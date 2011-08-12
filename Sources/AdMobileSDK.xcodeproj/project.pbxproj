@@ -14,7 +14,6 @@
 		ACA8B3791394B04D00DF8F3A /* ORMMAJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA8B3771394B04D00DF8F3A /* ORMMAJavascriptBridge.m */; };
 		ADF1FD851201A390008B99D2 /* Reachability.h in Headers */ = {isa = PBXBuildFile; fileRef = ADF1FD621201A38F008B99D2 /* Reachability.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ADFE0644129563F8002C00DE /* MMAdView.h in Headers */ = {isa = PBXBuildFile; fileRef = ADFE0642129563F8002C00DE /* MMAdView.h */; };
-		CF08E18B13B36C4B00653A17 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = CF08E18A13B36C4B00653A17 /* Reachability.m */; };
 		CF08E30D13B473ED00653A17 /* libSmartAdServer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF08E30C13B473ED00653A17 /* libSmartAdServer.a */; };
 		CF08E31213B4740000653A17 /* libGreystripeSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF08E31113B4740000653A17 /* libGreystripeSDK.a */; };
 		CF08E31413B4740C00653A17 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF08E31313B4740C00653A17 /* libGoogleAdMobAds.a */; };
@@ -177,7 +176,6 @@
 		ADF1FD991201A44D008B99D2 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		ADF1FD9E1201A470008B99D2 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		ADFE0642129563F8002C00DE /* MMAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMAdView.h; sourceTree = "<group>"; };
-		CF08E18A13B36C4B00653A17 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		CF08E30C13B473ED00653A17 /* libSmartAdServer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSmartAdServer.a; sourceTree = "<group>"; };
 		CF08E31113B4740000653A17 /* libGreystripeSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGreystripeSDK.a; sourceTree = "<group>"; };
 		CF08E31313B4740C00653A17 /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
@@ -460,7 +458,6 @@
 			isa = PBXGroup;
 			children = (
 				ADF1FD621201A38F008B99D2 /* Reachability.h */,
-				CF08E18A13B36C4B00653A17 /* Reachability.m */,
 			);
 			path = Reachability;
 			sourceTree = "<group>";
@@ -1245,7 +1242,6 @@
 				CF6DA0DA137273630051225F /* QSHttpClient.m in Sources */,
 				CF6DA0DC137273630051225F /* QSStrings.m in Sources */,
 				ACA8B3791394B04D00DF8F3A /* ORMMAJavascriptBridge.m in Sources */,
-				CF08E18B13B36C4B00653A17 /* Reachability.m in Sources */,
 				CFF3289B13B9F3B00070D02A /* UIWebViewAdditions.m in Sources */,
 				CFF328A113B9F9080070D02A /* TransparentUIView.m in Sources */,
 				CFF328A613B9F9D80070D02A /* TransparentUIWebView.m in Sources */,

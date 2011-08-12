@@ -20,7 +20,7 @@
 - (void)registerObserver;
 - (void)openURLinInternalBrowser:(NSNotification*)notification;
 
-- (void)updateFrames:(UIInterfaceOrientation)interfaceOrientation;
+- (void)updateFrames:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration;
 - (void)replaceItemWithToolbar:(UIToolbar*)toolbar tag:(NSInteger)tag withItem:(UIBarButtonItem*)item;
 - (void)backAction;
 - (void)forwardAction;
@@ -301,7 +301,7 @@ static InternalBrowser* sharedInstance = nil;
 	}
 }
 
-- (void)updateFrames:(UIInterfaceOrientation)interfaceOrientation {
+- (void)updateFrames:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration {
 	CGRect frame = [UIApplication sharedApplication].keyWindow.frame;
     
     if (UIDeviceOrientationIsLandscape(interfaceOrientation)) {        
@@ -310,16 +310,19 @@ static InternalBrowser* sharedInstance = nil;
     
     if (![[UIApplication sharedApplication] isStatusBarHidden]) {
         frame = CGRectMake(frame.origin.x, frame.origin.y + 20, frame.size.width, frame.size.height - 20);
-    }    
+    }
     
     [_navbar sizeToFit];
     [_toolbar sizeToFit];
-    
 	_webView.frame = CGRectMake(0, _navbar.frame.size.height, frame.size.width, frame.size.height - _navbar.frame.size.height - _toolbar.frame.size.height);
+    [_titleLabel setFrame:CGRectMake(60, 10.0f, _toolbar.frame.size.width - 120, _titleLabel.frame.size.height)];
+    
+    [UIView beginAnimations:@"resize" context:nil];
+    [UIView setAnimationDuration:duration];
     
     _toolbar.frame = CGRectMake(0, _webView.frame.origin.y + _webView.frame.size.height, frame.size.width, _navbar.frame.size.height);
     
-    [_titleLabel setFrame:CGRectMake(60, 10.0f, _toolbar.frame.size.width - 120, _titleLabel.frame.size.height)];
+    [UIView commitAnimations];
     
     _webView.scalesPageToFit = YES;
 }
@@ -401,10 +404,15 @@ static InternalBrowser* sharedInstance = nil;
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     BOOL rotate = [self.viewConreoller shouldAutorotateToInterfaceOrientation:interfaceOrientation];
-    if (rotate) {
-        [self updateFrames:interfaceOrientation];
-    }
     return rotate;
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    _toolbar.frame = CGRectMake(0, _toolbar.frame.size.height + self.view.frame.size.height, _toolbar.frame.size.width, _toolbar.frame.size.height);
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    [self updateFrames:[UIApplication sharedApplication].statusBarOrientation duration:0.3];
 }
 
 
