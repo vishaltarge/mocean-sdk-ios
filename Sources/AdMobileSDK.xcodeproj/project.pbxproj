@@ -139,7 +139,7 @@
 		CFF37874133B60A20078AC6D /* WebKitInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF37872133B60A20078AC6D /* WebKitInfo.m */; };
 		FC428BE913EFB3C5001B3B6E /* SmartAdServerAd.h in Headers */ = {isa = PBXBuildFile; fileRef = FC428BE613EFB3C5001B3B6E /* SmartAdServerAd.h */; };
 		FC428BEA13EFB3C5001B3B6E /* SmartAdServerView.h in Headers */ = {isa = PBXBuildFile; fileRef = FC428BE713EFB3C5001B3B6E /* SmartAdServerView.h */; };
-		FC428BEB13EFB3C5001B3B6E /* SmartAdServerViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = FC428BE813EFB3C5001B3B6E /* SmartAdServerViewDelegate.h */; };
+		FC63ADF213F546FB00360667 /* SmartAdServerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = FC63ADF113F546FB00360667 /* SmartAdServerDelegate.h */; };
 		FCB3133B13F2A3D30076DDE2 /* SASUIViewControllerAdaptor.h in Headers */ = {isa = PBXBuildFile; fileRef = FCB3133913F2A3D30076DDE2 /* SASUIViewControllerAdaptor.h */; };
 		FCB3133C13F2A3D30076DDE2 /* SASUIViewControllerAdaptor.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB3133A13F2A3D30076DDE2 /* SASUIViewControllerAdaptor.m */; };
 		FCC4715D13E7B4B500049C98 /* UIColorAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = FCC4715B13E7B4B500049C98 /* UIColorAdditions.h */; };
@@ -311,7 +311,7 @@
 		CFF37872133B60A20078AC6D /* WebKitInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebKitInfo.m; sourceTree = "<group>"; };
 		FC428BE613EFB3C5001B3B6E /* SmartAdServerAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartAdServerAd.h; sourceTree = "<group>"; };
 		FC428BE713EFB3C5001B3B6E /* SmartAdServerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartAdServerView.h; sourceTree = "<group>"; };
-		FC428BE813EFB3C5001B3B6E /* SmartAdServerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartAdServerViewDelegate.h; sourceTree = "<group>"; };
+		FC63ADF113F546FB00360667 /* SmartAdServerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartAdServerDelegate.h; sourceTree = "<group>"; };
 		FCB3133913F2A3D30076DDE2 /* SASUIViewControllerAdaptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASUIViewControllerAdaptor.h; sourceTree = "<group>"; };
 		FCB3133A13F2A3D30076DDE2 /* SASUIViewControllerAdaptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASUIViewControllerAdaptor.m; sourceTree = "<group>"; };
 		FCC4715B13E7B4B500049C98 /* UIColorAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIColorAdditions.h; sourceTree = "<group>"; };
@@ -432,9 +432,9 @@
 		AC895DAA13543A4A0029C0EA /* SAS */ = {
 			isa = PBXGroup;
 			children = (
+				FC63ADF113F546FB00360667 /* SmartAdServerDelegate.h */,
 				FC428BE613EFB3C5001B3B6E /* SmartAdServerAd.h */,
 				FC428BE713EFB3C5001B3B6E /* SmartAdServerView.h */,
-				FC428BE813EFB3C5001B3B6E /* SmartAdServerViewDelegate.h */,
 				CF08E30C13B473ED00653A17 /* libSmartAdServer.a */,
 			);
 			path = SAS;
@@ -1102,8 +1102,8 @@
 				FCC4715D13E7B4B500049C98 /* UIColorAdditions.h in Headers */,
 				FC428BE913EFB3C5001B3B6E /* SmartAdServerAd.h in Headers */,
 				FC428BEA13EFB3C5001B3B6E /* SmartAdServerView.h in Headers */,
-				FC428BEB13EFB3C5001B3B6E /* SmartAdServerViewDelegate.h in Headers */,
 				FCB3133B13F2A3D30076DDE2 /* SASUIViewControllerAdaptor.h in Headers */,
+				FC63ADF213F546FB00360667 /* SmartAdServerDelegate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
