@@ -48,6 +48,7 @@
 		
         AdView* ad = [[AdView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50) site:8061 zone:20249];
 		ad.updateTimeInterval = 5;
+        ad.contentAlignment = YES;
         
         [cell.contentView addSubview:ad];
         [ad release];
