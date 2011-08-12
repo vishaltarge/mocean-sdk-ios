@@ -75,5 +75,6 @@
 @property (retain) NSString*            longitude;
 
 - (NSString*)url;
+- (NSString*)urlIgnoreValifation;
 
 @end

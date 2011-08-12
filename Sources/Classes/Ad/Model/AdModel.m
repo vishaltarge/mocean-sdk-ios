@@ -21,8 +21,32 @@ autocloseInterstitialTime, startDisplayDate, closeButton, isDisplayed, aligmentC
 snapshot, snapshotRAWData, snapshotRAWDataTime, currentAdView, excampaigns, descriptor, loading,
 longitude, latitude;
 
-- (NSString*)url {
+- (BOOL)validate {
+    if (self.site <= 0) {
+        [[NotificationCenter sharedInstance] postNotificationName:[NSString stringWithFormat:@"Invalid site property: %d", self.site] object:nil];
+        return NO;
+    } else if (self.adZone <= 0) {
+        [[NotificationCenter sharedInstance] postNotificationName:[NSString stringWithFormat:@"Invalid zone property: %d", self.adZone] object:nil];
+        return NO;
+    } else if (!(self.adsType == 1 || self.adsType == 2 || self.adsType == 3 || self.adsType == 6 || self.adsType == -1)) {
+        [[NotificationCenter sharedInstance] postNotificationName:[NSString stringWithFormat:@"Invalid adsType property: %d", self.adsType] object:nil];
+        return NO;
+    } else if (minSize.width <= 0 || minSize.height <= 0) {
+        [[NotificationCenter sharedInstance] postNotificationName:[NSString stringWithFormat:@"Invalid minSize property: {%f, %f}", self.minSize.width, self.minSize.height] object:nil];
+        return NO;
+    } else if (maxSize.width <= 0 || maxSize.height <= 0) {
+        [[NotificationCenter sharedInstance] postNotificationName:[NSString stringWithFormat:@"Invalid maxSize property: {%f, %f}", self.minSize.width, self.minSize.height] object:nil];
+        return NO;
+    } else if ([advertiserId intValue] <= 0) {
+        [[NotificationCenter sharedInstance] postNotificationName:[NSString stringWithFormat:@"Invalid advertiserId property: %a", self.advertiserId] object:nil];
+        return NO;
+    }
     
+    return YES;
+}
+
+
+- (NSString*)urlIgnoreValifation {
     NSMutableString* _banerUrl = [NSMutableString new];
 	
 	if ([self adServerUrl]) {
@@ -60,7 +84,7 @@ longitude, latitude;
     if (self.metro) [_banerUrl appendFormat:@"&metro=%@", self.metro];
     if (self.zip) [_banerUrl appendFormat:@"&zip=%@", self.zip];
     if (self.carrier) [_banerUrl appendFormat:@"&carrier=%@", self.carrier];
-
+    
     if (self.latitude == nil && self.longitude == nil)
     {
 #ifdef INCLUDE_LOCATION_MANAGER
@@ -81,7 +105,7 @@ longitude, latitude;
     }
     else if ([self.latitude length] !=0 || [self.longitude length]!=0)
     {
-       [[NotificationCenter sharedInstance] postNotificationName:kLocationInvalidParamertsNotification object:nil]; 
+        [[NotificationCenter sharedInstance] postNotificationName:kLocationInvalidParamertsNotification object:nil]; 
     }
     
     [_banerUrl appendString:[[SharedModel sharedInstance] sharedUrlPart]];
@@ -107,6 +131,14 @@ longitude, latitude;
 	
 	[_banerUrl release];
 	return url;
+}
+
+- (NSString*)url {
+    if (![self validate]) {
+        return nil;
+    }
+    
+    return [self urlIgnoreValifation];
 }
 
 - (void)dealloc {

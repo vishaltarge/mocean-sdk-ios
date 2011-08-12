@@ -191,7 +191,7 @@ static Logger* sharedInstance = nil;
             
             if ([self isLogEnabled:adView]) {
                 if ([[notification name] isEqualToString:kStartAdDownloadNotification]) {
-                    NSString* url = [[adView adModel] url];
+                    NSString* url = [[adView adModel] urlIgnoreValifation];
                     [Logger logWithFormat:@" ad(%ld) - %@ | url: %@", adView, [notification name], url];
                 } else {
                     [Logger logWithFormat:@" ad(%ld) - %@", adView, [notification name]];

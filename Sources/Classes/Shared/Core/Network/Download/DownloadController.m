@@ -111,51 +111,55 @@ static DownloadController* sharedInstance = nil;
             //[_adRequests removeAd:adView];
             
             // start new reqest
-            NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:[[adView adModel] url]]];
-			[_adRequests addRequest:request forAd:adView];
-            [MURLRequestQueue loadAsync:request block:[MURLRequestCallback callbackWithSuccess:^(NSURLRequest *req, NSHTTPURLResponse *response, NSData *data) {
-                @synchronized(_adRequests) {
-                    if ([_adRequests containsRequest:request]) {
-                        NSString* responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                        NSArray* links = [Utils linksFromText:responseString];
-                        [responseString release];
-                        
-                        if (links && [links count] > 0) {
-                            [_cacheController loadLinks:links forAdView:adView request:request origData:data];
-                        }
-                        else {
-                            if (adView && request) {
-                                NSMutableDictionary* info = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:request, data, adView, nil]
-                                                                                               forKeys:[NSArray arrayWithObjects:@"request", @"data", @"adView", nil]];
-                                [[NotificationCenter sharedInstance] postNotificationName:kFinishAdDownloadNotification object:info];
+            NSString* url = [[adView adModel] url];
+            
+            if (url) {
+                NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+                [_adRequests addRequest:request forAd:adView];
+                [MURLRequestQueue loadAsync:request block:[MURLRequestCallback callbackWithSuccess:^(NSURLRequest *req, NSHTTPURLResponse *response, NSData *data) {
+                    @synchronized(_adRequests) {
+                        if ([_adRequests containsRequest:request]) {
+                            NSString* responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                            NSArray* links = [Utils linksFromText:responseString];
+                            [responseString release];
+                            
+                            if (links && [links count] > 0) {
+                                [_cacheController loadLinks:links forAdView:adView request:request origData:data];
                             }
+                            else {
+                                if (adView && request) {
+                                    NSMutableDictionary* info = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:request, data, adView, nil]
+                                                                                                   forKeys:[NSArray arrayWithObjects:@"request", @"data", @"adView", nil]];
+                                    [[NotificationCenter sharedInstance] postNotificationName:kFinishAdDownloadNotification object:info];
+                                }
+                                
+                                // remove from ads request array
+                                [_adRequests removeRequest:request];
+                            }
+                        }
+                    }
+                } error:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                    @synchronized(_adRequests) {
+                        if ([_adRequests containsRequest:request]) {
+                            NSMutableDictionary* sendInfo = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:error, [_adRequests adForRequest:request], nil]
+                                                                                               forKeys:[NSArray arrayWithObjects:@"error", @"adView", nil]];
                             
                             // remove from ads request array
                             [_adRequests removeRequest:request];
+                            
+                            if ([NSThread isMainThread]) {
+                                [[NotificationCenter sharedInstance] postNotificationName:kFailAdDownloadNotification object:sendInfo];
+                            } else {
+                                [NotificationCenterAdditions NC:[NotificationCenter sharedInstance] postNotificationOnMainThreadWithName:kFailAdDownloadNotification object:sendInfo];
+                            }
                         }
                     }
-                }
-            } error:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                @synchronized(_adRequests) {
-                    if ([_adRequests containsRequest:request]) {
-                        NSMutableDictionary* sendInfo = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:error, [_adRequests adForRequest:request], nil]
-                                                                                           forKeys:[NSArray arrayWithObjects:@"error", @"adView", nil]];
-                        
-                        // remove from ads request array
-                        [_adRequests removeRequest:request];
-                        
-                        if ([NSThread isMainThread]) {
-                            [[NotificationCenter sharedInstance] postNotificationName:kFailAdDownloadNotification object:sendInfo];
-                        } else {
-                            [NotificationCenterAdditions NC:[NotificationCenter sharedInstance] postNotificationOnMainThreadWithName:kFailAdDownloadNotification object:sendInfo];
-                        }
-                    }
-                }
-            } start:^(NSURLRequest *req) {
-                NSMutableDictionary* info = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:request, adView, nil]
-                                                                               forKeys:[NSArray arrayWithObjects:@"request", @"adView", nil]];
-                [[NotificationCenter sharedInstance] postNotificationName:kGetAdServerResponseNotification object:info];
-            }]];
+                } start:^(NSURLRequest *req) {
+                    NSMutableDictionary* info = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:request, adView, nil]
+                                                                                   forKeys:[NSArray arrayWithObjects:@"request", @"adView", nil]];
+                    [[NotificationCenter sharedInstance] postNotificationName:kGetAdServerResponseNotification object:info];
+                }]];
+            }
 		}
 	}
     
