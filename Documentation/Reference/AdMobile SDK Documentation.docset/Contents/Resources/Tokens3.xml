@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Protocols/AdInterstitialViewDelegate.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intf/AdInterstitialViewDelegate</TokenIdentifier>
+			<Abstract>The AdInterstitialViewDelegate protocol defines methods that a delegate of a AdInterstitialView object can optionally implement to receive notifications from ad.</Abstract>
+			<DeclaredIn>AdDelegate.h</DeclaredIn>
+			
+			<NodeRef refid="3"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/AdInterstitialViewDelegate/didClosedInterstitialAd:usageTimeInterval:</TokenIdentifier>
+			<Abstract>Sent after an ad interstitial view closed and tracks the usage time of ad interstitial view.</Abstract>
+			<DeclaredIn>AdDelegate.h</DeclaredIn>			
+			
+			<Declaration>- (void)didClosedInterstitialAd:(id)sender usageTimeInterval:(NSTimeInterval)usageTimeInterval</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>sender</Name>
+					<Abstract>The ad interstitial view was closed.</Abstract>
+				</Parameter><Parameter>
+					<Name>usageTimeInterval</Name>
+					<Abstract>The usage time interval of ad interstitial view.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/didClosedInterstitialAd:usageTimeInterval:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

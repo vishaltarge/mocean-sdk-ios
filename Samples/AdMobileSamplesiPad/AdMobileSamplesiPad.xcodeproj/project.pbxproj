@@ -1,0 +1,612 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FCF1EBDB13F24A5200364390 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1EBDA13F24A5200364390 /* UIKit.framework */; };
+		FCF1EBDD13F24A5200364390 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1EBDC13F24A5200364390 /* Foundation.framework */; };
+		FCF1EBDF13F24A5200364390 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1EBDE13F24A5200364390 /* CoreGraphics.framework */; };
+		FCF1EBE513F24A5200364390 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FCF1EBE313F24A5200364390 /* InfoPlist.strings */; };
+		FCF1EBE713F24A5200364390 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EBE613F24A5200364390 /* main.m */; };
+		FCF1EBEB13F24A5200364390 /* AdMobileSamplesiPadAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EBEA13F24A5200364390 /* AdMobileSamplesiPadAppDelegate.m */; };
+		FCF1EBEE13F24A5200364390 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCF1EBEC13F24A5200364390 /* MainWindow.xib */; };
+		FCF1EBF113F24A5200364390 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EBF013F24A5200364390 /* DetailViewController.m */; };
+		FCF1EBF413F24A5200364390 /* DetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCF1EBF213F24A5200364390 /* DetailView.xib */; };
+		FCF1EBF713F24A5200364390 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EBF613F24A5200364390 /* RootViewController.m */; };
+		FCF1EC0B13F24C3900364390 /* SimpleBannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC0A13F24C3900364390 /* SimpleBannerViewController.m */; };
+		FCF1EC0E13F24C4E00364390 /* InterstitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC0D13F24C4E00364390 /* InterstitialViewController.m */; };
+		FCF1EC1113F24C5E00364390 /* VideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC1013F24C5E00364390 /* VideoViewController.m */; };
+		FCF1EC1413F24C6800364390 /* OpenGLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC1313F24C6800364390 /* OpenGLViewController.m */; };
+		FCF1EC1713F24C7400364390 /* RichJSadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC1613F24C7400364390 /* RichJSadViewController.m */; };
+		FCF1EC1B13F24C9C00364390 /* BannerAnimationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC1A13F24C9C00364390 /* BannerAnimationViewController.m */; };
+		FCF1EC1E13F24CAF00364390 /* TableViewAnimationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC1D13F24CAF00364390 /* TableViewAnimationViewController.m */; };
+		FCF1EC2213F24CCF00364390 /* TableViewCellSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC2113F24CCF00364390 /* TableViewCellSampleViewController.m */; };
+		FCF1EC2513F24CDA00364390 /* VideoWithInterstitilaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC2413F24CDA00364390 /* VideoWithInterstitilaViewController.m */; };
+		FCF1EC3213F24D2200364390 /* IAdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC3113F24D2200364390 /* IAdViewController.m */; };
+		FCF1EC3513F24D2E00364390 /* MillennialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC3413F24D2E00364390 /* MillennialViewController.m */; };
+		FCF1EC3813F24D3A00364390 /* IVdopiaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC3713F24D3A00364390 /* IVdopiaViewController.m */; };
+		FCF1EC3B13F24D4700364390 /* AdMobViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC3A13F24D4700364390 /* AdMobViewController.m */; };
+		FCF1EC3E13F24D5500364390 /* RhythmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC3D13F24D5500364390 /* RhythmViewController.m */; };
+		FCF1EC4113F24D6000364390 /* GreystripeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC4013F24D6000364390 /* GreystripeViewController.m */; };
+		FCF1EC4413F24D6E00364390 /* SASViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC4313F24D6E00364390 /* SASViewController.m */; };
+		FCF1EC4713F24D7900364390 /* ORMMAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC4613F24D7900364390 /* ORMMAViewController.m */; };
+		FCF1EC6113F2561600364390 /* libAdMobileSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1EC5313F255D800364390 /* libAdMobileSDK.a */; };
+		FCF1EC7113F2566600364390 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1EC6413F2566600364390 /* AudioToolbox.framework */; };
+		FCF1EC7213F2566600364390 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1EC6513F2566600364390 /* AVFoundation.framework */; };
+		FCF1EC7313F2566600364390 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1EC6613F2566600364390 /* CFNetwork.framework */; };
+		FCF1EC7413F2566600364390 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1EC6813F2566600364390 /* CoreMotion.framework */; };
+		FCF1EC7513F2566600364390 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1EC6913F2566600364390 /* CoreTelephony.framework */; };
+		FCF1EC7613F2566600364390 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1EC6A13F2566600364390 /* iAd.framework */; };
+		FCF1EC7713F2566600364390 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1EC6B13F2566600364390 /* libsqlite3.0.dylib */; };
+		FCF1EC7813F2566600364390 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1EC6C13F2566600364390 /* libz.1.dylib */; };
+		FCF1EC7913F2566600364390 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1EC6D13F2566600364390 /* MediaPlayer.framework */; };
+		FCF1EC7A13F2566600364390 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1EC6E13F2566600364390 /* MessageUI.framework */; };
+		FCF1EC7B13F2566600364390 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1EC6F13F2566600364390 /* QuartzCore.framework */; };
+		FCF1EC7C13F2566600364390 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1EC7013F2566600364390 /* SystemConfiguration.framework */; };
+		FCF1EC8813F257AD00364390 /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = FCF1EC8213F257AC00364390 /* Default-Portrait.png */; };
+		FCF1EC8913F257AD00364390 /* DefaultImage (320x50).png in Resources */ = {isa = PBXBuildFile; fileRef = FCF1EC8313F257AC00364390 /* DefaultImage (320x50).png */; };
+		FCF1EC8A13F257AD00364390 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = FCF1EC8413F257AC00364390 /* Icon-72.png */; };
+		FCF1EC8B13F257AD00364390 /* Shader.fsh in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC8613F257AC00364390 /* Shader.fsh */; };
+		FCF1EC8C13F257AD00364390 /* Shader.vsh in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC8713F257AC00364390 /* Shader.vsh */; };
+		FCF1EC9013F2618D00364390 /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC8F13F2618C00364390 /* EAGLView.m */; };
+		FCF1EC9213F261AF00364390 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1EC9113F261AF00364390 /* OpenGLES.framework */; };
+		FCF1EC9313F2667A00364390 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = FCF1EC8613F257AC00364390 /* Shader.fsh */; };
+		FCF1EC9413F2667A00364390 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = FCF1EC8713F257AC00364390 /* Shader.vsh */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FCF1EC5213F255D800364390 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FCF1EC4913F255D700364390 /* AdMobileSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CFE1ED4112FA979400600579;
+			remoteInfo = AdMobileSDK;
+		};
+		FCF1EC5413F255D800364390 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FCF1EC4913F255D700364390 /* AdMobileSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CF6CAF8713D4632500158662;
+			remoteInfo = DocGeneration;
+		};
+		FCF1EC6213F2561A00364390 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FCF1EC4913F255D700364390 /* AdMobileSDK.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = AdMobileSDK;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		FCF1EBD613F24A5200364390 /* AdMobileSamplesiPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdMobileSamplesiPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCF1EBDA13F24A5200364390 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		FCF1EBDC13F24A5200364390 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		FCF1EBDE13F24A5200364390 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		FCF1EBE213F24A5200364390 /* AdMobileSamplesiPad-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AdMobileSamplesiPad-Info.plist"; sourceTree = "<group>"; };
+		FCF1EBE413F24A5200364390 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FCF1EBE613F24A5200364390 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		FCF1EBE813F24A5200364390 /* AdMobileSamplesiPad-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AdMobileSamplesiPad-Prefix.pch"; sourceTree = "<group>"; };
+		FCF1EBE913F24A5200364390 /* AdMobileSamplesiPadAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdMobileSamplesiPadAppDelegate.h; sourceTree = "<group>"; };
+		FCF1EBEA13F24A5200364390 /* AdMobileSamplesiPadAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdMobileSamplesiPadAppDelegate.m; sourceTree = "<group>"; };
+		FCF1EBED13F24A5200364390 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		FCF1EBEF13F24A5200364390 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		FCF1EBF013F24A5200364390 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		FCF1EBF313F24A5200364390 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DetailView.xib; sourceTree = "<group>"; };
+		FCF1EBF513F24A5200364390 /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		FCF1EBF613F24A5200364390 /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		FCF1EC0913F24C3900364390 /* SimpleBannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleBannerViewController.h; sourceTree = "<group>"; };
+		FCF1EC0A13F24C3900364390 /* SimpleBannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleBannerViewController.m; sourceTree = "<group>"; };
+		FCF1EC0C13F24C4E00364390 /* InterstitialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterstitialViewController.h; sourceTree = "<group>"; };
+		FCF1EC0D13F24C4E00364390 /* InterstitialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterstitialViewController.m; sourceTree = "<group>"; };
+		FCF1EC0F13F24C5E00364390 /* VideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoViewController.h; sourceTree = "<group>"; };
+		FCF1EC1013F24C5E00364390 /* VideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoViewController.m; sourceTree = "<group>"; };
+		FCF1EC1213F24C6800364390 /* OpenGLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLViewController.h; sourceTree = "<group>"; };
+		FCF1EC1313F24C6800364390 /* OpenGLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenGLViewController.m; sourceTree = "<group>"; };
+		FCF1EC1513F24C7400364390 /* RichJSadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RichJSadViewController.h; sourceTree = "<group>"; };
+		FCF1EC1613F24C7400364390 /* RichJSadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RichJSadViewController.m; sourceTree = "<group>"; };
+		FCF1EC1913F24C9C00364390 /* BannerAnimationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerAnimationViewController.h; sourceTree = "<group>"; };
+		FCF1EC1A13F24C9C00364390 /* BannerAnimationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerAnimationViewController.m; sourceTree = "<group>"; };
+		FCF1EC1C13F24CAF00364390 /* TableViewAnimationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewAnimationViewController.h; sourceTree = "<group>"; };
+		FCF1EC1D13F24CAF00364390 /* TableViewAnimationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewAnimationViewController.m; sourceTree = "<group>"; };
+		FCF1EC2013F24CCF00364390 /* TableViewCellSampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCellSampleViewController.h; sourceTree = "<group>"; };
+		FCF1EC2113F24CCF00364390 /* TableViewCellSampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCellSampleViewController.m; sourceTree = "<group>"; };
+		FCF1EC2313F24CDA00364390 /* VideoWithInterstitilaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoWithInterstitilaViewController.h; sourceTree = "<group>"; };
+		FCF1EC2413F24CDA00364390 /* VideoWithInterstitilaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoWithInterstitilaViewController.m; sourceTree = "<group>"; };
+		FCF1EC3013F24D2200364390 /* IAdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAdViewController.h; sourceTree = "<group>"; };
+		FCF1EC3113F24D2200364390 /* IAdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAdViewController.m; sourceTree = "<group>"; };
+		FCF1EC3313F24D2E00364390 /* MillennialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MillennialViewController.h; sourceTree = "<group>"; };
+		FCF1EC3413F24D2E00364390 /* MillennialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MillennialViewController.m; sourceTree = "<group>"; };
+		FCF1EC3613F24D3A00364390 /* IVdopiaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVdopiaViewController.h; sourceTree = "<group>"; };
+		FCF1EC3713F24D3A00364390 /* IVdopiaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVdopiaViewController.m; sourceTree = "<group>"; };
+		FCF1EC3913F24D4700364390 /* AdMobViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMobViewController.h; sourceTree = "<group>"; };
+		FCF1EC3A13F24D4700364390 /* AdMobViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdMobViewController.m; sourceTree = "<group>"; };
+		FCF1EC3C13F24D5500364390 /* RhythmViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RhythmViewController.h; sourceTree = "<group>"; };
+		FCF1EC3D13F24D5500364390 /* RhythmViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RhythmViewController.m; sourceTree = "<group>"; };
+		FCF1EC3F13F24D6000364390 /* GreystripeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GreystripeViewController.h; sourceTree = "<group>"; };
+		FCF1EC4013F24D6000364390 /* GreystripeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GreystripeViewController.m; sourceTree = "<group>"; };
+		FCF1EC4213F24D6E00364390 /* SASViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASViewController.h; sourceTree = "<group>"; };
+		FCF1EC4313F24D6E00364390 /* SASViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASViewController.m; sourceTree = "<group>"; };
+		FCF1EC4513F24D7900364390 /* ORMMAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORMMAViewController.h; sourceTree = "<group>"; };
+		FCF1EC4613F24D7900364390 /* ORMMAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORMMAViewController.m; sourceTree = "<group>"; };
+		FCF1EC4913F255D700364390 /* AdMobileSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AdMobileSDK.xcodeproj; path = ../../../Sources/AdMobileSDK.xcodeproj; sourceTree = "<group>"; };
+		FCF1EC4D13F255D700364390 /* AdDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdDelegate.h; sourceTree = "<group>"; };
+		FCF1EC4E13F255D700364390 /* AdInterstitialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdInterstitialView.h; sourceTree = "<group>"; };
+		FCF1EC4F13F255D700364390 /* AdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdView.h; sourceTree = "<group>"; };
+		FCF1EC6413F2566600364390 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		FCF1EC6513F2566600364390 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		FCF1EC6613F2566600364390 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		FCF1EC6713F2566600364390 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		FCF1EC6813F2566600364390 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		FCF1EC6913F2566600364390 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		FCF1EC6A13F2566600364390 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		FCF1EC6B13F2566600364390 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		FCF1EC6C13F2566600364390 /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = usr/lib/libz.1.dylib; sourceTree = SDKROOT; };
+		FCF1EC6D13F2566600364390 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		FCF1EC6E13F2566600364390 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		FCF1EC6F13F2566600364390 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		FCF1EC7013F2566600364390 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		FCF1EC8213F257AC00364390 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = SOURCE_ROOT; };
+		FCF1EC8313F257AC00364390 /* DefaultImage (320x50).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultImage (320x50).png"; sourceTree = SOURCE_ROOT; };
+		FCF1EC8413F257AC00364390 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = SOURCE_ROOT; };
+		FCF1EC8613F257AC00364390 /* Shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = ../Shaders/Shader.fsh; sourceTree = "<group>"; };
+		FCF1EC8713F257AC00364390 /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = ../Shaders/Shader.vsh; sourceTree = "<group>"; };
+		FCF1EC8E13F2618C00364390 /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
+		FCF1EC8F13F2618C00364390 /* EAGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAGLView.m; sourceTree = "<group>"; };
+		FCF1EC9113F261AF00364390 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FCF1EBD313F24A5200364390 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCF1EC9213F261AF00364390 /* OpenGLES.framework in Frameworks */,
+				FCF1EC6113F2561600364390 /* libAdMobileSDK.a in Frameworks */,
+				FCF1EC7113F2566600364390 /* AudioToolbox.framework in Frameworks */,
+				FCF1EC7213F2566600364390 /* AVFoundation.framework in Frameworks */,
+				FCF1EC7313F2566600364390 /* CFNetwork.framework in Frameworks */,
+				FCF1EBDF13F24A5200364390 /* CoreGraphics.framework in Frameworks */,
+				FCF1EC7413F2566600364390 /* CoreMotion.framework in Frameworks */,
+				FCF1EC7513F2566600364390 /* CoreTelephony.framework in Frameworks */,
+				FCF1EC7613F2566600364390 /* iAd.framework in Frameworks */,
+				FCF1EC7713F2566600364390 /* libsqlite3.0.dylib in Frameworks */,
+				FCF1EC7813F2566600364390 /* libz.1.dylib in Frameworks */,
+				FCF1EC7913F2566600364390 /* MediaPlayer.framework in Frameworks */,
+				FCF1EC7A13F2566600364390 /* MessageUI.framework in Frameworks */,
+				FCF1EC7B13F2566600364390 /* QuartzCore.framework in Frameworks */,
+				FCF1EC7C13F2566600364390 /* SystemConfiguration.framework in Frameworks */,
+				FCF1EBDB13F24A5200364390 /* UIKit.framework in Frameworks */,
+				FCF1EBDD13F24A5200364390 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FCF1EBCB13F24A5200364390 = {
+			isa = PBXGroup;
+			children = (
+				FCF1EBE013F24A5200364390 /* AdMobileSamplesiPad */,
+				FCF1EBD913F24A5200364390 /* Frameworks */,
+				FCF1EBD713F24A5200364390 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FCF1EBD713F24A5200364390 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FCF1EBD613F24A5200364390 /* AdMobileSamplesiPad.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FCF1EBD913F24A5200364390 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FCF1EC9113F261AF00364390 /* OpenGLES.framework */,
+				FCF1EC6413F2566600364390 /* AudioToolbox.framework */,
+				FCF1EC6513F2566600364390 /* AVFoundation.framework */,
+				FCF1EC6613F2566600364390 /* CFNetwork.framework */,
+				FCF1EC6713F2566600364390 /* CoreGraphics.framework */,
+				FCF1EC6813F2566600364390 /* CoreMotion.framework */,
+				FCF1EC6913F2566600364390 /* CoreTelephony.framework */,
+				FCF1EC6A13F2566600364390 /* iAd.framework */,
+				FCF1EC6B13F2566600364390 /* libsqlite3.0.dylib */,
+				FCF1EC6C13F2566600364390 /* libz.1.dylib */,
+				FCF1EC6D13F2566600364390 /* MediaPlayer.framework */,
+				FCF1EC6E13F2566600364390 /* MessageUI.framework */,
+				FCF1EC6F13F2566600364390 /* QuartzCore.framework */,
+				FCF1EC7013F2566600364390 /* SystemConfiguration.framework */,
+				FCF1EBDA13F24A5200364390 /* UIKit.framework */,
+				FCF1EBDC13F24A5200364390 /* Foundation.framework */,
+				FCF1EBDE13F24A5200364390 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FCF1EBE013F24A5200364390 /* AdMobileSamplesiPad */ = {
+			isa = PBXGroup;
+			children = (
+				FCF1EC4813F255C500364390 /* AdMobileSDK */,
+				FCF1EC0713F24C0A00364390 /* ViewControllers */,
+				FCF1EBE913F24A5200364390 /* AdMobileSamplesiPadAppDelegate.h */,
+				FCF1EBEA13F24A5200364390 /* AdMobileSamplesiPadAppDelegate.m */,
+				FCF1EBEC13F24A5200364390 /* MainWindow.xib */,
+				FCF1EBEF13F24A5200364390 /* DetailViewController.h */,
+				FCF1EBF013F24A5200364390 /* DetailViewController.m */,
+				FCF1EBF213F24A5200364390 /* DetailView.xib */,
+				FCF1EBF513F24A5200364390 /* RootViewController.h */,
+				FCF1EBF613F24A5200364390 /* RootViewController.m */,
+				FCF1EBE113F24A5200364390 /* Supporting Files */,
+			);
+			path = AdMobileSamplesiPad;
+			sourceTree = "<group>";
+		};
+		FCF1EBE113F24A5200364390 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FCF1EC8613F257AC00364390 /* Shader.fsh */,
+				FCF1EC8713F257AC00364390 /* Shader.vsh */,
+				FCF1EC8213F257AC00364390 /* Default-Portrait.png */,
+				FCF1EC8313F257AC00364390 /* DefaultImage (320x50).png */,
+				FCF1EC8413F257AC00364390 /* Icon-72.png */,
+				FCF1EBE213F24A5200364390 /* AdMobileSamplesiPad-Info.plist */,
+				FCF1EBE313F24A5200364390 /* InfoPlist.strings */,
+				FCF1EBE613F24A5200364390 /* main.m */,
+				FCF1EBE813F24A5200364390 /* AdMobileSamplesiPad-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FCF1EC0713F24C0A00364390 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				FCF1EC0813F24C1E00364390 /* Simple */,
+				FCF1EC1813F24C7E00364390 /* Animation */,
+				FCF1EC1F13F24CB800364390 /* Advanced */,
+				FCF1EC2F13F24D0E00364390 /* 3rd Party */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		FCF1EC0813F24C1E00364390 /* Simple */ = {
+			isa = PBXGroup;
+			children = (
+				FCF1EC0913F24C3900364390 /* SimpleBannerViewController.h */,
+				FCF1EC0A13F24C3900364390 /* SimpleBannerViewController.m */,
+				FCF1EC0C13F24C4E00364390 /* InterstitialViewController.h */,
+				FCF1EC0D13F24C4E00364390 /* InterstitialViewController.m */,
+				FCF1EC0F13F24C5E00364390 /* VideoViewController.h */,
+				FCF1EC1013F24C5E00364390 /* VideoViewController.m */,
+				FCF1EC1213F24C6800364390 /* OpenGLViewController.h */,
+				FCF1EC1313F24C6800364390 /* OpenGLViewController.m */,
+				FCF1EC1513F24C7400364390 /* RichJSadViewController.h */,
+				FCF1EC1613F24C7400364390 /* RichJSadViewController.m */,
+				FCF1EC8E13F2618C00364390 /* EAGLView.h */,
+				FCF1EC8F13F2618C00364390 /* EAGLView.m */,
+			);
+			name = Simple;
+			sourceTree = "<group>";
+		};
+		FCF1EC1813F24C7E00364390 /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				FCF1EC1913F24C9C00364390 /* BannerAnimationViewController.h */,
+				FCF1EC1A13F24C9C00364390 /* BannerAnimationViewController.m */,
+				FCF1EC1C13F24CAF00364390 /* TableViewAnimationViewController.h */,
+				FCF1EC1D13F24CAF00364390 /* TableViewAnimationViewController.m */,
+			);
+			name = Animation;
+			sourceTree = "<group>";
+		};
+		FCF1EC1F13F24CB800364390 /* Advanced */ = {
+			isa = PBXGroup;
+			children = (
+				FCF1EC2013F24CCF00364390 /* TableViewCellSampleViewController.h */,
+				FCF1EC2113F24CCF00364390 /* TableViewCellSampleViewController.m */,
+				FCF1EC2313F24CDA00364390 /* VideoWithInterstitilaViewController.h */,
+				FCF1EC2413F24CDA00364390 /* VideoWithInterstitilaViewController.m */,
+				FCF1EC4513F24D7900364390 /* ORMMAViewController.h */,
+				FCF1EC4613F24D7900364390 /* ORMMAViewController.m */,
+			);
+			name = Advanced;
+			sourceTree = "<group>";
+		};
+		FCF1EC2F13F24D0E00364390 /* 3rd Party */ = {
+			isa = PBXGroup;
+			children = (
+				FCF1EC3013F24D2200364390 /* IAdViewController.h */,
+				FCF1EC3113F24D2200364390 /* IAdViewController.m */,
+				FCF1EC3313F24D2E00364390 /* MillennialViewController.h */,
+				FCF1EC3413F24D2E00364390 /* MillennialViewController.m */,
+				FCF1EC3613F24D3A00364390 /* IVdopiaViewController.h */,
+				FCF1EC3713F24D3A00364390 /* IVdopiaViewController.m */,
+				FCF1EC3913F24D4700364390 /* AdMobViewController.h */,
+				FCF1EC3A13F24D4700364390 /* AdMobViewController.m */,
+				FCF1EC3C13F24D5500364390 /* RhythmViewController.h */,
+				FCF1EC3D13F24D5500364390 /* RhythmViewController.m */,
+				FCF1EC3F13F24D6000364390 /* GreystripeViewController.h */,
+				FCF1EC4013F24D6000364390 /* GreystripeViewController.m */,
+				FCF1EC4213F24D6E00364390 /* SASViewController.h */,
+				FCF1EC4313F24D6E00364390 /* SASViewController.m */,
+			);
+			name = "3rd Party";
+			sourceTree = "<group>";
+		};
+		FCF1EC4813F255C500364390 /* AdMobileSDK */ = {
+			isa = PBXGroup;
+			children = (
+				FCF1EC4913F255D700364390 /* AdMobileSDK.xcodeproj */,
+				FCF1EC4C13F255D700364390 /* Public */,
+			);
+			name = AdMobileSDK;
+			sourceTree = "<group>";
+		};
+		FCF1EC4A13F255D700364390 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FCF1EC5313F255D800364390 /* libAdMobileSDK.a */,
+				FCF1EC5513F255D800364390 /* libAdMobileSDK doc generation.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FCF1EC4C13F255D700364390 /* Public */ = {
+			isa = PBXGroup;
+			children = (
+				FCF1EC4D13F255D700364390 /* AdDelegate.h */,
+				FCF1EC4E13F255D700364390 /* AdInterstitialView.h */,
+				FCF1EC4F13F255D700364390 /* AdView.h */,
+			);
+			name = Public;
+			path = ../../../Sources/Classes/Public;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FCF1EBD513F24A5200364390 /* AdMobileSamplesiPad */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FCF1EBFA13F24A5200364390 /* Build configuration list for PBXNativeTarget "AdMobileSamplesiPad" */;
+			buildPhases = (
+				FCF1EBD213F24A5200364390 /* Sources */,
+				FCF1EBD313F24A5200364390 /* Frameworks */,
+				FCF1EBD413F24A5200364390 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FCF1EC6313F2561A00364390 /* PBXTargetDependency */,
+			);
+			name = AdMobileSamplesiPad;
+			productName = AdMobileSamplesiPad;
+			productReference = FCF1EBD613F24A5200364390 /* AdMobileSamplesiPad.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FCF1EBCD13F24A5200364390 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = FCF1EBD013F24A5200364390 /* Build configuration list for PBXProject "AdMobileSamplesiPad" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = FCF1EBCB13F24A5200364390;
+			productRefGroup = FCF1EBD713F24A5200364390 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = FCF1EC4A13F255D700364390 /* Products */;
+					ProjectRef = FCF1EC4913F255D700364390 /* AdMobileSDK.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				FCF1EBD513F24A5200364390 /* AdMobileSamplesiPad */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		FCF1EC5313F255D800364390 /* libAdMobileSDK.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libAdMobileSDK.a;
+			remoteRef = FCF1EC5213F255D800364390 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FCF1EC5513F255D800364390 /* libAdMobileSDK doc generation.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libAdMobileSDK doc generation.a";
+			remoteRef = FCF1EC5413F255D800364390 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FCF1EBD413F24A5200364390 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCF1EC9313F2667A00364390 /* Shader.fsh in Resources */,
+				FCF1EC9413F2667A00364390 /* Shader.vsh in Resources */,
+				FCF1EBE513F24A5200364390 /* InfoPlist.strings in Resources */,
+				FCF1EBEE13F24A5200364390 /* MainWindow.xib in Resources */,
+				FCF1EBF413F24A5200364390 /* DetailView.xib in Resources */,
+				FCF1EC8813F257AD00364390 /* Default-Portrait.png in Resources */,
+				FCF1EC8913F257AD00364390 /* DefaultImage (320x50).png in Resources */,
+				FCF1EC8A13F257AD00364390 /* Icon-72.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FCF1EBD213F24A5200364390 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCF1EBE713F24A5200364390 /* main.m in Sources */,
+				FCF1EBEB13F24A5200364390 /* AdMobileSamplesiPadAppDelegate.m in Sources */,
+				FCF1EBF113F24A5200364390 /* DetailViewController.m in Sources */,
+				FCF1EBF713F24A5200364390 /* RootViewController.m in Sources */,
+				FCF1EC0B13F24C3900364390 /* SimpleBannerViewController.m in Sources */,
+				FCF1EC0E13F24C4E00364390 /* InterstitialViewController.m in Sources */,
+				FCF1EC1113F24C5E00364390 /* VideoViewController.m in Sources */,
+				FCF1EC1413F24C6800364390 /* OpenGLViewController.m in Sources */,
+				FCF1EC1713F24C7400364390 /* RichJSadViewController.m in Sources */,
+				FCF1EC1B13F24C9C00364390 /* BannerAnimationViewController.m in Sources */,
+				FCF1EC1E13F24CAF00364390 /* TableViewAnimationViewController.m in Sources */,
+				FCF1EC2213F24CCF00364390 /* TableViewCellSampleViewController.m in Sources */,
+				FCF1EC2513F24CDA00364390 /* VideoWithInterstitilaViewController.m in Sources */,
+				FCF1EC3213F24D2200364390 /* IAdViewController.m in Sources */,
+				FCF1EC3513F24D2E00364390 /* MillennialViewController.m in Sources */,
+				FCF1EC3813F24D3A00364390 /* IVdopiaViewController.m in Sources */,
+				FCF1EC3B13F24D4700364390 /* AdMobViewController.m in Sources */,
+				FCF1EC3E13F24D5500364390 /* RhythmViewController.m in Sources */,
+				FCF1EC4113F24D6000364390 /* GreystripeViewController.m in Sources */,
+				FCF1EC4413F24D6E00364390 /* SASViewController.m in Sources */,
+				FCF1EC4713F24D7900364390 /* ORMMAViewController.m in Sources */,
+				FCF1EC8B13F257AD00364390 /* Shader.fsh in Sources */,
+				FCF1EC8C13F257AD00364390 /* Shader.vsh in Sources */,
+				FCF1EC9013F2618D00364390 /* EAGLView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FCF1EC6313F2561A00364390 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AdMobileSDK;
+			targetProxy = FCF1EC6213F2561A00364390 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FCF1EBE313F24A5200364390 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FCF1EBE413F24A5200364390 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		FCF1EBEC13F24A5200364390 /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FCF1EBED13F24A5200364390 /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		FCF1EBF213F24A5200364390 /* DetailView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FCF1EBF313F24A5200364390 /* en */,
+			);
+			name = DetailView.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FCF1EBF813F24A5200364390 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		FCF1EBF913F24A5200364390 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FCF1EBFB13F24A5200364390 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AdMobileSamplesiPad/AdMobileSamplesiPad-Prefix.pch";
+				INFOPLIST_FILE = "AdMobileSamplesiPad/AdMobileSamplesiPad-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		FCF1EBFC13F24A5200364390 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AdMobileSamplesiPad/AdMobileSamplesiPad-Prefix.pch";
+				INFOPLIST_FILE = "AdMobileSamplesiPad/AdMobileSamplesiPad-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FCF1EBD013F24A5200364390 /* Build configuration list for PBXProject "AdMobileSamplesiPad" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FCF1EBF813F24A5200364390 /* Debug */,
+				FCF1EBF913F24A5200364390 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FCF1EBFA13F24A5200364390 /* Build configuration list for PBXNativeTarget "AdMobileSamplesiPad" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FCF1EBFB13F24A5200364390 /* Debug */,
+				FCF1EBFC13F24A5200364390 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FCF1EBCD13F24A5200364390 /* Project object */;
+}
