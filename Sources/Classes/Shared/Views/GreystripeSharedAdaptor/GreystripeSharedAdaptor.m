@@ -94,7 +94,7 @@ static GreystripeSharedAdaptor* sharedInstance = nil;
 	//kGSAdSizeIPadWideSkyscraper		// 160x600
 	
 	NSInteger bannerWidth = aFrame.size.width;
-	NSInteger bannerHeight =aFrame.size.height; 
+	NSInteger bannerHeight =aFrame.size.height;
     
 	if ( bannerWidth == 320 && bannerHeight == 48 ) {
 		return kGSAdSizeBanner;
@@ -109,17 +109,16 @@ static GreystripeSharedAdaptor* sharedInstance = nil;
 		return kGSAdSizeIPadWideSkyscraper;
 	}
 	
-	
-	if ( bannerWidth <= 160 && bannerHeight <= 600 )  {
-		return  kGSAdSizeIPadWideSkyscraper;
-	}
-	if ( bannerWidth  <= 300 && bannerHeight <= 250 ) {
-		return kGSAdSizeIPadMediumRectangle;
-	}
-	if ( bannerWidth  <= 320 && bannerHeight <= 50 ) {
-		return kGSAdSizeBanner;
-	}
-	return kGSAdSizeIPhoneFullScreen;
+    
+    if (bannerWidth >= 160 && bannerHeight >= 600) {
+        return kGSAdSizeIPadWideSkyscraper;
+    } else if (bannerWidth >= 728 && bannerHeight >= 90) {
+        return kGSAdSizeIPadLeaderboard;
+    } else if (bannerWidth >= 300 && bannerHeight >= 250) {
+        return kGSAdSizeIPadMediumRectangle;
+    } else {
+        return kGSAdSizeBanner;
+    }
 }
 
 
@@ -136,6 +135,7 @@ static GreystripeSharedAdaptor* sharedInstance = nil;
         [GSAdEngine startupWithAppID:appId adSlotDescriptions:[NSArray arrayWithObjects:slot, nil]];
         
         _adView = [GSAdView adViewForSlotNamed:slot.name delegate:self];
+        
         [_adView retain];
         
         //never release adView!
