@@ -246,7 +246,6 @@ static AdController* sharedInstance = nil;
 	AdView* adView = [info objectForKey:@"adView"];
     AdModel* adModel = [adView adModel];
     
-	NSURLRequest* request = [info objectForKey:@"request"];
 	NSData* data = [info objectForKey:@"data"];
 	AdDescriptor* adDescriptor = [AdDescriptor descriptorFromContent:data frameSize:[adView adModel].frame.size aligmentCenter:adModel.aligmentCenter];
     

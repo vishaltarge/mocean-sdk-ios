@@ -505,7 +505,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
             id <AdViewDelegate> delegate = [self adModel].delegate;
             
             if (delegate && [delegate respondsToSelector:@selector(didFailToReceiveAd: withError:)]) {
-                NSError* error = [NSError errorWithDomain:@"invalid params" code:1010 userInfo:nil];
+                NSError* error = [NSError errorWithDomain:@"invalid site or zone params" code:1010 userInfo:nil];
                 [delegate didFailToReceiveAd:self withError:error];
             }
         }

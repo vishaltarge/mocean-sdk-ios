@@ -36,7 +36,7 @@ NSString* kShouldOpenInternalBrowserNotification = @"SDK should open Internal Br
 NSString* kCloseInternalBrowserNotification = @"Close Internal Browser";
 NSString* kCantOpenInternalBrowserNotification = @"Can't open internal browser";
 
-NSString* kInvalidParamsNotification = @"Invalid Params Notification";
+NSString* kInvalidParamsNotification = @"Invalid site or zone property";
 
 // visibility
 NSString* kAdViewBecomeVisibleNotification = @"Ad Become Visible";

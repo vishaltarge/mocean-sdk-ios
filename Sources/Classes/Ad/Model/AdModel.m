@@ -28,21 +28,22 @@ longitude, latitude;
     } else if (self.adZone <= 0) {
         [[NotificationCenter sharedInstance] postNotificationName:[NSString stringWithFormat:@"Invalid zone property: %d", self.adZone] object:nil];
         return NO;
-    } else if (!(self.adsType == 1 || self.adsType == 2 || self.adsType == 3 || self.adsType == 6 || self.adsType == -1)) {
+    }
+    
+    if (!(self.adsType == 1 || self.adsType == 2 || self.adsType == 3 || self.adsType == 6 || self.adsType == -1)) {
         [[NotificationCenter sharedInstance] postNotificationName:[NSString stringWithFormat:@"Invalid adsType property: %d", self.adsType] object:nil];
-        return NO;
-    } else if (!(self.premiumFilter == 0 || self.premiumFilter == 1 || self.premiumFilter == 2 || self.premiumFilter == -1)) {
+    }
+    if (!(self.premiumFilter == 0 || self.premiumFilter == 1 || self.premiumFilter == 2 || self.premiumFilter == -1)) {
         [[NotificationCenter sharedInstance] postNotificationName:[NSString stringWithFormat:@"Invalid premiumFilter property: %d", self.premiumFilter] object:nil];
-        return NO;
-    } else if (minSize.width < 0 || minSize.height < 0) {
+    }
+    if (minSize.width < 0 || minSize.height < 0) {
         [[NotificationCenter sharedInstance] postNotificationName:[NSString stringWithFormat:@"Invalid minSize property: {%f, %f}", self.minSize.width, self.minSize.height] object:nil];
-        return NO;
-    } else if (maxSize.width < 0 || maxSize.height < 0) {
+    }
+    if (maxSize.width < 0 || maxSize.height < 0) {
         [[NotificationCenter sharedInstance] postNotificationName:[NSString stringWithFormat:@"Invalid maxSize property: {%f, %f}", self.minSize.width, self.minSize.height] object:nil];
-        return NO;
-    } else if ([advertiserId intValue] <= 0) {
+    }
+    if (advertiserId && [advertiserId intValue] <= 0) {
         [[NotificationCenter sharedInstance] postNotificationName:[NSString stringWithFormat:@"Invalid advertiserId property: %a", self.advertiserId] object:nil];
-        return NO;
     }
     
     return YES;
