@@ -5,9 +5,9 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.AdMobilemobile.iOS-AdMobile-SDK-v2.5.4</string>
+	<string>com.AdMobilemobile.iOS-AdMobile-SDK-v2.6.0</string>
 	<key>CFBundleName</key>
-	<string>iOS AdMobile SDK v2.5.4 Documentation</string>
+	<string>iOS AdMobile SDK v2.6.0 Documentation</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
@@ -17,7 +17,7 @@
 	
 	
 	<key>DocSetFeedName</key>
-	<string>iOS AdMobile SDK v2.5.4 Documentation</string>
+	<string>iOS AdMobile SDK v2.6.0 Documentation</string>
 	
 	<key>DocSetMinimumXcodeVersion</key>
 	<string>3.0</string>

@@ -173,6 +173,14 @@ typedef enum {
  */
 - (void)update;
 
+/** Size of the ad content to be shown.
+ 
+ Use this property to get the actual size of the ad content. Property value updated after ad content downloaded.
+ 
+ @warning *Note:* If size unavailable (Millennial, Greystripe, iVdopia and other 3rd party SDKs) property returns CGRectZero.
+ */
+@property (readonly) CGSize				contentSize;
+
 
 /** @name Filtering the AdView Content*/
 
@@ -226,14 +234,6 @@ typedef enum {
  Use this property to set the maximal size of the ad content and server response will be close to this size.
  */
 @property CGSize						maxSize;
-
-/** Size of the ad content to be shown.
- 
- Use this property to get the actual size of the ad content. Property value updated after ad content downloaded.
- 
- @warning *Note:* If size unavailable (Millennial, Greystripe, iVdopia and other 3rd party SDKs) property returns CGRectZero.
- */
-@property (readonly) CGSize				contentSize;
 
 /** Custom request parameters.
  

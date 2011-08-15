@@ -155,6 +155,17 @@
 		</Token>
 		
 		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/AdView/contentSize</TokenIdentifier>
+			<Abstract>Size of the ad content to be shown.</Abstract>
+			<DeclaredIn>AdView.h</DeclaredIn>			
+			
+			<Declaration>@property (readonly) CGSize contentSize</Declaration>
+			
+			
+			<Anchor>//api/name/contentSize</Anchor>
+		</Token>
+		
+		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdView/premium</TokenIdentifier>
 			<Abstract>Ad premium filter.</Abstract>
 			<DeclaredIn>AdView.h</DeclaredIn>			
@@ -324,7 +335,7 @@
 			<Abstract>Id of the advertiser for install notification.</Abstract>
 			<DeclaredIn>AdView.h</DeclaredIn>			
 			
-			<Declaration>@property (retain) NSString *advertiserId</Declaration>
+			<Declaration>@property (assign) NSInteger advertiserId</Declaration>
 			
 			
 			<Anchor>//api/name/advertiserId</Anchor>
