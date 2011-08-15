@@ -369,9 +369,14 @@ NSString * const kDefaultPositionORMMAPropertiesFormat = @"{ defaultPosition: { 
     
     if (self.superview)
     {
+        NSString* contentWidth = [webView stringByEvaluatingJavaScriptFromString:@"document.getElementById('contentwidth').offsetWidth"];
+        NSString* contentHeight = [webView stringByEvaluatingJavaScriptFromString:@"document.getElementById('contentheight').offsetHeight"];
+        
         NSMutableDictionary* senfInfo = [NSMutableDictionary dictionary];
         [senfInfo setObject:self.superview forKey:@"adView"];
         [senfInfo setObject:self forKey:@"subView"];
+        [senfInfo setObject:contentWidth forKey:@"contentWidth"];
+        [senfInfo setObject:contentHeight forKey:@"contentHeight"];
         [[NotificationCenter sharedInstance] postNotificationName:kReadyAdDisplayNotification object:senfInfo];
     }
 }

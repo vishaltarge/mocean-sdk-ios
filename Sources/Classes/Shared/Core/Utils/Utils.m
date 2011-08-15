@@ -83,8 +83,16 @@ NSMutableDictionary* CreateNonRetainingDictionary() {
 	return [NSURL URLWithString:[[[request URL] absoluteString] stringByReplacingOccurrencesOfString:@"http" withString:@"itms-apps"]];
 }
 
++ (BOOL)canGetHexColor:(UIColor*)color {
+    return [color canProvideRGBComponents];
+}
+
 + (NSString*)hexColor:(UIColor*)color {
-    return [color hexStringFromColor];
+    if ([color canProvideRGBComponents]) {
+        return [color hexStringFromColor];
+    } else {
+        return nil;
+    }
 }
 
 + (NSString*)videoUrlFromString:(NSString*)string {

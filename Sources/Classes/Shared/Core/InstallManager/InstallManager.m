@@ -50,7 +50,6 @@ static InstallManager* sharedInstance = nil;
 }
 
 - (oneway void)superRelease {
-    RELEASE_SAFELY(advertiserId);
     RELEASE_SAFELY(groupCode);
     RELEASE_SAFELY(udid);
     
@@ -100,7 +99,7 @@ static InstallManager* sharedInstance = nil;
 
 
 
-- (void)sendNotificationWith:(NSString*)adId groupCode:(NSString*)gCode {
+- (void)sendNotificationWith:(NSInteger)adId groupCode:(NSString*)gCode {
     @synchronized(self) {
         if (!_started) {
             _started = YES;
@@ -154,7 +153,7 @@ static InstallManager* sharedInstance = nil;
 
 - (void)sendRequest {
     NSMutableString* url = [NSMutableString stringWithFormat:@"http://www.moceanmobile.com/appconversion.php"];
-    [url appendFormat:@"?advertiser_id=%@", [self.advertiserId stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    [url appendFormat:@"?advertiser_id=%d", self.advertiserId];
     [url appendFormat:@"&group_code=%@", [self.groupCode stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     [url appendFormat:@"&udid=%@", [self.udid stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     

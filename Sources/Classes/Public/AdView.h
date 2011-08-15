@@ -4,7 +4,7 @@
 //
 //  Created by Constantine Mureev on 2/22/11.
 //
-//  version: 2.5.4
+//  version: 2.6.0
 //
 
 
@@ -227,6 +227,14 @@ typedef enum {
  */
 @property CGSize						maxSize;
 
+/** Size of the ad content to be shown.
+ 
+ Use this property to get the actual size of the ad content. Property value updated after ad content downloaded.
+ 
+ @warning *Note:* If size unavailable (Millennial, Greystripe, iVdopia and other 3rd party SDKs) property returns CGRectZero.
+ */
+@property (readonly) CGSize				contentSize;
+
 /** Custom request parameters.
  
  Use this property to add custom request parameters.
@@ -308,7 +316,7 @@ typedef enum {
  
  @warning *Note:* Install notification enabled only if advertiserId and groupCode are specified.
  */
-@property (retain) NSString*			advertiserId;
+@property (assign) NSInteger			advertiserId;
 
 /** Group code for install notification.
  

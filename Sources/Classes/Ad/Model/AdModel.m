@@ -17,7 +17,7 @@
 updateTimeInterval, defaultImage, site, adZone, premiumFilter, adsType, keywords, minSize, maxSize,
 paramBG, paramLINK, additionalParameters, adServerUrl, advertiserId, groupCode,
 country, region, city, area, metro, zip, carrier, showCloseButtonTime,
-autocloseInterstitialTime, startDisplayDate, closeButton, isDisplayed, aligmentCenter, frame,
+autocloseInterstitialTime, startDisplayDate, closeButton, isDisplayed, aligmentCenter, contentSize, frame,
 snapshot, snapshotRAWData, snapshotRAWDataTime, currentAdView, excampaigns, descriptor, loading,
 longitude, latitude;
 
@@ -40,10 +40,10 @@ longitude, latitude;
         [[NotificationCenter sharedInstance] postNotificationName:[NSString stringWithFormat:@"Invalid minSize property: {%f, %f}", self.minSize.width, self.minSize.height] object:nil];
     }
     if (maxSize.width < 0 || maxSize.height < 0) {
-        [[NotificationCenter sharedInstance] postNotificationName:[NSString stringWithFormat:@"Invalid maxSize property: {%f, %f}", self.minSize.width, self.minSize.height] object:nil];
+        [[NotificationCenter sharedInstance] postNotificationName:[NSString stringWithFormat:@"Invalid maxSize property: {%f, %f}", self.maxSize.width, self.maxSize.height] object:nil];
     }
-    if (advertiserId && [advertiserId intValue] <= 0) {
-        [[NotificationCenter sharedInstance] postNotificationName:[NSString stringWithFormat:@"Invalid advertiserId property: %a", self.advertiserId] object:nil];
+    if (advertiserId <= 0) {
+        [[NotificationCenter sharedInstance] postNotificationName:[NSString stringWithFormat:@"Invalid advertiserId property: %d", self.advertiserId] object:nil];
     }
     
     return YES;
@@ -78,8 +78,8 @@ longitude, latitude;
 	if (self.premiumFilter != -1) [_banerUrl appendFormat:@"&premium=%d", self.premiumFilter];
 	if (self.adsType != -1) [_banerUrl appendFormat:@"&adstype=%d", self.adsType];
 	if (self.testMode) [_banerUrl appendString:@"&test=1"];
-	if (self.paramBG != nil) [_banerUrl appendFormat:@"&paramBG=%@", [Utils hexColor:self.paramBG]];
-	if (self.paramLINK != nil) [_banerUrl appendFormat:@"&paramLINK=%@", [Utils hexColor:self.paramLINK]];
+	if (self.paramBG != nil && [Utils canGetHexColor:self.paramBG]) [_banerUrl appendFormat:@"&paramBG=%@", [Utils hexColor:self.paramBG]];
+	if (self.paramLINK != nil && [Utils canGetHexColor:self.paramLINK]) [_banerUrl appendFormat:@"&paramLINK=%@", [Utils hexColor:self.paramLINK]];
     
     if (self.country) [_banerUrl appendFormat:@"&country=%@", self.country];
     if (self.region) [_banerUrl appendFormat:@"&region=%@", self.region];
@@ -152,7 +152,6 @@ longitude, latitude;
 	[paramLINK release];
 	[additionalParameters release];
 	[adServerUrl release];
-    [advertiserId release];
     [groupCode release];
     [country release];
     [region release];

@@ -30,7 +30,7 @@
 @implementation AdView
 
 @dynamic delegate, isLoading, testMode, logMode, animateMode, contentAlignment, updateTimeInterval,
-defaultImage, site, zone, premium, adsType, keywords, minSize, maxSize, textColor, additionalParameters,
+defaultImage, site, zone, premium, adsType, keywords, minSize, maxSize, contentSize, textColor, additionalParameters,
 adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, carrier, latitude, longitude;
 
 
@@ -345,6 +345,8 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 	NSDictionary *info = [notification object];
 	AdView* adView = [info objectForKey:@"adView"];
 	UIView* subView = [info objectForKey:@"subView"];
+    NSString* contentWidth = [info objectForKey:@"contentWidth"];
+    NSString* contentHeight = [info objectForKey:@"contentHeight"];
 	
 	if (adView == self) {        
         AdModel* model = [self adModel];
@@ -354,6 +356,14 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
             
             model.currentAdView = subView;
             subView.hidden = NO;
+            
+            // update content size if possible
+            if (contentHeight && contentWidth) {
+                model.contentSize = CGSizeMake([contentWidth floatValue], [contentHeight floatValue]);
+            } else {
+                model.contentSize = CGSizeZero;
+            }
+            
             
             // switch animation
             if (model.animateMode && currentAdView && subView) {
@@ -772,6 +782,11 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 	return ((AdModel*)_adModel).maxSize;
 }
 
+//@property (readonly) CGSize contentSize;
+- (CGSize)contentSize {
+    return ((AdModel*)_adModel).contentSize;
+}
+
 //@property (retain) NSString*	paramBG;
 - (void)setBackgroundColor:(UIColor*)backgroundColor {
 	((AdModel*)_adModel).paramBG = backgroundColor;
@@ -806,7 +821,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 }
 
 //@property (retain) NSString*	advertiserId;
-- (void)setAdvertiserId:(NSString*)advertiserId {
+- (void)setAdvertiserId:(NSInteger)advertiserId {
 	((AdModel*)_adModel).advertiserId = advertiserId;
     
     if (((AdModel*)_adModel).groupCode) {
@@ -814,7 +829,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     }
 }
 
-- (NSString*)advertiserId {
+- (NSInteger)advertiserId {
 	return ((AdModel*)_adModel).advertiserId;
 }
 

@@ -15,13 +15,13 @@
     BOOL        _started;
 }
 
-@property (retain) NSString* advertiserId;
+@property (assign) NSInteger advertiserId;
 @property (retain) NSString* groupCode;
 @property (retain) NSString* udid;
 
 + (InstallManager*)sharedInstance;
 + (void)releaseSharedInstance;
 
-- (void)sendNotificationWith:(NSString*)adId groupCode:(NSString*)gCode;
+- (void)sendNotificationWith:(NSInteger)adId groupCode:(NSString*)gCode;
 
 @end

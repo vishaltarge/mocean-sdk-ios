@@ -33,6 +33,7 @@ NSMutableDictionary* CreateNonRetainingDictionary();
 
 + (NSURL*)appUrl:(NSURLRequest *)request;
 
++ (BOOL)canGetHexColor:(UIColor*)color;
 + (NSString*)hexColor:(UIColor*)color;
 
 + (NSString*)videoUrlFromString:(NSString*)string;

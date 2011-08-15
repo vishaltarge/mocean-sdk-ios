@@ -40,7 +40,7 @@
 @property (retain) NSDictionary*        additionalParameters;
 @property (retain) NSString*			adServerUrl;
 
-@property (retain) NSString*			advertiserId;
+@property (assign) NSInteger			advertiserId;
 @property (retain) NSString*			groupCode;
 
 @property (retain) NSString*            country;
@@ -58,6 +58,7 @@
 @property BOOL                          isDisplayed;
 
 @property BOOL                          aligmentCenter;
+@property CGSize                        contentSize;
 
 @property CGRect						frame;
 
