@@ -138,7 +138,7 @@ static InternalBrowser* sharedInstance = nil;
         
 		[self.view addSubview:_navbar];
 		
-		_show = NO;
+		_opening = NO;
         
 		[self registerObserver];
         
@@ -207,7 +207,7 @@ static InternalBrowser* sharedInstance = nil;
 
 
 - (void)viewWillDisappear:(BOOL)animated {
-    _show = NO;
+    _opening = NO;
     [super viewWillDisappear:animated];
 }
 
@@ -273,13 +273,13 @@ static InternalBrowser* sharedInstance = nil;
 
 - (void)openURLinInternalBrowser:(NSNotification*)notification {
 	@synchronized(self) {
-		if (!_show || !self.view.window) {
+		if (!_opening && !self.view.window) {
             NSDictionary *info = [notification object];
             AdView* adView = [info objectForKey:@"adView"];
             NSURLRequest* request = [info objectForKey:@"request"];
             
             if (request && adView) {
-                _show = YES;
+                _opening = YES;
                 
                 self.sendAdView = adView;
                 self.viewConreoller = [adView viewControllerForView];
@@ -328,7 +328,7 @@ static InternalBrowser* sharedInstance = nil;
 }
 
 - (void)close {
-    _show = NO;
+    _opening = NO;
 	@synchronized(self) {
         [self.viewConreoller dismissModalViewControllerAnimated:YES];
         

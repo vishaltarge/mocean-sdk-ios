@@ -28,7 +28,7 @@
     UIBarButtonItem*                _activityItem;
     UIActionSheet*                  _actionSheet;
     
-	BOOL							_show;
+	BOOL							_opening;
     UIViewController*               _viewConreoller;
 	UIDevice*						_device;
     
