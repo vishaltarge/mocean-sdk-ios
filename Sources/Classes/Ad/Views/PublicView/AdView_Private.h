@@ -34,6 +34,7 @@
 - (void)adShouldOpenExternalApp:(NSNotification*)notification;
 - (void)visibleAd:(NSNotification*)notification;
 - (void)invisibleAd:(NSNotification*)notification;
+- (void)deviceOrientationDidChange:(NSNotification*)notification;
 
 @end
 

@@ -113,7 +113,7 @@
     [self.contentView removeFromSuperview];
     self.contentView = view;
     
-    self.contentView.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
+    //self.contentView.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
     
     [self.view addSubview:self.contentView];
     

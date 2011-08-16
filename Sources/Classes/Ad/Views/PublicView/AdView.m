@@ -145,6 +145,9 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 	[[NotificationCenter sharedInstance] addObserver:self selector:@selector(dislpayAd:) name:kReadyAdDisplayNotification object:nil];
 	[[NotificationCenter sharedInstance] addObserver:self selector:@selector(visibleAd:) name:kAdViewBecomeVisibleNotification object:nil];
 	[[NotificationCenter sharedInstance] addObserver:self selector:@selector(invisibleAd:) name:kAdViewBecomeInvisibleNotification object:nil];
+    
+    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+    [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(deviceOrientationDidChange:) name: UIDeviceOrientationDidChangeNotification object: nil];
 	
 	[[NotificationCenter sharedInstance] postNotificationName:kRegisterAdNotification object:self];
 	
@@ -421,6 +424,11 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
         [oldView removeFromSuperview];
         model.snapshot = nil;
     }
+}
+
+- (void)deviceOrientationDidChange:(NSNotification*)notification {
+	AdModel* model = [self adModel];
+    model.snapshotRAWData = nil;
 }
 
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
