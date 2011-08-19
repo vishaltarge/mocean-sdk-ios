@@ -42,7 +42,7 @@ longitude, latitude;
     if (maxSize.width < 0 || maxSize.height < 0) {
         [[NotificationCenter sharedInstance] postNotificationName:[NSString stringWithFormat:@"Invalid maxSize property: {%f, %f}", self.maxSize.width, self.maxSize.height] object:nil];
     }
-    if (advertiserId <= 0) {
+    if (advertiserId < 0) {
         [[NotificationCenter sharedInstance] postNotificationName:[NSString stringWithFormat:@"Invalid advertiserId property: %d", self.advertiserId] object:nil];
     }
     
