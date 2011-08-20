@@ -6,7 +6,7 @@
  *
  */
 
-#define LIBRARY_VERSION             @"2.6.1"
+#define LIBRARY_VERSION             @"2.6.2"
 
 #define kDefaultAdServerUrl         @"http://ads.mocean.mobi/ad"
 

@@ -97,15 +97,15 @@ longitude, latitude;
             [LocationManager sharedInstance].currentLocationCoordinate.longitude != 0.0)
         {
             [[NotificationCenter sharedInstance] postNotificationName:kLocationUsedFoundLocationNotification object:nil];
-            [_banerUrl appendFormat:@"&latitude=%f", [LocationManager sharedInstance].currentLocationCoordinate.latitude];
-            [_banerUrl appendFormat:@"&longitude=%f", [LocationManager sharedInstance].currentLocationCoordinate.longitude];
+            [_banerUrl appendFormat:@"&lat=%f", [LocationManager sharedInstance].currentLocationCoordinate.latitude];
+            [_banerUrl appendFormat:@"&long=%f", [LocationManager sharedInstance].currentLocationCoordinate.longitude];
         }
 #endif
     }
     else if ([self.latitude length]>0 && [self.longitude length]>0)
     {
-        [_banerUrl appendFormat:@"&latitude=%@", self.latitude];
-        [_banerUrl appendFormat:@"&longitude=%@", self.longitude];
+        [_banerUrl appendFormat:@"&lat=%@", self.latitude];
+        [_banerUrl appendFormat:@"&long=%@", self.longitude];
     }
     else if ([self.latitude length] !=0 || [self.longitude length]!=0)
     {
