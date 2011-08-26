@@ -10,8 +10,6 @@
 		AA747D9F0F9514B9006C5449 /* AdMobileSDK_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* AdMobileSDK_Prefix.pch */; settings = {ATTRIBUTES = (Public, ); }; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 		ACA293BB10BFAFB300A0A97A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACA293BA10BFAFB300A0A97A /* UIKit.framework */; };
-		ACA8B3781394B04D00DF8F3A /* ORMMAJavascriptBridge.h in Headers */ = {isa = PBXBuildFile; fileRef = ACA8B3761394B04D00DF8F3A /* ORMMAJavascriptBridge.h */; };
-		ACA8B3791394B04D00DF8F3A /* ORMMAJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA8B3771394B04D00DF8F3A /* ORMMAJavascriptBridge.m */; };
 		ADF1FD851201A390008B99D2 /* Reachability.h in Headers */ = {isa = PBXBuildFile; fileRef = ADF1FD621201A38F008B99D2 /* Reachability.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ADFE0644129563F8002C00DE /* MMAdView.h in Headers */ = {isa = PBXBuildFile; fileRef = ADFE0642129563F8002C00DE /* MMAdView.h */; };
 		CF08E30D13B473ED00653A17 /* libSmartAdServer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF08E30C13B473ED00653A17 /* libSmartAdServer.a */; };
@@ -153,14 +151,16 @@
 		FCE55CCA13E6EC9D00EC0FD8 /* QHTTPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE55CC013E6EC9D00EC0FD8 /* QHTTPOperation.m */; };
 		FCE55CCB13E6EC9D00EC0FD8 /* QRunLoopOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = FCE55CC113E6EC9D00EC0FD8 /* QRunLoopOperation.h */; };
 		FCE55CCC13E6EC9D00EC0FD8 /* QRunLoopOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE55CC213E6EC9D00EC0FD8 /* QRunLoopOperation.m */; };
+		FCFF4680140388AB004B2BB5 /* OrmmaAdaptor.h in Headers */ = {isa = PBXBuildFile; fileRef = FCFF467E140388AB004B2BB5 /* OrmmaAdaptor.h */; };
+		FCFF4681140388AB004B2BB5 /* OrmmaAdaptor.m in Sources */ = {isa = PBXBuildFile; fileRef = FCFF467F140388AB004B2BB5 /* OrmmaAdaptor.m */; };
+		FCFF468A1403AD51004B2BB5 /* ScriptObject.h in Headers */ = {isa = PBXBuildFile; fileRef = FCFF46881403AD51004B2BB5 /* ScriptObject.h */; };
+		FCFF468B1403AD51004B2BB5 /* ScriptObject.m in Sources */ = {isa = PBXBuildFile; fileRef = FCFF46891403AD51004B2BB5 /* ScriptObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		AA747D9E0F9514B9006C5449 /* AdMobileSDK_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMobileSDK_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		ACA293BA10BFAFB300A0A97A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		ACA8B3761394B04D00DF8F3A /* ORMMAJavascriptBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORMMAJavascriptBridge.h; path = ORMMA/ORMMAJavascriptBridge.h; sourceTree = "<group>"; };
-		ACA8B3771394B04D00DF8F3A /* ORMMAJavascriptBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ORMMAJavascriptBridge.m; path = ORMMA/ORMMAJavascriptBridge.m; sourceTree = "<group>"; };
 		ACAE9E4213869CFF00B6D1BF /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		AD1E2636125F3F80003B37DF /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		ADA9C50411F975B20074E2F3 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -324,6 +324,10 @@
 		FCE55CC013E6EC9D00EC0FD8 /* QHTTPOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHTTPOperation.m; sourceTree = "<group>"; };
 		FCE55CC113E6EC9D00EC0FD8 /* QRunLoopOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRunLoopOperation.h; sourceTree = "<group>"; };
 		FCE55CC213E6EC9D00EC0FD8 /* QRunLoopOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRunLoopOperation.m; sourceTree = "<group>"; };
+		FCFF467E140388AB004B2BB5 /* OrmmaAdaptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrmmaAdaptor.h; sourceTree = "<group>"; };
+		FCFF467F140388AB004B2BB5 /* OrmmaAdaptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrmmaAdaptor.m; sourceTree = "<group>"; };
+		FCFF46881403AD51004B2BB5 /* ScriptObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScriptObject.h; sourceTree = "<group>"; };
+		FCFF46891403AD51004B2BB5 /* ScriptObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScriptObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -421,8 +425,8 @@
 		AC2E96B01383ED1A0067D7F7 /* ORMMA */ = {
 			isa = PBXGroup;
 			children = (
-				ACA8B3761394B04D00DF8F3A /* ORMMAJavascriptBridge.h */,
-				ACA8B3771394B04D00DF8F3A /* ORMMAJavascriptBridge.m */,
+				FCFF467E140388AB004B2BB5 /* OrmmaAdaptor.h */,
+				FCFF467F140388AB004B2BB5 /* OrmmaAdaptor.m */,
 			);
 			name = ORMMA;
 			sourceTree = "<group>";
@@ -828,6 +832,7 @@
 		CFDE16A4131392D700FE2F5A /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				FCFF46871403AD44004B2BB5 /* JS */,
 				CF9860CD13405F70004D6202 /* InstallManager */,
 				CFC4484F133C7B3F00B147F6 /* LocationManager */,
 				CFF37870133B60830078AC6D /* WebKit */,
@@ -1002,6 +1007,15 @@
 			path = QHTTPOperation;
 			sourceTree = "<group>";
 		};
+		FCFF46871403AD44004B2BB5 /* JS */ = {
+			isa = PBXGroup;
+			children = (
+				FCFF46881403AD51004B2BB5 /* ScriptObject.h */,
+				FCFF46891403AD51004B2BB5 /* ScriptObject.m */,
+			);
+			path = JS;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1086,7 +1100,6 @@
 				CF6DA0D9137273630051225F /* QSHttpClient.h in Headers */,
 				CF6DA0DB137273630051225F /* QSStrings.h in Headers */,
 				CF6DA0DD137273630051225F /* QSUtilities.h in Headers */,
-				ACA8B3781394B04D00DF8F3A /* ORMMAJavascriptBridge.h in Headers */,
 				CFF3289C13B9F3B00070D02A /* UIWebViewAdditions.h in Headers */,
 				CFF328A013B9F9080070D02A /* TransparentUIView.h in Headers */,
 				CFF328A513B9F9D80070D02A /* TransparentUIWebView.h in Headers */,
@@ -1101,6 +1114,8 @@
 				FC428BEA13EFB3C5001B3B6E /* SmartAdServerView.h in Headers */,
 				FCB3133B13F2A3D30076DDE2 /* SASUIViewControllerAdaptor.h in Headers */,
 				FC63ADF213F546FB00360667 /* SmartAdServerDelegate.h in Headers */,
+				FCFF4680140388AB004B2BB5 /* OrmmaAdaptor.h in Headers */,
+				FCFF468A1403AD51004B2BB5 /* ScriptObject.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1241,7 +1256,6 @@
 				CF6DA0D8137273630051225F /* QSFileManager.m in Sources */,
 				CF6DA0DA137273630051225F /* QSHttpClient.m in Sources */,
 				CF6DA0DC137273630051225F /* QSStrings.m in Sources */,
-				ACA8B3791394B04D00DF8F3A /* ORMMAJavascriptBridge.m in Sources */,
 				CFF3289B13B9F3B00070D02A /* UIWebViewAdditions.m in Sources */,
 				CFF328A113B9F9080070D02A /* TransparentUIView.m in Sources */,
 				CFF328A613B9F9D80070D02A /* TransparentUIWebView.m in Sources */,
@@ -1253,6 +1267,8 @@
 				FCE55CCC13E6EC9D00EC0FD8 /* QRunLoopOperation.m in Sources */,
 				FCC4715E13E7B4B500049C98 /* UIColorAdditions.m in Sources */,
 				FCB3133C13F2A3D30076DDE2 /* SASUIViewControllerAdaptor.m in Sources */,
+				FCFF4681140388AB004B2BB5 /* OrmmaAdaptor.m in Sources */,
+				FCFF468B1403AD51004B2BB5 /* ScriptObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

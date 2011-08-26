@@ -159,6 +159,10 @@ NSMutableDictionary* CreateNonRetainingDictionary() {
     return YES;
 }
 
++ (NSInteger)randomInteger:(NSInteger)maxInt {
+    return arc4random() % maxInt;
+}
+
 #pragma mark -
 #pragma mark NSData
 

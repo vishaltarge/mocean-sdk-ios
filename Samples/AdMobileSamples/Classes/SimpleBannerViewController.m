@@ -24,7 +24,7 @@
     [imageView release];
 
 	_adView = [[AdView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50) site:8061 zone:20249];
-	_adView.updateTimeInterval = 15;
+	_adView.updateTimeInterval = 150;
 	[self.view addSubview:_adView];
 }
 

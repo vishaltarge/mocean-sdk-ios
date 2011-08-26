@@ -42,6 +42,8 @@ NSMutableDictionary* CreateNonRetainingDictionary();
 + (void)makeLibraryLinked;
 + (BOOL)isInternalURL:(NSURL*)url;
 
++ (NSInteger)randomInteger:(NSInteger)maxInt;
+
 + (NSString*)md5HashForData:(NSData*)data;
 + (NSString*)sha1HashForData:(NSData*)data;
 + (NSString*)md5HashForString:(NSString*)string;
