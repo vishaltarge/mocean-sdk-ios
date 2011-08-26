@@ -553,7 +553,7 @@ NSString * const kJavaScriptOrmma2 =
     if (aligmentCenter) {
          html = [NSString stringWithFormat:@"<html><head><style> body { margin:0; padding:0; }</style><script type=\"text/javascript\">%@</script></head><body><table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" align=\"center\" width=\"%f\" height=\"%f\"><tr><td align=\"center\" valign=\"middle\"><div id=\"contentheight\"><span id=\"contentwidth\">%@</span></div></td></tr></table></body></html>",kJavaScriptOrmma2, frameSize.width, frameSize.height, data];
      } else {
-         html = [NSString stringWithFormat:@"<html><head><style> body { margin:0; padding:0; }</style><script type=\"text/javascript\">%@</script></head><body>%@</body></html>",kJavaScriptOrmma2, data];
+         html = [NSString stringWithFormat:@"<html><head><style> body { margin:0; padding:0; }</style><script type=\"text/javascript\">%@</script></head><body><div id=\"contentheight\"><span id=\"contentwidth\">%@</span></div></body></html>",kJavaScriptOrmma2, data];
      }
     /*
 	[html appendFormat:@"<html><head><meta name=\"viewport\" content=\"width=%.0f,minimum-scale=1.0,maximum-scale=1.0\">", formWidth];
