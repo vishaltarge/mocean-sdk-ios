@@ -9,6 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "ScriptObject.h"
 
+typedef enum ORMMAStateEnum {
+	ORMMAStateHidden = -1,
+	ORMMAStateDefault = 0,
+	ORMMAStateResized,
+	ORMMAStateExpanded
+} ORMMAState;
+
 @interface OrmmaAdaptor : NSObject <ScriptCallbackDelegate>
 
 - (id)initWithWebView:(UIWebView*)webView;

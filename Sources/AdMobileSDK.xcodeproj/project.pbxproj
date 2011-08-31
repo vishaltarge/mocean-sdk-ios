@@ -137,6 +137,11 @@
 		FC428BE913EFB3C5001B3B6E /* SmartAdServerAd.h in Headers */ = {isa = PBXBuildFile; fileRef = FC428BE613EFB3C5001B3B6E /* SmartAdServerAd.h */; };
 		FC428BEA13EFB3C5001B3B6E /* SmartAdServerView.h in Headers */ = {isa = PBXBuildFile; fileRef = FC428BE713EFB3C5001B3B6E /* SmartAdServerView.h */; };
 		FC63ADF213F546FB00360667 /* SmartAdServerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = FC63ADF113F546FB00360667 /* SmartAdServerDelegate.h */; };
+		FC8821C6140B825C0089CD23 /* OrmmaAdaptor.h in Headers */ = {isa = PBXBuildFile; fileRef = FC8821C2140B825C0089CD23 /* OrmmaAdaptor.h */; };
+		FC8821C7140B825C0089CD23 /* OrmmaAdaptor.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8821C3140B825C0089CD23 /* OrmmaAdaptor.m */; };
+		FC8821D7140BCC560089CD23 /* OrmmaConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = FC8821D6140BCC560089CD23 /* OrmmaConstants.h */; };
+		FC8821E2140BDE570089CD23 /* OrmmaHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = FC8821E0140BDE570089CD23 /* OrmmaHelper.h */; };
+		FC8821E3140BDE570089CD23 /* OrmmaHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8821E1140BDE570089CD23 /* OrmmaHelper.m */; };
 		FCB3133B13F2A3D30076DDE2 /* SASUIViewControllerAdaptor.h in Headers */ = {isa = PBXBuildFile; fileRef = FCB3133913F2A3D30076DDE2 /* SASUIViewControllerAdaptor.h */; };
 		FCB3133C13F2A3D30076DDE2 /* SASUIViewControllerAdaptor.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB3133A13F2A3D30076DDE2 /* SASUIViewControllerAdaptor.m */; };
 		FCC4715D13E7B4B500049C98 /* UIColorAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = FCC4715B13E7B4B500049C98 /* UIColorAdditions.h */; };
@@ -151,8 +156,6 @@
 		FCE55CCA13E6EC9D00EC0FD8 /* QHTTPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE55CC013E6EC9D00EC0FD8 /* QHTTPOperation.m */; };
 		FCE55CCB13E6EC9D00EC0FD8 /* QRunLoopOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = FCE55CC113E6EC9D00EC0FD8 /* QRunLoopOperation.h */; };
 		FCE55CCC13E6EC9D00EC0FD8 /* QRunLoopOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE55CC213E6EC9D00EC0FD8 /* QRunLoopOperation.m */; };
-		FCFF4680140388AB004B2BB5 /* OrmmaAdaptor.h in Headers */ = {isa = PBXBuildFile; fileRef = FCFF467E140388AB004B2BB5 /* OrmmaAdaptor.h */; };
-		FCFF4681140388AB004B2BB5 /* OrmmaAdaptor.m in Sources */ = {isa = PBXBuildFile; fileRef = FCFF467F140388AB004B2BB5 /* OrmmaAdaptor.m */; };
 		FCFF468A1403AD51004B2BB5 /* ScriptObject.h in Headers */ = {isa = PBXBuildFile; fileRef = FCFF46881403AD51004B2BB5 /* ScriptObject.h */; };
 		FCFF468B1403AD51004B2BB5 /* ScriptObject.m in Sources */ = {isa = PBXBuildFile; fileRef = FCFF46891403AD51004B2BB5 /* ScriptObject.m */; };
 /* End PBXBuildFile section */
@@ -310,6 +313,11 @@
 		FC428BE613EFB3C5001B3B6E /* SmartAdServerAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartAdServerAd.h; sourceTree = "<group>"; };
 		FC428BE713EFB3C5001B3B6E /* SmartAdServerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartAdServerView.h; sourceTree = "<group>"; };
 		FC63ADF113F546FB00360667 /* SmartAdServerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartAdServerDelegate.h; sourceTree = "<group>"; };
+		FC8821C2140B825C0089CD23 /* OrmmaAdaptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrmmaAdaptor.h; sourceTree = "<group>"; };
+		FC8821C3140B825C0089CD23 /* OrmmaAdaptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrmmaAdaptor.m; sourceTree = "<group>"; };
+		FC8821D6140BCC560089CD23 /* OrmmaConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrmmaConstants.h; sourceTree = "<group>"; };
+		FC8821E0140BDE570089CD23 /* OrmmaHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrmmaHelper.h; sourceTree = "<group>"; };
+		FC8821E1140BDE570089CD23 /* OrmmaHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrmmaHelper.m; sourceTree = "<group>"; };
 		FCB3133913F2A3D30076DDE2 /* SASUIViewControllerAdaptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASUIViewControllerAdaptor.h; sourceTree = "<group>"; };
 		FCB3133A13F2A3D30076DDE2 /* SASUIViewControllerAdaptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASUIViewControllerAdaptor.m; sourceTree = "<group>"; };
 		FCC4715B13E7B4B500049C98 /* UIColorAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIColorAdditions.h; sourceTree = "<group>"; };
@@ -324,8 +332,6 @@
 		FCE55CC013E6EC9D00EC0FD8 /* QHTTPOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHTTPOperation.m; sourceTree = "<group>"; };
 		FCE55CC113E6EC9D00EC0FD8 /* QRunLoopOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRunLoopOperation.h; sourceTree = "<group>"; };
 		FCE55CC213E6EC9D00EC0FD8 /* QRunLoopOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRunLoopOperation.m; sourceTree = "<group>"; };
-		FCFF467E140388AB004B2BB5 /* OrmmaAdaptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrmmaAdaptor.h; sourceTree = "<group>"; };
-		FCFF467F140388AB004B2BB5 /* OrmmaAdaptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrmmaAdaptor.m; sourceTree = "<group>"; };
 		FCFF46881403AD51004B2BB5 /* ScriptObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScriptObject.h; sourceTree = "<group>"; };
 		FCFF46891403AD51004B2BB5 /* ScriptObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScriptObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -420,15 +426,6 @@
 				AA747D9E0F9514B9006C5449 /* AdMobileSDK_Prefix.pch */,
 			);
 			name = "Other Sources";
-			sourceTree = "<group>";
-		};
-		AC2E96B01383ED1A0067D7F7 /* ORMMA */ = {
-			isa = PBXGroup;
-			children = (
-				FCFF467E140388AB004B2BB5 /* OrmmaAdaptor.h */,
-				FCFF467F140388AB004B2BB5 /* OrmmaAdaptor.m */,
-			);
-			name = ORMMA;
 			sourceTree = "<group>";
 		};
 		AC895DAA13543A4A0029C0EA /* SAS */ = {
@@ -920,7 +917,7 @@
 		CFDE16F71313A29200FE2F5A /* AdWebView */ = {
 			isa = PBXGroup;
 			children = (
-				AC2E96B01383ED1A0067D7F7 /* ORMMA */,
+				FC8821C1140B825C0089CD23 /* ORMMA */,
 				CFDE16F81313A2AA00FE2F5A /* AdWebView.h */,
 				CFDE16F91313A2AA00FE2F5A /* AdWebView.m */,
 			);
@@ -972,6 +969,18 @@
 				CFF37872133B60A20078AC6D /* WebKitInfo.m */,
 			);
 			path = WebKit;
+			sourceTree = "<group>";
+		};
+		FC8821C1140B825C0089CD23 /* ORMMA */ = {
+			isa = PBXGroup;
+			children = (
+				FC8821C2140B825C0089CD23 /* OrmmaAdaptor.h */,
+				FC8821C3140B825C0089CD23 /* OrmmaAdaptor.m */,
+				FC8821D6140BCC560089CD23 /* OrmmaConstants.h */,
+				FC8821E0140BDE570089CD23 /* OrmmaHelper.h */,
+				FC8821E1140BDE570089CD23 /* OrmmaHelper.m */,
+			);
+			path = ORMMA;
 			sourceTree = "<group>";
 		};
 		FCE55CB613E6EC9D00EC0FD8 /* MURLRequesQueue */ = {
@@ -1114,8 +1123,10 @@
 				FC428BEA13EFB3C5001B3B6E /* SmartAdServerView.h in Headers */,
 				FCB3133B13F2A3D30076DDE2 /* SASUIViewControllerAdaptor.h in Headers */,
 				FC63ADF213F546FB00360667 /* SmartAdServerDelegate.h in Headers */,
-				FCFF4680140388AB004B2BB5 /* OrmmaAdaptor.h in Headers */,
 				FCFF468A1403AD51004B2BB5 /* ScriptObject.h in Headers */,
+				FC8821C6140B825C0089CD23 /* OrmmaAdaptor.h in Headers */,
+				FC8821D7140BCC560089CD23 /* OrmmaConstants.h in Headers */,
+				FC8821E2140BDE570089CD23 /* OrmmaHelper.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1267,8 +1278,9 @@
 				FCE55CCC13E6EC9D00EC0FD8 /* QRunLoopOperation.m in Sources */,
 				FCC4715E13E7B4B500049C98 /* UIColorAdditions.m in Sources */,
 				FCB3133C13F2A3D30076DDE2 /* SASUIViewControllerAdaptor.m in Sources */,
-				FCFF4681140388AB004B2BB5 /* OrmmaAdaptor.m in Sources */,
 				FCFF468B1403AD51004B2BB5 /* ScriptObject.m in Sources */,
+				FC8821C7140B825C0089CD23 /* OrmmaAdaptor.m in Sources */,
+				FC8821E3140BDE570089CD23 /* OrmmaHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
