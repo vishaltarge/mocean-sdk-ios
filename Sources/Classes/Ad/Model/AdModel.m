@@ -78,8 +78,8 @@ longitude, latitude;
 	if (self.premiumFilter != -1) [_banerUrl appendFormat:@"&premium=%d", self.premiumFilter];
 	if (self.adsType != -1) [_banerUrl appendFormat:@"&adstype=%d", self.adsType];
 	if (self.testMode) [_banerUrl appendString:@"&test=1"];
-	if (self.paramBG != nil && [Utils canGetHexColor:self.paramBG]) [_banerUrl appendFormat:@"&paramBG=%@", [Utils hexColor:self.paramBG]];
-	if (self.paramLINK != nil && [Utils canGetHexColor:self.paramLINK]) [_banerUrl appendFormat:@"&paramLINK=%@", [Utils hexColor:self.paramLINK]];
+	if (self.paramBG != nil && [Utils canGetHexColor:self.paramBG]) [_banerUrl appendFormat:@"&paramBG=#%@", [Utils hexColor:self.paramBG]];
+	if (self.paramLINK != nil && [Utils canGetHexColor:self.paramLINK]) [_banerUrl appendFormat:@"&paramLINK=#%@", [Utils hexColor:self.paramLINK]];
     
     if (self.country) [_banerUrl appendFormat:@"&country=%@", self.country];
     if (self.region) [_banerUrl appendFormat:@"&region=%@", self.region];
