@@ -44,7 +44,6 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     if (self) {
 		_adModel = [AdModel new];
 		((AdModel*)_adModel).frame = frame;
-        self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 		_observerSet = NO;
 		
         [self registerObserver];
