@@ -550,12 +550,13 @@ NSString * const kJavaScriptOrmma2 =
 	/*NSString* html = [NSString stringWithFormat:@"<html><head><style> body { margin:0; padding:0; }</style><script type=\"text/javascript\">%@ %@</script></head><body>%@</body></html>",kJavaScript_ormma_bridge,kJavaScript_ormma, data];
      */
     NSString* html = nil;
-    float scale = [[UIScreen mainScreen] scale];
+    
     if (aligmentCenter) {
-         html = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=device-width; initial-scale=%f; maximum-scale=%f; user-scalable=0;\"><style> body { margin:0; padding:0; }</style><script type=\"text/javascript\">%@</script></head><body><table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" align=\"center\" width=\"%f\" height=\"%f\"><tr><td align=\"center\" valign=\"middle\"><div id=\"contentheight\"><span id=\"contentwidth\">%@</span></div></td></tr></table></body></html>", scale, scale, kJavaScriptOrmma2, frameSize.width, frameSize.height, data];
+         html = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;\"/><style> body { margin:0; padding:0; } img { max-width:%.0f; }</style></head><body><table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" align=\"center\" width=\"%f\" height=\"%f\"><tr><td align=\"center\" valign=\"middle\"><div id=\"contentheight\"><span id=\"contentwidth\">%@</span></div></td></tr></table></body></html>", frameSize.width, @"", frameSize.width, frameSize.height, data];
      } else {
-         html = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=device-width; initial-scale=%f; maximum-scale=%f; user-scalable=0;\"><style> body { margin:0; padding:0; }</style><script type=\"text/javascript\">%@</script></head><body><div id=\"contentheight\"><span id=\"contentwidth\">%@</span></div></body></html>", scale, scale, kJavaScriptOrmma2, data];
+         html = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;\"/><style> body { margin:0; padding:0; } img { max-width:%.0f; }</style><script type=\"text/javascript\">%@</script></head><body><div id=\"contentheight\"><span id=\"contentwidth\">%@</span></div></body></html>", frameSize.width, @"", data];
      }
+    
     return html;
 }
 
