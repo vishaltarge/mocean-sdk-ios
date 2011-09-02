@@ -29,6 +29,8 @@
 @property (retain) NSString*                ua;
 @property (retain) NSString*                latitude;
 @property (retain) NSString*                longitude;
+@property (retain) NSString*                mcc;
+@property (retain) NSString*                mnc;
 
 + (SharedModel*)sharedInstance;
 + (void)releaseSharedInstance;

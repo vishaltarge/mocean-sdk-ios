@@ -23,9 +23,14 @@
     [self.view addSubview:imageView];
     [imageView release];
 
-	_adView = [[AdView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50) site:8061 zone:20249];
-	_adView.updateTimeInterval = 15;
-	[self.view addSubview:_adView];
+	_adView = [[AdView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
+    _adView.site = 8061;
+    _adView.zone = 20249;
+    _adView.minSize = CGSizeMake(640, 100);
+    _adView.updateTimeInterval = 15;
+    _adView.backgroundColor = [UIColor grayColor];
+    _adView.logMode = YES;
+    [self.view addSubview:_adView];
 }
 
 - (void) dealloc

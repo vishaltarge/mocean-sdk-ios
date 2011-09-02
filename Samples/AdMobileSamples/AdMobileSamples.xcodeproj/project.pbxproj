@@ -311,6 +311,7 @@
 		CFD18F2A134C804E006B2052 /* IVdopiaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVdopiaViewController.m; sourceTree = "<group>"; };
 		CFD18F2B134C804E006B2052 /* IVdopiaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVdopiaViewController.h; sourceTree = "<group>"; };
 		FC428BEF13EFBCC0001B3B6E /* SAS.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SAS.bundle; sourceTree = "<group>"; };
+		FCA6CCAF1410F63A000D9956 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -321,13 +322,13 @@
 				CF64F48513D992E500A4F1B5 /* libsqlite3.0.dylib in Frameworks */,
 				CF64F48613D992E500A4F1B5 /* libz.dylib in Frameworks */,
 				CF19F9C913B4B21B001D1C81 /* CoreMotion.framework in Frameworks */,
-				CF19F9CA13B4B21B001D1C81 /* CoreTelephony.framework in Frameworks */,
 				CF19F9CB13B4B21B001D1C81 /* OpenGLES.framework in Frameworks */,
 				CF19F9C313B4B1FC001D1C81 /* MediaPlayer.framework in Frameworks */,
 				CF19F9C413B4B1FC001D1C81 /* QuartzCore.framework in Frameworks */,
 				CF19F9C513B4B1FC001D1C81 /* SystemConfiguration.framework in Frameworks */,
 				CF19F9BC13B4B1D9001D1C81 /* CFNetwork.framework in Frameworks */,
 				CF19F9BD13B4B1D9001D1C81 /* CoreGraphics.framework in Frameworks */,
+				CF19F9CA13B4B21B001D1C81 /* CoreTelephony.framework in Frameworks */,
 				CF19F9BE13B4B1D9001D1C81 /* Foundation.framework in Frameworks */,
 				CF19F9BF13B4B1D9001D1C81 /* UIKit.framework in Frameworks */,
 				CF19F9B613B4B1A9001D1C81 /* AudioToolbox.framework in Frameworks */,
@@ -467,6 +468,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				FCA6CCAF1410F63A000D9956 /* CoreTelephony.framework */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,

@@ -16,7 +16,7 @@
 
 @implementation SharedModel
 
-@synthesize udidMd5 = _udidMd5, ua, latitude, longitude;
+@synthesize udidMd5 = _udidMd5, ua, latitude, longitude, mcc, mnc;
 
 static SharedModel* sharedInstance = nil;
 
@@ -121,6 +121,26 @@ static SharedModel* sharedInstance = nil;
     }
     else if (networkState == ReachableViaWWAN) {
         [result appendFormat:@"&connection_speed=%d", 0];
+    }
+    
+    // set mcc and mnc
+    if (self.mcc && self.mnc) {
+        [result appendFormat:@"&mcc=%@", self.mcc];
+        [result appendFormat:@"&mnc=%@", self.mnc];
+    } else {
+        CTTelephonyNetworkInfo *netInfo = [[[CTTelephonyNetworkInfo alloc] init] autorelease];
+        CTCarrier *carrier = [netInfo subscriberCellularProvider];
+        NSString *local_mcc = [carrier mobileCountryCode];
+        if (local_mcc && [local_mcc length] > 0) {
+            self.mcc = local_mcc;
+            [result appendFormat:@"&mcc=%@", self.mcc];
+        }
+        
+        NSString *local_mnc = [carrier mobileNetworkCode];
+        if (local_mnc && [local_mnc length] > 0) {
+            self.mnc = local_mnc;
+            [result appendFormat:@"&mnc=%@", self.mnc];
+        }
     }
     
     [result appendFormat:@"&version=%@", LIBRARY_VERSION];
