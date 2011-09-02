@@ -14,7 +14,7 @@
 @implementation AdModel
 
 @synthesize delegate, readyForDisplay, testMode, logMode, animateMode, internalOpenMode,
-updateTimeInterval, defaultImage, site, adZone, premiumFilter, adsType, keywords, minSize, maxSize,
+updateTimeInterval, defaultImage, site, adZone, premiumFilter, adsType, type, keywords, minSize, maxSize,
 paramBG, paramLINK, additionalParameters, adServerUrl, advertiserId, groupCode,
 country, region, city, area, metro, zip, carrier, showCloseButtonTime,
 autocloseInterstitialTime, startDisplayDate, closeButton, isDisplayed, aligmentCenter, contentSize, frame,
@@ -76,7 +76,14 @@ longitude, latitude;
     
 	if (self.keywords != nil) [_banerUrl appendFormat:@"&keywords=%@", self.keywords];	
 	if (self.premiumFilter != -1) [_banerUrl appendFormat:@"&premium=%d", self.premiumFilter];
-	if (self.adsType != -1) [_banerUrl appendFormat:@"&adstype=%d", self.adsType];
+    
+	if (self.adsType > 0) {
+        [_banerUrl appendFormat:@"&adstype=%d", self.adsType];
+    }
+    if (self.type > 0) {
+        [_banerUrl appendFormat:@"type=%d", self.type];
+    }
+    
 	if (self.testMode) [_banerUrl appendString:@"&test=1"];
 	if (self.paramBG != nil && [Utils canGetHexColor:self.paramBG]) [_banerUrl appendFormat:@"&paramBG=#%@", [Utils hexColor:self.paramBG]];
 	if (self.paramLINK != nil && [Utils canGetHexColor:self.paramLINK]) [_banerUrl appendFormat:@"&paramLINK=#%@", [Utils hexColor:self.paramLINK]];

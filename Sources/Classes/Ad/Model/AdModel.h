@@ -32,6 +32,7 @@
 @property (assign) NSInteger			adZone;
 @property AdPremium                     premiumFilter;
 @property AdsType                       adsType;
+@property AdType                        type;
 @property (retain) NSString*			keywords;
 @property CGSize						minSize;
 @property CGSize						maxSize;

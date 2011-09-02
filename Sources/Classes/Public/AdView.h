@@ -49,6 +49,16 @@ typedef enum {
 	AdsTypeSMS = 6,
 } AdsType;
 
+typedef enum {
+	AdTypeTextOnly = 1,
+	AdTypeImagesOnly = 2,
+	AdTypeImagesAndText = 3,
+	AdTypeRichmedia = 4,
+	AdTypeRichmediaAndText = 5,
+	AdTypeRichmediaAndImages = 6,
+	AdTypeAll = 7,
+} AdType;
+
 /** You use the AdView class to embed advertisement content in your application. To do so, you simply create an AdView object and add it to a UIView. An instance of AdView (or simply, an ad) is a means for displaying advertisement information from ad publisher site. To choose ad publisher site set parameters in the ad initialization method initWithFrame:site:zone: or use the properties site and zone. Use the adServerUrl property to choose ad publisher server.
  
  Ad handles the rendering of any content in its area: HTML, Video, Gif animation or JavaScript. Ad also handles any interactions with that content. So you can link from the banner to ad publisher site. Use the internalOpenMode property to set open mode for ad publisher site. To control all intercations implement AdViewDelegate protocol.
@@ -208,12 +218,29 @@ typedef enum {
  AdsTypeSMS = 6,
  } AdsType;
  
- 
- Use this property to filter the content of ad by type.
+ Deprecated! Use type property instead.
  
  The default value is AdsTypeImagesAndText.
  */
-@property AdsType                       adsType;
+@property AdsType                       adsType __attribute__((deprecated));
+
+/** Ad type filter.
+ 
+ typedef enum {
+ AdTypeTextOnly = 1,
+ AdTypeImagesOnly = 2,
+ AdTypeImagesAndText = 3,
+ AdTypeRichmedia = 4,
+ AdTypeRichmediaAndText = 5,
+ AdTypeRichmediaAndImages = 6,
+ AdTypeAll = 7,
+ } AdType;
+ 
+ Use this property to filter the content of ad by type.
+ 
+ The default value is AdTypeImagesAndText.
+ */
+@property AdType                       type;
 
 /** Keywords for search ads.
  

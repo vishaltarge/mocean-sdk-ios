@@ -30,7 +30,7 @@
 @implementation AdView
 
 @dynamic delegate, isLoading, testMode, logMode, animateMode, contentAlignment, updateTimeInterval,
-defaultImage, site, zone, premium, adsType, keywords, minSize, maxSize, contentSize, textColor, additionalParameters,
+defaultImage, site, zone, premium, adsType, type, keywords, minSize, maxSize, contentSize, textColor, additionalParameters,
 adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, carrier, latitude, longitude;
 
 
@@ -760,6 +760,15 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 
 - (AdsType)adsType {
 	return ((AdModel*)_adModel).adsType;
+}
+
+//@property AdType		type;
+- (void)setType:(AdType)type {
+	((AdModel*)_adModel).type = type;
+}
+
+- (AdType)type {
+	return ((AdModel*)_adModel).type;
 }
 
 //@property (retain) NSString*	keywords;
