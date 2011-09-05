@@ -9,6 +9,7 @@
 
 // simple
 #import "SimpleBannerViewController.h"
+#import "SimpleBannerRetinaViewController.h"
 #import "InterstitialViewController.h"
 #import "VideoViewController.h"
 #import "OpenGLViewController.h"

@@ -1,13 +1,14 @@
 //
-//  SimpleBannerViewController.m
+//  SimpleBannerRetinaViewController.m
 //  AdMobileSamples
 //
-//  Created by Ilya Rudometov on 8/2/10.
+//  Created by Constantine Mureev on 9/5/11.
+//  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "SimpleBannerViewController.h"
+#import "SimpleBannerRetinaViewController.h"
 
-@implementation SimpleBannerViewController
+@implementation SimpleBannerRetinaViewController
 
 - (void)viewDidLoad
 {
@@ -21,11 +22,13 @@
     imageView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     [self.view addSubview:imageView];
     [imageView release];
-
-	_adView = [[AdView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
-    _adView.site = 8061;
-    _adView.zone = 20249;
-    _adView.updateTimeInterval = 15;
+    
+	_adView = [[AdView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50) site:8061 zone:20249];
+    
+    // get only ad with size 640x100
+    _adView.minSize = CGSizeMake(640, 100);
+    _adView.maxSize = CGSizeMake(640, 100);
+    
     [self.view addSubview:_adView];
 }
 
