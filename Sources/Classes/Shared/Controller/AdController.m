@@ -251,8 +251,9 @@ static AdController* sharedInstance = nil;
     
 	if (adDescriptor.adContentType == AdContentTypeInvalidParams) {
         [[NotificationCenter sharedInstance] postNotificationName:kInvalidParamsServerResponseNotification object:adView];
-    }
-    else if (adDescriptor.adContentType != AdContentTypeEmpty && adDescriptor.adContentType != AdContentTypeUndefined) {
+    } else if (adDescriptor.adContentType == AdContentTypeEmpty) {
+        [[NotificationCenter sharedInstance] postNotificationName:kEmptyServerResponseNotification object:adView];
+    } else if (adDescriptor.adContentType != AdContentTypeUndefined) {
         if (adModel && [adModel.descriptor.serverReponse isEqualToData:adDescriptor.serverReponse]) {
             if (adDescriptor.adContentType == AdContentTypeDefaultHtml) {
                 [pool release];

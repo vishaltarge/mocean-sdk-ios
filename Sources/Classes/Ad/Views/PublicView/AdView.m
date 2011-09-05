@@ -140,6 +140,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     [[NotificationCenter sharedInstance] addObserver:self selector:@selector(adShouldOpenExternalApp:) name:kShouldOpenExternalAppNotification object:nil];
     [[NotificationCenter sharedInstance] addObserver:self selector:@selector(closeInternalBrowser:) name:kCloseInternalBrowserNotification object:nil];
     [[NotificationCenter sharedInstance] addObserver:self selector:@selector(failToReceiveAd:) name:kInvalidParamsServerResponseNotification object:nil];
+    [[NotificationCenter sharedInstance] addObserver:self selector:@selector(failToReceiveAd:) name:kEmptyServerResponseNotification object:nil];
     [[NotificationCenter sharedInstance] addObserver:self selector:@selector(failToReceiveAd:) name:kFailAdDownloadNotification object:nil];
     [[NotificationCenter sharedInstance] addObserver:self selector:@selector(failToReceiveAd:) name:kFailAdDisplayNotification object:nil];
     
@@ -552,6 +553,16 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
             
             if (delegate && [delegate respondsToSelector:@selector(didFailToReceiveAd: withError:)]) {
                 NSError* error = [NSError errorWithDomain:@"fail to display" code:1011 userInfo:nil];
+                [delegate didFailToReceiveAd:self withError:error];
+            }
+        }
+    } else if ([name isEqualToString:kEmptyServerResponseNotification]) {
+        AdView* ad = [notification object];
+        if (ad == self) {
+            id <AdViewDelegate> delegate = [self adModel].delegate;
+            
+            if (delegate && [delegate respondsToSelector:@selector(didFailToReceiveAd: withError:)]) {
+                NSError* error = [NSError errorWithDomain:@"There is no ads for this time. Try again later..." code:22 userInfo:nil];
                 [delegate didFailToReceiveAd:self withError:error];
             }
         }

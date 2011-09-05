@@ -202,7 +202,7 @@ typedef enum {
 
 
 /** Ad premium filter.
- 
+
     typedef enum {
         AdPremiumNonPremium = 0,
         AdPremiumPremium,
@@ -217,12 +217,12 @@ typedef enum {
 
 /** Ad type filter.
  
- typedef enum {
- AdsTypeTextOnly = 1,
- AdsTypeImagesOnly = 2,
- AdsTypeImagesAndText = 3,
- AdsTypeSMS = 6,
- } AdsType;
+     typedef enum {
+         AdsTypeTextOnly = 1,
+         AdsTypeImagesOnly = 2,
+         AdsTypeImagesAndText = 3,
+         AdsTypeSMS = 6,
+     } AdsType;
  
  Deprecated! Use type property instead.
  
@@ -232,15 +232,15 @@ typedef enum {
 
 /** Ad type filter.
  
- typedef enum {
- AdTypeTextOnly = 1,
- AdTypeImagesOnly = 2,
- AdTypeImagesAndText = 3,
- AdTypeRichmedia = 4,
- AdTypeRichmediaAndText = 5,
- AdTypeRichmediaAndImages = 6,
- AdTypeAll = 7,
- } AdType;
+     typedef enum {
+         AdTypeTextOnly = 1,
+         AdTypeImagesOnly = 2,
+         AdTypeImagesAndText = 3,
+         AdTypeRichmedia = 4,
+         AdTypeRichmediaAndText = 5,
+         AdTypeRichmediaAndImages = 6,
+         AdTypeAll = 7,
+     } AdType;
  
  Use this property to filter the content of ad by type.
  
@@ -369,11 +369,11 @@ typedef enum {
 
 /** AdLogMode value that determines log level.
  
- typedef enum {
- AdLogModeNone = 0,
- AdLogModeErrorsOnly = 1,
- AdLogModeAll = 2,
- } AdLogMode;
+     typedef enum {
+         AdLogModeNone = 0,
+         AdLogModeErrorsOnly = 1,
+         AdLogModeAll = 2,
+     } AdLogMode;
  
  Setting the value of this property to AdLogModeNone disables ads logging. AdLogModeErrorsOnly - enables logging errors only. AdLogModeAll - enables logging errors and infos.
  

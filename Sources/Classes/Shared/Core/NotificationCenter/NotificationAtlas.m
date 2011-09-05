@@ -37,6 +37,7 @@ NSString* kCloseInternalBrowserNotification = @"Close Internal Browser";
 NSString* kCantOpenInternalBrowserNotification = @"Can't open internal browser";
 
 NSString* kInvalidParamsServerResponseNotification = @"Server response with error - invalid site or zone property";
+NSString* kEmptyServerResponseNotification = @"Server response with empty body (no ads)";
 NSString* kInvalidParamsNotification = @"Validation error";
 
 // visibility

@@ -23,7 +23,7 @@
  */
 - (void)didReceiveAd:(id)sender;
 
-/** Sent if an ad view failed to load ad content.
+/** Sent if an ad view failed to load ad content. The same method can be invoked if the server does not currently advertising.
  
  @param sender The ad view that failed to load ad content.
  @param error The error that occurred during loading.
