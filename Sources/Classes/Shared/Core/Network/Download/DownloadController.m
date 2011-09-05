@@ -159,8 +159,6 @@ static DownloadController* sharedInstance = nil;
                                                                                    forKeys:[NSArray arrayWithObjects:@"request", @"adView", nil]];
                     [[NotificationCenter sharedInstance] postNotificationName:kGetAdServerResponseNotification object:info];
                 }]];
-            } else if ([adView adModel].site <= 0 || [adView adModel].adZone <= 0) {
-                [[NotificationCenter sharedInstance] postNotificationName:kInvalidParamsNotification object:adView];
             }
 		}
 	}

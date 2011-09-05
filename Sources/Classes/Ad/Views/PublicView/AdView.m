@@ -43,6 +43,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     self = [super initWithFrame:frame];
     if (self) {
 		_adModel = [AdModel new];
+		((AdModel*)_adModel).adView = self;
 		((AdModel*)_adModel).frame = frame;
 		_observerSet = NO;
 		
@@ -59,6 +60,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     self = [super initWithFrame:frame];
     if (self) {
 		_adModel = [AdModel new];
+		((AdModel*)_adModel).adView = self;
 		((AdModel*)_adModel).frame = frame;
 		_observerSet = NO;
 		
@@ -86,6 +88,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 }
 
 - (void)dealloc {
+    ((AdModel*)_adModel).adView = nil;
     self.delegate = nil;
     RELEASE_SAFELY(_adModel);
     [super dealloc];
@@ -120,6 +123,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     self.testMode = NO;
     self.premium = AdPremiumBoth;
     self.adsType = AdsTypeImagesAndText;
+    self.type = AdTypeImagesAndText;
     
     ((AdModel*)_adModel).loading = NO;
     ((AdModel*)_adModel).aligmentCenter = NO;
@@ -133,7 +137,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     [[NotificationCenter sharedInstance] addObserver:self selector:@selector(adShouldOpenBrowser:) name:kShouldOpenInternalBrowserNotification object:nil];
     [[NotificationCenter sharedInstance] addObserver:self selector:@selector(adShouldOpenExternalApp:) name:kShouldOpenExternalAppNotification object:nil];
     [[NotificationCenter sharedInstance] addObserver:self selector:@selector(closeInternalBrowser:) name:kCloseInternalBrowserNotification object:nil];
-    [[NotificationCenter sharedInstance] addObserver:self selector:@selector(failToReceiveAd:) name:kInvalidParamsNotification object:nil];
+    [[NotificationCenter sharedInstance] addObserver:self selector:@selector(failToReceiveAd:) name:kInvalidParamsServerResponseNotification object:nil];
     [[NotificationCenter sharedInstance] addObserver:self selector:@selector(failToReceiveAd:) name:kFailAdDownloadNotification object:nil];
     [[NotificationCenter sharedInstance] addObserver:self selector:@selector(failToReceiveAd:) name:kFailAdDisplayNotification object:nil];
     
@@ -516,7 +520,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 - (void)failToReceiveAd:(NSNotification*)notification {
     NSString* name = [notification name];
     
-    if ([name isEqualToString:kInvalidParamsNotification]) {
+    if ([name isEqualToString:kInvalidParamsServerResponseNotification]) {
         AdView* ad = [notification object];
         if (ad == self) {
             id <AdViewDelegate> delegate = [self adModel].delegate;
@@ -636,25 +640,25 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 	return ((AdModel*)_adModel).testMode;
 }
 
-//@property BOOL	logMode;
-- (void)setLogMode:(BOOL)logMode {
-    BOOL oldValue = ((AdModel*)_adModel).logMode;
-    BOOL newValue = logMode;
+//@property AdLogMode	logMode;
+- (void)setLogMode:(AdLogMode)logMode {
+    AdLogMode oldValue = ((AdModel*)_adModel).logMode;
+    AdLogMode newValue = logMode;
 	((AdModel*)_adModel).logMode = newValue;
     
     if (oldValue != newValue) {
-        if (newValue) {
-            // start logging for this ad
-            [[NotificationCenter sharedInstance] postNotificationName:kAdStartLoggingNotification object:self];
-        }
-        else {
+        if (newValue == AdLogModeErrorsOnly) {
+            [[NotificationCenter sharedInstance] postNotificationName:kAdStartLoggingErrorsNotification object:self];
+        } else if (newValue == AdLogModeAll) {
+            [[NotificationCenter sharedInstance] postNotificationName:kAdStartLoggingAllNotification object:self];
+        } else if (newValue == AdLogModeNone) {
             // stop logging for this ad
             [[NotificationCenter sharedInstance] postNotificationName:kAdStopLoggingNotification object:self];
         }
     }
 }
 
-- (BOOL)logMode {
+- (AdLogMode)logMode {
 	return ((AdModel*)_adModel).logMode;
 }
 

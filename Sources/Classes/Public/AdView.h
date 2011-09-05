@@ -4,7 +4,7 @@
 //
 //  Created by Constantine Mureev on 2/22/11.
 //
-//  version: 2.6.2
+//  version: 2.6.3
 //
 
 
@@ -58,6 +58,12 @@ typedef enum {
 	AdTypeRichmediaAndImages = 6,
 	AdTypeAll = 7,
 } AdType;
+
+typedef enum {
+	AdLogModeNone = 0,
+	AdLogModeErrorsOnly = 1,
+	AdLogModeAll = 2,
+} AdLogMode;
 
 /** You use the AdView class to embed advertisement content in your application. To do so, you simply create an AdView object and add it to a UIView. An instance of AdView (or simply, an ad) is a means for displaying advertisement information from ad publisher site. To choose ad publisher site set parameters in the ad initialization method initWithFrame:site:zone: or use the properties site and zone. Use the adServerUrl property to choose ad publisher server.
  
@@ -361,12 +367,18 @@ typedef enum {
  The default value is NO.*/
 @property BOOL							testMode;
 
-/** A Boolean value that determines whether ads log mode is enabled.
+/** A AdLogMode value that determines log level.
  
- Setting the value of this property to YES enables ads logging for this ad and setting it to NO disables logging.
+ typedef enum {
+ AdLogModeNone = 0,
+ AdLogModeErrorsOnly = 1,
+ AdLogModeAll = 2,
+ } AdLogMode;
  
- The default value is NO. */
-@property BOOL							logMode;
+ Setting the value of this property to AdLogModeNone disables ads logging. AdLogModeErrorsOnly - enbels logging errors only. AdLogModeAll - enabels logging errors and infos.
+ 
+ The default value is AdLogModeNone. */
+@property AdLogMode                     logMode;
 
 
 /** @name Setting the Delegate */

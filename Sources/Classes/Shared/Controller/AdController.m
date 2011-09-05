@@ -250,7 +250,7 @@ static AdController* sharedInstance = nil;
 	AdDescriptor* adDescriptor = [AdDescriptor descriptorFromContent:data frameSize:[adView adModel].frame.size aligmentCenter:adModel.aligmentCenter];
     
 	if (adDescriptor.adContentType == AdContentTypeInvalidParams) {
-        [[NotificationCenter sharedInstance] postNotificationName:kInvalidParamsNotification object:adView];
+        [[NotificationCenter sharedInstance] postNotificationName:kInvalidParamsServerResponseNotification object:adView];
     }
     else if (adDescriptor.adContentType != AdContentTypeEmpty && adDescriptor.adContentType != AdContentTypeUndefined) {
         if (adModel && [adModel.descriptor.serverReponse isEqualToData:adDescriptor.serverReponse]) {

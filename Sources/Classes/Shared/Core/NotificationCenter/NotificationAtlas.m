@@ -36,7 +36,8 @@ NSString* kShouldOpenInternalBrowserNotification = @"SDK should open Internal Br
 NSString* kCloseInternalBrowserNotification = @"Close Internal Browser";
 NSString* kCantOpenInternalBrowserNotification = @"Can't open internal browser";
 
-NSString* kInvalidParamsNotification = @"Invalid site or zone property";
+NSString* kInvalidParamsServerResponseNotification = @"Server response with error - invalid site or zone property";
+NSString* kInvalidParamsNotification = @"Validation error";
 
 // visibility
 NSString* kAdViewBecomeVisibleNotification = @"Ad Become Visible";
@@ -67,7 +68,8 @@ NSString* kAdUpdateNowNotification = @"Ad Update Now";
 NSString* kAdChangeUpdateTimeIntervalNotification = @"Ad Change Update Time Interval";
 
 // loggingControll
-NSString* kAdStartLoggingNotification = @"Start Log";
+NSString* kAdStartLoggingAllNotification = @"Start Logging all events";
+NSString* kAdStartLoggingErrorsNotification = @"Start Logging errors";
 NSString* kAdStopLoggingNotification = @"Stop Logg";
 
 // iAd

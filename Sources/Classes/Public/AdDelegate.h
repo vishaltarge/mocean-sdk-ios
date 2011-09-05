@@ -4,7 +4,7 @@
 //
 //  Created by Constantine Mureev on 2/24/11.
 //
-//  version: 2.6.2
+//  version: 2.6.3
 //
 
 /** The AdViewDelegate protocol defines methods that a delegate of a AdView object can optionally implement to receive notifications from ad. */

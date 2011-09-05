@@ -468,7 +468,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				FCA6CCAF1410F63A000D9956 /* CoreTelephony.framework */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -509,6 +508,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FCA6CCAF1410F63A000D9956 /* CoreTelephony.framework */,
 				CF19F9B413B4B1A9001D1C81 /* AudioToolbox.framework */,
 				CF19F9B013B4B17A001D1C81 /* AVFoundation.framework */,
 				CF19F9B813B4B1D9001D1C81 /* CFNetwork.framework */,

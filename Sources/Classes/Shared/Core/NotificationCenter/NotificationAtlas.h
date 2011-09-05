@@ -36,6 +36,7 @@ extern NSString* kShouldOpenInternalBrowserNotification;
 extern NSString* kCloseInternalBrowserNotification;
 extern NSString* kCantOpenInternalBrowserNotification;
 
+extern NSString* kInvalidParamsServerResponseNotification;
 extern NSString* kInvalidParamsNotification;
 
 // visibility
@@ -66,7 +67,8 @@ extern NSString* kAdUpdateNowNotification;
 extern NSString* kAdChangeUpdateTimeIntervalNotification;
 
 // loggingControll
-extern NSString* kAdStartLoggingNotification;
+extern NSString* kAdStartLoggingAllNotification;
+extern NSString* kAdStartLoggingErrorsNotification;
 extern NSString* kAdStopLoggingNotification;
 
 // iAd
