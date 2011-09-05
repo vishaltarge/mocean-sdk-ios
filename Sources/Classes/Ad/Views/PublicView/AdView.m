@@ -125,6 +125,8 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     self.adsType = AdsTypeImagesAndText;
     self.type = AdTypeImagesAndText;
     
+    [self setLogMode:AdLogModeErrorsOnly];
+    
     ((AdModel*)_adModel).loading = NO;
     ((AdModel*)_adModel).aligmentCenter = NO;
 }

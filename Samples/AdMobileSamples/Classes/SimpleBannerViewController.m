@@ -27,7 +27,6 @@
     _adView.site = 8061;
     _adView.zone = 20249;
     _adView.updateTimeInterval = 15;
-    _adView.logMode = AdLogModeErrorsOnly;
     [self.view addSubview:_adView];
 }
 

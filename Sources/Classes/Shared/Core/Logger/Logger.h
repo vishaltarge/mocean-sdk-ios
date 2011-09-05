@@ -14,7 +14,7 @@
 
 @interface Logger : NSObject {
     NSMutableDictionary*    _ads;
-    AdLogMode               maxLevel;
+    NSMutableArray*         _allLogAds;
 }
 
 + (Logger*)sharedInstance;

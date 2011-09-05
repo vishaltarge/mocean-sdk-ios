@@ -367,7 +367,7 @@ typedef enum {
  The default value is NO.*/
 @property BOOL							testMode;
 
-/** A AdLogMode value that determines log level.
+/** AdLogMode value that determines log level.
  
  typedef enum {
  AdLogModeNone = 0,
@@ -375,9 +375,9 @@ typedef enum {
  AdLogModeAll = 2,
  } AdLogMode;
  
- Setting the value of this property to AdLogModeNone disables ads logging. AdLogModeErrorsOnly - enbels logging errors only. AdLogModeAll - enabels logging errors and infos.
+ Setting the value of this property to AdLogModeNone disables ads logging. AdLogModeErrorsOnly - enables logging errors only. AdLogModeAll - enables logging errors and infos.
  
- The default value is AdLogModeNone. */
+ The default value is AdLogModeErrorsOnly. */
 @property AdLogMode                     logMode;
 
 

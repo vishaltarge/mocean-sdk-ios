@@ -146,9 +146,11 @@ static Logger* sharedInstance = nil;
 
 - (void)enableLogForAd:(AdView*)adView withLevel:(AdLogMode)logMode {
     NSString* adPtr = [NSString stringWithFormat:@"%ld", adView];
-    maxLevel = (AdLogMode)fmax(maxLevel, logMode);
-    
     @synchronized(_ads) {
+        if (logMode == AdLogModeAll) {
+            [_allLogAds addObject:adPtr];
+        }
+        
         [_ads setObject:[NSNumber numberWithInt:logMode] forKey:adPtr];
     }
 }
@@ -157,6 +159,10 @@ static Logger* sharedInstance = nil;
     NSString* adPtr = [NSString stringWithFormat:@"%ld", adView];
     
     @synchronized(_ads) {
+        if ([_allLogAds containsObject:adPtr]) {
+            [_allLogAds removeObject:adPtr];
+        }
+        
         [_ads removeObjectForKey:adPtr];
     }
 }
@@ -185,57 +191,48 @@ static Logger* sharedInstance = nil;
 
 - (void)printNotification:(NSNotification*)notification {
     @synchronized(self) {
-		NSObject* obj = [notification object];
-        
-        if ([obj isKindOfClass:[AdView class]]) {
-            AdView* adView = (AdView*)obj;
+        if ([_ads count] > 0) {
+            NSObject* obj = [notification object];
             
-            if ([[notification name] isEqualToString:kAdStartLoggingAllNotification]) {
-                [self enableLogForAd:adView withLevel:AdLogModeAll];
-            } else if ([[notification name] isEqualToString:kAdStartLoggingErrorsNotification]) {
-                [self enableLogForAd:adView withLevel:AdLogModeErrorsOnly];
-            } else if ([[notification name] isEqualToString:kAdStopLoggingNotification]) {
-                [self disableLogForAd:adView];
-                return;
-            }
-            
-            if ([self isLogEnabled:adView forLevel:AdLogModeAll]) {
-                if ([[notification name] isEqualToString:kStartAdDownloadNotification]) {
-                    NSString* url = [[adView adModel] urlIgnoreValifation];
-                    [Logger logWithFormat:@" ad(%ld) - %@ | url: %@", adView, [notification name], url];
-                } else {
-                    [Logger logWithFormat:@" ad(%ld) - %@", adView, [notification name]];
-                }
-            }
-        } else if ([obj isKindOfClass:[NSDictionary class]]) {
-            NSDictionary* dic = (NSDictionary*)obj;
-            AdView* adView = [dic objectForKey:@"adView"];
-            NSError* error = [dic objectForKey:@"error"];
-            
-            if ([[notification name] isEqualToString:kAdStartLoggingAllNotification]) {
-                [self enableLogForAd:adView withLevel:AdLogModeAll];
-            } else if ([[notification name] isEqualToString:kAdStartLoggingErrorsNotification]) {
-                [self enableLogForAd:adView withLevel:AdLogModeErrorsOnly];
-            } else if ([[notification name] isEqualToString:kAdStopLoggingNotification]) {
-                [self disableLogForAd:adView];
-                return;
-            }
-            
-            if ([self isLogEnabled:adView forLevel:AdLogModeErrorsOnly]) {
-                if ([adView isKindOfClass:[AdView class]] && [error isKindOfClass:[NSError class]]) {
-                    [Logger logWithFormat:@" ad(%ld) - %@ | error: %@", adView, [notification name], [error description]];
-                } else if ([self isLogEnabled:adView forLevel:AdLogModeAll]) {
-                    if ([adView isKindOfClass:[AdView class]]) {
+            if ([obj isKindOfClass:[AdView class]]) {
+                AdView* adView = (AdView*)obj;
+                
+                if ([self isLogEnabled:adView forLevel:AdLogModeAll]) {
+                    if ([[notification name] isEqualToString:kStartAdDownloadNotification]) {
+                        NSString* url = [[adView adModel] urlIgnoreValifation];
+                        [Logger logWithFormat:@" ad(%ld) - %@ | url: %@", adView, [notification name], url];
+                    } else {
                         [Logger logWithFormat:@" ad(%ld) - %@", adView, [notification name]];
                     }
-                    else {
-                        [Logger logWithFormat:@" - %@", [notification name]];
+                }
+            } else if ([obj isKindOfClass:[NSDictionary class]]) {
+                NSDictionary* dic = (NSDictionary*)obj;
+                AdView* adView = [dic objectForKey:@"adView"];
+                NSError* error = [dic objectForKey:@"error"];
+                
+                if ([self isLogEnabled:adView forLevel:AdLogModeErrorsOnly]) {
+                    if ([adView isKindOfClass:[AdView class]] && [error isKindOfClass:[NSError class]]) {
+                        [Logger logWithFormat:@" ad(%ld) - %@ | error: %@", adView, [notification name], [error description]];
+                    } else if ([self isLogEnabled:adView forLevel:AdLogModeAll]) {
+                        if ([adView isKindOfClass:[AdView class]]) {
+                            [Logger logWithFormat:@" ad(%ld) - %@", adView, [notification name]];
+                        }
+                        else {
+                            [Logger logWithFormat:@" - %@", [notification name]];
+                        }
                     }
                 }
+            } else if ([_allLogAds count] > 0) {
+                [Logger logWithFormat:@" - %@", [notification name]];
             }
-        }
-        else if (maxLevel == AdLogModeAll) {
-            [Logger logWithFormat:@" - %@", [notification name]];
+        } else if ([[notification name] isEqualToString:kAdStartLoggingAllNotification]) {
+            NSObject* obj = [notification object];
+            AdView* adView = (AdView*)obj;
+            [self enableLogForAd:adView withLevel:AdLogModeAll];
+        } else if ([[notification name] isEqualToString:kAdStartLoggingErrorsNotification]) {
+            NSObject* obj = [notification object];
+            AdView* adView = (AdView*)obj;
+            [self enableLogForAd:adView withLevel:AdLogModeErrorsOnly];
         }
 	}
 }
