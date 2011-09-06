@@ -42,6 +42,7 @@ static Logger* sharedInstance = nil;
     
 	if (self) {
         _ads = [NSMutableDictionary new];
+        _allLogAds = [NSMutableArray new];
         [self registerObserver];
 	}
 	
