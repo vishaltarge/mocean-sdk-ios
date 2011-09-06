@@ -562,7 +562,8 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
             }
         }
     } else if ([name isEqualToString:kEmptyServerResponseNotification]) {
-        AdView* ad = [notification object];
+        NSDictionary* info = [notification object];
+        AdView* ad = [info objectForKey:@"adView"];
         if (ad == self) {
             id <AdViewDelegate> delegate = [self adModel].delegate;
             
