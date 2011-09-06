@@ -252,7 +252,10 @@ static AdController* sharedInstance = nil;
 	if (adDescriptor.adContentType == AdContentTypeInvalidParams) {
         [[NotificationCenter sharedInstance] postNotificationName:kInvalidParamsServerResponseNotification object:adView];
     } else if (adDescriptor.adContentType == AdContentTypeEmpty) {
-        [[NotificationCenter sharedInstance] postNotificationName:kEmptyServerResponseNotification object:adView];
+        NSMutableDictionary* errorInfo = [NSMutableDictionary dictionary];
+        [errorInfo setObject:adView forKey:@"adView"];
+        [errorInfo setObject:[NSError errorWithDomain:kEmptyServerResponseNotification code:22 userInfo:nil] forKey:@"error"];        
+        [[NotificationCenter sharedInstance] postNotificationName:kEmptyServerResponseNotification object:errorInfo];
     } else if (adDescriptor.adContentType != AdContentTypeUndefined) {
         if (adModel && [adModel.descriptor.serverReponse isEqualToData:adDescriptor.serverReponse]) {
             if (adDescriptor.adContentType == AdContentTypeDefaultHtml) {
