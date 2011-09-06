@@ -127,7 +127,7 @@ static DownloadController* sharedInstance = nil;
                                 [_cacheController loadLinks:links forAdView:adView request:request origData:data];
                             }
                             else {
-                                if (adView && request) {
+                                if (adView && req) {
                                     NSMutableDictionary* info = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:request, data, adView, nil]
                                                                                                    forKeys:[NSArray arrayWithObjects:@"request", @"data", @"adView", nil]];
                                     [[NotificationCenter sharedInstance] postNotificationName:kFinishAdDownloadNotification object:info];
@@ -138,7 +138,7 @@ static DownloadController* sharedInstance = nil;
                             [_adRequests removeRequest:request];
                         }
                     }
-                } error:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                } error:^(NSURLRequest *req, NSHTTPURLResponse *response, NSError *error) {
                     @synchronized(_adRequests) {
                         if ([_adRequests containsRequest:request]) {
                             NSMutableDictionary* sendInfo = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:error, [_adRequests adForRequest:request], nil]
@@ -188,8 +188,6 @@ static DownloadController* sharedInstance = nil;
 }
 
 - (void)removeAdNotification:(NSNotification*)notification {
-    AdView* adView = [notification object];
-    [_adRequests removeAd:adView];
 }
 
 @end
