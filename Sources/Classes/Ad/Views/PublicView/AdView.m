@@ -1,4 +1,4 @@
-//
+  //
 //  AdView.m
 //  AdMobileSDK
 //
@@ -78,6 +78,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
         _observerSet = NO;
         [[NotificationCenter sharedInstance] postNotificationName:kUnregisterAdNotification object:self];
         [[NotificationCenter sharedInstance] removeObserver:self];
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
     }
     else if ([self retainCount] == 1 && ![NSThread isMainThread]) {
         [super performSelectorOnMainThread:@selector(release) withObject:nil waitUntilDone:NO];
