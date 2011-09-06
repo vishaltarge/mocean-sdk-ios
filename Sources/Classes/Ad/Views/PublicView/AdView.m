@@ -73,7 +73,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     return self;
 }
 
-- (void)release {
+- (oneway void)release {
 	if ([self retainCount] == 1 && _observerSet) {
         _observerSet = NO;
         [[NotificationCenter sharedInstance] postNotificationName:kUnregisterAdNotification object:self];
@@ -87,10 +87,14 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     }
 }
 
-- (void)dealloc {
+- (void)dealloc {    
+    // disable logging
+    [self setLogMode:AdLogModeNone];
+    
     ((AdModel*)_adModel).adView = nil;
     self.delegate = nil;
     RELEASE_SAFELY(_adModel);
+    
     [super dealloc];
 }
 
@@ -628,6 +632,10 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 
 - (AdModel*)adModel {
 	return ((AdModel*)_adModel);
+}
+
+- (NSString*)uid {
+    return [NSString stringWithFormat:@"%ld", self];
 }
 
 // @property (assign) id <AdViewDelegate> delegate;

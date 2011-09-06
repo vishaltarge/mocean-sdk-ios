@@ -37,7 +37,7 @@ extern NSString* kCloseInternalBrowserNotification;
 extern NSString* kCantOpenInternalBrowserNotification;
 
 extern NSString* kInvalidParamsServerResponseNotification;
-extern NSString* kEmptyServerResponseNotification
+extern NSString* kEmptyServerResponseNotification;
 extern NSString* kInvalidParamsNotification;
 
 // visibility

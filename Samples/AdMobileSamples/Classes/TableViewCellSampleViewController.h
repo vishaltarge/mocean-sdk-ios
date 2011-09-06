@@ -9,6 +9,7 @@
 
 @interface TableViewCellSampleViewController : UITableViewController
 {
+    NSMutableArray* _ads;
 }
 
 @end

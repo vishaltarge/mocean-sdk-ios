@@ -145,7 +145,7 @@ static Logger* sharedInstance = nil;
 
 
 - (void)enableLogForAd:(AdView*)adView withLevel:(AdLogMode)logMode {
-    NSString* adPtr = [NSString stringWithFormat:@"%ld", adView];
+    NSString* adPtr = [adView uid];
     @synchronized(_ads) {
         if (logMode == AdLogModeAll) {
             [_allLogAds addObject:adPtr];
@@ -156,7 +156,7 @@ static Logger* sharedInstance = nil;
 }
 
 - (void)disableLogForAd:(AdView*)adView {
-    NSString* adPtr = [NSString stringWithFormat:@"%ld", adView];
+    NSString* adPtr = [adView uid];
     
     @synchronized(_ads) {
         if ([_allLogAds containsObject:adPtr]) {
@@ -191,7 +191,19 @@ static Logger* sharedInstance = nil;
 
 - (void)printNotification:(NSNotification*)notification {
     @synchronized(self) {
-        if ([_ads count] > 0) {
+        if ([[notification name] isEqualToString:kAdStartLoggingAllNotification]) {
+            NSObject* obj = [notification object];
+            AdView* adView = (AdView*)obj;
+            [self enableLogForAd:adView withLevel:AdLogModeAll];
+        } else if ([[notification name] isEqualToString:kAdStartLoggingErrorsNotification]) {
+            NSObject* obj = [notification object];
+            AdView* adView = (AdView*)obj;
+            [self enableLogForAd:adView withLevel:AdLogModeErrorsOnly];
+        } else if ([[notification name] isEqualToString:kAdStopLoggingNotification]) {
+            NSObject* obj = [notification object];
+            AdView* adView = (AdView*)obj;
+            [self disableLogForAd:adView];
+        } else if ([_ads count] > 0) {
             NSObject* obj = [notification object];
             
             if ([obj isKindOfClass:[AdView class]]) {
@@ -225,14 +237,6 @@ static Logger* sharedInstance = nil;
             } else if ([_allLogAds count] > 0) {
                 [Logger logWithFormat:@" - %@", [notification name]];
             }
-        } else if ([[notification name] isEqualToString:kAdStartLoggingAllNotification]) {
-            NSObject* obj = [notification object];
-            AdView* adView = (AdView*)obj;
-            [self enableLogForAd:adView withLevel:AdLogModeAll];
-        } else if ([[notification name] isEqualToString:kAdStartLoggingErrorsNotification]) {
-            NSObject* obj = [notification object];
-            AdView* adView = (AdView*)obj;
-            [self enableLogForAd:adView withLevel:AdLogModeErrorsOnly];
         }
 	}
 }

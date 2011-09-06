@@ -14,6 +14,7 @@
 @interface AdView (Private)
 
 - (AdModel*)adModel;
+- (NSString*)uid;
 
 - (void)setDefaultValues;
 - (void)registerObserver;

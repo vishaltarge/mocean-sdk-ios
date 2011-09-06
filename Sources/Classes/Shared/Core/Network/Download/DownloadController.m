@@ -132,10 +132,10 @@ static DownloadController* sharedInstance = nil;
                                                                                                    forKeys:[NSArray arrayWithObjects:@"request", @"data", @"adView", nil]];
                                     [[NotificationCenter sharedInstance] postNotificationName:kFinishAdDownloadNotification object:info];
                                 }
-                                
-                                // remove from ads request array
-                                [_adRequests removeRequest:request];
                             }
+                            
+                            // remove from ads request array
+                            [_adRequests removeRequest:request];
                         }
                     }
                 } error:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
@@ -188,6 +188,8 @@ static DownloadController* sharedInstance = nil;
 }
 
 - (void)removeAdNotification:(NSNotification*)notification {
+    AdView* adView = [notification object];
+    [_adRequests removeAd:adView];
 }
 
 @end

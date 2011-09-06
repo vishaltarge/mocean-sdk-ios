@@ -856,9 +856,9 @@
 		CFDE16EC1313A22900FE2F5A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CFDE16ED1313A22900FE2F5A /* PublicView */,
 				CFF328A213B9F9CC0070D02A /* TransparentUIWebView */,
 				CFF3289D13B9F8E40070D02A /* TransparentUIView */,
-				CFDE16ED1313A22900FE2F5A /* PublicView */,
 				CFDE16EF1313A22900FE2F5A /* SubViews */,
 				CF9860F71340DA5C004D6202 /* TouchableViewController */,
 			);
