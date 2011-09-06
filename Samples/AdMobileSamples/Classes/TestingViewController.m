@@ -39,6 +39,7 @@
     [self pickOne:_segmentedControl];
     _adView.site = [[_siteTextField text] intValue];
     _adView.zone = [[_zoneTextField text] intValue];
+    _adView.type = AdTypeAll;
     [_adView update];
 }
 

@@ -22,6 +22,7 @@
         
         _adView = [[AdView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height) site:8061 zone:16109];
         _adView.updateTimeInterval = 60;
+        _adView.type = AdTypeRichmedia;
         
         [self.view addSubview:_adView];
         
