@@ -21,6 +21,9 @@
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        if (frame.size.width == 0.0 && frame.size.height == 0.0) {
+            frame = CGRectMake(frame.origin.x, frame.origin.y, 0, 1);
+        }
         _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
 		_webView.delegate = self;
         _webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
