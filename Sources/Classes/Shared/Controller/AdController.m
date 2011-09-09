@@ -158,7 +158,7 @@ static AdController* sharedInstance = nil;
     
 	@synchronized(_ads) {
 		[_ads addObject:adView];
-		[_adsVisibleState addObject:[NSNumber numberWithBool:[adView isViewVisible]]];
+		[_adsVisibleState addObject:[NSNumber numberWithBool:NO]];
 		
 		//start visible checker thread
 		if ([_ads count] == 1) {
@@ -183,6 +183,7 @@ static AdController* sharedInstance = nil;
 		}
 		
 		[_ads removeObject:adView];
+		[_adsVisibleState removeObjectAtIndex:ind];
 		
 		//stop visible checker thread
 		if ([_ads count] == 0) {
