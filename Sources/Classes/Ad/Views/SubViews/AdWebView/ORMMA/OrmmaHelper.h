@@ -11,6 +11,7 @@
 
 @interface OrmmaHelper : NSObject
 
++ (void)signalReadyInWebView:(UIWebView*)webView;
 + (void)setState:(NSString*)state inWebView:(UIWebView*)webView;
 + (void)fireChangeEvent:(NSString*)value inWebView:(UIWebView*)webView;
 

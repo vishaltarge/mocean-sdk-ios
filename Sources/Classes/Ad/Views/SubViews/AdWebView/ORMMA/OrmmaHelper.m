@@ -11,12 +11,16 @@
 @implementation OrmmaHelper
 
 
++ (void)signalReadyInWebView:(UIWebView*)webView {
+    [webView stringByEvaluatingJavaScriptFromString:@"window.ormma.signalReady();"];
+}
+
 + (void)setState:(NSString*)state inWebView:(UIWebView*)webView {
-    [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{ state: '%@' }", state] inWebView:webView];
+    [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{state: %@}", state] inWebView:webView];
 }
 
 + (void)fireChangeEvent:(NSString*)value inWebView:(UIWebView*)webView {
-    [webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"window.ormmaview.fireChangeEvent( %@ );", value]];
+    [webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"window.ormmaview.fireChangeEvent(%@);", value]];
 }
 
 @end

@@ -7,7 +7,6 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "ScriptObject.h"
 
 typedef enum ORMMAStateEnum {
 	ORMMAStateHidden = -1,
@@ -16,7 +15,7 @@ typedef enum ORMMAStateEnum {
 	ORMMAStateExpanded
 } ORMMAState;
 
-@interface OrmmaAdaptor : NSObject <ScriptCallbackDelegate>
+@interface OrmmaAdaptor : NSObject
 
 - (id)initWithWebView:(UIWebView*)webView;
 
