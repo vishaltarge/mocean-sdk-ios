@@ -83,6 +83,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FCA6CCBA1410F983000D9956 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		FCF1EBD613F24A5200364390 /* AdMobileSamplesiPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdMobileSamplesiPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCF1EBDA13F24A5200364390 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FCF1EBDC13F24A5200364390 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -191,6 +192,7 @@
 		FCF1EBCB13F24A5200364390 = {
 			isa = PBXGroup;
 			children = (
+				FCA6CCBA1410F983000D9956 /* CoreTelephony.framework */,
 				FCF1EBE013F24A5200364390 /* AdMobileSamplesiPad */,
 				FCF1EBD913F24A5200364390 /* Frameworks */,
 				FCF1EBD713F24A5200364390 /* Products */,

@@ -64,6 +64,7 @@
 		CFD18F2C134C804E006B2052 /* IVdopiaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD18F2A134C804E006B2052 /* IVdopiaViewController.m */; };
 		CFED897913B0C4DC00761B9C /* libAdMobileSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CFBA6E0013B0599900CCE607 /* libAdMobileSDK.a */; };
 		FC428BF013EFBCC0001B3B6E /* SAS.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FC428BEF13EFBCC0001B3B6E /* SAS.bundle */; };
+		FCF61E511414FBA1007B0BCA /* SimpleBannerRetinaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF61E501414FBA1007B0BCA /* SimpleBannerRetinaViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -311,6 +312,9 @@
 		CFD18F2A134C804E006B2052 /* IVdopiaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVdopiaViewController.m; sourceTree = "<group>"; };
 		CFD18F2B134C804E006B2052 /* IVdopiaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVdopiaViewController.h; sourceTree = "<group>"; };
 		FC428BEF13EFBCC0001B3B6E /* SAS.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SAS.bundle; sourceTree = "<group>"; };
+		FCA6CCAF1410F63A000D9956 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
+		FCF61E4F1414FBA1007B0BCA /* SimpleBannerRetinaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleBannerRetinaViewController.h; sourceTree = "<group>"; };
+		FCF61E501414FBA1007B0BCA /* SimpleBannerRetinaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleBannerRetinaViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -321,13 +325,13 @@
 				CF64F48513D992E500A4F1B5 /* libsqlite3.0.dylib in Frameworks */,
 				CF64F48613D992E500A4F1B5 /* libz.dylib in Frameworks */,
 				CF19F9C913B4B21B001D1C81 /* CoreMotion.framework in Frameworks */,
-				CF19F9CA13B4B21B001D1C81 /* CoreTelephony.framework in Frameworks */,
 				CF19F9CB13B4B21B001D1C81 /* OpenGLES.framework in Frameworks */,
 				CF19F9C313B4B1FC001D1C81 /* MediaPlayer.framework in Frameworks */,
 				CF19F9C413B4B1FC001D1C81 /* QuartzCore.framework in Frameworks */,
 				CF19F9C513B4B1FC001D1C81 /* SystemConfiguration.framework in Frameworks */,
 				CF19F9BC13B4B1D9001D1C81 /* CFNetwork.framework in Frameworks */,
 				CF19F9BD13B4B1D9001D1C81 /* CoreGraphics.framework in Frameworks */,
+				CF19F9CA13B4B21B001D1C81 /* CoreTelephony.framework in Frameworks */,
 				CF19F9BE13B4B1D9001D1C81 /* Foundation.framework in Frameworks */,
 				CF19F9BF13B4B1D9001D1C81 /* UIKit.framework in Frameworks */,
 				CF19F9B613B4B1A9001D1C81 /* AudioToolbox.framework in Frameworks */,
@@ -361,6 +365,7 @@
 		1619F3AF1206D19F00BEA21D /* Simple */ = {
 			isa = PBXGroup;
 			children = (
+				FCF61E4E1414FB4C007B0BCA /* Simple Banner (Retina) */,
 				ACC770251382B7EC005074D8 /* ORMMA */,
 				CF840589130E990B00EC0AF8 /* RichJS */,
 				CF840381130E679D00EC0AF8 /* OpenGL */,
@@ -507,6 +512,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FCA6CCAF1410F63A000D9956 /* CoreTelephony.framework */,
 				CF19F9B413B4B1A9001D1C81 /* AudioToolbox.framework */,
 				CF19F9B013B4B17A001D1C81 /* AVFoundation.framework */,
 				CF19F9B813B4B1D9001D1C81 /* CFNetwork.framework */,
@@ -1326,6 +1332,15 @@
 			path = ../../../Sources/Bundles;
 			sourceTree = "<group>";
 		};
+		FCF61E4E1414FB4C007B0BCA /* Simple Banner (Retina) */ = {
+			isa = PBXGroup;
+			children = (
+				FCF61E4F1414FBA1007B0BCA /* SimpleBannerRetinaViewController.h */,
+				FCF61E501414FBA1007B0BCA /* SimpleBannerRetinaViewController.m */,
+			);
+			name = "Simple Banner (Retina)";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1452,6 +1467,7 @@
 				CF65FA7C135D98D4006678B4 /* SASViewController.m in Sources */,
 				ACC770281382B7F9005074D8 /* ORMMAViewController.m in Sources */,
 				CFBBD63113BDC73D007ADECA /* TestingViewController.m in Sources */,
+				FCF61E511414FBA1007B0BCA /* SimpleBannerRetinaViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

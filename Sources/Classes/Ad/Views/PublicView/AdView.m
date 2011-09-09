@@ -1,4 +1,4 @@
-//
+  //
 //  AdView.m
 //  AdMobileSDK
 //
@@ -30,7 +30,7 @@
 @implementation AdView
 
 @dynamic delegate, isLoading, testMode, logMode, animateMode, contentAlignment, updateTimeInterval,
-defaultImage, site, zone, premium, adsType, keywords, minSize, maxSize, contentSize, textColor, additionalParameters,
+defaultImage, site, zone, premium, adsType, type, keywords, minSize, maxSize, contentSize, textColor, additionalParameters,
 adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, carrier, latitude, longitude;
 
 
@@ -43,8 +43,8 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     self = [super initWithFrame:frame];
     if (self) {
 		_adModel = [AdModel new];
+		((AdModel*)_adModel).adView = self;
 		((AdModel*)_adModel).frame = frame;
-        self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 		_observerSet = NO;
 		
         [self registerObserver];
@@ -60,6 +60,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     self = [super initWithFrame:frame];
     if (self) {
 		_adModel = [AdModel new];
+		((AdModel*)_adModel).adView = self;
 		((AdModel*)_adModel).frame = frame;
 		_observerSet = NO;
 		
@@ -72,11 +73,12 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     return self;
 }
 
-- (void)release {
+- (oneway void)release {
 	if ([self retainCount] == 1 && _observerSet) {
         _observerSet = NO;
         [[NotificationCenter sharedInstance] postNotificationName:kUnregisterAdNotification object:self];
         [[NotificationCenter sharedInstance] removeObserver:self];
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
     }
     else if ([self retainCount] == 1 && ![NSThread isMainThread]) {
         [super performSelectorOnMainThread:@selector(release) withObject:nil waitUntilDone:NO];
@@ -86,9 +88,14 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     }
 }
 
-- (void)dealloc {
+- (void)dealloc {    
+    // disable logging
+    [self setLogMode:AdLogModeNone];
+    
+    ((AdModel*)_adModel).adView = nil;
     self.delegate = nil;
     RELEASE_SAFELY(_adModel);
+    
     [super dealloc];
 }
 
@@ -121,6 +128,9 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     self.testMode = NO;
     self.premium = AdPremiumBoth;
     self.adsType = AdsTypeImagesAndText;
+    self.type = AdTypeImagesAndText;
+    
+    [self setLogMode:AdLogModeErrorsOnly];
     
     ((AdModel*)_adModel).loading = NO;
     ((AdModel*)_adModel).aligmentCenter = NO;
@@ -134,7 +144,8 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     [[NotificationCenter sharedInstance] addObserver:self selector:@selector(adShouldOpenBrowser:) name:kShouldOpenInternalBrowserNotification object:nil];
     [[NotificationCenter sharedInstance] addObserver:self selector:@selector(adShouldOpenExternalApp:) name:kShouldOpenExternalAppNotification object:nil];
     [[NotificationCenter sharedInstance] addObserver:self selector:@selector(closeInternalBrowser:) name:kCloseInternalBrowserNotification object:nil];
-    [[NotificationCenter sharedInstance] addObserver:self selector:@selector(failToReceiveAd:) name:kInvalidParamsNotification object:nil];
+    [[NotificationCenter sharedInstance] addObserver:self selector:@selector(failToReceiveAd:) name:kInvalidParamsServerResponseNotification object:nil];
+    [[NotificationCenter sharedInstance] addObserver:self selector:@selector(failToReceiveAd:) name:kEmptyServerResponseNotification object:nil];
     [[NotificationCenter sharedInstance] addObserver:self selector:@selector(failToReceiveAd:) name:kFailAdDownloadNotification object:nil];
     [[NotificationCenter sharedInstance] addObserver:self selector:@selector(failToReceiveAd:) name:kFailAdDisplayNotification object:nil];
     
@@ -517,7 +528,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 - (void)failToReceiveAd:(NSNotification*)notification {
     NSString* name = [notification name];
     
-    if ([name isEqualToString:kInvalidParamsNotification]) {
+    if ([name isEqualToString:kInvalidParamsServerResponseNotification]) {
         AdView* ad = [notification object];
         if (ad == self) {
             id <AdViewDelegate> delegate = [self adModel].delegate;
@@ -547,6 +558,17 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
             
             if (delegate && [delegate respondsToSelector:@selector(didFailToReceiveAd: withError:)]) {
                 NSError* error = [NSError errorWithDomain:@"fail to display" code:1011 userInfo:nil];
+                [delegate didFailToReceiveAd:self withError:error];
+            }
+        }
+    } else if ([name isEqualToString:kEmptyServerResponseNotification]) {
+        NSDictionary* info = [notification object];
+        AdView* ad = [info objectForKey:@"adView"];
+        if (ad == self) {
+            id <AdViewDelegate> delegate = [self adModel].delegate;
+            
+            if (delegate && [delegate respondsToSelector:@selector(didFailToReceiveAd: withError:)]) {
+                NSError* error = [NSError errorWithDomain:@"There is no ads for this time. Try again later..." code:22 userInfo:nil];
                 [delegate didFailToReceiveAd:self withError:error];
             }
         }
@@ -614,6 +636,10 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 	return ((AdModel*)_adModel);
 }
 
+- (NSString*)uid {
+    return [NSString stringWithFormat:@"%ld", self];
+}
+
 // @property (assign) id <AdViewDelegate> delegate;
 - (void)setDelegate:(id <AdViewDelegate>)delegate {
 	((AdModel*)_adModel).delegate = (id <AdInterstitialViewDelegate>)delegate;
@@ -637,25 +663,25 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 	return ((AdModel*)_adModel).testMode;
 }
 
-//@property BOOL	logMode;
-- (void)setLogMode:(BOOL)logMode {
-    BOOL oldValue = ((AdModel*)_adModel).logMode;
-    BOOL newValue = logMode;
+//@property AdLogMode	logMode;
+- (void)setLogMode:(AdLogMode)logMode {
+    AdLogMode oldValue = ((AdModel*)_adModel).logMode;
+    AdLogMode newValue = logMode;
 	((AdModel*)_adModel).logMode = newValue;
     
     if (oldValue != newValue) {
-        if (newValue) {
-            // start logging for this ad
-            [[NotificationCenter sharedInstance] postNotificationName:kAdStartLoggingNotification object:self];
-        }
-        else {
+        if (newValue == AdLogModeErrorsOnly) {
+            [[NotificationCenter sharedInstance] postNotificationName:kAdStartLoggingErrorsNotification object:self];
+        } else if (newValue == AdLogModeAll) {
+            [[NotificationCenter sharedInstance] postNotificationName:kAdStartLoggingAllNotification object:self];
+        } else if (newValue == AdLogModeNone) {
             // stop logging for this ad
             [[NotificationCenter sharedInstance] postNotificationName:kAdStopLoggingNotification object:self];
         }
     }
 }
 
-- (BOOL)logMode {
+- (AdLogMode)logMode {
 	return ((AdModel*)_adModel).logMode;
 }
 
@@ -761,6 +787,15 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 
 - (AdsType)adsType {
 	return ((AdModel*)_adModel).adsType;
+}
+
+//@property AdType		type;
+- (void)setType:(AdType)type {
+	((AdModel*)_adModel).type = type;
+}
+
+- (AdType)type {
+	return ((AdModel*)_adModel).type;
 }
 
 //@property (retain) NSString*	keywords;

@@ -4,7 +4,7 @@
 //
 //  Created by Constantine Mureev on 2/22/11.
 //
-//  version: 2.6.2
+//  version: 2.6.3
 //
 
 
@@ -48,6 +48,22 @@ typedef enum {
 	AdsTypeImagesAndText = 3,
 	AdsTypeSMS = 6,
 } AdsType;
+
+typedef enum {
+	AdTypeTextOnly = 1,
+	AdTypeImagesOnly = 2,
+	AdTypeImagesAndText = 3,
+	AdTypeRichmedia = 4,
+	AdTypeRichmediaAndText = 5,
+	AdTypeRichmediaAndImages = 6,
+	AdTypeAll = 7,
+} AdType;
+
+typedef enum {
+	AdLogModeNone = 0,
+	AdLogModeErrorsOnly = 1,
+	AdLogModeAll = 2,
+} AdLogMode;
 
 /** You use the AdView class to embed advertisement content in your application. To do so, you simply create an AdView object and add it to a UIView. An instance of AdView (or simply, an ad) is a means for displaying advertisement information from ad publisher site. To choose ad publisher site set parameters in the ad initialization method initWithFrame:site:zone: or use the properties site and zone. Use the adServerUrl property to choose ad publisher server.
  
@@ -186,7 +202,7 @@ typedef enum {
 
 
 /** Ad premium filter.
- 
+
     typedef enum {
         AdPremiumNonPremium = 0,
         AdPremiumPremium,
@@ -201,19 +217,36 @@ typedef enum {
 
 /** Ad type filter.
  
- typedef enum {
- AdsTypeTextOnly = 1,
- AdsTypeImagesOnly = 2,
- AdsTypeImagesAndText = 3,
- AdsTypeSMS = 6,
- } AdsType;
+     typedef enum {
+         AdsTypeTextOnly = 1,
+         AdsTypeImagesOnly = 2,
+         AdsTypeImagesAndText = 3,
+         AdsTypeSMS = 6,
+     } AdsType;
  
- 
- Use this property to filter the content of ad by type.
+ Deprecated! Use type property instead.
  
  The default value is AdsTypeImagesAndText.
  */
-@property AdsType                       adsType;
+@property AdsType                       adsType __attribute__((deprecated));
+
+/** Ad type filter.
+ 
+     typedef enum {
+         AdTypeTextOnly = 1,
+         AdTypeImagesOnly = 2,
+         AdTypeImagesAndText = 3,
+         AdTypeRichmedia = 4,
+         AdTypeRichmediaAndText = 5,
+         AdTypeRichmediaAndImages = 6,
+         AdTypeAll = 7,
+     } AdType;
+ 
+ Use this property to filter the content of ad by type.
+ 
+ The default value is AdTypeImagesAndText.
+ */
+@property AdType                       type;
 
 /** Keywords for search ads.
  
@@ -334,12 +367,18 @@ typedef enum {
  The default value is NO.*/
 @property BOOL							testMode;
 
-/** A Boolean value that determines whether ads log mode is enabled.
+/** AdLogMode value that determines log level.
  
- Setting the value of this property to YES enables ads logging for this ad and setting it to NO disables logging.
+     typedef enum {
+         AdLogModeNone = 0,
+         AdLogModeErrorsOnly = 1,
+         AdLogModeAll = 2,
+     } AdLogMode;
  
- The default value is NO. */
-@property BOOL							logMode;
+ Setting the value of this property to AdLogModeNone disables ads logging. AdLogModeErrorsOnly - enables logging errors only. AdLogModeAll - enables logging errors and infos.
+ 
+ The default value is AdLogModeErrorsOnly. */
+@property AdLogMode                     logMode;
 
 
 /** @name Setting the Delegate */

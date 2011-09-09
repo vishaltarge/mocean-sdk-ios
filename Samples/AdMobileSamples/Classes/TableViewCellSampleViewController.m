@@ -13,8 +13,18 @@
 @implementation TableViewCellSampleViewController
 
 
+- (void)viewDidLoad {
+    _ads = [NSMutableArray new];
+    
+    [super viewDidLoad];
+}
+
 - (void) dealloc
 {
+    for (AdView* ad in _ads) {
+        [ad removeFromSuperview];
+    }
+    [_ads release];
 	[super dealloc];
 }
 
@@ -34,12 +44,12 @@
 	
 	UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 	
-	if (!cell)
-	{
+	if (!cell) {
 		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
 		
         AdView* ad = [[AdView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50) site:8061 zone:20249];
 		ad.updateTimeInterval = 15;
+        [_ads addObject:ad];
         
         [cell.contentView addSubview:ad];
         [ad release];

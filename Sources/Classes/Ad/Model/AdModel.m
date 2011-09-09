@@ -14,36 +14,63 @@
 @implementation AdModel
 
 @synthesize delegate, readyForDisplay, testMode, logMode, animateMode, internalOpenMode,
-updateTimeInterval, defaultImage, site, adZone, premiumFilter, adsType, keywords, minSize, maxSize,
+updateTimeInterval, defaultImage, site, adZone, premiumFilter, adsType, type, keywords, minSize, maxSize,
 paramBG, paramLINK, additionalParameters, adServerUrl, advertiserId, groupCode,
 country, region, city, area, metro, zip, carrier, showCloseButtonTime,
 autocloseInterstitialTime, startDisplayDate, closeButton, isDisplayed, aligmentCenter, contentSize, frame,
-snapshot, snapshotRAWData, snapshotRAWDataTime, currentAdView, excampaigns, descriptor, loading,
+snapshot, snapshotRAWData, snapshotRAWDataTime, currentAdView, adView, excampaigns, descriptor, loading,
 longitude, latitude;
 
 - (BOOL)validate {
     if (self.site <= 0) {
-        [[NotificationCenter sharedInstance] postNotificationName:[NSString stringWithFormat:@"Invalid site property: %d", self.site] object:nil];
+        NSMutableDictionary* info = [NSMutableDictionary dictionary];
+        [info setObject:self.adView forKey:@"adView"];
+        [info setObject:[NSError errorWithDomain:[NSString stringWithFormat:@"Invalid site property. value - %d", self.site] code:171 userInfo:nil] forKey:@"error"];        
+        [[NotificationCenter sharedInstance] postNotificationName:kInvalidParamsNotification object:info];
         return NO;
     } else if (self.adZone <= 0) {
-        [[NotificationCenter sharedInstance] postNotificationName:[NSString stringWithFormat:@"Invalid zone property: %d", self.adZone] object:nil];
+        NSMutableDictionary* info = [NSMutableDictionary dictionary];
+        [info setObject:self.adView forKey:@"adView"];
+        [info setObject:[NSError errorWithDomain:[NSString stringWithFormat:@"Invalid zone property. value - %d", self.adZone] code:172 userInfo:nil] forKey:@"error"];        
+        [[NotificationCenter sharedInstance] postNotificationName:kInvalidParamsNotification object:info];
         return NO;
     }
     
-    if (!(self.adsType == 1 || self.adsType == 2 || self.adsType == 3 || self.adsType == 6 || self.adsType == -1)) {
-        [[NotificationCenter sharedInstance] postNotificationName:[NSString stringWithFormat:@"Invalid adsType property: %d", self.adsType] object:nil];
+    if (!(self.adsType == 1 || self.adsType == 2 || self.adsType == 3 || self.adsType == 6)) {
+        NSMutableDictionary* info = [NSMutableDictionary dictionary];
+        [info setObject:self.adView forKey:@"adView"];
+        [info setObject:[NSError errorWithDomain:[NSString stringWithFormat:@"Invalid adsType property. value - %d", self.adsType] code:173 userInfo:nil] forKey:@"error"];        
+        [[NotificationCenter sharedInstance] postNotificationName:kInvalidParamsNotification object:info];
     }
-    if (!(self.premiumFilter == 0 || self.premiumFilter == 1 || self.premiumFilter == 2 || self.premiumFilter == -1)) {
-        [[NotificationCenter sharedInstance] postNotificationName:[NSString stringWithFormat:@"Invalid premiumFilter property: %d", self.premiumFilter] object:nil];
+    if (!(self.premiumFilter == 0 || self.premiumFilter == 1 || self.premiumFilter == 2)) {
+        NSMutableDictionary* info = [NSMutableDictionary dictionary];
+        [info setObject:self.adView forKey:@"adView"];
+        [info setObject:[NSError errorWithDomain:[NSString stringWithFormat:@"Invalid premium property. value - %d", self.premiumFilter] code:174 userInfo:nil] forKey:@"error"];        
+        [[NotificationCenter sharedInstance] postNotificationName:kInvalidParamsNotification object:info];
     }
     if (minSize.width < 0 || minSize.height < 0) {
-        [[NotificationCenter sharedInstance] postNotificationName:[NSString stringWithFormat:@"Invalid minSize property: {%f, %f}", self.minSize.width, self.minSize.height] object:nil];
+        NSMutableDictionary* info = [NSMutableDictionary dictionary];
+        [info setObject:self.adView forKey:@"adView"];
+        [info setObject:[NSError errorWithDomain:[NSString stringWithFormat:@"Invalid minSize property. value - {%f, %f}", self.minSize.width, self.minSize.height] code:175 userInfo:nil] forKey:@"error"];        
+        [[NotificationCenter sharedInstance] postNotificationName:kInvalidParamsNotification object:info];
     }
     if (maxSize.width < 0 || maxSize.height < 0) {
-        [[NotificationCenter sharedInstance] postNotificationName:[NSString stringWithFormat:@"Invalid maxSize property: {%f, %f}", self.maxSize.width, self.maxSize.height] object:nil];
+        NSMutableDictionary* info = [NSMutableDictionary dictionary];
+        [info setObject:self.adView forKey:@"adView"];
+        [info setObject:[NSError errorWithDomain:[NSString stringWithFormat:@"Invalid maxSize property. value - {%f, %f}", self.maxSize.width, self.maxSize.height] code:176 userInfo:nil] forKey:@"error"];        
+        [[NotificationCenter sharedInstance] postNotificationName:kInvalidParamsNotification object:info];
     }
     if (advertiserId < 0) {
-        [[NotificationCenter sharedInstance] postNotificationName:[NSString stringWithFormat:@"Invalid advertiserId property: %d", self.advertiserId] object:nil];
+        NSMutableDictionary* info = [NSMutableDictionary dictionary];
+        [info setObject:self.adView forKey:@"adView"];
+        [info setObject:[NSError errorWithDomain:[NSString stringWithFormat:@"Invalid advertiserId property. value - %d", self.advertiserId] code:177 userInfo:nil] forKey:@"error"];        
+        [[NotificationCenter sharedInstance] postNotificationName:kInvalidParamsNotification object:info];
+    }
+    if (!(self.type >=1 && self.type <= 7)) {
+        NSMutableDictionary* info = [NSMutableDictionary dictionary];
+        [info setObject:self.adView forKey:@"adView"];
+        [info setObject:[NSError errorWithDomain:[NSString stringWithFormat:@"Invalid type property. value - %d", self.type] code:178 userInfo:nil] forKey:@"error"];        
+        [[NotificationCenter sharedInstance] postNotificationName:kInvalidParamsNotification object:info];
     }
     
     return YES;
@@ -66,28 +93,53 @@ longitude, latitude;
 	if (self.site > 0) [_banerUrl appendFormat:@"site=%d", self.site];
 	if (self.adZone > 0) [_banerUrl appendFormat:@"&zone=%d", self.adZone];
 	
-	if (self.minSize.width > 0 && self.minSize.height > 0) {
+	if (self.minSize.width > 0 && self.minSize.height > 0)
 		[_banerUrl appendFormat:@"&min_size_x=%1.0f&min_size_y=%1.0f", self.minSize.width, self.minSize.height];
-	}
 	
-	if (self.maxSize.width > 0 && self.maxSize.height > 0) {
+	if (self.maxSize.width > 0 && self.maxSize.height > 0)
 		[_banerUrl appendFormat:@"&size_x=%1.0f&size_y=%1.0f", self.maxSize.width, self.maxSize.height];
-	}
     
-	if (self.keywords != nil) [_banerUrl appendFormat:@"&keywords=%@", self.keywords];	
-	if (self.premiumFilter != -1) [_banerUrl appendFormat:@"&premium=%d", self.premiumFilter];
-	if (self.adsType != -1) [_banerUrl appendFormat:@"&adstype=%d", self.adsType];
-	if (self.testMode) [_banerUrl appendString:@"&test=1"];
-	if (self.paramBG != nil && [Utils canGetHexColor:self.paramBG]) [_banerUrl appendFormat:@"&paramBG=%@", [Utils hexColor:self.paramBG]];
-	if (self.paramLINK != nil && [Utils canGetHexColor:self.paramLINK]) [_banerUrl appendFormat:@"&paramLINK=%@", [Utils hexColor:self.paramLINK]];
+	if (self.keywords != nil)
+        [_banerUrl appendFormat:@"&keywords=%@", self.keywords];	
     
-    if (self.country) [_banerUrl appendFormat:@"&country=%@", self.country];
-    if (self.region) [_banerUrl appendFormat:@"&region=%@", self.region];
-    if (self.city) [_banerUrl appendFormat:@"&city=%@", self.city];
-    if (self.area) [_banerUrl appendFormat:@"&area=%@", self.area];
-    if (self.metro) [_banerUrl appendFormat:@"&metro=%@", self.metro];
-    if (self.zip) [_banerUrl appendFormat:@"&zip=%@", self.zip];
-    if (self.carrier) [_banerUrl appendFormat:@"&carrier=%@", self.carrier];
+    if (self.premiumFilter == 0 || self.premiumFilter == 1 || self.premiumFilter == 2)
+        [_banerUrl appendFormat:@"&premium=%d", self.premiumFilter];
+    
+	if (self.adsType == 1 || self.adsType == 2 || self.adsType == 3 || self.adsType == 6)
+        [_banerUrl appendFormat:@"&adstype=%d", self.adsType];
+        
+    if (self.type >=1 && self.type <= 7)
+        [_banerUrl appendFormat:@"&type=%d", self.type];
+    
+	if (self.testMode)
+        [_banerUrl appendString:@"&test=1"];
+    
+	if (self.paramBG != nil && [Utils canGetHexColor:self.paramBG])
+        [_banerUrl appendFormat:@"&paramBG=#%@", [Utils hexColor:self.paramBG]];
+    
+	if (self.paramLINK != nil && [Utils canGetHexColor:self.paramLINK])
+        [_banerUrl appendFormat:@"&paramLINK=#%@", [Utils hexColor:self.paramLINK]];
+    
+    if (self.country)
+        [_banerUrl appendFormat:@"&country=%@", self.country];
+    
+    if (self.region)
+        [_banerUrl appendFormat:@"&region=%@", self.region];
+    
+    if (self.city)
+        [_banerUrl appendFormat:@"&city=%@", self.city];
+    
+    if (self.area)
+        [_banerUrl appendFormat:@"&area=%@", self.area];
+    
+    if (self.metro)
+        [_banerUrl appendFormat:@"&metro=%@", self.metro];
+    
+    if (self.zip)
+        [_banerUrl appendFormat:@"&zip=%@", self.zip];
+    
+    if (self.carrier)
+        [_banerUrl appendFormat:@"&carrier=%@", self.carrier];
     
     if (self.latitude == nil && self.longitude == nil)
     {
@@ -114,7 +166,8 @@ longitude, latitude;
     
     [_banerUrl appendString:[[SharedModel sharedInstance] sharedUrlPart]];
     
-    if (self.excampaigns) [_banerUrl appendFormat:@"&excampaigns=%@", [self.excampaigns componentsJoinedByString:@","]];
+    if (self.excampaigns) 
+        [_banerUrl appendFormat:@"&excampaigns=%@", [self.excampaigns componentsJoinedByString:@","]];
 	
 	[_banerUrl appendString:@"&count=1"];
 	[_banerUrl appendString:@"&key=1"];

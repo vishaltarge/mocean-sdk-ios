@@ -22,7 +22,7 @@
 @property (readonly) BOOL				readyForDisplay;
 
 @property BOOL							testMode;
-@property BOOL							logMode;
+@property AdLogMode                     logMode;
 @property BOOL							animateMode;
 @property BOOL							internalOpenMode;
 @property NSTimeInterval				updateTimeInterval;
@@ -32,6 +32,7 @@
 @property (assign) NSInteger			adZone;
 @property AdPremium                     premiumFilter;
 @property AdsType                       adsType;
+@property AdType                        type;
 @property (retain) NSString*			keywords;
 @property CGSize						minSize;
 @property CGSize						maxSize;
@@ -66,6 +67,7 @@
 @property (retain) NSData*              snapshotRAWData;
 @property (retain) NSDate*              snapshotRAWDataTime;
 @property (retain) UIView*              currentAdView;
+@property (assign) AdView*              adView;
 
 @property (retain) NSMutableArray*      excampaigns;
 @property (retain) AdDescriptor*        descriptor;

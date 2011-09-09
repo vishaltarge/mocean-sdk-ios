@@ -127,18 +127,18 @@ static DownloadController* sharedInstance = nil;
                                 [_cacheController loadLinks:links forAdView:adView request:request origData:data];
                             }
                             else {
-                                if (adView && request) {
+                                if (adView && req) {
                                     NSMutableDictionary* info = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:request, data, adView, nil]
                                                                                                    forKeys:[NSArray arrayWithObjects:@"request", @"data", @"adView", nil]];
                                     [[NotificationCenter sharedInstance] postNotificationName:kFinishAdDownloadNotification object:info];
                                 }
-                                
-                                // remove from ads request array
-                                [_adRequests removeRequest:request];
                             }
+                            
+                            // remove from ads request array
+                            [_adRequests removeRequest:request];
                         }
                     }
-                } error:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                } error:^(NSURLRequest *req, NSHTTPURLResponse *response, NSError *error) {
                     @synchronized(_adRequests) {
                         if ([_adRequests containsRequest:request]) {
                             NSMutableDictionary* sendInfo = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:error, [_adRequests adForRequest:request], nil]
@@ -159,8 +159,6 @@ static DownloadController* sharedInstance = nil;
                                                                                    forKeys:[NSArray arrayWithObjects:@"request", @"adView", nil]];
                     [[NotificationCenter sharedInstance] postNotificationName:kGetAdServerResponseNotification object:info];
                 }]];
-            } else if ([adView adModel].site <= 0 || [adView adModel].adZone <= 0) {
-                [[NotificationCenter sharedInstance] postNotificationName:kInvalidParamsNotification object:adView];
             }
 		}
 	}

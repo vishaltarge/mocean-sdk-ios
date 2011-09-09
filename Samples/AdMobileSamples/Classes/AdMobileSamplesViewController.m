@@ -16,6 +16,7 @@
     NSMutableArray* items = [NSMutableArray array];
     
     [items addObject:@"Simple banner"];
+    [items addObject:@"Simple banner (Retina)"];
 	[items addObject:@"Interstitial"];
 	[items addObject:@"Video"];
 	[items addObject:@"Rich JS Interstitial Ad"];
@@ -64,14 +65,16 @@
         if (indexPath.row == 0)
             viewController = [[SimpleBannerViewController alloc] init];
         else if (indexPath.row == 1)
-            viewController = [[InterstitialViewController alloc] init];
+            viewController = [[SimpleBannerRetinaViewController alloc] init];
         else if (indexPath.row == 2)
-            viewController = [[VideoViewController alloc] init];
+            viewController = [[InterstitialViewController alloc] init];
         else if (indexPath.row == 3)
-            viewController = [[RichJSadViewController alloc] init];
+            viewController = [[VideoViewController alloc] init];
         else if (indexPath.row == 4)
+            viewController = [[RichJSadViewController alloc] init];
+        else if (indexPath.row == 5)
             viewController = [[OpenGLViewController alloc] init];
-		else if (indexPath.row == 5)
+		else if (indexPath.row == 6)
             viewController = [[ORMMAViewController alloc] init];
     }
     else if (indexPath.section == 1) {

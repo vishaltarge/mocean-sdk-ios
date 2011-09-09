@@ -2,13 +2,29 @@
 {\fonttbl\f0\fnil\fcharset0 TrebuchetMS;\f1\fnil\fcharset0 Verdana;\f2\fnil\fcharset0 LucidaGrande;
 \f3\fnil\fcharset0 Menlo-Regular;}
 {\colortbl;\red255\green255\blue255;\red52\green52\blue52;\red56\green56\blue56;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww18740\viewh12360\viewkind0
+\paperw11900\paperh16840\margl1440\margr1440\vieww12840\viewh12220\viewkind0
 \deftab720
 \pard\pardeftab720\sa100
 
 \f0\b\fs26 \cf2 Change log\
 \pard\pardeftab720\sa240
 \cf2 \
+\pard\pardeftab720\sa100
+
+\fs32 \cf2 v2.6.3
+\fs26 \
+\pard\pardeftab720\sa240
+
+\f1\b0\fs24 \cf3 1. add support for Retina display\uc0\u8232 2. add property Type\u8232 3. mark adsType property as deprecated\u8232 4. add logger levels\u8232 5. add mcc and mnc auto detect parameters
+\f2 \uc0\u8232 
+\f1 6. handle empty server response as special error in AdViewDelegate protocol
+\f2 \uc0\u8232 
+\f1 7. fix initWithFrame: constructor
+\f2 \uc0\u8232 
+\f1 8. fix detecting content size with contentSize property
+\f2 \uc0\u8232 
+\f1 9. update sample applications
+\f0\b\fs26 \cf2 \
 \pard\pardeftab720\sa100
 
 \fs32 \cf2 v2.6.2
@@ -32,10 +48,10 @@
 \pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. fix SDK crash on setting background color with system texture.\uc0\u8232 2. add contentSize property to AdView and AdInterstitialView\u8232 3. add documentation XCode install script\u8232 4. add parameters validation\u8232 5. add iPad sample application
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 6. fix Internal browser navigation panel position on iPad
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 7. update Rhythm SDK
+\f2 \uc0\u8232 
+\f1 6. fix Internal browser navigation panel position on iPad
+\f2 \uc0\u8232 
+\f1 7. update Rhythm SDK
 \f0\b\fs26 \cf2 \
 \pard\pardeftab720\sa100
 
@@ -60,14 +76,14 @@
 \pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. Disable location auto detect by default (also disable Rhythm SDK by default)
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 2. update documentation
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 3. fix bugs in InternalBrowser
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 4. update sample application
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 5. add several redirects support
+\f2 \uc0\u8232 
+\f1 2. update documentation
+\f2 \uc0\u8232 
+\f1 3. fix bugs in InternalBrowser
+\f2 \uc0\u8232 
+\f1 4. update sample application
+\f2 \uc0\u8232 
+\f1 5. add several redirects support
 \f0\b\fs26 \cf2 \
 \pard\pardeftab720\sa100
 
@@ -76,8 +92,8 @@
 \pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. Add direct links support (AppStore/iTunes/Maps/sms/mailto/tel)
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 2. update AdViewDelegate protocol
+\f2 \uc0\u8232 
+\f1 2. update AdViewDelegate protocol
 \f0\b\fs26 \cf2 \
 \pard\pardeftab720\sa100
 
@@ -86,18 +102,18 @@
 \pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. Add ORMMA support
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 2. fix js banner bug
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 3. update sample app
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 4. remove autoShow property
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 5. add contentAlignment
+\f2 \uc0\u8232 
+\f1 2. fix js banner bug
+\f2 \uc0\u8232 
+\f1 3. update sample app
+\f2 \uc0\u8232 
+\f1 4. remove autoShow property
+\f2 \uc0\u8232 
+\f1 5. add contentAlignment
 \f3\fs28 \cf0 \CocoaLigature0  
 \f1\fs24 \cf3 \CocoaLigature1 property
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 6. update documentation
+\f2 \uc0\u8232 
+\f1 6. update documentation
 \f0\b\fs26 \cf2 \
 \pard\pardeftab720\sa100
 
@@ -106,10 +122,10 @@
 \pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. Optimize transparency support to AdView
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 2. Improve internal browser
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 3. update sample app
+\f2 \uc0\u8232 
+\f1 2. Improve internal browser
+\f2 \uc0\u8232 
+\f1 3. update sample app
 \f0\b\fs26 \cf2 \
 \pard\pardeftab720\sa100
 
@@ -126,16 +142,16 @@
 \pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. Update Millennial SDK to 4.2.5
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 2. Change SDK integration method
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 3. Add 3rd party SDK enable/disable option
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 4. Add location services enable/disable option
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 5. bug fixes
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 6. Remove Medialets SDK
+\f2 \uc0\u8232 
+\f1 2. Change SDK integration method
+\f2 \uc0\u8232 
+\f1 3. Add 3rd party SDK enable/disable option
+\f2 \uc0\u8232 
+\f1 4. Add location services enable/disable option
+\f2 \uc0\u8232 
+\f1 5. bug fixes
+\f2 \uc0\u8232 
+\f1 6. Remove Medialets SDK
 \f0\b\fs26 \cf2 \
 \pard\pardeftab720\sa100
 
@@ -144,15 +160,15 @@
 \pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. ORMMA Level 1.
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 2. Longitude & Latitude property.
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 3. Define properties in UIWebView allowsInlineMediaPlayback as YES and mediaPlaybackRequiresUsersAction as NO.
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 4. Update AdMob 3rd party SDK.1. update internal browser.
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 5. Logging LocationManager state.
-\f2 \cf3 \uc0\u8232 
+\f2 \uc0\u8232 
+\f1 2. Longitude & Latitude property.
+\f2 \uc0\u8232 
+\f1 3. Define properties in UIWebView allowsInlineMediaPlayback as YES and mediaPlaybackRequiresUsersAction as NO.
+\f2 \uc0\u8232 
+\f1 4. Update AdMob 3rd party SDK.1. update internal browser.
+\f2 \uc0\u8232 
+\f1 5. Logging LocationManager state.
+\f2 \uc0\u8232 
 \f0\b\fs26 \cf2 \
 \pard\pardeftab720\sa240
 
@@ -161,10 +177,10 @@
 \pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. Resolve special references.
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 2. Auto close Interstitial if his content is nil or if server response is <invalid params>.
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 3. White-label SDK.\
+\f2 \uc0\u8232 
+\f1 2. Auto close Interstitial if his content is nil or if server response is <invalid params>.
+\f2 \uc0\u8232 
+\f1 3. White-label SDK.\
 \pard\pardeftab720\sa240
 
 \f0\b\fs32 \cf2 v2.1.1
@@ -172,10 +188,10 @@
 \pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. update internal browser.
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 2. add video ads auto play/pause support using view visibility.
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 3. improv 3rd part SDKs integration (Google AdMob, Millennial, Greystripe).
+\f2 \uc0\u8232 
+\f1 2. add video ads auto play/pause support using view visibility.
+\f2 \uc0\u8232 
+\f1 3. improv 3rd part SDKs integration (Google AdMob, Millennial, Greystripe).
 \f0\b\fs26 \cf2 \
 \pard\pardeftab720\sa100
 
@@ -184,8 +200,8 @@
 \pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. add version with 3rd party SDKs.
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 2. fix memory bugs.
+\f2 \uc0\u8232 
+\f1 2. fix memory bugs.
 \f0\b\fs26 \cf2 \
 \pard\pardeftab720\sa100
 
@@ -194,8 +210,8 @@
 \pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. update sample application.
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 2. improve interstitial displaying.
+\f2 \uc0\u8232 
+\f1 2. improve interstitial displaying.
 \f0\b\fs26 \cf2 \
 \pard\pardeftab720\sa100
 
@@ -212,8 +228,8 @@
 \pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. fix minor bugs.
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 2. add isLoding property
+\f2 \uc0\u8232 
+\f1 2. add isLoding property
 \f0\b\fs26 \cf2 \
 \pard\pardeftab720\sa100
 
@@ -222,10 +238,10 @@
 \pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. change public API.
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 2. fix memory leaks.
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 3. improve threading.
+\f2 \uc0\u8232 
+\f1 2. fix memory leaks.
+\f2 \uc0\u8232 
+\f1 3. improve threading.
 \f0\b\fs26 \cf2 \
 \pard\pardeftab720\sa100
 
@@ -241,12 +257,12 @@
 \pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. critical bugfix (sometimes html ad is't drawing on screen).
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 2. improve logging.
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 3. add Debug sample in Advanced section of AdCatalog sample app.
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 4. fix logic when server response with no data.\
+\f2 \uc0\u8232 
+\f1 2. improve logging.
+\f2 \uc0\u8232 
+\f1 3. add Debug sample in Advanced section of AdCatalog sample app.
+\f2 \uc0\u8232 
+\f1 4. fix logic when server response with no data.\
 \pard\pardeftab720\sa200
 
 \f0\b\fs32 \cf2 v1.7.8
@@ -254,20 +270,20 @@
 \pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. update iAd integration
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 2. update AdCatalog app icons.
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 3. run AdCatalog with native resolution for iPad
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 4. update Developer Guide for 1.7.8
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 5. add html documentation (Class Reference)
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 6. fix critical memory bug
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 7. improve UI (Interstitial positions, update animations)
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 8. improve threading\
+\f2 \uc0\u8232 
+\f1 2. update AdCatalog app icons.
+\f2 \uc0\u8232 
+\f1 3. run AdCatalog with native resolution for iPad
+\f2 \uc0\u8232 
+\f1 4. update Developer Guide for 1.7.8
+\f2 \uc0\u8232 
+\f1 5. add html documentation (Class Reference)
+\f2 \uc0\u8232 
+\f1 6. fix critical memory bug
+\f2 \uc0\u8232 
+\f1 7. improve UI (Interstitial positions, update animations)
+\f2 \uc0\u8232 
+\f1 8. improve threading\
 \pard\pardeftab720\sa100
 
 \f0\b\fs32 \cf2 v1.7.7
@@ -275,12 +291,12 @@
 \pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. Fix js IAD customer problem.
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 2. Remove pixel and key param.
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 3. Improve full screen webview appearance.
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 4. Update all 3rd party sdk's\
+\f2 \uc0\u8232 
+\f1 2. Remove pixel and key param.
+\f2 \uc0\u8232 
+\f1 3. Improve full screen webview appearance.
+\f2 \uc0\u8232 
+\f1 4. Update all 3rd party sdk's\
 \pard\pardeftab720\sa200
 
 \f0\b\fs32 \cf2 v1.7.6
@@ -295,10 +311,10 @@
 \pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. add full orientations support
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 2. add orientation demo in AdCatalog sample
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 3. critical bug fix.\
+\f2 \uc0\u8232 
+\f1 2. add orientation demo in AdCatalog sample
+\f2 \uc0\u8232 
+\f1 3. critical bug fix.\
 \pard\pardeftab720\sa200
 
 \f0\b\fs32 \cf2 v1.7.4
@@ -306,16 +322,16 @@
 \pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. fix UIWebView bug ((clear WebView immediately after close)).
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 2. change project and library name to mOceanSDK.
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 3. change callback interfaces declaration
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 4. change sample app name to AdCatalog
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 5. update default params for url.
-\f2 \cf3 \uc0\u8232 
-\f1 \cf3 6. add auto detect carrier name. (CoreTelephony framework required, documentation will be updated)\
+\f2 \uc0\u8232 
+\f1 2. change project and library name to mOceanSDK.
+\f2 \uc0\u8232 
+\f1 3. change callback interfaces declaration
+\f2 \uc0\u8232 
+\f1 4. change sample app name to AdCatalog
+\f2 \uc0\u8232 
+\f1 5. update default params for url.
+\f2 \uc0\u8232 
+\f1 6. add auto detect carrier name. (CoreTelephony framework required, documentation will be updated)\
 \pard\pardeftab720\sa200
 
 \f0\b\fs32 \cf2 v1.7.3

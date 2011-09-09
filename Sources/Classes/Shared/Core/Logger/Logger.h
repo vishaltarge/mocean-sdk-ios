@@ -13,7 +13,8 @@
 #import "AdView_Private.h"
 
 @interface Logger : NSObject {
-    NSMutableArray*     _ads;
+    NSMutableDictionary*    _ads;
+    NSMutableArray*         _allLogAds;
 }
 
 + (Logger*)sharedInstance;

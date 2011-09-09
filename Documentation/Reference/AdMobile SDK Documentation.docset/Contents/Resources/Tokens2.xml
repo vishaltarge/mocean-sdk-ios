@@ -188,6 +188,17 @@
 		</Token>
 		
 		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/AdView/type</TokenIdentifier>
+			<Abstract>Ad type filter.</Abstract>
+			<DeclaredIn>AdView.h</DeclaredIn>			
+			
+			<Declaration>@property AdType type</Declaration>
+			
+			
+			<Anchor>//api/name/type</Anchor>
+		</Token>
+		
+		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdView/keywords</TokenIdentifier>
 			<Abstract>Keywords for search ads.</Abstract>
 			<DeclaredIn>AdView.h</DeclaredIn>			
@@ -366,10 +377,10 @@ Setting the value of this property to YES enables ads test mode and setting it t
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdView/logMode</TokenIdentifier>
-			<Abstract>A Boolean value that determines whether ads log mode is enabled.</Abstract>
+			<Abstract>AdLogMode value that determines log level.</Abstract>
 			<DeclaredIn>AdView.h</DeclaredIn>			
 			
-			<Declaration>@property BOOL logMode</Declaration>
+			<Declaration>@property AdLogMode logMode</Declaration>
 			
 			
 			<Anchor>//api/name/logMode</Anchor>

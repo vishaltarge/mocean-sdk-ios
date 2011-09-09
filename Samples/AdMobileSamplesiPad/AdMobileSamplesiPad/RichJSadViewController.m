@@ -23,6 +23,7 @@
         _adView.showCloseButtonTime = 5;
         _adView.autocloseInterstitialTime = 15;
         _adView.contentAlignment = YES;
+        _adView.type = AdTypeRichmedia;
         _adView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         self.view = _adView;
     }

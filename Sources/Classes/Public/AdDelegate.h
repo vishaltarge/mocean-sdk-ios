@@ -4,7 +4,7 @@
 //
 //  Created by Constantine Mureev on 2/24/11.
 //
-//  version: 2.6.2
+//  version: 2.6.3
 //
 
 /** The AdViewDelegate protocol defines methods that a delegate of a AdView object can optionally implement to receive notifications from ad. */
@@ -24,6 +24,8 @@
 - (void)didReceiveAd:(id)sender;
 
 /** Sent if an ad view failed to load ad content.
+ 
+ The same method can be invoked if the server does not currently advertising.
  
  @param sender The ad view that failed to load ad content.
  @param error The error that occurred during loading.

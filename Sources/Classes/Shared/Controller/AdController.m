@@ -250,9 +250,13 @@ static AdController* sharedInstance = nil;
 	AdDescriptor* adDescriptor = [AdDescriptor descriptorFromContent:data frameSize:[adView adModel].frame.size aligmentCenter:adModel.aligmentCenter];
     
 	if (adDescriptor.adContentType == AdContentTypeInvalidParams) {
-        [[NotificationCenter sharedInstance] postNotificationName:kInvalidParamsNotification object:adView];
-    }
-    else if (adDescriptor.adContentType != AdContentTypeEmpty && adDescriptor.adContentType != AdContentTypeUndefined) {
+        [[NotificationCenter sharedInstance] postNotificationName:kInvalidParamsServerResponseNotification object:adView];
+    } else if (adDescriptor.adContentType == AdContentTypeEmpty) {
+        NSMutableDictionary* errorInfo = [NSMutableDictionary dictionary];
+        [errorInfo setObject:adView forKey:@"adView"];
+        [errorInfo setObject:[NSError errorWithDomain:kEmptyServerResponseNotification code:22 userInfo:nil] forKey:@"error"];        
+        [[NotificationCenter sharedInstance] postNotificationName:kEmptyServerResponseNotification object:errorInfo];
+    } else if (adDescriptor.adContentType != AdContentTypeUndefined) {
         if (adModel && [adModel.descriptor.serverReponse isEqualToData:adDescriptor.serverReponse]) {
             if (adDescriptor.adContentType == AdContentTypeDefaultHtml) {
                 [pool release];
