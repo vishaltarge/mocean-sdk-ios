@@ -8,6 +8,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+#import "AdView.h"
+
 typedef enum ORMMAStateEnum {
 	ORMMAStateHidden = -1,
 	ORMMAStateDefault = 0,
@@ -17,7 +19,7 @@ typedef enum ORMMAStateEnum {
 
 @interface OrmmaAdaptor : NSObject
 
-- (id)initWithWebView:(UIWebView*)webView;
+- (id)initWithWebView:(UIWebView*)webView adView:(AdView*)ad;
 
 - (BOOL)isOrmma:(NSURLRequest *)request; 
 - (void)webViewDidFinishLoad:(UIWebView*)webView;
