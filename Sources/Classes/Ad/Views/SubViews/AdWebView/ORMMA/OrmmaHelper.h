@@ -19,6 +19,7 @@
 + (void)setScreenSize:(CGSize)size inWebView:(UIWebView*)webView;
 + (void)setDefaultPosition:(CGRect)frame inWebView:(UIWebView*)webView;
 + (void)setOrientation:(UIDeviceOrientation)orientation inWebView:(UIWebView*)webView;
++ (void)setSupports:(NSArray*)supports inWebView:(UIWebView*)webView;
 
 + (void)fireChangeEvent:(NSString*)value inWebView:(UIWebView*)webView;
 

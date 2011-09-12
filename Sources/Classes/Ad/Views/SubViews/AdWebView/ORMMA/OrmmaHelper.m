@@ -69,6 +69,11 @@
     [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{orientation: %i}", orientationAngle] inWebView:webView];
 }
 
++ (void)setSupports:(NSArray*)supports inWebView:(UIWebView*)webView {
+    NSString* value = [supports componentsJoinedByString:@", "];
+    [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{supports: [%@]}", value] inWebView:webView];
+}
+
 + (void)fireChangeEvent:(NSString*)value inWebView:(UIWebView*)webView {
     if ([NSThread isMainThread]) {
         [webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"window.ormmaview.fireChangeEvent(%@);", value]];

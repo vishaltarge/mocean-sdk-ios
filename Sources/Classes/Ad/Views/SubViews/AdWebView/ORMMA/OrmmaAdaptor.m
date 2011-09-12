@@ -11,6 +11,7 @@
 #import "UIViewAdditions.h"
 #import "Reachability.h"
 #import "NotificationCenter.h"
+#import "LocationManager.h"
 
 #define ORMMA_SHAME     @"ormma"
 
@@ -64,7 +65,8 @@
 }
 
 - (void)setDefaults {
-    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
+    UIDevice* device = [UIDevice currentDevice];
+    UIDeviceOrientation orientation = device.orientation;
     
     // Default state
     if ([webView isViewVisible]) {
@@ -110,10 +112,60 @@
     // Orientation
     [OrmmaHelper setOrientation:orientation inWebView:self.webView];
     
-    // supports
+    // Supports
     
-    // supports: [ 'level-1', 'level-2', 'orientation', 'network', 'heading', 'location', 'screen', 'shake', 'size', 'tilt', 'sms', 'phone', 'email', 'audio', 'video', 'map'%@ ]
+    NSMutableArray* supports = [NSMutableArray array];
+    [supports addObject:@"'level-1'"];
+    [supports addObject:@"'level-2'"];
+    [supports addObject:@"'orientation'"];
+    [supports addObject:@"'network'"];
+    [supports addObject:@"'location'"];
+    [supports addObject:@"'screen'"];
+    [supports addObject:@"'shake'"];
+    [supports addObject:@"'size'"];
+    [supports addObject:@"'tilt'"];
+    [supports addObject:@"'audio'"];
+    [supports addObject:@"'video'"];
+    [supports addObject:@"'map'"];
     
+	if (NSClassFromString(@"EKEventStore")) {
+		[supports addObject:@"'calendar'"]; 
+	}
+
+#ifdef INCLUDE_LOCATION_MANAGER
+    if ([[LocationManager sharedInstance].locationManager headingAvailable]) {
+        [supports addObject:@"'heading'"];
+    }
+#endif
+    
+    if (device.model == @"iPhone") {
+        [supports addObject:@"'phone'"];
+    }
+    
+    Class mailClass = (NSClassFromString(@"MFMailComposeViewController"));
+    if (mailClass != nil) {
+        if ([mailClass canSendMail]) {
+            [supports addObject:@"'email'"];
+        }
+    }
+    
+    Class smsClass = (NSClassFromString(@"MFMessageComposeViewController"));
+    if (smsClass != nil) {
+        if ([smsClass canSendText]) {
+            [supports addObject:@"'sms'"];
+        }
+    }
+    
+    Class cameraClass = (NSClassFromString(@"UIImagePickerController"));
+    if (cameraClass != nil) {
+        if ([cameraClass isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            [supports addObject:@"'camera'"];
+        }
+    }
+    
+    [OrmmaHelper setSupports:supports inWebView:self.webView];
+    
+    // Done!    
     [OrmmaHelper signalReadyInWebView:self.webView];
 }
 
