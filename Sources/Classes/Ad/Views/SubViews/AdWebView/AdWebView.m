@@ -55,9 +55,7 @@
 }
 
 - (void)loadData:(NSData *)data MIMEType:(NSString *)MIMEType textEncodingName:(NSString *)encodingName baseURL:(NSURL *)baseURL {
-    OrmmaAdaptor* oa = [[OrmmaAdaptor alloc] initWithWebView:self.webView adView:(AdView*)self.superview];
-    self.ormmaAdaptor = oa;
-    [oa release];
+    self.ormmaAdaptor = [[[OrmmaAdaptor alloc] initWithWebView:self.webView adView:(AdView*)self.superview] autorelease];
     
     [self.webView loadData:data MIMEType:MIMEType textEncodingName:encodingName baseURL:baseURL];
 }
@@ -92,24 +90,25 @@
 }
 
 - (BOOL)webView:(UIWebView *)view shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    if (navigationType == UIWebViewNavigationTypeLinkClicked) {
-        if (adView) {
-            NSMutableDictionary* info = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:request, adView, nil]
-                                                                           forKeys:[NSArray arrayWithObjects:@"request", @"adView", nil]];
+    if ([self.ormmaAdaptor isOrmma:request]) {
+        [self.ormmaAdaptor webView:view shouldStartLoadWithRequest:request navigationType:navigationType];
+        return NO;
+    } else {
+        if (navigationType == UIWebViewNavigationTypeLinkClicked) {
+            if (adView) {
+                NSMutableDictionary* info = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:request, adView, nil]
+                                                                               forKeys:[NSArray arrayWithObjects:@"request", @"adView", nil]];
+                
+                [[NotificationCenter sharedInstance] postNotificationName:kOpenURLNotification object:info];
+            }
             
-            [[NotificationCenter sharedInstance] postNotificationName:kOpenURLNotification object:info];
-        }
-        
-		return NO;
-	}
-	else if (navigationType == UIWebViewNavigationTypeOther) {
-        if ([self.ormmaAdaptor isOrmma:request]) {
-            [self.ormmaAdaptor webView:view shouldStartLoadWithRequest:request navigationType:navigationType];
             return NO;
-        } else {
+        }
+        else if (navigationType == UIWebViewNavigationTypeOther) {
+            NSLog(@"%@", [[request URL] absoluteString]);
             return YES;
         }
-	}
+    }
     
 	return NO;
 }

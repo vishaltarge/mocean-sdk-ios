@@ -142,6 +142,8 @@
 		FC8821D7140BCC560089CD23 /* OrmmaConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = FC8821D6140BCC560089CD23 /* OrmmaConstants.h */; };
 		FC8821E2140BDE570089CD23 /* OrmmaHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = FC8821E0140BDE570089CD23 /* OrmmaHelper.h */; };
 		FC8821E3140BDE570089CD23 /* OrmmaHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8821E1140BDE570089CD23 /* OrmmaHelper.m */; };
+		FC9CFEF1141E21A000D0280B /* Accelerometer.h in Headers */ = {isa = PBXBuildFile; fileRef = FC9CFEEF141E21A000D0280B /* Accelerometer.h */; };
+		FC9CFEF2141E21A000D0280B /* Accelerometer.m in Sources */ = {isa = PBXBuildFile; fileRef = FC9CFEF0141E21A000D0280B /* Accelerometer.m */; };
 		FCB3133B13F2A3D30076DDE2 /* SASUIViewControllerAdaptor.h in Headers */ = {isa = PBXBuildFile; fileRef = FCB3133913F2A3D30076DDE2 /* SASUIViewControllerAdaptor.h */; };
 		FCB3133C13F2A3D30076DDE2 /* SASUIViewControllerAdaptor.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB3133A13F2A3D30076DDE2 /* SASUIViewControllerAdaptor.m */; };
 		FCC4715D13E7B4B500049C98 /* UIColorAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = FCC4715B13E7B4B500049C98 /* UIColorAdditions.h */; };
@@ -316,6 +318,8 @@
 		FC8821D6140BCC560089CD23 /* OrmmaConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrmmaConstants.h; sourceTree = "<group>"; };
 		FC8821E0140BDE570089CD23 /* OrmmaHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrmmaHelper.h; sourceTree = "<group>"; };
 		FC8821E1140BDE570089CD23 /* OrmmaHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrmmaHelper.m; sourceTree = "<group>"; };
+		FC9CFEEF141E21A000D0280B /* Accelerometer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Accelerometer.h; sourceTree = "<group>"; };
+		FC9CFEF0141E21A000D0280B /* Accelerometer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Accelerometer.m; sourceTree = "<group>"; };
 		FCB3133913F2A3D30076DDE2 /* SASUIViewControllerAdaptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASUIViewControllerAdaptor.h; sourceTree = "<group>"; };
 		FCB3133A13F2A3D30076DDE2 /* SASUIViewControllerAdaptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASUIViewControllerAdaptor.m; sourceTree = "<group>"; };
 		FCC4715B13E7B4B500049C98 /* UIColorAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIColorAdditions.h; sourceTree = "<group>"; };
@@ -825,6 +829,7 @@
 		CFDE16A4131392D700FE2F5A /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				FC9CFEED141E219100D0280B /* Accelerometer */,
 				CF9860CD13405F70004D6202 /* InstallManager */,
 				CFC4484F133C7B3F00B147F6 /* LocationManager */,
 				CFF37870133B60830078AC6D /* WebKit */,
@@ -978,6 +983,15 @@
 			path = ORMMA;
 			sourceTree = "<group>";
 		};
+		FC9CFEED141E219100D0280B /* Accelerometer */ = {
+			isa = PBXGroup;
+			children = (
+				FC9CFEEF141E21A000D0280B /* Accelerometer.h */,
+				FC9CFEF0141E21A000D0280B /* Accelerometer.m */,
+			);
+			path = Accelerometer;
+			sourceTree = "<group>";
+		};
 		FCE55CB613E6EC9D00EC0FD8 /* MURLRequesQueue */ = {
 			isa = PBXGroup;
 			children = (
@@ -1112,6 +1126,7 @@
 				FC8821C6140B825C0089CD23 /* OrmmaAdaptor.h in Headers */,
 				FC8821D7140BCC560089CD23 /* OrmmaConstants.h in Headers */,
 				FC8821E2140BDE570089CD23 /* OrmmaHelper.h in Headers */,
+				FC9CFEF1141E21A000D0280B /* Accelerometer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1265,6 +1280,7 @@
 				FCB3133C13F2A3D30076DDE2 /* SASUIViewControllerAdaptor.m in Sources */,
 				FC8821C7140B825C0089CD23 /* OrmmaAdaptor.m in Sources */,
 				FC8821E3140BDE570089CD23 /* OrmmaHelper.m in Sources */,
+				FC9CFEF2141E21A000D0280B /* Accelerometer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

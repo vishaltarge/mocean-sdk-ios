@@ -10,6 +10,10 @@
 #import <MessageUI/MFMailComposeViewController.h>
 #import <MessageUI/MFMessageComposeViewController.h>
 
+#ifdef INCLUDE_LOCATION_MANAGER
+#import <CoreLocation/CoreLocation.h>
+#endif
+
 #import "AdView.h"
 
 typedef enum ORMMAStateEnum {

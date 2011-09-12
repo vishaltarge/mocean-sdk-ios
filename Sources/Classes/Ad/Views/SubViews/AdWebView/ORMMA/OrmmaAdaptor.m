@@ -12,10 +12,11 @@
 #import "Reachability.h"
 #import "NotificationCenter.h"
 #import "LocationManager.h"
+#import "Accelerometer.h"
 
 #define ORMMA_SHAME     @"ormma"
 
-@interface OrmmaAdaptor()
+@interface OrmmaAdaptor() <UIAccelerometerDelegate>
 
 @property (nonatomic, retain) UIWebView*        webView;
 @property (nonatomic, retain) AdView*           adView;
@@ -27,6 +28,12 @@
 - (void)viewVisible:(NSNotification*)notification;
 - (void)viewInvisible:(NSNotification*)notification;
 - (void)invalidate:(NSNotification*)notification;
+- (void)orientationChanged:(NSNotification *)notification;
+- (void)keyboardWillShow:(NSNotification *)notification;
+- (void)keyboardWillHide:(NSNotification *)notification;
+- (void)handleReachabilityChangedNotification:(NSNotification *)notification;
+- (void)locationDetected:(NSNotification*)notification;
+- (void)headingDetected:(NSNotification*)notification;
 
 - (void)setDefaults;
 
@@ -43,16 +50,50 @@
         self.adView = ad;
         
         [[NotificationCenter sharedInstance] addObserver:self selector:@selector(viewVisible:) name:kAdViewBecomeVisibleNotification object:nil];
-		[[NotificationCenter sharedInstance] addObserver:self selector:@selector(viewInvisible:) name:kAdViewBecomeInvisibleNotification object:nil];
-        
+		[[NotificationCenter sharedInstance] addObserver:self selector:@selector(viewInvisible:) name:kAdViewBecomeInvisibleNotification object:nil];        
         [[NotificationCenter sharedInstance] addObserver:self selector:@selector(invalidate:) name:kUnregisterAdNotification object:nil];
+#ifdef INCLUDE_LOCATION_MANAGER
+        [[NotificationCenter sharedInstance] addObserver:self selector:@selector(locationDetected:) name:kNewLocationDetectedNotification object:nil];
+        [[NotificationCenter sharedInstance] addObserver:self selector:@selector(headingDetected:) name:kLocationUpdateHeadingNotification object:nil];
+#endif
+        
+        // setup our network reachability        
+		NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+		[notificationCenter addObserver:self
+							   selector:@selector(orientationChanged:)
+								   name:UIDeviceOrientationDidChangeNotification
+								 object:nil];
+		[notificationCenter addObserver:self 
+							   selector:@selector(keyboardWillShow:) 
+								   name:UIKeyboardWillShowNotification
+								 object:nil];
+		[notificationCenter addObserver:self 
+							   selector:@selector(keyboardWillHide:) 
+								   name:UIKeyboardWillHideNotification
+								 object:nil];
+		[notificationCenter addObserver:self
+							   selector:@selector(handleReachabilityChangedNotification:)
+								   name:kReachabilityChangedNotification
+								 object:nil];
+        
+		// start up reachability notifications
+        Reachability* reachability = [Reachability reachabilityForInternetConnection];
+        if ([reachability respondsToSelector:@selector(startNotifier)]) {
+            [reachability startNotifier];
+        }
+        
+        [[Accelerometer sharedInstance] addDelegate:self];
     }
     
     return self;
 }
 
 - (void)dealloc {
+    self.adView = nil;
     self.webView = nil;
+    [[NotificationCenter sharedInstance] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[Accelerometer sharedInstance] removeDelegate:self];
     [super dealloc];
 }
 
@@ -72,28 +113,15 @@
     if ([webView isViewVisible]) {
         self.currentState = ORMMAStateDefault;
     } else {
-        self.currentState = ORMMAStateHidden;
+        self.currentState = ORMMAStateDefault;
+        //self.currentState = ORMMAStateHidden;
     }
     self.notHiddenState = self.currentState;
     [OrmmaHelper setState:self.currentState inWebView:self.webView];
     
     // Network
-    NSString* network = nil;
     Reachability* reachability = [Reachability reachabilityForInternetConnection];
-	switch ([reachability currentReachabilityStatus]) {
-		case ReachableViaWWAN:
-			network = @"cell";
-            break;
-		case ReachableViaWiFi:
-			network = @"wifi";
-            break;
-        default:
-			network = @"offline";
-            break;
-	}
-    if (network) {
-        [OrmmaHelper setNetwork:network inWebView:self.webView];
-    }
+	[OrmmaHelper setNetwork:[reachability currentReachabilityStatus] inWebView:self.webView];
     
     // Frame size
     [OrmmaHelper setSize:self.webView.frame.size inWebView:self.webView];
@@ -197,9 +225,85 @@
         self.adView = nil;
         self.webView = nil;
 		[[NotificationCenter sharedInstance] removeObserver:self];
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+        [[Accelerometer sharedInstance] removeDelegate:self];
 	}
 }
 
+
+#pragma mark - Notification Center Dispatch Methods
+
+
+- (void)orientationChanged:(NSNotification *)notification {
+	UIDevice *device = [UIDevice currentDevice];
+    UIDeviceOrientation orientation = device.orientation;
+    
+    [OrmmaHelper setOrientation:orientation inWebView:self.webView];
+    
+	CGSize screenSize = [OrmmaHelper screenSizeForOrientation:orientation];	
+    [OrmmaHelper setScreenSize:screenSize inWebView:self.webView];
+    
+    // TODO
+    //[self.bridgeDelegate rotateExpandedWindowsToCurrentOrientation];
+}
+
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    [OrmmaHelper setKeyboardShow:true inWebView:self.webView];
+}
+
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+    [OrmmaHelper setKeyboardShow:false inWebView:self.webView];
+}
+
+
+- (void)handleReachabilityChangedNotification:(NSNotification *)notification {
+    Reachability* reachability = [Reachability reachabilityForInternetConnection];
+	[OrmmaHelper setNetwork:[reachability currentReachabilityStatus] inWebView:self.webView];
+}
+
+- (void)locationDetected:(NSNotification*)notification {
+#ifdef INCLUDE_LOCATION_MANAGER
+    CLLocation* location = [notification object];
+    [OrmmaHelper setLatitude:location.coordinate.latitude longitude:location.coordinate.longitude accuracy:location.horizontalAccuracy inWebView:self.webView];
+#endif   
+}
+
+- (void)headingDetected:(NSNotification*)notification {
+#ifdef INCLUDE_LOCATION_MANAGER
+    CLHeading* heading = [notification object];
+    [OrmmaHelper setHeading:heading.trueHeading inWebView:self.webView];
+#endif
+}
+
+
+#pragma mark - Accelerometer Delegete
+
+- (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration {
+	// Send accelerometer data
+    [OrmmaHelper setTilt:acceleration inWebView:self.webView];
+	
+	// Deal with shakes
+    BOOL shake = NO;
+    CGFloat kDefaultShakeIntensity = 1.5;
+    if ((acceleration.x > kDefaultShakeIntensity) || (acceleration.x < (-1 * kDefaultShakeIntensity))) {
+        shake = YES;
+    }
+    
+    if ((acceleration.x > kDefaultShakeIntensity) || (acceleration.x < (-1 * kDefaultShakeIntensity))) {
+        shake = YES;
+    }
+    
+    if ((acceleration.x > kDefaultShakeIntensity) || (acceleration.x < (-1 * kDefaultShakeIntensity))) {
+        shake = YES;
+    }
+    
+    if (shake) {
+        // Shake detected
+        [OrmmaHelper fireShakeEventInWebView:self.webView];
+    }
+}
 
 
 @end

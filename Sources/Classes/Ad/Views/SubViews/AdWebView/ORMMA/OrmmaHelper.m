@@ -26,8 +26,22 @@
     }
 }
 
-+ (void)setNetwork:(NSString*)network inWebView:(UIWebView*)webView {
-    [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{network: %@}", network] inWebView:webView];
++ (void)setNetwork:(NetworkStatus)status inWebView:(UIWebView*)webView {
+    NSString* network = nil;
+    switch (status) {
+		case ReachableViaWWAN:
+			network = @"cell";
+            break;
+		case ReachableViaWiFi:
+			network = @"wifi";
+            break;
+        default:
+			network = @"offline";
+            break;
+	}
+    if (network) {
+        [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{network: %@}", network] inWebView:webView];
+    }
 }
 
 + (void)setSize:(CGSize)size inWebView:(UIWebView*)webView {
@@ -74,12 +88,38 @@
     [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{supports: [%@]}", value] inWebView:webView];
 }
 
++ (void)setKeyboardShow:(BOOL)isShow inWebView:(UIWebView*)webView {
+    if (isShow) {
+        [OrmmaHelper fireChangeEvent:@"{keyboardState: true}" inWebView:webView];
+    } else {
+        [OrmmaHelper fireChangeEvent:@"{keyboardState: false}" inWebView:webView];
+    }
+}
+
++ (void)setTilt:(UIAcceleration*)acceleration inWebView:(UIWebView*)webView {
+    [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{tilt: { x: %f, y: %f, z: %f }}", acceleration.x, acceleration.y, acceleration.z] inWebView:webView];
+}
+
++ (void)setHeading:(CGFloat)heading inWebView:(UIWebView*)webView {
+    [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{heading: %f }", heading] inWebView:webView];
+}
+
++ (void)setLatitude:(CGFloat)latitude longitude:(CGFloat)longitude accuracy:(CGFloat)accuracy inWebView:(UIWebView*)webView {
+    [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{location: { lat: %f, lon: %f, acc: %f }}", latitude, longitude, accuracy] inWebView:webView];
+}
+
+
+
 + (void)fireChangeEvent:(NSString*)value inWebView:(UIWebView*)webView {
     if ([NSThread isMainThread]) {
         [webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"window.ormmaview.fireChangeEvent(%@);", value]];
     } else {
         [webView performSelectorOnMainThread:@selector(stringByEvaluatingJavaScriptFromString:) withObject:[NSString stringWithFormat:@"window.ormmaview.fireChangeEvent(%@);", value] waitUntilDone:NO];
     }
+}
+
++ (void)fireShakeEventInWebView:(UIWebView*)webView {
+    [webView stringByEvaluatingJavaScriptFromString:@"window.ormmaview.fireShakeEvent();"];
 }
 
 + (CGSize)screenSizeForOrientation:(UIDeviceOrientation)orientation {
