@@ -14,8 +14,16 @@
     [webView stringByEvaluatingJavaScriptFromString:@"window.ormma.signalReady();"];
 }
 
-+ (void)setState:(NSString*)state inWebView:(UIWebView*)webView {
-    [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{state: %@}", state] inWebView:webView];
++ (void)setState:(ORMMAState)state inWebView:(UIWebView*)webView {
+    if (state == ORMMAStateDefault) {
+        [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{state: default}", state] inWebView:webView];
+    } else if (state == ORMMAStateExpanded) {
+        //
+    } else if (state == ORMMAStateHidden) {
+        [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{state: hidden}", state] inWebView:webView];
+    } else if (state == ORMMAStateResized) {
+        //
+    }
 }
 
 + (void)setNetwork:(NSString*)network inWebView:(UIWebView*)webView {
@@ -62,7 +70,11 @@
 }
 
 + (void)fireChangeEvent:(NSString*)value inWebView:(UIWebView*)webView {
-    [webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"window.ormmaview.fireChangeEvent(%@);", value]];
+    if ([NSThread isMainThread]) {
+        [webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"window.ormmaview.fireChangeEvent(%@);", value]];
+    } else {
+        [webView performSelectorOnMainThread:@selector(stringByEvaluatingJavaScriptFromString:) withObject:[NSString stringWithFormat:@"window.ormmaview.fireChangeEvent(%@);", value] waitUntilDone:NO];
+    }
 }
 
 + (CGSize)screenSizeForOrientation:(UIDeviceOrientation)orientation {

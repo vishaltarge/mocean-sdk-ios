@@ -42,10 +42,6 @@
 		[self addSubview:self.webView];
 
         _defaultFrame = self.frame;
-        
-        OrmmaAdaptor* oa = [[OrmmaAdaptor alloc] initWithWebView:self.webView];
-        self.ormmaAdaptor = oa;
-        [oa release];
     }
     return self;
 }
@@ -59,6 +55,10 @@
 }
 
 - (void)loadData:(NSData *)data MIMEType:(NSString *)MIMEType textEncodingName:(NSString *)encodingName baseURL:(NSURL *)baseURL {
+    OrmmaAdaptor* oa = [[OrmmaAdaptor alloc] initWithWebView:self.webView adView:(AdView*)self.superview];
+    self.ormmaAdaptor = oa;
+    [oa release];
+    
     [self.webView loadData:data MIMEType:MIMEType textEncodingName:encodingName baseURL:baseURL];
 }
 

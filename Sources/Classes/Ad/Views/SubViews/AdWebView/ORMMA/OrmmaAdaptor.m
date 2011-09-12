@@ -20,6 +20,7 @@
 @property (nonatomic, retain) AdView*           adView;
 
 @property (nonatomic, assign) ORMMAState        currentState;
+@property (nonatomic, assign) ORMMAState        notHiddenState;
 @property (nonatomic, assign) CGSize            maxSize;
 
 - (void)viewVisible:(NSNotification*)notification;
@@ -32,7 +33,7 @@
 
 @implementation OrmmaAdaptor
 
-@synthesize webView, adView, currentState, maxSize;
+@synthesize webView, adView, currentState, notHiddenState, maxSize;
 
 - (id)initWithWebView:(UIWebView*)view adView:(AdView*)ad {
     self = [super init];
@@ -62,18 +63,17 @@
     [self setDefaults];
 }
 
-- (void)setDefaults {    
-    UIApplication *app = [UIApplication sharedApplication];
-    UIDeviceOrientation orientation = app.statusBarOrientation;
+- (void)setDefaults {
+    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
     
     // Default state
     if ([webView isViewVisible]) {
         self.currentState = ORMMAStateDefault;
-        [OrmmaHelper setState:@"default" inWebView:self.webView];
     } else {
         self.currentState = ORMMAStateHidden;
-        [OrmmaHelper setState:@"hidden" inWebView:self.webView];
     }
+    self.notHiddenState = self.currentState;
+    [OrmmaHelper setState:self.currentState inWebView:self.webView];
     
     // Network
     NSString* network = nil;
@@ -119,21 +119,23 @@
 
 - (void)webView:(UIWebView *)view shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     if ([self isOrmma:request]) {
-        // check callbacks
+        NSLog(@"%@", [[request URL] absoluteString]);
     }
 }
 
 - (void)viewVisible:(NSNotification*)notification {
 	AdView* adViewNotify = [notification object];
     if (adViewNotify == self.adView) {
-		//
+        self.currentState = self.notHiddenState;
+        [OrmmaHelper setState:self.currentState inWebView:self.webView];
 	}
 }
 
 - (void)viewInvisible:(NSNotification*)notification {
 	AdView* adViewNotify = [notification object];
     if (adViewNotify == self.adView) {
-		//
+        self.currentState = ORMMAStateHidden;
+        [OrmmaHelper setState:self.currentState inWebView:self.webView];
 	}
 }
 

@@ -12,7 +12,7 @@
 
 + (void)signalReadyInWebView:(UIWebView*)webView;
 
-+ (void)setState:(NSString*)state inWebView:(UIWebView*)webView;
++ (void)setState:(ORMMAState)state inWebView:(UIWebView*)webView;
 + (void)setNetwork:(NSString*)network inWebView:(UIWebView*)webView;
 + (void)setSize:(CGSize)size inWebView:(UIWebView*)webView;
 + (void)setMaxSize:(CGSize)size inWebView:(UIWebView*)webView;
