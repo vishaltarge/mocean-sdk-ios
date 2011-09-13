@@ -11,6 +11,7 @@
 
 @interface OrmmaHelper : NSObject
 
++ (void)registerOrmmaUpCaseObject:(UIWebView*)webView;
 + (void)signalReadyInWebView:(UIWebView*)webView;
 
 + (void)setState:(ORMMAState)state inWebView:(UIWebView*)webView;

@@ -109,6 +109,9 @@
     UIDevice* device = [UIDevice currentDevice];
     UIDeviceOrientation orientation = device.orientation;
     
+    // Register up case 'Ormma' object
+    [OrmmaHelper registerOrmmaUpCaseObject:self.webView];
+    
     // Default state
     if ([webView isViewVisible]) {
         self.currentState = ORMMAStateDefault;

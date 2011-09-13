@@ -10,6 +10,10 @@
 @implementation OrmmaHelper
 
 
++ (void)registerOrmmaUpCaseObject:(UIWebView*)webView {
+    [webView stringByEvaluatingJavaScriptFromString:@"window.Ormma=window.ormma;"];
+}
+
 + (void)signalReadyInWebView:(UIWebView*)webView {
     [webView stringByEvaluatingJavaScriptFromString:@"window.ormma.signalReady();"];
 }
