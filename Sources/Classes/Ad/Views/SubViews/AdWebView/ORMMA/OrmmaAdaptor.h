@@ -27,6 +27,8 @@ typedef enum ORMMAStateEnum {
 
 - (id)initWithWebView:(UIWebView*)webView adView:(AdView*)ad;
 
+- (NSString*)getDefaultsJSCode;
+
 - (BOOL)isOrmma:(NSURLRequest *)request; 
 - (void)webViewDidFinishLoad:(UIWebView*)webView;
 - (void)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;

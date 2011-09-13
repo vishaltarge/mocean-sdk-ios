@@ -11,24 +11,24 @@
 
 @interface OrmmaHelper : NSObject
 
-+ (void)registerOrmmaUpCaseObject:(UIWebView*)webView;
-+ (void)signalReadyInWebView:(UIWebView*)webView;
++ (NSString*)registerOrmmaUpCaseObject;
++ (NSString*)signalReadyInWebView;
 
-+ (void)setState:(ORMMAState)state inWebView:(UIWebView*)webView;
-+ (void)setNetwork:(NetworkStatus)status inWebView:(UIWebView*)webView;
-+ (void)setSize:(CGSize)size inWebView:(UIWebView*)webView;
-+ (void)setMaxSize:(CGSize)size inWebView:(UIWebView*)webView;
-+ (void)setScreenSize:(CGSize)size inWebView:(UIWebView*)webView;
-+ (void)setDefaultPosition:(CGRect)frame inWebView:(UIWebView*)webView;
-+ (void)setOrientation:(UIDeviceOrientation)orientation inWebView:(UIWebView*)webView;
-+ (void)setSupports:(NSArray*)supports inWebView:(UIWebView*)webView;
-+ (void)setKeyboardShow:(BOOL)isShow inWebView:(UIWebView*)webView;
-+ (void)setTilt:(UIAcceleration*)acceleration inWebView:(UIWebView*)webView;
-+ (void)setHeading:(CGFloat)heading inWebView:(UIWebView*)webView;
-+ (void)setLatitude:(CGFloat)latitude longitude:(CGFloat)longitude accuracy:(CGFloat)accuracy inWebView:(UIWebView*)webView;
++ (NSString*)setState:(ORMMAState)state;
++ (NSString*)setNetwork:(NetworkStatus)status;
++ (NSString*)setSize:(CGSize)size;
++ (NSString*)setMaxSize:(CGSize)size;
++ (NSString*)setScreenSize:(CGSize)size;
++ (NSString*)setDefaultPosition:(CGRect)frame;
++ (NSString*)setOrientation:(UIDeviceOrientation)orientation;
++ (NSString*)setSupports:(NSArray*)supports;
++ (NSString*)setKeyboardShow:(BOOL)isShow;
++ (NSString*)setTilt:(UIAcceleration*)acceleration;
++ (NSString*)setHeading:(CGFloat)heading;
++ (NSString*)setLatitude:(CGFloat)latitude longitude:(CGFloat)longitude accuracy:(CGFloat)accuracy;
 
-+ (void)fireChangeEvent:(NSString*)value inWebView:(UIWebView*)webView;
-+ (void)fireShakeEventInWebView:(UIWebView*)webView;
++ (NSString*)fireChangeEvent:(NSString*)value;
++ (NSString*)fireShakeEventInWebView;
 
 + (CGSize)screenSizeForOrientation:(UIDeviceOrientation)orientation;
 

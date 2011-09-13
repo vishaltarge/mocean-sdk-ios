@@ -35,8 +35,6 @@
 - (void)locationDetected:(NSNotification*)notification;
 - (void)headingDetected:(NSNotification*)notification;
 
-- (void)setDefaults;
-
 @end
 
 @implementation OrmmaAdaptor
@@ -102,15 +100,16 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView*)webView {
-    [self setDefaults];
+    [self.webView stringByEvaluatingJavaScriptFromString:[OrmmaHelper signalReadyInWebView]];
 }
 
-- (void)setDefaults {
+- (NSString*)getDefaultsJSCode {
+    NSMutableString* result = [NSMutableString string];
     UIDevice* device = [UIDevice currentDevice];
     UIDeviceOrientation orientation = device.orientation;
     
     // Register up case 'Ormma' object
-    [OrmmaHelper registerOrmmaUpCaseObject:self.webView];
+    [result appendString:[OrmmaHelper registerOrmmaUpCaseObject]];
     
     // Default state
     if ([webView isViewVisible]) {
@@ -120,28 +119,28 @@
         //self.currentState = ORMMAStateHidden;
     }
     self.notHiddenState = self.currentState;
-    [OrmmaHelper setState:self.currentState inWebView:self.webView];
+    [result appendString:[OrmmaHelper setState:self.currentState]];
     
     // Network
     Reachability* reachability = [Reachability reachabilityForInternetConnection];
-	[OrmmaHelper setNetwork:[reachability currentReachabilityStatus] inWebView:self.webView];
+    [result appendString:[OrmmaHelper setNetwork:[reachability currentReachabilityStatus]]];
     
     // Frame size
-    [OrmmaHelper setSize:self.webView.frame.size inWebView:self.webView];
+    [result appendString:[OrmmaHelper setSize:self.webView.frame.size]];
     
     // Max size
     self.maxSize = self.webView.frame.size;
-    [OrmmaHelper setMaxSize:self.maxSize inWebView:self.webView];
+    [result appendString:[OrmmaHelper setMaxSize:self.maxSize]];
     
     // Screen size
 	CGSize screenSize = [OrmmaHelper screenSizeForOrientation:orientation];	
-    [OrmmaHelper setScreenSize:screenSize inWebView:self.webView];
+    [result appendString:[OrmmaHelper setScreenSize:screenSize]];
     
     // Default position
-    [OrmmaHelper setDefaultPosition:self.adView.frame inWebView:self.webView];
+    [result appendString:[OrmmaHelper setDefaultPosition:self.adView.frame]];
     
     // Orientation
-    [OrmmaHelper setOrientation:orientation inWebView:self.webView];
+    [result appendString:[OrmmaHelper setOrientation:orientation]];
     
     // Supports
     
@@ -194,10 +193,9 @@
         }
     }
     
-    [OrmmaHelper setSupports:supports inWebView:self.webView];
+    [result appendString:[OrmmaHelper setSupports:supports]]; 
     
-    // Done!    
-    [OrmmaHelper signalReadyInWebView:self.webView];
+    return result;
 }
 
 - (void)webView:(UIWebView *)view shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
@@ -210,7 +208,7 @@
 	AdView* adViewNotify = [notification object];
     if (adViewNotify == self.adView) {
         self.currentState = self.notHiddenState;
-        [OrmmaHelper setState:self.currentState inWebView:self.webView];
+        [OrmmaHelper setState:self.currentState];
 	}
 }
 
@@ -218,7 +216,7 @@
 	AdView* adViewNotify = [notification object];
     if (adViewNotify == self.adView) {
         self.currentState = ORMMAStateHidden;
-        [OrmmaHelper setState:self.currentState inWebView:self.webView];
+        [OrmmaHelper setState:self.currentState];
 	}
 }
 
@@ -241,10 +239,10 @@
 	UIDevice *device = [UIDevice currentDevice];
     UIDeviceOrientation orientation = device.orientation;
     
-    [OrmmaHelper setOrientation:orientation inWebView:self.webView];
+    [OrmmaHelper setOrientation:orientation];
     
 	CGSize screenSize = [OrmmaHelper screenSizeForOrientation:orientation];	
-    [OrmmaHelper setScreenSize:screenSize inWebView:self.webView];
+    [OrmmaHelper setScreenSize:screenSize];
     
     // TODO
     //[self.bridgeDelegate rotateExpandedWindowsToCurrentOrientation];
@@ -252,31 +250,31 @@
 
 
 - (void)keyboardWillShow:(NSNotification *)notification {
-    [OrmmaHelper setKeyboardShow:true inWebView:self.webView];
+    [OrmmaHelper setKeyboardShow:true];
 }
 
 
 - (void)keyboardWillHide:(NSNotification *)notification {
-    [OrmmaHelper setKeyboardShow:false inWebView:self.webView];
+    [OrmmaHelper setKeyboardShow:false];
 }
 
 
 - (void)handleReachabilityChangedNotification:(NSNotification *)notification {
     Reachability* reachability = [Reachability reachabilityForInternetConnection];
-	[OrmmaHelper setNetwork:[reachability currentReachabilityStatus] inWebView:self.webView];
+	[OrmmaHelper setNetwork:[reachability currentReachabilityStatus]];
 }
 
 - (void)locationDetected:(NSNotification*)notification {
 #ifdef INCLUDE_LOCATION_MANAGER
     CLLocation* location = [notification object];
-    [OrmmaHelper setLatitude:location.coordinate.latitude longitude:location.coordinate.longitude accuracy:location.horizontalAccuracy inWebView:self.webView];
+    [OrmmaHelper setLatitude:location.coordinate.latitude longitude:location.coordinate.longitude accuracy:location.horizontalAccuracy];
 #endif   
 }
 
 - (void)headingDetected:(NSNotification*)notification {
 #ifdef INCLUDE_LOCATION_MANAGER
     CLHeading* heading = [notification object];
-    [OrmmaHelper setHeading:heading.trueHeading inWebView:self.webView];
+    [OrmmaHelper setHeading:heading.trueHeading];
 #endif
 }
 
@@ -285,7 +283,7 @@
 
 - (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration {
 	// Send accelerometer data
-    [OrmmaHelper setTilt:acceleration inWebView:self.webView];
+    [OrmmaHelper setTilt:acceleration];
 	
 	// Deal with shakes
     BOOL shake = NO;
@@ -304,7 +302,7 @@
     
     if (shake) {
         // Shake detected
-        [OrmmaHelper fireShakeEventInWebView:self.webView];
+        [OrmmaHelper fireShakeEventInWebView];
     }
 }
 
