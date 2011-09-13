@@ -42,6 +42,7 @@ NSString* kInvalidParamsNotification = @"Validation error";
 
 // visibility
 NSString* kAdViewBecomeVisibleNotification = @"Ad Become Visible";
+NSString* kAdViewFrameChangedNotification = @"Ad frame changed";
 NSString* kAdViewBecomeInvisibleNotification = @"Ad Become Invisible";
 
 // ua

@@ -15,6 +15,7 @@
 + (NSString*)signalReadyInWebView;
 
 + (NSString*)setState:(ORMMAState)state;
++ (NSString*)setViewable:(BOOL)viewable;
 + (NSString*)setNetwork:(NetworkStatus)status;
 + (NSString*)setSize:(CGSize)size;
 + (NSString*)setMaxSize:(CGSize)size;

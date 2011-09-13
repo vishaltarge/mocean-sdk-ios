@@ -28,12 +28,14 @@
 - (void)viewVisible:(NSNotification*)notification;
 - (void)viewInvisible:(NSNotification*)notification;
 - (void)invalidate:(NSNotification*)notification;
+- (void)frameChanged:(NSNotification*)notification;
 - (void)orientationChanged:(NSNotification *)notification;
 - (void)keyboardWillShow:(NSNotification *)notification;
 - (void)keyboardWillHide:(NSNotification *)notification;
 - (void)handleReachabilityChangedNotification:(NSNotification *)notification;
 - (void)locationDetected:(NSNotification*)notification;
 - (void)headingDetected:(NSNotification*)notification;
+- (void)evalJS:(NSString*)js;
 
 @end
 
@@ -50,6 +52,7 @@
         [[NotificationCenter sharedInstance] addObserver:self selector:@selector(viewVisible:) name:kAdViewBecomeVisibleNotification object:nil];
 		[[NotificationCenter sharedInstance] addObserver:self selector:@selector(viewInvisible:) name:kAdViewBecomeInvisibleNotification object:nil];        
         [[NotificationCenter sharedInstance] addObserver:self selector:@selector(invalidate:) name:kUnregisterAdNotification object:nil];
+        [[NotificationCenter sharedInstance] addObserver:self selector:@selector(frameChanged:) name:kAdViewFrameChangedNotification object:nil];
 #ifdef INCLUDE_LOCATION_MANAGER
         [[NotificationCenter sharedInstance] addObserver:self selector:@selector(locationDetected:) name:kNewLocationDetectedNotification object:nil];
         [[NotificationCenter sharedInstance] addObserver:self selector:@selector(headingDetected:) name:kLocationUpdateHeadingNotification object:nil];
@@ -100,7 +103,7 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView*)webView {
-    [self.webView stringByEvaluatingJavaScriptFromString:[OrmmaHelper signalReadyInWebView]];
+    [self evalJS:[OrmmaHelper signalReadyInWebView]];
 }
 
 - (NSString*)getDefaultsJSCode {
@@ -115,11 +118,13 @@
     if ([webView isViewVisible]) {
         self.currentState = ORMMAStateDefault;
     } else {
-        self.currentState = ORMMAStateDefault;
-        //self.currentState = ORMMAStateHidden;
+        self.currentState = ORMMAStateHidden;
     }
     self.notHiddenState = self.currentState;
     [result appendString:[OrmmaHelper setState:self.currentState]];
+    
+    // Viewable
+    [result appendString:[OrmmaHelper setViewable:[webView isViewVisible]]];
     
     // Network
     Reachability* reachability = [Reachability reachabilityForInternetConnection];
@@ -198,6 +203,14 @@
     return result;
 }
 
+- (void)evalJS:(NSString*)js {
+    if ([NSThread isMainThread]) {
+        [self.webView stringByEvaluatingJavaScriptFromString:js];
+    } else {
+        [self.webView performSelectorOnMainThread:@selector(stringByEvaluatingJavaScriptFromString:) withObject:js waitUntilDone:NO];
+    }
+}
+
 - (void)webView:(UIWebView *)view shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     if ([self isOrmma:request]) {
         NSLog(@"%@", [[request URL] absoluteString]);
@@ -208,7 +221,8 @@
 	AdView* adViewNotify = [notification object];
     if (adViewNotify == self.adView) {
         self.currentState = self.notHiddenState;
-        [OrmmaHelper setState:self.currentState];
+        [self evalJS:[OrmmaHelper setState:self.currentState]];
+        [self evalJS:[OrmmaHelper setViewable:YES]];
 	}
 }
 
@@ -216,7 +230,8 @@
 	AdView* adViewNotify = [notification object];
     if (adViewNotify == self.adView) {
         self.currentState = ORMMAStateHidden;
-        [OrmmaHelper setState:self.currentState];
+        [self evalJS:[OrmmaHelper setState:self.currentState]];
+        [self evalJS:[OrmmaHelper setViewable:NO]];
 	}
 }
 
@@ -231,6 +246,27 @@
 	}
 }
 
+- (void)frameChanged:(NSNotification*)notification {
+    NSDictionary* info = [notification object];
+	AdView* adViewNotify = [info objectForKey:@"adView"];
+    if (adViewNotify == self.adView) {
+        NSValue* frameValue = [info objectForKey:@"newFrame"];
+        CGRect newFrame = [frameValue CGRectValue];
+        
+        if (self.currentState != ORMMAStateResized) {
+            if (self.currentState == self.notHiddenState) {
+                self.notHiddenState = ORMMAStateResized;
+                self.currentState = self.notHiddenState;
+                [self evalJS:[OrmmaHelper setState:self.currentState]];
+            } else {
+                self.notHiddenState = ORMMAStateResized;
+            }
+        }
+        
+        [self evalJS:[OrmmaHelper setSize:newFrame.size]];
+	}
+}
+
 
 #pragma mark - Notification Center Dispatch Methods
 
@@ -239,10 +275,10 @@
 	UIDevice *device = [UIDevice currentDevice];
     UIDeviceOrientation orientation = device.orientation;
     
-    [OrmmaHelper setOrientation:orientation];
+    [self evalJS:[OrmmaHelper setOrientation:orientation]];
     
 	CGSize screenSize = [OrmmaHelper screenSizeForOrientation:orientation];	
-    [OrmmaHelper setScreenSize:screenSize];
+    [self evalJS:[OrmmaHelper setScreenSize:screenSize]];
     
     // TODO
     //[self.bridgeDelegate rotateExpandedWindowsToCurrentOrientation];
@@ -250,31 +286,31 @@
 
 
 - (void)keyboardWillShow:(NSNotification *)notification {
-    [OrmmaHelper setKeyboardShow:true];
+    [self evalJS:[OrmmaHelper setKeyboardShow:true]];
 }
 
 
 - (void)keyboardWillHide:(NSNotification *)notification {
-    [OrmmaHelper setKeyboardShow:false];
+    [self evalJS:[OrmmaHelper setKeyboardShow:false]];
 }
 
 
 - (void)handleReachabilityChangedNotification:(NSNotification *)notification {
     Reachability* reachability = [Reachability reachabilityForInternetConnection];
-	[OrmmaHelper setNetwork:[reachability currentReachabilityStatus]];
+	[self evalJS:[OrmmaHelper setNetwork:[reachability currentReachabilityStatus]]];
 }
 
 - (void)locationDetected:(NSNotification*)notification {
 #ifdef INCLUDE_LOCATION_MANAGER
     CLLocation* location = [notification object];
-    [OrmmaHelper setLatitude:location.coordinate.latitude longitude:location.coordinate.longitude accuracy:location.horizontalAccuracy];
+    [self evalJS:[OrmmaHelper setLatitude:location.coordinate.latitude longitude:location.coordinate.longitude accuracy:location.horizontalAccuracy]];
 #endif   
 }
 
 - (void)headingDetected:(NSNotification*)notification {
 #ifdef INCLUDE_LOCATION_MANAGER
     CLHeading* heading = [notification object];
-    [OrmmaHelper setHeading:heading.trueHeading];
+    [self evalJS:[OrmmaHelper setHeading:heading.trueHeading]];
 #endif
 }
 
@@ -283,7 +319,7 @@
 
 - (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration {
 	// Send accelerometer data
-    [OrmmaHelper setTilt:acceleration];
+    [self evalJS:[OrmmaHelper setTilt:acceleration]];
 	
 	// Deal with shakes
     BOOL shake = NO;
@@ -302,7 +338,7 @@
     
     if (shake) {
         // Shake detected
-        [OrmmaHelper fireShakeEventInWebView];
+        [self evalJS:[OrmmaHelper fireShakeEventInWebView]];
     }
 }
 

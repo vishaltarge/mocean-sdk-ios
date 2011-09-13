@@ -64,8 +64,6 @@
     NSString* js = [NSString stringWithFormat:@"<script type=\"text/javascript\">%@</script>", [self.ormmaAdaptor getDefaultsJSCode]];
     html = [html stringByReplacingOccurrencesOfString:ORMMA_PLACEHOLDER withString:js];
     
-    NSLog(@"%@", html);
-    
     [self.webView loadData:[html dataUsingEncoding:NSUTF8StringEncoding] MIMEType:MIMEType textEncodingName:encodingName baseURL:baseURL];
 }
 
@@ -114,7 +112,6 @@
             return NO;
         }
         else if (navigationType == UIWebViewNavigationTypeOther) {
-            NSLog(@"%@", [[request URL] absoluteString]);
             return YES;
         }
     }

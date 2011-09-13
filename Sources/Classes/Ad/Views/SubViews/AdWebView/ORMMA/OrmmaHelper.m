@@ -32,6 +32,14 @@
     }
 }
 
++ (NSString*)setViewable:(BOOL)viewable {
+    if (viewable) {
+        return [OrmmaHelper fireChangeEvent:@"{viewable: true}"];
+    } else {
+        return [OrmmaHelper fireChangeEvent:@"{viewable: false}"];
+    }
+}
+
 + (NSString*)setNetwork:(NetworkStatus)status {
     NSString* network = nil;
     switch (status) {

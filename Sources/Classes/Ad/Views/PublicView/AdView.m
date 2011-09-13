@@ -74,11 +74,12 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 }
 
 - (oneway void)release {
-	if ([self retainCount] == 1 && _observerSet) {
+	if ([self retainCount] == 2 && _observerSet) {
         _observerSet = NO;
         [[NotificationCenter sharedInstance] postNotificationName:kUnregisterAdNotification object:self];
         [[NotificationCenter sharedInstance] removeObserver:self];
         [[NSNotificationCenter defaultCenter] removeObserver:self];
+        [self removeObserver:self forKeyPath:@"frame"];
     }
     else if ([self retainCount] == 1 && ![NSThread isMainThread]) {
         [super performSelectorOnMainThread:@selector(release) withObject:nil waitUntilDone:NO];
@@ -159,6 +160,8 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(deviceOrientationDidChange:) name: UIDeviceOrientationDidChangeNotification object: nil];
+    
+    [self addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionOld context:NULL];
 	
 	[[NotificationCenter sharedInstance] postNotificationName:kRegisterAdNotification object:self];
 	
@@ -461,9 +464,26 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     return [super pointInside:point withEvent:event];
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if([keyPath isEqualToString:@"view.frame"]) {
+        CGRect oldFrame = CGRectNull;
+        CGRect newFrame = CGRectNull;
+        if([change objectForKey:@"old"] != [NSNull null]) {
+            oldFrame = [[change objectForKey:@"old"] CGRectValue];
+        }
+        if([object valueForKeyPath:keyPath] != [NSNull null]) {
+            newFrame = [[object valueForKeyPath:keyPath] CGRectValue];
+        }
+        NSMutableDictionary* info = [NSMutableDictionary dictionary];
+        [info setObject:self forKey:@"adView"];
+        [info setObject:[NSValue valueWithCGRect:newFrame] forKey:@"newFrame"];
+        
+        [[NotificationCenter sharedInstance] postNotificationName:kAdViewFrameChangedNotification object:info];
+    }
+}
 
-#pragma mark -
-#pragma mark Callback
+
+#pragma mark - Callback
 
 
 //- (void)willReceiveAd:(id)sender;
