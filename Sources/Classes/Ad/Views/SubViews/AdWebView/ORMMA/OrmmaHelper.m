@@ -16,13 +16,13 @@
 
 + (void)setState:(ORMMAState)state inWebView:(UIWebView*)webView {
     if (state == ORMMAStateDefault) {
-        [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{state: default}", state] inWebView:webView];
+        [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{state: 'default'}", state] inWebView:webView];
     } else if (state == ORMMAStateExpanded) {
-        //
+        [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{state: 'expanded'}", state] inWebView:webView];
     } else if (state == ORMMAStateHidden) {
-        [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{state: hidden}", state] inWebView:webView];
+        [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{state: 'hidden'}", state] inWebView:webView];
     } else if (state == ORMMAStateResized) {
-        //
+        [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{state: 'resized'}", state] inWebView:webView];
     }
 }
 
@@ -40,7 +40,7 @@
             break;
 	}
     if (network) {
-        [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{network: %@}", network] inWebView:webView];
+        [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{network: '%@'}", network] inWebView:webView];
     }
 }
 
