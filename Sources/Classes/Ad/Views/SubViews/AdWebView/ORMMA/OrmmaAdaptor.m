@@ -13,6 +13,7 @@
 #import "NotificationCenter.h"
 #import "LocationManager.h"
 #import "Accelerometer.h"
+#import "SharedModel.h"
 
 #define ORMMA_SHAME     @"ormma"
 
@@ -53,10 +54,8 @@
 		[[NotificationCenter sharedInstance] addObserver:self selector:@selector(viewInvisible:) name:kAdViewBecomeInvisibleNotification object:nil];        
         [[NotificationCenter sharedInstance] addObserver:self selector:@selector(invalidate:) name:kUnregisterAdNotification object:nil];
         [[NotificationCenter sharedInstance] addObserver:self selector:@selector(frameChanged:) name:kAdViewFrameChangedNotification object:nil];
-#ifdef INCLUDE_LOCATION_MANAGER
         [[NotificationCenter sharedInstance] addObserver:self selector:@selector(locationDetected:) name:kNewLocationDetectedNotification object:nil];
         [[NotificationCenter sharedInstance] addObserver:self selector:@selector(headingDetected:) name:kLocationUpdateHeadingNotification object:nil];
-#endif
         
         // setup our network reachability        
 		NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
@@ -151,6 +150,12 @@
     
     // Orientation
     [result appendString:[OrmmaHelper setOrientation:orientation]];
+    
+    // Location
+    SharedModel* sharedModel = [SharedModel sharedInstance];
+    if (sharedModel && sharedModel.latitude && sharedModel.longitude && sharedModel.accuracy) {
+        [self evalJS:[OrmmaHelper setLatitude:[sharedModel.latitude floatValue] longitude:[sharedModel.longitude floatValue] accuracy:[sharedModel.accuracy floatValue]]];
+    } 
     
     // Supports
     
