@@ -23,7 +23,7 @@
 @property (nonatomic, retain) AdView*           adView;
 
 @property (nonatomic, assign) ORMMAState        currentState;
-@property (nonatomic, assign) ORMMAState        notHiddenState;
+@property (nonatomic, assign) CGRect            defaultFrame;
 @property (nonatomic, assign) CGSize            maxSize;
 
 - (void)viewVisible:(NSNotification*)notification;
@@ -42,13 +42,14 @@
 
 @implementation OrmmaAdaptor
 
-@synthesize webView, adView, currentState, notHiddenState, maxSize;
+@synthesize webView, adView, currentState, maxSize;
 
 - (id)initWithWebView:(UIWebView*)view adView:(AdView*)ad {
     self = [super init];
     if (self) {
         self.webView = view;
         self.adView = ad;
+        self.defaultFrame = ad.frame;
         
         [[NotificationCenter sharedInstance] addObserver:self selector:@selector(viewVisible:) name:kAdViewBecomeVisibleNotification object:nil];
 		[[NotificationCenter sharedInstance] addObserver:self selector:@selector(viewInvisible:) name:kAdViewBecomeInvisibleNotification object:nil];        
@@ -115,7 +116,6 @@
     
     // Default state
     self.currentState = ORMMAStateDefault;
-    self.notHiddenState = self.currentState;
     [result appendString:[OrmmaHelper setState:self.currentState]];
     
     // Viewable
@@ -222,15 +222,75 @@
 
 - (void)webView:(UIWebView *)view shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     if ([self isOrmma:request]) {
-        //NSLog(@"%@", [[request URL] absoluteString]);
+        NSString* event = [[request URL] host];
+        if ([event isEqualToString:@"ormmaenabled"]) {
+            NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+        } else if ([event isEqualToString:@"show"]) {
+            [self.adView setHidden:NO];
+        } else if ([event isEqualToString:@"hide"]) {
+            [self.adView setHidden:YES];
+        } else if ([event isEqualToString:@"close"]) {
+            // if we're in the default state already, there is nothing to do
+            if (self.currentState == ORMMAStateDefault) {
+                // default ad, nothing to do
+                return;
+            } else if (self.currentState == ORMMAStateHidden) {
+                // hidden ad, nothing to do
+                return;
+            } else if (self.currentState == ORMMAStateExpanded) {
+                [UIView animateWithDuration:2.0 animations:^(void) {
+                    self.adView.frame = self.defaultFrame;
+                } completion:^(BOOL finished) {
+                    self.currentState = ORMMAStateDefault;
+                    [self evalJS:[OrmmaHelper setState:self.currentState]];
+                }];
+            } else {
+                [UIView animateWithDuration:2.0 animations:^(void) {
+                    self.adView.frame = self.defaultFrame;
+                } completion:^(BOOL finished) {
+                    self.currentState = ORMMAStateDefault;
+                    [self evalJS:[OrmmaHelper setState:self.currentState]];
+                }];
+            }
+        } else if ([event isEqualToString:@"expand"]) {
+            NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+        } else if ([event isEqualToString:@"resize"]) {
+            NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+        } else if ([event isEqualToString:@"addasset"]) {
+            NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+        } else if ([event isEqualToString:@"removeasset"]) {
+            NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+        } else if ([event isEqualToString:@"removeallassets"]) {
+            NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+        } else if ([event isEqualToString:@"calendar"]) {
+            NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+        } else if ([event isEqualToString:@"camera"]) {
+            NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+        } else if ([event isEqualToString:@"email"]) {
+            NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+        } else if ([event isEqualToString:@"phone"]) {
+            NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+        } else if ([event isEqualToString:@"sms"]) {
+            NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+        } else if ([event isEqualToString:@"open"]) {
+            NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+        } else if ([event isEqualToString:@"openmap"]) {
+            NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+        } else if ([event isEqualToString:@"playaudio"]) {
+            NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+        } else if ([event isEqualToString:@"playvideo"]) {
+            NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+        } else if ([event isEqualToString:@"request"]) {
+            NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+        } else if ([event isEqualToString:@"service"]) {
+            NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+        }
     }
 }
 
 - (void)viewVisible:(NSNotification*)notification {
 	AdView* adViewNotify = [notification object];
     if (adViewNotify == self.adView) {
-        self.currentState = self.notHiddenState;
-        [self evalJS:[OrmmaHelper setState:self.currentState]];
         [self evalJS:[OrmmaHelper setViewable:YES]];
 	}
 }
@@ -238,8 +298,6 @@
 - (void)viewInvisible:(NSNotification*)notification {
 	AdView* adViewNotify = [notification object];
     if (adViewNotify == self.adView) {
-        self.currentState = ORMMAStateHidden;
-        [self evalJS:[OrmmaHelper setState:self.currentState]];
         [self evalJS:[OrmmaHelper setViewable:NO]];
 	}
 }
@@ -263,13 +321,7 @@
         CGRect newFrame = [frameValue CGRectValue];
         
         if (self.currentState != ORMMAStateResized) {
-            if (self.currentState == self.notHiddenState) {
-                self.notHiddenState = ORMMAStateResized;
-                self.currentState = self.notHiddenState;
-                [self evalJS:[OrmmaHelper setState:self.currentState]];
-            } else {
-                self.notHiddenState = ORMMAStateResized;
-            }
+            self.defaultFrame = newFrame;
         }
         
         [self evalJS:[OrmmaHelper setSize:newFrame.size]];
