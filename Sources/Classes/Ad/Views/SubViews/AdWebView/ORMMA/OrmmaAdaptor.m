@@ -114,11 +114,7 @@
     [result appendString:[OrmmaHelper registerOrmmaUpCaseObject]];
     
     // Default state
-    if ([webView isViewVisible]) {
-        self.currentState = ORMMAStateDefault;
-    } else {
-        self.currentState = ORMMAStateHidden;
-    }
+    self.currentState = ORMMAStateDefault;
     self.notHiddenState = self.currentState;
     [result appendString:[OrmmaHelper setState:self.currentState]];
     
@@ -164,7 +160,6 @@
     [supports addObject:@"'level-2'"];
     [supports addObject:@"'orientation'"];
     [supports addObject:@"'network'"];
-    [supports addObject:@"'location'"];
     [supports addObject:@"'screen'"];
     [supports addObject:@"'shake'"];
     [supports addObject:@"'size'"];
@@ -181,9 +176,13 @@
     if ([[LocationManager sharedInstance].locationManager headingAvailable]) {
         [supports addObject:@"'heading'"];
     }
+    
+    if ([[LocationManager sharedInstance].locationManager) {
+        [supports addObject:@"'location'"];
+    }
 #endif
     
-    if (device.model == @"iPhone") {
+    if ([device.model isEqualToString:@"iPhone"]) {
         [supports addObject:@"'phone'"];
     }
     
@@ -223,7 +222,7 @@
 
 - (void)webView:(UIWebView *)view shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     if ([self isOrmma:request]) {
-        NSLog(@"%@", [[request URL] absoluteString]);
+        //NSLog(@"%@", [[request URL] absoluteString]);
     }
 }
 
