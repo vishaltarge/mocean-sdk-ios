@@ -42,7 +42,7 @@
 
 @implementation OrmmaAdaptor
 
-@synthesize webView, adView, currentState, maxSize;
+@synthesize webView, adView, currentState, defaultFrame, maxSize;
 
 - (id)initWithWebView:(UIWebView*)view adView:(AdView*)ad {
     self = [super init];
@@ -222,12 +222,17 @@
 
 - (void)webView:(UIWebView *)view shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     if ([self isOrmma:request]) {
-        NSString* event = [[request URL] host];
+        NSString* event = [[[request URL] host] lowercaseString];
+        NSDictionary* parameters = [OrmmaHelper parametersFromJSCall:[[request URL] parameterString]];
         if ([event isEqualToString:@"ormmaenabled"]) {
             NSLog(@"Dev log: %@", [[request URL] absoluteString]);
         } else if ([event isEqualToString:@"show"]) {
+            self.currentState = ORMMAStateDefault;
+            [self evalJS:[OrmmaHelper setState:self.currentState]];
             [self.adView setHidden:NO];
         } else if ([event isEqualToString:@"hide"]) {
+            self.currentState = ORMMAStateHidden;
+            [self evalJS:[OrmmaHelper setState:self.currentState]];
             [self.adView setHidden:YES];
         } else if ([event isEqualToString:@"close"]) {
             // if we're in the default state already, there is nothing to do
@@ -253,9 +258,61 @@
                 }];
             }
         } else if ([event isEqualToString:@"expand"]) {
-            NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+            if (self.currentState != ORMMAStateDefault) {
+                // Already Expanded
+                [self evalJS:[OrmmaHelper fireError:@"Can only expand from the default state." forEvent:event]];
+                return;
+            } else {
+                self.currentState = ORMMAStateExpanded;
+                CGFloat x = [OrmmaHelper floatFromDictionary:parameters
+                                                      forKey:@"x"];
+                CGFloat y = [OrmmaHelper floatFromDictionary:parameters
+                                                      forKey:@"y"];
+                CGFloat w = [OrmmaHelper floatFromDictionary:parameters
+                                                      forKey:@"w"];
+                if (w > maxSize.width) {
+                    [self evalJS:[OrmmaHelper fireError:@"Cannot expand an ad larger than allowed." forEvent:event]];
+                    return;
+                }
+                CGFloat h = [OrmmaHelper floatFromDictionary:parameters
+                                                      forKey:@"h"];
+                if (h > maxSize.height) {
+                    [self evalJS:[OrmmaHelper fireError:@"Cannot expand an ad larger than allowed." forEvent:event]];
+                    return;
+                }
+                
+                [UIView animateWithDuration:2.0 animations:^(void) {
+                    self.adView.frame = CGRectMake(x, y, w, h);
+                } completion:^(BOOL finished) {
+                    [self evalJS:[OrmmaHelper setState:self.currentState]];
+                }];
+            }
         } else if ([event isEqualToString:@"resize"]) {
-            NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+            if (self.currentState != ORMMAStateDefault) {
+                // Already Resized
+                [self evalJS:[OrmmaHelper fireError:@"Cannot resize an ad that is not in the default state." forEvent:event]];
+                return;
+            } else {
+                self.currentState = ORMMAStateResized;
+                CGFloat w = [OrmmaHelper floatFromDictionary:parameters
+                                                      forKey:@"w"];
+                if (w > maxSize.width) {
+                    [self evalJS:[OrmmaHelper fireError:@"Cannot resize an ad larger than allowed." forEvent:event]];
+                    return;
+                }
+                CGFloat h = [OrmmaHelper floatFromDictionary:parameters
+                                                      forKey:@"h"];
+                if (h > maxSize.height) {
+                    [self evalJS:[OrmmaHelper fireError:@"Cannot resize an ad larger than allowed." forEvent:event]];
+                    return;
+                }
+                
+                [UIView animateWithDuration:2.0 animations:^(void) {
+                    self.adView.frame = CGRectMake(self.adView.frame.origin.x, self.adView.frame.origin.y, w, h);
+                } completion:^(BOOL finished) {
+                    [self evalJS:[OrmmaHelper setState:self.currentState]];
+                }];
+            }
         } else if ([event isEqualToString:@"addasset"]) {
             NSLog(@"Dev log: %@", [[request URL] absoluteString]);
         } else if ([event isEqualToString:@"removeasset"]) {
@@ -325,6 +382,7 @@
         }
         
         [self evalJS:[OrmmaHelper setSize:newFrame.size]];
+        [self evalJS:[OrmmaHelper setDefaultPosition:newFrame]];
 	}
 }
 
@@ -378,6 +436,7 @@
 
 #pragma mark - Accelerometer Delegete
 
+         
 - (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration {
 	// Send accelerometer data
     [self evalJS:[OrmmaHelper setTilt:acceleration]];

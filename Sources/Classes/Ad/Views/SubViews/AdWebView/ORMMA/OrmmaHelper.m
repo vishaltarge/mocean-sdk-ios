@@ -134,6 +134,10 @@
     return @"window.ormmaview.fireShakeEvent();";
 }
 
++ (NSString*)fireError:(NSString*)message forEvent:(NSString*)event {
+    return [NSString stringWithFormat:@"window.ormmaview.fireErrorEvent('%@', '%@');", message, event];
+}
+
 + (CGSize)screenSizeForOrientation:(UIDeviceOrientation)orientation {
 	CGSize size;
 	UIScreen *screen = [UIScreen mainScreen];
@@ -148,6 +152,31 @@
 		size.height = screenSize.height;
 	}
 	return size;
+}
+
++ (NSDictionary *)parametersFromJSCall:(NSString *)parameterString {
+	NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+	
+	NSArray *parameterList = [parameterString componentsSeparatedByString:@"&"];
+	for (NSString *parameterEntry in parameterList) {
+		NSArray *kvp = [parameterEntry componentsSeparatedByString:@"="];
+		NSString *key = [kvp objectAtIndex:0];
+		NSString *encodedValue = [kvp objectAtIndex:1];
+		NSString *value = [encodedValue stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];;
+		[parameters setObject:value forKey:key];
+	}
+	
+	return parameters;
+}
+
++ (CGFloat)floatFromDictionary:(NSDictionary*)dictionary
+						forKey:(NSString*)key {
+	NSString *stringValue = [dictionary valueForKey:key];
+	if (stringValue == nil) {
+		return -666.666;
+	}
+	CGFloat value = [stringValue floatValue];
+	return value;
 }
 
 @end

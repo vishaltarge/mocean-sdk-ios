@@ -30,7 +30,11 @@
 
 + (NSString*)fireChangeEvent:(NSString*)value;
 + (NSString*)fireShakeEventInWebView;
++ (NSString*)fireError:(NSString*)message forEvent:(NSString*)event;
 
 + (CGSize)screenSizeForOrientation:(UIDeviceOrientation)orientation;
++ (NSDictionary *)parametersFromJSCall:(NSString *)parameterString;
++ (CGFloat)floatFromDictionary:(NSDictionary*)dictionary
+						forKey:(NSString*)key;
 
 @end
