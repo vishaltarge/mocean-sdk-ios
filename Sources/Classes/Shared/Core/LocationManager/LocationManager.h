@@ -20,6 +20,7 @@
 @interface LocationManager : CLLocationManager <CLLocationManagerDelegate> {
 	CLLocationCoordinate2D              _currentLocationCoordinate;
 	CLLocation*                         _currentLocation;
+	CLHeading*                          _currentHeading;
 #else
 @interface LocationManager : NSObject {
 #endif
@@ -32,9 +33,11 @@
 @property (readonly) CLLocationManager*             locationManager;
 @property (readonly) CLLocationCoordinate2D         currentLocationCoordinate;
 @property (readonly) CLLocation*                    currentLocation;
+@property (readonly) CLHeading*                     currentHeading;
 #else
 @property (readonly) id                             locationManager;
 @property (readonly) id                             currentLocation;
+@property (readonly) id                             currentHeading;
 #endif
 @property (readonly) BOOL                           isUpdatingLocation;
 @property (assign) BOOL                             unknowsState;
