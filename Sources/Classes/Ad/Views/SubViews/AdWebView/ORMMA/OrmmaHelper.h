@@ -13,6 +13,7 @@
 
 + (NSString*)registerOrmmaUpCaseObject;
 + (NSString*)signalReadyInWebView;
++ (NSString*)nativeCallComplete:(NSString*)command;
 
 + (NSString*)setState:(ORMMAState)state;
 + (NSString*)setViewable:(BOOL)viewable;
@@ -36,5 +37,9 @@
 + (NSDictionary *)parametersFromJSCall:(NSString *)parameterString;
 + (CGFloat)floatFromDictionary:(NSDictionary*)dictionary
 						forKey:(NSString*)key;
++ (NSString*)requiredStringFromDictionary:(NSDictionary*)dictionary
+                                   forKey:(NSString *)key;
++ (BOOL)booleanFromDictionary:(NSDictionary *)dictionary
+					   forKey:(NSString *)key;
 
 @end

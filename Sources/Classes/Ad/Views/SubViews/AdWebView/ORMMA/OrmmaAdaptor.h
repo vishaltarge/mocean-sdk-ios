@@ -9,12 +9,15 @@
 #import <UIKit/UIKit.h>
 #import <MessageUI/MFMailComposeViewController.h>
 #import <MessageUI/MFMessageComposeViewController.h>
+#import <EventKit/EventKit.h>
 
 #ifdef INCLUDE_LOCATION_MANAGER
 #import <CoreLocation/CoreLocation.h>
 #endif
 
 #import "AdView.h"
+#import "NotificationCenter.h"
+#import "UIAlertView+Blocks.h"
 
 typedef enum ORMMAStateEnum {
 	ORMMAStateHidden = -1,

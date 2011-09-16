@@ -22,6 +22,7 @@
 @property (nonatomic, retain) UIWebView*        webView;
 @property (nonatomic, retain) AdView*           adView;
 
+@property (nonatomic, assign) ORMMAState        nonHideState;
 @property (nonatomic, assign) ORMMAState        currentState;
 @property (nonatomic, assign) CGRect            defaultFrame;
 @property (nonatomic, assign) CGSize            maxSize;
@@ -37,12 +38,13 @@
 - (void)locationDetected:(NSNotification*)notification;
 - (void)headingDetected:(NSNotification*)notification;
 - (void)evalJS:(NSString*)js;
+- (void)click:(NSString*)url;
 
 @end
 
 @implementation OrmmaAdaptor
 
-@synthesize webView, adView, currentState, defaultFrame, maxSize;
+@synthesize webView, adView, nonHideState, currentState, defaultFrame, maxSize;
 
 - (id)initWithWebView:(UIWebView*)view adView:(AdView*)ad {
     self = [super init];
@@ -116,6 +118,7 @@
     
     // Default state
     self.currentState = ORMMAStateDefault;
+    self.nonHideState = self.currentState;
     [result appendString:[OrmmaHelper setState:self.currentState]];
     
     // Viewable
@@ -219,18 +222,32 @@
         [self.webView performSelectorOnMainThread:@selector(stringByEvaluatingJavaScriptFromString:) withObject:js waitUntilDone:NO];
     }
 }
+         
+         
+- (void)click:(NSString*)url {
+    if (self.adView) {
+        NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+        NSMutableDictionary* info = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:request, self.adView, nil]
+                                                                       forKeys:[NSArray arrayWithObjects:@"request", @"adView", nil]];
+        
+        [[NotificationCenter sharedInstance] postNotificationName:kOpenURLNotification object:info];
+    }
+}
 
 - (void)webView:(UIWebView *)view shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     if ([self isOrmma:request]) {
         NSString* event = [[[request URL] host] lowercaseString];
-        NSDictionary* parameters = [OrmmaHelper parametersFromJSCall:[[request URL] parameterString]];
+        NSDictionary* parameters = [OrmmaHelper parametersFromJSCall:[[request URL] query]];
         if ([event isEqualToString:@"ormmaenabled"]) {
             NSLog(@"Dev log: %@", [[request URL] absoluteString]);
         } else if ([event isEqualToString:@"show"]) {
-            self.currentState = ORMMAStateDefault;
-            [self evalJS:[OrmmaHelper setState:self.currentState]];
-            [self.adView setHidden:NO];
+            if (self.adView.hidden) {
+                self.currentState = self.nonHideState;
+                [self evalJS:[OrmmaHelper setState:self.currentState]];
+                [self.adView setHidden:NO];
+            }
         } else if ([event isEqualToString:@"hide"]) {
+            self.nonHideState = self.currentState;
             self.currentState = ORMMAStateHidden;
             [self evalJS:[OrmmaHelper setState:self.currentState]];
             [self.adView setHidden:YES];
@@ -238,22 +255,22 @@
             // if we're in the default state already, there is nothing to do
             if (self.currentState == ORMMAStateDefault) {
                 // default ad, nothing to do
-                return;
             } else if (self.currentState == ORMMAStateHidden) {
                 // hidden ad, nothing to do
-                return;
             } else if (self.currentState == ORMMAStateExpanded) {
-                [UIView animateWithDuration:2.0 animations:^(void) {
+                [UIView animateWithDuration:0.2 animations:^(void) {
                     self.adView.frame = self.defaultFrame;
                 } completion:^(BOOL finished) {
                     self.currentState = ORMMAStateDefault;
+                    self.nonHideState = self.currentState;
                     [self evalJS:[OrmmaHelper setState:self.currentState]];
                 }];
             } else {
-                [UIView animateWithDuration:2.0 animations:^(void) {
+                [UIView animateWithDuration:0.2 animations:^(void) {
                     self.adView.frame = self.defaultFrame;
                 } completion:^(BOOL finished) {
                     self.currentState = ORMMAStateDefault;
+                    self.nonHideState = self.currentState;
                     [self evalJS:[OrmmaHelper setState:self.currentState]];
                 }];
             }
@@ -261,57 +278,49 @@
             if (self.currentState != ORMMAStateDefault) {
                 // Already Expanded
                 [self evalJS:[OrmmaHelper fireError:@"Can only expand from the default state." forEvent:event]];
-                return;
             } else {
                 self.currentState = ORMMAStateExpanded;
-                CGFloat x = [OrmmaHelper floatFromDictionary:parameters
-                                                      forKey:@"x"];
-                CGFloat y = [OrmmaHelper floatFromDictionary:parameters
-                                                      forKey:@"y"];
-                CGFloat w = [OrmmaHelper floatFromDictionary:parameters
-                                                      forKey:@"w"];
+                self.nonHideState = self.currentState;
+                CGFloat x = [OrmmaHelper floatFromDictionary:parameters forKey:@"x"];
+                CGFloat y = [OrmmaHelper floatFromDictionary:parameters forKey:@"y"];
+                CGFloat w = [OrmmaHelper floatFromDictionary:parameters forKey:@"w"];
                 if (w > maxSize.width) {
                     [self evalJS:[OrmmaHelper fireError:@"Cannot expand an ad larger than allowed." forEvent:event]];
-                    return;
+                } else {
+                    CGFloat h = [OrmmaHelper floatFromDictionary:parameters forKey:@"h"];
+                    if (h > maxSize.height) {
+                        [self evalJS:[OrmmaHelper fireError:@"Cannot expand an ad larger than allowed." forEvent:event]];
+                    } else {
+                        [UIView animateWithDuration:2.0 animations:^(void) {
+                            self.adView.frame = CGRectMake(x, y, w, h);
+                        } completion:^(BOOL finished) {
+                            [self evalJS:[OrmmaHelper setState:self.currentState]];
+                        }];
+                    }
                 }
-                CGFloat h = [OrmmaHelper floatFromDictionary:parameters
-                                                      forKey:@"h"];
-                if (h > maxSize.height) {
-                    [self evalJS:[OrmmaHelper fireError:@"Cannot expand an ad larger than allowed." forEvent:event]];
-                    return;
-                }
-                
-                [UIView animateWithDuration:2.0 animations:^(void) {
-                    self.adView.frame = CGRectMake(x, y, w, h);
-                } completion:^(BOOL finished) {
-                    [self evalJS:[OrmmaHelper setState:self.currentState]];
-                }];
             }
         } else if ([event isEqualToString:@"resize"]) {
             if (self.currentState != ORMMAStateDefault) {
                 // Already Resized
                 [self evalJS:[OrmmaHelper fireError:@"Cannot resize an ad that is not in the default state." forEvent:event]];
-                return;
             } else {
                 self.currentState = ORMMAStateResized;
-                CGFloat w = [OrmmaHelper floatFromDictionary:parameters
-                                                      forKey:@"w"];
+                self.nonHideState = self.currentState;
+                CGFloat w = [OrmmaHelper floatFromDictionary:parameters forKey:@"w"];
                 if (w > maxSize.width) {
                     [self evalJS:[OrmmaHelper fireError:@"Cannot resize an ad larger than allowed." forEvent:event]];
-                    return;
+                } else {
+                    CGFloat h = [OrmmaHelper floatFromDictionary:parameters forKey:@"h"];
+                    if (h > maxSize.height) {
+                        [self evalJS:[OrmmaHelper fireError:@"Cannot resize an ad larger than allowed." forEvent:event]];
+                    } else {
+                        [UIView animateWithDuration:2.0 animations:^(void) {
+                            self.adView.frame = CGRectMake(self.adView.frame.origin.x, self.adView.frame.origin.y, w, h);
+                        } completion:^(BOOL finished) {
+                            [self evalJS:[OrmmaHelper setState:self.currentState]];
+                        }];
+                    }
                 }
-                CGFloat h = [OrmmaHelper floatFromDictionary:parameters
-                                                      forKey:@"h"];
-                if (h > maxSize.height) {
-                    [self evalJS:[OrmmaHelper fireError:@"Cannot resize an ad larger than allowed." forEvent:event]];
-                    return;
-                }
-                
-                [UIView animateWithDuration:2.0 animations:^(void) {
-                    self.adView.frame = CGRectMake(self.adView.frame.origin.x, self.adView.frame.origin.y, w, h);
-                } completion:^(BOOL finished) {
-                    [self evalJS:[OrmmaHelper setState:self.currentState]];
-                }];
             }
         } else if ([event isEqualToString:@"addasset"]) {
             NSLog(@"Dev log: %@", [[request URL] absoluteString]);
@@ -320,17 +329,94 @@
         } else if ([event isEqualToString:@"removeallassets"]) {
             NSLog(@"Dev log: %@", [[request URL] absoluteString]);
         } else if ([event isEqualToString:@"calendar"]) {
-            NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+            NSString *dateString = [OrmmaHelper requiredStringFromDictionary:parameters 
+                                                                      forKey:@"date"];
+            NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+            [formatter setDateFormat:@"yyyyMMddHHmm"];
+            NSDate *date = [formatter dateFromString:dateString];
+            
+            NSString *title = [OrmmaHelper requiredStringFromDictionary:parameters 
+                                                                 forKey:@"title"];
+            NSString *body = [OrmmaHelper requiredStringFromDictionary:parameters 
+                                                                forKey:@"body"];
+            if (!date && !title && !body) {
+                // handle internally
+                EKEventStore* eventStore = [[[EKEventStore alloc] init] autorelease];
+                EKEvent* ekEvent = [EKEvent eventWithEventStore:eventStore];
+                ekEvent.title = title;
+                ekEvent.notes = body;
+                
+                ekEvent.startDate = date;
+                ekEvent.endDate   = [[NSDate alloc] initWithTimeInterval:600 
+                                                             sinceDate:ekEvent.startDate];
+                [ekEvent setCalendar:[eventStore defaultCalendarForNewEvents]];
+                
+                RIButtonItem *noItem = [RIButtonItem item];
+                noItem.label = @"No";
+                
+                RIButtonItem *yesItem = [RIButtonItem item];
+                yesItem.label = @"Yes";
+                yesItem.action = ^ {
+                    NSError *err;
+                    BOOL status = [eventStore saveEvent:ekEvent 
+                                                   span:EKSpanThisEvent 
+                                                  error:&err]; 
+                    if (status) {
+                        UIAlertView *eventSavedSuccessfully = [[UIAlertView alloc] initWithTitle:@"Event Status" 
+                                                                                         message:@"Event successfully added." 
+                                                                                        delegate:nil 
+                                                                               cancelButtonTitle:@"Ok" 
+                                                                               otherButtonTitles:nil];
+                        [eventSavedSuccessfully show];
+                        [eventSavedSuccessfully release];
+                    } else {
+                        UIAlertView *eventSavedUNSuccessfully = [[UIAlertView alloc] initWithTitle:@"Event Status" 
+                                                                                           message:@"Event not added." 
+                                                                                          delegate:nil 
+                                                                                 cancelButtonTitle:@"Ok" 
+                                                                                 otherButtonTitles:nil];
+                        [eventSavedUNSuccessfully show];
+                        [eventSavedUNSuccessfully release];
+                    }
+                };
+                
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Event Status"
+                                                                    message:@"Do you wish to save calendar event?"
+                                                           cancelButtonItem:noItem 
+                                                           otherButtonItems:yesItem, nil];
+                [alertView show];
+                [alertView release];                 
+            }
         } else if ([event isEqualToString:@"camera"]) {
             NSLog(@"Dev log: %@", [[request URL] absoluteString]);
         } else if ([event isEqualToString:@"email"]) {
-            NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+            /*
+            NSString *to = [OrmmaHelper requiredStringFromDictionary:parameters 
+                                                              forKey:@"to"];
+            NSString *subject = [OrmmaHelper requiredStringFromDictionary:parameters 
+                                                                   forKey:@"subject"];
+            NSString *body = [OrmmaHelper requiredStringFromDictionary:parameters 
+                                                                forKey:@"body"];
+            BOOL html = [OrmmaHelper booleanFromDictionary:parameters 
+                                                    forKey:@"html"];
+            if (!body && !to != nil ) && 
+                ( subject != nil ) )
+            {
+                [self.bridgeDelegate sendEMailTo:to
+                                     withSubject:subject
+                                        withBody:body
+                                          isHTML:html];
+            }*/
         } else if ([event isEqualToString:@"phone"]) {
-            NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+            NSString *phoneNumber = [OrmmaHelper requiredStringFromDictionary:parameters 
+                                                                       forKey:@"number"];
+            [self click:[NSString stringWithFormat:@"tel:%@", phoneNumber]];
         } else if ([event isEqualToString:@"sms"]) {
             NSLog(@"Dev log: %@", [[request URL] absoluteString]);
         } else if ([event isEqualToString:@"open"]) {
-            NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+            NSString *url = [OrmmaHelper requiredStringFromDictionary:parameters 
+                                                               forKey:@"url"];
+            [self click:url];
         } else if ([event isEqualToString:@"openmap"]) {
             NSLog(@"Dev log: %@", [[request URL] absoluteString]);
         } else if ([event isEqualToString:@"playaudio"]) {
@@ -342,6 +428,9 @@
         } else if ([event isEqualToString:@"service"]) {
             NSLog(@"Dev log: %@", [[request URL] absoluteString]);
         }
+        
+        // notify JS that we've completed the last request
+        [self evalJS:[OrmmaHelper nativeCallComplete:event]];
     }
 }
 

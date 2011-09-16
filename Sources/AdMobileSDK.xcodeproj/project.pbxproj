@@ -146,6 +146,12 @@
 		FC9CFEF2141E21A000D0280B /* Accelerometer.m in Sources */ = {isa = PBXBuildFile; fileRef = FC9CFEF0141E21A000D0280B /* Accelerometer.m */; };
 		FCB3133B13F2A3D30076DDE2 /* SASUIViewControllerAdaptor.h in Headers */ = {isa = PBXBuildFile; fileRef = FCB3133913F2A3D30076DDE2 /* SASUIViewControllerAdaptor.h */; };
 		FCB3133C13F2A3D30076DDE2 /* SASUIViewControllerAdaptor.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB3133A13F2A3D30076DDE2 /* SASUIViewControllerAdaptor.m */; };
+		FCB54BDA142327E400867C7E /* RIButtonItem.h in Headers */ = {isa = PBXBuildFile; fileRef = FCB54BD4142327E400867C7E /* RIButtonItem.h */; };
+		FCB54BDB142327E400867C7E /* RIButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB54BD5142327E400867C7E /* RIButtonItem.m */; };
+		FCB54BDC142327E400867C7E /* UIActionSheet+Blocks.h in Headers */ = {isa = PBXBuildFile; fileRef = FCB54BD6142327E400867C7E /* UIActionSheet+Blocks.h */; };
+		FCB54BDD142327E400867C7E /* UIActionSheet+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB54BD7142327E400867C7E /* UIActionSheet+Blocks.m */; };
+		FCB54BDE142327E400867C7E /* UIAlertView+Blocks.h in Headers */ = {isa = PBXBuildFile; fileRef = FCB54BD8142327E400867C7E /* UIAlertView+Blocks.h */; };
+		FCB54BDF142327E400867C7E /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB54BD9142327E400867C7E /* UIAlertView+Blocks.m */; };
 		FCC4715D13E7B4B500049C98 /* UIColorAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = FCC4715B13E7B4B500049C98 /* UIColorAdditions.h */; };
 		FCC4715E13E7B4B500049C98 /* UIColorAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC4715C13E7B4B500049C98 /* UIColorAdditions.m */; };
 		FCE55CC313E6EC9D00EC0FD8 /* MURLRequestQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = FCE55CB713E6EC9D00EC0FD8 /* MURLRequestQueue.h */; };
@@ -322,6 +328,12 @@
 		FC9CFEF0141E21A000D0280B /* Accelerometer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Accelerometer.m; sourceTree = "<group>"; };
 		FCB3133913F2A3D30076DDE2 /* SASUIViewControllerAdaptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASUIViewControllerAdaptor.h; sourceTree = "<group>"; };
 		FCB3133A13F2A3D30076DDE2 /* SASUIViewControllerAdaptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASUIViewControllerAdaptor.m; sourceTree = "<group>"; };
+		FCB54BD4142327E400867C7E /* RIButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RIButtonItem.h; sourceTree = "<group>"; };
+		FCB54BD5142327E400867C7E /* RIButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RIButtonItem.m; sourceTree = "<group>"; };
+		FCB54BD6142327E400867C7E /* UIActionSheet+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+Blocks.h"; sourceTree = "<group>"; };
+		FCB54BD7142327E400867C7E /* UIActionSheet+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+Blocks.m"; sourceTree = "<group>"; };
+		FCB54BD8142327E400867C7E /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Blocks.h"; sourceTree = "<group>"; };
+		FCB54BD9142327E400867C7E /* UIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Blocks.m"; sourceTree = "<group>"; };
 		FCC4715B13E7B4B500049C98 /* UIColorAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIColorAdditions.h; sourceTree = "<group>"; };
 		FCC4715C13E7B4B500049C98 /* UIColorAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIColorAdditions.m; sourceTree = "<group>"; };
 		FCE55CB713E6EC9D00EC0FD8 /* MURLRequestQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MURLRequestQueue.h; sourceTree = "<group>"; };
@@ -442,6 +454,7 @@
 		ADA9C21611F96D370074E2F3 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				FCB54BD3142327E400867C7E /* UIAlertView-Blocks */,
 				CF6DA0C6137273630051225F /* QSUtilities */,
 				AC895DAA13543A4A0029C0EA /* SAS */,
 				CF67021313543BAA00ACA281 /* Rhythm */,
@@ -992,6 +1005,19 @@
 			path = Accelerometer;
 			sourceTree = "<group>";
 		};
+		FCB54BD3142327E400867C7E /* UIAlertView-Blocks */ = {
+			isa = PBXGroup;
+			children = (
+				FCB54BD4142327E400867C7E /* RIButtonItem.h */,
+				FCB54BD5142327E400867C7E /* RIButtonItem.m */,
+				FCB54BD6142327E400867C7E /* UIActionSheet+Blocks.h */,
+				FCB54BD7142327E400867C7E /* UIActionSheet+Blocks.m */,
+				FCB54BD8142327E400867C7E /* UIAlertView+Blocks.h */,
+				FCB54BD9142327E400867C7E /* UIAlertView+Blocks.m */,
+			);
+			path = "UIAlertView-Blocks";
+			sourceTree = "<group>";
+		};
 		FCE55CB613E6EC9D00EC0FD8 /* MURLRequesQueue */ = {
 			isa = PBXGroup;
 			children = (
@@ -1127,6 +1153,9 @@
 				FC8821D7140BCC560089CD23 /* OrmmaConstants.h in Headers */,
 				FC8821E2140BDE570089CD23 /* OrmmaHelper.h in Headers */,
 				FC9CFEF1141E21A000D0280B /* Accelerometer.h in Headers */,
+				FCB54BDA142327E400867C7E /* RIButtonItem.h in Headers */,
+				FCB54BDC142327E400867C7E /* UIActionSheet+Blocks.h in Headers */,
+				FCB54BDE142327E400867C7E /* UIAlertView+Blocks.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1281,6 +1310,9 @@
 				FC8821C7140B825C0089CD23 /* OrmmaAdaptor.m in Sources */,
 				FC8821E3140BDE570089CD23 /* OrmmaHelper.m in Sources */,
 				FC9CFEF2141E21A000D0280B /* Accelerometer.m in Sources */,
+				FCB54BDB142327E400867C7E /* RIButtonItem.m in Sources */,
+				FCB54BDD142327E400867C7E /* UIActionSheet+Blocks.m in Sources */,
+				FCB54BDF142327E400867C7E /* UIAlertView+Blocks.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

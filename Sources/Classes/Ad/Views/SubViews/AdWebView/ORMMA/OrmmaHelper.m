@@ -18,6 +18,10 @@
     return @"window.ormma.signalReady();";
 }
 
++ (NSString*)nativeCallComplete:(NSString*)command {
+    return [NSString stringWithFormat:@"window.ormmaview.nativeCallComplete('%@');", command];
+}
+
 + (NSString*)setState:(ORMMAState)state {
     if (state == ORMMAStateDefault) {
         return [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{state: 'default'}", state]];
@@ -173,9 +177,29 @@
 						forKey:(NSString*)key {
 	NSString *stringValue = [dictionary valueForKey:key];
 	if (stringValue == nil) {
-		return -666.666;
+		return 0;
 	}
 	CGFloat value = [stringValue floatValue];
+	return value;
+}
+
++ (NSString*)requiredStringFromDictionary:(NSDictionary*)dictionary
+                                   forKey:(NSString *)key {
+    NSString *value = [dictionary objectForKey:key];
+	if (value == nil || [value isEqual:[NSNull null]]) {
+		return nil;
+	}
+	value = [value stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+	if (value.length == 0 || [value isEqual:[NSNull null]] || value == nil) {
+		return nil;
+	}
+	return value;
+}
+
++ (BOOL)booleanFromDictionary:(NSDictionary *)dictionary
+					   forKey:(NSString *)key {
+	NSString *stringValue = [dictionary valueForKey:key];
+	BOOL value = [@"Y" isEqualToString:stringValue] || [@"y" isEqualToString:stringValue];
 	return value;
 }
 
