@@ -291,7 +291,7 @@
                     if (h > maxSize.height) {
                         [self evalJS:[OrmmaHelper fireError:@"Cannot expand an ad larger than allowed." forEvent:event]];
                     } else {
-                        [UIView animateWithDuration:2.0 animations:^(void) {
+                        [UIView animateWithDuration:0.2 animations:^(void) {
                             self.adView.frame = CGRectMake(x, y, w, h);
                         } completion:^(BOOL finished) {
                             [self evalJS:[OrmmaHelper setState:self.currentState]];
@@ -314,7 +314,7 @@
                     if (h > maxSize.height) {
                         [self evalJS:[OrmmaHelper fireError:@"Cannot resize an ad larger than allowed." forEvent:event]];
                     } else {
-                        [UIView animateWithDuration:2.0 animations:^(void) {
+                        [UIView animateWithDuration:0.2 animations:^(void) {
                             self.adView.frame = CGRectMake(self.adView.frame.origin.x, self.adView.frame.origin.y, w, h);
                         } completion:^(BOOL finished) {
                             [self evalJS:[OrmmaHelper setState:self.currentState]];
