@@ -132,12 +132,13 @@
     [result appendString:[OrmmaHelper setSize:self.webView.frame.size]];
     
     // Max size
-    UIViewController* superVC = [self.webView viewControllerForView];
-    if (superVC) {
-        self.maxSize = superVC.view.frame.size;
+    UIView* sv = self.adView.superview;
+    if (sv) {
+        self.maxSize = sv.frame.size;
     } else {
         self.maxSize = self.webView.frame.size;
     }
+    
     [result appendString:[OrmmaHelper setMaxSize:self.maxSize]];
     
     // Screen size
