@@ -339,7 +339,7 @@
                                                                  forKey:@"title"];
             NSString *body = [OrmmaHelper requiredStringFromDictionary:parameters 
                                                                 forKey:@"body"];
-            if (!date && !title && !body) {
+            if (date && title && body) {
                 // handle internally
                 EKEventStore* eventStore = [[[EKEventStore alloc] init] autorelease];
                 EKEvent* ekEvent = [EKEvent eventWithEventStore:eventStore];
@@ -390,29 +390,40 @@
         } else if ([event isEqualToString:@"camera"]) {
             NSLog(@"Dev log: %@", [[request URL] absoluteString]);
         } else if ([event isEqualToString:@"email"]) {
-            /*
-            NSString *to = [OrmmaHelper requiredStringFromDictionary:parameters 
-                                                              forKey:@"to"];
-            NSString *subject = [OrmmaHelper requiredStringFromDictionary:parameters 
-                                                                   forKey:@"subject"];
-            NSString *body = [OrmmaHelper requiredStringFromDictionary:parameters 
-                                                                forKey:@"body"];
-            BOOL html = [OrmmaHelper booleanFromDictionary:parameters 
-                                                    forKey:@"html"];
-            if (!body && !to != nil ) && 
-                ( subject != nil ) )
-            {
-                [self.bridgeDelegate sendEMailTo:to
-                                     withSubject:subject
-                                        withBody:body
-                                          isHTML:html];
-            }*/
+            NSString *to = [OrmmaHelper requiredStringFromDictionary:parameters forKey:@"to"];
+            NSString *subject = [OrmmaHelper requiredStringFromDictionary:parameters forKey:@"subject"];
+            NSString *body = [OrmmaHelper requiredStringFromDictionary:parameters forKey:@"body"];
+            BOOL html = [OrmmaHelper booleanFromDictionary:parameters forKey:@"html"];
+            if (body && to && subject && [MFMailComposeViewController canSendMail]) {
+                MFMailComposeViewController *vc = [[[MFMailComposeViewController alloc] init] autorelease];
+                NSArray *recipients = [NSArray arrayWithObject:to];
+                [vc setToRecipients:recipients];
+                [vc setSubject:subject];
+                [vc setMessageBody:body  isHTML:html];
+                
+                UIViewController* rvc = [UIApplication sharedApplication].keyWindow.rootViewController;
+                if (rvc) {
+                    [rvc presentModalViewController:vc animated:YES];
+                }
+            }
         } else if ([event isEqualToString:@"phone"]) {
             NSString *phoneNumber = [OrmmaHelper requiredStringFromDictionary:parameters 
                                                                        forKey:@"number"];
             [self click:[NSString stringWithFormat:@"tel:%@", phoneNumber]];
         } else if ([event isEqualToString:@"sms"]) {
-            NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+            NSString *to = [OrmmaHelper requiredStringFromDictionary:parameters forKey:@"to"];
+            NSString *body = [OrmmaHelper requiredStringFromDictionary:parameters 
+                                                         forKey:@"body"];
+            if (body && to && NSClassFromString(@"MFMessageComposeViewController") && [MFMessageComposeViewController canSendText]) {
+                MFMessageComposeViewController *vc = [[[MFMessageComposeViewController alloc] init] autorelease];
+                NSArray *recipients = [NSArray arrayWithObject:to];
+                vc.recipients = recipients;
+                vc.body = body;
+                UIViewController* rvc = [UIApplication sharedApplication].keyWindow.rootViewController;
+                if (rvc) {
+                    [rvc presentModalViewController:vc animated:YES];
+                }
+            }
         } else if ([event isEqualToString:@"open"]) {
             NSString *url = [OrmmaHelper requiredStringFromDictionary:parameters 
                                                                forKey:@"url"];
