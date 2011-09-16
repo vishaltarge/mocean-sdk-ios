@@ -176,11 +176,11 @@
 	}
 
 #ifdef INCLUDE_LOCATION_MANAGER
-    if ([[LocationManager sharedInstance].locationManager headingAvailable]) {
+    if ([CLLocationManager headingAvailable]) {
         [supports addObject:@"'heading'"];
     }
     
-    if ([[LocationManager sharedInstance].locationManager) {
+    if ([LocationManager sharedInstance].locationManager) {
         [supports addObject:@"'location'"];
     }
 #endif
