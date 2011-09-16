@@ -154,10 +154,15 @@
     // Location
     SharedModel* sharedModel = [SharedModel sharedInstance];
     if (sharedModel && sharedModel.latitude && sharedModel.longitude && sharedModel.accuracy) {
-        [self evalJS:[OrmmaHelper setLatitude:[sharedModel.latitude floatValue] longitude:[sharedModel.longitude floatValue] accuracy:[sharedModel.accuracy floatValue]]];
-    } 
+        [result appendString:[OrmmaHelper setLatitude:[sharedModel.latitude floatValue] longitude:[sharedModel.longitude floatValue] accuracy:[sharedModel.accuracy floatValue]]];
+    }
     
-    // Supports
+#ifdef INCLUDE_LOCATION_MANAGER
+    // Heading
+    if ([LocationManager headingAvailable] && [LocationManager sharedInstance].currentHeading) {
+        [result appendString:[OrmmaHelper setHeading:[LocationManager sharedInstance].currentHeading.trueHeading]];
+    }
+#endif
     
     NSMutableArray* supports = [NSMutableArray array];
     [supports addObject:@"'level-1'"];
@@ -168,16 +173,16 @@
     [supports addObject:@"'shake'"];
     [supports addObject:@"'size'"];
     [supports addObject:@"'tilt'"];
-    [supports addObject:@"'audio'"];
-    [supports addObject:@"'video'"];
-    [supports addObject:@"'map'"];
+    //[supports addObject:@"'audio'"];
+    //[supports addObject:@"'video'"];
+    //[supports addObject:@"'map'"];
     
 	if (NSClassFromString(@"EKEventStore")) {
 		[supports addObject:@"'calendar'"]; 
 	}
 
 #ifdef INCLUDE_LOCATION_MANAGER
-    if ([CLLocationManager headingAvailable]) {
+    if ([LocationManager headingAvailable]) {
         [supports addObject:@"'heading'"];
     }
     
