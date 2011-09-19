@@ -166,12 +166,14 @@ static LocationManager* sharedInstance = nil;
 - (void)locationManager:(CLLocationManager *)manager 
 	   didUpdateHeading:(CLHeading *)newHeading
 {
-    if (_currentHeading) {
-        [_currentHeading release];
+    if (newHeading.trueHeading >= 0 && newHeading.trueHeading != _currentHeading.trueHeading) {
+        if (_currentHeading) {
+            [_currentHeading release];
+        }
+        _currentHeading = [newHeading retain];
+        
+        [[NotificationCenter sharedInstance] postNotificationName:kLocationUpdateHeadingNotification object:newHeading];
     }
-    _currentHeading = [newHeading retain];
-    
-    [[NotificationCenter sharedInstance] postNotificationName:kLocationUpdateHeadingNotification object:newHeading];
 }
 
 #endif 
