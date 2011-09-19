@@ -26,7 +26,7 @@ typedef enum ORMMAStateEnum {
 	ORMMAStateExpanded
 } ORMMAState;
 
-@interface OrmmaAdaptor : NSObject
+@interface OrmmaAdaptor : NSObject <MFMessageComposeViewControllerDelegate, MFMailComposeViewControllerDelegate>
 
 - (id)initWithWebView:(UIWebView*)webView adView:(AdView*)ad;
 

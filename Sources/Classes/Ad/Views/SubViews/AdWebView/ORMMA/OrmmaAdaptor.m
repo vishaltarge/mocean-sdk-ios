@@ -350,6 +350,7 @@
                 EKEventStore* eventStore = [[[EKEventStore alloc] init] autorelease];
                 EKEvent* ekEvent = [EKEvent eventWithEventStore:eventStore];
                 ekEvent.title = title;
+                
                 ekEvent.notes = body;
                 
                 ekEvent.startDate = date;
@@ -406,11 +407,16 @@
                 [vc setToRecipients:recipients];
                 [vc setSubject:subject];
                 [vc setMessageBody:body  isHTML:html];
+                vc.mailComposeDelegate = self;
                 
                 UIViewController* rvc = [UIApplication sharedApplication].keyWindow.rootViewController;
-                if (rvc) {
-                    [rvc presentModalViewController:vc animated:YES];
+                if (!rvc) {
+                    rvc = [[UIApplication sharedApplication].keyWindow viewControllerForView];
                 }
+                if (!rvc) {
+                    rvc = [self.adView viewControllerForView];
+                }
+                [rvc presentModalViewController:vc animated:YES];
             }
         } else if ([event isEqualToString:@"phone"]) {
             NSString *phoneNumber = [OrmmaHelper requiredStringFromDictionary:parameters 
@@ -425,10 +431,16 @@
                 NSArray *recipients = [NSArray arrayWithObject:to];
                 vc.recipients = recipients;
                 vc.body = body;
+                vc.messageComposeDelegate = self;
+                
                 UIViewController* rvc = [UIApplication sharedApplication].keyWindow.rootViewController;
-                if (rvc) {
-                    [rvc presentModalViewController:vc animated:YES];
+                if (!rvc) {
+                    rvc = [[UIApplication sharedApplication].keyWindow viewControllerForView];
                 }
+                if (!rvc) {
+                    rvc = [self.adView viewControllerForView];
+                }
+                [rvc presentModalViewController:vc animated:YES];
             }
         } else if ([event isEqualToString:@"open"]) {
             NSString *url = [OrmmaHelper requiredStringFromDictionary:parameters 
@@ -566,6 +578,36 @@
         // Shake detected
         [self evalJS:[OrmmaHelper fireShakeEventInWebView]];
     }
+}
+
+
+#pragma mark - MFMessageComposeViewController Delegete
+
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result {
+    UIViewController* rvc = [UIApplication sharedApplication].keyWindow.rootViewController;
+    if (!rvc) {
+        rvc = [[UIApplication sharedApplication].keyWindow viewControllerForView];
+    }
+    if (!rvc) {
+        rvc = [self.adView viewControllerForView];
+    }
+    [rvc dismissModalViewControllerAnimated:YES];
+}
+
+
+#pragma mark - MFMailComposeViewController Delegate
+
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    UIViewController* rvc = [UIApplication sharedApplication].keyWindow.rootViewController;
+    if (!rvc) {
+        rvc = [[UIApplication sharedApplication].keyWindow viewControllerForView];
+    }
+    if (!rvc) {
+        rvc = [self.adView viewControllerForView];
+    }
+    [rvc dismissModalViewControllerAnimated:YES];
 }
 
 
