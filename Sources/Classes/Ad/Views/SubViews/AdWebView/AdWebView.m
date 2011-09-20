@@ -57,12 +57,14 @@
 }
 
 - (void)loadData:(NSData *)data MIMEType:(NSString *)MIMEType textEncodingName:(NSString *)encodingName baseURL:(NSURL *)baseURL {
-    self.ormmaAdaptor = [[[OrmmaAdaptor alloc] initWithWebView:self.webView adView:(AdView*)self.superview] autorelease];
-    
-    // replce ormma placeholder
     NSString* html = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
-    NSString* js = [NSString stringWithFormat:@"<script type=\"text/javascript\">%@</script>", [self.ormmaAdaptor getDefaultsJSCode]];
-    html = [html stringByReplacingOccurrencesOfString:ORMMA_PLACEHOLDER withString:js];
+    
+    if([[html lowercaseString] rangeOfString:[@"ormma" lowercaseString]].location != NSNotFound) {
+        // replce ormma placeholder
+        self.ormmaAdaptor = [[[OrmmaAdaptor alloc] initWithWebView:self.webView adView:(AdView*)self.superview] autorelease];
+        NSString* js = [NSString stringWithFormat:@"<script type=\"text/javascript\">%@</script>", [self.ormmaAdaptor getDefaultsJSCode]];
+        html = [html stringByReplacingOccurrencesOfString:ORMMA_PLACEHOLDER withString:js];
+    }
     
     [self.webView loadData:[html dataUsingEncoding:NSUTF8StringEncoding] MIMEType:MIMEType textEncodingName:encodingName baseURL:baseURL];
 }
