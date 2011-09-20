@@ -7,6 +7,13 @@
 
 #import "Utils.h"
 #import "Constants.h"
+#import "NSObject+SBJSON.h"
+#import "NSString+SBJSON.h"
+#import "UIAlertView+Blocks.h"
+#import "UIActionSheet+Blocks.h"
+#import "UIViewAdditions.h"
+#import "UIWebViewAdditions.h"
+#import "UIColorAdditions.m"
 
 #import <SystemConfiguration/SystemConfiguration.h>
 
@@ -159,6 +166,10 @@ NSMutableDictionary* CreateNonRetainingDictionary() {
     return YES;
 }
 
++ (NSInteger)randomInteger:(NSInteger)maxInt {
+    return arc4random() % maxInt;
+}
+
 #pragma mark -
 #pragma mark NSData
 
@@ -204,6 +215,8 @@ NSMutableDictionary* CreateNonRetainingDictionary() {
     useCatagory2();
     useCatagory3();
     useCatagory4();
+    useCatagory5();
+    useCatagory6();
 }
 
 @end

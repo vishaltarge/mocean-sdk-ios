@@ -16,7 +16,7 @@
 
 @implementation SharedModel
 
-@synthesize udidMd5 = _udidMd5, ua, latitude, longitude, mcc, mnc;
+@synthesize udidMd5 = _udidMd5, ua, latitude, longitude, accuracy, mcc, mnc;
 
 static SharedModel* sharedInstance = nil;
 
@@ -163,6 +163,7 @@ static SharedModel* sharedInstance = nil;
     CLLocation* location = [notification object];
     self.latitude = [NSString stringWithFormat:@"%f", location.coordinate.latitude];
     self.longitude = [NSString stringWithFormat:@"%f", location.coordinate.longitude];
+    self.accuracy = [NSString stringWithFormat:@"%f", location.horizontalAccuracy];
 #endif
 }
 

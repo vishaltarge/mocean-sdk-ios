@@ -42,6 +42,7 @@ extern NSString* kInvalidParamsNotification;
 
 // visibility
 extern NSString* kAdViewBecomeVisibleNotification;
+extern NSString* kAdViewFrameChangedNotification;
 extern NSString* kAdViewBecomeInvisibleNotification;
 
 // ua
