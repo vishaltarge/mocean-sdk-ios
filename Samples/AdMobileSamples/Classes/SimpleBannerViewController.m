@@ -22,7 +22,7 @@
     [self.view addSubview:imageView];
     [imageView release];
 
-	_adView = [[AdView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 414)];
+	_adView = [[AdView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
     _adView.site = 8061;
     _adView.zone = 20249;
     [self.view addSubview:_adView];

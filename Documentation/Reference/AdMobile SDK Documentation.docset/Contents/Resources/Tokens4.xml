@@ -113,5 +113,27 @@
 			<Anchor>//api/name/adShouldOpen:withUrl:</Anchor>
 		</Token>
 		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/AdViewDelegate/ormmaProcess:event:parameters:</TokenIdentifier>
+			<Abstract>Sent after an ad process ORMMA command.</Abstract>
+			<DeclaredIn>AdDelegate.h</DeclaredIn>			
+			
+			<Declaration>- (void)ormmaProcess:(id)sender event:(NSString *)event parameters:(NSDictionary *)parameters</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>sender</Name>
+					<Abstract>The ad view that is about to open URL.</Abstract>
+				</Parameter><Parameter>
+					<Name>event</Name>
+					<Abstract>The string with name of the event.</Abstract>
+				</Parameter><Parameter>
+					<Name>parameters</Name>
+					<Abstract>The Dictionary with parameters from event.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/ormmaProcess:event:parameters:</Anchor>
+		</Token>
+		
 	</File>
 </Tokens>

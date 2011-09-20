@@ -222,8 +222,6 @@ typedef enum {
      } AdType;
  
  Use this property to filter the content of ad by type.
- 
- The default value is AdTypeImagesAndText.
  */
 @property AdType                       type;
 

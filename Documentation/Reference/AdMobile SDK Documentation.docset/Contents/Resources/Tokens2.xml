@@ -177,17 +177,6 @@
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/AdView/adsType</TokenIdentifier>
-			<Abstract>Ad type filter.</Abstract>
-			<DeclaredIn>AdView.h</DeclaredIn>			
-			
-			<Declaration>@property AdsType adsType</Declaration>
-			
-			
-			<Anchor>//api/name/adsType</Anchor>
-		</Token>
-		
-		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdView/type</TokenIdentifier>
 			<Abstract>Ad type filter.</Abstract>
 			<DeclaredIn>AdView.h</DeclaredIn>			
