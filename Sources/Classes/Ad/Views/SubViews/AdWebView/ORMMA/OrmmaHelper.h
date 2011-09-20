@@ -28,6 +28,7 @@
 + (NSString*)setTilt:(UIAcceleration*)acceleration;
 + (NSString*)setHeading:(CGFloat)heading;
 + (NSString*)setLatitude:(CGFloat)latitude longitude:(CGFloat)longitude accuracy:(CGFloat)accuracy;
++ (NSString*)setResponse:(NSData*)data uri:(NSString*)uri;
 
 + (NSString*)fireChangeEvent:(NSString*)value;
 + (NSString*)fireShakeEventInWebView;

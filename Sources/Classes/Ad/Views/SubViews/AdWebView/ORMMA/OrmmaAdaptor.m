@@ -14,6 +14,7 @@
 #import "LocationManager.h"
 #import "Accelerometer.h"
 #import "SharedModel.h"
+#import "MURLRequestQueue.h"
 
 #define ORMMA_SHAME     @"ormma"
 
@@ -209,14 +210,15 @@
         }
     }
     
+    /*
     Class cameraClass = (NSClassFromString(@"UIImagePickerController"));
     if (cameraClass != nil) {
         if ([cameraClass isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
             [supports addObject:@"'camera'"];
         }
-    }
+    }*/
     
-    [result appendString:[OrmmaHelper setSupports:supports]]; 
+    [result appendString:[OrmmaHelper setSupports:supports]];
     
     return result;
 }
@@ -424,8 +426,7 @@
             [self click:[NSString stringWithFormat:@"tel:%@", phoneNumber]];
         } else if ([event isEqualToString:@"sms"]) {
             NSString *to = [OrmmaHelper requiredStringFromDictionary:parameters forKey:@"to"];
-            NSString *body = [OrmmaHelper requiredStringFromDictionary:parameters 
-                                                         forKey:@"body"];
+            NSString *body = [OrmmaHelper requiredStringFromDictionary:parameters forKey:@"body"];
             if (body && to && NSClassFromString(@"MFMessageComposeViewController") && [MFMessageComposeViewController canSendText]) {
                 MFMessageComposeViewController *vc = [[[MFMessageComposeViewController alloc] init] autorelease];
                 NSArray *recipients = [NSArray arrayWithObject:to];
@@ -453,7 +454,17 @@
         } else if ([event isEqualToString:@"playvideo"]) {
             NSLog(@"Dev log: %@", [[request URL] absoluteString]);
         } else if ([event isEqualToString:@"request"]) {
-            NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+            NSString *uri = [OrmmaHelper requiredStringFromDictionary:parameters forKey:@"uri"];
+            NSString *display = [OrmmaHelper requiredStringFromDictionary:parameters forKey:@"display"];
+            NSURLRequest* req = [NSURLRequest requestWithURL:[NSURL URLWithString:uri]];
+            
+            [MURLRequestQueue loadAsync:req block:[MURLRequestCallback callbackWithSuccess:^(NSURLRequest *send_req, NSHTTPURLResponse *response, NSData *data) {
+                if ([display isEqualToString:@"proxy"]) {
+                    [self evalJS:[OrmmaHelper setResponse:data uri:uri]];
+                }
+            } error:^(NSURLRequest *send_req, NSHTTPURLResponse *response, NSError *error) {
+                // nothing to do...
+            }]];
         } else if ([event isEqualToString:@"service"]) {
             NSLog(@"Dev log: %@", [[request URL] absoluteString]);
         }

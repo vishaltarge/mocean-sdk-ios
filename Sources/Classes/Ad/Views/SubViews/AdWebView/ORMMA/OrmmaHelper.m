@@ -6,6 +6,7 @@
 //
 
 #import "OrmmaHelper.h"
+#import "QSStrings.h"
 
 @implementation OrmmaHelper
 
@@ -126,6 +127,11 @@
 
 + (NSString*)setLatitude:(CGFloat)latitude longitude:(CGFloat)longitude accuracy:(CGFloat)accuracy {
     return [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{location: { lat: %f, lon: %f, acc: %f }}", latitude, longitude, accuracy]];
+}
+
++ (NSString*)setResponse:(NSData*)data uri:(NSString*)uri {
+    //NSLog(@"%@", [NSString stringWithFormat:@" %@, %@", [QSStrings encodeBase64WithData:data], uri]);
+    return @""; //[NSString stringWithFormat:@" %@, %@", [QSStrings encodeBase64WithData:data], uri];
 }
 
 
