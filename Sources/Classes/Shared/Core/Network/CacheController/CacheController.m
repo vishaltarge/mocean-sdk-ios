@@ -24,7 +24,8 @@
 }
 
 - (void)loadLinks:(NSArray*)links forAdView:(AdView*)adView request:(NSURLRequest*)request origData:(NSData*)origData {
-        if (links && [links count] > 0 && adView && request) {            
+        if (links && [links count] > 0 && adView && request) {
+            NSMutableData* resultData = [NSMutableData dataWithData:origData];
             NSMutableArray* cacheReqests = [NSMutableArray new];
             
             for (NSString* url in links) {
@@ -32,17 +33,24 @@
                 [cacheReqests addObject:newReq];
             }
             
-            for (NSURLRequest* r in cacheReqests) {                
+            __block int count = [cacheReqests count];
+            
+            for (NSURLRequest* r in cacheReqests) {
                 [MURLRequestQueue loadAsync:r block:[MURLRequestCallback callbackWithSuccess:^(NSURLRequest *req, NSHTTPURLResponse *response, NSData *data) {
-                    data = [CacheController updateResponse:origData withNewData:data request:req];
-                    
-                    NSMutableDictionary* info = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:request, data, adView, nil]
-                                                                                   forKeys:[NSArray arrayWithObjects:@"request", @"data", @"adView", nil]];
-                    [[NotificationCenter sharedInstance] postNotificationName:kFinishAdDownloadNotification object:info];
-                } error:^(NSURLRequest *req, NSHTTPURLResponse *response, NSError *error) {                                 
-                    NSMutableDictionary* info = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:request, origData, adView, nil]
-                                                                                   forKeys:[NSArray arrayWithObjects:@"request", @"data", @"adView", nil]];
-                    [[NotificationCenter sharedInstance] postNotificationName:kFinishAdDownloadNotification object:info];
+                    [resultData setData:[CacheController updateResponse:resultData withNewData:data request:req]];
+                    count--;
+                    if (count == 0) {                        
+                        NSMutableDictionary* info = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:request, resultData, adView, nil]
+                                                                                       forKeys:[NSArray arrayWithObjects:@"request", @"data", @"adView", nil]];
+                        [[NotificationCenter sharedInstance] postNotificationName:kFinishAdDownloadNotification object:info];
+                    }
+                } error:^(NSURLRequest *req, NSHTTPURLResponse *response, NSError *error) {
+                    count--;
+                    if (count == 0) {                        
+                        NSMutableDictionary* info = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:request, resultData, adView, nil]
+                                                                                       forKeys:[NSArray arrayWithObjects:@"request", @"data", @"adView", nil]];
+                        [[NotificationCenter sharedInstance] postNotificationName:kFinishAdDownloadNotification object:info];
+                    }
                 }]];
             }
             

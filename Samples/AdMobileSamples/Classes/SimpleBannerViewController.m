@@ -25,9 +25,10 @@
 	_adView = [[AdView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 414)];
     _adView.backgroundColor = [UIColor grayColor];
     _adView.site = 8061;
-    _adView.zone = 1122;
+    _adView.zone = 1151;
     _adView.adServerUrl = @"http://192.168.1.153/mocean/ad.php";
     _adView.updateTimeInterval = 15;
+    _adView.logMode = AdLogModeAll;
     [self.view addSubview:_adView];
 }
 
