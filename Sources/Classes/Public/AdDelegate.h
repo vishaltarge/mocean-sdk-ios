@@ -4,7 +4,7 @@
 //
 //  Created by Constantine Mureev on 2/24/11.
 //
-//  version: 2.6.3
+//  version: 2.7.0
 //
 
 /** The AdViewDelegate protocol defines methods that a delegate of a AdView object can optionally implement to receive notifications from ad. */
@@ -61,6 +61,16 @@
  @return Returns YES to allow SDK open browser otherwise returns NO.
  */
 - (BOOL)adShouldOpen:(id)sender withUrl:(NSURL*)url;
+
+/** Sent after an ad process ORMMA command.
+ 
+ @warning *Important:* Implement this method only if you want add additional logic for event. By default SDK alreadey emplements all methods and your code could conflict with SDK
+ 
+ @param sender The ad view that is about to open URL.
+ @param event The string with name of the event.
+ @param parameters The Dictionary with parameters from event.
+ */
+- (void)ormmaProcess:(id)sender event:(NSString*)event parameters:(NSDictionary*)parameters;
 
 @end
 

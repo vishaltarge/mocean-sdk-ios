@@ -31,6 +31,7 @@
 - (void)openInternalBrowser:(NSNotification*)notification;
 - (void)closeInternalBrowser:(NSNotification*)notification;
 - (void)failToReceiveAd:(NSNotification*)notification;
+- (void)ormmaEvent:(NSNotification*)notification;
 - (void)adShouldOpenBrowser:(NSNotification*)notification;
 - (void)adShouldOpenExternalApp:(NSNotification*)notification;
 - (void)visibleAd:(NSNotification*)notification;

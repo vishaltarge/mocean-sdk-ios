@@ -247,7 +247,7 @@
         NSString* event = [[[request URL] host] lowercaseString];
         NSDictionary* parameters = [OrmmaHelper parametersFromJSCall:[[request URL] query]];
         if ([event isEqualToString:@"ormmaenabled"]) {
-            NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+            //NSLog(@"Dev log: %@", [[request URL] absoluteString]);
         } else if ([event isEqualToString:@"show"]) {
             if (self.adView.hidden) {
                 self.currentState = self.nonHideState;
@@ -331,11 +331,11 @@
                 }
             }
         } else if ([event isEqualToString:@"addasset"]) {
-            NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+            //NSLog(@"Dev log: %@", [[request URL] absoluteString]);
         } else if ([event isEqualToString:@"removeasset"]) {
-            NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+            //NSLog(@"Dev log: %@", [[request URL] absoluteString]);
         } else if ([event isEqualToString:@"removeallassets"]) {
-            NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+            //NSLog(@"Dev log: %@", [[request URL] absoluteString]);
         } else if ([event isEqualToString:@"calendar"]) {
             NSString *dateString = [OrmmaHelper requiredStringFromDictionary:parameters 
                                                                       forKey:@"date"];
@@ -397,7 +397,7 @@
                 [alertView release];                 
             }
         } else if ([event isEqualToString:@"camera"]) {
-            NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+            //NSLog(@"Dev log: %@", [[request URL] absoluteString]);
         } else if ([event isEqualToString:@"email"]) {
             NSString *to = [OrmmaHelper requiredStringFromDictionary:parameters forKey:@"to"];
             NSString *subject = [OrmmaHelper requiredStringFromDictionary:parameters forKey:@"subject"];
@@ -448,11 +448,11 @@
                                                                forKey:@"url"];
             [self click:url];
         } else if ([event isEqualToString:@"openmap"]) {
-            NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+            //NSLog(@"Dev log: %@", [[request URL] absoluteString]);
         } else if ([event isEqualToString:@"playaudio"]) {
-            NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+            //NSLog(@"Dev log: %@", [[request URL] absoluteString]);
         } else if ([event isEqualToString:@"playvideo"]) {
-            NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+            //NSLog(@"Dev log: %@", [[request URL] absoluteString]);
         } else if ([event isEqualToString:@"request"]) {
             NSString *uri = [OrmmaHelper requiredStringFromDictionary:parameters forKey:@"uri"];
             NSString *display = [OrmmaHelper requiredStringFromDictionary:parameters forKey:@"display"];
@@ -466,11 +466,18 @@
                 // nothing to do...
             }]];
         } else if ([event isEqualToString:@"service"]) {
-            NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+            //NSLog(@"Dev log: %@", [[request URL] absoluteString]);
         }
         
         // notify JS that we've completed the last request
         [self evalJS:[OrmmaHelper nativeCallComplete:event]];
+        
+        // send callback
+        NSMutableDictionary* info = [NSMutableDictionary dictionary];
+        [info setObject:self.adView forKey:@"adView"];
+        [info setObject:event forKey:@"event"];
+        [info setObject:parameters forKey:@"dic"];
+        [[NotificationCenter sharedInstance] postNotificationName:kORMMAEventNotification object:info];
     }
 }
 

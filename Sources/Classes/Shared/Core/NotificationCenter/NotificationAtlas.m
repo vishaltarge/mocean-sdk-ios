@@ -79,3 +79,6 @@ NSString* kAdStopLoggingNotification = @"Stop Logg";
 
 // track url
 NSString* kTrackUrlNotification = @"External campaign track url";
+
+// other 
+NSString* kORMMAEventNotification = @"Process ORMMA event";

@@ -79,4 +79,7 @@ extern NSString* kAdStopLoggingNotification;
 // track url
 extern NSString* kTrackUrlNotification;
 
+// other 
+extern NSString* kORMMAEventNotification;
+
 

@@ -148,6 +148,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     [[NotificationCenter sharedInstance] addObserver:self selector:@selector(failToReceiveAd:) name:kEmptyServerResponseNotification object:nil];
     [[NotificationCenter sharedInstance] addObserver:self selector:@selector(failToReceiveAd:) name:kFailAdDownloadNotification object:nil];
     [[NotificationCenter sharedInstance] addObserver:self selector:@selector(failToReceiveAd:) name:kFailAdDisplayNotification object:nil];
+    [[NotificationCenter sharedInstance] addObserver:self selector:@selector(ormmaEvent:) name:kORMMAEventNotification object:nil];
     
     
 	[[NotificationCenter sharedInstance] addObserver:self selector:@selector(adDownloaded:) name:kStartAdDisplayNotification object:nil];
@@ -591,6 +592,21 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
                 NSError* error = [NSError errorWithDomain:@"There is no ads for this time. Try again later..." code:22 userInfo:nil];
                 [delegate didFailToReceiveAd:self withError:error];
             }
+        }
+    }
+}
+
+- (void)ormmaEvent:(NSNotification*)notification {
+    NSDictionary *info = [notification object];
+    AdView* adView = [info objectForKey:@"adView"];
+    NSString* event = [info objectForKey:@"event"];
+    NSDictionary* dic = [info objectForKey:@"dic"];
+	
+	if (adView == self) {
+        id <AdViewDelegate> delegate = [self adModel].delegate;
+        
+        if (delegate && [delegate respondsToSelector:@selector(ormmaProcess:event:parameters:)]) {
+            [delegate ormmaProcess:self event:event parameters:dic];
         }
     }
 }

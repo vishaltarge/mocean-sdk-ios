@@ -4,7 +4,7 @@
 //
 //  Created by Constantine Mureev on 2/22/11.
 //
-//  version: 2.6.3
+//  version: 2.7.0
 //
 
 
