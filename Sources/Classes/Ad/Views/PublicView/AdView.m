@@ -74,12 +74,13 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 }
 
 - (oneway void)release {
-	if ([self retainCount] == 2 && _observerSet) {
+	if ([self retainCount] == 3 && _observerSet) {
         _observerSet = NO;
         [[NotificationCenter sharedInstance] postNotificationName:kUnregisterAdNotification object:self];
         [self removeObserver:self forKeyPath:@"frame"];
         [[NotificationCenter sharedInstance] removeObserver:self];
         [[NSNotificationCenter defaultCenter] removeObserver:self];
+        [super release];
     }
     else if ([self retainCount] == 1 && ![NSThread isMainThread]) {
         [super performSelectorOnMainThread:@selector(release) withObject:nil waitUntilDone:NO];
@@ -165,8 +166,6 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 	
 	[[NotificationCenter sharedInstance] postNotificationName:kRegisterAdNotification object:self];
 	
-	// hell yeah!
-	[self release];
 	_observerSet = YES;
 }
 
