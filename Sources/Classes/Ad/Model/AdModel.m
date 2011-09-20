@@ -60,7 +60,7 @@ longitude, latitude;
         [info setObject:[NSError errorWithDomain:[NSString stringWithFormat:@"Invalid advertiserId property. value - %d", self.advertiserId] code:177 userInfo:nil] forKey:@"error"];        
         [[NotificationCenter sharedInstance] postNotificationName:kInvalidParamsNotification object:info];
     }
-    if (!(self.type >=1 && self.type <= 7)) {
+    if (!(self.type <= 7)) {
         NSMutableDictionary* info = [NSMutableDictionary dictionary];
         [info setObject:self.adView forKey:@"adView"];
         [info setObject:[NSError errorWithDomain:[NSString stringWithFormat:@"Invalid type property. value - %d", self.type] code:178 userInfo:nil] forKey:@"error"];        
