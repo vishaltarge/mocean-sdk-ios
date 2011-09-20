@@ -43,13 +43,6 @@ typedef enum {
 } AdPremium;
 
 typedef enum {
-	AdsTypeTextOnly = 1,
-	AdsTypeImagesOnly = 2,
-	AdsTypeImagesAndText = 3,
-	AdsTypeSMS = 6,
-} AdsType;
-
-typedef enum {
 	AdTypeTextOnly = 1,
 	AdTypeImagesOnly = 2,
 	AdTypeImagesAndText = 3,
@@ -215,20 +208,6 @@ typedef enum {
  */
 @property AdPremium                     premium;
 
-/** Ad type filter.
- 
-     typedef enum {
-         AdsTypeTextOnly = 1,
-         AdsTypeImagesOnly = 2,
-         AdsTypeImagesAndText = 3,
-         AdsTypeSMS = 6,
-     } AdsType;
- 
- Deprecated! Use type property instead.
- 
- The default value is AdsTypeImagesAndText.
- */
-@property AdsType                       adsType __attribute__((deprecated));
 
 /** Ad type filter.
  

@@ -14,7 +14,7 @@
 @implementation AdModel
 
 @synthesize delegate, readyForDisplay, testMode, logMode, animateMode, internalOpenMode,
-updateTimeInterval, defaultImage, site, adZone, premiumFilter, adsType, type, keywords, minSize, maxSize,
+updateTimeInterval, defaultImage, site, adZone, premiumFilter, type, keywords, minSize, maxSize,
 paramBG, paramLINK, additionalParameters, adServerUrl, advertiserId, groupCode,
 country, region, city, area, metro, zip, carrier, showCloseButtonTime,
 autocloseInterstitialTime, startDisplayDate, closeButton, isDisplayed, aligmentCenter, contentSize, frame,
@@ -36,12 +36,6 @@ longitude, latitude;
         return NO;
     }
     
-    if (!(self.adsType == 1 || self.adsType == 2 || self.adsType == 3 || self.adsType == 6)) {
-        NSMutableDictionary* info = [NSMutableDictionary dictionary];
-        [info setObject:self.adView forKey:@"adView"];
-        [info setObject:[NSError errorWithDomain:[NSString stringWithFormat:@"Invalid adsType property. value - %d", self.adsType] code:173 userInfo:nil] forKey:@"error"];        
-        [[NotificationCenter sharedInstance] postNotificationName:kInvalidParamsNotification object:info];
-    }
     if (!(self.premiumFilter == 0 || self.premiumFilter == 1 || self.premiumFilter == 2)) {
         NSMutableDictionary* info = [NSMutableDictionary dictionary];
         [info setObject:self.adView forKey:@"adView"];
@@ -105,10 +99,7 @@ longitude, latitude;
     if (self.premiumFilter == 0 || self.premiumFilter == 1 || self.premiumFilter == 2)
         [_banerUrl appendFormat:@"&premium=%d", self.premiumFilter];
     
-	if (self.adsType == 1 || self.adsType == 2 || self.adsType == 3 || self.adsType == 6)
-        [_banerUrl appendFormat:@"&adstype=%d", self.adsType];
-        
-    if (self.type >=1 && self.type <= 7)
+	if (self.type >=1 && self.type <= 7)
         [_banerUrl appendFormat:@"&type=%d", self.type];
     
 	if (self.testMode)
