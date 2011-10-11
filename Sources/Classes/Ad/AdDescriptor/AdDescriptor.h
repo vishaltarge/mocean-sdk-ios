@@ -18,9 +18,6 @@ typedef enum {
 	AdContentTypeMillennial,
 	AdContentTypeiVdopia,
 	AdContentTypeIAd,
-	AdContentTypeAdMob,
-	AdContentTypeRhythm,
-	AdContentTypeSAS
 } AdContentType;
 
 

@@ -9,7 +9,6 @@
 
 #import "NotificationCenter.h"
 #import "Utils.h"
-#import "MURLRequestQueue.h"
 
 
 @implementation AdRequests
@@ -108,9 +107,11 @@
         if (ind != NSNotFound) {
             NSArray* requests = [_requestListsForAds objectAtIndex:ind];
             
+            /*
             for (NSURLRequest* req in requests) {
                 [MURLRequestQueue cancelAsync:req];
             }
+             */
             
             [_requestListsForAds removeObjectAtIndex:ind];
             [_ads removeObjectAtIndex:ind];

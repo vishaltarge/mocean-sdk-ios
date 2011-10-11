@@ -44,10 +44,7 @@
 	[items addObject:@"iAd"];
 	[items addObject:@"Millennial"];
 	[items addObject:@"iVdopia"];
-	[items addObject:@"AdMob"];
 	[items addObject:@"Greystripe"];
-	[items addObject:@"Rhythm"];
-	[items addObject:@"SmartAdServer"];
     [_sections addObject:items];
     
     [super viewDidLoad];
@@ -147,13 +144,7 @@
         else if (indexPath.row == 2)
             viewController = [[IVdopiaViewController alloc] initWithFrame:newFrame];
         else if (indexPath.row == 3)
-            viewController = [[AdMobViewController alloc] initWithFrame:newFrame];
-        else if (indexPath.row == 4)
             viewController = [[GreystripeViewController alloc] initWithFrame:newFrame];
-        else if (indexPath.row == 5)
-            viewController = [[RhythmViewController alloc] initWithFrame:newFrame];
-        else if (indexPath.row == 6)
-            viewController = [[SASViewController alloc] initWithFrame:newFrame];
     }
     
     if (!viewController) {

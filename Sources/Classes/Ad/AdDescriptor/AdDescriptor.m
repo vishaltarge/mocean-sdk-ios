@@ -63,26 +63,6 @@
                     adDescriptor.appId = _xmlResponseParser.appId;
                     adDescriptor.campaignId = _xmlResponseParser.campaignId;
                     adDescriptor.trackUrl = _xmlResponseParser.trackUrl;
-                } else if (_xmlResponseParser.adContentType == AdContentTypeAdMob) {
-                    adDescriptor.adContentType = AdContentTypeAdMob;
-                    adDescriptor.appId = _xmlResponseParser.appId;
-                    adDescriptor.latitude = _xmlResponseParser.latitude;
-                    adDescriptor.longitude = _xmlResponseParser.longitude;
-                    adDescriptor.zip = _xmlResponseParser.zip;
-                    adDescriptor.campaignId = _xmlResponseParser.campaignId;
-                    adDescriptor.trackUrl = _xmlResponseParser.trackUrl;
-                } else if (_xmlResponseParser.adContentType == AdContentTypeRhythm) {
-                     adDescriptor.adContentType = AdContentTypeRhythm;
-                     adDescriptor.appId = _xmlResponseParser.appId;
-                     adDescriptor.campaignId = _xmlResponseParser.campaignId;
-                     adDescriptor.trackUrl = _xmlResponseParser.trackUrl;
-                } else if (_xmlResponseParser.adContentType == AdContentTypeSAS) {
-                    adDescriptor.adContentType = AdContentTypeSAS;
-                    adDescriptor.appId = _xmlResponseParser.appId;
-                    adDescriptor.adId = _xmlResponseParser.adId;
-                    adDescriptor.adType = _xmlResponseParser.adType;
-                    adDescriptor.campaignId = _xmlResponseParser.campaignId;
-                    adDescriptor.trackUrl = _xmlResponseParser.trackUrl;
                 } else {
                     adDescriptor.adContentType = AdContentTypeUndefined;
                 }

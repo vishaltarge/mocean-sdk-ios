@@ -14,7 +14,8 @@
 #import "LocationManager.h"
 #import "Accelerometer.h"
 #import "SharedModel.h"
-#import "MURLRequestQueue.h"
+#import "NetworkQueue.h"
+#import "ObjectStorage.h"
 
 #define ORMMA_SHAME     @"ormma"
 
@@ -458,13 +459,22 @@
             NSString *display = [OrmmaHelper requiredStringFromDictionary:parameters forKey:@"display"];
             NSURLRequest* req = [NSURLRequest requestWithURL:[NSURL URLWithString:uri]];
             
-            [MURLRequestQueue loadAsync:req block:[MURLRequestCallback callbackWithSuccess:^(NSURLRequest *send_req, NSHTTPURLResponse *response, NSData *data) {
-                if ([display isEqualToString:@"proxy"]) {
-                    [self evalJS:[OrmmaHelper setResponse:data uri:uri]];
+            [ObjectStorage objectForKey:uri block:^(id obj) {
+                NSData* cachedData = obj;
+                if (cachedData) {
+                    [self evalJS:[OrmmaHelper fireResponseEvent:cachedData uri:uri]];
+                } else {
+                    [NetworkQueue loadWithRequest:req completion:^(NSURLRequest *r, NSHTTPURLResponse *response, NSData *data, NSError *error) {
+                        if (!error) {
+                            if ([display isEqualToString:@"proxy"]) {
+                                [self evalJS:[OrmmaHelper fireResponseEvent:data uri:uri]];
+                            }
+                            
+                            [ObjectStorage storeObject:data key:uri];
+                        }
+                    }];
                 }
-            } error:^(NSURLRequest *send_req, NSHTTPURLResponse *response, NSError *error) {
-                // nothing to do...
-            }]];
+            }];
         } else if ([event isEqualToString:@"service"]) {
             //NSLog(@"Dev log: %@", [[request URL] absoluteString]);
         }

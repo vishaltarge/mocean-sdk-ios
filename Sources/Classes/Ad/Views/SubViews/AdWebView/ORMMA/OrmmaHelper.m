@@ -129,9 +129,8 @@
     return [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{location: { lat: %f, lon: %f, acc: %f }}", latitude, longitude, accuracy]];
 }
 
-+ (NSString*)setResponse:(NSData*)data uri:(NSString*)uri {
-    //NSLog(@"%@", [NSString stringWithFormat:@" %@, %@", [QSStrings encodeBase64WithData:data], uri]);
-    return @""; //[NSString stringWithFormat:@" %@, %@", [QSStrings encodeBase64WithData:data], uri];
++ (NSString*)fireResponseEvent:(NSData*)data uri:(NSString*)uri {
+    return [NSString stringWithFormat:@"window.ormmaview.fireResponseEvent(%@, %@);", [QSStrings encodeBase64WithData:data], uri];
 }
 
 

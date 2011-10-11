@@ -48,10 +48,7 @@
 		CF6313151345BF7F00399622 /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = CF6313141345BF7F00399622 /* Default-Portrait.png */; };
 		CF64F48513D992E500A4F1B5 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CF64F48313D992E500A4F1B5 /* libsqlite3.0.dylib */; };
 		CF64F48613D992E500A4F1B5 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CF64F48413D992E500A4F1B5 /* libz.dylib */; };
-		CF650B9D135725800060443B /* AdMobViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF650B9C135725800060443B /* AdMobViewController.m */; };
-		CF65FA76135D98B8006678B4 /* RhythmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF65FA75135D98B8006678B4 /* RhythmViewController.m */; };
 		CF65FA79135D98C6006678B4 /* GreystripeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF65FA78135D98C6006678B4 /* GreystripeViewController.m */; };
-		CF65FA7C135D98D4006678B4 /* SASViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF65FA7B135D98D4006678B4 /* SASViewController.m */; };
 		CF728BB6134A040400F61216 /* MillennialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF728BB4134A040400F61216 /* MillennialViewController.m */; };
 		CF840386130E67B200EC0AF8 /* OpenGLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF840382130E67B200EC0AF8 /* OpenGLViewController.m */; };
 		CF840387130E67B200EC0AF8 /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF840384130E67B200EC0AF8 /* EAGLView.m */; };
@@ -152,14 +149,8 @@
 		CF6313141345BF7F00399622 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
 		CF64F48313D992E500A4F1B5 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/lib/libsqlite3.0.dylib; sourceTree = DEVELOPER_DIR; };
 		CF64F48413D992E500A4F1B5 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/lib/libz.dylib; sourceTree = DEVELOPER_DIR; };
-		CF650B9B135725800060443B /* AdMobViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMobViewController.h; sourceTree = "<group>"; };
-		CF650B9C135725800060443B /* AdMobViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdMobViewController.m; sourceTree = "<group>"; };
-		CF65FA74135D98B8006678B4 /* RhythmViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RhythmViewController.h; sourceTree = "<group>"; };
-		CF65FA75135D98B8006678B4 /* RhythmViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RhythmViewController.m; sourceTree = "<group>"; };
 		CF65FA77135D98C6006678B4 /* GreystripeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GreystripeViewController.h; sourceTree = "<group>"; };
 		CF65FA78135D98C6006678B4 /* GreystripeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GreystripeViewController.m; sourceTree = "<group>"; };
-		CF65FA7A135D98D4006678B4 /* SASViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASViewController.h; sourceTree = "<group>"; };
-		CF65FA7B135D98D4006678B4 /* SASViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASViewController.m; sourceTree = "<group>"; };
 		CF728BB4134A040400F61216 /* MillennialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MillennialViewController.m; sourceTree = "<group>"; };
 		CF728BB5134A040400F61216 /* MillennialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MillennialViewController.h; sourceTree = "<group>"; };
 		CF840382130E67B200EC0AF8 /* OpenGLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenGLViewController.m; sourceTree = "<group>"; };
@@ -604,24 +595,6 @@
 			name = RotationAdView;
 			sourceTree = "<group>";
 		};
-		CF650B99135725610060443B /* AdMob */ = {
-			isa = PBXGroup;
-			children = (
-				CF650B9B135725800060443B /* AdMobViewController.h */,
-				CF650B9C135725800060443B /* AdMobViewController.m */,
-			);
-			name = AdMob;
-			sourceTree = "<group>";
-		};
-		CF65FA70135D987B006678B4 /* Rhythm */ = {
-			isa = PBXGroup;
-			children = (
-				CF65FA74135D98B8006678B4 /* RhythmViewController.h */,
-				CF65FA75135D98B8006678B4 /* RhythmViewController.m */,
-			);
-			name = Rhythm;
-			sourceTree = "<group>";
-		};
 		CF65FA72135D988E006678B4 /* Greystripe */ = {
 			isa = PBXGroup;
 			children = (
@@ -629,15 +602,6 @@
 				CF65FA78135D98C6006678B4 /* GreystripeViewController.m */,
 			);
 			name = Greystripe;
-			sourceTree = "<group>";
-		};
-		CF65FA73135D9898006678B4 /* SAS */ = {
-			isa = PBXGroup;
-			children = (
-				CF65FA7A135D98D4006678B4 /* SASViewController.h */,
-				CF65FA7B135D98D4006678B4 /* SASViewController.m */,
-			);
-			name = SAS;
 			sourceTree = "<group>";
 		};
 		CF728BB2134A03EE00F61216 /* Millennial */ = {
@@ -681,10 +645,7 @@
 		CFBB3D881344F02F00477890 /* 3rd Party */ = {
 			isa = PBXGroup;
 			children = (
-				CF65FA73135D9898006678B4 /* SAS */,
 				CF65FA72135D988E006678B4 /* Greystripe */,
-				CF65FA70135D987B006678B4 /* Rhythm */,
-				CF650B99135725610060443B /* AdMob */,
 				CFD18F28134C8035006B2052 /* iVdopia */,
 				CF728BB2134A03EE00F61216 /* Millennial */,
 				CFBB3D8A1344F05100477890 /* iAd */,
@@ -1465,10 +1426,7 @@
 				CFBB3D901344F0E800477890 /* IAdViewController.m in Sources */,
 				CF728BB6134A040400F61216 /* MillennialViewController.m in Sources */,
 				CFD18F2C134C804E006B2052 /* IVdopiaViewController.m in Sources */,
-				CF650B9D135725800060443B /* AdMobViewController.m in Sources */,
-				CF65FA76135D98B8006678B4 /* RhythmViewController.m in Sources */,
 				CF65FA79135D98C6006678B4 /* GreystripeViewController.m in Sources */,
-				CF65FA7C135D98D4006678B4 /* SASViewController.m in Sources */,
 				ACC770281382B7F9005074D8 /* ORMMAViewController.m in Sources */,
 				CFBBD63113BDC73D007ADECA /* TestingViewController.m in Sources */,
 				FCF61E511414FBA1007B0BCA /* SimpleBannerRetinaViewController.m in Sources */,

@@ -4,7 +4,7 @@
 //
 //  Created by Constantine Mureev on 2/22/11.
 //
-//  version: 2.7.0
+//  version: 2.8.0
 //
 
 
@@ -13,10 +13,7 @@
  @warning *Important:*  If you disable 3rd party SDK you can also delete .a files of this SDK from project to minimize library size.
  */
 
-#define INCLUDE_SAS 
-#undef INCLUDE_RHYTHM
 #define INCLUDE_GREYSTRIPE
-#define INCLUDE_ADMOB
 #define INCLUDE_IVDOPIA
 #define INCLUDE_MILLENNIAL
 #define INCLUDE_IAD

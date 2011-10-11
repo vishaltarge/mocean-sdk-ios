@@ -27,10 +27,7 @@
 #import "IAdViewController.h"
 #import "MillennialViewController.h"
 #import "IVdopiaViewController.h"
-#import "AdMobViewController.h"
-#import "RhythmViewController.h"
 #import "GreystripeViewController.h"
-#import "SASViewController.h"
 
 @class DetailViewController;
 

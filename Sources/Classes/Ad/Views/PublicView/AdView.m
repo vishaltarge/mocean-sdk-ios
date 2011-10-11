@@ -18,10 +18,7 @@
 #import "VideoView.h"
 #import "IAdAdaptor.h"
 #import "IVdopiaAdaptor.h"
-#import "AdMobAdaptor.h"
 #import "GreystripeAdaptor.h"
-#import "SasAdaptor.h"
-#import "RhythmAdaptor.h"
 #import "MillennialAdaptor.h"
 
 #import "LocationManager.h"
@@ -233,20 +230,6 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
             model.descriptor = descriptor;
         }
 #endif
-#ifdef INCLUDE_ADMOB
-        else if (descriptor.adContentType == AdContentTypeAdMob) {
-            AdMobAdaptor* adMobAdaptor = [[AdMobAdaptor alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-            adMobAdaptor.hidden = YES;
-            [self addSubview:adMobAdaptor];
-            [adMobAdaptor showWithPublisherID:descriptor.appId
-                                     latitude:descriptor.latitude
-                                    longitude:descriptor.longitude
-                                          zip:descriptor.zip];
-            [adMobAdaptor release];
-            
-            model.descriptor = descriptor;
-        }
-#endif
 #ifdef INCLUDE_GREYSTRIPE
         else if (descriptor.adContentType == AdContentTypeGreystripe) {
             GreystripeAdaptor* greystripeAdaptor = [[GreystripeAdaptor alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
@@ -254,28 +237,6 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
             [self addSubview:greystripeAdaptor];
             [greystripeAdaptor showWithAppID:descriptor.appId];
             [greystripeAdaptor release];
-            
-            model.descriptor = descriptor;
-        }
-#endif
-#ifdef INCLUDE_RHYTHM
-        else if (descriptor.adContentType == AdContentTypeRhythm) {
-            RhythmAdaptor* rhythmAdaptor = [[RhythmAdaptor alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-            rhythmAdaptor.hidden = YES;
-            [self addSubview:rhythmAdaptor];
-            [rhythmAdaptor showWithAppID:descriptor.appId];
-            [rhythmAdaptor release];
-            
-            model.descriptor = descriptor;
-        }
-#endif
-#ifdef INCLUDE_SAS
-        else if (descriptor.adContentType == AdContentTypeSAS) {
-			SasAdaptor* sasAdaptor = [[SasAdaptor alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-            sasAdaptor.hidden = YES;
-            [self addSubview:sasAdaptor];
-			[sasAdaptor showWithSiteId:descriptor.appId pageId:descriptor.adId formatId:descriptor.adType];
-            [sasAdaptor release];
             
             model.descriptor = descriptor;
         }
@@ -297,14 +258,6 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
                 if ([model.currentAdView isKindOfClass:[MillennialAdaptor class]]) {
                     MillennialAdaptor* millennialAdaptor = (MillennialAdaptor*)model.currentAdView;
                     [millennialAdaptor update];
-                }
-#endif
-            }
-            else if (descriptor.adContentType == AdContentTypeAdMob) {
-#ifdef INCLUDE_ADMOB
-                if ([model.currentAdView isKindOfClass:[AdMobAdaptor class]]) {
-                    AdMobAdaptor* adMobAdaptor = (AdMobAdaptor*)model.currentAdView;
-                    [adMobAdaptor update];
                 }
 #endif
             }

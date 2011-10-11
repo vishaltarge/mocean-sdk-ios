@@ -263,7 +263,6 @@ static AdController* sharedInstance = nil;
                 [pool release];
                 return;
             } else if (adDescriptor.adContentType == AdContentTypeGreystripe ||
-                       adDescriptor.adContentType == AdContentTypeAdMob ||
                        adDescriptor.adContentType == AdContentTypeMillennial) {
                 NSMutableDictionary* senfInfo = [NSMutableDictionary dictionary];
                 

@@ -90,15 +90,6 @@
 		else if ([self.propertyContent caseInsensitiveCompare:@"iVdopia"] == NSOrderedSame) {
 			_adContentType = AdContentTypeiVdopia;
 		}
-		else if ([self.propertyContent caseInsensitiveCompare:@"admob"] == NSOrderedSame) {
-			_adContentType = AdContentTypeAdMob;
-		}
-		else if ([self.propertyContent caseInsensitiveCompare:@"Rhythm"] == NSOrderedSame) {
-			_adContentType = AdContentTypeRhythm;
-		}
-		else if ([self.propertyContent caseInsensitiveCompare:@"SmartAdServer"] == NSOrderedSame) {
-			_adContentType = AdContentTypeSAS;
-		}
 	}
 	else if ([elementName caseInsensitiveCompare:@"track_url"] == NSOrderedSame) {
 		self.trackUrl = self.propertyContent;
@@ -106,8 +97,7 @@
 	else if ([elementName caseInsensitiveCompare:@"param"] == NSOrderedSame) {
 		if ([self.propertyName caseInsensitiveCompare:@"id"] == NSOrderedSame) {
 			if (_adContentType == AdContentTypeGreystripe ||
-                _adContentType == AdContentTypeMillennial ||
-                _adContentType == AdContentTypeRhythm) {
+                _adContentType == AdContentTypeMillennial) {
 				self.appId = self.propertyContent;
 			}
 			else {
@@ -119,39 +109,13 @@
 				self.appId = self.propertyContent;
 			}
 		}
-		else if ([self.propertyName caseInsensitiveCompare:@"publisherid"] == NSOrderedSame) {
-			if (_adContentType == AdContentTypeAdMob) {
-				self.appId = self.propertyContent;
-			}
-		}
-		else if ([self.propertyName caseInsensitiveCompare:@"siteid"] == NSOrderedSame) {
-			if (_adContentType == AdContentTypeSAS) {
-				self.appId = self.propertyContent;
-			}
-		}
-		else if ([self.propertyName caseInsensitiveCompare:@"pageid"] == NSOrderedSame) {
-			if (_adContentType == AdContentTypeSAS) {
-				self.adId = self.propertyContent;
-			}
-		}
-		else if ([self.propertyName caseInsensitiveCompare:@"formatid"] == NSOrderedSame) {
-			if (_adContentType == AdContentTypeSAS) {
-				self.adType = self.propertyContent;
-			}
-		}
 		else if ([self.propertyName caseInsensitiveCompare:@"lat"] == NSOrderedSame) {
 			if (_adContentType == AdContentTypeMillennial) {
-				self.latitude = self.propertyContent;
-			}
-            else if (_adContentType == AdContentTypeAdMob) {
 				self.latitude = self.propertyContent;
 			}
 		}
 		else if ([self.propertyName caseInsensitiveCompare:@"long"] == NSOrderedSame) {
 			if (_adContentType == AdContentTypeMillennial) {
-				self.longitude = self.propertyContent;
-			}
-            else if (_adContentType == AdContentTypeAdMob) {
 				self.longitude = self.propertyContent;
 			}
 		}
@@ -163,11 +127,7 @@
 		else if ([self.propertyName caseInsensitiveCompare:@"zip"] == NSOrderedSame) {
 			if (_adContentType == AdContentTypeMillennial) {
 				self.zip = self.propertyContent;
-			}
-            else if (_adContentType == AdContentTypeAdMob) {
-				self.zip = self.propertyContent;
-            }
-		}
+			}		}
 	}
 	[self.propertyContent release];
     self.propertyContent = nil;

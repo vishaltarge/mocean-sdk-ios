@@ -6,7 +6,7 @@
 //
 
 #import "DownloadController.h"
-#import "MURLRequestQueue.h"
+#import "NetworkQueue.h"
 
 @interface DownloadController (PrivateMethods)
 
@@ -99,7 +99,7 @@ static DownloadController* sharedInstance = nil;
 
 
 - (void)cancelAll{
-    [MURLRequestQueue cancelAll];
+    [NetworkQueue cancelAll];
 }
 
 - (void)downladAd:(AdView*)adView {
@@ -116,8 +116,28 @@ static DownloadController* sharedInstance = nil;
             if (url) {
                 NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
                 [_adRequests addRequest:request forAd:adView];
-                [MURLRequestQueue loadAsync:request block:[MURLRequestCallback callbackWithSuccess:^(NSURLRequest *req, NSHTTPURLResponse *response, NSData *data) {
-                    @synchronized(_adRequests) {
+                [NetworkQueue loadWithRequest:request completion:^(NSURLRequest *req, NSHTTPURLResponse *response, NSData *data, NSError *error) {
+                    if (error) {
+                        NSMutableDictionary* info = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:request, adView, nil]
+                                                                                       forKeys:[NSArray arrayWithObjects:@"request", @"adView", nil]];
+                        [[NotificationCenter sharedInstance] postNotificationName:kGetAdServerResponseNotification object:info];
+                        
+                        @synchronized(_adRequests) {
+                            if ([_adRequests containsRequest:request]) {
+                                NSMutableDictionary* sendInfo = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:error, adView, nil]
+                                                                                                   forKeys:[NSArray arrayWithObjects:@"error", @"adView", nil]];
+                                
+                                // remove from ads request array
+                                [_adRequests removeRequest:request];
+                                
+                                if ([NSThread isMainThread]) {
+                                    [[NotificationCenter sharedInstance] postNotificationName:kFailAdDownloadNotification object:sendInfo];
+                                } else {
+                                    [NotificationCenterAdditions NC:[NotificationCenter sharedInstance] postNotificationOnMainThreadWithName:kFailAdDownloadNotification object:sendInfo];
+                                }
+                            }
+                        }
+                    } else {
                         if ([_adRequests containsRequest:request]) {
                             NSString* responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                             NSArray* links = [Utils linksFromText:responseString];
@@ -138,27 +158,7 @@ static DownloadController* sharedInstance = nil;
                             [_adRequests removeRequest:request];
                         }
                     }
-                } error:^(NSURLRequest *req, NSHTTPURLResponse *response, NSError *error) {
-                    @synchronized(_adRequests) {
-                        if ([_adRequests containsRequest:request]) {
-                            NSMutableDictionary* sendInfo = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:error, [_adRequests adForRequest:request], nil]
-                                                                                               forKeys:[NSArray arrayWithObjects:@"error", @"adView", nil]];
-                            
-                            // remove from ads request array
-                            [_adRequests removeRequest:request];
-                            
-                            if ([NSThread isMainThread]) {
-                                [[NotificationCenter sharedInstance] postNotificationName:kFailAdDownloadNotification object:sendInfo];
-                            } else {
-                                [NotificationCenterAdditions NC:[NotificationCenter sharedInstance] postNotificationOnMainThreadWithName:kFailAdDownloadNotification object:sendInfo];
-                            }
-                        }
-                    }
-                } start:^(NSURLRequest *req) {
-                    NSMutableDictionary* info = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:request, adView, nil]
-                                                                                   forKeys:[NSArray arrayWithObjects:@"request", @"adView", nil]];
-                    [[NotificationCenter sharedInstance] postNotificationName:kGetAdServerResponseNotification object:info];
-                }]];
+                }];
             }
 		}
 	}

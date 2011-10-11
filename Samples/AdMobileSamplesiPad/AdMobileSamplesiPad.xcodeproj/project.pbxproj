@@ -29,10 +29,7 @@
 		FCF1EC3213F24D2200364390 /* IAdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC3113F24D2200364390 /* IAdViewController.m */; };
 		FCF1EC3513F24D2E00364390 /* MillennialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC3413F24D2E00364390 /* MillennialViewController.m */; };
 		FCF1EC3813F24D3A00364390 /* IVdopiaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC3713F24D3A00364390 /* IVdopiaViewController.m */; };
-		FCF1EC3B13F24D4700364390 /* AdMobViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC3A13F24D4700364390 /* AdMobViewController.m */; };
-		FCF1EC3E13F24D5500364390 /* RhythmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC3D13F24D5500364390 /* RhythmViewController.m */; };
 		FCF1EC4113F24D6000364390 /* GreystripeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC4013F24D6000364390 /* GreystripeViewController.m */; };
-		FCF1EC4413F24D6E00364390 /* SASViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC4313F24D6E00364390 /* SASViewController.m */; };
 		FCF1EC4713F24D7900364390 /* ORMMAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC4613F24D7900364390 /* ORMMAViewController.m */; };
 		FCF1EC6113F2561600364390 /* libAdMobileSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1EC5313F255D800364390 /* libAdMobileSDK.a */; };
 		FCF1EC7113F2566600364390 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1EC6413F2566600364390 /* AudioToolbox.framework */; };
@@ -124,14 +121,8 @@
 		FCF1EC3413F24D2E00364390 /* MillennialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MillennialViewController.m; sourceTree = "<group>"; };
 		FCF1EC3613F24D3A00364390 /* IVdopiaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVdopiaViewController.h; sourceTree = "<group>"; };
 		FCF1EC3713F24D3A00364390 /* IVdopiaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVdopiaViewController.m; sourceTree = "<group>"; };
-		FCF1EC3913F24D4700364390 /* AdMobViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMobViewController.h; sourceTree = "<group>"; };
-		FCF1EC3A13F24D4700364390 /* AdMobViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdMobViewController.m; sourceTree = "<group>"; };
-		FCF1EC3C13F24D5500364390 /* RhythmViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RhythmViewController.h; sourceTree = "<group>"; };
-		FCF1EC3D13F24D5500364390 /* RhythmViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RhythmViewController.m; sourceTree = "<group>"; };
 		FCF1EC3F13F24D6000364390 /* GreystripeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GreystripeViewController.h; sourceTree = "<group>"; };
 		FCF1EC4013F24D6000364390 /* GreystripeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GreystripeViewController.m; sourceTree = "<group>"; };
-		FCF1EC4213F24D6E00364390 /* SASViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASViewController.h; sourceTree = "<group>"; };
-		FCF1EC4313F24D6E00364390 /* SASViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASViewController.m; sourceTree = "<group>"; };
 		FCF1EC4513F24D7900364390 /* ORMMAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORMMAViewController.h; sourceTree = "<group>"; };
 		FCF1EC4613F24D7900364390 /* ORMMAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORMMAViewController.m; sourceTree = "<group>"; };
 		FCF1EC4913F255D700364390 /* AdMobileSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AdMobileSDK.xcodeproj; path = ../../../Sources/AdMobileSDK.xcodeproj; sourceTree = "<group>"; };
@@ -192,7 +183,6 @@
 		FCF1EBCB13F24A5200364390 = {
 			isa = PBXGroup;
 			children = (
-				FCA6CCBA1410F983000D9956 /* CoreTelephony.framework */,
 				FCF1EBE013F24A5200364390 /* AdMobileSamplesiPad */,
 				FCF1EBD913F24A5200364390 /* Frameworks */,
 				FCF1EBD713F24A5200364390 /* Products */,
@@ -210,6 +200,7 @@
 		FCF1EBD913F24A5200364390 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FCA6CCBA1410F983000D9956 /* CoreTelephony.framework */,
 				FCF1EC9113F261AF00364390 /* OpenGLES.framework */,
 				FCF1EC6413F2566600364390 /* AudioToolbox.framework */,
 				FCF1EC6513F2566600364390 /* AVFoundation.framework */,
@@ -328,14 +319,8 @@
 				FCF1EC3413F24D2E00364390 /* MillennialViewController.m */,
 				FCF1EC3613F24D3A00364390 /* IVdopiaViewController.h */,
 				FCF1EC3713F24D3A00364390 /* IVdopiaViewController.m */,
-				FCF1EC3913F24D4700364390 /* AdMobViewController.h */,
-				FCF1EC3A13F24D4700364390 /* AdMobViewController.m */,
-				FCF1EC3C13F24D5500364390 /* RhythmViewController.h */,
-				FCF1EC3D13F24D5500364390 /* RhythmViewController.m */,
 				FCF1EC3F13F24D6000364390 /* GreystripeViewController.h */,
 				FCF1EC4013F24D6000364390 /* GreystripeViewController.m */,
-				FCF1EC4213F24D6E00364390 /* SASViewController.h */,
-				FCF1EC4313F24D6E00364390 /* SASViewController.m */,
 			);
 			name = "3rd Party";
 			sourceTree = "<group>";
@@ -474,10 +459,7 @@
 				FCF1EC3213F24D2200364390 /* IAdViewController.m in Sources */,
 				FCF1EC3513F24D2E00364390 /* MillennialViewController.m in Sources */,
 				FCF1EC3813F24D3A00364390 /* IVdopiaViewController.m in Sources */,
-				FCF1EC3B13F24D4700364390 /* AdMobViewController.m in Sources */,
-				FCF1EC3E13F24D5500364390 /* RhythmViewController.m in Sources */,
 				FCF1EC4113F24D6000364390 /* GreystripeViewController.m in Sources */,
-				FCF1EC4413F24D6E00364390 /* SASViewController.m in Sources */,
 				FCF1EC4713F24D7900364390 /* ORMMAViewController.m in Sources */,
 				FCF1EC8B13F257AD00364390 /* Shader.fsh in Sources */,
 				FCF1EC8C13F257AD00364390 /* Shader.vsh in Sources */,

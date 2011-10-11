@@ -7,7 +7,7 @@
 
 #import "InstallManager.h"
 #import "Constants.h"
-#import "MURLRequestQueue.h"
+#import "NetworkQueue.h"
 
 @interface InstallManager ()
 
@@ -156,39 +156,39 @@ static InstallManager* sharedInstance = nil;
     [url appendFormat:@"?advertiser_id=%d", self.advertiserId];
     [url appendFormat:@"&group_code=%@", [self.groupCode stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     [url appendFormat:@"&udid=%@", [self.udid stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    
-    MURLRequestCallback* callback = [MURLRequestCallback callbackWithSuccess:^(NSURLRequest *request, NSHTTPURLResponse *response, NSData *data) {
-        if (data && [data length] > 0) {
-            NSString *strResponce = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            NSRange range = [strResponce rangeOfString:@"<result>OK</result>"];
-            if ( range.length > 0) {
-                [self save];
-            }
-            else
-            {
-                range = [strResponce rangeOfString:@"<errorcode>"];
-                if ( range.length > 0 )	{
-                    NSString *str = [strResponce substringFromIndex:range.location + range.length];
-                    range = [str rangeOfString:@"<"];
-                    str = [str substringToIndex:range.location];
-                    [[NotificationCenter sharedInstance] postNotificationName:kFailInstallNotification object:str];
+        
+    [NetworkQueue loadWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]] completion:^(NSURLRequest *request, NSHTTPURLResponse *response, NSData *data, NSError *error) {
+        if (error) {
+            [self performSelector:@selector(sendRequest) withObject:nil afterDelay:15];
+        } else {
+            if (data && [data length] > 0) {
+                NSString *strResponce = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                NSRange range = [strResponce rangeOfString:@"<result>OK</result>"];
+                if ( range.length > 0) {
+                    [self save];
                 }
-                else {
-                    //<errorcode>1</errorcode>
-                    [[NotificationCenter sharedInstance] postNotificationName:kFailInstallNotification object:nil];			
+                else
+                {
+                    range = [strResponce rangeOfString:@"<errorcode>"];
+                    if ( range.length > 0 )	{
+                        NSString *str = [strResponce substringFromIndex:range.location + range.length];
+                        range = [str rangeOfString:@"<"];
+                        str = [str substringToIndex:range.location];
+                        [[NotificationCenter sharedInstance] postNotificationName:kFailInstallNotification object:str];
+                    }
+                    else {
+                        //<errorcode>1</errorcode>
+                        [[NotificationCenter sharedInstance] postNotificationName:kFailInstallNotification object:nil];			
+                    }
                 }
+                [strResponce release];
+                
             }
-            [strResponce release];
-            
+            else {
+                [[NotificationCenter sharedInstance] postNotificationName:kFailInstallNotification object:nil];		
+            }
         }
-        else {
-            [[NotificationCenter sharedInstance] postNotificationName:kFailInstallNotification object:nil];		
-        }
-    } error:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-        [self performSelector:@selector(sendRequest) withObject:nil afterDelay:15];
     }];
-    
-    [MURLRequestQueue loadAsync:[NSURLRequest requestWithURL:[NSURL URLWithString:url]] block:callback];
 }
 
 - (void)save {

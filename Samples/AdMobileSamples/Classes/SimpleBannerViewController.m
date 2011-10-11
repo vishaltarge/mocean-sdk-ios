@@ -24,7 +24,8 @@
 
 	_adView = [[AdView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
     _adView.site = 8061;
-    _adView.zone = 20249;
+    _adView.logMode = AdLogModeAll;
+    _adView.zone = 22034;
     [self.view addSubview:_adView];
 }
 

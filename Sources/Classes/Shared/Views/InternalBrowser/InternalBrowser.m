@@ -294,6 +294,7 @@ static InternalBrowser* sharedInstance = nil;
                 if (vc) {
                     self.viewConreoller = vc;
                 }
+                [self updateFrames:[UIApplication sharedApplication].statusBarOrientation duration:0.0];
                 
                 [self.viewConreoller presentModalViewController:self animated:YES];
             }
