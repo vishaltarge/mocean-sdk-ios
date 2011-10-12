@@ -548,7 +548,7 @@
         NSValue* frameValue = [info objectForKey:@"newFrame"];
         CGRect newFrame = [frameValue CGRectValue];
         
-        if (self.currentState != ORMMAStateResized) {
+        if (self.currentState != ORMMAStateResized && self.currentState != ORMMAStateExpanded) {
             self.defaultFrame = newFrame;
         }
         
