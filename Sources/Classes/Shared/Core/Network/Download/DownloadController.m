@@ -116,12 +116,13 @@ static DownloadController* sharedInstance = nil;
             if (url) {
                 NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
                 [_adRequests addRequest:request forAd:adView];
+                                
+                NSMutableDictionary* info = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:request, adView, nil]
+                                                                               forKeys:[NSArray arrayWithObjects:@"request", @"adView", nil]];
+                [[NotificationCenter sharedInstance] postNotificationName:kGetAdServerResponseNotification object:info];
+                
                 [NetworkQueue loadWithRequest:request completion:^(NSURLRequest *req, NSHTTPURLResponse *response, NSData *data, NSError *error) {
-                    if (error) {
-                        NSMutableDictionary* info = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:request, adView, nil]
-                                                                                       forKeys:[NSArray arrayWithObjects:@"request", @"adView", nil]];
-                        [[NotificationCenter sharedInstance] postNotificationName:kGetAdServerResponseNotification object:info];
-                        
+                    if (error) {                        
                         @synchronized(_adRequests) {
                             if ([_adRequests containsRequest:request]) {
                                 NSMutableDictionary* sendInfo = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:error, adView, nil]

@@ -8,6 +8,7 @@
 #import "AdInterstitialView.h"
 #import "AdView_Private.h"
 #import "AdDescriptor.h"
+#import "Reachability.h"
 
 #import "NotificationCenter.h"
 
@@ -64,10 +65,14 @@
 }
 
 - (void)registerObserver {
-    [super registerObserver];
-    [[NotificationCenter sharedInstance] addObserver:self selector:@selector(buttonsAction:) name:kInvalidParamsServerResponseNotification object:nil];
-    [[NotificationCenter sharedInstance] addObserver:self selector:@selector(buttonsAction:) name:kFailAdDisplayNotification object:nil];
-    [[NotificationCenter sharedInstance] addObserver:self selector:@selector(closeInterstitial:) name:kInterstitialAdCloseNotification object:nil];
+    // start interstitial ad only if internet available    
+    Reachability* reachability = [Reachability reachabilityForInternetConnection];
+    if ([reachability currentReachabilityStatus] != NotReachable) {        
+        [super registerObserver];
+        [[NotificationCenter sharedInstance] addObserver:self selector:@selector(buttonsAction:) name:kInvalidParamsServerResponseNotification object:nil];
+        [[NotificationCenter sharedInstance] addObserver:self selector:@selector(buttonsAction:) name:kFailAdDisplayNotification object:nil];
+        [[NotificationCenter sharedInstance] addObserver:self selector:@selector(closeInterstitial:) name:kInterstitialAdCloseNotification object:nil];
+    }
 }
 
 - (void)dislpayAd:(NSNotification*)notification {
