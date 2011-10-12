@@ -459,6 +459,31 @@
             NSString *display = [OrmmaHelper requiredStringFromDictionary:parameters forKey:@"display"];
             NSURLRequest* req = [NSURLRequest requestWithURL:[NSURL URLWithString:uri]];
             
+            if ([display isEqualToString:@"proxy"]) {
+                Reachability* reachability = [Reachability reachabilityForInternetConnection];
+                if ([reachability currentReachabilityStatus] != NotReachable) {
+                    [ObjectStorage objectForKey:uri block:^(id obj) {
+                        NSData* cachedData = obj;
+                        if (cachedData) {
+                            [self evalJS:[OrmmaHelper fireResponseEvent:cachedData uri:uri]];
+                        }
+                    }];
+                } else {
+                    [NetworkQueue loadWithRequest:req completion:^(NSURLRequest *r, NSHTTPURLResponse *response, NSData *data, NSError *error) {
+                        if (!error) {
+                            [self evalJS:[OrmmaHelper fireResponseEvent:data uri:uri]];
+                            [ObjectStorage storeObject:data key:uri];
+                        }
+                    }];
+                }
+            } else {
+                [NetworkQueue loadWithRequest:req completion:^(NSURLRequest *r, NSHTTPURLResponse *response, NSData *data, NSError *error) {
+                    if (!error) {
+                        [ObjectStorage storeObject:data key:uri];
+                    }
+                }];
+            }
+            
             [ObjectStorage objectForKey:uri block:^(id obj) {
                 NSData* cachedData = obj;
                 if (cachedData) {

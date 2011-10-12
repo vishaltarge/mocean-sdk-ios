@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ADE6826314455250007B144C /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADE682621445524F007B144C /* EventKit.framework */; };
 		FCF1EBDB13F24A5200364390 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1EBDA13F24A5200364390 /* UIKit.framework */; };
 		FCF1EBDD13F24A5200364390 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1EBDC13F24A5200364390 /* Foundation.framework */; };
 		FCF1EBDF13F24A5200364390 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1EBDE13F24A5200364390 /* CoreGraphics.framework */; };
@@ -80,6 +81,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		ADE682621445524F007B144C /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		FCA6CCBA1410F983000D9956 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		FCF1EBD613F24A5200364390 /* AdMobileSamplesiPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdMobileSamplesiPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCF1EBDA13F24A5200364390 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -157,6 +159,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADE6826314455250007B144C /* EventKit.framework in Frameworks */,
 				FCF1EC9213F261AF00364390 /* OpenGLES.framework in Frameworks */,
 				FCF1EC6113F2561600364390 /* libAdMobileSDK.a in Frameworks */,
 				FCF1EC7113F2566600364390 /* AudioToolbox.framework in Frameworks */,
@@ -200,6 +203,7 @@
 		FCF1EBD913F24A5200364390 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ADE682621445524F007B144C /* EventKit.framework */,
 				FCA6CCBA1410F983000D9956 /* CoreTelephony.framework */,
 				FCF1EC9113F261AF00364390 /* OpenGLES.framework */,
 				FCF1EC6413F2566600364390 /* AudioToolbox.framework */,

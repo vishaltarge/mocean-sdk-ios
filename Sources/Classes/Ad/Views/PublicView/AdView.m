@@ -418,8 +418,8 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     return [super pointInside:point withEvent:event];
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if([keyPath isEqualToString:@"view.frame"]) {
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {    
+    if([keyPath isEqualToString:@"view.frame"] || [keyPath isEqualToString:@"frame"]) {
         CGRect oldFrame = CGRectNull;
         CGRect newFrame = CGRectNull;
         if([change objectForKey:@"old"] != [NSNull null]) {
