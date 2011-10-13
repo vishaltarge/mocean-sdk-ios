@@ -65,14 +65,12 @@
 }
 
 - (void)registerObserver {
-    // start interstitial ad only if internet available    
-    Reachability* reachability = [Reachability reachabilityForInternetConnection];
-    if ([reachability currentReachabilityStatus] != NotReachable) {        
-        [super registerObserver];
-        [[NotificationCenter sharedInstance] addObserver:self selector:@selector(buttonsAction:) name:kInvalidParamsServerResponseNotification object:nil];
-        [[NotificationCenter sharedInstance] addObserver:self selector:@selector(buttonsAction:) name:kFailAdDisplayNotification object:nil];
-        [[NotificationCenter sharedInstance] addObserver:self selector:@selector(closeInterstitial:) name:kInterstitialAdCloseNotification object:nil];
-    }
+    // start interstitial ad only if internet available      
+    [super registerObserver];
+    [[NotificationCenter sharedInstance] addObserver:self selector:@selector(buttonsAction:) name:kInvalidParamsServerResponseNotification object:nil];
+    [[NotificationCenter sharedInstance] addObserver:self selector:@selector(buttonsAction:) name:kFailAdDisplayNotification object:nil];
+    [[NotificationCenter sharedInstance] addObserver:self selector:@selector(buttonsAction:) name:kFailAdDownloadNotification object:nil];
+    [[NotificationCenter sharedInstance] addObserver:self selector:@selector(closeInterstitial:) name:kInterstitialAdCloseNotification object:nil];
 }
 
 - (void)dislpayAd:(NSNotification*)notification {
@@ -135,8 +133,23 @@
 
 - (void)buttonsAction:(id)sender {
     if (self.superview && self.window) {
-        [[NotificationCenter sharedInstance] postNotificationName:kInterstitialAdCloseNotification object:self];
-        [self removeFromSuperview];
+        if ([sender isKindOfClass:[NSNotification class]]) {
+            NSNotification* notification = sender;
+            if ([notification object] == self) {
+                [[NotificationCenter sharedInstance] postNotificationName:kInterstitialAdCloseNotification object:self];
+                [self removeFromSuperview];
+            } else if ([[notification object] isKindOfClass:[NSDictionary class]]) {
+                NSDictionary* info = [notification object];
+                AdView* adView = [info objectForKey:@"adView"];
+                if (adView == self) {
+                    [[NotificationCenter sharedInstance] postNotificationName:kInterstitialAdCloseNotification object:self];
+                    [self removeFromSuperview];
+                }
+            }
+        } else {
+            [[NotificationCenter sharedInstance] postNotificationName:kInterstitialAdCloseNotification object:self];
+            [self removeFromSuperview];
+        }
     }
 }
 
