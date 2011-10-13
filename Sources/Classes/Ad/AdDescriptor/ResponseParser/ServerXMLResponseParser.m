@@ -16,6 +16,7 @@
 @synthesize adContentType = _adContentType;
 @synthesize propertyName = _propertyName;
 @synthesize propertyContent = _propertyContent;
+@synthesize content;
 
 @synthesize campaignId = _campaignId;
 @synthesize trackUrl = _trackUrl;
@@ -24,7 +25,7 @@
 @synthesize adType = _adType;
 @synthesize latitude, longitude, zip;
 
-- (void) startParseSynchronous:(NSString*)content {
+- (void) startParseSynchronous:(NSString*)contentSrc {
     _adContentType = AdContentTypeUndefined;
 	[self.campaignId release];
     self.campaignId = nil;
@@ -42,14 +43,15 @@
     self.longitude = nil;
 	[self.zip release];
     self.zip = nil;
+    self.content = [NSMutableDictionary dictionary];
     
 	_startSynchronous = YES;
 	_adContentType = AdContentTypeUndefined;
 	
-	content = [content stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-	NSRange start = [content rangeOfString:@"<!-- client_side_external_campaign"];
-	NSRange end = [content rangeOfString:@"-->"];
-	NSString* result = [content substringWithRange:NSMakeRange(start.location+start.length, end.location-start.location-start.length)];  
+	contentSrc = [contentSrc stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+	NSRange start = [contentSrc rangeOfString:@"<!-- client_side_external_campaign"];
+	NSRange end = [contentSrc rangeOfString:@"-->"];
+	NSString* result = [contentSrc substringWithRange:NSMakeRange(start.location+start.length, end.location-start.location-start.length)];  
 	
 	self.parser = [[NSXMLParser alloc] initWithData:[result dataUsingEncoding:NSUTF8StringEncoding]];
 	
@@ -73,11 +75,15 @@
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
-{
+{    
 	if ([elementName caseInsensitiveCompare:@"campaign_id"] == NSOrderedSame) {
+        [self.content setObject:self.propertyContent forKey:@"campaign_id"];
+        
 		self.campaignId = self.propertyContent;
 	}
 	else if ([elementName caseInsensitiveCompare:@"type"] == NSOrderedSame) {
+        [self.content setObject:self.propertyContent forKey:@"type"];
+        
 		if ([self.propertyContent caseInsensitiveCompare:@"iAds"] == NSOrderedSame) {
 			_adContentType = AdContentTypeIAd;
 		}
@@ -92,9 +98,13 @@
 		}
 	}
 	else if ([elementName caseInsensitiveCompare:@"track_url"] == NSOrderedSame) {
+        [self.content setObject:self.propertyContent forKey:@"track_url"];
+        
 		self.trackUrl = self.propertyContent;
 	}
 	else if ([elementName caseInsensitiveCompare:@"param"] == NSOrderedSame) {
+        [self.content setObject:self.propertyContent forKey:self.propertyName];
+        
 		if ([self.propertyName caseInsensitiveCompare:@"id"] == NSOrderedSame) {
 			if (_adContentType == AdContentTypeGreystripe ||
                 _adContentType == AdContentTypeMillennial) {
@@ -127,7 +137,8 @@
 		else if ([self.propertyName caseInsensitiveCompare:@"zip"] == NSOrderedSame) {
 			if (_adContentType == AdContentTypeMillennial) {
 				self.zip = self.propertyContent;
-			}		}
+			}
+        }
 	}
 	[self.propertyContent release];
     self.propertyContent = nil;
@@ -152,6 +163,7 @@
 }
 
 - (void) dealloc {
+    self.content = nil;
     [_parser release];
 	[_propertyName release];
 	[_propertyContent release];

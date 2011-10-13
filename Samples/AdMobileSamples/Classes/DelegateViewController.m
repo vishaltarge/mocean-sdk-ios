@@ -37,17 +37,17 @@
 #pragma mark -
 #pragma mark AdViewDelegate methodes
 
-- (void) willReceiveAd:(id)sender {
+- (void)willReceiveAd:(id)sender {
 	if (sender == _adView) {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"willReceiveAd" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil]; 
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"willReceiveAd" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil]; 
 		[alert show]; 
 		[alert release];
 	}
 }
 
-- (void) didReceiveAd:(id)sender {
+- (void)didReceiveAd:(id)sender {
 	if (sender == _adView) {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"didReceiveAd" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil]; 
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"didReceiveAd" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil]; 
 		[alert show]; 
 		[alert release];
 	}
@@ -55,7 +55,16 @@
 
 - (void)didFailToReceiveAd:(id)sender withError:(NSError*)error {
 	if (sender == _adView) {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:[error description] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil]; 
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"didFailToReceiveAd" message:[error description] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil]; 
+		[alert show]; 
+		[alert release];
+	}
+}
+
+
+- (void)didReceiveThirdPartyRequest:(id)sender content:(NSDictionary*)content {
+    if (sender == _adView) {
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"didReceiveThirdPartyRequest" message:[content description] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil]; 
 		[alert show]; 
 		[alert release];
 	}
@@ -63,7 +72,7 @@
 
 - (void) adWillStartFullScreen:(id)sender {
 	if (sender == _adView) {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"adShouldStartFullScreen" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil]; 
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"adShouldStartFullScreen" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil]; 
 		[alert show]; 
 		[alert release];
 	}

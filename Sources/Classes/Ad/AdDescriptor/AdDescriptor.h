@@ -25,6 +25,8 @@ typedef enum {
 }
 
 @property (assign) AdContentType adContentType;
+@property (assign) BOOL externalCampaign;
+@property (retain) NSDictionary* externalContent;
 @property (retain) NSString* appId;
 @property (retain) NSString* adId;
 @property (retain) NSString* adType;

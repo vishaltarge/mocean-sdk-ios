@@ -12,7 +12,7 @@
 
 @implementation AdDescriptor
 
-@synthesize adContentType, appId, adId, adType, latitude,longitude, zip, campaignId, trackUrl, serverReponse, serverReponseString;
+@synthesize adContentType, externalCampaign, externalContent, appId, adId, adType, latitude,longitude, zip, campaignId, trackUrl, serverReponse, serverReponseString;
 
 + (AdDescriptor*)descriptorFromContent:(NSData*)data frameSize:(CGSize)frameSize aligmentCenter:(BOOL)aligmentCenter {
 	AdDescriptor* adDescriptor = [AdDescriptor  new];
@@ -22,6 +22,7 @@
             adDescriptor.adContentType = AdContentTypeEmpty;
         } else {
             adDescriptor.serverReponse = data;
+            adDescriptor.externalCampaign = NO;
             
             NSString* dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             adDescriptor.serverReponseString = dataString;
@@ -36,8 +37,12 @@
             } else if ([AdDescriptorHelper isVideoContent:adDescriptor.serverReponseString]) {
                 adDescriptor.adContentType = AdContentTypeMojivaVideo;
             } else if ([AdDescriptorHelper isExternalCampaign:adDescriptor.serverReponseString]) {
+                adDescriptor.externalCampaign = YES;
+                
                 ServerXMLResponseParser* _xmlResponseParser = [[ServerXMLResponseParser alloc] init];
                 [_xmlResponseParser startParseSynchronous:adDescriptor.serverReponseString];
+                
+                adDescriptor.externalContent = _xmlResponseParser.content;
                 
                 if (_xmlResponseParser.adContentType == AdContentTypeIAd) {
                     adDescriptor.adContentType = AdContentTypeIAd;
@@ -88,6 +93,7 @@
 }
 
 - (void)dealloc {
+    self.externalContent = nil;
 	[appId release];
 	[adId release];
 	[adType release];

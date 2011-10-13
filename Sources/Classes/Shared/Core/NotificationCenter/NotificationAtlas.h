@@ -81,5 +81,6 @@ extern NSString* kTrackUrlNotification;
 
 // other 
 extern NSString* kORMMAEventNotification;
+extern NSString* kThirdPartyNotification;
 
 

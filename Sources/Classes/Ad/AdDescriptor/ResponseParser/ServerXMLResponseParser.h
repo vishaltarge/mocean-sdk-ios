@@ -41,6 +41,7 @@
 
 @property (retain) NSString* propertyName;
 @property (retain) NSMutableString* propertyContent;
+@property (retain) NSMutableDictionary* content;
 
 @property (readonly) AdContentType adContentType;
 @property (retain) NSString* campaignId;

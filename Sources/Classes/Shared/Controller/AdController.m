@@ -294,13 +294,18 @@ static AdController* sharedInstance = nil;
             [senfInfo setObject:adDescriptor forKey:@"descriptor"];
             [NotificationCenterAdditions NC:[NotificationCenter sharedInstance] postNotificationOnMainThreadWithName:kStartAdDisplayNotification object:senfInfo];
         }
-    }
-    else
-    {
-        NSMutableDictionary* senfInfo = [NSMutableDictionary dictionary];
-        [senfInfo setObject:adView forKey:@"adView"];
-        [senfInfo setObject:adDescriptor forKey:@"descriptor"];
-        [NotificationCenterAdditions NC:[NotificationCenter sharedInstance] postNotificationOnMainThreadWithName:kFailAdDisplayNotification object:senfInfo];
+    } else {
+        if (adDescriptor.externalCampaign) {
+            NSMutableDictionary* senfInfo = [NSMutableDictionary dictionary];
+            [senfInfo setObject:adView forKey:@"adView"];
+            [senfInfo setObject:adDescriptor.externalContent forKey:@"dic"];
+            [NotificationCenterAdditions NC:[NotificationCenter sharedInstance] postNotificationOnMainThreadWithName:kThirdPartyNotification object:senfInfo];
+        } else {
+            NSMutableDictionary* senfInfo = [NSMutableDictionary dictionary];
+            [senfInfo setObject:adView forKey:@"adView"];
+            [senfInfo setObject:adDescriptor forKey:@"descriptor"];
+            [NotificationCenterAdditions NC:[NotificationCenter sharedInstance] postNotificationOnMainThreadWithName:kFailAdDisplayNotification object:senfInfo];
+        }
     }
     
     [pool release];

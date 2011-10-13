@@ -23,6 +23,17 @@
  */
 - (void)didReceiveAd:(id)sender;
 
+/** Sent if an ad view receive 3rd party ad content.
+ 
+ Generraly this method called if SDK can't display ad. For example: AdMob, Rhythm or SmartAdServer
+ 
+ @warning *Important:* SDK never displayed ads which sends in this method!
+ 
+ @param sender The ad view that receive 3rd party ad content.
+ @param content The dictionary of strings (key/values) for 3rd party. You can start processing this content from @"type" key for determinig ads type.
+ */
+- (void)didReceiveThirdPartyRequest:(id)sender content:(NSDictionary*)content;
+
 /** Sent if an ad view failed to load ad content.
  
  The same method can be invoked if the server does not currently advertising.
