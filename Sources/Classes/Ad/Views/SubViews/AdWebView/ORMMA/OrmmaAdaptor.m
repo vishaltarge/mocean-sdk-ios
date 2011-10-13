@@ -169,6 +169,7 @@
     NSMutableArray* supports = [NSMutableArray array];
     [supports addObject:@"'level-1'"];
     [supports addObject:@"'level-2'"];
+    [supports addObject:@"'level-3'"];
     [supports addObject:@"'orientation'"];
     [supports addObject:@"'network'"];
     [supports addObject:@"'screen'"];
@@ -483,23 +484,6 @@
                     }
                 }];
             }
-            
-            [ObjectStorage objectForKey:uri block:^(id obj) {
-                NSData* cachedData = obj;
-                if (cachedData) {
-                    [self evalJS:[OrmmaHelper fireResponseEvent:cachedData uri:uri]];
-                } else {
-                    [NetworkQueue loadWithRequest:req completion:^(NSURLRequest *r, NSHTTPURLResponse *response, NSData *data, NSError *error) {
-                        if (!error) {
-                            if ([display isEqualToString:@"proxy"]) {
-                                [self evalJS:[OrmmaHelper fireResponseEvent:data uri:uri]];
-                            }
-                            
-                            [ObjectStorage storeObject:data key:uri];
-                        }
-                    }];
-                }
-            }];
         } else if ([event isEqualToString:@"service"]) {
             //NSLog(@"Dev log: %@", [[request URL] absoluteString]);
         }
