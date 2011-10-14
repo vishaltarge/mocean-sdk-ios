@@ -15,7 +15,6 @@
 
 #define INCLUDE_GREYSTRIPE
 #define INCLUDE_IVDOPIA
-#define INCLUDE_MILLENNIAL
 #define INCLUDE_IAD
 
 /** Set #define to enable location services code or #undef to disable to exclude location detection from SDK.

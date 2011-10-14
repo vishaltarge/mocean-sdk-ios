@@ -5,12 +5,14 @@
 //  Created by Constantine Mureev on 3/3/11.
 //
 
-#import "AVPlayer.h"
+#import "InternalAVPlayer.h"
 #import "NotificationCenter.h"
+#import "AdView.h"
+#import "UIViewAdditions.h"
 #include <objc/runtime.h>
 
 
-@interface AVPlayer ()
+@interface InternalAVPlayer ()
 
 @property (assign, getter = isOpening) BOOL opening;
 @property (assign, getter = isAudio) BOOL audio;
@@ -24,6 +26,7 @@
 @property (retain) MPMoviePlayerViewController *avPlayer;
 @property (retain) MPMoviePlayerController* avPlayerController;
 @property (assign) UIViewController*    viewConreoller;
+@property (assign) AdView*    adView;
 
 - (void)registerObserver;
 - (void)playAudio:(NSNotification*)notification;
@@ -36,9 +39,9 @@
 
 @end
 
-@implementation AVPlayer
+@implementation InternalAVPlayer
 
-@synthesize opening, audio, statusBarHidden, autoplay, exitOnComplete, Inline, oldStyle, avPlayer, avPlayerController, viewConreoller;
+@synthesize opening, audio, statusBarHidden, autoplay, exitOnComplete, Inline, oldStyle, avPlayer, avPlayerController, viewConreoller, adView;
 
 - (id)init {
     self = [super init];
@@ -55,9 +58,9 @@
 	[[NotificationCenter sharedInstance] addObserver:self selector:@selector(playVideo:) name:kPlayVideoNotification object:nil];
 }
 
-+ (AVPlayer*)sharedInstance {
++ (InternalAVPlayer*)sharedInstance {
     static dispatch_once_t once;
-    static AVPlayer* sharedInstance;
+    static InternalAVPlayer* sharedInstance;
     dispatch_once(&once, ^ { sharedInstance = [self new]; });
     return sharedInstance;
 }
@@ -70,6 +73,7 @@
         
         if (url && properties) {
             self.opening = YES;
+            self.adView = [info objectForKey:@"adView"];
             
             NSNumber* number_autoPlay = [properties objectForKey:@"autoPlay"];
             BOOL autoPlay = YES;
@@ -120,6 +124,7 @@
         
         if (url && properties) {
             self.opening = YES;
+            self.adView = [info objectForKey:@"adView"];
             
             NSNumber* number_autoPlay = [properties objectForKey:@"autoPlay"];
             BOOL autoPlay = YES;
@@ -191,6 +196,11 @@
     UIViewController* vc = [UIApplication sharedApplication].keyWindow.rootViewController;
     if (vc) {
         self.viewConreoller = vc;
+    } else {
+        vc = [self.adView viewControllerForView];
+        if (vc) {
+            self.viewConreoller = vc;
+        }
     }
     
     [self.viewConreoller presentModalViewController:self.avPlayer animated:YES];
@@ -225,6 +235,11 @@
     UIViewController* vc = [UIApplication sharedApplication].keyWindow.rootViewController;
     if (vc) {
         self.viewConreoller = vc;
+    } else {
+        vc = [self.adView viewControllerForView];
+        if (vc) {
+            self.viewConreoller = vc;
+        }
     }
     
     [self.viewConreoller presentModalViewController:self.avPlayer animated:YES];
@@ -253,6 +268,7 @@
 		}
          */
 	} else {
+        [self.viewConreoller dismissModalViewControllerAnimated:YES];
         [[NotificationCenter sharedInstance] postNotificationName:@"Player received unknown error" object:nil];
 	}
 }

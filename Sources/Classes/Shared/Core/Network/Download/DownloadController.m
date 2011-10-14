@@ -182,7 +182,9 @@ static DownloadController* sharedInstance = nil;
 }
 
 - (void)startAdDownloadNotification:(NSNotification*)notification {
-	[NSThread detachNewThreadSelector:@selector(downladAd:) toTarget:self withObject:[notification object]];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self downladAd:[notification object]];
+    });
 }
 
 - (void)cancelAdDownloadNotification:(NSNotification*)notification {

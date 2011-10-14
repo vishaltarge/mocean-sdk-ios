@@ -190,8 +190,8 @@ static Logger* sharedInstance = nil;
     return NO;
 }
 
-- (void)printNotification:(NSNotification*)notification {
-    @synchronized(self) {
+- (void)printNotification:(NSNotification*)notification {    
+    //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         if ([[notification name] isEqualToString:kAdStartLoggingAllNotification]) {
             NSObject* obj = [notification object];
             AdView* adView = (AdView*)obj;
@@ -239,7 +239,7 @@ static Logger* sharedInstance = nil;
                 [Logger logWithFormat:@" - %@", [notification name]];
             }
         }
-	}
+   //});
 }
 
 + (void)showAlertWithMessage:(NSString*)message

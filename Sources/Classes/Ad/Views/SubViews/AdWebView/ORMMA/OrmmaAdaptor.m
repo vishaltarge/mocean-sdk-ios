@@ -461,12 +461,14 @@
             NSString *url = [OrmmaHelper requiredStringFromDictionary:parameters forKey:@"url"];
             NSMutableDictionary* info = [NSMutableDictionary dictionary];
             [info setObject:url forKey:@"url"];
+            [info setObject:self.adView forKey:@"adView"];
             [info setObject:parameters forKey:@"properties"];
             [[NotificationCenter sharedInstance] postNotificationName:kPlayAudioNotification object:info];
         } else if ([event isEqualToString:@"playvideo"]) {
             NSString *url = [OrmmaHelper requiredStringFromDictionary:parameters forKey:@"url"];
             NSMutableDictionary* info = [NSMutableDictionary dictionary];
             [info setObject:url forKey:@"url"];
+            [info setObject:self.adView forKey:@"adView"];
             [info setObject:parameters forKey:@"properties"];
             [[NotificationCenter sharedInstance] postNotificationName:kPlayVideoNotification object:info];
         } else if ([event isEqualToString:@"request"]) {

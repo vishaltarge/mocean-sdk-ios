@@ -229,7 +229,9 @@ static AdController* sharedInstance = nil;
     [_adUpdateControllers addObject:updater];
     [updater release];
     
-	[NSThread detachNewThreadSelector:@selector(addAdView:) toTarget:self withObject:adView];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self addAdView:adView];
+    });
 	
     [self performSelector:@selector(statrLoad:) withObject:adView afterDelay:0.1];
 }
@@ -237,7 +239,9 @@ static AdController* sharedInstance = nil;
 - (void)unregisterAd:(NSNotification*)notification {
 	AdView* adView = [notification object];
     
-	[NSThread detachNewThreadSelector:@selector(removeAdView:) toTarget:self withObject:adView];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self removeAdView:adView];
+    });
 }
 
 - (void)processDownload:(NSNotification*)notification {
@@ -262,8 +266,7 @@ static AdController* sharedInstance = nil;
             if (adDescriptor.adContentType == AdContentTypeDefaultHtml) {
                 [pool release];
                 return;
-            } else if (adDescriptor.adContentType == AdContentTypeGreystripe ||
-                       adDescriptor.adContentType == AdContentTypeMillennial) {
+            } else if (adDescriptor.adContentType == AdContentTypeGreystripe) {
                 NSMutableDictionary* senfInfo = [NSMutableDictionary dictionary];
                 
                 NSUInteger ind = NSNotFound;
@@ -312,7 +315,9 @@ static AdController* sharedInstance = nil;
 }
 
 - (void)adDownloaded:(NSNotification*)notification {
-    [NSThread detachNewThreadSelector:@selector(processDownload:) toTarget:self withObject:notification];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self processDownload:notification];
+    });
 }
 
 - (void)adClicked:(NSNotification*)notification {
@@ -389,7 +394,9 @@ static AdController* sharedInstance = nil;
         if (adView && model && model.descriptor && model.descriptor.trackUrl) {
             NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:model.descriptor.trackUrl]];
             
-            [NSThread detachNewThreadSelector:@selector(sendTrackRequest:) toTarget:self withObject:request];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                [self sendTrackRequest:request];
+            });
         }
     }
 }

@@ -15,7 +15,6 @@ typedef enum {
 	AdContentTypeDefaultHtml,
 	AdContentTypeMojivaVideo,
 	AdContentTypeGreystripe,
-	AdContentTypeMillennial,
 	AdContentTypeiVdopia,
 	AdContentTypeIAd,
 } AdContentType;
