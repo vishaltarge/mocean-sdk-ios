@@ -130,7 +130,7 @@
 }
 
 + (NSString*)fireResponseEvent:(NSData*)data uri:(NSString*)uri {
-    return [NSString stringWithFormat:@"window.ormmaview.fireResponseEvent('%@', '%@');", [QSStrings encodeBase64WithData:data], uri];
+    return [NSString stringWithFormat:@"window.ormmaview.fireResponseEvent('%@', '%@');", uri, [QSStrings encodeBase64WithData:data]];
 }
 
 
