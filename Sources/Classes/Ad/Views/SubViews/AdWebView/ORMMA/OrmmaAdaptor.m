@@ -405,22 +405,28 @@
             NSString *subject = [OrmmaHelper requiredStringFromDictionary:parameters forKey:@"subject"];
             NSString *body = [OrmmaHelper requiredStringFromDictionary:parameters forKey:@"body"];
             BOOL html = [OrmmaHelper booleanFromDictionary:parameters forKey:@"html"];
-            if (body && to && subject && [MFMailComposeViewController canSendMail]) {
-                MFMailComposeViewController *vc = [[[MFMailComposeViewController alloc] init] autorelease];
-                NSArray *recipients = [NSArray arrayWithObject:to];
-                [vc setToRecipients:recipients];
-                [vc setSubject:subject];
-                [vc setMessageBody:body  isHTML:html];
-                vc.mailComposeDelegate = self;
-                
-                UIViewController* rvc = [UIApplication sharedApplication].keyWindow.rootViewController;
-                if (!rvc) {
-                    rvc = [[UIApplication sharedApplication].keyWindow viewControllerForView];
+            if (body && to && subject) {
+                if ([MFMailComposeViewController canSendMail]) {
+                    MFMailComposeViewController *vc = [[[MFMailComposeViewController alloc] init] autorelease];
+                    NSArray *recipients = [NSArray arrayWithObject:to];
+                    [vc setToRecipients:recipients];
+                    [vc setSubject:subject];
+                    [vc setMessageBody:body  isHTML:html];
+                    vc.mailComposeDelegate = self;
+                    
+                    UIViewController* rvc = [UIApplication sharedApplication].keyWindow.rootViewController;
+                    if (!rvc) {
+                        rvc = [[UIApplication sharedApplication].keyWindow viewControllerForView];
+                    }
+                    if (!rvc) {
+                        rvc = [self.adView viewControllerForView];
+                    }
+                    [rvc presentModalViewController:vc animated:YES];
+                } else {
+                    [self evalJS:[OrmmaHelper fireError:@"Cannot send email: device mailbox not configured." forEvent:event]];
                 }
-                if (!rvc) {
-                    rvc = [self.adView viewControllerForView];
-                }
-                [rvc presentModalViewController:vc animated:YES];
+            } else {
+                [self evalJS:[OrmmaHelper fireError:@"Cannot send email: body, subject and to are required." forEvent:event]];
             }
         } else if ([event isEqualToString:@"phone"]) {
             NSString *phoneNumber = [OrmmaHelper requiredStringFromDictionary:parameters 
