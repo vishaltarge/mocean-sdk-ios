@@ -176,8 +176,8 @@
     [supports addObject:@"'shake'"];
     [supports addObject:@"'size'"];
     [supports addObject:@"'tilt'"];
-    //[supports addObject:@"'audio'"];
-    //[supports addObject:@"'video'"];
+    [supports addObject:@"'audio'"];
+    [supports addObject:@"'video'"];
     //[supports addObject:@"'map'"];
     
 	if (NSClassFromString(@"EKEventStore")) {
@@ -452,15 +452,21 @@
         } else if ([event isEqualToString:@"openmap"]) {
             //NSLog(@"Dev log: %@", [[request URL] absoluteString]);
         } else if ([event isEqualToString:@"playaudio"]) {
-            //NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+            NSString *url = [OrmmaHelper requiredStringFromDictionary:parameters forKey:@"url"];
+            NSMutableDictionary* info = [NSMutableDictionary dictionary];
+            [info setObject:url forKey:@"url"];
+            [info setObject:parameters forKey:@"properties"];
+            [[NotificationCenter sharedInstance] postNotificationName:kPlayAudioNotification object:info];
         } else if ([event isEqualToString:@"playvideo"]) {
-            //NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+            NSString *url = [OrmmaHelper requiredStringFromDictionary:parameters forKey:@"url"];
+            NSMutableDictionary* info = [NSMutableDictionary dictionary];
+            [info setObject:url forKey:@"url"];
+            [info setObject:parameters forKey:@"properties"];
+            [[NotificationCenter sharedInstance] postNotificationName:kPlayVideoNotification object:info];
         } else if ([event isEqualToString:@"request"]) {
             NSString *uri = [OrmmaHelper requiredStringFromDictionary:parameters forKey:@"uri"];
             NSString *display = [OrmmaHelper requiredStringFromDictionary:parameters forKey:@"display"];
             NSURLRequest* req = [NSURLRequest requestWithURL:[NSURL URLWithString:uri]];
-            
-            NSLog(display);
             
             if ([display isEqualToString:@"proxy"]) {
                 Reachability* reachability = [Reachability reachabilityForInternetConnection];

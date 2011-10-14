@@ -13,6 +13,7 @@
 #import "Logger.h"
 #import "SharedModel.h"
 #import "AdClicker.h"
+#import "AVPlayer.h"
 
 
 @implementation NotificationCenter
@@ -63,6 +64,15 @@ static NotificationCenter* sharedInstance = nil;
 			}
 			else {
 				[InternalBrowser performSelectorOnMainThread:@selector(sharedInstance) withObject:nil waitUntilDone:NO];
+			}
+			
+			if ([NSThread isMainThread]) {
+				if (![AVPlayer sharedInstance]) {
+					// somtheing going wrong...
+				}
+			}
+			else {
+				[AVPlayer performSelectorOnMainThread:@selector(sharedInstance) withObject:nil waitUntilDone:NO];
 			}
 
 		}

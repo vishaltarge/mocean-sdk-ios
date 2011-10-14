@@ -19,6 +19,8 @@
 		AD2F62FB144461D1003A6E05 /* NetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = AD2F62F3144461D1003A6E05 /* NetworkQueue.m */; };
 		AD2F62FC144461D1003A6E05 /* ObjectStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = AD2F62F4144461D1003A6E05 /* ObjectStorage.h */; };
 		AD2F62FD144461D1003A6E05 /* ObjectStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = AD2F62F5144461D1003A6E05 /* ObjectStorage.m */; };
+		ADB1C9C91447F8AC00785D44 /* AVPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = ADB1C9C71447F8AC00785D44 /* AVPlayer.h */; };
+		ADB1C9CA1447F8AC00785D44 /* AVPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB1C9C81447F8AC00785D44 /* AVPlayer.m */; };
 		ADF1FD851201A390008B99D2 /* Reachability.h in Headers */ = {isa = PBXBuildFile; fileRef = ADF1FD621201A38F008B99D2 /* Reachability.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ADFE0644129563F8002C00DE /* MMAdView.h in Headers */ = {isa = PBXBuildFile; fileRef = ADFE0642129563F8002C00DE /* MMAdView.h */; };
 		CF08E31213B4740000653A17 /* libGreystripeSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF08E31113B4740000653A17 /* libGreystripeSDK.a */; };
@@ -161,6 +163,8 @@
 		ADA9C50A11F975B20074E2F3 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		ADA9C50C11F975B20074E2F3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		ADA9C50E11F975B20074E2F3 /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
+		ADB1C9C71447F8AC00785D44 /* AVPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVPlayer.h; sourceTree = "<group>"; };
+		ADB1C9C81447F8AC00785D44 /* AVPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVPlayer.m; sourceTree = "<group>"; };
 		ADC0232A1206BC3700FC1CE8 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		ADC023311206BC4800FC1CE8 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		ADF1FD621201A38F008B99D2 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -415,6 +419,15 @@
 			path = Libs;
 			sourceTree = "<group>";
 		};
+		ADB1C9C61447F8AC00785D44 /* AVPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				ADB1C9C71447F8AC00785D44 /* AVPlayer.h */,
+				ADB1C9C81447F8AC00785D44 /* AVPlayer.m */,
+			);
+			path = AVPlayer;
+			sourceTree = "<group>";
+		};
 		ADF1FD611201A38F008B99D2 /* Reachability */ = {
 			isa = PBXGroup;
 			children = (
@@ -497,6 +510,7 @@
 		CF4B882D13201C81004C9F9A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				ADB1C9C61447F8AC00785D44 /* AVPlayer */,
 				CF65FA8D135DA2EC006678B4 /* GreystripeSharedAdaptor */,
 				CF4B882E13201C81004C9F9A /* InternalBrowser */,
 				CFF3289A13B9F3AF0070D02A /* UIWebViewAdditions.h */,
@@ -992,6 +1006,7 @@
 				AD2F62F8144461D1003A6E05 /* NetworkActivityIndicatorManager.h in Headers */,
 				AD2F62FA144461D1003A6E05 /* NetworkQueue.h in Headers */,
 				AD2F62FC144461D1003A6E05 /* ObjectStorage.h in Headers */,
+				ADB1C9C91447F8AC00785D44 /* AVPlayer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1145,6 +1160,7 @@
 				AD2F62F9144461D1003A6E05 /* NetworkActivityIndicatorManager.m in Sources */,
 				AD2F62FB144461D1003A6E05 /* NetworkQueue.m in Sources */,
 				AD2F62FD144461D1003A6E05 /* ObjectStorage.m in Sources */,
+				ADB1C9CA1447F8AC00785D44 /* AVPlayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

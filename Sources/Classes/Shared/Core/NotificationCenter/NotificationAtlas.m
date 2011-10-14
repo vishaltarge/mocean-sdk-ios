@@ -83,3 +83,5 @@ NSString* kTrackUrlNotification = @"External campaign track url";
 // other 
 NSString* kORMMAEventNotification = @"Process ORMMA event";
 NSString* kThirdPartyNotification = @"Recieve Third Party";
+NSString* kPlayAudioNotification = @"Play audio";
+NSString* kPlayVideoNotification = @"play video";
