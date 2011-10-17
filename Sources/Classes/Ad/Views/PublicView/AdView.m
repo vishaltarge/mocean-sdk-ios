@@ -19,6 +19,7 @@
 #import "IAdAdaptor.h"
 #import "IVdopiaAdaptor.h"
 #import "GreystripeAdaptor.h"
+#import "MillennialAdaptor.h"
 
 #import "LocationManager.h"
 
@@ -204,6 +205,21 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
             model.descriptor = descriptor;
         }
 #endif
+#ifdef INCLUDE_MILLENNIAL
+        else if (descriptor.adContentType == AdContentTypeMillennial) {
+            MillennialAdaptor* millennialAdaptor = [[MillennialAdaptor alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+            millennialAdaptor.hidden = YES;
+            [self addSubview:millennialAdaptor];
+            [millennialAdaptor showWithAdType:descriptor.adType
+                                        appId:descriptor.appId
+                                     latitude:descriptor.latitude
+                                    longitude:descriptor.longitude
+                                          zip:descriptor.zip];
+            [millennialAdaptor release];
+            
+            model.descriptor = descriptor;
+        }
+#endif
 #ifdef INCLUDE_IVDOPIA
         else if (descriptor.adContentType == AdContentTypeiVdopia) {
             IVdopiaAdaptor* iVdopiaAdaptor = [[IVdopiaAdaptor alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
@@ -238,7 +254,15 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 	if (adView == self) {
         AdModel* model = [self adModel];
         if (model.currentAdView) {
-            if (descriptor.adContentType == AdContentTypeGreystripe) {
+            if (descriptor.adContentType == AdContentTypeMillennial) {
+#ifdef INCLUDE_MILLENNIAL
+                if ([model.currentAdView isKindOfClass:[MillennialAdaptor class]]) {
+                    MillennialAdaptor* millennialAdaptor = (MillennialAdaptor*)model.currentAdView;
+                    [millennialAdaptor update];
+                }
+#endif
+            }
+            else if (descriptor.adContentType == AdContentTypeGreystripe) {
 #ifdef INCLUDE_GREYSTRIPE
                 if ([model.currentAdView isKindOfClass:[GreystripeAdaptor class]]) {
                     GreystripeAdaptor* greystripeAdaptor = (GreystripeAdaptor*)model.currentAdView;
@@ -328,9 +352,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
                 model.snapshot = nil;
             }
             
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                [self postAdDisplaydNotification];
-            });
+            [NSThread detachNewThreadSelector:@selector(postAdDisplaydNotification) toTarget:self withObject:nil];
             //[[NotificationCenter sharedInstance] postNotificationName:kAdDisplayedNotification object:self];
         }
 	}

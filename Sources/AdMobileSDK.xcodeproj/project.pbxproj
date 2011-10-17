@@ -19,12 +19,12 @@
 		AD2F62FB144461D1003A6E05 /* NetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = AD2F62F3144461D1003A6E05 /* NetworkQueue.m */; };
 		AD2F62FC144461D1003A6E05 /* ObjectStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = AD2F62F4144461D1003A6E05 /* ObjectStorage.h */; };
 		AD2F62FD144461D1003A6E05 /* ObjectStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = AD2F62F5144461D1003A6E05 /* ObjectStorage.m */; };
+		AD4E572B144C44EC00A835D0 /* libMMSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD4E5729144C44EC00A835D0 /* libMMSDK.a */; };
+		AD4E572C144C44EC00A835D0 /* MMAdView.h in Headers */ = {isa = PBXBuildFile; fileRef = AD4E572A144C44EC00A835D0 /* MMAdView.h */; };
+		AD4E5731144C451700A835D0 /* MillennialAdaptor.h in Headers */ = {isa = PBXBuildFile; fileRef = AD4E572F144C451700A835D0 /* MillennialAdaptor.h */; };
+		AD4E5732144C451700A835D0 /* MillennialAdaptor.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4E5730144C451700A835D0 /* MillennialAdaptor.m */; };
 		ADB1C9C91447F8AC00785D44 /* InternalAVPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = ADB1C9C71447F8AC00785D44 /* InternalAVPlayer.h */; };
 		ADB1C9CA1447F8AC00785D44 /* InternalAVPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB1C9C81447F8AC00785D44 /* InternalAVPlayer.m */; };
-		ADE7883F144860B1009E980F /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE7883B144860B1009E980F /* SBJSON.m */; };
-		ADE78840144860B1009E980F /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE7883C144860B1009E980F /* SBJsonBase.m */; };
-		ADE78841144860B1009E980F /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE7883D144860B1009E980F /* SBJsonParser.m */; };
-		ADE78842144860B1009E980F /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE7883E144860B1009E980F /* SBJsonWriter.m */; };
 		ADF1FD851201A390008B99D2 /* Reachability.h in Headers */ = {isa = PBXBuildFile; fileRef = ADF1FD621201A38F008B99D2 /* Reachability.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CF08E31213B4740000653A17 /* libGreystripeSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF08E31113B4740000653A17 /* libGreystripeSDK.a */; };
 		CF08E31713B4741700653A17 /* libVDOAdsSimulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF08E31513B4741700653A17 /* libVDOAdsSimulator.a */; };
@@ -155,6 +155,10 @@
 		AD2F62F3144461D1003A6E05 /* NetworkQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkQueue.m; sourceTree = "<group>"; };
 		AD2F62F4144461D1003A6E05 /* ObjectStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectStorage.h; sourceTree = "<group>"; };
 		AD2F62F5144461D1003A6E05 /* ObjectStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectStorage.m; sourceTree = "<group>"; };
+		AD4E5729144C44EC00A835D0 /* libMMSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMMSDK.a; sourceTree = "<group>"; };
+		AD4E572A144C44EC00A835D0 /* MMAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMAdView.h; sourceTree = "<group>"; };
+		AD4E572F144C451700A835D0 /* MillennialAdaptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MillennialAdaptor.h; sourceTree = "<group>"; };
+		AD4E5730144C451700A835D0 /* MillennialAdaptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MillennialAdaptor.m; sourceTree = "<group>"; };
 		ADA9C50411F975B20074E2F3 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		ADA9C50611F975B20074E2F3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		ADA9C50811F975B20074E2F3 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -165,10 +169,6 @@
 		ADB1C9C81447F8AC00785D44 /* InternalAVPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InternalAVPlayer.m; sourceTree = "<group>"; };
 		ADC0232A1206BC3700FC1CE8 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		ADC023311206BC4800FC1CE8 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		ADE7883B144860B1009E980F /* SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJSON.m; sourceTree = "<group>"; };
-		ADE7883C144860B1009E980F /* SBJsonBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonBase.m; sourceTree = "<group>"; };
-		ADE7883D144860B1009E980F /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
-		ADE7883E144860B1009E980F /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		ADF1FD621201A38F008B99D2 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		ADF1FD941201A43B008B99D2 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		ADF1FD991201A44D008B99D2 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -313,6 +313,7 @@
 				CF08E31213B4740000653A17 /* libGreystripeSDK.a in Frameworks */,
 				CF08E31713B4741700653A17 /* libVDOAdsSimulator.a in Frameworks */,
 				CF08E31813B4741700653A17 /* libVDOAdsDevice.a in Frameworks */,
+				AD4E572B144C44EC00A835D0 /* libMMSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,9 +401,28 @@
 			path = NetworkQueue;
 			sourceTree = "<group>";
 		};
+		AD4E5728144C44EC00A835D0 /* Millennial */ = {
+			isa = PBXGroup;
+			children = (
+				AD4E5729144C44EC00A835D0 /* libMMSDK.a */,
+				AD4E572A144C44EC00A835D0 /* MMAdView.h */,
+			);
+			path = Millennial;
+			sourceTree = "<group>";
+		};
+		AD4E572E144C451700A835D0 /* MillennialAdaptor */ = {
+			isa = PBXGroup;
+			children = (
+				AD4E572F144C451700A835D0 /* MillennialAdaptor.h */,
+				AD4E5730144C451700A835D0 /* MillennialAdaptor.m */,
+			);
+			path = MillennialAdaptor;
+			sourceTree = "<group>";
+		};
 		ADA9C21611F96D370074E2F3 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				AD4E5728144C44EC00A835D0 /* Millennial */,
 				FCB54BD3142327E400867C7E /* UIAlertView-Blocks */,
 				CF6DA0C6137273630051225F /* QSUtilities */,
 				CF6701D113542BB500ACA281 /* Greystripe */,
@@ -601,10 +621,6 @@
 		CF728B871349FB8D00F61216 /* JSON */ = {
 			isa = PBXGroup;
 			children = (
-				ADE7883B144860B1009E980F /* SBJSON.m */,
-				ADE7883C144860B1009E980F /* SBJsonBase.m */,
-				ADE7883D144860B1009E980F /* SBJsonParser.m */,
-				ADE7883E144860B1009E980F /* SBJsonWriter.m */,
 				CF728B881349FB8D00F61216 /* JSON.h */,
 				CF728B891349FB8D00F61216 /* NSObject+SBJSON.h */,
 				CF728B8A1349FB8D00F61216 /* NSObject+SBJSON.m */,
@@ -778,6 +794,7 @@
 		CFDE16EF1313A22900FE2F5A /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				AD4E572E144C451700A835D0 /* MillennialAdaptor */,
 				CF6701FA13542BEC00ACA281 /* GreystripeAdptor */,
 				CF3528E1134C762B006D80F8 /* IVdopiaAdaptor */,
 				CF63133D1345E0B000399622 /* IAdAdaptor */,
@@ -982,6 +999,8 @@
 				AD2F62FA144461D1003A6E05 /* NetworkQueue.h in Headers */,
 				AD2F62FC144461D1003A6E05 /* ObjectStorage.h in Headers */,
 				ADB1C9C91447F8AC00785D44 /* InternalAVPlayer.h in Headers */,
+				AD4E572C144C44EC00A835D0 /* MMAdView.h in Headers */,
+				AD4E5731144C451700A835D0 /* MillennialAdaptor.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1134,10 +1153,7 @@
 				AD2F62FB144461D1003A6E05 /* NetworkQueue.m in Sources */,
 				AD2F62FD144461D1003A6E05 /* ObjectStorage.m in Sources */,
 				ADB1C9CA1447F8AC00785D44 /* InternalAVPlayer.m in Sources */,
-				ADE7883F144860B1009E980F /* SBJSON.m in Sources */,
-				ADE78840144860B1009E980F /* SBJsonBase.m in Sources */,
-				ADE78841144860B1009E980F /* SBJsonParser.m in Sources */,
-				ADE78842144860B1009E980F /* SBJsonWriter.m in Sources */,
+				AD4E5732144C451700A835D0 /* MillennialAdaptor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

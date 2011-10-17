@@ -90,6 +90,9 @@
 		else if ([self.propertyContent caseInsensitiveCompare:@"GreyStripe"] == NSOrderedSame) {
 			_adContentType = AdContentTypeGreystripe;
 		}
+		else if ([self.propertyContent caseInsensitiveCompare:@"Millennial"] == NSOrderedSame) {
+			_adContentType = AdContentTypeMillennial;
+		}
 		else if ([self.propertyContent caseInsensitiveCompare:@"iVdopia"] == NSOrderedSame) {
 			_adContentType = AdContentTypeiVdopia;
 		}
@@ -103,7 +106,8 @@
         [self.content setObject:self.propertyContent forKey:self.propertyName];
         
 		if ([self.propertyName caseInsensitiveCompare:@"id"] == NSOrderedSame) {
-			if (_adContentType == AdContentTypeGreystripe) {
+			if (_adContentType == AdContentTypeGreystripe ||
+                _adContentType == AdContentTypeMillennial) {
 				self.appId = self.propertyContent;
 			}
 			else {
@@ -115,6 +119,26 @@
 				self.appId = self.propertyContent;
 			}
 		}
+		else if ([self.propertyName caseInsensitiveCompare:@"lat"] == NSOrderedSame) {
+			if (_adContentType == AdContentTypeMillennial) {
+				self.latitude = self.propertyContent;
+			}
+		}
+		else if ([self.propertyName caseInsensitiveCompare:@"long"] == NSOrderedSame) {
+			if (_adContentType == AdContentTypeMillennial) {
+				self.longitude = self.propertyContent;
+			}
+		}
+		else if ([self.propertyName caseInsensitiveCompare:@"adType"] == NSOrderedSame) {
+			if (_adContentType == AdContentTypeMillennial) {
+				self.adType = self.propertyContent;
+			}
+		}
+		else if ([self.propertyName caseInsensitiveCompare:@"zip"] == NSOrderedSame) {
+			if (_adContentType == AdContentTypeMillennial) {
+				self.zip = self.propertyContent;
+			}
+        }
 	}
 	[self.propertyContent release];
     self.propertyContent = nil;
