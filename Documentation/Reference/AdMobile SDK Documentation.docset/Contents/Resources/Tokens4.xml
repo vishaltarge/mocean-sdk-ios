@@ -44,6 +44,25 @@
 		</Token>
 		
 		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/AdViewDelegate/didReceiveThirdPartyRequest:content:</TokenIdentifier>
+			<Abstract>Sent if an ad view receive 3rd party ad content.</Abstract>
+			<DeclaredIn>AdDelegate.h</DeclaredIn>			
+			
+			<Declaration>- (void)didReceiveThirdPartyRequest:(id)sender content:(NSDictionary *)content</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>sender</Name>
+					<Abstract>The ad view that receive 3rd party ad content.</Abstract>
+				</Parameter><Parameter>
+					<Name>content</Name>
+					<Abstract>The dictionary of strings (key/values) for 3rd party. You can start processing this content from @"type" key for determinig ads type.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/didReceiveThirdPartyRequest:content:</Anchor>
+		</Token>
+		
+		<Token>
 			<TokenIdentifier>//apple_ref/occ/intfm/AdViewDelegate/didFailToReceiveAd:withError:</TokenIdentifier>
 			<Abstract>Sent if an ad view failed to load ad content.</Abstract>
 			<DeclaredIn>AdDelegate.h</DeclaredIn>			
@@ -122,7 +141,7 @@
 			<Parameters>
 				<Parameter>
 					<Name>sender</Name>
-					<Abstract>The ad view that is about to open URL.</Abstract>
+					<Abstract>The ad view that is about to process ORMMA event.</Abstract>
 				</Parameter><Parameter>
 					<Name>event</Name>
 					<Abstract>The string with name of the event.</Abstract>
