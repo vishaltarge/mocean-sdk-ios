@@ -456,7 +456,9 @@
                                                                forKey:@"url"];
             [self click:url];
         } else if ([event isEqualToString:@"openmap"]) {
-            //NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+            NSString *poi = [OrmmaHelper requiredStringFromDictionary:parameters 
+                                                               forKey:@"url"];
+            [self click:[NSString stringWithFormat:@"http://maps.google.com/maps?q=%@", [poi stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
         } else if ([event isEqualToString:@"playaudio"]) {
             NSString *url = [OrmmaHelper requiredStringFromDictionary:parameters forKey:@"url"];
             NSMutableDictionary* info = [NSMutableDictionary dictionary];

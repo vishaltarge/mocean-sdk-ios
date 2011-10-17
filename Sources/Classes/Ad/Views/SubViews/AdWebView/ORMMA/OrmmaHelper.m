@@ -6,7 +6,6 @@
 //
 
 #import "OrmmaHelper.h"
-#import "QSStrings.h"
 
 @implementation OrmmaHelper
 
@@ -130,7 +129,7 @@
 }
 
 + (NSString*)fireResponseEvent:(NSData*)data uri:(NSString*)uri {
-    return [NSString stringWithFormat:@"window.ormmaview.fireResponseEvent('%@', '%@');", uri, [QSStrings encodeBase64WithData:data]];
+    return [NSString stringWithFormat:@"window.ormmaview.fireResponseEvent('%@', '%@');", uri, [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease]];
 }
 
 

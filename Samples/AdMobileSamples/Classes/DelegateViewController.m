@@ -37,40 +37,42 @@
 #pragma mark -
 #pragma mark AdViewDelegate methodes
 
+/*
+ *  You can use this for getting notifications than ad start downloading ads
+ *
 - (void)willReceiveAd:(id)sender {
 	if (sender == _adView) {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"willReceiveAd" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil]; 
-		[alert show]; 
-		[alert release];
+        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"willReceiveAd" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease]; 
+        [alert show];
 	}
 }
+*/
 
 - (void)didReceiveAd:(id)sender {
 	if (sender == _adView) {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"didReceiveAd" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil]; 
-		[alert show]; 
-		[alert release];
+        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"didReceiveAd" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease]; 
+        [alert show]; 
 	}
 }
 
 - (void)didFailToReceiveAd:(id)sender withError:(NSError*)error {
 	if (sender == _adView) {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"didFailToReceiveAd" message:[error description] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil]; 
-		[alert show]; 
-		[alert release];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"didFailToReceiveAd" message:[error description] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil]; 
+        [alert show]; 
+        [alert release];
 	}
 }
 
 
 - (void)didReceiveThirdPartyRequest:(id)sender content:(NSDictionary*)content {
     if (sender == _adView) {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"didReceiveThirdPartyRequest" message:[content description] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil]; 
-		[alert show]; 
-		[alert release];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"didReceiveThirdPartyRequest" message:[content description] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil]; 
+        [alert show]; 
+        [alert release];
 	}
 }
 
-- (void) adWillStartFullScreen:(id)sender {
+- (void)adWillStartFullScreen:(id)sender {
 	if (sender == _adView) {
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"adShouldStartFullScreen" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil]; 
 		[alert show]; 
@@ -78,7 +80,7 @@
 	}
 }
 
-- (void) adDidEndFullScreen:(id)sender {
+- (void)adDidEndFullScreen:(id)sender {
 	if (sender == _adView) {
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"adDidEndFullScreen" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil]; 
 		[alert show]; 
