@@ -45,7 +45,7 @@
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/intfm/AdViewDelegate/didReceiveThirdPartyRequest:content:</TokenIdentifier>
-			<Abstract>Sent if an ad view receive 3rd party ad content.</Abstract>
+			<Abstract>Sent if SDK received client side third party campaign.</Abstract>
 			<DeclaredIn>AdDelegate.h</DeclaredIn>			
 			
 			<Declaration>- (void)didReceiveThirdPartyRequest:(id)sender content:(NSDictionary *)content</Declaration>
@@ -55,7 +55,7 @@
 					<Abstract>The ad view that receive 3rd party ad content.</Abstract>
 				</Parameter><Parameter>
 					<Name>content</Name>
-					<Abstract>The dictionary of strings (key/values) for 3rd party. You can start processing this content from @"type" key for determinig ads type.</Abstract>
+					<Abstract>The dictionary of strings (key/values) for third party. You can start processing this content from @“type” key for determining ads type.</Abstract>
 				</Parameter>
 			</Parameters>
 			
