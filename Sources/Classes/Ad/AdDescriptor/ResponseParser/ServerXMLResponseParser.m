@@ -27,21 +27,13 @@
 
 - (void) startParseSynchronous:(NSString*)contentSrc {
     _adContentType = AdContentTypeUndefined;
-	[self.campaignId release];
     self.campaignId = nil;
-	[self.trackUrl release];
     self.trackUrl = nil;
-	[self.appId release];
     self.appId = nil;
-	[self.adId release];
     self.adId = nil;
-	[self.adType release];
     self.adType = nil;
-	[self.latitude release];
     self.latitude = nil;
-	[self.longitude release];
     self.longitude = nil;
-	[self.zip release];
     self.zip = nil;
     self.content = [NSMutableDictionary dictionary];
     
@@ -53,7 +45,7 @@
 	NSRange end = [contentSrc rangeOfString:@"-->"];
 	NSString* result = [contentSrc substringWithRange:NSMakeRange(start.location+start.length, end.location-start.location-start.length)];  
 	
-	self.parser = [[NSXMLParser alloc] initWithData:[result dataUsingEncoding:NSUTF8StringEncoding]];
+	self.parser = [[[NSXMLParser alloc] initWithData:[result dataUsingEncoding:NSUTF8StringEncoding]] autorelease];
 	
 	[self.parser setDelegate:self];
 	[self.parser setShouldProcessNamespaces:NO];
@@ -71,7 +63,7 @@
 	if ([elementName isEqualToString:@"param"] && [attributeDict count] == 1) {
 		self.propertyName = [attributeDict valueForKey:@"name"];
     }
-	self.propertyContent = [[NSMutableString alloc] init];
+	self.propertyContent = [NSMutableString string];
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
@@ -140,7 +132,6 @@
 			}
         }
 	}
-	[self.propertyContent release];
     self.propertyContent = nil;
 }
 
@@ -170,9 +161,9 @@
 	[_campaignId release];
 	[_adId release];
 	[_trackUrl release];
-    [self.latitude release];
-    [self.longitude release];
-    [self.zip release];
+    self.latitude = nil;
+    self.longitude = nil;
+    self.zip = nil;
 	
 	[super dealloc];
 }
