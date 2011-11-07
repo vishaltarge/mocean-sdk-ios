@@ -16,10 +16,6 @@
 
 #import "AdWebView.h"
 #import "VideoView.h"
-#import "IAdAdaptor.h"
-#import "IVdopiaAdaptor.h"
-#import "GreystripeAdaptor.h"
-#import "MillennialAdaptor.h"
 
 #import "LocationManager.h"
 
@@ -254,22 +250,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 	if (adView == self) {
         AdModel* model = [self adModel];
         if (model.currentAdView) {
-            if (descriptor.adContentType == AdContentTypeMillennial) {
-#ifdef INCLUDE_MILLENNIAL
-                if ([model.currentAdView isKindOfClass:[MillennialAdaptor class]]) {
-                    MillennialAdaptor* millennialAdaptor = (MillennialAdaptor*)model.currentAdView;
-                    [millennialAdaptor update];
-                }
-#endif
-            }
-            else if (descriptor.adContentType == AdContentTypeGreystripe) {
-#ifdef INCLUDE_GREYSTRIPE
-                if ([model.currentAdView isKindOfClass:[GreystripeAdaptor class]]) {
-                    GreystripeAdaptor* greystripeAdaptor = (GreystripeAdaptor*)model.currentAdView;
-                    [greystripeAdaptor update];
-                }
-#endif
-            }
+            // all code removed
         }
     }
 }
@@ -399,7 +380,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
 	AdModel* model = [self adModel];
-    if (model.descriptor.adContentType != AdContentTypeIAd) {
+    //if (model.descriptor.adContentType == AdContentTypeIAd) {
         NSData* rawData = [self adModel].snapshotRAWData;
         NSDate* lastTime = [self adModel].snapshotRAWDataTime;
         if (!(rawData && lastTime && abs([lastTime timeIntervalSinceNow]) < 1000)) {
@@ -414,7 +395,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
         if ([self isPointTransparent:point rawData:rawData]) {
             return NO;
         }
-    }
+    //}
     
     return [super pointInside:point withEvent:event];
 }

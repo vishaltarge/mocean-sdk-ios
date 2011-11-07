@@ -7,8 +7,6 @@
 
 #import "Utils.h"
 #import "Constants.h"
-#import "NSObject+SBJSON.h"
-#import "NSString+SBJSON.h"
 #import "UIAlertView+Blocks.h"
 #import "UIActionSheet+Blocks.h"
 #import "UIViewAdditions.h"
@@ -211,8 +209,6 @@ NSMutableDictionary* CreateNonRetainingDictionary() {
 }
 
 + (void)makeLibraryLinked {
-    useCatagory1();
-    useCatagory2();
     useCatagory3();
     useCatagory4();
     useCatagory5();

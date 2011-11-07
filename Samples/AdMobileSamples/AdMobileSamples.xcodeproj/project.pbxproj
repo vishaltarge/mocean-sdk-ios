@@ -23,7 +23,6 @@
 		AD0ECA2F120C1B38008216A6 /* DelegateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0ECA2E120C1B38008216A6 /* DelegateViewController.m */; };
 		ADAF1C6F126876F600AD88B8 /* DefaultImage (320x240).png in Resources */ = {isa = PBXBuildFile; fileRef = ADAF1C6E126876F600AD88B8 /* DefaultImage (320x240).png */; };
 		ADAF1C731268775200AD88B8 /* DefaultImage (320x50).png in Resources */ = {isa = PBXBuildFile; fileRef = ADAF1C721268775200AD88B8 /* DefaultImage (320x50).png */; };
-		CF08E31E13B4744F00653A17 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF08E31C13B4744F00653A17 /* iAd.framework */; };
 		CF0DF283130BD868005A6FB3 /* DebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF0DF281130BD868005A6FB3 /* DebugViewController.m */; };
 		CF19F9B213B4B17A001D1C81 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF19F9B013B4B17A001D1C81 /* AVFoundation.framework */; };
 		CF19F9B313B4B17A001D1C81 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF19F9B113B4B17A001D1C81 /* MessageUI.framework */; };
@@ -48,17 +47,13 @@
 		CF6313151345BF7F00399622 /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = CF6313141345BF7F00399622 /* Default-Portrait.png */; };
 		CF64F48513D992E500A4F1B5 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CF64F48313D992E500A4F1B5 /* libsqlite3.0.dylib */; };
 		CF64F48613D992E500A4F1B5 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CF64F48413D992E500A4F1B5 /* libz.dylib */; };
-		CF65FA79135D98C6006678B4 /* GreystripeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF65FA78135D98C6006678B4 /* GreystripeViewController.m */; };
-		CF728BB6134A040400F61216 /* MillennialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF728BB4134A040400F61216 /* MillennialViewController.m */; };
 		CF840386130E67B200EC0AF8 /* OpenGLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF840382130E67B200EC0AF8 /* OpenGLViewController.m */; };
 		CF840387130E67B200EC0AF8 /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF840384130E67B200EC0AF8 /* EAGLView.m */; };
 		CF84058C130E992300EC0AF8 /* RichJSadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF84058B130E992300EC0AF8 /* RichJSadViewController.m */; };
-		CFBB3D901344F0E800477890 /* IAdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFBB3D8F1344F0E800477890 /* IAdViewController.m */; };
 		CFBBD63113BDC73D007ADECA /* TestingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFBBD63013BDC73D007ADECA /* TestingViewController.m */; };
 		CFD0702A130A5AB700915735 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CFD07025130A5AB700915735 /* Icon@2x.png */; };
 		CFD0702B130A5AB700915735 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CFD07026130A5AB700915735 /* Icon.png */; };
 		CFD0702E130A5AB700915735 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = CFD07029130A5AB700915735 /* Icon-72.png */; };
-		CFD18F2C134C804E006B2052 /* IVdopiaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD18F2A134C804E006B2052 /* IVdopiaViewController.m */; };
 		CFED897913B0C4DC00761B9C /* libAdMobileSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CFBA6E0013B0599900CCE607 /* libAdMobileSDK.a */; };
 		FC428BF013EFBCC0001B3B6E /* SAS.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FC428BEF13EFBCC0001B3B6E /* SAS.bundle */; };
 		FCB54BC41423125200867C7E /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCB54BC31423125200867C7E /* EventKit.framework */; };
@@ -124,7 +119,6 @@
 		CF08E18713B3674F00653A17 /* AdDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdDelegate.h; sourceTree = "<group>"; };
 		CF08E18813B3674F00653A17 /* AdInterstitialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdInterstitialView.h; sourceTree = "<group>"; };
 		CF08E18913B3674F00653A17 /* AdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdView.h; sourceTree = "<group>"; };
-		CF08E31C13B4744F00653A17 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/iAd.framework; sourceTree = DEVELOPER_DIR; };
 		CF0DF281130BD868005A6FB3 /* DebugViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DebugViewController.m; sourceTree = "<group>"; };
 		CF0DF282130BD868005A6FB3 /* DebugViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugViewController.h; sourceTree = "<group>"; };
 		CF19F9B013B4B17A001D1C81 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -149,10 +143,6 @@
 		CF6313141345BF7F00399622 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
 		CF64F48313D992E500A4F1B5 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/lib/libsqlite3.0.dylib; sourceTree = DEVELOPER_DIR; };
 		CF64F48413D992E500A4F1B5 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/lib/libz.dylib; sourceTree = DEVELOPER_DIR; };
-		CF65FA77135D98C6006678B4 /* GreystripeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GreystripeViewController.h; sourceTree = "<group>"; };
-		CF65FA78135D98C6006678B4 /* GreystripeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GreystripeViewController.m; sourceTree = "<group>"; };
-		CF728BB4134A040400F61216 /* MillennialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MillennialViewController.m; sourceTree = "<group>"; };
-		CF728BB5134A040400F61216 /* MillennialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MillennialViewController.h; sourceTree = "<group>"; };
 		CF840382130E67B200EC0AF8 /* OpenGLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenGLViewController.m; sourceTree = "<group>"; };
 		CF840383130E67B200EC0AF8 /* OpenGLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLViewController.h; sourceTree = "<group>"; };
 		CF840384130E67B200EC0AF8 /* EAGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAGLView.m; sourceTree = "<group>"; };
@@ -160,8 +150,6 @@
 		CF84058A130E992300EC0AF8 /* RichJSadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RichJSadViewController.h; sourceTree = "<group>"; };
 		CF84058B130E992300EC0AF8 /* RichJSadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RichJSadViewController.m; sourceTree = "<group>"; };
 		CFBA6DF713B0599800CCE607 /* AdMobileSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AdMobileSDK.xcodeproj; path = ../../../Sources/AdMobileSDK.xcodeproj; sourceTree = "<group>"; };
-		CFBB3D8E1344F0E800477890 /* IAdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAdViewController.h; sourceTree = "<group>"; };
-		CFBB3D8F1344F0E800477890 /* IAdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAdViewController.m; sourceTree = "<group>"; };
 		CFBBD62F13BDC73D007ADECA /* TestingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestingViewController.h; sourceTree = "<group>"; };
 		CFBBD63013BDC73D007ADECA /* TestingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestingViewController.m; sourceTree = "<group>"; };
 		CFBBD63913BDD711007ADECA /* AdController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdController.h; sourceTree = "<group>"; };
@@ -301,8 +289,6 @@
 		CFD07025130A5AB700915735 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		CFD07026130A5AB700915735 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		CFD07029130A5AB700915735 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
-		CFD18F2A134C804E006B2052 /* IVdopiaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVdopiaViewController.m; sourceTree = "<group>"; };
-		CFD18F2B134C804E006B2052 /* IVdopiaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVdopiaViewController.h; sourceTree = "<group>"; };
 		FC428BEF13EFBCC0001B3B6E /* SAS.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SAS.bundle; sourceTree = "<group>"; };
 		FCA6CCAF1410F63A000D9956 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
 		FCB54BC31423125200867C7E /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/EventKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -331,7 +317,6 @@
 				CF19F9B613B4B1A9001D1C81 /* AudioToolbox.framework in Frameworks */,
 				CF19F9B213B4B17A001D1C81 /* AVFoundation.framework in Frameworks */,
 				CF19F9B313B4B17A001D1C81 /* MessageUI.framework in Frameworks */,
-				CF08E31E13B4744F00653A17 /* iAd.framework in Frameworks */,
 				CFED897913B0C4DC00761B9C /* libAdMobileSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -343,7 +328,6 @@
 			isa = PBXGroup;
 			children = (
 				CF0B88F513CFFDAE00BDCDDA /* AdMobileSDK */,
-				CFBB3D881344F02F00477890 /* 3rd Party */,
 				16BB05A212094E8200DBCF9A /* Advanced */,
 				16D10198120844220059D8EB /* Animation examples */,
 				1619F3AF1206D19F00BEA21D /* Simple */,
@@ -515,7 +499,6 @@
 				CF19F9C713B4B21B001D1C81 /* CoreTelephony.framework */,
 				FCB54BC31423125200867C7E /* EventKit.framework */,
 				CF19F9C813B4B21B001D1C81 /* OpenGLES.framework */,
-				CF08E31C13B4744F00653A17 /* iAd.framework */,
 				CF64F48313D992E500A4F1B5 /* libsqlite3.0.dylib */,
 				CF64F48413D992E500A4F1B5 /* libz.dylib */,
 				CF19F9C013B4B1FC001D1C81 /* MediaPlayer.framework */,
@@ -595,24 +578,6 @@
 			name = RotationAdView;
 			sourceTree = "<group>";
 		};
-		CF65FA72135D988E006678B4 /* Greystripe */ = {
-			isa = PBXGroup;
-			children = (
-				CF65FA77135D98C6006678B4 /* GreystripeViewController.h */,
-				CF65FA78135D98C6006678B4 /* GreystripeViewController.m */,
-			);
-			name = Greystripe;
-			sourceTree = "<group>";
-		};
-		CF728BB2134A03EE00F61216 /* Millennial */ = {
-			isa = PBXGroup;
-			children = (
-				CF728BB5134A040400F61216 /* MillennialViewController.h */,
-				CF728BB4134A040400F61216 /* MillennialViewController.m */,
-			);
-			name = Millennial;
-			sourceTree = "<group>";
-		};
 		CF840381130E679D00EC0AF8 /* OpenGL */ = {
 			isa = PBXGroup;
 			children = (
@@ -640,26 +605,6 @@
 				CFAEF44A13D00D9C00355C81 /* libAdMobileSDK doc generation.a */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		CFBB3D881344F02F00477890 /* 3rd Party */ = {
-			isa = PBXGroup;
-			children = (
-				CF65FA72135D988E006678B4 /* Greystripe */,
-				CFD18F28134C8035006B2052 /* iVdopia */,
-				CF728BB2134A03EE00F61216 /* Millennial */,
-				CFBB3D8A1344F05100477890 /* iAd */,
-			);
-			name = "3rd Party";
-			sourceTree = "<group>";
-		};
-		CFBB3D8A1344F05100477890 /* iAd */ = {
-			isa = PBXGroup;
-			children = (
-				CFBB3D8E1344F0E800477890 /* IAdViewController.h */,
-				CFBB3D8F1344F0E800477890 /* IAdViewController.m */,
-			);
-			name = iAd;
 			sourceTree = "<group>";
 		};
 		CFBBD62E13BDC715007ADECA /* Testing */ = {
@@ -1279,15 +1224,6 @@
 			path = JSON;
 			sourceTree = "<group>";
 		};
-		CFD18F28134C8035006B2052 /* iVdopia */ = {
-			isa = PBXGroup;
-			children = (
-				CFD18F2B134C804E006B2052 /* IVdopiaViewController.h */,
-				CFD18F2A134C804E006B2052 /* IVdopiaViewController.m */,
-			);
-			name = iVdopia;
-			sourceTree = "<group>";
-		};
 		FC428BEE13EFBCC0001B3B6E /* Bundles */ = {
 			isa = PBXGroup;
 			children = (
@@ -1423,10 +1359,6 @@
 				CF840386130E67B200EC0AF8 /* OpenGLViewController.m in Sources */,
 				CF840387130E67B200EC0AF8 /* EAGLView.m in Sources */,
 				CF84058C130E992300EC0AF8 /* RichJSadViewController.m in Sources */,
-				CFBB3D901344F0E800477890 /* IAdViewController.m in Sources */,
-				CF728BB6134A040400F61216 /* MillennialViewController.m in Sources */,
-				CFD18F2C134C804E006B2052 /* IVdopiaViewController.m in Sources */,
-				CF65FA79135D98C6006678B4 /* GreystripeViewController.m in Sources */,
 				ACC770281382B7F9005074D8 /* ORMMAViewController.m in Sources */,
 				CFBBD63113BDC73D007ADECA /* TestingViewController.m in Sources */,
 				FCF61E511414FBA1007B0BCA /* SimpleBannerRetinaViewController.m in Sources */,
@@ -1484,13 +1416,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Paul Mureev (8UAP5ETNLH)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_LDFLAGS = "-ObjC";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "DFA0F74B-3007-4E3A-A8BB-8593FDE04165";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1500,14 +1432,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Paul Mureev (8UAP5ETNLH)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = "-ObjC";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "DFA0F74B-3007-4E3A-A8BB-8593FDE04165";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

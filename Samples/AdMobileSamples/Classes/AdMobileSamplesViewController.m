@@ -39,14 +39,6 @@
 	[items addObject:@"Ad delegate (callback sample)"];
 	[items addObject:@"Debug"];
     [_sections addObject:items];
-    
-    items = [NSMutableArray array];
-    
-	[items addObject:@"iAd"];
-	[items addObject:@"Millennial"];
-	[items addObject:@"iVdopia"];
-	[items addObject:@"Greystripe"];
-    [_sections addObject:items];
 }
 
 - (void)dealloc{
@@ -93,16 +85,6 @@
             viewController = [[DelegateViewController alloc] init];
         else if (indexPath.row == 5)
             viewController = [[DebugViewController alloc] init];
-    }
-    else if (indexPath.section == 3) {
-        if (indexPath.row == 0)
-            viewController = [[IAdViewController alloc] init];
-        else if (indexPath.row == 1)
-            viewController = [[MillennialViewController alloc] init];
-        else if (indexPath.row == 2)
-            viewController = [[IVdopiaViewController alloc] init];
-        else if (indexPath.row == 3)
-            viewController = [[GreystripeViewController alloc] init];
     }
     
     if (!viewController) {

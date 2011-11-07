@@ -75,19 +75,6 @@
 	}
 	else if ([elementName caseInsensitiveCompare:@"type"] == NSOrderedSame) {
         [self.content setObject:self.propertyContent forKey:@"type"];
-        
-		if ([self.propertyContent caseInsensitiveCompare:@"iAds"] == NSOrderedSame) {
-			_adContentType = AdContentTypeIAd;
-		}
-		else if ([self.propertyContent caseInsensitiveCompare:@"GreyStripe"] == NSOrderedSame) {
-			_adContentType = AdContentTypeGreystripe;
-		}
-		else if ([self.propertyContent caseInsensitiveCompare:@"Millennial"] == NSOrderedSame) {
-			_adContentType = AdContentTypeMillennial;
-		}
-		else if ([self.propertyContent caseInsensitiveCompare:@"iVdopia"] == NSOrderedSame) {
-			_adContentType = AdContentTypeiVdopia;
-		}
 	}
 	else if ([elementName caseInsensitiveCompare:@"track_url"] == NSOrderedSame) {
         [self.content setObject:self.propertyContent forKey:@"track_url"];
@@ -96,41 +83,6 @@
 	}
 	else if ([elementName caseInsensitiveCompare:@"param"] == NSOrderedSame) {
         [self.content setObject:self.propertyContent forKey:self.propertyName];
-        
-		if ([self.propertyName caseInsensitiveCompare:@"id"] == NSOrderedSame) {
-			if (_adContentType == AdContentTypeGreystripe ||
-                _adContentType == AdContentTypeMillennial) {
-				self.appId = self.propertyContent;
-			}
-			else {
-				self.adId = self.propertyContent;
-			}
-		}
-		else if ([self.propertyName caseInsensitiveCompare:@"applicationKey"] == NSOrderedSame) {
-			if (_adContentType == AdContentTypeiVdopia) {
-				self.appId = self.propertyContent;
-			}
-		}
-		else if ([self.propertyName caseInsensitiveCompare:@"lat"] == NSOrderedSame) {
-			if (_adContentType == AdContentTypeMillennial) {
-				self.latitude = self.propertyContent;
-			}
-		}
-		else if ([self.propertyName caseInsensitiveCompare:@"long"] == NSOrderedSame) {
-			if (_adContentType == AdContentTypeMillennial) {
-				self.longitude = self.propertyContent;
-			}
-		}
-		else if ([self.propertyName caseInsensitiveCompare:@"adType"] == NSOrderedSame) {
-			if (_adContentType == AdContentTypeMillennial) {
-				self.adType = self.propertyContent;
-			}
-		}
-		else if ([self.propertyName caseInsensitiveCompare:@"zip"] == NSOrderedSame) {
-			if (_adContentType == AdContentTypeMillennial) {
-				self.zip = self.propertyContent;
-			}
-        }
 	}
     self.propertyContent = nil;
 }

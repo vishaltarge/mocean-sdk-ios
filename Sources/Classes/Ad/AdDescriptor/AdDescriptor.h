@@ -14,10 +14,6 @@ typedef enum {
     AdContentTypeInvalidParams,
 	AdContentTypeDefaultHtml,
 	AdContentTypeMojivaVideo,
-	AdContentTypeGreystripe,
-	AdContentTypeMillennial,
-	AdContentTypeiVdopia,
-	AdContentTypeIAd,
 } AdContentType;
 
 

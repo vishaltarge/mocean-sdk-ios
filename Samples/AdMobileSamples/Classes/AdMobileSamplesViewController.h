@@ -14,6 +14,7 @@
 #import "VideoViewController.h"
 #import "OpenGLViewController.h"
 #import "RichJSadViewController.h"
+#import "ORMMAViewController.h"
 
 // animation
 #import "BannerAnimationViewController.h"
@@ -26,13 +27,6 @@
 #import "DebugViewController.h"
 #import "DelegateViewController.h"
 #import "TestingViewController.h"
-
-// 3rd Party
-#import "IAdViewController.h"
-#import "MillennialViewController.h"
-#import "IVdopiaViewController.h"
-#import "GreystripeViewController.h"
-#import "ORMMAViewController.h"
 
 @interface AdMobileSamplesViewController : UITableViewController {
     NSMutableArray*         _sections;

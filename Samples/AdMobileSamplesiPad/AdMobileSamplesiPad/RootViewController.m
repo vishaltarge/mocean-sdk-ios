@@ -41,12 +41,6 @@
     
     items = [NSMutableArray array];
     
-	[items addObject:@"iAd"];
-	[items addObject:@"Millennial"];
-	[items addObject:@"iVdopia"];
-	[items addObject:@"Greystripe"];
-    [_sections addObject:items];
-    
     [super viewDidLoad];
     self.clearsSelectionOnViewWillAppear = NO;
     self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
@@ -135,16 +129,6 @@
             viewController = [[VideoWithInterstitilaViewController alloc] initWithFrame:newFrame];
         else if (indexPath.row == 2)
             viewController = [[ORMMAViewController alloc] initWithFrame:newFrame];
-    }
-    else if (indexPath.section == 3) {
-        if (indexPath.row == 0)
-            viewController = [[IAdViewController alloc] initWithFrame:newFrame];
-        else if (indexPath.row == 1)
-            viewController = [[MillennialViewController alloc] initWithFrame:newFrame];
-        else if (indexPath.row == 2)
-            viewController = [[IVdopiaViewController alloc] initWithFrame:newFrame];
-        else if (indexPath.row == 3)
-            viewController = [[GreystripeViewController alloc] initWithFrame:newFrame];
     }
     
     if (!viewController) {

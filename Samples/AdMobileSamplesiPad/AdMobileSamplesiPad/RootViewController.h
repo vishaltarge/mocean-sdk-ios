@@ -23,12 +23,6 @@
 #import "VideoWithInterstitilaViewController.h"
 #import "ORMMAViewController.h"
 
-// 3rd Party
-#import "IAdViewController.h"
-#import "MillennialViewController.h"
-#import "IVdopiaViewController.h"
-#import "GreystripeViewController.h"
-
 @class DetailViewController;
 
 @interface RootViewController : UITableViewController {

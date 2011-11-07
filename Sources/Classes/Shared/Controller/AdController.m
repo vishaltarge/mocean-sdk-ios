@@ -266,19 +266,6 @@ static AdController* sharedInstance = nil;
             if (adDescriptor.adContentType == AdContentTypeDefaultHtml) {
                 [pool release];
                 return;
-            } else if (adDescriptor.adContentType == AdContentTypeGreystripe) {
-                NSMutableDictionary* senfInfo = [NSMutableDictionary dictionary];
-                
-                NSUInteger ind = NSNotFound;
-                @synchronized(_ads) {
-                    ind = [_ads indexOfObject:adView];
-                }
-                
-                if (ind != NSNotFound) {
-                    [senfInfo setObject:adView forKey:@"adView"];
-                    [senfInfo setObject:adDescriptor forKey:@"descriptor"];
-                    [NotificationCenterAdditions NC:[NotificationCenter sharedInstance] postNotificationOnMainThreadWithName:kUpdateAdDisplayNotification object:senfInfo];
-                }
             }
             
             [pool release];

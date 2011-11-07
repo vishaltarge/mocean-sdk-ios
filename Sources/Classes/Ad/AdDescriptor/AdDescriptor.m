@@ -44,33 +44,7 @@
                 
                 adDescriptor.externalContent = _xmlResponseParser.content;
                 
-                if (_xmlResponseParser.adContentType == AdContentTypeIAd) {
-                    adDescriptor.adContentType = AdContentTypeIAd;
-                    adDescriptor.adId = _xmlResponseParser.adId;
-                    adDescriptor.campaignId = _xmlResponseParser.campaignId;
-                    adDescriptor.trackUrl = _xmlResponseParser.trackUrl;
-                } else if (_xmlResponseParser.adContentType == AdContentTypeGreystripe) {
-                    adDescriptor.adContentType = AdContentTypeGreystripe;
-                    adDescriptor.appId = _xmlResponseParser.appId;
-                    adDescriptor.campaignId = _xmlResponseParser.campaignId;
-                    adDescriptor.trackUrl = _xmlResponseParser.trackUrl;
-                } else if (_xmlResponseParser.adContentType == AdContentTypeMillennial) {
-                    adDescriptor.adContentType = AdContentTypeMillennial;
-                    adDescriptor.appId = _xmlResponseParser.appId;
-                    adDescriptor.campaignId = _xmlResponseParser.campaignId;
-                    adDescriptor.trackUrl = _xmlResponseParser.trackUrl;
-                    adDescriptor.adType = _xmlResponseParser.adType;
-                    adDescriptor.latitude = _xmlResponseParser.latitude;
-                    adDescriptor.longitude = _xmlResponseParser.longitude;
-                    adDescriptor.zip = _xmlResponseParser.zip;
-                } else if (_xmlResponseParser.adContentType == AdContentTypeiVdopia) {
-                    adDescriptor.adContentType = AdContentTypeiVdopia;
-                    adDescriptor.appId = _xmlResponseParser.appId;
-                    adDescriptor.campaignId = _xmlResponseParser.campaignId;
-                    adDescriptor.trackUrl = _xmlResponseParser.trackUrl;
-                } else {
-                    adDescriptor.adContentType = AdContentTypeUndefined;
-                }
+                adDescriptor.adContentType = AdContentTypeUndefined;
                 
                 [_xmlResponseParser release];
             } else {

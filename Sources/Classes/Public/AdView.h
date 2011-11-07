@@ -4,19 +4,8 @@
 //
 //  Created by Constantine Mureev on 2/22/11.
 //
-//  version: 2.8.0
+//  version: 2.9.0
 //
-
-
-/** Set #define to enable SDK or #undef to disable using 3rd party SDK.
- 
- @warning *Important:*  If you disable 3rd party SDK you can also delete .a files of this SDK from project to minimize library size.
- */
-
-#define INCLUDE_GREYSTRIPE
-#define INCLUDE_IVDOPIA
-#define INCLUDE_MILLENNIAL
-#define INCLUDE_IAD
 
 /** Set #define to enable location services code or #undef to disable to exclude location detection from SDK.
  */

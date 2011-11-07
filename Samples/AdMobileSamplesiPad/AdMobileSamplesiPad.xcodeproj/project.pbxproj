@@ -27,10 +27,6 @@
 		FCF1EC1E13F24CAF00364390 /* TableViewAnimationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC1D13F24CAF00364390 /* TableViewAnimationViewController.m */; };
 		FCF1EC2213F24CCF00364390 /* TableViewCellSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC2113F24CCF00364390 /* TableViewCellSampleViewController.m */; };
 		FCF1EC2513F24CDA00364390 /* VideoWithInterstitilaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC2413F24CDA00364390 /* VideoWithInterstitilaViewController.m */; };
-		FCF1EC3213F24D2200364390 /* IAdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC3113F24D2200364390 /* IAdViewController.m */; };
-		FCF1EC3513F24D2E00364390 /* MillennialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC3413F24D2E00364390 /* MillennialViewController.m */; };
-		FCF1EC3813F24D3A00364390 /* IVdopiaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC3713F24D3A00364390 /* IVdopiaViewController.m */; };
-		FCF1EC4113F24D6000364390 /* GreystripeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC4013F24D6000364390 /* GreystripeViewController.m */; };
 		FCF1EC4713F24D7900364390 /* ORMMAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC4613F24D7900364390 /* ORMMAViewController.m */; };
 		FCF1EC6113F2561600364390 /* libAdMobileSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1EC5313F255D800364390 /* libAdMobileSDK.a */; };
 		FCF1EC7113F2566600364390 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1EC6413F2566600364390 /* AudioToolbox.framework */; };
@@ -38,7 +34,6 @@
 		FCF1EC7313F2566600364390 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1EC6613F2566600364390 /* CFNetwork.framework */; };
 		FCF1EC7413F2566600364390 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1EC6813F2566600364390 /* CoreMotion.framework */; };
 		FCF1EC7513F2566600364390 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1EC6913F2566600364390 /* CoreTelephony.framework */; };
-		FCF1EC7613F2566600364390 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1EC6A13F2566600364390 /* iAd.framework */; };
 		FCF1EC7713F2566600364390 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1EC6B13F2566600364390 /* libsqlite3.0.dylib */; };
 		FCF1EC7813F2566600364390 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1EC6C13F2566600364390 /* libz.1.dylib */; };
 		FCF1EC7913F2566600364390 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1EC6D13F2566600364390 /* MediaPlayer.framework */; };
@@ -117,14 +112,6 @@
 		FCF1EC2113F24CCF00364390 /* TableViewCellSampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCellSampleViewController.m; sourceTree = "<group>"; };
 		FCF1EC2313F24CDA00364390 /* VideoWithInterstitilaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoWithInterstitilaViewController.h; sourceTree = "<group>"; };
 		FCF1EC2413F24CDA00364390 /* VideoWithInterstitilaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoWithInterstitilaViewController.m; sourceTree = "<group>"; };
-		FCF1EC3013F24D2200364390 /* IAdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAdViewController.h; sourceTree = "<group>"; };
-		FCF1EC3113F24D2200364390 /* IAdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAdViewController.m; sourceTree = "<group>"; };
-		FCF1EC3313F24D2E00364390 /* MillennialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MillennialViewController.h; sourceTree = "<group>"; };
-		FCF1EC3413F24D2E00364390 /* MillennialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MillennialViewController.m; sourceTree = "<group>"; };
-		FCF1EC3613F24D3A00364390 /* IVdopiaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVdopiaViewController.h; sourceTree = "<group>"; };
-		FCF1EC3713F24D3A00364390 /* IVdopiaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVdopiaViewController.m; sourceTree = "<group>"; };
-		FCF1EC3F13F24D6000364390 /* GreystripeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GreystripeViewController.h; sourceTree = "<group>"; };
-		FCF1EC4013F24D6000364390 /* GreystripeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GreystripeViewController.m; sourceTree = "<group>"; };
 		FCF1EC4513F24D7900364390 /* ORMMAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORMMAViewController.h; sourceTree = "<group>"; };
 		FCF1EC4613F24D7900364390 /* ORMMAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORMMAViewController.m; sourceTree = "<group>"; };
 		FCF1EC4913F255D700364390 /* AdMobileSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AdMobileSDK.xcodeproj; path = ../../../Sources/AdMobileSDK.xcodeproj; sourceTree = "<group>"; };
@@ -168,7 +155,6 @@
 				FCF1EBDF13F24A5200364390 /* CoreGraphics.framework in Frameworks */,
 				FCF1EC7413F2566600364390 /* CoreMotion.framework in Frameworks */,
 				FCF1EC7513F2566600364390 /* CoreTelephony.framework in Frameworks */,
-				FCF1EC7613F2566600364390 /* iAd.framework in Frameworks */,
 				FCF1EC7713F2566600364390 /* libsqlite3.0.dylib in Frameworks */,
 				FCF1EC7813F2566600364390 /* libz.1.dylib in Frameworks */,
 				FCF1EC7913F2566600364390 /* MediaPlayer.framework in Frameworks */,
@@ -266,7 +252,6 @@
 				FCF1EC0813F24C1E00364390 /* Simple */,
 				FCF1EC1813F24C7E00364390 /* Animation */,
 				FCF1EC1F13F24CB800364390 /* Advanced */,
-				FCF1EC2F13F24D0E00364390 /* 3rd Party */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -312,21 +297,6 @@
 				FCF1EC4613F24D7900364390 /* ORMMAViewController.m */,
 			);
 			name = Advanced;
-			sourceTree = "<group>";
-		};
-		FCF1EC2F13F24D0E00364390 /* 3rd Party */ = {
-			isa = PBXGroup;
-			children = (
-				FCF1EC3013F24D2200364390 /* IAdViewController.h */,
-				FCF1EC3113F24D2200364390 /* IAdViewController.m */,
-				FCF1EC3313F24D2E00364390 /* MillennialViewController.h */,
-				FCF1EC3413F24D2E00364390 /* MillennialViewController.m */,
-				FCF1EC3613F24D3A00364390 /* IVdopiaViewController.h */,
-				FCF1EC3713F24D3A00364390 /* IVdopiaViewController.m */,
-				FCF1EC3F13F24D6000364390 /* GreystripeViewController.h */,
-				FCF1EC4013F24D6000364390 /* GreystripeViewController.m */,
-			);
-			name = "3rd Party";
 			sourceTree = "<group>";
 		};
 		FCF1EC4813F255C500364390 /* AdMobileSDK */ = {
@@ -460,10 +430,6 @@
 				FCF1EC1E13F24CAF00364390 /* TableViewAnimationViewController.m in Sources */,
 				FCF1EC2213F24CCF00364390 /* TableViewCellSampleViewController.m in Sources */,
 				FCF1EC2513F24CDA00364390 /* VideoWithInterstitilaViewController.m in Sources */,
-				FCF1EC3213F24D2200364390 /* IAdViewController.m in Sources */,
-				FCF1EC3513F24D2E00364390 /* MillennialViewController.m in Sources */,
-				FCF1EC3813F24D3A00364390 /* IVdopiaViewController.m in Sources */,
-				FCF1EC4113F24D6000364390 /* GreystripeViewController.m in Sources */,
 				FCF1EC4713F24D7900364390 /* ORMMAViewController.m in Sources */,
 				FCF1EC8B13F257AD00364390 /* Shader.fsh in Sources */,
 				FCF1EC8C13F257AD00364390 /* Shader.vsh in Sources */,
