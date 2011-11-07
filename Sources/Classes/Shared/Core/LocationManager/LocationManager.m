@@ -33,8 +33,6 @@ static LocationManager* sharedInstance = nil;
         
 		_currentLocationCoordinate.latitude = 0.0;
 		_currentLocationCoordinate.longitude = 0.0;
-        
-        [super startUpdatingHeading];
 #endif
 		_isUpdatingLocation = NO;
         self.unknowsState = YES;
@@ -125,6 +123,12 @@ static LocationManager* sharedInstance = nil;
     }
 }
 
+- (void)startUpdatingHeading {
+#ifdef INCLUDE_LOCATION_MANAGER
+    [super startUpdatingHeading];
+#endif
+}
+
 #ifdef INCLUDE_LOCATION_MANAGER
 
 #pragma mark -
@@ -166,7 +170,7 @@ static LocationManager* sharedInstance = nil;
 - (void)locationManager:(CLLocationManager *)manager 
 	   didUpdateHeading:(CLHeading *)newHeading
 {
-    if (newHeading.trueHeading >= 0 && newHeading.trueHeading != _currentHeading.trueHeading) {
+    if (newHeading.trueHeading >= 0 && (newHeading.trueHeading != _currentHeading.trueHeading || !_currentHeading)) {
         if (_currentHeading) {
             [_currentHeading release];
         }

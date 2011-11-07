@@ -57,34 +57,20 @@
 	[super dealloc];
 }
 
-- (void)bannerDidHide:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
-{
-	
-}
-
-- (void) hideBanner
+- (void)hideBanner
 {
 	CGRect adFrame = _adView.frame;
-	CGRect tableViewFrame = _tableView.frame;
-	
-	[UIView beginAnimations:nil context:nil];
-	[UIView setAnimationDuration:0.5];
-	[UIView setAnimationDelegate:self];
-	[UIView setAnimationDidStopSelector:@selector(bannerDidHide:finished:context:)];
-	
 	adFrame.origin.y = -AD_HEIGHT;
-	_adView.frame = adFrame;
-	
+	CGRect tableViewFrame = _tableView.frame;
 	tableViewFrame.origin.y = 0;
 	tableViewFrame.size.height = self.view.bounds.size.height;
-	_tableView.frame = tableViewFrame;
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        _adView.frame = adFrame;
+        _tableView.frame = tableViewFrame;
+    }];
 	
 	[UIView commitAnimations];
-}
-
-- (void)animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
-{
-	[self performSelector:@selector(hideBanner) withObject:nil afterDelay:3];
 }
 
 #pragma mark -
@@ -98,17 +84,16 @@
 	if (adFrame.origin.y >= 0)
 		return;
 	
-	[UIView beginAnimations:nil context:nil];
-	[UIView setAnimationDuration:0.5];
-	[UIView setAnimationDelegate:self];
-	[UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
-	
 	adFrame.origin.y = 0;
-	_adView.frame = adFrame;
-	
 	tableViewFrame.origin.y = AD_HEIGHT;
 	tableViewFrame.size.height -= AD_HEIGHT;
-	_tableView.frame = tableViewFrame;
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        _adView.frame = adFrame;
+        _tableView.frame = tableViewFrame;
+    } completion:^(BOOL finished) {
+        [self performSelector:@selector(hideBanner) withObject:nil afterDelay:3];
+    }];
 	
 	[UIView commitAnimations];
 }

@@ -509,7 +509,11 @@
                 }];
             }
         } else if ([event isEqualToString:@"service"]) {
-            //NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+            NSString *name = [OrmmaHelper requiredStringFromDictionary:parameters forKey:@"name"];
+            NSString *enabled = [OrmmaHelper requiredStringFromDictionary:parameters forKey:@"enabled"];
+            if ([name isEqualToString:@"headingChange"] && [enabled isEqualToString:@"Y"]) {
+                 [[LocationManager sharedInstance] startUpdatingHeading];
+            }
         }
         
         // notify JS that we've completed the last request

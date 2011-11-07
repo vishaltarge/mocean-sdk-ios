@@ -45,4 +45,6 @@
 + (LocationManager*)sharedInstance;
 + (void)releaseSharedInstance;
 
+- (void)startUpdatingHeading;
+
 @end
