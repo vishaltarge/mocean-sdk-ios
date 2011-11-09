@@ -37,21 +37,22 @@
 #pragma mark -
 #pragma mark AdViewDelegate methodes
 
-/*
- *  You can use this for getting notifications than ad start downloading ads
- *
+
 - (void)willReceiveAd:(id)sender {
 	if (sender == _adView) {
-        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"willReceiveAd" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease]; 
-        [alert show];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"willReceiveAd" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease]; 
+            [alert show];
+        });
 	}
 }
-*/
 
 - (void)didReceiveAd:(id)sender {
 	if (sender == _adView) {
-        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"didReceiveAd" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease]; 
-        [alert show]; 
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"didReceiveAd" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease]; 
+            [alert show]; 
+        });
 	}
 }
 
