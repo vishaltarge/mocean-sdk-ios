@@ -90,6 +90,7 @@
 										self.frame.size.height/2 - 50,
 										100,
 										50);
+            btnClose.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
 			[btnClose setTitle:kCloseButtonText forState:UIControlStateNormal];
 			[btnClose setTitle:kCloseButtonText forState:UIControlStateHighlighted];
 			((AdModel*)_adModel).closeButton = btnClose;
