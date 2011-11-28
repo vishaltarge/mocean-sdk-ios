@@ -136,6 +136,14 @@ typedef enum {
  */
 @property BOOL							internalOpenMode;
 
+/** A Boolean value that determines whether ad track is enabled.
+ 
+ Neeeeeeeeed to ad more description here!!!!!!!!!!!!!!!!!
+ 
+ The default value is NO.
+ */
+@property BOOL							track;
+
 /** Color of ad text links.
  
  The default value is nil.

@@ -22,7 +22,7 @@
 
 @implementation AdView
 
-@dynamic delegate, isLoading, testMode, logMode, animateMode, contentAlignment, updateTimeInterval,
+@dynamic delegate, isLoading, testMode, logMode, animateMode, contentAlignment, track, updateTimeInterval,
 defaultImage, site, zone, premium, type, keywords, minSize, maxSize, contentSize, textColor, additionalParameters,
 adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, carrier, latitude, longitude;
 
@@ -126,6 +126,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     [self setLogMode:AdLogModeErrorsOnly];
     
     ((AdModel*)_adModel).loading = NO;
+    ((AdModel*)_adModel).track = -1;
     ((AdModel*)_adModel).aligmentCenter = NO;
 }
 
@@ -694,6 +695,18 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 
 - (BOOL)internalOpenMode {
 	return ((AdModel*)_adModel).internalOpenMode;
+}
+
+- (void)setTrack:(BOOL)track {
+    if (track) {
+        ((AdModel*)_adModel).track = 1;
+    } else {
+        ((AdModel*)_adModel).track = 0;
+    }
+}
+
+- (BOOL)track {
+	return ((AdModel*)_adModel).track > 0;
 }
 
 //@property NSTimeInterval	updateTimeInterval;

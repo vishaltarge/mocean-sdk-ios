@@ -13,7 +13,7 @@
 
 @implementation AdModel
 
-@synthesize delegate, readyForDisplay, testMode, logMode, animateMode, internalOpenMode,
+@synthesize delegate, readyForDisplay, testMode, logMode, animateMode, internalOpenMode, track,
 updateTimeInterval, defaultImage, site, adZone, premiumFilter, type, keywords, minSize, maxSize,
 paramBG, paramLINK, additionalParameters, adServerUrl, advertiserId, groupCode,
 country, region, city, area, metro, zip, carrier, showCloseButtonTime,
@@ -128,6 +128,10 @@ longitude, latitude;
     
     if (self.zip)
         [_banerUrl appendFormat:@"&zip=%@", self.zip];
+    
+    if (self.track >= 0) {
+        [_banerUrl appendFormat:@"&track=%d", self.track];
+    }
     
     if (self.carrier)
         [_banerUrl appendFormat:@"&carrier=%@", self.carrier];
