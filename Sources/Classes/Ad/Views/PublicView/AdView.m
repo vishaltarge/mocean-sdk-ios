@@ -303,6 +303,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
         UIView* currentAdView = model.currentAdView;
         if (subView != currentAdView) {
             model.snapshot = currentAdView;
+            [self adModel].snapshotRAWData = nil;
             
             model.currentAdView = subView;
             subView.hidden = NO;
@@ -380,22 +381,20 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
 	AdModel* model = [self adModel];
-    //if (model.descriptor.adContentType == AdContentTypeIAd) {
-        NSData* rawData = [self adModel].snapshotRAWData;
-        NSDate* lastTime = [self adModel].snapshotRAWDataTime;
-        if (!(rawData && lastTime && abs([lastTime timeIntervalSinceNow]) < 1000)) {
-            // update cached data
-            
-            rawData = [self ARGBData];
-            lastTime = [NSDate date];
-            [self adModel].snapshotRAWData = rawData;
-            [self adModel].snapshotRAWDataTime = lastTime;
-        }
+    NSData* rawData = [self adModel].snapshotRAWData;
+    NSDate* lastTime = [self adModel].snapshotRAWDataTime;
+    if (!(rawData && lastTime && abs([lastTime timeIntervalSinceNow]) < 1000)) {
+        // update cached data
         
-        if ([self isPointTransparent:point rawData:rawData]) {
-            return NO;
-        }
-    //}
+        rawData = [self ARGBData];
+        lastTime = [NSDate date];
+        [self adModel].snapshotRAWData = rawData;
+        [self adModel].snapshotRAWDataTime = lastTime;
+    }
+    
+    if ([self isPointTransparent:point rawData:rawData]) {
+        return NO;
+    }
     
     return [super pointInside:point withEvent:event];
 }
