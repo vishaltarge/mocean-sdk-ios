@@ -63,7 +63,7 @@ void useCatagory5(){
 	
 }
 
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     NSArray *buttonsArray = objc_getAssociatedObject(self, RI_BUTTON_ASS_KEY);
     RIButtonItem *item = [buttonsArray objectAtIndex:buttonIndex];
