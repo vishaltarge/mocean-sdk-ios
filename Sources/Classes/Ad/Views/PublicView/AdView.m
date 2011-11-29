@@ -71,6 +71,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
         _observerSet = NO;
         [[NotificationCenter sharedInstance] postNotificationName:kUnregisterAdNotification object:self];
         [self removeObserver:self forKeyPath:@"frame"];
+        [self removeObserver:self forKeyPath:@"hidden"];
         [[NotificationCenter sharedInstance] removeObserver:self];
         [[NSNotificationCenter defaultCenter] removeObserver:self];
         [super release];
@@ -156,8 +157,9 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(deviceOrientationDidChange:) name: UIDeviceOrientationDidChangeNotification object: nil];
     
-    [self addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionOld context:NULL];
-	
+    [self addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:nil];
+    [self addObserver:self forKeyPath:@"hidden" options:NSKeyValueObservingOptionNew context:nil];
+    
 	[[NotificationCenter sharedInstance] postNotificationName:kRegisterAdNotification object:self];
 	
 	_observerSet = YES;
@@ -381,7 +383,6 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 }
 
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
-	AdModel* model = [self adModel];
     NSData* rawData = [self adModel].snapshotRAWData;
     NSDate* lastTime = [self adModel].snapshotRAWDataTime;
     if (!(rawData && lastTime && abs([lastTime timeIntervalSinceNow]) < 1000)) {
@@ -400,8 +401,26 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     return [super pointInside:point withEvent:event];
 }
 
+- (void)willMoveToWindow:(UIWindow *)newWindow {
+    BOOL newState = !self.hidden && newWindow;
+    BOOL oldSate = [self adModel].visibleState;
+    
+    if (oldSate != newState) {
+        // set new value
+        [self adModel].visibleState = newState;
+        
+        if (oldSate == NO) {
+            // ad become visible
+            [[NotificationCenter sharedInstance] postNotificationName:kAdViewBecomeVisibleNotification object:self];
+        } else {
+            // ad become invisible
+            [[NotificationCenter sharedInstance] postNotificationName:kAdViewBecomeInvisibleNotification object:self];
+        }
+    }
+}
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {    
-    if([keyPath isEqualToString:@"view.frame"] || [keyPath isEqualToString:@"frame"]) {
+    if ([keyPath isEqualToString:@"view.frame"] || [keyPath isEqualToString:@"frame"]) {
         CGRect oldFrame = CGRectNull;
         CGRect newFrame = CGRectNull;
         if([change objectForKey:@"old"] != [NSNull null]) {
@@ -415,6 +434,22 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
         [info setObject:[NSValue valueWithCGRect:newFrame] forKey:@"newFrame"];
         
         [[NotificationCenter sharedInstance] postNotificationName:kAdViewFrameChangedNotification object:info];
+    } else if ([keyPath isEqualToString:@"hidden"]) {
+        BOOL newState = [self isViewVisible];
+        BOOL oldSate = [self adModel].visibleState;
+        
+        if (oldSate != newState) {
+            // set new value
+            [self adModel].visibleState = newState;
+            
+            if (oldSate == NO) {
+                // ad become visible
+                [[NotificationCenter sharedInstance] postNotificationName:kAdViewBecomeVisibleNotification object:self];
+            } else {
+                // ad become invisible
+                [[NotificationCenter sharedInstance] postNotificationName:kAdViewBecomeInvisibleNotification object:self];
+            }
+        }
     }
 }
 

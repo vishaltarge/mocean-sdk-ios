@@ -19,18 +19,14 @@
 
 @interface AdController : NSObject <UIWebViewDelegate>{
 	NSMutableArray*		_ads;
-	NSMutableArray*		_adsVisibleState;
 	NSMutableArray*		_adUpdateControllers;
 	
-	BOOL				_visibleCheckerThreadValid;
     AdView*             _adView;
     
     BOOL                _isRequestRedirect;
     NSString*           _FirstRequestString;
     
 }
-
-@property (assign) NSThread* checkerThread;
 
 + (AdController*)sharedInstance;
 + (void)releaseSharedInstance;

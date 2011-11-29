@@ -33,8 +33,6 @@
 
 @implementation AdController
 
-@synthesize checkerThread;
-
 static AdController* sharedInstance = nil;
 
 #pragma mark -
@@ -44,9 +42,7 @@ static AdController* sharedInstance = nil;
     self = [super init];
 	if (self) {
 		_ads = [NSMutableArray new];
-		_adsVisibleState = [NSMutableArray new];
 		_adUpdateControllers = [NSMutableArray new];
-		_visibleCheckerThreadValid = NO;
 		
 		[self registerObserver];
 	}
@@ -65,7 +61,6 @@ static AdController* sharedInstance = nil;
 
 - (oneway void)superRelease {
 	RELEASE_SAFELY(_ads);
-	RELEASE_SAFELY(_adsVisibleState);
 	RELEASE_SAFELY(_adUpdateControllers);
 	
 	[super release];
@@ -117,54 +112,12 @@ static AdController* sharedInstance = nil;
 #pragma mark Private
 
 
-- (void)visibleCheckerThread {
-	NSAutoreleasePool* pool = [NSAutoreleasePool new];
-	
-	self.checkerThread = [NSThread currentThread];
-	
-	while (_visibleCheckerThreadValid) {
-		@synchronized(_ads) {
-			NSUInteger ind = 0;
-			for (AdView* adView in _ads) {
-				BOOL newState = [adView isViewVisible];
-				BOOL oldSate = [((NSNumber*)[_adsVisibleState objectAtIndex:ind]) boolValue];
-				
-				if (oldSate != newState) {
-					// set new value
-					[_adsVisibleState replaceObjectAtIndex:ind withObject:[NSNumber numberWithBool:newState]];
-					
-					if (oldSate == NO) {
-						// ad become visible
-						[[NotificationCenter sharedInstance] postNotificationName:kAdViewBecomeVisibleNotification object:adView];
-					}
-					else {
-						// ad become invisible
-						[[NotificationCenter sharedInstance] postNotificationName:kAdViewBecomeInvisibleNotification object:adView];
-					}
-
-				}
-				
-				ind++;
-			}
-		}
-		[NSThread sleepForTimeInterval:0.5];
-	}
-	
-	[pool drain];
-}
 
 - (void)addAdView:(AdView*)adView {
 	NSAutoreleasePool* pool = [NSAutoreleasePool new];
     
 	@synchronized(_ads) {
 		[_ads addObject:adView];
-		[_adsVisibleState addObject:[NSNumber numberWithBool:NO]];
-		
-		//start visible checker thread
-		if ([_ads count] == 1) {
-			_visibleCheckerThreadValid = YES;
-			[NSThread detachNewThreadSelector:@selector(visibleCheckerThread) toTarget:self withObject:nil];
-		}
 	}
     
 	[pool drain];
@@ -183,12 +136,6 @@ static AdController* sharedInstance = nil;
 		}
 		
 		[_ads removeObject:adView];
-		[_adsVisibleState removeObjectAtIndex:ind];
-		
-		//stop visible checker thread
-		if ([_ads count] == 0) {
-			_visibleCheckerThreadValid = NO;
-		}
 	}
 	
 	[pool drain];

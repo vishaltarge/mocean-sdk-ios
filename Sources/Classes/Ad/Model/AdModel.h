@@ -62,6 +62,7 @@
 @property CGSize                        contentSize;
 
 @property CGRect						frame;
+@property BOOL                          visibleState;
 
 @property (retain) UIView*              snapshot;
 @property (retain) NSData*              snapshotRAWData;
