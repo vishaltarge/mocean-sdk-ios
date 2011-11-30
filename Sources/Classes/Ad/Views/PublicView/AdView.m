@@ -10,6 +10,7 @@
 #import "AdDescriptor.h"
 #import "UIViewAdditions.h"
 #import "Utils.h"
+#import "QSStrings.h"
 
 #import "NotificationCenter.h"
 #import "LocationManager.h"
@@ -21,6 +22,9 @@
 
 
 @implementation AdView
+
+@synthesize closeButton;
+@dynamic adModel, uid;
 
 @dynamic delegate, isLoading, testMode, logMode, animateMode, contentAlignment, track, updateTimeInterval,
 defaultImage, site, zone, premium, type, keywords, minSize, maxSize, contentSize, textColor, additionalParameters,
@@ -87,6 +91,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 - (void)dealloc {    
     // disable logging
     [self setLogMode:AdLogModeNone];
+    self.closeButton = nil;
     
     ((AdModel*)_adModel).adView = nil;
     self.delegate = nil;
@@ -304,7 +309,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 	if (adView == self) {        
         AdModel* model = [self adModel];
         UIView* currentAdView = model.currentAdView;
-        if (subView != currentAdView) {
+        if (subView != currentAdView) {            
             model.snapshot = currentAdView;
             [self adModel].snapshotRAWData = nil;
             
@@ -317,27 +322,48 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
             } else {
                 model.contentSize = CGSizeZero;
             }
-            
-            
+                        
             // switch animation
             if (model.animateMode && currentAdView && subView) {
                 CGRect prevAdFrame = subView.frame;
                 CGRect startAdFrame = CGRectMake(prevAdFrame.origin.x-prevAdFrame.size.width, prevAdFrame.origin.y, prevAdFrame.size.width, prevAdFrame.size.height);
                 subView.frame = startAdFrame;
                 
-                [UIView beginAnimations:@"switchForward" context:nil];
-                [UIView setAnimationDelegate:self];
-                [UIView setAnimationDidStopSelector:@selector(animationFinished:finished:context:)];
-                subView.frame = prevAdFrame;
-                CGRect newFrameForOldImage = CGRectMake(prevAdFrame.origin.x+prevAdFrame.size.width, prevAdFrame.origin.y, prevAdFrame.size.width, prevAdFrame.size.height);
-                currentAdView.frame = newFrameForOldImage;
-                [UIView commitAnimations];
+                [UIView animateWithDuration:0.2 animations:^{
+                    subView.frame = prevAdFrame;
+                    CGRect newFrameForOldImage = CGRectMake(prevAdFrame.origin.x+prevAdFrame.size.width, prevAdFrame.origin.y, prevAdFrame.size.width, prevAdFrame.size.height);
+                    currentAdView.frame = newFrameForOldImage;
+                } completion:^(BOOL finished) {
+                    UIView* oldView = model.snapshot;
+                    
+                    if (oldView && oldView.superview) {
+                        [oldView removeFromSuperview];
+                        model.snapshot = nil;
+                    }
+                }];
             } else if (model.snapshot) {
                 [model.snapshot removeFromSuperview];
                 model.snapshot = nil;
             }
             
-            [NSThread detachNewThreadSelector:@selector(postAdDisplaydNotification) toTarget:self withObject:nil];
+            if (!((AdModel*)_adModel).isDisplayed) {
+                ((AdModel*)_adModel).startDisplayDate = [NSDate date];
+                ((AdModel*)_adModel).isDisplayed = YES;
+            }
+            
+            if (!self.closeButton) {
+                [self prepareResources];
+                if (self.closeButton) {
+                    self.closeButton.frame = CGRectMake(self.frame.size.width - self.closeButton.frame.size.width - 11, 11, self.closeButton.frame.size.width, self.closeButton.frame.size.height);
+                    [self addSubview:self.closeButton];
+                }
+            } else {
+                [self bringSubviewToFront:self.closeButton];
+            }
+
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                [self postAdDisplaydNotification];
+            });
             //[[NotificationCenter sharedInstance] postNotificationName:kAdDisplayedNotification object:self];
         }
 	}
@@ -367,13 +393,75 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 	}
 }
 
-- (void)animationFinished:(NSString *)animationID finished:(BOOL)finished context:(void *)context {
-	AdModel* model = [self adModel];
-    UIView* oldView = model.snapshot;
+- (BOOL)saveToMojivaFolderData:(NSData*)data name:(NSString*)name {
+    BOOL result = NO;
+    NSString* dirPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Library/MojivaAd/Cache"];
+    NSString* fileName = name;
+    NSString* path = [dirPath stringByAppendingPathComponent:fileName];
     
-    if (oldView && oldView.superview) {
-        [oldView removeFromSuperview];
-        model.snapshot = nil;
+    if (![[NSFileManager defaultManager] isReadableFileAtPath:path]) {
+        [[NSFileManager defaultManager] createDirectoryAtPath:dirPath withIntermediateDirectories:YES attributes:nil error:nil];
+        
+        if ([data writeToFile:path atomically:YES]) {
+            result = YES;
+        }
+    }
+    else {
+        result = YES;
+    }
+    return result;
+}
+
+- (void)prepareResources {
+    NSString* dirPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Library/MojivaAd/Cache"];
+    
+    NSString* path = [dirPath stringByAppendingPathComponent:@"closeIcon.png"];
+    UIImage* closeIcon = nil;
+    
+    if (![[NSFileManager defaultManager] isReadableFileAtPath:path]) {
+        NSData* imageData = [QSStrings decodeBase64WithString:kCloseIconB64];
+        NSData* imageData2x = [QSStrings decodeBase64WithString:kCloseIcon2xB64];
+        if ([self saveToMojivaFolderData:imageData name:@"closeIcon.png"] &&
+            [self saveToMojivaFolderData:imageData2x name:@"closeIcon@2x.png"]) {
+            closeIcon = [UIImage imageWithContentsOfFile:path];
+        }
+    } else {
+        closeIcon = [UIImage imageWithContentsOfFile:path];
+    }
+    
+    if (closeIcon && !self.closeButton) {
+        self.closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.closeButton.frame = CGRectMake(0, 0, closeIcon.size.width, closeIcon.size.height);
+        [self.closeButton setImage:closeIcon forState:UIControlStateNormal];
+        [self.closeButton addTarget:self action:@selector(buttonsAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+}
+
+- (void)buttonsAction:(id)sender {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didClosedAd:usageTimeInterval:)]) {
+        NSDate* _startDate = ((AdModel*)_adModel).startDisplayDate;
+        NSTimeInterval timeInterval = -[_startDate timeIntervalSinceNow];
+        [self.delegate didClosedAd:self usageTimeInterval:timeInterval];
+    } else {
+        if (self.superview && self.window) {
+            if ([sender isKindOfClass:[NSNotification class]]) {
+                NSNotification* notification = sender;
+                if ([notification object] == self) {
+                    [[NotificationCenter sharedInstance] postNotificationName:kInterstitialAdCloseNotification object:self];
+                    [self removeFromSuperview];
+                } else if ([[notification object] isKindOfClass:[NSDictionary class]]) {
+                    NSDictionary* info = [notification object];
+                    AdView* adView = [info objectForKey:@"adView"];
+                    if (adView == self) {
+                        [[NotificationCenter sharedInstance] postNotificationName:kInterstitialAdCloseNotification object:self];
+                        [self removeFromSuperview];
+                    }
+                }
+            } else {
+                [[NotificationCenter sharedInstance] postNotificationName:kInterstitialAdCloseNotification object:self];
+                [self removeFromSuperview];
+            }
+        }
     }
 }
 
@@ -662,7 +750,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 
 // @property (assign) id <AdViewDelegate> delegate;
 - (void)setDelegate:(id <AdViewDelegate>)delegate {
-	((AdModel*)_adModel).delegate = (id <AdInterstitialViewDelegate>)delegate;
+	((AdModel*)_adModel).delegate = (id <AdViewDelegate>)delegate;
 }
 
 - (id <AdViewDelegate>)delegate {

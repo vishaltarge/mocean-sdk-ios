@@ -73,6 +73,12 @@
  */
 - (BOOL)adShouldOpen:(id)sender withUrl:(NSURL*)url;
 
+/** Sent after an ad view closed and tracks the usage time of ad interstitial view.
+ 
+ @param sender The ad view was closed.
+ @param usageTimeInterval The usage time interval of ad view. */
+- (void)didClosedAd:(id)sender usageTimeInterval:(NSTimeInterval)usageTimeInterval;
+
 /** Sent after an ad process ORMMA command.
  
  @warning *Important:* Implement this method only if you want add additional logic for event. By default SDK alreadey emplements all methods and your code could conflict with SDK
@@ -82,18 +88,5 @@
  @param parameters The Dictionary with parameters from event.
  */
 - (void)ormmaProcess:(id)sender event:(NSString*)event parameters:(NSDictionary*)parameters;
-
-@end
-
-/** The AdInterstitialViewDelegate protocol defines methods that a delegate of a AdInterstitialView object can optionally implement to receive notifications from ad. */
-@protocol AdInterstitialViewDelegate <AdViewDelegate>
-@optional
-
-
-/** Sent after an ad interstitial view closed and tracks the usage time of ad interstitial view.
- 
- @param sender The ad interstitial view was closed.
- @param usageTimeInterval The usage time interval of ad interstitial view. */
-- (void) didClosedInterstitialAd:(id)sender usageTimeInterval:(NSTimeInterval)usageTimeInterval;
 
 @end

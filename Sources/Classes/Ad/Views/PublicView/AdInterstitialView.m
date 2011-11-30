@@ -82,24 +82,16 @@
         [super dislpayAd:notification];
 		
 		// Close button code
-		UIButton* btnClose = ((AdModel*)_adModel).closeButton;
-		if (!btnClose) {
-			btnClose = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+		if (!self.closeButton) {
+            [self prepareResources];
 			
-			btnClose.frame = CGRectMake(self.frame.size.width/2 - 50,
-										self.frame.size.height/2 - 50,
-										100,
-										50);
-            btnClose.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
-			[btnClose setTitle:kCloseButtonText forState:UIControlStateNormal];
-			[btnClose setTitle:kCloseButtonText forState:UIControlStateHighlighted];
-			((AdModel*)_adModel).closeButton = btnClose;
+			self.closeButton.frame = CGRectMake(self.frame.size.width - self.closeButton.frame.size.width - 11, 11, self.closeButton.frame.size.width, self.closeButton.frame.size.height);
+            self.closeButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
 		}
-		[btnClose addTarget:self action:@selector(buttonsAction:) forControlEvents:UIControlEventTouchUpInside];
 		
-		btnClose.hidden = YES;
+		self.closeButton.hidden = YES;
 		
-		[self addSubview:btnClose];
+		[self addSubview:self.closeButton];
 		if (((AdModel*)_adModel).showCloseButtonTime > 0 && !((AdModel*)_adModel).isDisplayed) {
 			[NSTimer scheduledTimerWithTimeInterval:((AdModel*)_adModel).showCloseButtonTime
 											 target:self 
@@ -126,7 +118,7 @@
 }
 
 - (void)showCloseButton {
-	((AdModel*)_adModel).closeButton.hidden = NO;
+	self.closeButton.hidden = NO;
 }
 
 - (void)scheduledButtonAction {
@@ -134,23 +126,29 @@
 }
 
 - (void)buttonsAction:(id)sender {
-    if (self.superview && self.window) {
-        if ([sender isKindOfClass:[NSNotification class]]) {
-            NSNotification* notification = sender;
-            if ([notification object] == self) {
-                [[NotificationCenter sharedInstance] postNotificationName:kInterstitialAdCloseNotification object:self];
-                [self removeFromSuperview];
-            } else if ([[notification object] isKindOfClass:[NSDictionary class]]) {
-                NSDictionary* info = [notification object];
-                AdView* adView = [info objectForKey:@"adView"];
-                if (adView == self) {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didClosedAd:usageTimeInterval:)]) {
+        NSDate* _startDate = ((AdModel*)_adModel).startDisplayDate;
+        NSTimeInterval timeInterval = -[_startDate timeIntervalSinceNow];
+        [self.delegate didClosedAd:self usageTimeInterval:timeInterval];
+    } else {
+        if (self.superview && self.window) {
+            if ([sender isKindOfClass:[NSNotification class]]) {
+                NSNotification* notification = sender;
+                if ([notification object] == self) {
                     [[NotificationCenter sharedInstance] postNotificationName:kInterstitialAdCloseNotification object:self];
                     [self removeFromSuperview];
+                } else if ([[notification object] isKindOfClass:[NSDictionary class]]) {
+                    NSDictionary* info = [notification object];
+                    AdView* adView = [info objectForKey:@"adView"];
+                    if (adView == self) {
+                        [[NotificationCenter sharedInstance] postNotificationName:kInterstitialAdCloseNotification object:self];
+                        [self removeFromSuperview];
+                    }
                 }
+            } else {
+                [[NotificationCenter sharedInstance] postNotificationName:kInterstitialAdCloseNotification object:self];
+                [self removeFromSuperview];
             }
-        } else {
-            [[NotificationCenter sharedInstance] postNotificationName:kInterstitialAdCloseNotification object:self];
-            [self removeFromSuperview];
         }
     }
 }
@@ -165,12 +163,12 @@
     AdView* adView = [notification object];
 	
 	if (adView == self) {
-        id <AdInterstitialViewDelegate> delegate = [self adModel].delegate;
+        id <AdViewDelegate> delegate = [self adModel].delegate;
         
-        if (delegate && [delegate respondsToSelector:@selector(didClosedInterstitialAd:usageTimeInterval:)]) {
+        if (delegate && [delegate respondsToSelector:@selector(didClosedAd:usageTimeInterval:)]) {
             NSDate* _startDate = ((AdModel*)_adModel).startDisplayDate;
             NSTimeInterval timeInterval = -[_startDate timeIntervalSinceNow];
-            [delegate didClosedInterstitialAd:self usageTimeInterval:timeInterval];
+            [delegate didClosedAd:self usageTimeInterval:timeInterval];
         }
     }
 }
@@ -181,11 +179,11 @@
 
 
 // @property (assign) id <AdViewDelegate> delegate;
-- (void)setDelegate:(id <AdInterstitialViewDelegate>)delegate {
+- (void)setDelegate:(id <AdViewDelegate>)delegate {
 	((AdModel*)_adModel).delegate = delegate;
 }
 
-- (id <AdInterstitialViewDelegate>)delegate {
+- (id <AdViewDelegate>)delegate {
 	return ((AdModel*)_adModel).delegate;
 }
 
@@ -205,15 +203,6 @@
 
 - (NSTimeInterval)autocloseInterstitialTime {
 	return ((AdModel*)_adModel).autocloseInterstitialTime;
-}
-
-//@property (retain) UIButton* closeButton;
-- (void)setCloseButton:(UIButton*)closeButton {
-	((AdModel*)_adModel).closeButton = closeButton;
-}
-
-- (UIButton*)closeButton {
-	return ((AdModel*)_adModel).closeButton;
 }
 
 

@@ -11,10 +11,15 @@
 #import "InstallManager.h"
 #import "UIViewAdditions.h"
 
-@interface AdView (Private)
+@interface AdView ()
 
-- (AdModel*)adModel;
-- (NSString*)uid;
+@property (retain) UIButton*    closeButton;
+
+- (void)buttonsAction:(id)sender;
+- (void)prepareResources;
+
+@property (readonly) AdModel*   adModel;
+@property (readonly) NSString*  uid;
 
 - (void)setDefaultValues;
 - (void)registerObserver;
@@ -22,8 +27,6 @@
 - (void)adDownloaded:(NSNotification*)notification;
 - (void)addDefaultImage:(NSNotification*)notification;
 - (void)dislpayAd:(NSNotification*)notification;
-
-- (void)animationFinished:(NSString *)animationID finished:(BOOL)finished context:(void *)context;
 
 - (void)startAdDownload:(NSNotification*)notification;
 - (void)adDisplayd:(NSNotification*)notification;

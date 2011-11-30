@@ -10,7 +10,7 @@
 #import "AdInterstitialView.h"
 #import "AdDelegate.h"
 
-@interface VideoWithInterstitilaViewController : UIViewController <AdViewDelegate, AdInterstitialViewDelegate>
+@interface VideoWithInterstitilaViewController : UIViewController <AdViewDelegate, AdViewDelegate>
 {
 	AdView* _adView;
 	AdInterstitialView* _adInterstitialView;

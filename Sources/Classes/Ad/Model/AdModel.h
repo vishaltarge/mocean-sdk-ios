@@ -17,7 +17,7 @@
 
 }
 
-@property (assign) id <AdInterstitialViewDelegate>	delegate;
+@property (assign) id <AdViewDelegate>	delegate;
 
 @property (readonly) BOOL				readyForDisplay;
 
@@ -55,7 +55,6 @@
 @property NSTimeInterval                showCloseButtonTime;
 @property NSTimeInterval                autocloseInterstitialTime;
 @property (retain) NSDate*              startDisplayDate;
-@property (retain) UIButton*            closeButton;
 @property BOOL                          isDisplayed;
 
 @property BOOL                          aligmentCenter;

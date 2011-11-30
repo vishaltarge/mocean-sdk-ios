@@ -50,14 +50,14 @@
 
 /** The receiver's delegate.
  
- The AdInterstitialView is sent messages when content is processing. The delegate must adopt the AdInterstitialViewDelegate protocol.
+ The AdInterstitialView is sent messages when content is processing. The delegate must adopt the AdViewDelegate protocol.
  The delegate is not retained.
  
  @warning *Important:* Before releasing an instance of AdInterstitialView for which you have set a delegate, you must first set its delegate property to nil. This can be done, for example, in your dealloc method.
  
- @see AdInterstitialViewDelegate Protocol Reference for the optional methods this delegate may implement.
+ @see AdViewDelegate Protocol Reference for the optional methods this delegate may implement.
  */
-@property (assign) id <AdInterstitialViewDelegate>	delegate;
+@property (assign) id <AdViewDelegate>	delegate;
 
 
 @end
