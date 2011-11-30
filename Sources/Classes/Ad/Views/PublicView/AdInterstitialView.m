@@ -136,18 +136,18 @@
                 NSNotification* notification = sender;
                 if ([notification object] == self) {
                     [[NotificationCenter sharedInstance] postNotificationName:kInterstitialAdCloseNotification object:self];
-                    [self removeFromSuperview];
+                    self.hidden = YES;
                 } else if ([[notification object] isKindOfClass:[NSDictionary class]]) {
                     NSDictionary* info = [notification object];
                     AdView* adView = [info objectForKey:@"adView"];
                     if (adView == self) {
                         [[NotificationCenter sharedInstance] postNotificationName:kInterstitialAdCloseNotification object:self];
-                        [self removeFromSuperview];
+                        self.hidden = YES;
                     }
                 }
             } else {
                 [[NotificationCenter sharedInstance] postNotificationName:kInterstitialAdCloseNotification object:self];
-                [self removeFromSuperview];
+                self.hidden = YES;
             }
         }
     }
