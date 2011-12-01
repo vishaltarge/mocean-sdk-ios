@@ -116,6 +116,14 @@ typedef enum {
  */
 @property BOOL							animateMode;
 
+/** A Boolean value that determines whether ad adding close button.
+ 
+ Setting the value of this property to YES disable embedded close button and all assigned actions.
+ 
+ The default value is NO.
+ */
+@property BOOL							useCustomClose;
+
 /** A Boolean value that determines whether content alingment center vertically and horizontally.
  
  Setting the value of this property to YES enables auto warapping server reponse content in HTML table with aligment
@@ -138,7 +146,7 @@ typedef enum {
 
 /** A Boolean value that determines whether ad track is enabled.
  
- Neeeeeeeeed to ad more description here!!!!!!!!!!!!!!!!!
+If set to YES, the ad server will send a client side impression tracking pixel with each ad, regardless of if the campaign has this property set or not. Impressions will not be counting if this pixel does not render on the device.
  
  The default value is NO.
  */

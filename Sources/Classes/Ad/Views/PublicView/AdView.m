@@ -26,7 +26,7 @@
 @synthesize closeButton;
 @dynamic adModel, uid;
 
-@dynamic delegate, isLoading, testMode, logMode, animateMode, contentAlignment, track, updateTimeInterval,
+@dynamic delegate, isLoading, testMode, logMode, animateMode, useCustomClose, contentAlignment, track, updateTimeInterval,
 defaultImage, site, zone, premium, type, keywords, minSize, maxSize, contentSize, textColor, additionalParameters,
 adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, carrier, latitude, longitude;
 
@@ -351,10 +351,11 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
                 ((AdModel*)_adModel).isDisplayed = YES;
             }
             
-            if (!self.closeButton) {
+            if (!self.closeButton && !self.adModel.useCustomClose) {
                 [self prepareResources];
                 if (self.closeButton) {
                     self.closeButton.frame = CGRectMake(self.frame.size.width - self.closeButton.frame.size.width - 11, 11, self.closeButton.frame.size.width, self.closeButton.frame.size.height);
+                    self.closeButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
                     [self addSubview:self.closeButton];
                 }
             } else {
@@ -800,6 +801,15 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 
 - (BOOL)animateMode {
 	return ((AdModel*)_adModel).animateMode;
+}
+
+//@property BOOL	useCustomClose;
+- (void)setuseCustomClose:(BOOL)useCustomClose {
+	((AdModel*)_adModel).useCustomClose = useCustomClose;
+}
+
+- (BOOL)useCustomClose {
+	return ((AdModel*)_adModel).useCustomClose;
 }
 
 //@property BOOL	contentAlignment;

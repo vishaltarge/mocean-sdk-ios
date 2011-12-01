@@ -13,7 +13,7 @@
 
 @implementation AdModel
 
-@synthesize delegate, readyForDisplay, testMode, logMode, animateMode, internalOpenMode, track,
+@synthesize delegate, readyForDisplay, testMode, logMode, animateMode, useCustomClose, internalOpenMode, track,
 updateTimeInterval, defaultImage, site, adZone, premiumFilter, type, keywords, minSize, maxSize,
 paramBG, paramLINK, additionalParameters, adServerUrl, advertiserId, groupCode,
 country, region, city, area, metro, zip, carrier, showCloseButtonTime,

@@ -79,35 +79,35 @@
 	AdView* adView = [info objectForKey:@"adView"];
 	
 	if (adView == self) {
-        [super dislpayAd:notification];
+        //[super dislpayAd:notification];
 		
 		// Close button code
-		if (!self.closeButton) {
+		if (!self.closeButton && !self.adModel.useCustomClose) {
             [self prepareResources];
 			
 			self.closeButton.frame = CGRectMake(self.frame.size.width - self.closeButton.frame.size.width - 11, 11, self.closeButton.frame.size.width, self.closeButton.frame.size.height);
-            self.closeButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
-		}
-		
-		self.closeButton.hidden = YES;
-		
-		[self addSubview:self.closeButton];
-		if (((AdModel*)_adModel).showCloseButtonTime > 0 && !((AdModel*)_adModel).isDisplayed) {
-			[NSTimer scheduledTimerWithTimeInterval:((AdModel*)_adModel).showCloseButtonTime
-											 target:self 
-										   selector:@selector(showCloseButton)
-										   userInfo:nil 
-											repeats:NO];
-		}
-		else {
-			[self showCloseButton];
-		}
-		if (((AdModel*)_adModel).autocloseInterstitialTime > 0) {
-			[NSTimer scheduledTimerWithTimeInterval:((AdModel*)_adModel).autocloseInterstitialTime
-											 target:self 
-										   selector:@selector(scheduledButtonAction) 
-										   userInfo:nil 
-											repeats:NO];
+            self.closeButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
+            
+            self.closeButton.hidden = YES;
+            
+            [self addSubview:self.closeButton];
+            if (((AdModel*)_adModel).showCloseButtonTime > 0 && !((AdModel*)_adModel).isDisplayed) {
+                [NSTimer scheduledTimerWithTimeInterval:((AdModel*)_adModel).showCloseButtonTime
+                                                 target:self 
+                                               selector:@selector(showCloseButton)
+                                               userInfo:nil 
+                                                repeats:NO];
+            }
+            else {
+                [self showCloseButton];
+            }
+            if (((AdModel*)_adModel).autocloseInterstitialTime > 0) {
+                [NSTimer scheduledTimerWithTimeInterval:((AdModel*)_adModel).autocloseInterstitialTime
+                                                 target:self 
+                                               selector:@selector(scheduledButtonAction) 
+                                               userInfo:nil 
+                                                repeats:NO];
+            }
 		}
         
         if (!((AdModel*)_adModel).isDisplayed) {
