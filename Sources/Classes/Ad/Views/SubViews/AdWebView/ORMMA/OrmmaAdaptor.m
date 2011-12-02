@@ -106,15 +106,13 @@
     return [[[request URL] scheme] isEqualToString:ORMMA_SHAME];
 }
 
-/*
 - (void)test {
     [self evalJS:[OrmmaHelper signalReadyInWebView]];
 }
-*/
 
 - (void)webViewDidFinishLoad:(UIWebView*)webView {
-    //[self performSelector:@selector(test) withObject:nil afterDelay:5.0];
-    [self evalJS:[OrmmaHelper signalReadyInWebView]];
+    [self performSelector:@selector(test) withObject:nil afterDelay:5.0];
+    //[self evalJS:[OrmmaHelper signalReadyInWebView]];
 }
 
 - (NSString*)getDefaultsJSCode {
