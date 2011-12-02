@@ -22,6 +22,14 @@
 /** @name Customizing AdInterstitialView Closing */
 
 
+/** A Boolean value that determines whether ad adding close button.
+ 
+ Setting the value of this property to YES disable embedded close button and all assigned actions.
+ 
+ The default value is NO.
+ */
+@property BOOL							useCustomClose;
+
 /** Show close button delay time interval, in seconds.
  
  Setting to 0 will show close button immediately.

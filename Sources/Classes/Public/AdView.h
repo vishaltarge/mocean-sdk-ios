@@ -120,7 +120,7 @@ typedef enum {
  
  Setting the value of this property to YES disable embedded close button and all assigned actions.
  
- The default value is NO.
+ The default value is YES.
  */
 @property BOOL							useCustomClose;
 

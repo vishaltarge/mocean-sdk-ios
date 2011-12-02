@@ -226,6 +226,15 @@
 #pragma mark Propertys
 
 
+//@property BOOL	useCustomClose;
+- (void)setUseCustomClose:(BOOL)useCustomClose {
+	((AdModel*)_adModel).useCustomClose = useCustomClose;
+}
+
+- (BOOL)useCustomClose {
+	return ((AdModel*)_adModel).useCustomClose;
+}
+
 // @property (assign) id <AdViewDelegate> delegate;
 - (void)setDelegate:(id <AdViewDelegate>)delegate {
 	((AdModel*)_adModel).delegate = delegate;
