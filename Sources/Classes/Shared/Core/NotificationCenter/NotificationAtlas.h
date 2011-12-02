@@ -84,5 +84,6 @@ extern NSString* kORMMAEventNotification;
 extern NSString* kThirdPartyNotification;
 extern NSString* kPlayAudioNotification;
 extern NSString* kPlayVideoNotification;
+extern NSString* kCloseExpandNotification;
 
 

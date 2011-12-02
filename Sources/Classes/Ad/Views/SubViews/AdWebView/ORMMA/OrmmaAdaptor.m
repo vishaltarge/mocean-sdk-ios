@@ -16,6 +16,7 @@
 #import "SharedModel.h"
 #import "NetworkQueue.h"
 #import "ObjectStorage.h"
+#import "ExpandWebView.h"
 
 #define ORMMA_SHAME     @"ormma"
 
@@ -23,6 +24,7 @@
 
 @property (nonatomic, retain) UIWebView*        webView;
 @property (nonatomic, retain) AdView*           adView;
+@property (nonatomic, retain) ExpandWebView*    expandView;
 
 @property (nonatomic, assign) ORMMAState        nonHideState;
 @property (nonatomic, assign) ORMMAState        currentState;
@@ -39,6 +41,7 @@
 - (void)handleReachabilityChangedNotification:(NSNotification *)notification;
 - (void)locationDetected:(NSNotification*)notification;
 - (void)headingDetected:(NSNotification*)notification;
+- (void)expandViewClosed:(NSNotification*)notification;
 - (void)evalJS:(NSString*)js;
 - (void)click:(NSString*)url;
 
@@ -46,7 +49,7 @@
 
 @implementation OrmmaAdaptor
 
-@synthesize webView, adView, nonHideState, currentState, defaultFrame, maxSize, interstitial;
+@synthesize webView, adView, expandView, nonHideState, currentState, defaultFrame, maxSize, interstitial;
 
 - (id)initWithWebView:(UIWebView*)view adView:(AdView*)ad {
     self = [super init];
@@ -61,6 +64,7 @@
         [[NotificationCenter sharedInstance] addObserver:self selector:@selector(frameChanged:) name:kAdViewFrameChangedNotification object:nil];
         [[NotificationCenter sharedInstance] addObserver:self selector:@selector(locationDetected:) name:kNewLocationDetectedNotification object:nil];
         [[NotificationCenter sharedInstance] addObserver:self selector:@selector(headingDetected:) name:kLocationUpdateHeadingNotification object:nil];
+        [[NotificationCenter sharedInstance] addObserver:self selector:@selector(expandViewClosed:) name:kCloseExpandNotification object:nil];
         
         // setup our network reachability        
 		NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
@@ -274,13 +278,9 @@
         } else if (self.currentState == ORMMAStateHidden) {
             // hidden ad, nothing to do
         } else if (self.currentState == ORMMAStateExpanded) {
-            [UIView animateWithDuration:0.2 animations:^(void) {
-                self.adView.frame = self.defaultFrame;
-            } completion:^(BOOL finished) {
-                self.currentState = ORMMAStateDefault;
-                self.nonHideState = self.currentState;
-                [self evalJS:[OrmmaHelper setState:self.currentState]];
-            }];
+            // we need to close expandView
+            [self.expandView close];
+            self.expandView = nil;
         } else {
             [UIView animateWithDuration:0.2 animations:^(void) {
                 self.adView.frame = self.defaultFrame;
@@ -297,21 +297,24 @@
         } else {
             self.currentState = ORMMAStateExpanded;
             self.nonHideState = self.currentState;
-            CGFloat x = [OrmmaHelper floatFromDictionary:parameters forKey:@"x"];
-            CGFloat y = [OrmmaHelper floatFromDictionary:parameters forKey:@"y"];
-            CGFloat w = [OrmmaHelper floatFromDictionary:parameters forKey:@"w"];
+            NSString* url = [OrmmaHelper requiredStringFromDictionary:parameters forKey:@"url"];
+            CGFloat w = [OrmmaHelper floatFromDictionary:parameters forKey:@"width"];
+            CGFloat h = [OrmmaHelper floatFromDictionary:parameters forKey:@"height"];
+            BOOL useBackground = [OrmmaHelper booleanFromDictionary:parameters forKey:@"useBackground"];
+            
             if (w > maxSize.width) {
                 [self evalJS:[OrmmaHelper fireError:@"Cannot expand an ad larger than allowed." forEvent:event]];
             } else {
-                CGFloat h = [OrmmaHelper floatFromDictionary:parameters forKey:@"h"];
                 if (h > maxSize.height) {
                     [self evalJS:[OrmmaHelper fireError:@"Cannot expand an ad larger than allowed." forEvent:event]];
                 } else {
-                    [UIView animateWithDuration:0.2 animations:^(void) {
-                        self.adView.frame = CGRectMake(x, y, w, h);
-                    } completion:^(BOOL finished) {
-                        [self evalJS:[OrmmaHelper setState:self.currentState]];
-                    }];
+                    self.expandView = [[[ExpandWebView alloc] initWithFrame:CGRectMake(self.adView.frame.origin.x, self.adView.frame.origin.y, self.maxSize.width, self.maxSize.height)] autorelease];
+                    
+                    self.expandView.adView = self.adView;
+                    
+                    [self.adView.superview addSubview:self.expandView];
+                    
+                    [self.expandView loadUrl:url];
                 }
             }
         }
@@ -626,6 +629,16 @@
     CLHeading* heading = [notification object];
     [self evalJS:[OrmmaHelper setHeading:heading.trueHeading]];
 #endif
+}
+
+- (void)expandViewClosed:(NSNotification*)notification {
+    NSDictionary* info = [notification object];
+	AdView* adViewNotify = [info objectForKey:@"adView"];
+    if (adViewNotify == self.adView) {
+        self.currentState = ORMMAStateDefault;
+        self.nonHideState = self.currentState;
+        [self evalJS:[OrmmaHelper setState:self.currentState]];
+	}
 }
 
 
