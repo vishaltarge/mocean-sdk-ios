@@ -19,6 +19,8 @@
 		AD2F62FB144461D1003A6E05 /* NetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = AD2F62F3144461D1003A6E05 /* NetworkQueue.m */; };
 		AD2F62FC144461D1003A6E05 /* ObjectStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = AD2F62F4144461D1003A6E05 /* ObjectStorage.h */; };
 		AD2F62FD144461D1003A6E05 /* ObjectStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = AD2F62F5144461D1003A6E05 /* ObjectStorage.m */; };
+		AD5D78D314891662001E3B0C /* ExpandWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = AD5D78D114891662001E3B0C /* ExpandWebView.h */; };
+		AD5D78D414891662001E3B0C /* ExpandWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5D78D214891662001E3B0C /* ExpandWebView.m */; };
 		ADB1C9C91447F8AC00785D44 /* InternalAVPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = ADB1C9C71447F8AC00785D44 /* InternalAVPlayer.h */; };
 		ADB1C9CA1447F8AC00785D44 /* InternalAVPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB1C9C81447F8AC00785D44 /* InternalAVPlayer.m */; };
 		ADF1FD851201A390008B99D2 /* Reachability.h in Headers */ = {isa = PBXBuildFile; fileRef = ADF1FD621201A38F008B99D2 /* Reachability.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -127,6 +129,8 @@
 		AD2F62F3144461D1003A6E05 /* NetworkQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkQueue.m; sourceTree = "<group>"; };
 		AD2F62F4144461D1003A6E05 /* ObjectStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectStorage.h; sourceTree = "<group>"; };
 		AD2F62F5144461D1003A6E05 /* ObjectStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectStorage.m; sourceTree = "<group>"; };
+		AD5D78D114891662001E3B0C /* ExpandWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpandWebView.h; sourceTree = "<group>"; };
+		AD5D78D214891662001E3B0C /* ExpandWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpandWebView.m; sourceTree = "<group>"; };
 		ADA9C50411F975B20074E2F3 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		ADA9C50611F975B20074E2F3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		ADA9C50811F975B20074E2F3 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -339,6 +343,15 @@
 				AD2F62F5144461D1003A6E05 /* ObjectStorage.m */,
 			);
 			path = NetworkQueue;
+			sourceTree = "<group>";
+		};
+		AD5D78D014891662001E3B0C /* ExpandWebView */ = {
+			isa = PBXGroup;
+			children = (
+				AD5D78D114891662001E3B0C /* ExpandWebView.h */,
+				AD5D78D214891662001E3B0C /* ExpandWebView.m */,
+			);
+			path = ExpandWebView;
 			sourceTree = "<group>";
 		};
 		ADA9C21611F96D370074E2F3 /* Libs */ = {
@@ -640,6 +653,7 @@
 			children = (
 				CFDE16F71313A29200FE2F5A /* AdWebView */,
 				CF9860F21340D9CF004D6202 /* VideoView */,
+				AD5D78D014891662001E3B0C /* ExpandWebView */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -824,6 +838,7 @@
 				AD2F62FA144461D1003A6E05 /* NetworkQueue.h in Headers */,
 				AD2F62FC144461D1003A6E05 /* ObjectStorage.h in Headers */,
 				ADB1C9C91447F8AC00785D44 /* InternalAVPlayer.h in Headers */,
+				AD5D78D314891662001E3B0C /* ExpandWebView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -970,6 +985,7 @@
 				AD2F62FB144461D1003A6E05 /* NetworkQueue.m in Sources */,
 				AD2F62FD144461D1003A6E05 /* ObjectStorage.m in Sources */,
 				ADB1C9CA1447F8AC00785D44 /* InternalAVPlayer.m in Sources */,
+				AD5D78D414891662001E3B0C /* ExpandWebView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

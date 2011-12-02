@@ -34,8 +34,6 @@
 		FCF1EC7313F2566600364390 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1EC6613F2566600364390 /* CFNetwork.framework */; };
 		FCF1EC7413F2566600364390 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1EC6813F2566600364390 /* CoreMotion.framework */; };
 		FCF1EC7513F2566600364390 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1EC6913F2566600364390 /* CoreTelephony.framework */; };
-		FCF1EC7713F2566600364390 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1EC6B13F2566600364390 /* libsqlite3.0.dylib */; };
-		FCF1EC7813F2566600364390 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1EC6C13F2566600364390 /* libz.1.dylib */; };
 		FCF1EC7913F2566600364390 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1EC6D13F2566600364390 /* MediaPlayer.framework */; };
 		FCF1EC7A13F2566600364390 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1EC6E13F2566600364390 /* MessageUI.framework */; };
 		FCF1EC7B13F2566600364390 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1EC6F13F2566600364390 /* QuartzCore.framework */; };
@@ -155,8 +153,6 @@
 				FCF1EBDF13F24A5200364390 /* CoreGraphics.framework in Frameworks */,
 				FCF1EC7413F2566600364390 /* CoreMotion.framework in Frameworks */,
 				FCF1EC7513F2566600364390 /* CoreTelephony.framework in Frameworks */,
-				FCF1EC7713F2566600364390 /* libsqlite3.0.dylib in Frameworks */,
-				FCF1EC7813F2566600364390 /* libz.1.dylib in Frameworks */,
 				FCF1EC7913F2566600364390 /* MediaPlayer.framework in Frameworks */,
 				FCF1EC7A13F2566600364390 /* MessageUI.framework in Frameworks */,
 				FCF1EC7B13F2566600364390 /* QuartzCore.framework in Frameworks */,

@@ -45,8 +45,6 @@
 		CF6313111345BBED00399622 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF63130F1345BBED00399622 /* Default@2x.png */; };
 		CF6313121345BBED00399622 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = CF6313101345BBED00399622 /* Default.png */; };
 		CF6313151345BF7F00399622 /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = CF6313141345BF7F00399622 /* Default-Portrait.png */; };
-		CF64F48513D992E500A4F1B5 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CF64F48313D992E500A4F1B5 /* libsqlite3.0.dylib */; };
-		CF64F48613D992E500A4F1B5 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CF64F48413D992E500A4F1B5 /* libz.dylib */; };
 		CF840386130E67B200EC0AF8 /* OpenGLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF840382130E67B200EC0AF8 /* OpenGLViewController.m */; };
 		CF840387130E67B200EC0AF8 /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF840384130E67B200EC0AF8 /* EAGLView.m */; };
 		CF84058C130E992300EC0AF8 /* RichJSadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF84058B130E992300EC0AF8 /* RichJSadViewController.m */; };
@@ -141,8 +139,6 @@
 		CF63130F1345BBED00399622 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		CF6313101345BBED00399622 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		CF6313141345BF7F00399622 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
-		CF64F48313D992E500A4F1B5 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/lib/libsqlite3.0.dylib; sourceTree = DEVELOPER_DIR; };
-		CF64F48413D992E500A4F1B5 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/lib/libz.dylib; sourceTree = DEVELOPER_DIR; };
 		CF840382130E67B200EC0AF8 /* OpenGLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenGLViewController.m; sourceTree = "<group>"; };
 		CF840383130E67B200EC0AF8 /* OpenGLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLViewController.h; sourceTree = "<group>"; };
 		CF840384130E67B200EC0AF8 /* EAGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAGLView.m; sourceTree = "<group>"; };
@@ -301,8 +297,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CF64F48513D992E500A4F1B5 /* libsqlite3.0.dylib in Frameworks */,
-				CF64F48613D992E500A4F1B5 /* libz.dylib in Frameworks */,
 				CF19F9C913B4B21B001D1C81 /* CoreMotion.framework in Frameworks */,
 				CF19F9CB13B4B21B001D1C81 /* OpenGLES.framework in Frameworks */,
 				CF19F9C313B4B1FC001D1C81 /* MediaPlayer.framework in Frameworks */,
@@ -499,8 +493,6 @@
 				CF19F9C713B4B21B001D1C81 /* CoreTelephony.framework */,
 				FCB54BC31423125200867C7E /* EventKit.framework */,
 				CF19F9C813B4B21B001D1C81 /* OpenGLES.framework */,
-				CF64F48313D992E500A4F1B5 /* libsqlite3.0.dylib */,
-				CF64F48413D992E500A4F1B5 /* libz.dylib */,
 				CF19F9C013B4B1FC001D1C81 /* MediaPlayer.framework */,
 				CF19F9B113B4B17A001D1C81 /* MessageUI.framework */,
 				CF19F9C113B4B1FC001D1C81 /* QuartzCore.framework */,
