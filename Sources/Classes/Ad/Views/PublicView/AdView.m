@@ -128,12 +128,14 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     self.internalOpenMode = YES;
     self.testMode = NO;
     self.premium = AdPremiumBoth;
+    self.useCustomClose = YES;
     
     [self setLogMode:AdLogModeErrorsOnly];
     
     ((AdModel*)_adModel).loading = NO;
     ((AdModel*)_adModel).track = -1;
     ((AdModel*)_adModel).aligmentCenter = NO;
+    ((AdModel*)_adModel).isDisplayed = NO;
 }
 
 - (void)registerObserver {
@@ -253,7 +255,6 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 - (void)updateAd:(NSNotification*)notification {
 	NSDictionary *info = [notification object];
 	AdView* adView = [info objectForKey:@"adView"];
-	AdDescriptor* descriptor = [info objectForKey:@"descriptor"];
 	
 	if (adView == self) {
         AdModel* model = [self adModel];
@@ -804,7 +805,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 }
 
 //@property BOOL	useCustomClose;
-- (void)setuseCustomClose:(BOOL)useCustomClose {
+- (void)setUseCustomClose:(BOOL)useCustomClose {
 	((AdModel*)_adModel).useCustomClose = useCustomClose;
 }
 

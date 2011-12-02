@@ -36,4 +36,6 @@ typedef enum ORMMAStateEnum {
 - (void)webViewDidFinishLoad:(UIWebView*)webView;
 - (void)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;
 
+@property (assign) BOOL     interstitial;
+
 @end

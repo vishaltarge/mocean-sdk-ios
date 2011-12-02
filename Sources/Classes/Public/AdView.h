@@ -124,6 +124,12 @@ typedef enum {
  */
 @property BOOL							useCustomClose;
 
+/** Interstitial close button.
+ 
+ Set this value to customize close button appearance.
+ */
+@property (retain) UIButton* closeButton;
+
 /** A Boolean value that determines whether content alingment center vertically and horizontally.
  
  Setting the value of this property to YES enables auto warapping server reponse content in HTML table with aligment

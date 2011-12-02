@@ -6,6 +6,7 @@
 //
 
 #import "AdWebView.h"
+#import "AdInterstitialView.h"
 
 #import "NotificationCenter.h"
 #import "OrmmaAdaptor.h"
@@ -62,7 +63,10 @@
     if([[html lowercaseString] rangeOfString:[@"ormma" lowercaseString]].location != NSNotFound) {
         // replce ormma placeholder
         self.ormmaAdaptor = [[[OrmmaAdaptor alloc] initWithWebView:self.webView adView:(AdView*)self.superview] autorelease];
+        self.ormmaAdaptor.interstitial = [self.adView isKindOfClass:[AdInterstitialView class]];
+        
         NSString* js = [NSString stringWithFormat:@"<script type=\"text/javascript\">%@</script>", [self.ormmaAdaptor getDefaultsJSCode]];
+        
         html = [html stringByReplacingOccurrencesOfString:ORMMA_PLACEHOLDER withString:js];
     }
     

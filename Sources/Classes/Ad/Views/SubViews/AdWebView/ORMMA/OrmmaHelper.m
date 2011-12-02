@@ -80,6 +80,14 @@
     return [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{defaultPosition: { x: %f, y: %f, width: %f, height: %f }}", frame.origin.x, frame.origin.y, frame.size.width, frame.size.height]];
 }
 
++ (NSString*)setPlacementInterstitial:(BOOL)interstitial {
+    if (interstitial) {
+        return [OrmmaHelper fireChangeEvent:@"{placementType: 'interstitial'}"];
+    } else {
+        return [OrmmaHelper fireChangeEvent:@"{placementType: 'inline'}"];
+    }
+}
+
 + (NSString*)setOrientation:(UIDeviceOrientation)orientation {
     NSInteger orientationAngle = -1;
 	switch (orientation) {

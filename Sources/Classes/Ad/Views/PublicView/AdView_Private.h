@@ -13,8 +13,6 @@
 
 @interface AdView ()
 
-@property (retain) UIButton*    closeButton;
-
 - (void)buttonsAction:(id)sender;
 - (void)prepareResources;
 
@@ -40,6 +38,7 @@
 - (void)visibleAd:(NSNotification*)notification;
 - (void)invisibleAd:(NSNotification*)notification;
 - (void)deviceOrientationDidChange:(NSNotification*)notification;
+- (void)receiveThirdParty:(NSNotification*)notification;
 
 @end
 

@@ -61,7 +61,7 @@
 - (void)setDefaultValues {
     [super setDefaultValues];
     
-    ((AdModel*)_adModel).isDisplayed = NO;
+    self.useCustomClose = NO;
 }
 
 - (void)registerObserver {
@@ -148,6 +148,8 @@
                                                    userInfo:nil 
                                                     repeats:NO];
                 }
+            } else if (self.closeButton) {
+                [self bringSubviewToFront:self.closeButton];
             }
             
             if (!((AdModel*)_adModel).isDisplayed) {

@@ -38,12 +38,6 @@
  */
 @property NSTimeInterval autocloseInterstitialTime;
 
-/** Interstitial close button.
- 
- Set this value to customize close button appearance.
- */
-@property (retain) UIButton* closeButton;
-
 
 /** @name Setting the Delegate */
 

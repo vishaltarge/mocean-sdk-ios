@@ -46,7 +46,7 @@
 
 @implementation OrmmaAdaptor
 
-@synthesize webView, adView, nonHideState, currentState, defaultFrame, maxSize;
+@synthesize webView, adView, nonHideState, currentState, defaultFrame, maxSize, interstitial;
 
 - (id)initWithWebView:(UIWebView*)view adView:(AdView*)ad {
     self = [super init];
@@ -106,7 +106,14 @@
     return [[[request URL] scheme] isEqualToString:ORMMA_SHAME];
 }
 
+/*
+- (void)test {
+    [self evalJS:[OrmmaHelper signalReadyInWebView]];
+}
+*/
+
 - (void)webViewDidFinishLoad:(UIWebView*)webView {
+    //[self performSelector:@selector(test) withObject:nil afterDelay:5.0];
     [self evalJS:[OrmmaHelper signalReadyInWebView]];
 }
 
@@ -152,6 +159,9 @@
     
     // Orientation
     [result appendString:[OrmmaHelper setOrientation:orientation]];
+    
+    // Placement
+    [result appendString:[OrmmaHelper setPlacementInterstitial:self.interstitial]];
     
     // Location
     SharedModel* sharedModel = [SharedModel sharedInstance];
@@ -263,7 +273,11 @@
     } else if ([event isEqualToString:@"close"]) {
         // if we're in the default state already, there is nothing to do
         if (self.currentState == ORMMAStateDefault) {
-            // default ad, nothing to do
+            // do same as hide command
+            self.nonHideState = self.currentState;
+            self.currentState = ORMMAStateHidden;
+            [self evalJS:[OrmmaHelper setState:self.currentState]];
+            [self.adView setHidden:YES];
         } else if (self.currentState == ORMMAStateHidden) {
             // hidden ad, nothing to do
         } else if (self.currentState == ORMMAStateExpanded) {
@@ -521,7 +535,7 @@
 
 - (void)webView:(UIWebView *)view shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     if ([self isOrmma:request]) {
-        //NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+        NSLog(@"Dev log: %@", [[request URL] absoluteString]);
         
         // notify JS that we've completed the last request
         NSString* event = [[[request URL] host] lowercaseString];
