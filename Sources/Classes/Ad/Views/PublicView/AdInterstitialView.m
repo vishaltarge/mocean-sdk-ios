@@ -60,8 +60,6 @@
 
 - (void)setDefaultValues {
     [super setDefaultValues];
-    
-    self.useCustomClose = NO;
 }
 
 - (void)registerObserver {
@@ -122,7 +120,7 @@
             }
             
             // Close button code
-            if (!self.closeButton && !self.adModel.useCustomClose) {
+            if (!self.closeButton) {
                 [self prepareResources];
                 
                 self.closeButton.frame = CGRectMake(self.frame.size.width - self.closeButton.frame.size.width - 11, 11, self.closeButton.frame.size.width, self.closeButton.frame.size.height);
@@ -225,15 +223,6 @@
 #pragma mark -
 #pragma mark Propertys
 
-
-//@property BOOL	useCustomClose;
-- (void)setUseCustomClose:(BOOL)useCustomClose {
-	((AdModel*)_adModel).useCustomClose = useCustomClose;
-}
-
-- (BOOL)useCustomClose {
-	return ((AdModel*)_adModel).useCustomClose;
-}
 
 // @property (assign) id <AdViewDelegate> delegate;
 - (void)setDelegate:(id <AdViewDelegate>)delegate {

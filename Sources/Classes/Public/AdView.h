@@ -56,7 +56,7 @@ typedef enum {
  
  To debug ad behavior use the properties testMode and logMode.
  
- Set the delegate property to an object conforming to the AdViewDelegate protocol if you want to track the processing of ad content.
+ Set the delegate property to an object conforming to the AdViewDelegate protocol if you want to listen the processing of ad content.
  */
 @interface AdView : UIView {
 	BOOL	_observerSet;
@@ -116,19 +116,13 @@ typedef enum {
  */
 @property BOOL							animateMode;
 
-/** A Boolean value that determines whether ad adding close button.
+/** Close button.
  
- Setting the value of this property to YES disable embedded close button and all assigned actions.
+ Set this value to customize close button appearance and behaviour.
  
- The default value is YES.
+ @warning *Note:* If you set set UIButton then you need implement close logic too.
  */
-@property BOOL							useCustomClose;
-
-/** Interstitial close button.
- 
- Set this value to customize close button appearance.
- */
-@property (retain) UIButton* closeButton;
+@property (retain) UIButton*            closeButton;
 
 /** A Boolean value that determines whether content alingment center vertically and horizontally.
  

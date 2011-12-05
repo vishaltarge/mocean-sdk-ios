@@ -34,17 +34,6 @@
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/AdInterstitialView/closeButton</TokenIdentifier>
-			<Abstract>Interstitial close button.</Abstract>
-			<DeclaredIn>AdInterstitialView.h</DeclaredIn>			
-			
-			<Declaration>@property (retain) UIButton *closeButton</Declaration>
-			
-			
-			<Anchor>//api/name/closeButton</Anchor>
-		</Token>
-		
-		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdInterstitialView/delegate</TokenIdentifier>
 			<Abstract>The receiver's delegate.</Abstract>
 			<DeclaredIn>AdInterstitialView.h</DeclaredIn>			
@@ -54,7 +43,7 @@
 		
 	</RelatedTokens>
 	
-			<Declaration>@property (assign) id&lt;AdInterstitialViewDelegate&gt; delegate</Declaration>
+			<Declaration>@property (assign) id&lt;AdViewDelegate&gt; delegate</Declaration>
 			
 			
 			<Anchor>//api/name/delegate</Anchor>

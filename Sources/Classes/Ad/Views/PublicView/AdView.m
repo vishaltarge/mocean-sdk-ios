@@ -26,7 +26,7 @@
 @synthesize closeButton;
 @dynamic adModel, uid;
 
-@dynamic delegate, isLoading, testMode, logMode, animateMode, useCustomClose, contentAlignment, track, updateTimeInterval,
+@dynamic delegate, isLoading, testMode, logMode, animateMode, contentAlignment, track, updateTimeInterval,
 defaultImage, site, zone, premium, type, keywords, minSize, maxSize, contentSize, textColor, additionalParameters,
 adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, carrier, latitude, longitude;
 
@@ -128,7 +128,6 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     self.internalOpenMode = YES;
     self.testMode = NO;
     self.premium = AdPremiumBoth;
-    self.useCustomClose = YES;
     
     [self setLogMode:AdLogModeErrorsOnly];
     
@@ -352,13 +351,15 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
                 ((AdModel*)_adModel).isDisplayed = YES;
             }
             
-            if (!self.closeButton && !self.adModel.useCustomClose) {
+            if (!self.closeButton) {
+                /* close button is dosabled by default
                 [self prepareResources];
                 if (self.closeButton) {
                     self.closeButton.frame = CGRectMake(self.frame.size.width - self.closeButton.frame.size.width - 11, 11, self.closeButton.frame.size.width, self.closeButton.frame.size.height);
                     self.closeButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
                     [self addSubview:self.closeButton];
                 }
+                 */
             } else {
                 [self bringSubviewToFront:self.closeButton];
             }
@@ -802,15 +803,6 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 
 - (BOOL)animateMode {
 	return ((AdModel*)_adModel).animateMode;
-}
-
-//@property BOOL	useCustomClose;
-- (void)setUseCustomClose:(BOOL)useCustomClose {
-	((AdModel*)_adModel).useCustomClose = useCustomClose;
-}
-
-- (BOOL)useCustomClose {
-	return ((AdModel*)_adModel).useCustomClose;
 }
 
 //@property BOOL	contentAlignment;

@@ -12,7 +12,7 @@
 	<body>
 		<header id="top_header">
 			<div id="library" class="hideInXcode">
-				<h1><a id="libraryTitle" href="../index.html">iOS AdMobile SDK v2.8.0 </a></h1>
+				<h1><a id="libraryTitle" href="../index.html">iOS AdMobile SDK v2.9.0 </a></h1>
 				<a id="developerHome" href="../index.html">AdMobile</a>
 			</div>
 			
@@ -54,6 +54,8 @@
 	
 	<option value="//api/name/city">&nbsp;&nbsp;&nbsp;&nbsp;city</option>
 	
+	<option value="//api/name/closeButton">&nbsp;&nbsp;&nbsp;&nbsp;closeButton</option>
+	
 	<option value="//api/name/contentAlignment">&nbsp;&nbsp;&nbsp;&nbsp;contentAlignment</option>
 	
 	<option value="//api/name/contentSize">&nbsp;&nbsp;&nbsp;&nbsp;contentSize</option>
@@ -93,6 +95,8 @@
 	<option value="//api/name/testMode">&nbsp;&nbsp;&nbsp;&nbsp;testMode</option>
 	
 	<option value="//api/name/textColor">&nbsp;&nbsp;&nbsp;&nbsp;textColor</option>
+	
+	<option value="//api/name/track">&nbsp;&nbsp;&nbsp;&nbsp;track</option>
 	
 	<option value="//api/name/type">&nbsp;&nbsp;&nbsp;&nbsp;type</option>
 	
@@ -165,6 +169,8 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/city">city</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/closeButton">closeButton</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/contentAlignment">contentAlignment</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/contentSize">contentSize</a></span></li>
@@ -204,6 +210,8 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/testMode">testMode</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/textColor">textColor</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/track">track</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/type">type</a></span></li>
 	
@@ -274,7 +282,7 @@
 
 <p>To debug ad behavior use the properties <a href="#//api/name/testMode">testMode</a> and <a href="#//api/name/logMode">logMode</a>.</p>
 
-<p>Set the <a href="#//api/name/delegate">delegate</a> property to an object conforming to the <a href="../Protocols/AdViewDelegate.html">AdViewDelegate</a> protocol if you want to track the processing of ad content.</p>
+<p>Set the <a href="#//api/name/delegate">delegate</a> property to an object conforming to the <a href="../Protocols/AdViewDelegate.html">AdViewDelegate</a> protocol if you want to listen the processing of ad content.</p>
 					</div>
 					
 					
@@ -342,6 +350,13 @@
 	
 </li><li>
 	<span class="tooltip">
+		<code><a href="#//api/name/closeButton">&nbsp;&nbsp;closeButton</a></code>
+		<span class="tooltip"><p>Close button.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
 		<code><a href="#//api/name/contentAlignment">&nbsp;&nbsp;contentAlignment</a></code>
 		<span class="tooltip"><p>A Boolean value that determines whether content alingment center vertically and horizontally.</p></span>
 	</span>
@@ -351,6 +366,13 @@
 	<span class="tooltip">
 		<code><a href="#//api/name/internalOpenMode">&nbsp;&nbsp;internalOpenMode</a></code>
 		<span class="tooltip"><p>A Boolean value that determines whether ad internal browser is enabled.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/track">&nbsp;&nbsp;track</a></code>
+		<span class="tooltip"><p>A Boolean value that determines whether ad <a href="#//api/name/track">track</a> is enabled.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -859,6 +881,47 @@ Setting the value of this property to YES enables ads test mode and setting it t
 		<p>City of the device user (with state). For US only.</p>
 
 <p>The default value is nil.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">AdView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/closeButton" title="closeButton"></a>
+	<h3 class="subsubtitle method-title">closeButton</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Close button.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (retain) UIButton *closeButton</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Close button.</p>
+
+<p>Set this value to customize close button appearance and behaviour.</p><div class="warning"><p><strong>Note:</strong> If you set set UIButton then you need implement close logic too.</p></div>
 	</div>
 	
 	
@@ -1736,6 +1799,49 @@ Setting the value of this property to YES enables ads test mode and setting it t
 </div>
 						
 						<div class="section-method">
+	<a name="//api/name/track" title="track"></a>
+	<h3 class="subsubtitle method-title">track</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>A Boolean value that determines whether ad <a href="#//api/name/track">track</a> is enabled.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property BOOL track</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>A Boolean value that determines whether ad <a href="#//api/name/track">track</a> is enabled.</p>
+
+<p>If set to YES, the ad server will send a client side impression tracking pixel with each ad, regardless of if the campaign has this property set or not. Impressions will not be counting if this pixel does not render on the device.</p>
+
+<p>The default value is NO.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">AdView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/type" title="type"></a>
 	<h3 class="subsubtitle method-title">type</h3>
 	
@@ -2044,7 +2150,7 @@ Setting the value of this property to YES enables ads test mode and setting it t
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2011 AdMobile. All rights reserved. (Last updated: 2011-10-18)</span><br />
+						<p><span class="copyright">&copy; 2011 AdMobile. All rights reserved. (Last updated: 2011-12-05)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.4 (build 703)</a>.</span></p>
 						

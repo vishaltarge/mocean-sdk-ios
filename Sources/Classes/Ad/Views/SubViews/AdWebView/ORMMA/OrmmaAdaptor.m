@@ -316,7 +316,7 @@
                     self.nonHideState = self.currentState;
                     [self evalJS:[OrmmaHelper setState:self.currentState]];
                     
-                    self.expandView = [[[ExpandWebView alloc] initWithFrame:CGRectMake(self.adView.frame.origin.x, self.adView.frame.origin.y, self.maxSize.width, self.maxSize.height)] autorelease];
+                    self.expandView = [[[ExpandWebView alloc] initWithFrame:CGRectMake(self.adView.frame.origin.x, self.adView.frame.origin.y, w, h)] autorelease];
                     self.expandView.adView = self.adView;
                     
                     NSArray* rgba = [backgroundColor arrayFromRGBAComponents];

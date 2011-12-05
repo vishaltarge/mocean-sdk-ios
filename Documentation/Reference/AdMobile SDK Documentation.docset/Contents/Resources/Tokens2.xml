@@ -89,6 +89,17 @@
 		</Token>
 		
 		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/AdView/closeButton</TokenIdentifier>
+			<Abstract>Close button.</Abstract>
+			<DeclaredIn>AdView.h</DeclaredIn>			
+			
+			<Declaration>@property (retain) UIButton *closeButton</Declaration>
+			
+			
+			<Anchor>//api/name/closeButton</Anchor>
+		</Token>
+		
+		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdView/contentAlignment</TokenIdentifier>
 			<Abstract>A Boolean value that determines whether content alingment center vertically and horizontally.</Abstract>
 			<DeclaredIn>AdView.h</DeclaredIn>			
@@ -108,6 +119,17 @@
 			
 			
 			<Anchor>//api/name/internalOpenMode</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/AdView/track</TokenIdentifier>
+			<Abstract>A Boolean value that determines whether ad track is enabled.</Abstract>
+			<DeclaredIn>AdView.h</DeclaredIn>			
+			
+			<Declaration>@property BOOL track</Declaration>
+			
+			
+			<Anchor>//api/name/track</Anchor>
 		</Token>
 		
 		<Token>
