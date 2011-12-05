@@ -551,9 +551,9 @@
         
         // notify JS that we've completed the last request
         NSString* event = [[[request URL] host] lowercaseString];
+        [self evalJS:[OrmmaHelper nativeCallComplete:event]];
         
         [self processEvent:request];
-        [self evalJS:[OrmmaHelper nativeCallComplete:event]];
     }
 }
 

@@ -22,6 +22,16 @@
 /** @name Customizing AdInterstitialView Closing */
 
 
+/** Close button.
+ 
+ Set this value to customize close button appearance and behaviour.
+ 
+ By default closed button set by SDK.
+ 
+ @warning *Note:* If you set set UIButton then you need implement close logic too.
+ */
+@property (retain) UIButton*            closeButton;
+
 /** Show close button delay time interval, in seconds.
  
  Setting to 0 will show close button immediately.

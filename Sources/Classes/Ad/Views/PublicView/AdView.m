@@ -352,14 +352,13 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
             }
             
             if (!self.closeButton) {
-                /* close button is dosabled by default
                 [self prepareResources];
                 if (self.closeButton) {
                     self.closeButton.frame = CGRectMake(self.frame.size.width - self.closeButton.frame.size.width - 11, 11, self.closeButton.frame.size.width, self.closeButton.frame.size.height);
                     self.closeButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
                     [self addSubview:self.closeButton];
                 }
-                 */
+                self.closeButton.hidden = YES;
             } else {
                 [self bringSubviewToFront:self.closeButton];
             }

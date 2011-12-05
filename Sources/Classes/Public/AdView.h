@@ -120,7 +120,11 @@ typedef enum {
  
  Set this value to customize close button appearance and behaviour.
  
+ By default closed button set by SDK with hidden property YES.
+ 
  @warning *Note:* If you set set UIButton then you need implement close logic too.
+ 
+ @warning *Note:* If you want simply enable default close button set hidden property to NO.
  */
 @property (retain) UIButton*            closeButton;
 

@@ -12,6 +12,17 @@
 		
 		
 		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/AdInterstitialView/closeButton</TokenIdentifier>
+			<Abstract>Close button.</Abstract>
+			<DeclaredIn>AdInterstitialView.h</DeclaredIn>			
+			
+			<Declaration>@property (retain) UIButton *closeButton</Declaration>
+			
+			
+			<Anchor>//api/name/closeButton</Anchor>
+		</Token>
+		
+		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdInterstitialView/showCloseButtonTime</TokenIdentifier>
 			<Abstract>Show close button delay time interval, in seconds.</Abstract>
 			<DeclaredIn>AdInterstitialView.h</DeclaredIn>			
