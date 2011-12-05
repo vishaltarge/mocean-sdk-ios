@@ -531,15 +531,13 @@
 
 - (void)webView:(UIWebView *)view shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     if ([self isOrmma:request]) {
-        NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+        //NSLog(@"Dev log: %@", [[request URL] absoluteString]);
         
         // notify JS that we've completed the last request
         NSString* event = [[[request URL] host] lowercaseString];
-        [self evalJS:[OrmmaHelper nativeCallComplete:event]];
         
-        dispatch_async(dispatch_get_main_queue(), ^{    
-            [self processEvent:request];
-        });
+        [self processEvent:request];
+        [self evalJS:[OrmmaHelper nativeCallComplete:event]];
     }
 }
 
