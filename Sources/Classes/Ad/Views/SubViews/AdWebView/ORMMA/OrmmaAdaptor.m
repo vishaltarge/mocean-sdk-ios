@@ -297,9 +297,7 @@
         if (self.currentState != ORMMAStateDefault) {
             // Already Expanded
             [self evalJS:[OrmmaHelper fireError:@"Can only expand from the default state." forEvent:event]];
-        } else {
-            self.currentState = ORMMAStateExpanded;
-            self.nonHideState = self.currentState;
+        } else {            
             NSString* url = [OrmmaHelper requiredStringFromDictionary:parameters forKey:@"url"];
             CGFloat w = [OrmmaHelper floatFromDictionary:parameters forKey:@"width"];
             CGFloat h = [OrmmaHelper floatFromDictionary:parameters forKey:@"height"];
@@ -311,6 +309,10 @@
                 if (h > maxSize.height) {
                     [self evalJS:[OrmmaHelper fireError:@"Cannot expand an ad larger than allowed." forEvent:event]];
                 } else {
+                    self.currentState = ORMMAStateExpanded;
+                    self.nonHideState = self.currentState;
+                    [self evalJS:[OrmmaHelper setState:self.currentState]];
+                    
                     self.expandView = [[[ExpandWebView alloc] initWithFrame:CGRectMake(self.adView.frame.origin.x, self.adView.frame.origin.y, self.maxSize.width, self.maxSize.height)] autorelease];
                     
                     self.expandView.adView = self.adView;
