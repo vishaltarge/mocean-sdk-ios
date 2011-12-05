@@ -160,6 +160,9 @@
     // Placement
     [result appendString:[OrmmaHelper setPlacementInterstitial:self.interstitial]];
     
+    // Expand properties expandProperties
+    [result appendString:[OrmmaHelper setExpandPropertiesWithMaxSize:self.maxSize]];
+    
     // Location
     SharedModel* sharedModel = [SharedModel sharedInstance];
     if (sharedModel && sharedModel.latitude && sharedModel.longitude && sharedModel.accuracy) {

@@ -23,6 +23,7 @@
 + (NSString*)setScreenSize:(CGSize)size;
 + (NSString*)setDefaultPosition:(CGRect)frame;
 + (NSString*)setPlacementInterstitial:(BOOL)interstitial;
++ (NSString*)setExpandPropertiesWithMaxSize:(CGSize)size;
 + (NSString*)setOrientation:(UIDeviceOrientation)orientation;
 + (NSString*)setSupports:(NSArray*)supports;
 + (NSString*)setKeyboardShow:(BOOL)isShow;

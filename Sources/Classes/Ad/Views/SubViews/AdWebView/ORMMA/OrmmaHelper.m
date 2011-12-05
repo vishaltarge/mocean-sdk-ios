@@ -88,6 +88,10 @@
     }
 }
 
++ (NSString*)setExpandPropertiesWithMaxSize:(CGSize)size {
+    return [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{expandProperties: { width: %f, height: %f, useCustomClose: !1, isModal: !1, lockOrientation: !1, useBackground: !1, backgroundColor: \"#ffffff\", backgroundOpacity:1 }}", size.width, size.height]];
+}
+
 + (NSString*)setOrientation:(UIDeviceOrientation)orientation {
     NSInteger orientationAngle = -1;
 	switch (orientation) {
