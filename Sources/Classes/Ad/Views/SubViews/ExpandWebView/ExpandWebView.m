@@ -81,7 +81,7 @@
 		wView.delegate = self;
         self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         wView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-		[wView disableBouncesForWebView];
+		//[wView disableBouncesForWebView];
 		
         wView.allowsInlineMediaPlayback = YES;
         wView.mediaPlaybackRequiresUserAction = NO;
@@ -142,7 +142,18 @@
 }
 
 - (BOOL)webView:(UIWebView *)view shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-   return YES;
+    if (navigationType == UIWebViewNavigationTypeLinkClicked) {
+        if (adView) {
+            NSMutableDictionary* info = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:request, adView, nil]
+                                                                           forKeys:[NSArray arrayWithObjects:@"request", @"adView", nil]];
+            
+            [[NotificationCenter sharedInstance] postNotificationName:kOpenURLNotification object:info];
+        }
+        
+        return NO;
+    } else if (navigationType == UIWebViewNavigationTypeOther) {
+        return YES;
+    }
 }
 
 @end

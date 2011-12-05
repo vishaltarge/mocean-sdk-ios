@@ -215,7 +215,7 @@
 + (BOOL)booleanFromDictionary:(NSDictionary *)dictionary
 					   forKey:(NSString *)key {
 	NSString *stringValue = [dictionary valueForKey:key];
-	BOOL value = [@"Y" isEqualToString:stringValue] || [@"y" isEqualToString:stringValue];
+	BOOL value = [@"Y" isEqualToString:stringValue] || [@"y" isEqualToString:stringValue] || [@"true" isEqualToString:stringValue];
 	return value;
 }
 

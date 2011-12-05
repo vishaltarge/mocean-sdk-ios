@@ -17,6 +17,7 @@
 #import "NetworkQueue.h"
 #import "ObjectStorage.h"
 #import "ExpandWebView.h"
+#import "UIColorAdditions.h"
 
 #define ORMMA_SHAME     @"ormma"
 
@@ -302,6 +303,8 @@
             CGFloat w = [OrmmaHelper floatFromDictionary:parameters forKey:@"width"];
             CGFloat h = [OrmmaHelper floatFromDictionary:parameters forKey:@"height"];
             BOOL useBackground = [OrmmaHelper booleanFromDictionary:parameters forKey:@"useBackground"];
+            UIColor* backgroundColor = [UIColor colorWithHexString:[[OrmmaHelper requiredStringFromDictionary:parameters forKey:@"backgroundColor"] stringByReplacingOccurrencesOfString:@"#" withString:@""]];
+            CGFloat backgroundOpacity = [OrmmaHelper floatFromDictionary:parameters forKey:@"backgroundOpacity"];
             
             if (w > maxSize.width) {
                 [self evalJS:[OrmmaHelper fireError:@"Cannot expand an ad larger than allowed." forEvent:event]];
@@ -314,11 +317,19 @@
                     [self evalJS:[OrmmaHelper setState:self.currentState]];
                     
                     self.expandView = [[[ExpandWebView alloc] initWithFrame:CGRectMake(self.adView.frame.origin.x, self.adView.frame.origin.y, self.maxSize.width, self.maxSize.height)] autorelease];
-                    
                     self.expandView.adView = self.adView;
                     
-                    [self.adView.superview addSubview:self.expandView];
+                    NSArray* rgba = [backgroundColor arrayFromRGBAComponents];
+                    if (useBackground && backgroundColor && rgba && [rgba count] >= 3) {
+                        CGFloat r = [(NSNumber*)[rgba objectAtIndex:0] floatValue];
+                        CGFloat g = [(NSNumber*)[rgba objectAtIndex:1] floatValue];
+                        CGFloat b = [(NSNumber*)[rgba objectAtIndex:2] floatValue];
+                        self.expandView.backgroundColor = [UIColor colorWithRed:r green:g blue:b alpha:backgroundOpacity];
+                    } else {
+                        self.expandView.backgroundColor = [UIColor whiteColor];
+                    }
                     
+                    [self.adView.superview addSubview:self.expandView];
                     [self.expandView loadUrl:url];
                 }
             }
@@ -536,7 +547,7 @@
 
 - (void)webView:(UIWebView *)view shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     if ([self isOrmma:request]) {
-        //NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+        NSLog(@"Dev log: %@", [[request URL] absoluteString]);
         
         // notify JS that we've completed the last request
         NSString* event = [[[request URL] host] lowercaseString];
