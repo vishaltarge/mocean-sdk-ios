@@ -17,6 +17,7 @@
 NSMutableArray* CreateNonRetainingArray();
 NSMutableDictionary* CreateNonRetainingDictionary();
 
+void NSProfile(const char *name, void (^work) (void));
 
 @interface Utils : NSObject {}
 

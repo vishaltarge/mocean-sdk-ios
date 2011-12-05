@@ -19,6 +19,20 @@
 #include <sys/sysctl.h>
 
 
+void NSProfile(const char *name, void (^work) (void)) {
+    struct timeval start, end;
+    gettimeofday (&start, NULL);
+    
+    work();
+    
+    gettimeofday (&end, NULL);
+    
+    double fstart = (start.tv_sec * 1000000.0 + start.tv_usec) / 1000000.0;
+    double fend = (end.tv_sec * 1000000.0 + end.tv_usec) / 1000000.0;
+    
+    printf("%s took %f seconds", name, fend - fstart);
+}
+
 // No-ops for non-retaining objects.
 static const void* RetainNoOp(CFAllocatorRef allocator, const void *value) { return value; }
 static void ReleaseNoOp(CFAllocatorRef allocator, const void *value) { }
