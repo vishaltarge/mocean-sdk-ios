@@ -60,7 +60,8 @@
 - (void)loadData:(NSData *)data MIMEType:(NSString *)MIMEType textEncodingName:(NSString *)encodingName baseURL:(NSURL *)baseURL {
     NSString* html = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
     
-    if([[html lowercaseString] rangeOfString:[@"ormma" lowercaseString]].location != NSNotFound) {
+    if([[html lowercaseString] rangeOfString:[@"ormma" lowercaseString]].location != NSNotFound ||
+       [[html lowercaseString] rangeOfString:[@"mraid" lowercaseString]].location != NSNotFound) {
         // replce ormma placeholder
         self.ormmaAdaptor = [[[OrmmaAdaptor alloc] initWithWebView:self.webView adView:(AdView*)self.superview] autorelease];
         self.ormmaAdaptor.interstitial = [self.adView isKindOfClass:[AdInterstitialView class]];

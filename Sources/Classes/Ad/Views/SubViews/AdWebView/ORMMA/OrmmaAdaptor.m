@@ -282,9 +282,24 @@
         } else if (self.currentState == ORMMAStateHidden) {
             // hidden ad, nothing to do
         } else if (self.currentState == ORMMAStateExpanded) {
-            // we need to close expandView
-            [self.expandView close];
-            self.expandView = nil;
+            if (self.expandView) {
+                // we need to close expandView
+                [self.expandView close];
+                self.expandView = nil;
+                
+                self.currentState = ORMMAStateDefault;
+                self.nonHideState = self.currentState;
+                [self evalJS:[OrmmaHelper setState:self.currentState]];
+            } else {
+                // resize to normal frame
+                [UIView animateWithDuration:0.2 animations:^(void) {
+                    self.adView.frame = self.defaultFrame;
+                } completion:^(BOOL finished) {
+                    self.currentState = ORMMAStateDefault;
+                    self.nonHideState = self.currentState;
+                    [self evalJS:[OrmmaHelper setState:self.currentState]];
+                }];
+            }
         } else {
             [UIView animateWithDuration:0.2 animations:^(void) {
                 self.adView.frame = self.defaultFrame;
@@ -302,9 +317,6 @@
             NSString* url = [OrmmaHelper requiredStringFromDictionary:parameters forKey:@"url"];
             CGFloat w = [OrmmaHelper floatFromDictionary:parameters forKey:@"width"];
             CGFloat h = [OrmmaHelper floatFromDictionary:parameters forKey:@"height"];
-            BOOL useBackground = [OrmmaHelper booleanFromDictionary:parameters forKey:@"useBackground"];
-            UIColor* backgroundColor = [UIColor colorWithHexString:[[OrmmaHelper requiredStringFromDictionary:parameters forKey:@"backgroundColor"] stringByReplacingOccurrencesOfString:@"#" withString:@""]];
-            CGFloat backgroundOpacity = [OrmmaHelper floatFromDictionary:parameters forKey:@"backgroundOpacity"];
             
             if (w > maxSize.width) {
                 [self evalJS:[OrmmaHelper fireError:@"Cannot expand an ad larger than allowed." forEvent:event]];
@@ -316,21 +328,37 @@
                     self.nonHideState = self.currentState;
                     [self evalJS:[OrmmaHelper setState:self.currentState]];
                     
-                    self.expandView = [[[ExpandWebView alloc] initWithFrame:CGRectMake(self.adView.frame.origin.x, self.adView.frame.origin.y, w, h)] autorelease];
-                    self.expandView.adView = self.adView;
-                    
-                    NSArray* rgba = [backgroundColor arrayFromRGBAComponents];
-                    if (useBackground && backgroundColor && rgba && [rgba count] >= 3) {
-                        CGFloat r = [(NSNumber*)[rgba objectAtIndex:0] floatValue];
-                        CGFloat g = [(NSNumber*)[rgba objectAtIndex:1] floatValue];
-                        CGFloat b = [(NSNumber*)[rgba objectAtIndex:2] floatValue];
-                        self.expandView.backgroundColor = [UIColor colorWithRed:r green:g blue:b alpha:backgroundOpacity];
+                    if (url) {                        
+                        BOOL useBackground = [OrmmaHelper booleanFromDictionary:parameters forKey:@"useBackground"];
+                        UIColor* backgroundColor = [UIColor colorWithHexString:[[OrmmaHelper requiredStringFromDictionary:parameters forKey:@"backgroundColor"] stringByReplacingOccurrencesOfString:@"#" withString:@""]];
+                        CGFloat backgroundOpacity = [OrmmaHelper floatFromDictionary:parameters forKey:@"backgroundOpacity"];
+                        
+                        self.expandView = [[[ExpandWebView alloc] initWithFrame:CGRectMake(self.adView.frame.origin.x, self.adView.frame.origin.y, w, h)] autorelease];
+                        self.expandView.adView = self.adView;
+                        
+                        NSArray* rgba = [backgroundColor arrayFromRGBAComponents];
+                        if (useBackground && backgroundColor && rgba && [rgba count] >= 3) {
+                            CGFloat r = [(NSNumber*)[rgba objectAtIndex:0] floatValue];
+                            CGFloat g = [(NSNumber*)[rgba objectAtIndex:1] floatValue];
+                            CGFloat b = [(NSNumber*)[rgba objectAtIndex:2] floatValue];
+                            self.expandView.backgroundColor = [UIColor colorWithRed:r green:g blue:b alpha:backgroundOpacity];
+                        } else {
+                            self.expandView.backgroundColor = [UIColor whiteColor];
+                        }
+                        
+                        [self.adView.superview addSubview:self.expandView];
+                        [self.expandView loadUrl:url];
                     } else {
-                        self.expandView.backgroundColor = [UIColor whiteColor];
+                        // to make shure
+                        self.expandView = nil;
+                        
+                        // resize
+                        [UIView animateWithDuration:0.2 animations:^(void) {
+                            self.adView.frame = CGRectMake(self.adView.frame.origin.x, self.adView.frame.origin.y, w, h);
+                        } completion:^(BOOL finished) {
+                            [self evalJS:[OrmmaHelper setState:self.currentState]];
+                        }];
                     }
-                    
-                    [self.adView.superview addSubview:self.expandView];
-                    [self.expandView loadUrl:url];
                 }
             }
         }
@@ -547,7 +575,7 @@
 
 - (void)webView:(UIWebView *)view shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     if ([self isOrmma:request]) {
-        //NSLog(@"Dev log: %@", [[request URL] absoluteString]);
+        NSLog(@"Dev log: %@", [[request URL] absoluteString]);
         
         // notify JS that we've completed the last request
         NSString* event = [[[request URL] host] lowercaseString];
