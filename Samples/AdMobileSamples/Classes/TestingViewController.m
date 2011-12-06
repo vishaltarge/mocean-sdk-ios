@@ -140,13 +140,13 @@
 	[self.view addSubview:_segmentedControl];
     //segmentedControl.momentary = YES;
     
-	[self.view addSubview:_adView];
-    
 	[self.view addSubview:_siteTextField];
 	[self.view addSubview:_zoneTextField];
 	[self.view addSubview:_updateButton];
 	[self.view addSubview:_segmentedControl];
 	[self.view addSubview:_textView];
+    
+	[self.view addSubview:_adView];
 }
 
 - (void) dealloc {
