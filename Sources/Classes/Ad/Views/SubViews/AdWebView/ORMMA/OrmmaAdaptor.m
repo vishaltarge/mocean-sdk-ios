@@ -236,6 +236,26 @@
     return result;
 }
 
+- (void)moveToDefaultState {
+    if (self.currentState == ORMMAStateResized || self.currentState == ORMMAStateExpanded) {
+        if (self.expandView) {
+            // we need to close expandView
+            [self.expandView close];
+            self.expandView = nil;
+            
+            self.currentState = ORMMAStateDefault;
+            self.nonHideState = self.currentState;
+            [self evalJS:[OrmmaHelper setState:self.currentState]];
+        } else {
+            // resize to normal frame
+            self.adView.frame = self.defaultFrame;
+            self.currentState = ORMMAStateDefault;
+            self.nonHideState = self.currentState;
+            [self evalJS:[OrmmaHelper setState:self.currentState]];
+        }
+    }
+}
+
 - (void)evalJS:(NSString*)js {
     if ([NSThread isMainThread]) {
         [self.webView stringByEvaluatingJavaScriptFromString:js];

@@ -14,5 +14,6 @@
 @property (assign) UIView*  adView;
 
 - (void)loadData:(NSData *)data MIMEType:(NSString *)MIMEType textEncodingName:(NSString *)encodingName baseURL:(NSURL *)baseURL;
+- (void)closeOrmma;
 
 @end

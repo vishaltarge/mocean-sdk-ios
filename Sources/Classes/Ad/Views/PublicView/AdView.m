@@ -310,6 +310,11 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
         AdModel* model = [self adModel];
         UIView* currentAdView = model.currentAdView;
         if (subView != currentAdView) {            
+            if ([currentAdView isKindOfClass:[AdWebView class]]) {
+                AdWebView* adWebView = (AdWebView*)currentAdView;
+                [adWebView closeOrmma];
+            }
+            
             model.snapshot = currentAdView;
             [self adModel].snapshotRAWData = nil;
             

@@ -74,6 +74,12 @@
     [self.webView loadData:[html dataUsingEncoding:NSUTF8StringEncoding] MIMEType:MIMEType textEncodingName:encodingName baseURL:baseURL];
 }
 
+- (void)closeOrmma {
+    if (self.ormmaAdaptor) {
+        [self.ormmaAdaptor moveToDefaultState];
+    }
+}
+
 
 #pragma mark - UIWebViewDelegate
 
