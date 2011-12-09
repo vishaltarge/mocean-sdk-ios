@@ -114,7 +114,7 @@ CGContextRef CreateARGBBitmapContext (size_t pixelsWide, size_t pixelsHigh) {
     size_t bpp = 4;
     size_t bpr = self.frame.size.width * 4;
     
-    NSUInteger ind = point.x * bpp + (point.y * bpr);
+    NSUInteger ind = floor(point.x) * bpp + (floor(point.y) * bpr);
     char *rawDataBytes = (char *)[rawData bytes];
     
     return ([rawData length] > ind && rawDataBytes[ind] == 0);

@@ -1,4 +1,4 @@
-  //
+//
 //  AdView.m
 //  AdMobileSDK
 //
@@ -480,7 +480,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
     NSData* rawData = [self adModel].snapshotRAWData;
     NSDate* lastTime = [self adModel].snapshotRAWDataTime;
-    if (!(rawData && lastTime && abs([lastTime timeIntervalSinceNow]) < 1000)) {
+    if (!(rawData && lastTime && abs([lastTime timeIntervalSinceNow]) < 1)) {
         // update cached data
         
         rawData = [self ARGBData];
