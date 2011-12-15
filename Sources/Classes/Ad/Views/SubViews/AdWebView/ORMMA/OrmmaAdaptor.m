@@ -30,6 +30,8 @@
 @property (nonatomic, assign) ORMMAState        nonHideState;
 @property (nonatomic, assign) ORMMAState        currentState;
 @property (nonatomic, assign) CGRect            defaultFrame;
+@property (nonatomic, retain) UIView*           lastSuperView;
+@property (nonatomic, retain) UIColor*          lastBackgroundColor;
 @property (nonatomic, assign) CGSize            maxSize;
 
 - (void)viewVisible:(NSNotification*)notification;
@@ -50,7 +52,7 @@
 
 @implementation OrmmaAdaptor
 
-@synthesize webView, adView, expandView, nonHideState, currentState, defaultFrame, maxSize, interstitial;
+@synthesize webView, adView, expandView, nonHideState, currentState, defaultFrame, lastSuperView, lastBackgroundColor, maxSize, interstitial;
 
 - (id)initWithWebView:(UIWebView*)view adView:(AdView*)ad {
     self = [super init];
@@ -311,6 +313,13 @@
                 self.nonHideState = self.currentState;
                 [self evalJS:[OrmmaHelper setState:self.currentState]];
             } else {
+                self.adView.frame = [self.lastSuperView convertRect:self.adView.frame fromView:self.adView.superview];
+                [self.lastSuperView addSubview:self.adView];
+                self.lastSuperView = nil;
+                
+                self.adView.backgroundColor = self.lastBackgroundColor;
+                self.lastBackgroundColor = nil;
+                
                 // resize to normal frame
                 [UIView animateWithDuration:0.2 animations:^(void) {
                     self.adView.frame = self.defaultFrame;
@@ -348,33 +357,43 @@
                     self.nonHideState = self.currentState;
                     [self evalJS:[OrmmaHelper setState:self.currentState]];
                     
+                    BOOL useBackground = [OrmmaHelper booleanFromDictionary:parameters forKey:@"useBackground"];
+                    UIColor* backgroundColor = [UIColor colorWithHexString:[[OrmmaHelper requiredStringFromDictionary:parameters forKey:@"backgroundColor"] stringByReplacingOccurrencesOfString:@"#" withString:@""]];
+                    CGFloat backgroundOpacity = [OrmmaHelper floatFromDictionary:parameters forKey:@"backgroundOpacity"];
+                    
+                    UIColor* expandBackgroundColor = nil;
+                    
+                    NSArray* rgba = [backgroundColor arrayFromRGBAComponents];
+                    if (useBackground && backgroundColor && rgba && [rgba count] >= 3) {
+                        CGFloat r = [(NSNumber*)[rgba objectAtIndex:0] floatValue];
+                        CGFloat g = [(NSNumber*)[rgba objectAtIndex:1] floatValue];
+                        CGFloat b = [(NSNumber*)[rgba objectAtIndex:2] floatValue];
+                        expandBackgroundColor = [UIColor colorWithRed:r green:g blue:b alpha:backgroundOpacity];
+                    } else {
+                        expandBackgroundColor = [UIColor whiteColor];
+                    }
+                    
                     if (url) {                        
-                        BOOL useBackground = [OrmmaHelper booleanFromDictionary:parameters forKey:@"useBackground"];
-                        UIColor* backgroundColor = [UIColor colorWithHexString:[[OrmmaHelper requiredStringFromDictionary:parameters forKey:@"backgroundColor"] stringByReplacingOccurrencesOfString:@"#" withString:@""]];
-                        CGFloat backgroundOpacity = [OrmmaHelper floatFromDictionary:parameters forKey:@"backgroundOpacity"];
-                        
-                        self.expandView = [[[ExpandWebView alloc] initWithFrame:CGRectMake(self.adView.frame.origin.x, self.adView.frame.origin.y, w, h)] autorelease];
+                        self.expandView = [[[ExpandWebView alloc] initWithFrame:CGRectMake(0, 0, w, h)] autorelease];
                         self.expandView.adView = self.adView;
+                        self.expandView.backgroundColor = expandBackgroundColor;
                         
-                        NSArray* rgba = [backgroundColor arrayFromRGBAComponents];
-                        if (useBackground && backgroundColor && rgba && [rgba count] >= 3) {
-                            CGFloat r = [(NSNumber*)[rgba objectAtIndex:0] floatValue];
-                            CGFloat g = [(NSNumber*)[rgba objectAtIndex:1] floatValue];
-                            CGFloat b = [(NSNumber*)[rgba objectAtIndex:2] floatValue];
-                            self.expandView.backgroundColor = [UIColor colorWithRed:r green:g blue:b alpha:backgroundOpacity];
-                        } else {
-                            self.expandView.backgroundColor = [UIColor whiteColor];
-                        }
-                        
-                        [self.adView.superview addSubview:self.expandView];
+                        [self.adView.window addSubview:self.expandView];
                         [self.expandView loadUrl:url];
                     } else {
                         // to make shure
                         self.expandView = nil;
+                        self.lastBackgroundColor = self.adView.backgroundColor;
+                        self.adView.backgroundColor = expandBackgroundColor;
+                        
+                        CGRect newFrame = [self.adView.superview convertRect:self.adView.frame toView:self.adView.window];
+                        self.lastSuperView = self.adView.superview;
+                        [self.adView.window addSubview:self.adView];
+                        self.adView.frame = newFrame;
                         
                         // resize
-                        [UIView animateWithDuration:0.2 animations:^(void) {
-                            self.adView.frame = CGRectMake(self.adView.frame.origin.x, self.adView.frame.origin.y, w, h);
+                        [UIView animateWithDuration:0.3 animations:^(void) {
+                            self.adView.frame = CGRectMake(0, newFrame.origin.y, w, h);
                         } completion:^(BOOL finished) {
                             [self evalJS:[OrmmaHelper setState:self.currentState]];
                         }];
