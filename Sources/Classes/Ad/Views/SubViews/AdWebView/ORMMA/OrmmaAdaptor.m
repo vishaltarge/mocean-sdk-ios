@@ -141,11 +141,17 @@
     [result appendString:[OrmmaHelper setSize:self.webView.frame.size]];
     
     // Max size
-    UIView* sv = self.adView.superview;
-    if (sv) {
-        self.maxSize = sv.frame.size;
+    UIViewController* parentVC = [self.adView viewControllerForView];
+    
+    if (parentVC && parentVC.view) {
+        self.maxSize = parentVC.view.frame.size;
     } else {
-        self.maxSize = self.webView.frame.size;
+        UIView* sv = self.adView.superview;
+        if (sv) {
+            self.maxSize = sv.frame.size;
+        } else {
+            self.maxSize = self.webView.frame.size;
+        }
     }
     
     [result appendString:[OrmmaHelper setMaxSize:self.maxSize]];
@@ -163,8 +169,13 @@
     // Placement
     [result appendString:[OrmmaHelper setPlacementInterstitial:self.interstitial]];
     
+    CGFloat expandHeight = screenSize.height;
+    if (![UIApplication sharedApplication].isStatusBarHidden) {
+        expandHeight -= 20.0f;
+    }
+    
     // Expand properties expandProperties
-    [result appendString:[OrmmaHelper setExpandPropertiesWithMaxSize:self.maxSize]];
+    [result appendString:[OrmmaHelper setExpandPropertiesWithMaxSize:CGSizeMake(screenSize.width, expandHeight)]];
     
     // Location
     SharedModel* sharedModel = [SharedModel sharedInstance];
@@ -238,26 +249,6 @@
     return result;
 }
 
-- (void)moveToDefaultState {
-    if (self.currentState == ORMMAStateResized || self.currentState == ORMMAStateExpanded) {
-        if (self.expandView) {
-            // we need to close expandView
-            [self.expandView close];
-            self.expandView = nil;
-            
-            self.currentState = ORMMAStateDefault;
-            self.nonHideState = self.currentState;
-            [self evalJS:[OrmmaHelper setState:self.currentState]];
-        } else {
-            // resize to normal frame
-            self.adView.frame = self.defaultFrame;
-            self.currentState = ORMMAStateDefault;
-            self.nonHideState = self.currentState;
-            [self evalJS:[OrmmaHelper setState:self.currentState]];
-        }
-    }
-}
-
 - (void)evalJS:(NSString*)js {
     if ([NSThread isMainThread]) {
         [self.webView stringByEvaluatingJavaScriptFromString:js];
@@ -277,9 +268,7 @@
     }
 }
 
-- (void)processEvent:(NSURLRequest*)request {
-    NSString* event = [[[request URL] host] lowercaseString];
-    NSDictionary* parameters = [OrmmaHelper parametersFromJSCall:[[request URL] query]];
+- (void)processEvent:(NSString*)event parameters:(NSDictionary*)parameters {
     if ([event isEqualToString:@"ormmaenabled"]) {
         //
     } else if ([event isEqualToString:@"show"]) {
@@ -303,7 +292,7 @@
             [self.adView setHidden:YES];
         } else if (self.currentState == ORMMAStateHidden) {
             // hidden ad, nothing to do
-        } else if (self.currentState == ORMMAStateExpanded) {
+        } else if (self.currentState == ORMMAStateExpanded) {            
             if (self.expandView) {
                 // we need to close expandView
                 [self.expandView close];
@@ -346,13 +335,18 @@
             NSString* url = [OrmmaHelper requiredStringFromDictionary:parameters forKey:@"url"];
             CGFloat w = [OrmmaHelper floatFromDictionary:parameters forKey:@"width"];
             CGFloat h = [OrmmaHelper floatFromDictionary:parameters forKey:@"height"];
+            UIDevice* device = [UIDevice currentDevice];
+            UIDeviceOrientation orientation = device.orientation;
+            CGSize screenSize = [OrmmaHelper screenSizeForOrientation:orientation];	
             
-            if (w > maxSize.width) {
+            if (w > screenSize.width) {
                 [self evalJS:[OrmmaHelper fireError:@"Cannot expand an ad larger than allowed." forEvent:event]];
             } else {
-                if (h > maxSize.height) {
+                if (h > screenSize.height) {
                     [self evalJS:[OrmmaHelper fireError:@"Cannot expand an ad larger than allowed." forEvent:event]];
                 } else {
+                    //[[NotificationCenter sharedInstance] postNotificationName:kAdStopUpdateNotification object:self.adView];
+                    
                     self.currentState = ORMMAStateExpanded;
                     self.nonHideState = self.currentState;
                     [self evalJS:[OrmmaHelper setState:self.currentState]];
@@ -391,9 +385,14 @@
                         [self.adView.window addSubview:self.adView];
                         self.adView.frame = newFrame;
                         
+                        CGFloat originY = 20;
+                        if ([UIApplication sharedApplication].isStatusBarHidden) {
+                            originY = 0;
+                        }
+                        
                         // resize
                         [UIView animateWithDuration:0.3 animations:^(void) {
-                            self.adView.frame = CGRectMake(0, newFrame.origin.y, w, h);
+                            self.adView.frame = CGRectMake(newFrame.origin.x, originY, w, h);
                         } completion:^(BOOL finished) {
                             [self evalJS:[OrmmaHelper setState:self.currentState]];
                         }];
@@ -416,6 +415,8 @@
                 if (h > maxSize.height) {
                     [self evalJS:[OrmmaHelper fireError:@"Cannot resize an ad larger than allowed." forEvent:event]];
                 } else {
+                    //[[NotificationCenter sharedInstance] postNotificationName:kAdStopUpdateNotification object:self.adView];
+                    
                     [UIView animateWithDuration:0.2 animations:^(void) {
                         self.adView.frame = CGRectMake(self.adView.frame.origin.x, self.adView.frame.origin.y, w, h);
                     } completion:^(BOOL finished) {
@@ -612,15 +613,22 @@
     [[NotificationCenter sharedInstance] postNotificationName:kORMMAEventNotification object:info];
 }
 
+- (void)moveToDefaultState {
+    if (self.currentState == ORMMAStateResized || self.currentState == ORMMAStateExpanded) {
+        [self processEvent:@"close" parameters:[NSDictionary dictionary]];
+    }
+}
+
 - (void)webView:(UIWebView *)view shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     if ([self isOrmma:request]) {
         NSLog(@"Dev log: %@", [[request URL] absoluteString]);
         
         // notify JS that we've completed the last request
         NSString* event = [[[request URL] host] lowercaseString];
+        NSDictionary* parameters = [OrmmaHelper parametersFromJSCall:[[request URL] query]];
         [self evalJS:[OrmmaHelper nativeCallComplete:event]];
         
-        [self processEvent:request];
+        [self processEvent:event parameters:parameters];
     }
 }
 

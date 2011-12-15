@@ -51,6 +51,7 @@
 
 - (void)dealloc {
     self.adView = nil;
+    self.webView.delegate = nil;
 	self.webView = nil;
     self.ormmaAdaptor = nil;
     
