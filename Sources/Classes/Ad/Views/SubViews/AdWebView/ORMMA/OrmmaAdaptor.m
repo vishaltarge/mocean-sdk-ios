@@ -451,8 +451,8 @@
             ekEvent.notes = body;
             
             ekEvent.startDate = date;
-            ekEvent.endDate   = [[NSDate alloc] initWithTimeInterval:600 
-                                                           sinceDate:ekEvent.startDate];
+            ekEvent.endDate   = [[[NSDate alloc] initWithTimeInterval:600 
+                                                           sinceDate:ekEvent.startDate] autorelease];
             [ekEvent setCalendar:[eventStore defaultCalendarForNewEvents]];
             
             RIButtonItem *noItem = [RIButtonItem item];

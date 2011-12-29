@@ -14,7 +14,7 @@
 
 @interface AdController ()
 
-- (void)visibleCheckerThread;
+//- (void)visibleCheckerThread;
 
 - (void)addAdView:(AdView*)adView;
 - (void)removeAdView:(AdView*)adView;

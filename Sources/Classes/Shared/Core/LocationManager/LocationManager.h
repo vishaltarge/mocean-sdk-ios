@@ -46,5 +46,6 @@
 + (void)releaseSharedInstance;
 
 - (void)startUpdatingHeading;
-
+- (void)stopUpdatingLocation;
+    
 @end

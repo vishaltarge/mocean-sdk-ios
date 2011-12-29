@@ -149,9 +149,9 @@ static DownloadController* sharedInstance = nil;
                             }
                             else {
                                 if (adView && req) {
-                                    NSMutableDictionary* info = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:request, data, adView, nil]
+                                    NSMutableDictionary* infoBlock = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:request, data, adView, nil]
                                                                                                    forKeys:[NSArray arrayWithObjects:@"request", @"data", @"adView", nil]];
-                                    [[NotificationCenter sharedInstance] postNotificationName:kFinishAdDownloadNotification object:info];
+                                    [[NotificationCenter sharedInstance] postNotificationName:kFinishAdDownloadNotification object:infoBlock];
                                 }
                             }
                             

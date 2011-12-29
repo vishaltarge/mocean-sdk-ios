@@ -154,6 +154,7 @@
     } else if (navigationType == UIWebViewNavigationTypeOther) {
         return YES;
     }
+    return YES;
 }
 
 @end

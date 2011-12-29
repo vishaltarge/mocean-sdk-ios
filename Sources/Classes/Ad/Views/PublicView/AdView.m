@@ -20,7 +20,6 @@
 
 #import "LocationManager.h"
 
-
 @implementation AdView
 
 @synthesize closeButton;
@@ -516,10 +515,10 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {    
     if ([keyPath isEqualToString:@"view.frame"] || [keyPath isEqualToString:@"frame"]) {
-        CGRect oldFrame = CGRectNull;
+        //CGRect oldFrame = CGRectNull;
         CGRect newFrame = CGRectNull;
         if([change objectForKey:@"old"] != [NSNull null]) {
-            oldFrame = [[change objectForKey:@"old"] CGRectValue];
+            //oldFrame = [[change objectForKey:@"old"] CGRectValue];
         }
         if([object valueForKeyPath:keyPath] != [NSNull null]) {
             newFrame = [[object valueForKeyPath:keyPath] CGRectValue];

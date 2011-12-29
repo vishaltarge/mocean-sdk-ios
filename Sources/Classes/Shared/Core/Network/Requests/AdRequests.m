@@ -105,7 +105,7 @@
     @synchronized(self) {
         NSUInteger ind = [_ads indexOfObject:adView];
         if (ind != NSNotFound) {
-            NSArray* requests = [_requestListsForAds objectAtIndex:ind];
+            //NSArray* requests = [_requestListsForAds objectAtIndex:ind];
             
             /*
             for (NSURLRequest* req in requests) {
