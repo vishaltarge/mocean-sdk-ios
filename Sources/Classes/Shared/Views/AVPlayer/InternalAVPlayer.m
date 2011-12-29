@@ -145,9 +145,9 @@
             }
             
             NSNumber* number_playInline = [properties objectForKey:@"playInline"];
-            BOOL playInline = NO;
+            //BOOL playInline = NO;
             if (number_playInline) {
-                playInline = [number_playInline  boolValue];
+                //playInline = [number_playInline  boolValue];
             }
             
             NSNumber* number_fullScreenMode = [properties objectForKey:@"fullScreenMode"];
@@ -289,13 +289,13 @@
         
         
         
-        /*
+        
 		if(self.delegate)
 		{
 			[self.delegate playerCompleted];
 		}	
-        */
-        /*
+        
+        
         
         
         
@@ -319,12 +319,11 @@
         
         
         
-        /*
+        
 		if(self.delegate)
 		{
 			[self.delegate playerCompleted];
 		}
-         *//*
 	}*/
 }
 
