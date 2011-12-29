@@ -156,9 +156,8 @@
             }
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                [self postAdDisplaydNotification];
+                [[NotificationCenter sharedInstance] postNotificationName:kAdDisplayedNotification object:self];
             });
-            //[[NotificationCenter sharedInstance] postNotificationName:kAdDisplayedNotification object:self];
         }
 	}
 }

@@ -289,14 +289,6 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 	}
 }
 
-- (void)postAdDisplaydNotification {
-    NSAutoreleasePool* pool = [NSAutoreleasePool new];
-    
-    [[NotificationCenter sharedInstance] postNotificationName:kAdDisplayedNotification object:self];
-    
-    [pool release];
-}
-
 
 - (void)dislpayAd:(NSNotification*)notification {
 	NSDictionary *info = [notification object];
@@ -368,7 +360,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
             }
 
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                [self postAdDisplaydNotification];
+                [[NotificationCenter sharedInstance] postNotificationName:kAdDisplayedNotification object:self];
             });
             //[[NotificationCenter sharedInstance] postNotificationName:kAdDisplayedNotification object:self];
         }
