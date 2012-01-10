@@ -116,6 +116,16 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     [self performSelectorInBackground:@selector(callUpdateInBackground) withObject:nil];
 }
 
+- (void)stopEverythingAndNotfiyDelegateOnCleanup {
+    //stop ad update and cancel all network proccess
+    [_adModel cancelAllNetworkConnection];
+    
+    //close internal browser
+    [_adModel closeInternalBrowser];
+    
+    //stop video view player
+    [_adModel stopVideoViewPlayer];
+}
 
 #pragma mark -
 #pragma mark Private

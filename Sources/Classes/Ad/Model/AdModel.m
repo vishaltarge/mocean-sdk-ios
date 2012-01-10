@@ -10,6 +10,9 @@
 #import "Utils.h"
 #import "Constants.h"
 #import "NotificationCenter.h"
+#import "DownloadController.h"
+#import "InternalBrowser.h"
+#import "VideoView.h"
 
 @implementation AdModel
 
@@ -240,6 +243,23 @@ longitude, latitude;
 	}
 	
 	[super dealloc];
+}
+
+- (void)cancelAllNetworkConnection {
+    [[DownloadController sharedInstance] cancelAll];
+}
+
+- (void)closeInternalBrowser {
+    [[InternalBrowser sharedInstance] close];
+}
+
+- (void)stopVideoViewPlayer {
+    for (UIView *view in self.adView.subviews) {
+        if ([view isKindOfClass:[VideoView class]]) {
+            VideoView *videoView = (VideoView*)view;
+            [videoView stop];
+        }
+    }
 }
 
 @end

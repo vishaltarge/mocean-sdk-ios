@@ -74,10 +74,15 @@
 
 @property (assign) BOOL                 loading;
 
+
 @property (retain) NSString*            latitude;
 @property (retain) NSString*            longitude;
 
 - (NSString*)url;
 - (NSString*)urlIgnoreValifation;
+
+- (void)cancelAllNetworkConnection;
+- (void)closeInternalBrowser;
+- (void)stopVideoViewPlayer;
 
 @end
