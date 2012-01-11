@@ -123,8 +123,8 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     //close internal browser
     [_adModel closeInternalBrowser];
     
-    //stop video view player
-    [_adModel stopVideoViewPlayer];
+    //pause video view player
+    [_adModel pauseVideoViewPlayer];
 }
 
 #pragma mark -

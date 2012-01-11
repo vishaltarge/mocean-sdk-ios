@@ -95,13 +95,6 @@
 	}
 }
 
-- (void) stop {
-    if (_videoPlaying) {
-        _videoPlaying = NO;
-        [_player stop];
-    }
-}
-
 - (void) viewDidTouched {
     if (_request && self.superview) {
         NSMutableDictionary* info = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:_request, self.superview, nil]

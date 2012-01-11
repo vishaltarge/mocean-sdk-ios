@@ -83,6 +83,6 @@
 
 - (void)cancelAllNetworkConnection;
 - (void)closeInternalBrowser;
-- (void)stopVideoViewPlayer;
+- (void)pauseVideoViewPlayer;
 
 @end

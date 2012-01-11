@@ -253,11 +253,11 @@ longitude, latitude;
     [[InternalBrowser sharedInstance] close];
 }
 
-- (void)stopVideoViewPlayer {
+- (void)pauseVideoViewPlayer {
     for (UIView *view in self.adView.subviews) {
         if ([view isKindOfClass:[VideoView class]]) {
             VideoView *videoView = (VideoView*)view;
-            [videoView stop];
+            [videoView pause];
         }
     }
 }
