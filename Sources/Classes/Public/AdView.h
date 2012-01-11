@@ -80,6 +80,8 @@ typedef enum {
 				zone:(NSInteger)zone;
 
 
+- (void)stopEverythingAndNotfiyDelegateOnCleanup;
+
 /** @name Configuring the AdView */
 
 
