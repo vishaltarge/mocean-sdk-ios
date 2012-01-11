@@ -47,6 +47,11 @@
     return self;
 }
 
+- (void)stopEverythingAndNotfiyDelegateOnCleanup {
+    [super stopEverythingAndNotfiyDelegateOnCleanup];
+    
+    [self scheduledButtonAction];
+}
 
 - (void)dealloc {
     self.delegate = nil;

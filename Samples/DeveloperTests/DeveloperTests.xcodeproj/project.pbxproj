@@ -10,6 +10,7 @@
 		3B18BD9214BD7755002E19FF /* VideoBannerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B18BD9114BD7755002E19FF /* VideoBannerVC.m */; };
 		3B9AFE8914BD5D7800456962 /* TheWorldMethodTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9AFE8814BD5D7800456962 /* TheWorldMethodTest.m */; };
 		3B9AFE9E14BD6D5800456962 /* SimpleBannerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9AFE9D14BD6D5800456962 /* SimpleBannerVC.m */; };
+		3BB7209814BDB50B0001C10B /* InterstitialBannerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BB7209714BDB50B0001C10B /* InterstitialBannerVC.m */; };
 		AD669E0D14878BE40008896F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD669E0C14878BE40008896F /* UIKit.framework */; };
 		AD669E0F14878BE40008896F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD669E0E14878BE40008896F /* Foundation.framework */; };
 		AD669E1114878BE40008896F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD669E1014878BE40008896F /* CoreGraphics.framework */; };
@@ -67,6 +68,8 @@
 		3B9AFE8814BD5D7800456962 /* TheWorldMethodTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheWorldMethodTest.m; sourceTree = "<group>"; };
 		3B9AFE9C14BD6D5800456962 /* SimpleBannerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleBannerVC.h; sourceTree = "<group>"; };
 		3B9AFE9D14BD6D5800456962 /* SimpleBannerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleBannerVC.m; sourceTree = "<group>"; };
+		3BB7209614BDB50B0001C10B /* InterstitialBannerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterstitialBannerVC.h; sourceTree = "<group>"; };
+		3BB7209714BDB50B0001C10B /* InterstitialBannerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterstitialBannerVC.m; sourceTree = "<group>"; };
 		AD669E0814878BE40008896F /* DeveloperTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeveloperTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD669E0C14878BE40008896F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AD669E0E14878BE40008896F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -135,6 +138,8 @@
 				3B9AFE9D14BD6D5800456962 /* SimpleBannerVC.m */,
 				3B18BD9014BD7755002E19FF /* VideoBannerVC.h */,
 				3B18BD9114BD7755002E19FF /* VideoBannerVC.m */,
+				3BB7209614BDB50B0001C10B /* InterstitialBannerVC.h */,
+				3BB7209714BDB50B0001C10B /* InterstitialBannerVC.m */,
 			);
 			name = "The World method test";
 			sourceTree = "<group>";
@@ -351,6 +356,7 @@
 				3B9AFE8914BD5D7800456962 /* TheWorldMethodTest.m in Sources */,
 				3B9AFE9E14BD6D5800456962 /* SimpleBannerVC.m in Sources */,
 				3B18BD9214BD7755002E19FF /* VideoBannerVC.m in Sources */,
+				3BB7209814BDB50B0001C10B /* InterstitialBannerVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

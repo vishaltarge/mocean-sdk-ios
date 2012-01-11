@@ -23,9 +23,11 @@
     [imageView release];
 
 	_adView = [[AdView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
-    _adView.site = 8061;
-    _adView.zone = 20249;
-    //_adView.logMode = AdLogModeAll;
+    _adView.site = 10114;
+    _adView.zone = 21000;
+    
+    _adView.additionalParameters = [NSDictionary dictionaryWithObject:@"66.167.100.59" forKey:@"ip"];
+    _adView.logMode = AdLogModeAll;
     [self.view addSubview:_adView];
 }
 

@@ -130,7 +130,6 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 #pragma mark -
 #pragma mark Private
 
-
 - (void)setDefaultValues {
     self.updateTimeInterval = 120; // 2min
     self.animateMode = YES;

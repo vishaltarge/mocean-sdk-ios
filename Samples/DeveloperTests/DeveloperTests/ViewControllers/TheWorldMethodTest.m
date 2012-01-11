@@ -9,6 +9,7 @@
 #import "TheWorldMethodTest.h"
 #import "SimpleBannerVC.h"
 #import "VideoBannerVC.h"
+#import "InterstitialBannerVC.h"
 
 @implementation TheWorldMethodTest
 
@@ -50,6 +51,7 @@
     
     [self.rows addObject:@"Simple banner"];
     [self.rows addObject:@"Video view"];
+    [self.rows addObject:@"Interstitial banner"];
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.bounds.size.width, self.view.bounds.size.height) style:UITableViewStylePlain];
     self.tableView.delegate = self;
@@ -80,6 +82,10 @@
         [controller release];
     } else if (indexPath.row == 1) {
         VideoBannerVC *controller = [[VideoBannerVC alloc] initWithNibName:nil bundle:nil];
+        [self.navigationController pushViewController:controller animated:YES];
+        [controller release];
+    } else if (indexPath.row == 2) {
+        InterstitialBannerVC *controller = [[InterstitialBannerVC alloc] initWithNibName:nil bundle:nil];
         [self.navigationController pushViewController:controller animated:YES];
         [controller release];
     }
