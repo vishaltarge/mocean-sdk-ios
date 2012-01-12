@@ -80,11 +80,10 @@
     }
     
     if (aligmentCenter) {
-         html = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;\"/><style> body { margin:0; padding:0; } img { max-width:%.0f; }</style><script type=\"text/javascript\">%@</script>%@</head><body><table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" align=\"center\" width=\"device-width\" height=\"device-height\"><tr><td align=\"center\" valign=\"middle\"><div id=\"contentheight\"><span id=\"contentwidth\">%@</span></div></td></tr></table></body></html>", bannerWidth, ORMMA_JS, ORMMA_PLACEHOLDER, data];
+         html = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;\"/><style> body { margin:0; padding:0; } img { max-width:%.0f; }</style><script type=\"text/javascript\">%@</script>%@</head><body><table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" align=\"center\" width=\"device-width\" height=\"device-height\"><tr ><td align=\"center\" valign=\"middle\" height=\"%.0f\"><div id=\"contentheight\"><span id=\"contentwidth\">%@</span></div></td></tr></table></body></html>", bannerWidth, ORMMA_JS, ORMMA_PLACEHOLDER, frameSize.height, data];
      } else {
          html = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;\"/><style> body { margin:0; padding:0; } img { max-width:%.0f; }</style><script type=\"text/javascript\">%@</script>%@</head><body><div id=\"contentheight\"><span id=\"contentwidth\">%@</span></div></body></html>", bannerWidth, ORMMA_JS, ORMMA_PLACEHOLDER, data];
     }
-    
     return html;
 }
 
