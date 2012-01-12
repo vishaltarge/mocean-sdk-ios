@@ -178,6 +178,10 @@ NSMutableDictionary* CreateNonRetainingDictionary() {
     return YES;
 }
 
++ (BOOL)isInternalScheme:(NSURL*)url {
+    return [url.scheme isEqual:@"http"] || [url.scheme isEqual:@"https"] ? YES : NO;
+}
+
 + (NSInteger)randomInteger:(NSInteger)maxInt {
     return arc4random() % maxInt;
 }

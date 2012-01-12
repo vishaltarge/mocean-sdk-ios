@@ -36,6 +36,7 @@ void NSProfile(const char *name, void (^work) (void));
 
 + (void)makeLibraryLinked;
 + (BOOL)isInternalURL:(NSURL*)url;
++ (BOOL)isInternalScheme:(NSURL*)url;
 
 + (NSInteger)randomInteger:(NSInteger)maxInt;
 

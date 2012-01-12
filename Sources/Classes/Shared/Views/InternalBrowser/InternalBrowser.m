@@ -278,7 +278,7 @@ static InternalBrowser* sharedInstance = nil;
             AdView* adView = [info objectForKey:@"adView"];
             NSURLRequest* request = [info objectForKey:@"request"];
             
-            if (request && adView) {
+            if (request && adView) { 
                 _opening = YES;
                 
                 self.sendAdView = adView;
@@ -300,6 +300,12 @@ static InternalBrowser* sharedInstance = nil;
             }
 		}
 	}
+}
+
+- (void)openURLinkExternalBrowser:(NSURLRequest*)request {
+    NSMutableDictionary *info = [NSMutableDictionary dictionaryWithObject:self.sendAdView forKey:@"adView"];
+    [info setObject:request forKey:@"request"];
+    [[NotificationCenter sharedInstance] postNotificationName:kShouldOpenExternalAppNotification object:info];
 }
 
 - (void)updateFrames:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration {
@@ -432,6 +438,13 @@ static InternalBrowser* sharedInstance = nil;
     }
     */
     
+    if (![Utils isInternalScheme:[request URL]] && _opening) {
+        [self openURLinkExternalBrowser:request];
+        self.loadingURL = nil;
+        [self close];
+        return NO;
+    }
+    
     self.loadingURL = [request URL];
     _backButton.enabled = [_webView canGoBack];
     _forwardButton.enabled = [_webView canGoForward];
@@ -466,8 +479,10 @@ static InternalBrowser* sharedInstance = nil;
 
 
 - (void)webView:(UIWebView*)webView didFailLoadWithError:(NSError*)error {
+    [self openURLinkExternalBrowser:[NSURLRequest requestWithURL:self.loadingURL]];
     self.loadingURL = nil;
     [self webViewDidFinishLoad:webView];
+    [self close];
 }
 
 
