@@ -324,7 +324,6 @@ static InternalBrowser* sharedInstance = nil;
 
 	_webView.frame = CGRectMake(0, _navbar.frame.size.height, frame.size.width, frame.size.height - _navbar.frame.size.height - _toolbar.frame.size.height);
     [_titleLabel setFrame:CGRectMake(60, 10.0f, frame.size.width - 120, _titleLabel.frame.size.height)];
-    _titleLabel.backgroundColor = [UIColor redColor];
     
     [UIView beginAnimations:@"resize" context:nil];
     [UIView setAnimationDuration:duration];
