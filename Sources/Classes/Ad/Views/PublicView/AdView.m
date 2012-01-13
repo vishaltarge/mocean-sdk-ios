@@ -125,6 +125,10 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     
     //pause video view player
     [_adModel pauseVideoViewPlayer];
+    
+    //cloase ORMMA and set in default state
+    NSDictionary *info = [NSDictionary dictionaryWithObject:self forKey:@"adView"];
+    [[NotificationCenter sharedInstance] postNotificationName:kORMMASetDefaultStateNotification object:info];
 }
 
 #pragma mark -

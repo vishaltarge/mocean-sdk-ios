@@ -68,6 +68,7 @@
         [[NotificationCenter sharedInstance] addObserver:self selector:@selector(locationDetected:) name:kNewLocationDetectedNotification object:nil];
         [[NotificationCenter sharedInstance] addObserver:self selector:@selector(headingDetected:) name:kLocationUpdateHeadingNotification object:nil];
         [[NotificationCenter sharedInstance] addObserver:self selector:@selector(expandViewClosed:) name:kCloseExpandNotification object:nil];
+        [[NotificationCenter sharedInstance] addObserver:self selector:@selector(moveToDefaultState) name:kORMMASetDefaultStateNotification object:nil];
         
         // setup our network reachability        
 		NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];

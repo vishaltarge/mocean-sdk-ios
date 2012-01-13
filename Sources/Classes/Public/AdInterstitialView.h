@@ -18,8 +18,6 @@
 
 }
 
-- (void)stopEverythingAndNotfiyDelegateOnCleanup;
-
 /** @name Customizing AdInterstitialView Closing */
 
 

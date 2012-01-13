@@ -22,6 +22,7 @@
 - (void)scheduledButtonAction;
 - (void)buttonsAction:(id)sender;
 - (void)closeInterstitial:(NSNotification*)notification;
+- (void)stopEverythingAndNotfiyDelegateOnCleanup;
 
 @end
 
