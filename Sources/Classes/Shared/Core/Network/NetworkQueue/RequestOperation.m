@@ -335,6 +335,8 @@ didReceiveResponse:(NSURLResponse *)response
     NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
     if ([httpResponse statusCode] == 204) {
         self.error = [NSError errorWithDomain:@"All up to Date" code:777 userInfo:nil];
+    } else if ([httpResponse statusCode] != 200) {
+        self.error = [NSError errorWithDomain:@"Server responds with code" code:[httpResponse statusCode] userInfo:nil];
     }
     
     if (self.outputStream) {
