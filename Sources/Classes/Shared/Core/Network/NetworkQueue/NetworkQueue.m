@@ -23,6 +23,15 @@ static NSOperationQueue* get_network_operations_io_queue() {
 + (void)loadWithRequest:(NSURLRequest *)urlRequest 
              completion:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSData *data, NSError *error))completion {
     if (![NSThread isMainThread]) {
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[urlRequest URL]];
+        if ([[request allHTTPHeaderFields] valueForKey:@"Keep-Alive"] != nil) {
+            [request setValue:@"false" forHTTPHeaderField:@"Keep-Alive"];
+        } else {
+            [request addValue:@"false" forHTTPHeaderField:@"Keep-Alive"];
+        }
+        
+        urlRequest = (NSURLRequest*)[request retain];
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             RequestOperation* operation = [RequestOperation operationWithRequest:urlRequest completion:completion];
             [get_network_operations_io_queue() addOperation:operation];
