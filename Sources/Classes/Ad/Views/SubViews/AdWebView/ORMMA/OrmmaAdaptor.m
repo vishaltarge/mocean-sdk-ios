@@ -250,11 +250,12 @@
 }
 
 - (void)evalJS:(NSString*)js {
-    if ([NSThread isMainThread]) {
+    [self.webView performSelectorOnMainThread:@selector(stringByEvaluatingJavaScriptFromString:) withObject:js waitUntilDone:NO];
+    /*if ([NSThread isMainThread]) {
         [self.webView stringByEvaluatingJavaScriptFromString:js];
     } else {
         [self.webView performSelectorOnMainThread:@selector(stringByEvaluatingJavaScriptFromString:) withObject:js waitUntilDone:NO];
-    }
+    }*/
 }
          
          
