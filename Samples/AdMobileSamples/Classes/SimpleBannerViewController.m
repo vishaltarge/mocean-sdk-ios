@@ -22,13 +22,18 @@
     [self.view addSubview:imageView];
     [imageView release];
 
-	_adView = [[AdView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
+	_adView = [[AdView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 414.0)];
     _adView.site = 10114;
-    _adView.zone = 21000;
+    _adView.zone = 50001;
     
-    _adView.additionalParameters = [NSDictionary dictionaryWithObject:@"66.167.100.59" forKey:@"ip"];
+    //_adView.additionalParameters = [NSDictionary dictionaryWithObject:@"66.167.100.59" forKey:@"ip"];
+    _adView.adServerUrl = @"http://192.168.1.162/new_mcn/request.php";
+    _adView.backgroundColor= [UIColor whiteColor];
     _adView.logMode = AdLogModeAll;
+    _adView.type = AdTypeRichmedia;
     [self.view addSubview:_adView];
+    
+    //[NSTimer scheduledTimerWithTimeInterval:30.0 target:_adView selector:@selector(stopEverythingAndNotfiyDelegateOnCleanup) userInfo:nil repeats:NO];
 }
 
 - (void) dealloc
