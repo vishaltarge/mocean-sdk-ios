@@ -124,7 +124,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 - (void)setDefaultValues {
     self.updateTimeInterval = 120; // 2min
     self.animateMode = YES;
-    self.internalOpenMode = YES;
+    self.internalOpenMode = NO;
     self.testMode = NO;
     self.premium = AdPremiumBoth;
     

@@ -144,7 +144,7 @@ typedef enum {
  
  To handle opening/closing internal browser use AdView delegate or viewWillAppear/viewWillDisappear methods of UIViewController.
  
- The default value is YES.
+ The default value is NO.
  */
 @property BOOL							internalOpenMode;
 
