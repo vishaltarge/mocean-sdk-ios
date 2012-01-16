@@ -22,6 +22,7 @@
 - (void)scheduledButtonAction;
 - (void)buttonsAction:(id)sender;
 - (void)closeInterstitial:(NSNotification*)notification;
+- (void)stopEverythingAndNotfiyDelegateOnCleanup;
 
 @end
 
@@ -47,6 +48,11 @@
     return self;
 }
 
+- (void)stopEverythingAndNotfiyDelegateOnCleanup {
+    [super stopEverythingAndNotfiyDelegateOnCleanup];
+    
+    [self scheduledButtonAction];
+}
 
 - (void)dealloc {
     self.delegate = nil;

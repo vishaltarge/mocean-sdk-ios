@@ -18,7 +18,6 @@
 
 }
 
-
 /** @name Customizing AdInterstitialView Closing */
 
 

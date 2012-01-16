@@ -107,7 +107,11 @@ CGContextRef CreateARGBBitmapContext (size_t pixelsWide, size_t pixelsHigh) {
         return nil;
     
     size_t dataSize = 4 * w * h; // ARGB = 4 8-bit components
-    return [NSData dataWithBytes:data length:dataSize];
+    
+    NSData *argbData = [NSData dataWithBytes:data length:dataSize];
+    free(data);
+    
+    return argbData;
 }
 
 - (BOOL)isPointTransparent:(CGPoint)point rawData:(NSData*)rawData {    

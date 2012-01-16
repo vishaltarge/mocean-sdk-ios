@@ -7,6 +7,7 @@
 //
 
 #import "FirstViewController.h"
+#import "TheWorldMethodTest.h"
 
 @implementation FirstViewController
 
@@ -41,6 +42,7 @@
     items = [NSMutableArray array];
     
 	[items addObject:@"Test 4"];
+    [items addObject:@"The world method test"];
     [self.sections addObject:items];
     
     self.tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain] autorelease];
@@ -103,6 +105,9 @@
     } else if (indexPath.section == 2) {
         if (indexPath.row == 0)
             viewController = [[Test4 alloc] init];
+        
+        if (indexPath.row == 1)
+            viewController = [[TheWorldMethodTest alloc] init];
     }
     
     if (!viewController) {

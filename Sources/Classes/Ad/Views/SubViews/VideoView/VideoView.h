@@ -28,5 +28,6 @@
 
 - (void) play;
 - (void) pause;
+- (void) setFullscreen:(BOOL)fullscreen animated:(BOOL)animated;
 
 @end

@@ -17,6 +17,7 @@
 #import "NetworkQueue.h"
 #import "ObjectStorage.h"
 #import "ExpandWebView.h"
+#import "ExpandViewController.h"
 #import "UIColorAdditions.h"
 
 #define ORMMA_SHAME     @"ormma"
@@ -26,6 +27,7 @@
 @property (nonatomic, retain) UIWebView*        webView;
 @property (nonatomic, retain) AdView*           adView;
 @property (nonatomic, retain) ExpandWebView*    expandView;
+@property (nonatomic, retain) ExpandViewController* expandVC;
 
 @property (nonatomic, assign) ORMMAState        nonHideState;
 @property (nonatomic, assign) ORMMAState        currentState;
@@ -52,7 +54,7 @@
 
 @implementation OrmmaAdaptor
 
-@synthesize webView, adView, expandView, nonHideState, currentState, defaultFrame, lastSuperView, lastBackgroundColor, maxSize, interstitial;
+@synthesize webView, adView, expandView, expandVC, nonHideState, currentState, defaultFrame, lastSuperView, lastBackgroundColor, maxSize, interstitial;
 
 - (id)initWithWebView:(UIWebView*)view adView:(AdView*)ad {
     self = [super init];
@@ -68,6 +70,7 @@
         [[NotificationCenter sharedInstance] addObserver:self selector:@selector(locationDetected:) name:kNewLocationDetectedNotification object:nil];
         [[NotificationCenter sharedInstance] addObserver:self selector:@selector(headingDetected:) name:kLocationUpdateHeadingNotification object:nil];
         [[NotificationCenter sharedInstance] addObserver:self selector:@selector(expandViewClosed:) name:kCloseExpandNotification object:nil];
+        [[NotificationCenter sharedInstance] addObserver:self selector:@selector(moveToDefaultState) name:kORMMASetDefaultStateNotification object:nil];
         
         // setup our network reachability        
 		NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
@@ -293,8 +296,10 @@
             [self.adView setHidden:YES];
         } else if (self.currentState == ORMMAStateHidden) {
             // hidden ad, nothing to do
-        } else if (self.currentState == ORMMAStateExpanded) {            
-            if (self.expandView) {
+        } else if (self.currentState == ORMMAStateExpanded) {
+            [expandVC dismissModalViewControllerAnimated:YES]; 
+            
+            if (self.expandView && self.expandVC) {
                 // we need to close expandView
                 [self.expandView close];
                 self.expandView = nil;
@@ -319,6 +324,8 @@
                     [self evalJS:[OrmmaHelper setState:self.currentState]];
                 }];
             }
+            
+            expandVC = nil;
         } else {
             [UIView animateWithDuration:0.2 animations:^(void) {
                 self.adView.frame = self.defaultFrame;
@@ -368,12 +375,19 @@
                         expandBackgroundColor = [UIColor whiteColor];
                     }
                     
+                    self.expandVC = [[[ExpandViewController alloc] init] autorelease];
+                    UIViewController* rootVC = [self.adView.superview viewControllerForView];
+                    if (rootVC) {
+                        [rootVC presentModalViewController:self.expandVC animated:NO];
+                    }
+                    
                     if (url) {                        
                         self.expandView = [[[ExpandWebView alloc] initWithFrame:CGRectMake(0, 0, w, h)] autorelease];
                         self.expandView.adView = self.adView;
                         self.expandView.backgroundColor = expandBackgroundColor;
                         
-                        [self.adView.window addSubview:self.expandView];
+                        [expandVC.view addSubview:self.expandView];
+
                         [self.expandView loadUrl:url];
                     } else {
                         // to make shure
@@ -381,9 +395,9 @@
                         self.lastBackgroundColor = self.adView.backgroundColor;
                         self.adView.backgroundColor = expandBackgroundColor;
                         
-                        CGRect newFrame = [self.adView.superview convertRect:self.adView.frame toView:self.adView.window];
+                        CGRect newFrame = [self.adView.superview convertRect:self.adView.frame toView:expandVC.view];
                         self.lastSuperView = self.adView.superview;
-                        [self.adView.window addSubview:self.adView];
+                        [expandVC.view addSubview:self.adView];
                         self.adView.frame = newFrame;
                         
                         CGFloat originY = 20;
@@ -452,8 +466,8 @@
             ekEvent.notes = body;
             
             ekEvent.startDate = date;
-            ekEvent.endDate   = [[[NSDate alloc] initWithTimeInterval:600 
-                                                           sinceDate:ekEvent.startDate] autorelease];
+            ekEvent.endDate   = [[NSDate alloc] initWithTimeInterval:600 
+                                                           sinceDate:ekEvent.startDate];
             [ekEvent setCalendar:[eventStore defaultCalendarForNewEvents]];
             
             RIButtonItem *noItem = [RIButtonItem item];

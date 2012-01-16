@@ -43,5 +43,6 @@
 
 + (InternalBrowser*)sharedInstance;
 + (void)releaseSharedInstance;
+- (void)close;
 
 @end
