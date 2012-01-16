@@ -320,7 +320,6 @@
                 } completion:^(BOOL finished) {
                     self.currentState = ORMMAStateDefault;
                     self.nonHideState = self.currentState;
-                    NSLog(@"%@", [OrmmaHelper setState:self.currentState]);
                     [self evalJS:[OrmmaHelper setState:self.currentState]];
                 }];
             }
@@ -387,6 +386,7 @@
                         self.expandView.backgroundColor = expandBackgroundColor;
                         
                         [expandVC.view addSubview:self.expandView];
+
                         [self.expandView loadUrl:url];
                     } else {
                         // to make shure
