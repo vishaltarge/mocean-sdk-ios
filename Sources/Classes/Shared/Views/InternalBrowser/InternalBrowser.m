@@ -49,7 +49,7 @@ static InternalBrowser* sharedInstance = nil;
         self.view.backgroundColor = [UIColor whiteColor];
 		_webView = [[UIWebView alloc] initWithFrame:CGRectZero];
         _webView.delegate = self;
-        //_webView.scalesPageToFit = YES;
+        _webView.scalesPageToFit = YES;
         
 		[self.view addSubview:_webView];
         
