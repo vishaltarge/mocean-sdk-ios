@@ -126,7 +126,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     //pause video view player
     [_adModel pauseVideoViewPlayer];
     
-    //cloase ORMMA and set in default state
+    //cloase ORMMA and set it in default state
     [[NotificationCenter sharedInstance] postNotificationName:kORMMASetDefaultStateNotification object:nil];
 }
 
