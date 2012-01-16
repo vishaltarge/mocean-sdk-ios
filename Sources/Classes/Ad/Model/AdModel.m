@@ -258,6 +258,7 @@ longitude, latitude;
         if ([view isKindOfClass:[VideoView class]]) {
             VideoView *videoView = (VideoView*)view;
             [videoView pause];
+            [videoView setFullscreen:NO animated:NO];
         }
     }
 }

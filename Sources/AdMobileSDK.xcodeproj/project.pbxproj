@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B708CF914C3FFC900A2AE34 /* ExpandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B708CF714C3FFC900A2AE34 /* ExpandViewController.m */; };
+		3B708CFA14C3FFC900A2AE34 /* ExpandViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B708CF814C3FFC900A2AE34 /* ExpandViewController.h */; };
 		AA747D9F0F9514B9006C5449 /* AdMobileSDK_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* AdMobileSDK_Prefix.pch */; settings = {ATTRIBUTES = (Public, ); }; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 		ACA293BB10BFAFB300A0A97A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACA293BA10BFAFB300A0A97A /* UIKit.framework */; };
@@ -115,6 +117,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B708CF714C3FFC900A2AE34 /* ExpandViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpandViewController.m; sourceTree = "<group>"; };
+		3B708CF814C3FFC900A2AE34 /* ExpandViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpandViewController.h; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* AdMobileSDK_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMobileSDK_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		ACA293BA10BFAFB300A0A97A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -348,6 +352,8 @@
 		AD5D78D014891662001E3B0C /* ExpandWebView */ = {
 			isa = PBXGroup;
 			children = (
+				3B708CF814C3FFC900A2AE34 /* ExpandViewController.h */,
+				3B708CF714C3FFC900A2AE34 /* ExpandViewController.m */,
 				AD5D78D114891662001E3B0C /* ExpandWebView.h */,
 				AD5D78D214891662001E3B0C /* ExpandWebView.m */,
 			);
@@ -839,6 +845,7 @@
 				AD2F62FC144461D1003A6E05 /* ObjectStorage.h in Headers */,
 				ADB1C9C91447F8AC00785D44 /* InternalAVPlayer.h in Headers */,
 				AD5D78D314891662001E3B0C /* ExpandWebView.h in Headers */,
+				3B708CFA14C3FFC900A2AE34 /* ExpandViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -986,6 +993,7 @@
 				AD2F62FD144461D1003A6E05 /* ObjectStorage.m in Sources */,
 				ADB1C9CA1447F8AC00785D44 /* InternalAVPlayer.m in Sources */,
 				AD5D78D414891662001E3B0C /* ExpandWebView.m in Sources */,
+				3B708CF914C3FFC900A2AE34 /* ExpandViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

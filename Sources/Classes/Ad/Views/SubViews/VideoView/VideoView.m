@@ -95,6 +95,10 @@
 	}
 }
 
+- (void) setFullscreen:(BOOL)fullscreen animated:(BOOL)animated {
+    [_player setFullscreen:fullscreen animated:animated];
+}
+
 - (void) viewDidTouched {
     if (_request && self.superview) {
         NSMutableDictionary* info = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:_request, self.superview, nil]
