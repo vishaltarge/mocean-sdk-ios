@@ -27,7 +27,7 @@
 
 @dynamic delegate, isLoading, testMode, logMode, animateMode, contentAlignment, track, updateTimeInterval,
 defaultImage, site, zone, premium, type, keywords, minSize, maxSize, contentSize, textColor, additionalParameters,
-adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, carrier, latitude, longitude;
+adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, carrier, latitude, longitude, timeout;
 
 
 - (id)init {
@@ -139,6 +139,9 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     self.internalOpenMode = NO;
     self.testMode = NO;
     self.premium = AdPremiumBoth;
+    self.timeout = 1000; //1 sec
+    self.maxSize = CGSizeMake(self.frame.size.width, self.frame.size.height);
+    ((AdModel*)_adModel).isUserSetMaxSize = NO;
     
     [self setLogMode:AdLogModeErrorsOnly];
     
@@ -517,6 +520,15 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     }
 }
 
+- (void)setNewMaxBannerSize:(CGRect)newFrame {
+    //if the user has not set the custom value
+    if (!((AdModel*)_adModel).isUserSetMaxSize) {
+        //update max banner size
+        self.maxSize = newFrame.size;
+        ((AdModel*)_adModel).isUserSetMaxSize = NO;
+    }
+}
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {    
     if ([keyPath isEqualToString:@"view.frame"] || [keyPath isEqualToString:@"frame"]) {
         //CGRect oldFrame = CGRectNull;
@@ -526,7 +538,9 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
         }
         if([object valueForKeyPath:keyPath] != [NSNull null]) {
             newFrame = [[object valueForKeyPath:keyPath] CGRectValue];
+            [self setNewMaxBannerSize:newFrame];
         }
+        
         NSMutableDictionary* info = [NSMutableDictionary dictionary];
         [info setObject:self forKey:@"adView"];
         [info setObject:[NSValue valueWithCGRect:newFrame] forKey:@"newFrame"];
@@ -939,6 +953,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 
 //@property CGSize	maxSize;
 - (void)setMaxSize:(CGSize)maxSize {
+    ((AdModel*)_adModel).isUserSetMaxSize = YES;
 	((AdModel*)_adModel).maxSize = maxSize;
 }
 
@@ -1093,6 +1108,25 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 
 - (NSString*)longitude {
 	return ((AdModel*)_adModel).longitude;
+}
+
+//@property (assign) NSInteger            timeout;
+#define MIN_TIMEOUT_VALUE 0
+#define MAX_TIMEOUT_VALUE 3000
+
+- (void)setTimeout:(NSInteger)timeout {
+    // filter
+    if (timeout > MAX_TIMEOUT_VALUE) {
+        timeout = MAX_TIMEOUT_VALUE;
+    } else if (timeout < MIN_TIMEOUT_VALUE) {
+        timeout = MIN_TIMEOUT_VALUE;
+    }
+    
+    ((AdModel*)_adModel).timeout = timeout;
+}
+
+- (NSInteger)timeout {
+    return ((AdModel*)_adModel).timeout;
 }
 
 @end

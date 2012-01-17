@@ -22,7 +22,7 @@ paramBG, paramLINK, additionalParameters, adServerUrl, advertiserId, groupCode,
 country, region, city, area, metro, zip, carrier, showCloseButtonTime,
 autocloseInterstitialTime, startDisplayDate, isDisplayed, aligmentCenter, contentSize, frame,
 visibleState, snapshot, snapshotRAWData, snapshotRAWDataTime, currentAdView, adView, excampaigns, descriptor, loading,
-longitude, latitude;
+longitude, latitude, timeout, isUserSetMaxSize;
 
 - (BOOL)validate {
     if (self.site <= 0) {
@@ -181,6 +181,8 @@ longitude, latitude;
         }
 	}
 	
+    [_banerUrl appendFormat:@"&timeout=%d", self.timeout];
+    
 	// important! return url - isKindeOfClass NSString!
 	NSString* url = [_banerUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 	

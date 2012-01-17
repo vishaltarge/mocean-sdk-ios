@@ -102,6 +102,16 @@ typedef enum {
  The default value is http://ads.AdMobile.mobi/ad .*/
 @property (retain) NSString*			adServerUrl;
 
+/** Maximum server response time.
+ 
+ Specify timeout of ad call. This tells the ad server the maximum time you are willing to wait for an ad response.
+ 
+ The default value is 1000ms (milleseconds).
+ 
+ The max value is 3000ms (milleseconds).
+ */
+@property (assign) NSInteger            timeout;
+
 /** Image for unloaded ad state.
  
  Settings the value of this property determines ad default image for unloaded state. In this state the content of ad is invisible and ad default image is displayed. Without connection to the internet default image also will be displayed.

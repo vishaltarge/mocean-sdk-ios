@@ -36,10 +36,12 @@
 @property (retain) NSString*			keywords;
 @property CGSize						minSize;
 @property CGSize						maxSize;
+@property BOOL                          isUserSetMaxSize;
 @property (retain) UIColor*             paramBG;
 @property (retain) UIColor*             paramLINK;
 @property (retain) NSDictionary*        additionalParameters;
 @property (retain) NSString*			adServerUrl;
+@property (assign) NSInteger            timeout;
 
 @property (assign) NSInteger			advertiserId;
 @property (retain) NSString*			groupCode;
@@ -73,7 +75,6 @@
 @property (retain) AdDescriptor*        descriptor;
 
 @property (assign) BOOL                 loading;
-
 
 @property (retain) NSString*            latitude;
 @property (retain) NSString*            longitude;
