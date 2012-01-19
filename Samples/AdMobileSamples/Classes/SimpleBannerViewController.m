@@ -21,19 +21,17 @@
     imageView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     [self.view addSubview:imageView];
     [imageView release];
-
-	_adView = [[AdView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 414.0)];
-    _adView.site = 10114;
-    _adView.zone = 50001;
     
-    //_adView.additionalParameters = [NSDictionary dictionaryWithObject:@"66.167.100.59" forKey:@"ip"];
-    _adView.adServerUrl = @"http://192.168.1.162/new_mcn/request.php";
-    _adView.backgroundColor= [UIColor whiteColor];
+	_adView = [[AdView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50.0)];
+    _adView.site = 8061;
+    _adView.zone = 20249;
+    
     _adView.logMode = AdLogModeAll;
-    _adView.type = AdTypeRichmedia;
     [self.view addSubview:_adView];
     
-    //[NSTimer scheduledTimerWithTimeInterval:30.0 target:_adView selector:@selector(stopEverythingAndNotfiyDelegateOnCleanup) userInfo:nil repeats:NO];
+    UIBarButtonItem *update = [[UIBarButtonItem alloc] initWithTitle:@"Update" style:UIBarButtonItemStylePlain target:_adView action:@selector(update)];
+    [self.navigationItem setRightBarButtonItem:update];
+    [update release];
 }
 
 - (void) dealloc

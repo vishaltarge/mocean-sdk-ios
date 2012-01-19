@@ -36,6 +36,10 @@
 	_tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height - AD_HEIGHT)];
 	_tableView.dataSource = self;
 	[self.view addSubview:_tableView];
+    
+    UIBarButtonItem *update = [[UIBarButtonItem alloc] initWithTitle:@"Update" style:UIBarButtonItemStylePlain target:_adView action:@selector(update)];
+    [self.navigationItem setRightBarButtonItem:update];
+    [update release];
 }
 
 - (void) dealloc

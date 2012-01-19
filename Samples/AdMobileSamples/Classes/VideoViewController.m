@@ -27,6 +27,10 @@
     _adView.type = AdTypeRichmedia;
 	_adView.defaultImage = [UIImage imageNamed:@"DefaultImage (320x240).png"];
 	[self.view addSubview:_adView];
+    
+    UIBarButtonItem *update = [[UIBarButtonItem alloc] initWithTitle:@"Update" style:UIBarButtonItemStylePlain target:_adView action:@selector(update)];
+    [self.navigationItem setRightBarButtonItem:update];
+    [update release];
 }
 
 - (void) dealloc

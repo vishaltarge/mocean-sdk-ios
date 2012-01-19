@@ -74,6 +74,10 @@ enum {
 	
     [self startAnimation];
 	
+    UIBarButtonItem *update = [[UIBarButtonItem alloc] initWithTitle:@"Update" style:UIBarButtonItemStylePlain target:_adView action:@selector(update)];
+    [self.navigationItem setRightBarButtonItem:update];
+    [update release];
+    
 	[super viewDidLoad];
 }
 

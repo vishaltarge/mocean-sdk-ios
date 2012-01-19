@@ -32,6 +32,10 @@
 	
 	_adView.delegate = self;
 	[self.view addSubview:_adView];
+    
+    UIBarButtonItem *update = [[UIBarButtonItem alloc] initWithTitle:@"Update" style:UIBarButtonItemStylePlain target:_adView action:@selector(update)];
+    [self.navigationItem setRightBarButtonItem:update];
+    [update release];
 }
 
 - (void) dealloc

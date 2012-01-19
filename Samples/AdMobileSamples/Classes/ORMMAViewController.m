@@ -22,7 +22,6 @@
     [self.view addSubview:imageView];
     [imageView release];
 	
-	
 	_adView = [[AdView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 416) site:8061 zone:53923];
 	_adView.updateTimeInterval = 180;
     _adView.delegate = self;
@@ -30,14 +29,9 @@
     _adView.type = AdTypeRichmedia;
 	[self.view addSubview:_adView];
     
-    UIButton *btnStartTimer = [[UIButton alloc] initWithFrame:CGRectMake(10.0, 100.0, 100.0, 45.0)];
-    [btnStartTimer setTitle:@"Start timer" forState:UIControlStateNormal];
-    [btnStartTimer addTarget:self action:@selector(buttonClick) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btnStartTimer];
-}
-
-- (void)buttonClick {
-    [NSTimer scheduledTimerWithTimeInterval:10.0 target:_adView selector:@selector(stopEverythingAndNotfiyDelegateOnCleanup) userInfo:nil repeats:NO];
+    UIBarButtonItem *update = [[UIBarButtonItem alloc] initWithTitle:@"Update" style:UIBarButtonItemStylePlain target:_adView action:@selector(update)];
+    [self.navigationItem setRightBarButtonItem:update];
+    [update release];
 }
 
 - (void) dealloc
