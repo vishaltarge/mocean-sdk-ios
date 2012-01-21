@@ -89,7 +89,7 @@
         AdModel* model = [self adModel];
         UIView* currentAdView = model.currentAdView;
         if (subView != currentAdView) {            
-            model.snapshot = currentAdView;
+            UIView *oldView = currentAdView;
             [self adModel].snapshotRAWData = nil;
             
             model.currentAdView = subView;
@@ -107,22 +107,19 @@
                 CGRect prevAdFrame = subView.frame;
                 CGRect startAdFrame = CGRectMake(prevAdFrame.origin.x-prevAdFrame.size.width, prevAdFrame.origin.y, prevAdFrame.size.width, prevAdFrame.size.height);
                 subView.frame = startAdFrame;
+                subView.alpha = 0.3;
                 
                 [UIView animateWithDuration:0.2 animations:^{
                     subView.frame = prevAdFrame;
                     CGRect newFrameForOldImage = CGRectMake(prevAdFrame.origin.x+prevAdFrame.size.width, prevAdFrame.origin.y, prevAdFrame.size.width, prevAdFrame.size.height);
                     currentAdView.frame = newFrameForOldImage;
+                    subView.alpha = 1.0;
+                    currentAdView.alpha = 0.3;
                 } completion:^(BOOL finished) {
-                    UIView* oldView = model.snapshot;
-                    
-                    if (oldView && oldView.superview) {
-                        [oldView removeFromSuperview];
-                        model.snapshot = nil;
-                    }
+                    [oldView removeFromSuperview];
                 }];
-            } else if (model.snapshot) {
-                [model.snapshot removeFromSuperview];
-                model.snapshot = nil;
+            } else if (oldView) {
+                [oldView removeFromSuperview];
             }
             
             // Close button code

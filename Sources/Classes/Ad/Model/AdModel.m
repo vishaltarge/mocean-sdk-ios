@@ -21,7 +21,7 @@ updateTimeInterval, defaultImage, site, adZone, premiumFilter, type, keywords, m
 paramBG, paramLINK, additionalParameters, adServerUrl, advertiserId, groupCode,
 country, region, city, area, metro, zip, carrier, showCloseButtonTime,
 autocloseInterstitialTime, startDisplayDate, isDisplayed, aligmentCenter, contentSize, frame,
-visibleState, snapshot, snapshotRAWData, snapshotRAWDataTime, currentAdView, adView, excampaigns, descriptor, loading,
+visibleState, snapshotRAWData, snapshotRAWDataTime, currentAdView, adView, excampaigns, descriptor, loading,
 longitude, latitude, timeout, isUserSetMaxSize;
 
 - (BOOL)validate {
@@ -222,22 +222,12 @@ longitude, latitude, timeout, isUserSetMaxSize;
     [snapshotRAWDataTime release];
     
     if ([NSThread isMainThread]) {
-        if (snapshot && snapshot.superview) {
-            [snapshot removeFromSuperview];
-        }
-        [snapshot release];
-        
         if (currentAdView && currentAdView.superview) {
             [currentAdView removeFromSuperview];
         }
         [currentAdView release];
 	}
 	else {
-        if (snapshot && snapshot.superview) {
-            [snapshot performSelectorOnMainThread:@selector(removeFromSuperview) withObject:nil waitUntilDone:YES];
-        }
-        [snapshot performSelectorOnMainThread:@selector(release) withObject:nil waitUntilDone:YES];
-        
         if (currentAdView && currentAdView.superview) {
             [currentAdView performSelectorOnMainThread:@selector(removeFromSuperview) withObject:nil waitUntilDone:YES];
         }

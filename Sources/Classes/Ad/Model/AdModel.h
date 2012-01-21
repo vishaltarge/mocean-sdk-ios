@@ -65,7 +65,6 @@
 @property CGRect						frame;
 @property BOOL                          visibleState;
 
-@property (retain) UIView*              snapshot;
 @property (retain) NSData*              snapshotRAWData;
 @property (retain) NSDate*              snapshotRAWDataTime;
 @property (retain) UIView*              currentAdView;
