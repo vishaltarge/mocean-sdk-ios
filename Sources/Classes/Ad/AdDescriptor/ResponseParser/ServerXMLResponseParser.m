@@ -106,13 +106,14 @@
 }
 
 - (void) dealloc {
+    self.parser = nil;
+    self.propertyName = nil;
+    self.propertyContent = nil;
     self.content = nil;
-    [_parser release];
-	[_propertyName release];
-	[_propertyContent release];
-	[_campaignId release];
-	[_adId release];
-	[_trackUrl release];
+    self.campaignId = nil;
+    self.appId = nil;
+    self.adId = nil;
+    self.adType = nil;
     self.latitude = nil;
     self.longitude = nil;
     self.zip = nil;
