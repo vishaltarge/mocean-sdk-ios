@@ -10,7 +10,7 @@
 
 @interface SimpleBannerRetinaViewController : UIViewController
 {
-	AdView* _adView;
+	MASTAdView* _adView;
 }
 
 @end

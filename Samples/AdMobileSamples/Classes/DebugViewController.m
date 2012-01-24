@@ -23,7 +23,7 @@
     [imageView release];
 
 	
-	_adView = [[AdView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50) site:8061 zone:20249];
+	_adView = [[MASTAdView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50) site:8061 zone:20249];
 	_adView.updateTimeInterval = 0; // disable updates
 	//_adView.additionalParameters = [NSDictionary dictionaryWithObject:@"1" forKey:@"debug"];
 	_adView.logMode = YES;

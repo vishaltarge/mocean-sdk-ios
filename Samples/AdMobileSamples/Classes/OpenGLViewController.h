@@ -19,7 +19,7 @@
 
 
 @interface OpenGLViewController : UIViewController {
-	AdView*			_adView;
+	MASTAdView*			_adView;
 	EAGLView*		eaglView;
     EAGLContext*	context;
     GLuint			program;

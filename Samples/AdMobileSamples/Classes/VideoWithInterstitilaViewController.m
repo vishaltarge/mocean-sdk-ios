@@ -24,14 +24,14 @@
     [imageView release];
 
 	
-	_adView = [[AdView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 240) site:8061 zone:16109];
+	_adView = [[MASTAdView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 240) site:8061 zone:16109];
 	_adView.updateTimeInterval = 60;
     _adView.type = AdTypeRichmedia;
 	_adView.defaultImage = [UIImage imageNamed:@"DefaultImage (320x240).png"];
 	
 	[self.view addSubview:_adView];
 	
-	_adInterstitialView = [[AdInterstitialView alloc] initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, self.view.frame.size.height) site:8061 zone:16112];
+	_adInterstitialView = [[MASTAdInterstitialView alloc] initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, self.view.frame.size.height) site:8061 zone:16112];
     _adView.contentAlignment = YES;
     [_adInterstitialView setBackgroundColor:[UIColor whiteColor]];
     

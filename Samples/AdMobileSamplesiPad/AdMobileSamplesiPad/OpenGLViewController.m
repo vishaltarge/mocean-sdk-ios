@@ -42,7 +42,7 @@ enum {
         eaglView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         self.view = eaglView;
         
-        _adView = [[AdView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, 50) site:8061 zone:20249];
+        _adView = [[MASTAdView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, 50) site:8061 zone:20249];
         _adView.updateTimeInterval = 15;
         _adView.contentAlignment = YES;
         _adView.autoresizingMask = UIViewAutoresizingFlexibleWidth;

@@ -103,6 +103,43 @@
 		28D7ACF70DDB3853001CB0EB /* AdMobileSamplesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdMobileSamplesViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* AdMobileSamples_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMobileSamples_Prefix.pch; sourceTree = "<group>"; };
+		3BAA930714CEAA36002721E7 /* MASTAdDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTAdDelegate.h; sourceTree = "<group>"; };
+		3BAA930814CEAA36002721E7 /* MASTAdInterstitialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTAdInterstitialView.h; sourceTree = "<group>"; };
+		3BAA930914CEAA36002721E7 /* MASTAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTAdView.h; sourceTree = "<group>"; };
+		3BAA930D14CEAC5B002721E7 /* MASTAdModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTAdModel.h; sourceTree = "<group>"; };
+		3BAA931114CEACEC002721E7 /* MASTReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTReachability.h; sourceTree = "<group>"; };
+		3BAA931414CEAD47002721E7 /* MASTAdDescriptorHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTAdDescriptorHelper.h; sourceTree = "<group>"; };
+		3BAA931514CEAD47002721E7 /* MASTAdDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTAdDescriptor.h; sourceTree = "<group>"; };
+		3BAA931614CEAD51002721E7 /* MASTServerXMLResponseParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTServerXMLResponseParser.h; sourceTree = "<group>"; };
+		3BAA931714CEAD7A002721E7 /* MASTAdView_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTAdView_Private.h; sourceTree = "<group>"; };
+		3BAA931C14CEADEE002721E7 /* MASTAdController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTAdController.h; sourceTree = "<group>"; };
+		3BAA932014CEADEE002721E7 /* MASTAccelerometer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTAccelerometer.h; sourceTree = "<group>"; };
+		3BAA932314CEADEE002721E7 /* MASTFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTFileManager.h; sourceTree = "<group>"; };
+		3BAA932614CEADEE002721E7 /* MASTInstallManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTInstallManager.h; sourceTree = "<group>"; };
+		3BAA932914CEADEE002721E7 /* MASTLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTLocationManager.h; sourceTree = "<group>"; };
+		3BAA932C14CEADEE002721E7 /* MASTLogBasicFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTLogBasicFormatter.h; sourceTree = "<group>"; };
+		3BAA932E14CEADEE002721E7 /* MASTLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTLogger.h; sourceTree = "<group>"; };
+		3BAA933214CEADEE002721E7 /* MASTCacheController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTCacheController.h; sourceTree = "<group>"; };
+		3BAA933514CEADEE002721E7 /* MASTAdClicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTAdClicker.h; sourceTree = "<group>"; };
+		3BAA933814CEADEE002721E7 /* MASTDownloadController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTDownloadController.h; sourceTree = "<group>"; };
+		3BAA933B14CEADEE002721E7 /* MASTNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTNetworkActivityIndicatorManager.h; sourceTree = "<group>"; };
+		3BAA933D14CEADEE002721E7 /* MASTNetworkQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTNetworkQueue.h; sourceTree = "<group>"; };
+		3BAA933F14CEADEE002721E7 /* MASTObjectStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTObjectStorage.h; sourceTree = "<group>"; };
+		3BAA934114CEADEE002721E7 /* MASTRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTRequestOperation.h; sourceTree = "<group>"; };
+		3BAA934414CEADEE002721E7 /* MASTAdRequests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTAdRequests.h; sourceTree = "<group>"; };
+		3BAA934714CEADEE002721E7 /* MASTAdUpdater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTAdUpdater.h; sourceTree = "<group>"; };
+		3BAA934A14CEADEE002721E7 /* MASTNotificationAtlas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTNotificationAtlas.h; sourceTree = "<group>"; };
+		3BAA934C14CEADEE002721E7 /* MASTNotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTNotificationCenter.h; sourceTree = "<group>"; };
+		3BAA934E14CEADEE002721E7 /* MASTNotificationCenterAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTNotificationCenterAdditions.h; sourceTree = "<group>"; };
+		3BAA935114CEADEE002721E7 /* MASTConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTConstants.h; sourceTree = "<group>"; };
+		3BAA935214CEADEE002721E7 /* MASTUIColorAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTUIColorAdditions.h; sourceTree = "<group>"; };
+		3BAA935414CEADEE002721E7 /* MASTUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTUtils.h; sourceTree = "<group>"; };
+		3BAA935714CEADEE002721E7 /* MASTWebKitInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTWebKitInfo.h; sourceTree = "<group>"; };
+		3BAA935A14CEADEE002721E7 /* MASTSharedModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSharedModel.h; sourceTree = "<group>"; };
+		3BAA935E14CEADEE002721E7 /* MASTInternalAVPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTInternalAVPlayer.h; sourceTree = "<group>"; };
+		3BAA936114CEADEE002721E7 /* MASTInternalBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTInternalBrowser.h; sourceTree = "<group>"; };
+		3BAA936314CEADEE002721E7 /* MASTUIViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTUIViewAdditions.h; sourceTree = "<group>"; };
+		3BAA936514CEADEE002721E7 /* MASTUIWebViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTUIWebViewAdditions.h; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* AdMobileSamples-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AdMobileSamples-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		ACC770261382B7F9005074D8 /* ORMMAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORMMAViewController.h; sourceTree = "<group>"; };
 		ACC770271382B7F9005074D8 /* ORMMAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORMMAViewController.m; sourceTree = "<group>"; };
@@ -120,9 +157,6 @@
 		AD2D17DE148D0C4A00D0B576 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		ADAF1C6E126876F600AD88B8 /* DefaultImage (320x240).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultImage (320x240).png"; sourceTree = "<group>"; };
 		ADAF1C721268775200AD88B8 /* DefaultImage (320x50).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultImage (320x50).png"; sourceTree = "<group>"; };
-		CF08E18713B3674F00653A17 /* AdDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdDelegate.h; sourceTree = "<group>"; };
-		CF08E18813B3674F00653A17 /* AdInterstitialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdInterstitialView.h; sourceTree = "<group>"; };
-		CF08E18913B3674F00653A17 /* AdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdView.h; sourceTree = "<group>"; };
 		CF0DF281130BD868005A6FB3 /* DebugViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DebugViewController.m; sourceTree = "<group>"; };
 		CF0DF282130BD868005A6FB3 /* DebugViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugViewController.h; sourceTree = "<group>"; };
 		CF1ABF25130E608000A6859F /* Shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.fsh; sourceTree = "<group>"; };
@@ -141,32 +175,6 @@
 		CFBA6DF713B0599800CCE607 /* AdMobileSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AdMobileSDK.xcodeproj; path = ../../../Sources/AdMobileSDK.xcodeproj; sourceTree = "<group>"; };
 		CFBBD62F13BDC73D007ADECA /* TestingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestingViewController.h; sourceTree = "<group>"; };
 		CFBBD63013BDC73D007ADECA /* TestingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestingViewController.m; sourceTree = "<group>"; };
-		CFBBD63913BDD711007ADECA /* AdController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdController.h; sourceTree = "<group>"; };
-		CFBBD63D13BDD711007ADECA /* FileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileManager.h; sourceTree = "<group>"; };
-		CFBBD64013BDD711007ADECA /* InstallManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstallManager.h; sourceTree = "<group>"; };
-		CFBBD64313BDD711007ADECA /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
-		CFBBD64613BDD711007ADECA /* LogBasicFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogBasicFormatter.h; sourceTree = "<group>"; };
-		CFBBD64813BDD711007ADECA /* Logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
-		CFBBD64C13BDD711007ADECA /* CacheController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CacheController.h; sourceTree = "<group>"; };
-		CFBBD64F13BDD711007ADECA /* DownloadController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadController.h; sourceTree = "<group>"; };
-		CFBBD65213BDD711007ADECA /* AdRequests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdRequests.h; sourceTree = "<group>"; };
-		CFBBD65513BDD711007ADECA /* AdUpdater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdUpdater.h; sourceTree = "<group>"; };
-		CFBBD65813BDD711007ADECA /* NotificationAtlas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationAtlas.h; sourceTree = "<group>"; };
-		CFBBD65A13BDD711007ADECA /* NotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationCenter.h; sourceTree = "<group>"; };
-		CFBBD65C13BDD711007ADECA /* NotificationCenterAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationCenterAdditions.h; sourceTree = "<group>"; };
-		CFBBD65F13BDD711007ADECA /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
-		CFBBD66013BDD711007ADECA /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
-		CFBBD66313BDD711007ADECA /* WebKitInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebKitInfo.h; sourceTree = "<group>"; };
-		CFBBD66613BDD711007ADECA /* SharedModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedModel.h; sourceTree = "<group>"; };
-		CFBBD66A13BDD711007ADECA /* GreystripeSharedAdaptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GreystripeSharedAdaptor.h; sourceTree = "<group>"; };
-		CFBBD66D13BDD711007ADECA /* InternalBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InternalBrowser.h; sourceTree = "<group>"; };
-		CFBBD66F13BDD711007ADECA /* UIViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewAdditions.h; sourceTree = "<group>"; };
-		CFBBD67113BDD711007ADECA /* UIWebViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIWebViewAdditions.h; sourceTree = "<group>"; };
-		CFBBD67513BDD711007ADECA /* AdDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdDescriptor.h; sourceTree = "<group>"; };
-		CFBBD67713BDD711007ADECA /* AdDescriptorHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdDescriptorHelper.h; sourceTree = "<group>"; };
-		CFBBD67A13BDD711007ADECA /* ServerXMLResponseParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerXMLResponseParser.h; sourceTree = "<group>"; };
-		CFBBD67D13BDD711007ADECA /* AdModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdModel.h; sourceTree = "<group>"; };
-		CFBBD68313BDD711007ADECA /* AdView_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdView_Private.h; sourceTree = "<group>"; };
 		CFBBD68613BDD711007ADECA /* AdMobAdaptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMobAdaptor.h; sourceTree = "<group>"; };
 		CFBBD68913BDD711007ADECA /* AdWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdWebView.h; sourceTree = "<group>"; };
 		CFBBD68C13BDD711007ADECA /* ORMMAJavascriptBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORMMAJavascriptBridge.h; sourceTree = "<group>"; };
@@ -217,7 +225,6 @@
 		CFBBD71713BDD7C4007ADECA /* QSHttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSHttpClient.h; sourceTree = "<group>"; };
 		CFBBD71913BDD7C4007ADECA /* QSStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSStrings.h; sourceTree = "<group>"; };
 		CFBBD71B13BDD7C4007ADECA /* QSUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSUtilities.h; sourceTree = "<group>"; };
-		CFBBD71E13BDD7C4007ADECA /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		CFBBD72213BDD7C4007ADECA /* RhythmAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RhythmAd.h; sourceTree = "<group>"; };
 		CFBBD72313BDD7C4007ADECA /* RhythmAdDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RhythmAdDelegate.h; sourceTree = "<group>"; };
 		CFBBD72413BDD7C4007ADECA /* RhythmVideoAdDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RhythmVideoAdDelegate.h; sourceTree = "<group>"; };
@@ -227,26 +234,6 @@
 		CFBBD72A13BDD7C4007ADECA /* SmartAdServerAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartAdServerAd.h; sourceTree = "<group>"; };
 		CFBBD72B13BDD7C4007ADECA /* SmartAdServerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartAdServerDelegate.h; sourceTree = "<group>"; };
 		CFBBD72C13BDD7C4007ADECA /* SmartAdServerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartAdServerView.h; sourceTree = "<group>"; };
-		CFBBD73213BDD7C4007ADECA /* CoreAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreAdditions.h; sourceTree = "<group>"; };
-		CFBBD73513BDD7C4007ADECA /* NSArrayAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSArrayAdditions.h; sourceTree = "<group>"; };
-		CFBBD73613BDD7C4007ADECA /* NSDataAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataAdditions.h; sourceTree = "<group>"; };
-		CFBBD73713BDD7C4007ADECA /* NSDateAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDateAdditions.h; sourceTree = "<group>"; };
-		CFBBD73813BDD7C4007ADECA /* NSMutableArrayAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSMutableArrayAdditions.h; sourceTree = "<group>"; };
-		CFBBD73913BDD7C4007ADECA /* NSMutableDictionaryAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSMutableDictionaryAdditions.h; sourceTree = "<group>"; };
-		CFBBD73A13BDD7C4007ADECA /* NSObjectAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSObjectAdditions.h; sourceTree = "<group>"; };
-		CFBBD73B13BDD7C4007ADECA /* NSStringAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSStringAdditions.h; sourceTree = "<group>"; };
-		CFBBD73C13BDD7C4007ADECA /* Three20Core+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Three20Core+Additions.h"; sourceTree = "<group>"; };
-		CFBBD73D13BDD7C4007ADECA /* Three20Core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Three20Core.h; sourceTree = "<group>"; };
-		CFBBD73E13BDD7C4007ADECA /* Three20Core_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Three20Core_Prefix.pch; sourceTree = "<group>"; };
-		CFBBD73F13BDD7C4007ADECA /* TTCorePreprocessorMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTCorePreprocessorMacros.h; sourceTree = "<group>"; };
-		CFBBD74013BDD7C4007ADECA /* TTDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTDebug.h; sourceTree = "<group>"; };
-		CFBBD74113BDD7C4007ADECA /* TTDebugFlags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTDebugFlags.h; sourceTree = "<group>"; };
-		CFBBD74213BDD7C4007ADECA /* TTEntityTables.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTEntityTables.h; sourceTree = "<group>"; };
-		CFBBD74313BDD7C4007ADECA /* TTGlobalCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTGlobalCore.h; sourceTree = "<group>"; };
-		CFBBD74413BDD7C4007ADECA /* TTGlobalCoreLocale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTGlobalCoreLocale.h; sourceTree = "<group>"; };
-		CFBBD74513BDD7C4007ADECA /* TTGlobalCorePaths.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTGlobalCorePaths.h; sourceTree = "<group>"; };
-		CFBBD74613BDD7C4007ADECA /* TTGlobalCoreRects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTGlobalCoreRects.h; sourceTree = "<group>"; };
-		CFBBD74713BDD7C4007ADECA /* TTMarkupStripper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTMarkupStripper.h; sourceTree = "<group>"; };
 		CFBBD76813BDD7C4007ADECA /* Three20Network.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Three20Network.h; sourceTree = "<group>"; };
 		CFBBD76913BDD7C4007ADECA /* Three20Network_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Three20Network_Prefix.pch; sourceTree = "<group>"; };
 		CFBBD76A13BDD7C4007ADECA /* TTErrorCodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTErrorCodes.h; sourceTree = "<group>"; };
@@ -485,6 +472,221 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		3BAA930614CEAA36002721E7 /* Public */ = {
+			isa = PBXGroup;
+			children = (
+				3BAA930714CEAA36002721E7 /* MASTAdDelegate.h */,
+				3BAA930814CEAA36002721E7 /* MASTAdInterstitialView.h */,
+				3BAA930914CEAA36002721E7 /* MASTAdView.h */,
+			);
+			name = Public;
+			path = ../../../Sources/Classes/Public;
+			sourceTree = "<group>";
+		};
+		3BAA931914CEADEE002721E7 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				3BAA931B14CEADEE002721E7 /* Controller */,
+				3BAA931E14CEADEE002721E7 /* Core */,
+				3BAA935914CEADEE002721E7 /* Model */,
+				3BAA935C14CEADEE002721E7 /* Views */,
+			);
+			name = Shared;
+			path = ../../../Sources/Classes/Shared;
+			sourceTree = "<group>";
+		};
+		3BAA931B14CEADEE002721E7 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3BAA931C14CEADEE002721E7 /* MASTAdController.h */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		3BAA931E14CEADEE002721E7 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				3BAA931F14CEADEE002721E7 /* Accelerometer */,
+				3BAA932214CEADEE002721E7 /* FileManager */,
+				3BAA932514CEADEE002721E7 /* InstallManager */,
+				3BAA932814CEADEE002721E7 /* LocationManager */,
+				3BAA932B14CEADEE002721E7 /* Logger */,
+				3BAA933014CEADEE002721E7 /* Network */,
+				3BAA934914CEADEE002721E7 /* NotificationCenter */,
+				3BAA935014CEADEE002721E7 /* Utils */,
+				3BAA935614CEADEE002721E7 /* WebKit */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		3BAA931F14CEADEE002721E7 /* Accelerometer */ = {
+			isa = PBXGroup;
+			children = (
+				3BAA932014CEADEE002721E7 /* MASTAccelerometer.h */,
+			);
+			path = Accelerometer;
+			sourceTree = "<group>";
+		};
+		3BAA932214CEADEE002721E7 /* FileManager */ = {
+			isa = PBXGroup;
+			children = (
+				3BAA932314CEADEE002721E7 /* MASTFileManager.h */,
+			);
+			path = FileManager;
+			sourceTree = "<group>";
+		};
+		3BAA932514CEADEE002721E7 /* InstallManager */ = {
+			isa = PBXGroup;
+			children = (
+				3BAA932614CEADEE002721E7 /* MASTInstallManager.h */,
+			);
+			path = InstallManager;
+			sourceTree = "<group>";
+		};
+		3BAA932814CEADEE002721E7 /* LocationManager */ = {
+			isa = PBXGroup;
+			children = (
+				3BAA932914CEADEE002721E7 /* MASTLocationManager.h */,
+			);
+			path = LocationManager;
+			sourceTree = "<group>";
+		};
+		3BAA932B14CEADEE002721E7 /* Logger */ = {
+			isa = PBXGroup;
+			children = (
+				3BAA932C14CEADEE002721E7 /* MASTLogBasicFormatter.h */,
+				3BAA932E14CEADEE002721E7 /* MASTLogger.h */,
+			);
+			path = Logger;
+			sourceTree = "<group>";
+		};
+		3BAA933014CEADEE002721E7 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				3BAA933114CEADEE002721E7 /* CacheController */,
+				3BAA933414CEADEE002721E7 /* Clicker */,
+				3BAA933714CEADEE002721E7 /* Download */,
+				3BAA933A14CEADEE002721E7 /* NetworkQueue */,
+				3BAA934314CEADEE002721E7 /* Requests */,
+				3BAA934614CEADEE002721E7 /* Updates */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		3BAA933114CEADEE002721E7 /* CacheController */ = {
+			isa = PBXGroup;
+			children = (
+				3BAA933214CEADEE002721E7 /* MASTCacheController.h */,
+			);
+			path = CacheController;
+			sourceTree = "<group>";
+		};
+		3BAA933414CEADEE002721E7 /* Clicker */ = {
+			isa = PBXGroup;
+			children = (
+				3BAA933514CEADEE002721E7 /* MASTAdClicker.h */,
+			);
+			path = Clicker;
+			sourceTree = "<group>";
+		};
+		3BAA933714CEADEE002721E7 /* Download */ = {
+			isa = PBXGroup;
+			children = (
+				3BAA933814CEADEE002721E7 /* MASTDownloadController.h */,
+			);
+			path = Download;
+			sourceTree = "<group>";
+		};
+		3BAA933A14CEADEE002721E7 /* NetworkQueue */ = {
+			isa = PBXGroup;
+			children = (
+				3BAA933B14CEADEE002721E7 /* MASTNetworkActivityIndicatorManager.h */,
+				3BAA933D14CEADEE002721E7 /* MASTNetworkQueue.h */,
+				3BAA933F14CEADEE002721E7 /* MASTObjectStorage.h */,
+				3BAA934114CEADEE002721E7 /* MASTRequestOperation.h */,
+			);
+			path = NetworkQueue;
+			sourceTree = "<group>";
+		};
+		3BAA934314CEADEE002721E7 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				3BAA934414CEADEE002721E7 /* MASTAdRequests.h */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		3BAA934614CEADEE002721E7 /* Updates */ = {
+			isa = PBXGroup;
+			children = (
+				3BAA934714CEADEE002721E7 /* MASTAdUpdater.h */,
+			);
+			path = Updates;
+			sourceTree = "<group>";
+		};
+		3BAA934914CEADEE002721E7 /* NotificationCenter */ = {
+			isa = PBXGroup;
+			children = (
+				3BAA934A14CEADEE002721E7 /* MASTNotificationAtlas.h */,
+				3BAA934C14CEADEE002721E7 /* MASTNotificationCenter.h */,
+				3BAA934E14CEADEE002721E7 /* MASTNotificationCenterAdditions.h */,
+			);
+			path = NotificationCenter;
+			sourceTree = "<group>";
+		};
+		3BAA935014CEADEE002721E7 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				3BAA935114CEADEE002721E7 /* MASTConstants.h */,
+				3BAA935214CEADEE002721E7 /* MASTUIColorAdditions.h */,
+				3BAA935414CEADEE002721E7 /* MASTUtils.h */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		3BAA935614CEADEE002721E7 /* WebKit */ = {
+			isa = PBXGroup;
+			children = (
+				3BAA935714CEADEE002721E7 /* MASTWebKitInfo.h */,
+			);
+			path = WebKit;
+			sourceTree = "<group>";
+		};
+		3BAA935914CEADEE002721E7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3BAA935A14CEADEE002721E7 /* MASTSharedModel.h */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3BAA935C14CEADEE002721E7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3BAA935D14CEADEE002721E7 /* AVPlayer */,
+				3BAA936014CEADEE002721E7 /* InternalBrowser */,
+				3BAA936314CEADEE002721E7 /* MASTUIViewAdditions.h */,
+				3BAA936514CEADEE002721E7 /* MASTUIWebViewAdditions.h */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3BAA935D14CEADEE002721E7 /* AVPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				3BAA935E14CEADEE002721E7 /* MASTInternalAVPlayer.h */,
+			);
+			path = AVPlayer;
+			sourceTree = "<group>";
+		};
+		3BAA936014CEADEE002721E7 /* InternalBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				3BAA936114CEADEE002721E7 /* MASTInternalBrowser.h */,
+			);
+			path = InternalBrowser;
+			sourceTree = "<group>";
+		};
 		ACC770251382B7EC005074D8 /* ORMMA */ = {
 			isa = PBXGroup;
 			children = (
@@ -503,24 +705,13 @@
 			name = Delegate;
 			sourceTree = "<group>";
 		};
-		CF08E18613B3674F00653A17 /* Public */ = {
-			isa = PBXGroup;
-			children = (
-				CF08E18713B3674F00653A17 /* AdDelegate.h */,
-				CF08E18813B3674F00653A17 /* AdInterstitialView.h */,
-				CF08E18913B3674F00653A17 /* AdView.h */,
-			);
-			name = Public;
-			path = ../../../Sources/Classes/Public;
-			sourceTree = "<group>";
-		};
 		CF0B88F513CFFDAE00BDCDDA /* AdMobileSDK */ = {
 			isa = PBXGroup;
 			children = (
-				CF08E18613B3674F00653A17 /* Public */,
+				3BAA930614CEAA36002721E7 /* Public */,
 				FC428BEE13EFBCC0001B3B6E /* Bundles */,
-				CFBA6DF713B0599800CCE607 /* AdMobileSDK.xcodeproj */,
 				CFBBD63213BDD16D007ADECA /* Private */,
+				CFBA6DF713B0599800CCE607 /* AdMobileSDK.xcodeproj */,
 			);
 			name = AdMobileSDK;
 			sourceTree = "<group>";
@@ -593,184 +784,11 @@
 		CFBBD63213BDD16D007ADECA /* Private */ = {
 			isa = PBXGroup;
 			children = (
+				3BAA931914CEADEE002721E7 /* Shared */,
 				CFBBD6D613BDD7C4007ADECA /* Libs */,
-				CFBBD63713BDD711007ADECA /* Shared */,
 				CFBBD67313BDD711007ADECA /* Ad */,
 			);
 			name = Private;
-			sourceTree = "<group>";
-		};
-		CFBBD63713BDD711007ADECA /* Shared */ = {
-			isa = PBXGroup;
-			children = (
-				CFBBD63813BDD711007ADECA /* Controller */,
-				CFBBD63B13BDD711007ADECA /* Core */,
-				CFBBD66513BDD711007ADECA /* Model */,
-				CFBBD66813BDD711007ADECA /* Views */,
-			);
-			name = Shared;
-			path = ../../../Sources/Classes/Shared;
-			sourceTree = "<group>";
-		};
-		CFBBD63813BDD711007ADECA /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				CFBBD63913BDD711007ADECA /* AdController.h */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		CFBBD63B13BDD711007ADECA /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				CFBBD63C13BDD711007ADECA /* FileManager */,
-				CFBBD63F13BDD711007ADECA /* InstallManager */,
-				CFBBD64213BDD711007ADECA /* LocationManager */,
-				CFBBD64513BDD711007ADECA /* Logger */,
-				CFBBD64A13BDD711007ADECA /* Network */,
-				CFBBD65713BDD711007ADECA /* NotificationCenter */,
-				CFBBD65E13BDD711007ADECA /* Utils */,
-				CFBBD66213BDD711007ADECA /* WebKit */,
-			);
-			path = Core;
-			sourceTree = "<group>";
-		};
-		CFBBD63C13BDD711007ADECA /* FileManager */ = {
-			isa = PBXGroup;
-			children = (
-				CFBBD63D13BDD711007ADECA /* FileManager.h */,
-			);
-			path = FileManager;
-			sourceTree = "<group>";
-		};
-		CFBBD63F13BDD711007ADECA /* InstallManager */ = {
-			isa = PBXGroup;
-			children = (
-				CFBBD64013BDD711007ADECA /* InstallManager.h */,
-			);
-			path = InstallManager;
-			sourceTree = "<group>";
-		};
-		CFBBD64213BDD711007ADECA /* LocationManager */ = {
-			isa = PBXGroup;
-			children = (
-				CFBBD64313BDD711007ADECA /* LocationManager.h */,
-			);
-			path = LocationManager;
-			sourceTree = "<group>";
-		};
-		CFBBD64513BDD711007ADECA /* Logger */ = {
-			isa = PBXGroup;
-			children = (
-				CFBBD64613BDD711007ADECA /* LogBasicFormatter.h */,
-				CFBBD64813BDD711007ADECA /* Logger.h */,
-			);
-			path = Logger;
-			sourceTree = "<group>";
-		};
-		CFBBD64A13BDD711007ADECA /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				CFBBD64B13BDD711007ADECA /* CacheController */,
-				CFBBD64E13BDD711007ADECA /* Download */,
-				CFBBD65113BDD711007ADECA /* Requests */,
-				CFBBD65413BDD711007ADECA /* Updates */,
-			);
-			path = Network;
-			sourceTree = "<group>";
-		};
-		CFBBD64B13BDD711007ADECA /* CacheController */ = {
-			isa = PBXGroup;
-			children = (
-				CFBBD64C13BDD711007ADECA /* CacheController.h */,
-			);
-			path = CacheController;
-			sourceTree = "<group>";
-		};
-		CFBBD64E13BDD711007ADECA /* Download */ = {
-			isa = PBXGroup;
-			children = (
-				CFBBD64F13BDD711007ADECA /* DownloadController.h */,
-			);
-			path = Download;
-			sourceTree = "<group>";
-		};
-		CFBBD65113BDD711007ADECA /* Requests */ = {
-			isa = PBXGroup;
-			children = (
-				CFBBD65213BDD711007ADECA /* AdRequests.h */,
-			);
-			path = Requests;
-			sourceTree = "<group>";
-		};
-		CFBBD65413BDD711007ADECA /* Updates */ = {
-			isa = PBXGroup;
-			children = (
-				CFBBD65513BDD711007ADECA /* AdUpdater.h */,
-			);
-			path = Updates;
-			sourceTree = "<group>";
-		};
-		CFBBD65713BDD711007ADECA /* NotificationCenter */ = {
-			isa = PBXGroup;
-			children = (
-				CFBBD65813BDD711007ADECA /* NotificationAtlas.h */,
-				CFBBD65A13BDD711007ADECA /* NotificationCenter.h */,
-				CFBBD65C13BDD711007ADECA /* NotificationCenterAdditions.h */,
-			);
-			path = NotificationCenter;
-			sourceTree = "<group>";
-		};
-		CFBBD65E13BDD711007ADECA /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				CFBBD65F13BDD711007ADECA /* Constants.h */,
-				CFBBD66013BDD711007ADECA /* Utils.h */,
-			);
-			path = Utils;
-			sourceTree = "<group>";
-		};
-		CFBBD66213BDD711007ADECA /* WebKit */ = {
-			isa = PBXGroup;
-			children = (
-				CFBBD66313BDD711007ADECA /* WebKitInfo.h */,
-			);
-			path = WebKit;
-			sourceTree = "<group>";
-		};
-		CFBBD66513BDD711007ADECA /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				CFBBD66613BDD711007ADECA /* SharedModel.h */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		CFBBD66813BDD711007ADECA /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				CFBBD66913BDD711007ADECA /* GreystripeSharedAdaptor */,
-				CFBBD66C13BDD711007ADECA /* InternalBrowser */,
-				CFBBD66F13BDD711007ADECA /* UIViewAdditions.h */,
-				CFBBD67113BDD711007ADECA /* UIWebViewAdditions.h */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		CFBBD66913BDD711007ADECA /* GreystripeSharedAdaptor */ = {
-			isa = PBXGroup;
-			children = (
-				CFBBD66A13BDD711007ADECA /* GreystripeSharedAdaptor.h */,
-			);
-			path = GreystripeSharedAdaptor;
-			sourceTree = "<group>";
-		};
-		CFBBD66C13BDD711007ADECA /* InternalBrowser */ = {
-			isa = PBXGroup;
-			children = (
-				CFBBD66D13BDD711007ADECA /* InternalBrowser.h */,
-			);
-			path = InternalBrowser;
 			sourceTree = "<group>";
 		};
 		CFBBD67313BDD711007ADECA /* Ad */ = {
@@ -787,8 +805,8 @@
 		CFBBD67413BDD711007ADECA /* AdDescriptor */ = {
 			isa = PBXGroup;
 			children = (
-				CFBBD67513BDD711007ADECA /* AdDescriptor.h */,
-				CFBBD67713BDD711007ADECA /* AdDescriptorHelper.h */,
+				3BAA931414CEAD47002721E7 /* MASTAdDescriptorHelper.h */,
+				3BAA931514CEAD47002721E7 /* MASTAdDescriptor.h */,
 				CFBBD67913BDD711007ADECA /* ResponseParser */,
 			);
 			path = AdDescriptor;
@@ -797,7 +815,7 @@
 		CFBBD67913BDD711007ADECA /* ResponseParser */ = {
 			isa = PBXGroup;
 			children = (
-				CFBBD67A13BDD711007ADECA /* ServerXMLResponseParser.h */,
+				3BAA931614CEAD51002721E7 /* MASTServerXMLResponseParser.h */,
 			);
 			path = ResponseParser;
 			sourceTree = "<group>";
@@ -805,7 +823,7 @@
 		CFBBD67C13BDD711007ADECA /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CFBBD67D13BDD711007ADECA /* AdModel.h */,
+				3BAA930D14CEAC5B002721E7 /* MASTAdModel.h */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -825,7 +843,7 @@
 		CFBBD68013BDD711007ADECA /* PublicView */ = {
 			isa = PBXGroup;
 			children = (
-				CFBBD68313BDD711007ADECA /* AdView_Private.h */,
+				3BAA931714CEAD7A002721E7 /* MASTAdView_Private.h */,
 			);
 			path = PublicView;
 			sourceTree = "<group>";
@@ -965,7 +983,6 @@
 				CFBBD71D13BDD7C4007ADECA /* Reachability */,
 				CFBBD72013BDD7C4007ADECA /* Rhythm */,
 				CFBBD72813BDD7C4007ADECA /* SAS */,
-				CFBBD72D13BDD7C4007ADECA /* Three20Core */,
 				CFBBD76213BDD7C4007ADECA /* Three20Network */,
 				CFBBD79513BDD7C4007ADECA /* TouchJSON */,
 			);
@@ -1069,7 +1086,7 @@
 		CFBBD71D13BDD7C4007ADECA /* Reachability */ = {
 			isa = PBXGroup;
 			children = (
-				CFBBD71E13BDD7C4007ADECA /* Reachability.h */,
+				3BAA931114CEACEC002721E7 /* MASTReachability.h */,
 			);
 			path = Reachability;
 			sourceTree = "<group>";
@@ -1095,41 +1112,6 @@
 				CFBBD72C13BDD7C4007ADECA /* SmartAdServerView.h */,
 			);
 			path = SAS;
-			sourceTree = "<group>";
-		};
-		CFBBD72D13BDD7C4007ADECA /* Three20Core */ = {
-			isa = PBXGroup;
-			children = (
-				CFBBD73213BDD7C4007ADECA /* CoreAdditions.h */,
-				CFBBD73413BDD7C4007ADECA /* Headers */,
-			);
-			path = Three20Core;
-			sourceTree = "<group>";
-		};
-		CFBBD73413BDD7C4007ADECA /* Headers */ = {
-			isa = PBXGroup;
-			children = (
-				CFBBD73513BDD7C4007ADECA /* NSArrayAdditions.h */,
-				CFBBD73613BDD7C4007ADECA /* NSDataAdditions.h */,
-				CFBBD73713BDD7C4007ADECA /* NSDateAdditions.h */,
-				CFBBD73813BDD7C4007ADECA /* NSMutableArrayAdditions.h */,
-				CFBBD73913BDD7C4007ADECA /* NSMutableDictionaryAdditions.h */,
-				CFBBD73A13BDD7C4007ADECA /* NSObjectAdditions.h */,
-				CFBBD73B13BDD7C4007ADECA /* NSStringAdditions.h */,
-				CFBBD73C13BDD7C4007ADECA /* Three20Core+Additions.h */,
-				CFBBD73D13BDD7C4007ADECA /* Three20Core.h */,
-				CFBBD73E13BDD7C4007ADECA /* Three20Core_Prefix.pch */,
-				CFBBD73F13BDD7C4007ADECA /* TTCorePreprocessorMacros.h */,
-				CFBBD74013BDD7C4007ADECA /* TTDebug.h */,
-				CFBBD74113BDD7C4007ADECA /* TTDebugFlags.h */,
-				CFBBD74213BDD7C4007ADECA /* TTEntityTables.h */,
-				CFBBD74313BDD7C4007ADECA /* TTGlobalCore.h */,
-				CFBBD74413BDD7C4007ADECA /* TTGlobalCoreLocale.h */,
-				CFBBD74513BDD7C4007ADECA /* TTGlobalCorePaths.h */,
-				CFBBD74613BDD7C4007ADECA /* TTGlobalCoreRects.h */,
-				CFBBD74713BDD7C4007ADECA /* TTMarkupStripper.h */,
-			);
-			path = Headers;
 			sourceTree = "<group>";
 		};
 		CFBBD76213BDD7C4007ADECA /* Three20Network */ = {

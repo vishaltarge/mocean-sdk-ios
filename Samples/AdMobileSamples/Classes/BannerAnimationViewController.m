@@ -26,7 +26,7 @@
     [imageView release];
 
 	
-	_adView = [[AdView alloc] initWithFrame:CGRectMake(0, -AD_HEIGHT, self.view.frame.size.width, AD_HEIGHT) site:8061 zone:20249];
+	_adView = [[MASTAdView alloc] initWithFrame:CGRectMake(0, -AD_HEIGHT, self.view.frame.size.width, AD_HEIGHT) site:8061 zone:20249];
 	_adView.updateTimeInterval = 30;
 	_adView.animateMode = NO;
 	

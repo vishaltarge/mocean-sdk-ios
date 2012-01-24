@@ -8,17 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "MASTAdView.h"
-#import "NotificationCenter.h"
-#import "AdModel.h"
-#import "AdView_Private.h"
+#import "MASTNotificationCenter.h"
+#import "MASTAdModel.h"
+#import "MASTAdView_Private.h"
 
 
-@interface TestingViewController : UIViewController <AdViewDelegate> {
+@interface TestingViewController : UIViewController <MASTAdViewDelegate> {
     UITextField*        _siteTextField;
     UITextField*        _zoneTextField;
     UIButton*           _updateButton;
     UISegmentedControl* _segmentedControl;
-	AdView*             _adView;
+	MASTAdView*             _adView;
     UITextView*         _textView;
 }
 

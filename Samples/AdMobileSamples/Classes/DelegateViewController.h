@@ -7,10 +7,10 @@
 
 #import <UIKit/UIKit.h>
 #import "MASTAdView.h"
-#import "AdDelegate.h"
+#import "MASTAdDelegate.h"
 
-@interface DelegateViewController : UIViewController <AdViewDelegate> {
-	AdView*		_adView;
+@interface DelegateViewController : UIViewController <MASTAdViewDelegate> {
+	MASTAdView*		_adView;
 }
 
 @end

@@ -23,7 +23,7 @@
     [self.view addSubview:imageView];
     [imageView release];
     
-	_adView = [[AdView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 100.0) site:8061 zone:20249];
+	_adView = [[MASTAdView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 100.0) site:8061 zone:20249];
     
     // get only ad with size 640x100
     _adView.minSize = CGSizeMake(640, 100);

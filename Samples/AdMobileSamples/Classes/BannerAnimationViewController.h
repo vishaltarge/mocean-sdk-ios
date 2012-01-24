@@ -8,9 +8,9 @@
 #import <UIKit/UIKit.h>
 #import "MASTAdView.h"
 
-@interface BannerAnimationViewController : UIViewController <AdViewDelegate>
+@interface BannerAnimationViewController : UIViewController <MASTAdViewDelegate>
 {
-	AdView* _adView;
+	MASTAdView* _adView;
 }
 
 @end

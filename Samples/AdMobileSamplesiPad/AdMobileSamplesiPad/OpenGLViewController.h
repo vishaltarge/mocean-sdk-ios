@@ -15,10 +15,10 @@
 #import <OpenGLES/ES2/glext.h>
 
 #import "EAGLView.h"
-#import "AdView.h"
+#import "MASTAdView.h"
 
 @interface OpenGLViewController : UIViewController {
-	AdView*			_adView;
+	MASTAdView*			_adView;
 	EAGLView*		eaglView;
     EAGLContext*	context;
     GLuint			program;
