@@ -8,14 +8,14 @@
 #import <UIKit/UIKit.h>
 #import <MediaPlayer/MediaPlayer.h>
 
-#import "TouchableViewController.h"
-#import "NotificationCenter.h"
+#import "MASTTouchableViewController.h"
+#import "MASTNotificationCenter.h"
 
 
-@interface VideoView : UIView <TouchableViewDelegate> {
+@interface MASTVideoView : UIView <TouchableViewDelegate> {
 	NSURLRequest					*_request;
 	NSString						*_videoUrl;
-	TouchableViewController			*_touchableViewController;
+	MASTTouchableViewController			*_touchableViewController;
 	MPMoviePlayerController			*_player;
 	
 	BOOL							_videoPlaying;

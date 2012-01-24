@@ -7,14 +7,14 @@
 
 #import <Foundation/Foundation.h>
 
-#import "AdView.h"
-#import "Utils.h"
-#import "NotificationCenter.h"
+#import "MASTAdView.h"
+#import "MASTUtils.h"
+#import "MASTNotificationCenter.h"
 
-@interface CacheController : NSObject {
+@interface MASTCacheController : NSObject {
 }
 
-- (void)loadLinks:(NSArray*)links forAdView:(AdView*)adView request:(NSURLRequest*)request origData:(NSData*)origData;
+- (void)loadLinks:(NSArray*)links forAdView:(MASTAdView*)adView request:(NSURLRequest*)request origData:(NSData*)origData;
 
 + (NSData*)updateResponse:(NSData*)origData withNewData:(NSData*)newData request:(NSURLRequest*)request;
 

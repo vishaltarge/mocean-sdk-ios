@@ -5,13 +5,13 @@
 //  Created by Constantine Mureev on 3/1/11.
 //
 
-#import "Utils.h"
-#import "Constants.h"
-#import "UIAlertView+Blocks.h"
-#import "UIActionSheet+Blocks.h"
-#import "UIViewAdditions.h"
-#import "UIWebViewAdditions.h"
-#import "UIColorAdditions.m"
+#import "MASTUtils.h"
+#import "MASTConstants.h"
+#import "MASTUIAlertView+Blocks.h"
+#import "MASTUIActionSheet+Blocks.h"
+#import "MASTUIViewAdditions.h"
+#import "MASTUIWebViewAdditions.h"
+#import "MASTUIColorAdditions.m"
 
 #import <SystemConfiguration/SystemConfiguration.h>
 
@@ -53,7 +53,7 @@ NSMutableDictionary* CreateNonRetainingDictionary() {
 }
 
 
-@implementation Utils
+@implementation MASTUtils
 
 
 + (NSString*)platform
@@ -68,7 +68,7 @@ NSMutableDictionary* CreateNonRetainingDictionary() {
 }
 
 + (NSString*)platformFormatedString {
-    NSString *platform = [Utils platform];
+    NSString *platform = [MASTUtils platform];
     if ([platform isEqualToString:@"iPhone1,1"])	return PLTFORM_IPHONE_1G;
     if ([platform isEqualToString:@"iPhone1,2"])	return PLTFORM_IPHONE_3G;
     if ([platform isEqualToString:@"iPhone2,1"])	return PLTFORM_IPHONE_3GS;
@@ -219,11 +219,11 @@ NSMutableDictionary* CreateNonRetainingDictionary() {
 
 
 + (NSString*)md5HashForString:(NSString*)string {
-	return [Utils md5HashForData:[string dataUsingEncoding:NSUTF8StringEncoding]];
+	return [MASTUtils md5HashForData:[string dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 + (NSString*)sha1HashForString:(NSString*)string {
-	return [Utils sha1HashForData:[string dataUsingEncoding:NSUTF8StringEncoding]];
+	return [MASTUtils sha1HashForData:[string dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 + (void)makeLibraryLinked {

@@ -5,7 +5,7 @@
 //  Created by Constantine Mureev on 2/22/11.
 //
 
-#import "NotificationAtlas.h"
+#import "MASTNotificationAtlas.h"
 
 // ad Downloading
 NSString* kStartAdDownloadNotification = @"Start Ad Download";

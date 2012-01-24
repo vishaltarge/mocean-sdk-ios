@@ -7,11 +7,11 @@
 
 #import <UIKit/UIKit.h>
 
-#import "AdView.h"
+#import "MASTAdView.h"
 
-@interface ExpandViewController : UIViewController
+@interface MASTExpandViewController : UIViewController
 
-@property (nonatomic, retain) AdView* adView;
+@property (nonatomic, retain) MASTAdView* adView;
 @property (nonatomic, retain) UIView* expandView;
 
 @end

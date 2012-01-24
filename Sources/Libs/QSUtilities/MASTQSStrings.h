@@ -26,7 +26,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface QSStrings : NSObject {
+@interface MASTQSStrings : NSObject {
 
 }
 

@@ -17,8 +17,8 @@
 //  the License.
 //
 
-#import "GTMDefines.h"
-#import "GTMNSString+HTML.h"
+#import "MASTGTMDefines.h"
+#import "MASTQSUtilities.h"
 
 typedef struct {
   NSString *escapeSequence;

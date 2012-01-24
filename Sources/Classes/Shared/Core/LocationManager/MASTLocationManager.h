@@ -7,14 +7,14 @@
 
 #import <Foundation/Foundation.h>
 
-#import "AdView.h"
+#import "MASTAdView.h"
 
 #ifdef INCLUDE_LOCATION_MANAGER
 #import <CoreLocation/CoreLocation.h>
 #endif
 
 
-#import "NotificationCenter.h"
+#import "MASTNotificationCenter.h"
 
 #ifdef INCLUDE_LOCATION_MANAGER
 @interface LocationManager : CLLocationManager <CLLocationManagerDelegate> {
@@ -22,7 +22,7 @@
 	CLLocation*                         _currentLocation;
 	CLHeading*                          _currentHeading;
 #else
-@interface LocationManager : NSObject {
+@interface MASTLocationManager : NSObject {
 #endif
 	BOOL								_isUpdatingLocation;
 	NSString*							_latitude;
@@ -42,7 +42,7 @@
 @property (readonly) BOOL                           isUpdatingLocation;
 @property (assign) BOOL                             unknowsState;
 
-+ (LocationManager*)sharedInstance;
++ (MASTLocationManager*)sharedInstance;
 + (void)releaseSharedInstance;
 
 - (void)startUpdatingHeading;

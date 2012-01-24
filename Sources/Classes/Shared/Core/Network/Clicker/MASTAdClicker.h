@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-#import "NotificationCenter.h"
+#import "MASTNotificationCenter.h"
 
 #define TIMER_INTERVAL      3.0
 #define CLEAN_INTERVAL      7.0
 
-@interface AdClicker : NSObject {
+@interface MASTAdClicker : NSObject {
     NSMutableArray*         _infos;
     NSMutableArray*         _connections;
     NSMutableDictionary*    _urls;
@@ -22,7 +22,7 @@
     NSTimer*                _cleanTimer;
 }
 
-+ (AdClicker*)sharedInstance;
++ (MASTAdClicker*)sharedInstance;
 + (void)releaseSharedInstance;
 
 @end

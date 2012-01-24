@@ -5,20 +5,20 @@
 //  Created by Constantine Mureev on 3/1/11.
 //
 
-#import "SharedModel.h"
+#import "MASTSharedModel.h"
 
-@interface SharedModel()
+@interface MASTSharedModel()
 
 - (void)uaDetected:(NSNotification*)notification;
 - (void)locationDetected:(NSNotification*)notification;
 
 @end
 
-@implementation SharedModel
+@implementation MASTSharedModel
 
 @synthesize udidMd5 = _udidMd5, ua, latitude, longitude, accuracy, mcc, mnc;
 
-static SharedModel* sharedInstance = nil;
+static MASTSharedModel* sharedInstance = nil;
 
 
 #pragma mark -
@@ -28,14 +28,14 @@ static SharedModel* sharedInstance = nil;
 - (id) init {
     self = [super init];
 	if (self) {
-        [[NotificationCenter sharedInstance] addObserver:self selector:@selector(uaDetected:) name:kUaDetectedNotification object:nil];
-        [[NotificationCenter sharedInstance] addObserver:self selector:@selector(locationDetected:) name:kNewLocationDetectedNotification object:nil];
+        [[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(uaDetected:) name:kUaDetectedNotification object:nil];
+        [[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(locationDetected:) name:kNewLocationDetectedNotification object:nil];
         
-        if (![WebKitInfo sharedInstance]) {
+        if (![MASTWebKitInfo sharedInstance]) {
             // somthing going wrong...
         }
         
-        if (![LocationManager sharedInstance]) {
+        if (![MASTLocationManager sharedInstance]) {
             // somthing going wrong...
         }
 	}
@@ -109,13 +109,13 @@ static SharedModel* sharedInstance = nil;
         [result appendFormat:@"&ua=%@", self.ua];
     }
     
-    else if ([WebKitInfo sharedInstance].ua) {
-        self.ua = [WebKitInfo sharedInstance].ua;
+    else if ([MASTWebKitInfo sharedInstance].ua) {
+        self.ua = [MASTWebKitInfo sharedInstance].ua;
         [result appendFormat:@"&ua=%@", self.ua];
     }
     
     // set connection speed
-    NetworkStatus networkState = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
+    NetworkStatus networkState = [[MASTReachability reachabilityForInternetConnection] currentReachabilityStatus];
     if (networkState == ReachableViaWiFi) {
         [result appendFormat:@"&connection_speed=%d", 1];
     }
@@ -177,7 +177,7 @@ static SharedModel* sharedInstance = nil;
     if (_udidMd5) {
         return _udidMd5;
     } else {
-        self.udidMd5 = [Utils md5HashForString:[[UIDevice currentDevice] uniqueIdentifier]];
+        self.udidMd5 = [MASTUtils md5HashForString:[[UIDevice currentDevice] uniqueIdentifier]];
         return _udidMd5;
     }
 }

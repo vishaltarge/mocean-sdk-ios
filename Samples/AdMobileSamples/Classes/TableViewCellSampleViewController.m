@@ -6,7 +6,7 @@
 //
 
 #import "TableViewCellSampleViewController.h"
-#import "AdView.h"
+#import "MASTAdView.h"
 
 #define ADS_COUNT 1000
 

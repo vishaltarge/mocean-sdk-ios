@@ -5,15 +5,15 @@
 //  Created by Constantine Mureev on 3/3/11.
 //
 
-#import "InternalBrowser.h"
+#import "MASTInternalBrowser.h"
 
-#import "NotificationCenter.h"
-#import "DownloadController.h"
-#import "UIViewAdditions.h"
+#import "MASTNotificationCenter.h"
+#import "MASTDownloadController.h"
+#import "MASTUIViewAdditions.h"
 
 #define degreesToRadian(x) ((x) / 180.0 * M_PI)
 
-@interface InternalBrowser ()
+@interface MASTInternalBrowser ()
 
 - (BOOL)saveToMojivaFolderData:(NSData*)data name:(NSString*)name;
 - (void)prepareResources;
@@ -31,11 +31,11 @@
 @end
 
 
-@implementation InternalBrowser
+@implementation MASTInternalBrowser
 
 @synthesize viewConreoller = _viewConreoller, sendAdView, URL, loadingURL;
 
-static InternalBrowser* sharedInstance = nil;
+static MASTInternalBrowser* sharedInstance = nil;
 
 
 #pragma mark -
@@ -241,8 +241,8 @@ static InternalBrowser* sharedInstance = nil;
     NSString* path = [dirPath stringByAppendingPathComponent:@"backIcon.png"];
     
     if (![[NSFileManager defaultManager] isReadableFileAtPath:path]) {
-        NSData* imageData = [QSStrings decodeBase64WithString:kBackIconB64];
-        NSData* imageData2x = [QSStrings decodeBase64WithString:kBackIcon2xB64];
+        NSData* imageData = [MASTQSStrings decodeBase64WithString:kBackIconB64];
+        NSData* imageData2x = [MASTQSStrings decodeBase64WithString:kBackIcon2xB64];
         if ([self saveToMojivaFolderData:imageData name:@"backIcon.png"] &&
             [self saveToMojivaFolderData:imageData2x name:@"backIcon@2x.png"]) {
             _backIcon = [[UIImage imageWithContentsOfFile:path] retain];
@@ -255,8 +255,8 @@ static InternalBrowser* sharedInstance = nil;
     path = [dirPath stringByAppendingPathComponent:@"forwardIcon.png"];
     
     if (![[NSFileManager defaultManager] isReadableFileAtPath:path]) {
-        NSData* imageData = [QSStrings decodeBase64WithString:kForwardIconB64];
-        NSData* imageData2x = [QSStrings decodeBase64WithString:kForwardIcon2xB64];
+        NSData* imageData = [MASTQSStrings decodeBase64WithString:kForwardIconB64];
+        NSData* imageData2x = [MASTQSStrings decodeBase64WithString:kForwardIcon2xB64];
         if ([self saveToMojivaFolderData:imageData name:@"forwardIcon.png"] &&
             [self saveToMojivaFolderData:imageData2x name:@"forwardIcon@2x.png"]) {
             _forwardIcon = [[UIImage imageWithContentsOfFile:path] retain];
@@ -268,14 +268,14 @@ static InternalBrowser* sharedInstance = nil;
 }
 
 - (void)registerObserver {
-	[[NotificationCenter sharedInstance] addObserver:self selector:@selector(openURLinInternalBrowser:) name:kOpenInternalBrowserNotification object:nil];
+	[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(openURLinInternalBrowser:) name:kOpenInternalBrowserNotification object:nil];
 }
 
 - (void)openURLinInternalBrowser:(NSNotification*)notification {
 	@synchronized(self) {
 		if (!_opening && !self.view.window) {
             NSDictionary *info = [notification object];
-            AdView* adView = [info objectForKey:@"adView"];
+            MASTAdView* adView = [info objectForKey:@"adView"];
             NSURLRequest* request = [info objectForKey:@"request"];
             
             if (request && adView) { 
@@ -285,7 +285,7 @@ static InternalBrowser* sharedInstance = nil;
                 self.viewConreoller = [adView viewControllerForView];
                 
                 // remove all load/update ad requests 
-                [[DownloadController sharedInstance] cancelAll];
+                [[MASTDownloadController sharedInstance] cancelAll];
                 
                 self.URL = [request URL];
                 [_webView loadRequest:request];
@@ -305,7 +305,7 @@ static InternalBrowser* sharedInstance = nil;
 - (void)openURLinkExternalBrowser:(NSURLRequest*)request {
     NSMutableDictionary *info = [NSMutableDictionary dictionaryWithObject:self.sendAdView forKey:@"adView"];
     [info setObject:request forKey:@"request"];
-    [[NotificationCenter sharedInstance] postNotificationName:kShouldOpenExternalAppNotification object:info];
+    [[MASTNotificationCenter sharedInstance] postNotificationName:kShouldOpenExternalAppNotification object:info];
 }
 
 - (void)updateFrames:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration {
@@ -346,7 +346,7 @@ static InternalBrowser* sharedInstance = nil;
 		//fast
 		//[_webView stringByEvaluatingJavaScriptFromString:@"document.body.innerHTML = \"\";"];
         
-        [[NotificationCenter sharedInstance] postNotificationName:kCloseInternalBrowserNotification object:self.sendAdView];
+        [[MASTNotificationCenter sharedInstance] postNotificationName:kCloseInternalBrowserNotification object:self.sendAdView];
 	}
 }
 
@@ -439,7 +439,7 @@ static InternalBrowser* sharedInstance = nil;
     }
     */
     
-    if (![Utils isInternalScheme:[request URL]] && _opening) {
+    if (![MASTUtils isInternalScheme:[request URL]] && _opening) {
         [self openURLinkExternalBrowser:request];
         self.loadingURL = nil;
         [self close];

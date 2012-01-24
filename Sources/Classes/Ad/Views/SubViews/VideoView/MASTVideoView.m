@@ -5,10 +5,10 @@
 //  Created by Constantine Mureev on 3/28/11.
 //
 
-#import "VideoView.h"
+#import "MASTVideoView.h"
 
 
-@implementation VideoView
+@implementation MASTVideoView
 
 @synthesize videoUrl = _videoUrl;
 
@@ -25,7 +25,7 @@
 		_player.movieSourceType = MPMovieSourceTypeFile;
 		[self addSubview:_player.view];
 		
-		_touchableViewController = [[TouchableViewController alloc] initWithFrame:CGRectMake(0, 0, _player.view.frame.size.width, _player.view.frame.size.height - 40)];
+		_touchableViewController = [[MASTTouchableViewController alloc] initWithFrame:CGRectMake(0, 0, _player.view.frame.size.width, _player.view.frame.size.height - 40)];
         _touchableViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 		[_touchableViewController setDelegate:self];
 		[self addSubview:_touchableViewController.view];
@@ -70,7 +70,7 @@
         [senfInfo setObject:self.superview forKey:@"adView"];
         [senfInfo setObject:self forKey:@"subView"];
         
-        [[NotificationCenter sharedInstance] postNotificationName:kReadyAdDisplayNotification object:senfInfo];
+        [[MASTNotificationCenter sharedInstance] postNotificationName:kReadyAdDisplayNotification object:senfInfo];
     }
 }
 
@@ -104,7 +104,7 @@
         NSMutableDictionary* info = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:_request, self.superview, nil]
                                                                        forKeys:[NSArray arrayWithObjects:@"request", @"adView", nil]];
         
-        [[NotificationCenter sharedInstance] postNotificationName:kOpenURLNotification object:info];
+        [[MASTNotificationCenter sharedInstance] postNotificationName:kOpenURLNotification object:info];
     }
 }
 

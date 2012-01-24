@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "UIViewAdditions.h"
+#import "MASTUIViewAdditions.h"
 
 
-@interface TransparentUIView : UIView {
+@interface MASTTransparentUIView : UIView {
     
 }
 

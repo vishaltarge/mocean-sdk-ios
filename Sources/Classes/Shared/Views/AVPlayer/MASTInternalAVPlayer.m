@@ -5,14 +5,14 @@
 //  Created by Constantine Mureev on 3/3/11.
 //
 
-#import "InternalAVPlayer.h"
-#import "NotificationCenter.h"
-#import "AdView.h"
-#import "UIViewAdditions.h"
+#import "MASTInternalAVPlayer.h"
+#import "MASTNotificationCenter.h"
+#import "MASTAdView.h"
+#import "MASTUIViewAdditions.h"
 #include <objc/runtime.h>
 
 
-@interface InternalAVPlayer ()
+@interface MASTInternalAVPlayer ()
 
 @property (assign, getter = isOpening) BOOL opening;
 @property (assign, getter = isAudio) BOOL audio;
@@ -26,7 +26,7 @@
 @property (retain) MPMoviePlayerViewController *avPlayer;
 @property (retain) MPMoviePlayerController* avPlayerController;
 @property (assign) UIViewController*    viewConreoller;
-@property (assign) AdView*    adView;
+@property (assign) MASTAdView*    adView;
 
 - (void)registerObserver;
 - (void)playAudio:(NSNotification*)notification;
@@ -39,7 +39,7 @@
 
 @end
 
-@implementation InternalAVPlayer
+@implementation MASTInternalAVPlayer
 
 @synthesize opening, audio, statusBarHidden, autoplay, exitOnComplete, Inline, oldStyle, avPlayer, avPlayerController, viewConreoller, adView;
 
@@ -54,13 +54,13 @@
 }
 
 - (void)registerObserver {
-	[[NotificationCenter sharedInstance] addObserver:self selector:@selector(playAudio:) name:kPlayAudioNotification object:nil];
-	[[NotificationCenter sharedInstance] addObserver:self selector:@selector(playVideo:) name:kPlayVideoNotification object:nil];
+	[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(playAudio:) name:kPlayAudioNotification object:nil];
+	[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(playVideo:) name:kPlayVideoNotification object:nil];
 }
 
-+ (InternalAVPlayer*)sharedInstance {
++ (MASTInternalAVPlayer*)sharedInstance {
     static dispatch_once_t once;
-    static InternalAVPlayer* sharedInstance;
+    static MASTInternalAVPlayer* sharedInstance;
     dispatch_once(&once, ^ { sharedInstance = [self new]; });
     return sharedInstance;
 }
@@ -269,7 +269,7 @@
          */
 	} else {
         [self.viewConreoller dismissModalViewControllerAnimated:YES];
-        [[NotificationCenter sharedInstance] postNotificationName:@"Player received unknown error" object:nil];
+        [[MASTNotificationCenter sharedInstance] postNotificationName:@"Player received unknown error" object:nil];
 	}
 }
 

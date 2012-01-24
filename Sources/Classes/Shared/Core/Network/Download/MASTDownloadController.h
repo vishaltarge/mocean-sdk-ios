@@ -8,26 +8,26 @@
 #import <Foundation/Foundation.h>
 
 
-#import "NotificationCenter.h"
-#import "NotificationAtlas.h"
+#import "MASTNotificationCenter.h"
+#import "MASTNotificationAtlas.h"
 
-#import "AdView_Private.h"
-#import "AdRequests.h"
-#import "Utils.h"
-#import "CacheController.h"
+#import "MASTAdView_Private.h"
+#import "MASTAdRequests.h"
+#import "MASTUtils.h"
+#import "MASTCacheController.h"
 
 
-@interface DownloadController : NSObject {
-    CacheController*        _cacheController;
+@interface MASTDownloadController : NSObject {
+    MASTCacheController*        _cacheController;
 	
-	AdRequests*				_adRequests;
+	MASTAdRequests*				_adRequests;
 }
 
-+ (DownloadController*)sharedInstance;
++ (MASTDownloadController*)sharedInstance;
 + (void)releaseSharedInstance;
 
 - (void)cancelAll;
 
-- (void)downladAd:(AdView*)adView;
+- (void)downladAd:(MASTAdView*)adView;
 
 @end

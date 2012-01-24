@@ -5,16 +5,16 @@
 //  Created by Constantine Mureev on 8/19/10.
 //
 
-#import "Logger.h"
+#import "MASTLogger.h"
 
-@interface Logger()
+@interface MASTLogger()
 
 - (void)registerObserver;
 
 - (void)printNotification:(NSNotification*)notification;
-- (void)enableLogForAd:(AdView*)adView withLevel:(AdLogMode)logMode;
-- (void)disableLogForAd:(AdView*)adView;
-- (BOOL)isLogEnabled:(AdView*)adView forLevel:(AdLogMode)level;
+- (void)enableLogForAd:(MASTAdView*)adView withLevel:(AdLogMode)logMode;
+- (void)disableLogForAd:(MASTAdView*)adView;
+- (BOOL)isLogEnabled:(MASTAdView*)adView forLevel:(AdLogMode)level;
 
 + (void)showAlertWithMessage:(NSString*)message;
 + (void)printLogWithMessage:(NSString*)message;
@@ -28,9 +28,9 @@
 @end
 
 
-@implementation Logger
+@implementation MASTLogger
 
-static Logger* sharedInstance = nil;
+static MASTLogger* sharedInstance = nil;
 
 
 #pragma mark -
@@ -106,28 +106,28 @@ static Logger* sharedInstance = nil;
 
 
 - (void)registerObserver {
-	[[NotificationCenter sharedInstance] addObserver:self selector:@selector(printNotification:) name:nil object:nil];
+	[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(printNotification:) name:nil object:nil];
 }
 
 + (void) logWithString:(NSString*)message
 {
-	[Logger printLogWithMessage:message];
+	[MASTLogger printLogWithMessage:message];
 }
 
 + (void) logWithFormat:(NSString*)format, ...
 {
 	va_list args;
 	va_start(args, format);
-	NSString* message = [LogBasicFormatter stringWithFormat:format valist:args];
+	NSString* message = [MASTLogBasicFormatter stringWithFormat:format valist:args];
 	va_end(args);
 	
-	[Logger logWithString:message];
+	[MASTLogger logWithString:message];
 }
 
 + (void) logUsingAlertWithString:(NSString*)message
 {
-	[Logger printLogWithMessage:message];
-	[Logger showAlertWithMessage:message];
+	[MASTLogger printLogWithMessage:message];
+	[MASTLogger showAlertWithMessage:message];
 }
 
 
@@ -135,9 +135,9 @@ static Logger* sharedInstance = nil;
 {
 	va_list args;
 	va_start(args, format);
-	NSString* message = [LogBasicFormatter stringWithFormat:format valist:args];
+	NSString* message = [MASTLogBasicFormatter stringWithFormat:format valist:args];
 	va_end(args);
-	[Logger logUsingAlertWithString:message];
+	[MASTLogger logUsingAlertWithString:message];
 }
 
 
@@ -145,7 +145,7 @@ static Logger* sharedInstance = nil;
 #pragma mark Private
 
 
-- (void)enableLogForAd:(AdView*)adView withLevel:(AdLogMode)logMode {
+- (void)enableLogForAd:(MASTAdView*)adView withLevel:(AdLogMode)logMode {
     NSString* adPtr = [adView uid];
     @synchronized(_ads) {
         if (logMode == AdLogModeAll) {
@@ -156,7 +156,7 @@ static Logger* sharedInstance = nil;
     }
 }
 
-- (void)disableLogForAd:(AdView*)adView {
+- (void)disableLogForAd:(MASTAdView*)adView {
     NSString* adPtr = [adView uid];
     
     @synchronized(_ads) {
@@ -168,7 +168,7 @@ static Logger* sharedInstance = nil;
     }
 }
 
-- (BOOL)isLogEnabled:(AdView*)adView forLevel:(AdLogMode)level {
+- (BOOL)isLogEnabled:(MASTAdView*)adView forLevel:(AdLogMode)level {
     NSString* adPtr = [NSString stringWithFormat:@"%ld", adView];
     
     @synchronized(_ads) {
@@ -194,49 +194,49 @@ static Logger* sharedInstance = nil;
     //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         if ([[notification name] isEqualToString:kAdStartLoggingAllNotification]) {
             NSObject* obj = [notification object];
-            AdView* adView = (AdView*)obj;
+            MASTAdView* adView = (MASTAdView*)obj;
             [self enableLogForAd:adView withLevel:AdLogModeAll];
         } else if ([[notification name] isEqualToString:kAdStartLoggingErrorsNotification]) {
             NSObject* obj = [notification object];
-            AdView* adView = (AdView*)obj;
+            MASTAdView* adView = (MASTAdView*)obj;
             [self enableLogForAd:adView withLevel:AdLogModeErrorsOnly];
         } else if ([[notification name] isEqualToString:kAdStopLoggingNotification]) {
             NSObject* obj = [notification object];
-            AdView* adView = (AdView*)obj;
+            MASTAdView* adView = (MASTAdView*)obj;
             [self disableLogForAd:adView];
         } else if ([_ads count] > 0) {
             NSObject* obj = [notification object];
             
-            if ([obj isKindOfClass:[AdView class]]) {
-                AdView* adView = (AdView*)obj;
+            if ([obj isKindOfClass:[MASTAdView class]]) {
+                MASTAdView* adView = (MASTAdView*)obj;
                 
                 if ([self isLogEnabled:adView forLevel:AdLogModeAll]) {
                     if ([[notification name] isEqualToString:kStartAdDownloadNotification]) {
                         NSString* url = [[adView adModel] urlIgnoreValifation];
-                        [Logger logWithFormat:@" ad(%ld) - %@ | url: %@", adView, [notification name], url];
+                        [MASTLogger logWithFormat:@" ad(%ld) - %@ | url: %@", adView, [notification name], url];
                     } else {
-                        [Logger logWithFormat:@" ad(%ld) - %@", adView, [notification name]];
+                        [MASTLogger logWithFormat:@" ad(%ld) - %@", adView, [notification name]];
                     }
                 }
             } else if ([obj isKindOfClass:[NSDictionary class]]) {
                 NSDictionary* dic = (NSDictionary*)obj;
-                AdView* adView = [dic objectForKey:@"adView"];
+                MASTAdView* adView = [dic objectForKey:@"adView"];
                 NSError* error = [dic objectForKey:@"error"];
                 
                 if ([self isLogEnabled:adView forLevel:AdLogModeErrorsOnly]) {
-                    if ([adView isKindOfClass:[AdView class]] && [error isKindOfClass:[NSError class]]) {
-                        [Logger logWithFormat:@" ad(%ld) - %@ | error: %@", adView, [notification name], [error description]];
+                    if ([adView isKindOfClass:[MASTAdView class]] && [error isKindOfClass:[NSError class]]) {
+                        [MASTLogger logWithFormat:@" ad(%ld) - %@ | error: %@", adView, [notification name], [error description]];
                     } else if ([self isLogEnabled:adView forLevel:AdLogModeAll]) {
-                        if ([adView isKindOfClass:[AdView class]]) {
-                            [Logger logWithFormat:@" ad(%ld) - %@", adView, [notification name]];
+                        if ([adView isKindOfClass:[MASTAdView class]]) {
+                            [MASTLogger logWithFormat:@" ad(%ld) - %@", adView, [notification name]];
                         }
                         else {
-                            [Logger logWithFormat:@" - %@", [notification name]];
+                            [MASTLogger logWithFormat:@" - %@", [notification name]];
                         }
                     }
                 }
             } else if ([_allLogAds count] > 0) {
-                [Logger logWithFormat:@" - %@", [notification name]];
+                [MASTLogger logWithFormat:@" - %@", [notification name]];
             }
         }
    //});

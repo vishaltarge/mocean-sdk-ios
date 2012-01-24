@@ -5,17 +5,17 @@
 //  Created by Constantine Mureev on 2/22/11.
 //
 
-#import "AdDescriptor.h"
-#import "ServerXMLResponseParser.h"
-#import "AdDescriptorHelper.h"
+#import "MASTAdDescriptor.h"
+#import "MASTServerXMLResponseParser.h"
+#import "MASTAdDescriptorHelper.h"
 
 
-@implementation AdDescriptor
+@implementation MASTAdDescriptor
 
 @synthesize adContentType, externalCampaign, externalContent, appId, adId, adType, latitude,longitude, zip, campaignId, trackUrl, serverReponse, serverReponseString;
 
-+ (AdDescriptor*)descriptorFromContent:(NSData*)data frameSize:(CGSize)frameSize aligmentCenter:(BOOL)aligmentCenter {
-	AdDescriptor* adDescriptor = [AdDescriptor  new];
++ (MASTAdDescriptor*)descriptorFromContent:(NSData*)data frameSize:(CGSize)frameSize aligmentCenter:(BOOL)aligmentCenter {
+	MASTAdDescriptor* adDescriptor = [MASTAdDescriptor  new];
 	
 	if (data) {
         if ([data length] == 0) {
@@ -34,12 +34,12 @@
                 adDescriptor.adContentType = AdContentTypeInvalidParams;
             } else if ([adDescriptor.serverReponseString.lowercaseString rangeOfString:@"<!-- error: -1 -->"].location != NSNotFound) {
                 adDescriptor.adContentType = AdContentTypeInvalidParams;
-            } else if ([AdDescriptorHelper isVideoContent:adDescriptor.serverReponseString]) {
+            } else if ([MASTAdDescriptorHelper isVideoContent:adDescriptor.serverReponseString]) {
                 adDescriptor.adContentType = AdContentTypeMojivaVideo;
-            } else if ([AdDescriptorHelper isExternalCampaign:adDescriptor.serverReponseString]) {
+            } else if ([MASTAdDescriptorHelper isExternalCampaign:adDescriptor.serverReponseString]) {
                 adDescriptor.externalCampaign = YES;
                 
-                ServerXMLResponseParser* _xmlResponseParser = [[ServerXMLResponseParser alloc] init];
+                MASTServerXMLResponseParser* _xmlResponseParser = [[MASTServerXMLResponseParser alloc] init];
                 [_xmlResponseParser startParseSynchronous:adDescriptor.serverReponseString];
                 
                 adDescriptor.externalContent = _xmlResponseParser.content;
@@ -48,10 +48,10 @@
                 
                 [_xmlResponseParser release];
             } else {
-                NSString* clearHtml = [AdDescriptorHelper stringByStrippingHTMLcomments:adDescriptor.serverReponseString];
+                NSString* clearHtml = [MASTAdDescriptorHelper stringByStrippingHTMLcomments:adDescriptor.serverReponseString];
                 if ([clearHtml length] > 0) {
                     adDescriptor.adContentType = AdContentTypeDefaultHtml;
-                    adDescriptor.serverReponseString = [AdDescriptorHelper wrapHTML:clearHtml frameSize:frameSize aligmentCenter:aligmentCenter];
+                    adDescriptor.serverReponseString = [MASTAdDescriptorHelper wrapHTML:clearHtml frameSize:frameSize aligmentCenter:aligmentCenter];
                     adDescriptor.serverReponse = [adDescriptor.serverReponseString dataUsingEncoding:NSUTF8StringEncoding];
                 } else {
                     adDescriptor.adContentType = AdContentTypeUndefined;

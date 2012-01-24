@@ -5,13 +5,13 @@
 //  Created by Constantine Mureev on 3/3/11.
 //
 
-#import "AdRequests.h"
+#import "MASTAdRequests.h"
 
-#import "NotificationCenter.h"
-#import "Utils.h"
+#import "MASTNotificationCenter.h"
+#import "MASTUtils.h"
 
 
-@implementation AdRequests
+@implementation MASTAdRequests
 
 - (id)init {
 	self = [super init];
@@ -50,7 +50,7 @@
 	return result;
 }
 
-- (void)addRequest:(NSURLRequest*)request forAd:(AdView*)adView {
+- (void)addRequest:(NSURLRequest*)request forAd:(MASTAdView*)adView {
     @synchronized(self) {
         if ([_ads containsObject:adView]) {
             NSUInteger ind = [_ads indexOfObject:adView];
@@ -101,7 +101,7 @@
     }
 }
 
-- (void)removeAd:(AdView*)adView {
+- (void)removeAd:(MASTAdView*)adView {
     @synchronized(self) {
         NSUInteger ind = [_ads indexOfObject:adView];
         if (ind != NSNotFound) {
@@ -119,8 +119,8 @@
     }
 }
 
-- (AdView*)adForRequest:(NSURLRequest*)request {
-	AdView* ad = nil;
+- (MASTAdView*)adForRequest:(NSURLRequest*)request {
+	MASTAdView* ad = nil;
 	
     @synchronized(self) {
         NSUInteger i, count = [_ads count];
@@ -137,7 +137,7 @@
 	return ad;
 }
 
-- (NSArray*)allRequestsForAd:(AdView*)adView {
+- (NSArray*)allRequestsForAd:(MASTAdView*)adView {
     @synchronized(self) {
         NSUInteger ind = [_ads indexOfObject:adView];
         if (ind != NSNotFound) {

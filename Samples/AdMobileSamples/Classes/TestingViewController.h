@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AdView.h"
+#import "MASTAdView.h"
 #import "NotificationCenter.h"
 #import "AdModel.h"
 #import "AdView_Private.h"

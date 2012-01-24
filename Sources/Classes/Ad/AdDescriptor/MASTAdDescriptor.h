@@ -17,7 +17,7 @@ typedef enum {
 } AdContentType;
 
 
-@interface AdDescriptor : NSObject {
+@interface MASTAdDescriptor : NSObject {
 }
 
 @property (assign) AdContentType adContentType;
@@ -34,6 +34,6 @@ typedef enum {
 @property (retain) NSData* serverReponse;
 @property (retain) NSString* serverReponseString;
 
-+ (AdDescriptor*)descriptorFromContent:(NSData*)data frameSize:(CGSize)frameSize aligmentCenter:(BOOL)aligmentCenter;
++ (MASTAdDescriptor*)descriptorFromContent:(NSData*)data frameSize:(CGSize)frameSize aligmentCenter:(BOOL)aligmentCenter;
 
 @end

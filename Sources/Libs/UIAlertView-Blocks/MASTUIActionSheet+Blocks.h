@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RIButtonItem.h"
+#import "MASTRIButtonItem.h"
 
 
 // do nothing, just for make this catagory linked
@@ -15,8 +15,8 @@ void useCatagory6();
 
 @interface UIActionSheet (Blocks) <UIActionSheetDelegate>
 
--(id)initWithTitle:(NSString *)inTitle cancelButtonItem:(RIButtonItem *)inCancelButtonItem destructiveButtonItem:(RIButtonItem *)inDestructiveItem otherButtonItems:(RIButtonItem *)inOtherButtonItems, ... NS_REQUIRES_NIL_TERMINATION;
+-(id)initWithTitle:(NSString *)inTitle cancelButtonItem:(MASTRIButtonItem *)inCancelButtonItem destructiveButtonItem:(MASTRIButtonItem *)inDestructiveItem otherButtonItems:(MASTRIButtonItem *)inOtherButtonItems, ... NS_REQUIRES_NIL_TERMINATION;
 
-- (void)addButtonItem:(RIButtonItem *)item;
+- (void)addButtonItem:(MASTRIButtonItem *)item;
 
 @end

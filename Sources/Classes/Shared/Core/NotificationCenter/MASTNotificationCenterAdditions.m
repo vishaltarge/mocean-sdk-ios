@@ -5,10 +5,10 @@
 //  Created by Constantine Mureev on 3/3/11.
 //
 
-#import "NotificationCenterAdditions.h"
+#import "MASTNotificationCenterAdditions.h"
 #import <pthread.h>
 
-@implementation NotificationCenterAdditions
+@implementation MASTNotificationCenterAdditions
 
 
 + (void)postNotificationDictionary:(NSDictionary*)info {
@@ -28,7 +28,7 @@
 
 + (void)NC:(NSNotificationCenter*)notificationCenter postNotificationOnMainThreadWithName:(NSString*)name object:(id)object {
 	if( pthread_main_np() ) return [notificationCenter postNotificationName:name object:object userInfo:nil];
-	[NotificationCenterAdditions NC:notificationCenter postNotificationOnMainThreadWithName:name object:object userInfo:nil waitUntilDone:NO];
+	[MASTNotificationCenterAdditions NC:notificationCenter postNotificationOnMainThreadWithName:name object:object userInfo:nil waitUntilDone:NO];
 }
 
 + (void)NC:(NSNotificationCenter*)notificationCenter postNotificationOnMainThreadWithName:(NSString*)name object:(id)object userInfo:(NSDictionary *)userInfo waitUntilDone:(BOOL)waitUntilDone {
@@ -40,7 +40,7 @@
 	if( userInfo ) [info setObject:userInfo forKey:@"userInfo"];
 	[info setObject:notificationCenter forKey:@"nc"];
 	
-	[NotificationCenterAdditions performSelectorOnMainThread:@selector(postNotificationDictionary:) withObject:info waitUntilDone:waitUntilDone];
+	[MASTNotificationCenterAdditions performSelectorOnMainThread:@selector(postNotificationDictionary:) withObject:info waitUntilDone:waitUntilDone];
 	
 	[info release];
 }

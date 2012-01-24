@@ -5,19 +5,19 @@
 //  Created by Constantine Mureev on 2/24/11.
 //
 
-#import "AdController.h"
+#import "MASTAdController.h"
 
-#import "NotificationCenterAdditions.h"
-#import "UIViewAdditions.h"
-#import "Utils.h"
+#import "MASTNotificationCenterAdditions.h"
+#import "MASTUIViewAdditions.h"
+#import "MASTUtils.h"
 
 
-@interface AdController ()
+@interface MASTAdController ()
 
 //- (void)visibleCheckerThread;
 
-- (void)addAdView:(AdView*)adView;
-- (void)removeAdView:(AdView*)adView;
+- (void)addAdView:(MASTAdView*)adView;
+- (void)removeAdView:(MASTAdView*)adView;
 
 - (void)registerObserver;
 - (void)registerAd:(NSNotification*)notification;
@@ -31,9 +31,9 @@
 @end
 
 
-@implementation AdController
+@implementation MASTAdController
 
-static AdController* sharedInstance = nil;
+static MASTAdController* sharedInstance = nil;
 
 #pragma mark -
 #pragma mark Singleton
@@ -113,7 +113,7 @@ static AdController* sharedInstance = nil;
 
 
 
-- (void)addAdView:(AdView*)adView {
+- (void)addAdView:(MASTAdView*)adView {
 	NSAutoreleasePool* pool = [NSAutoreleasePool new];
     
 	@synchronized(_ads) {
@@ -123,14 +123,14 @@ static AdController* sharedInstance = nil;
 	[pool drain];
 }
 
-- (void)removeAdView:(AdView*)adView {
+- (void)removeAdView:(MASTAdView*)adView {
 	NSAutoreleasePool* pool = [NSAutoreleasePool new];
 	
 	@synchronized(_ads) {
 		NSUInteger ind = [_ads indexOfObject:adView];
 		
 		if (ind != NSNotFound) {
-			AdUpdater* updater = [_adUpdateControllers objectAtIndex:ind];
+			MASTAdUpdater* updater = [_adUpdateControllers objectAtIndex:ind];
 			[updater invalidate];
 			[_adUpdateControllers removeObjectAtIndex:ind];
 		}
@@ -142,17 +142,17 @@ static AdController* sharedInstance = nil;
 }
 
 - (void)registerObserver {
-	[[NotificationCenter sharedInstance] addObserver:self selector:@selector(registerAd:) name:kRegisterAdNotification object:nil];
-	[[NotificationCenter sharedInstance] addObserver:self selector:@selector(unregisterAd:) name:kUnregisterAdNotification object:nil];
-	[[NotificationCenter sharedInstance] addObserver:self selector:@selector(adDownloaded:) name:kFinishAdDownloadNotification object:nil];
-	[[NotificationCenter sharedInstance] addObserver:self selector:@selector(adClicked:) name:kOpenURLNotification object:nil];
-	[[NotificationCenter sharedInstance] addObserver:self selector:@selector(adOpenRequest:) name:kOpenVerifiedRequestNotification object:nil];
-	[[NotificationCenter sharedInstance] addObserver:self selector:@selector(failToReceiveAd:) name:kFailAdDownloadNotification object:nil];
-	[[NotificationCenter sharedInstance] addObserver:self selector:@selector(trackExternalCampaignURL:) name:kTrackUrlNotification object:nil];
+	[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(registerAd:) name:kRegisterAdNotification object:nil];
+	[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(unregisterAd:) name:kUnregisterAdNotification object:nil];
+	[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(adDownloaded:) name:kFinishAdDownloadNotification object:nil];
+	[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(adClicked:) name:kOpenURLNotification object:nil];
+	[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(adOpenRequest:) name:kOpenVerifiedRequestNotification object:nil];
+	[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(failToReceiveAd:) name:kFailAdDownloadNotification object:nil];
+	[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(trackExternalCampaignURL:) name:kTrackUrlNotification object:nil];
 }
 
-- (void)statrLoad:(AdView*)adView {
-    AdModel* adModel = [adView adModel];
+- (void)statrLoad:(MASTAdView*)adView {
+    MASTAdModel* adModel = [adView adModel];
 
     if ( adModel.latitude == nil && adModel.longitude == nil )
     {
@@ -165,13 +165,13 @@ static AdController* sharedInstance = nil;
 #endif
     }
 
-	[[NotificationCenter sharedInstance] postNotificationName:kStartAdDownloadNotification object:adView];
+	[[MASTNotificationCenter sharedInstance] postNotificationName:kStartAdDownloadNotification object:adView];
 }
 
 - (void)registerAd:(NSNotification*)notification {
-	AdView* adView = [notification object];
+	MASTAdView* adView = [notification object];
     
-    AdUpdater* updater = [AdUpdater new];
+    MASTAdUpdater* updater = [MASTAdUpdater new];
     updater.adView = adView;
     [_adUpdateControllers addObject:updater];
     [updater release];
@@ -184,7 +184,7 @@ static AdController* sharedInstance = nil;
 }
 
 - (void)unregisterAd:(NSNotification*)notification {
-	AdView* adView = [notification object];
+	MASTAdView* adView = [notification object];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self removeAdView:adView];
@@ -195,19 +195,19 @@ static AdController* sharedInstance = nil;
     NSAutoreleasePool* pool = [NSAutoreleasePool new];
     
     NSDictionary *info = [notification object];
-	AdView* adView = [info objectForKey:@"adView"];
-    AdModel* adModel = [adView adModel];
+	MASTAdView* adView = [info objectForKey:@"adView"];
+    MASTAdModel* adModel = [adView adModel];
     
 	NSData* data = [info objectForKey:@"data"];
-	AdDescriptor* adDescriptor = [AdDescriptor descriptorFromContent:data frameSize:[adView adModel].frame.size aligmentCenter:adModel.aligmentCenter];
+	MASTAdDescriptor* adDescriptor = [MASTAdDescriptor descriptorFromContent:data frameSize:[adView adModel].frame.size aligmentCenter:adModel.aligmentCenter];
     
 	if (adDescriptor.adContentType == AdContentTypeInvalidParams) {
-        [[NotificationCenter sharedInstance] postNotificationName:kInvalidParamsServerResponseNotification object:adView];
+        [[MASTNotificationCenter sharedInstance] postNotificationName:kInvalidParamsServerResponseNotification object:adView];
     } else if (adDescriptor.adContentType == AdContentTypeEmpty) {
         NSMutableDictionary* errorInfo = [NSMutableDictionary dictionary];
         [errorInfo setObject:adView forKey:@"adView"];
         [errorInfo setObject:[NSError errorWithDomain:kEmptyServerResponseNotification code:22 userInfo:nil] forKey:@"error"];        
-        [[NotificationCenter sharedInstance] postNotificationName:kEmptyServerResponseNotification object:errorInfo];
+        [[MASTNotificationCenter sharedInstance] postNotificationName:kEmptyServerResponseNotification object:errorInfo];
     } else if (adDescriptor.adContentType != AdContentTypeUndefined) {
         if (adModel && [adModel.descriptor.serverReponse isEqualToData:adDescriptor.serverReponse]) {
             if (adDescriptor.adContentType == AdContentTypeDefaultHtml) {
@@ -229,19 +229,19 @@ static AdController* sharedInstance = nil;
         if (ind != NSNotFound) {
             [senfInfo setObject:adView forKey:@"adView"];
             [senfInfo setObject:adDescriptor forKey:@"descriptor"];
-            [NotificationCenterAdditions NC:[NotificationCenter sharedInstance] postNotificationOnMainThreadWithName:kStartAdDisplayNotification object:senfInfo];
+            [MASTNotificationCenterAdditions NC:[MASTNotificationCenter sharedInstance] postNotificationOnMainThreadWithName:kStartAdDisplayNotification object:senfInfo];
         }
     } else {
         if (adDescriptor.externalCampaign) {
             NSMutableDictionary* senfInfo = [NSMutableDictionary dictionary];
             [senfInfo setObject:adView forKey:@"adView"];
             [senfInfo setObject:adDescriptor.externalContent forKey:@"dic"];
-            [NotificationCenterAdditions NC:[NotificationCenter sharedInstance] postNotificationOnMainThreadWithName:kThirdPartyNotification object:senfInfo];
+            [MASTNotificationCenterAdditions NC:[MASTNotificationCenter sharedInstance] postNotificationOnMainThreadWithName:kThirdPartyNotification object:senfInfo];
         } else {
             NSMutableDictionary* senfInfo = [NSMutableDictionary dictionary];
             [senfInfo setObject:adView forKey:@"adView"];
             [senfInfo setObject:adDescriptor forKey:@"descriptor"];
-            [NotificationCenterAdditions NC:[NotificationCenter sharedInstance] postNotificationOnMainThreadWithName:kFailAdDisplayNotification object:senfInfo];
+            [MASTNotificationCenterAdditions NC:[MASTNotificationCenter sharedInstance] postNotificationOnMainThreadWithName:kFailAdDisplayNotification object:senfInfo];
         }
     }
     
@@ -256,28 +256,28 @@ static AdController* sharedInstance = nil;
 
 - (void)adClicked:(NSNotification*)notification {
     NSDictionary *info = [notification object];
-	AdView* adView = [info objectForKey:@"adView"];
+	MASTAdView* adView = [info objectForKey:@"adView"];
     NSURLRequest* request = [info objectForKey:@"request"];
     
     if (adView && request) {
             NSMutableDictionary* sendInfo = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:request, adView, nil]
                                                                                forKeys:[NSArray arrayWithObjects:@"request", @"adView", nil]];
             
-            [[NotificationCenter sharedInstance] postNotificationName:kVerifyRequestNotification object:sendInfo];
+            [[MASTNotificationCenter sharedInstance] postNotificationName:kVerifyRequestNotification object:sendInfo];
     }
 }
 
 - (void)adOpenRequest:(NSNotification*)notification {
     NSDictionary *info = [notification object];
-	AdView* adView = [info objectForKey:@"adView"];
+	MASTAdView* adView = [info objectForKey:@"adView"];
     NSURLRequest* request = [info objectForKey:@"request"];
     
     if (adView && request) {
         // check url
-        if ([Utils isInternalURL:[request URL]]) {
-            [[NotificationCenter sharedInstance] postNotificationName:kShouldOpenInternalBrowserNotification object:info];
+        if ([MASTUtils isInternalURL:[request URL]]) {
+            [[MASTNotificationCenter sharedInstance] postNotificationName:kShouldOpenInternalBrowserNotification object:info];
         } else {
-            [[NotificationCenter sharedInstance] postNotificationName:kShouldOpenExternalAppNotification object:info];
+            [[MASTNotificationCenter sharedInstance] postNotificationName:kShouldOpenExternalAppNotification object:info];
         }
     }
 }
@@ -285,10 +285,10 @@ static AdController* sharedInstance = nil;
 - (void)failToReceiveAd:(NSNotification*)notification {
     @synchronized(notification) {
         NSDictionary *info = [notification object];
-        AdView* adView = [info objectForKey:@"adView"];
+        MASTAdView* adView = [info objectForKey:@"adView"];
         NSError* error = [info objectForKey:@"error"];
         
-        AdModel* model = [adView adModel];
+        MASTAdModel* model = [adView adModel];
         
         if (adView && error && model && model.descriptor && model.descriptor.campaignId) {
             if (model.excampaigns) {
@@ -301,12 +301,12 @@ static AdController* sharedInstance = nil;
                 }
                 if (!find) {
                     [model.excampaigns addObject:model.descriptor.campaignId];
-                    [[NotificationCenter sharedInstance] postNotificationName:kStartAdDownloadNotification object:adView];
+                    [[MASTNotificationCenter sharedInstance] postNotificationName:kStartAdDownloadNotification object:adView];
                 }
             }
             else {
                 model.excampaigns = [NSMutableArray arrayWithObject:model.descriptor.campaignId];
-                [[NotificationCenter sharedInstance] postNotificationName:kStartAdDownloadNotification object:adView];
+                [[MASTNotificationCenter sharedInstance] postNotificationName:kStartAdDownloadNotification object:adView];
             }
         }
     }
@@ -322,8 +322,8 @@ static AdController* sharedInstance = nil;
 
 - (void)trackExternalCampaignURL:(NSNotification*)notification {
     @synchronized(notification) {
-        AdView* adView = [notification object];        
-        AdModel* model = [adView adModel];
+        MASTAdView* adView = [notification object];        
+        MASTAdModel* model = [adView adModel];
         
         if (adView && model && model.descriptor && model.descriptor.trackUrl) {
             NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:model.descriptor.trackUrl]];

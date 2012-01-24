@@ -5,10 +5,10 @@
 //  Created by Constantine Mureev on 2/21/11.
 //
 
-#import "DownloadController.h"
-#import "NetworkQueue.h"
+#import "MASTDownloadController.h"
+#import "MASTNetworkQueue.h"
 
-@interface DownloadController (PrivateMethods)
+@interface MASTDownloadController (PrivateMethods)
 
 - (void)registerObserver;
 - (void)startAdDownloadNotification:(NSNotification*)notification;
@@ -18,9 +18,9 @@
 @end
 
 
-@implementation DownloadController
+@implementation MASTDownloadController
 
-static DownloadController* sharedInstance = nil;
+static MASTDownloadController* sharedInstance = nil;
 
 #pragma mark -
 #pragma mark Singleton
@@ -28,8 +28,8 @@ static DownloadController* sharedInstance = nil;
 - (id) init {
     self = [super init];
 	if (self) {
-		_adRequests = [AdRequests new];
-        _cacheController = [[CacheController alloc] init];
+		_adRequests = [MASTAdRequests new];
+        _cacheController = [[MASTCacheController alloc] init];
 		
 		// TODO: add shared model
 		//_sharedRequestQueue.userAgent = [SharedModel sharedInstance].userAgent;
@@ -99,10 +99,10 @@ static DownloadController* sharedInstance = nil;
 
 
 - (void)cancelAll{
-    [NetworkQueue cancelAll];
+    [MASTNetworkQueue cancelAll];
 }
 
-- (void)downladAd:(AdView*)adView {
+- (void)downladAd:(MASTAdView*)adView {
     NSAutoreleasePool* pool = [NSAutoreleasePool new];
     
 	@synchronized(_adRequests) {        
@@ -119,9 +119,9 @@ static DownloadController* sharedInstance = nil;
                                 
                 NSMutableDictionary* info = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:request, adView, nil]
                                                                                forKeys:[NSArray arrayWithObjects:@"request", @"adView", nil]];
-                [[NotificationCenter sharedInstance] postNotificationName:kGetAdServerResponseNotification object:info];
+                [[MASTNotificationCenter sharedInstance] postNotificationName:kGetAdServerResponseNotification object:info];
                 
-                [NetworkQueue loadWithRequest:request completion:^(NSURLRequest *req, NSHTTPURLResponse *response, NSData *data, NSError *error) {
+                [MASTNetworkQueue loadWithRequest:request completion:^(NSURLRequest *req, NSHTTPURLResponse *response, NSData *data, NSError *error) {
                     if (error) {                        
                         @synchronized(_adRequests) {
                             if ([_adRequests containsRequest:request]) {
@@ -132,16 +132,16 @@ static DownloadController* sharedInstance = nil;
                                 [_adRequests removeRequest:request];
                                 
                                 if ([NSThread isMainThread]) {
-                                    [[NotificationCenter sharedInstance] postNotificationName:kFailAdDownloadNotification object:sendInfo];
+                                    [[MASTNotificationCenter sharedInstance] postNotificationName:kFailAdDownloadNotification object:sendInfo];
                                 } else {
-                                    [NotificationCenterAdditions NC:[NotificationCenter sharedInstance] postNotificationOnMainThreadWithName:kFailAdDownloadNotification object:sendInfo];
+                                    [MASTNotificationCenterAdditions NC:[MASTNotificationCenter sharedInstance] postNotificationOnMainThreadWithName:kFailAdDownloadNotification object:sendInfo];
                                 }
                             }
                         }
                     } else {
                         if ([_adRequests containsRequest:request]) {
                             NSString* responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                            NSArray* links = [Utils linksFromText:responseString];
+                            NSArray* links = [MASTUtils linksFromText:responseString];
                             [responseString release];
                             
                             if (links && [links count] > 0) {
@@ -151,7 +151,7 @@ static DownloadController* sharedInstance = nil;
                                 if (adView && req) {
                                     NSMutableDictionary* infoBlock = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:request, data, adView, nil]
                                                                                                    forKeys:[NSArray arrayWithObjects:@"request", @"data", @"adView", nil]];
-                                    [[NotificationCenter sharedInstance] postNotificationName:kFinishAdDownloadNotification object:infoBlock];
+                                    [[MASTNotificationCenter sharedInstance] postNotificationName:kFinishAdDownloadNotification object:infoBlock];
                                 }
                             }
                             
@@ -173,12 +173,12 @@ static DownloadController* sharedInstance = nil;
 
 
 - (void)registerObserver {
-	[[NotificationCenter sharedInstance] addObserver:self selector:@selector(startAdDownloadNotification:) name:kStartAdDownloadNotification object:nil];
-	[[NotificationCenter sharedInstance] addObserver:self selector:@selector(cancelAdDownloadNotification:) name:kAdStopUpdateNotification object:nil];
-	[[NotificationCenter sharedInstance] addObserver:self selector:@selector(cancelAdDownloadNotification:) name:kAdCancelUpdateNotification object:nil];
-	[[NotificationCenter sharedInstance] addObserver:self selector:@selector(cancelAdDownloadNotification:) name:kAdViewBecomeInvisibleNotification object:nil];
+	[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(startAdDownloadNotification:) name:kStartAdDownloadNotification object:nil];
+	[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(cancelAdDownloadNotification:) name:kAdStopUpdateNotification object:nil];
+	[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(cancelAdDownloadNotification:) name:kAdCancelUpdateNotification object:nil];
+	[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(cancelAdDownloadNotification:) name:kAdViewBecomeInvisibleNotification object:nil];
     
-	[[NotificationCenter sharedInstance] addObserver:self selector:@selector(removeAdNotification:) name:kUnregisterAdNotification object:nil];
+	[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(removeAdNotification:) name:kUnregisterAdNotification object:nil];
 }
 
 - (void)startAdDownloadNotification:(NSNotification*)notification {

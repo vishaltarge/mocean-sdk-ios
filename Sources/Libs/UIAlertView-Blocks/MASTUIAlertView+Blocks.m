@@ -6,7 +6,7 @@
 //  Copyright 2010 Random Ideas, LLC. All rights reserved.
 //
 
-#import "UIAlertView+Blocks.h"
+#import "MASTUIAlertView+Blocks.h"
 #import <objc/runtime.h>
 
 static NSString *RI_BUTTON_ASS_KEY = @"com.random-ideas.BUTTONS";
@@ -19,26 +19,26 @@ void useCatagory5(){
 
 @implementation UIAlertView (Blocks)
 
--(id)initWithTitle:(NSString *)inTitle message:(NSString *)inMessage cancelButtonItem:(RIButtonItem *)inCancelButtonItem otherButtonItems:(RIButtonItem *)inOtherButtonItems, ... 
+-(id)initWithTitle:(NSString *)inTitle message:(NSString *)inMessage cancelButtonItem:(MASTRIButtonItem *)inCancelButtonItem otherButtonItems:(MASTRIButtonItem *)inOtherButtonItems, ... 
 {
     if((self = [self initWithTitle:inTitle message:inMessage delegate:self cancelButtonTitle:inCancelButtonItem.label otherButtonTitles:nil]))
     {
         NSMutableArray *buttonsArray = [NSMutableArray array];
         
-        RIButtonItem *eachItem;
+        MASTRIButtonItem *eachItem;
         va_list argumentList;
         if (inOtherButtonItems)                     
         {                                  
             [buttonsArray addObject: inOtherButtonItems];
             va_start(argumentList, inOtherButtonItems);       
-            while((eachItem = va_arg(argumentList, RIButtonItem *))) 
+            while((eachItem = va_arg(argumentList, MASTRIButtonItem *))) 
             {
                 [buttonsArray addObject: eachItem];            
             }
             va_end(argumentList);
         }    
         
-        for(RIButtonItem *item in buttonsArray)
+        for(MASTRIButtonItem *item in buttonsArray)
         {
             [self addButtonWithTitle:item.label];
         }
@@ -54,7 +54,7 @@ void useCatagory5(){
     return self;
 }
 
-- (void)addButtonItem:(RIButtonItem *)item
+- (void)addButtonItem:(MASTRIButtonItem *)item
 {	
     NSMutableArray *buttonsArray = objc_getAssociatedObject(self, RI_BUTTON_ASS_KEY);	
 	
@@ -66,7 +66,7 @@ void useCatagory5(){
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     NSArray *buttonsArray = objc_getAssociatedObject(self, RI_BUTTON_ASS_KEY);
-    RIButtonItem *item = [buttonsArray objectAtIndex:buttonIndex];
+    MASTRIButtonItem *item = [buttonsArray objectAtIndex:buttonIndex];
     if(item.action)
         item.action();
     objc_setAssociatedObject(self, RI_BUTTON_ASS_KEY, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);

@@ -6,10 +6,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "OrmmaAdaptor.h"
-#import "Reachability.h"
+#import "MASTOrmmaAdaptor.h"
+#import "MASTReachability.h"
 
-@interface OrmmaHelper : NSObject
+@interface MASTOrmmaHelper : NSObject
 
 + (NSString*)registerOrmmaUpCaseObject;
 + (NSString*)signalReadyInWebView;

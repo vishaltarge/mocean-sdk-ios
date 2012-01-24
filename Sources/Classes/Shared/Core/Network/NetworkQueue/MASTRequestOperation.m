@@ -20,7 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RequestOperation.h"
+#import "MASTRequestOperation.h"
 
 static NSUInteger const kMinimumInitialDataCapacity = 1024;
 static NSUInteger const kMaximumInitialDataCapacity = 1024 * 1024 * 8;
@@ -76,7 +76,7 @@ static inline BOOL OperationStateTransitionIsValid(OperationState from, Operatio
     }
 }
 
-@interface RequestOperation ()
+@interface MASTRequestOperation ()
 @property (readwrite, nonatomic, assign) OperationState state;
 @property (readwrite, nonatomic, assign, getter = isCancelled) BOOL cancelled;
 @property (readwrite, nonatomic, retain) NSURLConnection *connection;
@@ -95,7 +95,7 @@ static inline BOOL OperationStateTransitionIsValid(OperationState from, Operatio
 - (void)finish;
 @end
 
-@implementation RequestOperation
+@implementation MASTRequestOperation
 @synthesize state = _state;
 @synthesize cancelled = _cancelled;
 @synthesize connection = _connection;
@@ -133,17 +133,17 @@ static NSThread *_networkRequestThread = nil;
     return _networkRequestThread;
 }
 
-+ (RequestOperation *)operationWithRequest:(NSURLRequest *)urlRequest 
++ (MASTRequestOperation *)operationWithRequest:(NSURLRequest *)urlRequest 
                 completion:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSData *data, NSError *error))completion
 {
-    RequestOperation *operation = [[[self alloc] init] autorelease];
+    MASTRequestOperation *operation = [[[self alloc] init] autorelease];
     operation.request = urlRequest;
     operation.completion = completion;
     
     return operation;
 }
 
-+ (RequestOperation *)streamingOperationWithRequest:(NSURLRequest *)urlRequest
++ (MASTRequestOperation *)streamingOperationWithRequest:(NSURLRequest *)urlRequest
                                               inputStream:(NSInputStream *)inputStream
                                              outputStream:(NSOutputStream *)outputStream
                                                completion:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))completion
@@ -156,7 +156,7 @@ static NSThread *_networkRequestThread = nil;
         }
     }
 
-    RequestOperation *operation = [self operationWithRequest:mutableURLRequest completion:^(NSURLRequest *request, NSHTTPURLResponse *response, __unused NSData *data, NSError *error) {
+    MASTRequestOperation *operation = [self operationWithRequest:mutableURLRequest completion:^(NSURLRequest *request, NSHTTPURLResponse *response, __unused NSData *data, NSError *error) {
         if (completion) {
             completion(request, response, error);
         }

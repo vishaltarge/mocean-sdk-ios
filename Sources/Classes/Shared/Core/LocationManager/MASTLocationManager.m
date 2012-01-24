@@ -5,10 +5,10 @@
 //  Created by Constantine Mureev on 3/25/11.
 //
 
-#import "LocationManager.h"
+#import "MASTLocationManager.h"
 
 
-@implementation LocationManager
+@implementation MASTLocationManager
 
 @synthesize locationManager = _locationManager,
 currentLocation = _currentLocation, currentHeading = _currentHeading, isUpdatingLocation = _isUpdatingLocation, unknowsState;
@@ -17,7 +17,7 @@ currentLocation = _currentLocation, currentHeading = _currentHeading, isUpdating
 @synthesize currentLocationCoordinate = _currentLocationCoordinate;
 #endif
 
-static LocationManager* sharedInstance = nil;
+static MASTLocationManager* sharedInstance = nil;
 
 
 #pragma mark -

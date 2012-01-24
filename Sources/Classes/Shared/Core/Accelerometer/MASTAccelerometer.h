@@ -7,9 +7,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Accelerometer : NSObject <UIAccelerometerDelegate>
+@interface MASTAccelerometer : NSObject <UIAccelerometerDelegate>
 
-+ (Accelerometer*)sharedInstance;
++ (MASTAccelerometer*)sharedInstance;
 
 - (void)addDelegate:(id <UIAccelerometerDelegate>)delegate;
 - (void)removeDelegate:(id <UIAccelerometerDelegate>)delegate;

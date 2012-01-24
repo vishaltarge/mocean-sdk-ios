@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface LogBasicFormatter : NSObject {
+@interface MASTLogBasicFormatter : NSObject {
 
 }
 

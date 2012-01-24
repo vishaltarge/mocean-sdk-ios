@@ -23,8 +23,7 @@
  * THE SOFTWARE.
  */
 
-#import "QSUtilities.h"
-#import "GTMNSString+HTML.h"
+#import "MASTQSUtilities.h"
 
 static const char _base64EncodingTable[64] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 static const short _base64DecodingTable[256] = {
@@ -46,7 +45,7 @@ static const short _base64DecodingTable[256] = {
 	-2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2
 };
 
-@implementation QSStrings
+@implementation MASTQSStrings
 
 + (NSString *)implodeObjectArray:(NSArray *)objArray WithSelector:(SEL)selSelector Glue:(NSString *)strGlue {
 	NSInteger intCount = [objArray count];
@@ -123,7 +122,7 @@ static const short _base64DecodingTable[256] = {
 }
 
 + (NSString *)encodeBase64WithString:(NSString *)strData {
-	return [QSStrings encodeBase64WithData:[strData dataUsingEncoding:NSUTF8StringEncoding]];
+	return [MASTQSStrings encodeBase64WithData:[strData dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 /*

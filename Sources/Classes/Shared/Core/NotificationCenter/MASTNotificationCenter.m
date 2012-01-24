@@ -5,20 +5,20 @@
 //  Created by Constantine Mureev on 2/22/11.
 //
 
-#import "NotificationCenter.h"
+#import "MASTNotificationCenter.h"
 
-#import "DownloadController.h"
-#import "AdController.h"
-#import "InternalBrowser.h"
-#import "Logger.h"
-#import "SharedModel.h"
-#import "AdClicker.h"
-#import "InternalAVPlayer.h"
+#import "MASTDownloadController.h"
+#import "MASTAdController.h"
+#import "MASTInternalBrowser.h"
+#import "MASTLogger.h"
+#import "MASTSharedModel.h"
+#import "MASTAdClicker.h"
+#import "MASTInternalAVPlayer.h"
 
 
-@implementation NotificationCenter
+@implementation MASTNotificationCenter
 
-static NotificationCenter* sharedInstance = nil;
+static MASTNotificationCenter* sharedInstance = nil;
 
 #pragma mark -
 #pragma mark Singleton
@@ -37,42 +37,42 @@ static NotificationCenter* sharedInstance = nil;
 			sharedInstance = [[self alloc] init];
             
 			
-            if (![Logger sharedInstance]) {
+            if (![MASTLogger sharedInstance]) {
 				// somtheing going wrong...
 			}
             
-            if (![SharedModel sharedInstance]) {
+            if (![MASTSharedModel sharedInstance]) {
 				// somtheing going wrong...
 			}
             
-			if (![AdController sharedInstance]) {
+			if (![MASTAdController sharedInstance]) {
 				// somtheing going wrong...
 			}
 			
-            if (![DownloadController sharedInstance]) {
+            if (![MASTDownloadController sharedInstance]) {
 				// somtheing going wrong...
 			}
 			
-            if (![AdClicker sharedInstance]) {
+            if (![MASTAdClicker sharedInstance]) {
 				// somtheing going wrong...
 			}
 			
 			if ([NSThread isMainThread]) {
-				if (![InternalBrowser sharedInstance]) {
+				if (![MASTInternalBrowser sharedInstance]) {
 					// somtheing going wrong...
 				}
 			}
 			else {
-				[InternalBrowser performSelectorOnMainThread:@selector(sharedInstance) withObject:nil waitUntilDone:NO];
+				[MASTInternalBrowser performSelectorOnMainThread:@selector(sharedInstance) withObject:nil waitUntilDone:NO];
 			}
 			
 			if ([NSThread isMainThread]) {
-				if (![InternalAVPlayer sharedInstance]) {
+				if (![MASTInternalAVPlayer sharedInstance]) {
 					// somtheing going wrong...
 				}
 			}
 			else {
-				[InternalAVPlayer performSelectorOnMainThread:@selector(sharedInstance) withObject:nil waitUntilDone:NO];
+				[MASTInternalAVPlayer performSelectorOnMainThread:@selector(sharedInstance) withObject:nil waitUntilDone:NO];
 			}
 
 		}

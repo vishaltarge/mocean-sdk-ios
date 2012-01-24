@@ -15,9 +15,9 @@
 #import <CoreLocation/CoreLocation.h>
 #endif
 
-#import "AdView.h"
-#import "NotificationCenter.h"
-#import "UIAlertView+Blocks.h"
+#import "MASTAdView.h"
+#import "MASTNotificationCenter.h"
+#import "MASTUIAlertView+Blocks.h"
 
 typedef enum ORMMAStateEnum {
 	ORMMAStateHidden = -1,
@@ -26,9 +26,9 @@ typedef enum ORMMAStateEnum {
 	ORMMAStateExpanded
 } ORMMAState;
 
-@interface OrmmaAdaptor : NSObject <MFMessageComposeViewControllerDelegate, MFMailComposeViewControllerDelegate>
+@interface MASTOrmmaAdaptor : NSObject <MFMessageComposeViewControllerDelegate, MFMailComposeViewControllerDelegate>
 
-- (id)initWithWebView:(UIWebView*)webView adView:(AdView*)ad;
+- (id)initWithWebView:(UIWebView*)webView adView:(MASTAdView*)ad;
 
 - (NSString*)getDefaultsJSCode;
 - (void)moveToDefaultState;

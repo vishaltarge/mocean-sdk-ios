@@ -6,7 +6,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NetworkQueue : NSObject
+@interface MASTNetworkQueue : NSObject
 
 + (void)loadWithRequest:(NSURLRequest *)urlRequest 
              completion:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSData *data, NSError *error))completion;

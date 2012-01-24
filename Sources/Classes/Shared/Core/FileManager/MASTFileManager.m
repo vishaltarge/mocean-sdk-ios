@@ -5,9 +5,9 @@
 //  Created by Constantine Mureev on 3/16/11.
 //
 
-#import "FileManager.h"
+#import "MASTFileManager.h"
 
 
-@implementation FileManager
+@implementation MASTFileManager
 
 @end

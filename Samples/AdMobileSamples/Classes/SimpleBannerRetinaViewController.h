@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AdView.h"
+#import "MASTAdView.h"
 
 @interface SimpleBannerRetinaViewController : UIViewController
 {

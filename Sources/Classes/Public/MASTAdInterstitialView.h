@@ -9,12 +9,12 @@
 
 #import <UIKit/UIKit.h>
 
-#import "AdView.h"
+#import "MASTAdView.h"
 
 
 /** The AdInterstitialView class is subclassing of AdView with advanced customization parameters. An instance of AdInterstitialView  is a means for full-screen displaying ads with specific closing. 
  */
-@interface AdInterstitialView : AdView {
+@interface MASTAdInterstitialView : MASTAdView {
 
 }
 
@@ -60,7 +60,7 @@
  
  @see AdViewDelegate Protocol Reference for the optional methods this delegate may implement.
  */
-@property (assign) id <AdViewDelegate>	delegate;
+@property (assign) id <MASTAdViewDelegate>	delegate;
 
 
 @end

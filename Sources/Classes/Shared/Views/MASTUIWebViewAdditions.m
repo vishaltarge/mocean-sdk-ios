@@ -5,7 +5,7 @@
 //  Created by Constantine Mureev on 3/3/11.
 //
 
-#import "UIWebViewAdditions.h"
+#import "MASTUIWebViewAdditions.h"
 
 
 void useCatagory4(){

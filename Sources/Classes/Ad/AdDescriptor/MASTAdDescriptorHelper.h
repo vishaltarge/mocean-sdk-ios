@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface AdDescriptorHelper : NSObject {}
+@interface MASTAdDescriptorHelper : NSObject {}
 
 + (BOOL)isMedialetsContent:(NSString *)data;
 + (BOOL)isVideoContent:(NSString *)data;

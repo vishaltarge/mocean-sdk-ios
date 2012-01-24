@@ -5,9 +5,9 @@
 //  Created by Constantine Mureev on 7/30/10.
 //
 
-#import "TouchableViewController.h"
+#import "MASTTouchableViewController.h"
 
-@implementation TouchableViewController
+@implementation MASTTouchableViewController
 
 @synthesize delegate = _delegate;
 

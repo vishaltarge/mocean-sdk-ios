@@ -19,7 +19,7 @@ NSMutableDictionary* CreateNonRetainingDictionary();
 
 void NSProfile(const char *name, void (^work) (void));
 
-@interface Utils : NSObject {}
+@interface MASTUtils : NSObject {}
 
 + (NSString*)platform;
 + (NSString*)platformFormatedString;

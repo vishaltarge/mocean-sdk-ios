@@ -6,7 +6,7 @@
 //  Copyright 2011 AdMobile Mobile. A subsidiary of Mojiva, Inc. All rights reserved.
 //
 
-#import "UIColorAdditions.h"
+#import "MASTUIColorAdditions.h"
 
 /*
  

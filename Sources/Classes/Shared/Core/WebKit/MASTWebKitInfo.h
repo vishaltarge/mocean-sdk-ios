@@ -7,16 +7,16 @@
 
 #import <Foundation/Foundation.h>
 
-#import "NotificationCenter.h"
+#import "MASTNotificationCenter.h"
 
 
-@interface WebKitInfo : NSObject <UIWebViewDelegate> {
+@interface MASTWebKitInfo : NSObject <UIWebViewDelegate> {
     UIWebView*          _webView;
 }
 
 @property (retain) NSString*        ua;
 
-+ (WebKitInfo*)sharedInstance;
++ (MASTWebKitInfo*)sharedInstance;
 + (void)releaseSharedInstance;
 
 

@@ -7,8 +7,8 @@
 #import <UIKit/UIKit.h>
 #import <MediaPlayer/MediaPlayer.h>
 
-@interface InternalAVPlayer : NSObject
+@interface MASTInternalAVPlayer : NSObject
 
-+ (InternalAVPlayer*)sharedInstance;
++ (MASTInternalAVPlayer*)sharedInstance;
 
 @end

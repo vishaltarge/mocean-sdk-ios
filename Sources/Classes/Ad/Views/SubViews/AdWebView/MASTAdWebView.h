@@ -7,7 +7,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AdWebView : UIView <UIWebViewDelegate> {
+@interface MASTAdWebView : UIView <UIWebViewDelegate> {
     CGRect                      _defaultFrame;
 }
 

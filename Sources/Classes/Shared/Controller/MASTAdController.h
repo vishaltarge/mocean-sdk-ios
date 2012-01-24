@@ -8,27 +8,27 @@
 #import <Foundation/Foundation.h>
 
 
-#import "NotificationCenter.h"
-#import "AdView_Private.h"
-#import "AdDescriptor.h"
-#import "AdView.h"
-#import "AdModel.h"
-#import "AdUpdater.h"
-#import "LocationManager.h"
+#import "MASTNotificationCenter.h"
+#import "MASTAdView_Private.h"
+#import "MASTAdDescriptor.h"
+#import "MASTAdView.h"
+#import "MASTAdModel.h"
+#import "MASTAdUpdater.h"
+#import "MASTLocationManager.h"
 
 
-@interface AdController : NSObject <UIWebViewDelegate>{
+@interface MASTAdController : NSObject <UIWebViewDelegate>{
 	NSMutableArray*		_ads;
 	NSMutableArray*		_adUpdateControllers;
 	
-    AdView*             _adView;
+    MASTAdView*             _adView;
     
     BOOL                _isRequestRedirect;
     NSString*           _FirstRequestString;
     
 }
 
-+ (AdController*)sharedInstance;
++ (MASTAdController*)sharedInstance;
 + (void)releaseSharedInstance;
 
 @end

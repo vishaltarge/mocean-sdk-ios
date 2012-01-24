@@ -5,7 +5,7 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/cl/AdView</TokenIdentifier>
 			<Abstract>You use the AdView class to embed advertisement content in your application. To do so, you simply create an AdView object and add it to a UIView. An instance of AdView (or simply, an ad) is a means for displaying advertisement information from ad publisher site. To choose ad publisher site set parameters in the ad initialization method initWithFrame:site:zone: or use the properties site and zone. Use the adServerUrl property to choose ad publisher server.</Abstract>
-			<DeclaredIn>AdView.h</DeclaredIn>
+			<DeclaredIn>MASTAdView.h</DeclaredIn>
 			
 			<NodeRef refid="2"/>
 		</Token>
@@ -14,7 +14,7 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/AdView/initWithFrame:site:zone:</TokenIdentifier>
 			<Abstract>Initializes and returns an AdView object having the given frame, site and zone.</Abstract>
-			<DeclaredIn>AdView.h</DeclaredIn>			
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
 			
 			<Declaration>- (id)initWithFrame:(CGRect)frame site:(NSInteger)site zone:(NSInteger)zone</Declaration>
 			<Parameters>
@@ -34,9 +34,20 @@
 		</Token>
 		
 		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/AdView/stopEverythingAndNotfiyDelegateOnCleanup</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
+			
+			<Declaration>- (void)stopEverythingAndNotfiyDelegateOnCleanup</Declaration>
+			
+			
+			<Anchor>//api/name/stopEverythingAndNotfiyDelegateOnCleanup</Anchor>
+		</Token>
+		
+		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdView/site</TokenIdentifier>
 			<Abstract>Id of the publisher site.</Abstract>
-			<DeclaredIn>AdView.h</DeclaredIn>			
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
 			
 			<Declaration>@property (assign) NSInteger site</Declaration>
 			
@@ -47,7 +58,7 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdView/zone</TokenIdentifier>
 			<Abstract>Id of the publisher zone.</Abstract>
-			<DeclaredIn>AdView.h</DeclaredIn>			
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
 			
 			<Declaration>@property (assign) NSInteger zone</Declaration>
 			
@@ -58,7 +69,7 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdView/adServerUrl</TokenIdentifier>
 			<Abstract>Publisher server url.</Abstract>
-			<DeclaredIn>AdView.h</DeclaredIn>			
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
 			
 			<Declaration>@property (retain) NSString *adServerUrl</Declaration>
 			
@@ -67,9 +78,20 @@
 		</Token>
 		
 		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/AdView/timeout</TokenIdentifier>
+			<Abstract>Maximum server response time.</Abstract>
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
+			
+			<Declaration>@property (assign) NSInteger timeout</Declaration>
+			
+			
+			<Anchor>//api/name/timeout</Anchor>
+		</Token>
+		
+		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdView/defaultImage</TokenIdentifier>
 			<Abstract>Image for unloaded ad state.</Abstract>
-			<DeclaredIn>AdView.h</DeclaredIn>			
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
 			
 			<Declaration>@property (retain) UIImage *defaultImage</Declaration>
 			
@@ -80,7 +102,7 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdView/animateMode</TokenIdentifier>
 			<Abstract>A Boolean value that determines whether ad animate mode is enabled.</Abstract>
-			<DeclaredIn>AdView.h</DeclaredIn>			
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
 			
 			<Declaration>@property BOOL animateMode</Declaration>
 			
@@ -91,7 +113,7 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdView/closeButton</TokenIdentifier>
 			<Abstract>Close button.</Abstract>
-			<DeclaredIn>AdView.h</DeclaredIn>			
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
 			
 			<Declaration>@property (retain) UIButton *closeButton</Declaration>
 			
@@ -102,7 +124,7 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdView/contentAlignment</TokenIdentifier>
 			<Abstract>A Boolean value that determines whether content alingment center vertically and horizontally.</Abstract>
-			<DeclaredIn>AdView.h</DeclaredIn>			
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
 			
 			<Declaration>@property BOOL contentAlignment</Declaration>
 			
@@ -113,7 +135,7 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdView/internalOpenMode</TokenIdentifier>
 			<Abstract>A Boolean value that determines whether ad internal browser is enabled.</Abstract>
-			<DeclaredIn>AdView.h</DeclaredIn>			
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
 			
 			<Declaration>@property BOOL internalOpenMode</Declaration>
 			
@@ -124,7 +146,7 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdView/track</TokenIdentifier>
 			<Abstract>A Boolean value that determines whether ad track is enabled.</Abstract>
-			<DeclaredIn>AdView.h</DeclaredIn>			
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
 			
 			<Declaration>@property BOOL track</Declaration>
 			
@@ -135,7 +157,7 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdView/textColor</TokenIdentifier>
 			<Abstract>Color of ad text links.</Abstract>
-			<DeclaredIn>AdView.h</DeclaredIn>			
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
 			
 			<Declaration>@property (retain) UIColor *textColor</Declaration>
 			
@@ -146,7 +168,7 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdView/isLoading</TokenIdentifier>
 			<Abstract>A Boolean value that determines whether ad is in the process of loading.</Abstract>
-			<DeclaredIn>AdView.h</DeclaredIn>			
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
 			
 			<Declaration>@property (readonly) BOOL isLoading</Declaration>
 			
@@ -157,7 +179,7 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdView/updateTimeInterval</TokenIdentifier>
 			<Abstract>Update time interval, in seconds.</Abstract>
-			<DeclaredIn>AdView.h</DeclaredIn>			
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
 			
 			<Declaration>@property NSTimeInterval updateTimeInterval</Declaration>
 			
@@ -168,7 +190,7 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/AdView/update</TokenIdentifier>
 			<Abstract>Starts to update the ad content immediately.</Abstract>
-			<DeclaredIn>AdView.h</DeclaredIn>			
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
 			
 			<Declaration>- (void)update</Declaration>
 			
@@ -179,7 +201,7 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdView/contentSize</TokenIdentifier>
 			<Abstract>Size of the ad content to be shown.</Abstract>
-			<DeclaredIn>AdView.h</DeclaredIn>			
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
 			
 			<Declaration>@property (readonly) CGSize contentSize</Declaration>
 			
@@ -190,7 +212,7 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdView/premium</TokenIdentifier>
 			<Abstract>Ad premium filter.</Abstract>
-			<DeclaredIn>AdView.h</DeclaredIn>			
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
 			
 			<Declaration>@property AdPremium premium</Declaration>
 			
@@ -201,7 +223,7 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdView/type</TokenIdentifier>
 			<Abstract>Ad type filter.</Abstract>
-			<DeclaredIn>AdView.h</DeclaredIn>			
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
 			
 			<Declaration>@property AdType type</Declaration>
 			
@@ -212,7 +234,7 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdView/keywords</TokenIdentifier>
 			<Abstract>Keywords for search ads.</Abstract>
-			<DeclaredIn>AdView.h</DeclaredIn>			
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
 			
 			<Declaration>@property (retain) NSString *keywords</Declaration>
 			
@@ -223,7 +245,7 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdView/minSize</TokenIdentifier>
 			<Abstract>Minimal size of the ad content to be shown.</Abstract>
-			<DeclaredIn>AdView.h</DeclaredIn>			
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
 			
 			<Declaration>@property CGSize minSize</Declaration>
 			
@@ -234,7 +256,7 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdView/maxSize</TokenIdentifier>
 			<Abstract>Maximal size of the ad content to be shown.</Abstract>
-			<DeclaredIn>AdView.h</DeclaredIn>			
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
 			
 			<Declaration>@property CGSize maxSize</Declaration>
 			
@@ -245,7 +267,7 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdView/additionalParameters</TokenIdentifier>
 			<Abstract>Custom request parameters.</Abstract>
-			<DeclaredIn>AdView.h</DeclaredIn>			
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
 			
 			<Declaration>@property (retain) NSDictionary *additionalParameters</Declaration>
 			
@@ -256,7 +278,7 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdView/latitude</TokenIdentifier>
 			<Abstract>User location latitude value.</Abstract>
-			<DeclaredIn>AdView.h</DeclaredIn>			
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
 			
 			<Declaration>@property (retain) NSString *latitude</Declaration>
 			
@@ -267,7 +289,7 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdView/longitude</TokenIdentifier>
 			<Abstract>User location longitude value.</Abstract>
-			<DeclaredIn>AdView.h</DeclaredIn>			
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
 			
 			<Declaration>@property (retain) NSString *longitude</Declaration>
 			
@@ -278,7 +300,7 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdView/country</TokenIdentifier>
 			<Abstract>Country of visitor. It overrides country detected by IP. It is ISO 3166 to be used for specifying country code.</Abstract>
-			<DeclaredIn>AdView.h</DeclaredIn>			
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
 			
 			<Declaration>@property (retain) NSString *country</Declaration>
 			
@@ -289,7 +311,7 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdView/region</TokenIdentifier>
 			<Abstract>Region of visitor. ISO 3166-2 is used for United States and Canada and FIBS 10-4 is used for other countries.</Abstract>
-			<DeclaredIn>AdView.h</DeclaredIn>			
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
 			
 			<Declaration>@property (retain) NSString *region</Declaration>
 			
@@ -300,7 +322,7 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdView/city</TokenIdentifier>
 			<Abstract>City of the device user (with state). For US only.</Abstract>
-			<DeclaredIn>AdView.h</DeclaredIn>			
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
 			
 			<Declaration>@property (retain) NSString *city</Declaration>
 			
@@ -311,7 +333,7 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdView/area</TokenIdentifier>
 			<Abstract>Area code of a user. For US only.</Abstract>
-			<DeclaredIn>AdView.h</DeclaredIn>			
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
 			
 			<Declaration>@property (retain) NSString *area</Declaration>
 			
@@ -322,7 +344,7 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdView/metro</TokenIdentifier>
 			<Abstract>Metro code of a user. For US only.</Abstract>
-			<DeclaredIn>AdView.h</DeclaredIn>			
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
 			
 			<Declaration>@property (retain) NSString *metro</Declaration>
 			
@@ -333,7 +355,7 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdView/zip</TokenIdentifier>
 			<Abstract>Zip/Postal code of user (note: parameter is all caps). For US only.</Abstract>
-			<DeclaredIn>AdView.h</DeclaredIn>			
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
 			
 			<Declaration>@property (retain) NSString *zip</Declaration>
 			
@@ -344,7 +366,7 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdView/carrier</TokenIdentifier>
 			<Abstract>User carrier.</Abstract>
-			<DeclaredIn>AdView.h</DeclaredIn>			
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
 			
 			<Declaration>@property (retain) NSString *carrier</Declaration>
 			
@@ -355,7 +377,7 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdView/advertiserId</TokenIdentifier>
 			<Abstract>Id of the advertiser for install notification.</Abstract>
-			<DeclaredIn>AdView.h</DeclaredIn>			
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
 			
 			<Declaration>@property (assign) NSInteger advertiserId</Declaration>
 			
@@ -366,7 +388,7 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdView/groupCode</TokenIdentifier>
 			<Abstract>Group code for install notification.</Abstract>
-			<DeclaredIn>AdView.h</DeclaredIn>			
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
 			
 			<Declaration>@property (retain) NSString *groupCode</Declaration>
 			
@@ -378,7 +400,7 @@
 			<TokenIdentifier>//apple_ref/occ/instp/AdView/testMode</TokenIdentifier>
 			<Abstract>A Boolean value that determines whether ads test mode is enabled.
 Setting the value of this property to YES enables ads test mode and setting it to NO disables ads test mode.</Abstract>
-			<DeclaredIn>AdView.h</DeclaredIn>			
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
 			
 			<Declaration>@property BOOL testMode</Declaration>
 			
@@ -389,7 +411,7 @@ Setting the value of this property to YES enables ads test mode and setting it t
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdView/logMode</TokenIdentifier>
 			<Abstract>AdLogMode value that determines log level.</Abstract>
-			<DeclaredIn>AdView.h</DeclaredIn>			
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
 			
 			<Declaration>@property AdLogMode logMode</Declaration>
 			
@@ -400,7 +422,7 @@ Setting the value of this property to YES enables ads test mode and setting it t
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdView/delegate</TokenIdentifier>
 			<Abstract>The receiver's delegate.</Abstract>
-			<DeclaredIn>AdView.h</DeclaredIn>			
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
 			
 	<RelatedTokens>
 		<TokenIdentifier>//apple_ref/occ/instp/AdView/delegate</TokenIdentifier>

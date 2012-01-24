@@ -7,11 +7,11 @@
 
 #import <Foundation/Foundation.h>
 
-#import "NotificationCenter.h"
-#import "Utils.h"
+#import "MASTNotificationCenter.h"
+#import "MASTUtils.h"
 
 
-@interface InstallManager : NSObject {
+@interface MASTInstallManager : NSObject {
     BOOL        _started;
 }
 
@@ -19,7 +19,7 @@
 @property (retain) NSString* groupCode;
 @property (retain) NSString* udid;
 
-+ (InstallManager*)sharedInstance;
++ (MASTInstallManager*)sharedInstance;
 + (void)releaseSharedInstance;
 
 - (void)sendNotificationWith:(NSInteger)adId groupCode:(NSString*)gCode;

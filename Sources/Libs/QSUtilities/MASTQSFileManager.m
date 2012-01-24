@@ -23,11 +23,11 @@
  * THE SOFTWARE.
  */
 
-#import "QSFileManager.h"
+#import "MASTQSFileManager.h"
 
 static NSString * _strDocumentsPath = nil;
 
-@implementation QSFileManager
+@implementation MASTQSFileManager
 
 + (NSString *)documentsFilePathForFile:(NSString *)strFile {
 	if (_strDocumentsPath == nil) {
@@ -48,11 +48,11 @@ static NSString * _strDocumentsPath = nil;
 }
 
 + (bool)writeDocumentsFile:(NSString *)strFileName WithData:(NSData *)objData {
-	return [QSFileManager writeFile:[QSFileManager documentsFilePathForFile:@"qcodo_large.tif"] WithData:objData];
+	return [MASTQSFileManager writeFile:[MASTQSFileManager documentsFilePathForFile:@"qcodo_large.tif"] WithData:objData];
 }
 
 + (NSData *)readDocumentsFile:(NSString *)strFileName {
-	return [QSFileManager readFile:[QSFileManager documentsFilePathForFile:strFileName]];
+	return [MASTQSFileManager readFile:[MASTQSFileManager documentsFilePathForFile:strFileName]];
 }
 
 + (NSInteger)fileSize:(NSString *)strFilePath {

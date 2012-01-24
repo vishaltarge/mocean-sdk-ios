@@ -7,17 +7,17 @@
 
 #import <Foundation/Foundation.h>
 
-#import "AdView.h"
-#import "AdDelegate.h"
-#import "SharedModel.h"
-#import "AdDescriptor.h"
+#import "MASTAdView.h"
+#import "MASTAdDelegate.h"
+#import "MASTSharedModel.h"
+#import "MASTAdDescriptor.h"
 
 
-@interface AdModel : NSObject {
+@interface MASTAdModel : NSObject {
 
 }
 
-@property (assign) id <AdViewDelegate>	delegate;
+@property (assign) id <MASTAdViewDelegate>	delegate;
 
 @property (readonly) BOOL				readyForDisplay;
 
@@ -68,10 +68,10 @@
 @property (retain) NSData*              snapshotRAWData;
 @property (retain) NSDate*              snapshotRAWDataTime;
 @property (retain) UIView*              currentAdView;
-@property (assign) AdView*              adView;
+@property (assign) MASTAdView*              adView;
 
 @property (retain) NSMutableArray*      excampaigns;
-@property (retain) AdDescriptor*        descriptor;
+@property (retain) MASTAdDescriptor*        descriptor;
 
 @property (assign) BOOL                 loading;
 

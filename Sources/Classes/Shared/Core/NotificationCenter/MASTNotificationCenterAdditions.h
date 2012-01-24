@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface NotificationCenterAdditions : NSObject {}
+@interface MASTNotificationCenterAdditions : NSObject {}
 
 + (void)NC:(NSNotificationCenter*)notificationCenter postNotificationOnMainThreadWithName:(NSString*)name object:(id)object;
 + (void)NC:(NSNotificationCenter*)notificationCenter postNotificationOnMainThreadWithName:(NSString*)name object:(id)object userInfo:(NSDictionary *)userInfo waitUntilDone:(BOOL)waitUntilDone;

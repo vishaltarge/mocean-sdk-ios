@@ -5,13 +5,13 @@
 //  Created by Constantine Mureev on 3/9/11.
 //
 
-#import "AdUpdater.h"
+#import "MASTAdUpdater.h"
 
-#import "NotificationCenter.h"
-#import "NotificationCenterAdditions.h"
-#import "AdView.h"
+#import "MASTNotificationCenter.h"
+#import "MASTNotificationCenterAdditions.h"
+#import "MASTAdView.h"
 
-@interface AdUpdater (PrivateMethods)
+@interface MASTAdUpdater (PrivateMethods)
 
 - (void)sendUpdate:(NSTimer*)timer;
 - (void)startTimerOnMainThread;
@@ -29,7 +29,7 @@
 @end
 
 
-@implementation AdUpdater
+@implementation MASTAdUpdater
 
 @synthesize updateTimer, updateTimeInterval;
 @synthesize adView = _adView;
@@ -41,15 +41,15 @@
         _viewVisible = NO;
         _valid = YES;
 		
-		[[NotificationCenter sharedInstance] addObserver:self selector:@selector(start:) name:kAdStartUpdateNotification object:nil];
-		[[NotificationCenter sharedInstance] addObserver:self selector:@selector(stop:) name:kAdStopUpdateNotification object:nil];
-		[[NotificationCenter sharedInstance] addObserver:self selector:@selector(updateNow:) name:kAdUpdateNowNotification object:nil];
-		[[NotificationCenter sharedInstance] addObserver:self selector:@selector(updateTimeInterval:) name:kAdChangeUpdateTimeIntervalNotification object:nil];
-		[[NotificationCenter sharedInstance] addObserver:self selector:@selector(viewVisible:) name:kAdViewBecomeVisibleNotification object:nil];
-		[[NotificationCenter sharedInstance] addObserver:self selector:@selector(viewInvisible:) name:kAdViewBecomeInvisibleNotification object:nil];
+		[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(start:) name:kAdStartUpdateNotification object:nil];
+		[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(stop:) name:kAdStopUpdateNotification object:nil];
+		[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(updateNow:) name:kAdUpdateNowNotification object:nil];
+		[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(updateTimeInterval:) name:kAdChangeUpdateTimeIntervalNotification object:nil];
+		[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(viewVisible:) name:kAdViewBecomeVisibleNotification object:nil];
+		[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(viewInvisible:) name:kAdViewBecomeInvisibleNotification object:nil];
         
-        [[NotificationCenter sharedInstance] addObserver:self selector:@selector(startTimer:) name:kFinishAdDownloadNotification object:nil];
-        [[NotificationCenter sharedInstance] addObserver:self selector:@selector(startTimer:) name:kFailAdDownloadNotification object:nil];
+        [[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(startTimer:) name:kFinishAdDownloadNotification object:nil];
+        [[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(startTimer:) name:kFailAdDownloadNotification object:nil];
         //[[NotificationCenter sharedInstance] addObserver:self selector:@selector(startTimer:) name:kCancelAdDownloadNotification object:nil];
         
         kFinishAdDownloadNotification;
@@ -65,11 +65,11 @@
 }
 
 - (void)start:(NSNotification*)notification {
-	AdView* adViewNotify = [notification object];
+	MASTAdView* adViewNotify = [notification object];
     if (adViewNotify == self.adView) {
         @synchronized(self) {
             // update timeInterval
-            AdModel* adModel = [adViewNotify adModel];
+            MASTAdModel* adModel = [adViewNotify adModel];
             self.updateTimeInterval = adModel.updateTimeInterval;
             
             if (!_updateStarted) {
@@ -82,7 +82,7 @@
 }
 
 - (void)stop:(NSNotification*)notification {
-	AdView* adViewNotify = [notification object];
+	MASTAdView* adViewNotify = [notification object];
     if (adViewNotify == self.adView) {
         @synchronized(self) {
             if (_updateStarted) {
@@ -99,7 +99,7 @@
 }
 
 - (void)updateNow:(NSNotification*)notification {
-	AdView* adViewNotify = [notification object];
+	MASTAdView* adViewNotify = [notification object];
     if (adViewNotify == self.adView) {
         @synchronized(self) {
             // try stop timer
@@ -108,19 +108,19 @@
                 self.updateTimer = nil;
             }
             
-            [[NotificationCenter sharedInstance] postNotificationName:kAdCancelUpdateNotification object:self.adView];
-            [[NotificationCenter sharedInstance] postNotificationName:kStartAdDownloadNotification object:self.adView];
+            [[MASTNotificationCenter sharedInstance] postNotificationName:kAdCancelUpdateNotification object:self.adView];
+            [[MASTNotificationCenter sharedInstance] postNotificationName:kStartAdDownloadNotification object:self.adView];
         }
     }
 }
 
 
 - (void)updateTimeInterval:(NSNotification*)notification {
-	AdView* adViewNotify = [notification object];
+	MASTAdView* adViewNotify = [notification object];
     if (adViewNotify == self.adView) {
         @synchronized(self) {
             // update timeInterval
-            AdModel* adModel = [adViewNotify adModel];
+            MASTAdModel* adModel = [adViewNotify adModel];
 
             self.updateTimeInterval = adModel.updateTimeInterval;
             
@@ -148,11 +148,11 @@
 
 - (void)startTimer:(NSNotification*)notification {
     NSDictionary *info = [notification object];
-	AdView* adViewNotify = [info objectForKey:@"adView"];
+	MASTAdView* adViewNotify = [info objectForKey:@"adView"];
     if (adViewNotify == self.adView) {
         @synchronized(self) {
             // update timeInterval
-            AdModel* adModel = [adViewNotify adModel];
+            MASTAdModel* adModel = [adViewNotify adModel];
             self.updateTimeInterval = adModel.updateTimeInterval;
             
             if (_updateStarted && _viewVisible) {
@@ -165,7 +165,7 @@
 - (void)sendUpdate:(NSTimer*)timer {
 	@synchronized(self) {
         if (_valid) {
-            AdModel* adModel = [self.adView adModel];
+            MASTAdModel* adModel = [self.adView adModel];
             if ( adModel.latitude == nil && adModel.longitude == nil )
             {
 #ifdef INCLUDE_LOCATION_MANAGER
@@ -176,7 +176,7 @@
                 }
 #endif
             }
-            [[NotificationCenter sharedInstance] postNotificationName:kStartAdDownloadNotification object:self.adView];
+            [[MASTNotificationCenter sharedInstance] postNotificationName:kStartAdDownloadNotification object:self.adView];
         }
 	}
 }
@@ -201,14 +201,14 @@
 - (void)invalidate {
     @synchronized(self) {
         _valid = NO;
-        [[NotificationCenter sharedInstance] removeObserver:self];
+        [[MASTNotificationCenter sharedInstance] removeObserver:self];
         NSNotification* stopNotification = [NSNotification notificationWithName:kAdStopUpdateNotification object:self.adView];
         [self stop:stopNotification];
 	}
 }
 
 - (void)viewVisible:(NSNotification*)notification {
-	AdView* adViewNotify = [notification object];
+	MASTAdView* adViewNotify = [notification object];
     if (adViewNotify == self.adView) {
 		@synchronized(self) {
             _viewVisible = YES;
@@ -221,7 +221,7 @@
 }
 
 - (void)viewInvisible:(NSNotification*)notification {
-	AdView* adViewNotify = [notification object];
+	MASTAdView* adViewNotify = [notification object];
     if (adViewNotify == self.adView) {
 		@synchronized(self) {
             _viewVisible = NO;

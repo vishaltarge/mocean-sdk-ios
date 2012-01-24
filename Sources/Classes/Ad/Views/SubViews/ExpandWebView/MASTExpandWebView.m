@@ -5,18 +5,18 @@
 //  Created by Constantine Mureev on 2/22/11.
 //
 
-#import "ExpandWebView.h"
+#import "MASTExpandWebView.h"
 
-#import "NotificationCenter.h"
-#import "UIWebViewAdditions.h"
-#import "Constants.h"
-#import "QSStrings.h"
+#import "MASTNotificationCenter.h"
+#import "MASTUIWebViewAdditions.h"
+#import "MASTConstants.h"
+#import "MASTQSStrings.h"
 
-@interface ExpandWebView()
+@interface MASTExpandWebView()
 @property (nonatomic, retain) UIWebView*        webView;
 @end
 
-@implementation ExpandWebView
+@implementation MASTExpandWebView
 
 @synthesize adView, webView, closeButton;
 
@@ -42,7 +42,7 @@
 - (void)buttonsAction:(id)sender {    
     NSMutableDictionary* senfInfo = [NSMutableDictionary dictionary];
     [senfInfo setObject:self.adView forKey:@"adView"];
-    [[NotificationCenter sharedInstance] postNotificationName:kCloseExpandNotification object:senfInfo];
+    [[MASTNotificationCenter sharedInstance] postNotificationName:kCloseExpandNotification object:senfInfo];
     [self removeFromSuperview];
 }
 
@@ -53,8 +53,8 @@
     UIImage* closeIcon = nil;
     
     if (![[NSFileManager defaultManager] isReadableFileAtPath:path]) {
-        NSData* imageData = [QSStrings decodeBase64WithString:kCloseIconB64];
-        NSData* imageData2x = [QSStrings decodeBase64WithString:kCloseIcon2xB64];
+        NSData* imageData = [MASTQSStrings decodeBase64WithString:kCloseIconB64];
+        NSData* imageData2x = [MASTQSStrings decodeBase64WithString:kCloseIcon2xB64];
         if ([self saveToMojivaFolderData:imageData name:@"closeIcon.png"] &&
             [self saveToMojivaFolderData:imageData2x name:@"closeIcon@2x.png"]) {
             closeIcon = [UIImage imageWithContentsOfFile:path];
@@ -147,7 +147,7 @@
             NSMutableDictionary* info = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:request, adView, nil]
                                                                            forKeys:[NSArray arrayWithObjects:@"request", @"adView", nil]];
             
-            [[NotificationCenter sharedInstance] postNotificationName:kOpenURLNotification object:info];
+            [[MASTNotificationCenter sharedInstance] postNotificationName:kOpenURLNotification object:info];
         }
         
         return NO;

@@ -5,9 +5,9 @@
 //  Created by Constantine Mureev on 12/16/11.
 //
 
-#import "ExpandViewController.h"
+#import "MASTExpandViewController.h"
 
-@implementation ExpandViewController
+@implementation MASTExpandViewController
 
 @synthesize adView;
 

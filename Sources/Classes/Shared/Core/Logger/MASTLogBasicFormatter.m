@@ -5,10 +5,10 @@
 //  Created by Constantine Mureev on 8/19/10.
 //
 
-#import "LogBasicFormatter.h"
+#import "MASTLogBasicFormatter.h"
 
 
-@implementation LogBasicFormatter
+@implementation MASTLogBasicFormatter
 
 + (NSString *)stringWithFormat:(NSString *)fmt valist:(va_list)args
 {

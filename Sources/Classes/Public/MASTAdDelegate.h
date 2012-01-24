@@ -8,7 +8,7 @@
 //
 
 /** The AdViewDelegate protocol defines methods that a delegate of a AdView object can optionally implement to receive notifications from ad. */
-@protocol AdViewDelegate <NSObject>
+@protocol MASTAdViewDelegate <NSObject>
 @optional
 
 /** Sent before an ad view will begin loading ad content.

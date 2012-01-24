@@ -5,18 +5,18 @@
 //  Created by Constantine Mureev on 9/12/11.
 //
 
-#import "Accelerometer.h"
-#import "Utils.h"
+#import "MASTAccelerometer.h"
+#import "MASTUtils.h"
 
-@interface Accelerometer()
+@interface MASTAccelerometer()
 @property (retain) NSMutableArray* delegates;
 @end
 
-@implementation Accelerometer
+@implementation MASTAccelerometer
 
 @synthesize delegates;
 
-static Accelerometer* sharedInstance = nil;
+static MASTAccelerometer* sharedInstance = nil;
 
 
 #pragma mark -

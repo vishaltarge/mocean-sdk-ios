@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "AdDescriptor.h"
+#import "MASTAdDescriptor.h"
 
 
 // Delegate support not implemented yet
@@ -18,7 +18,7 @@
 - (void)xmlReadError:(id)sender;
 @end
 
-@interface ServerXMLResponseParser : NSObject <NSXMLParserDelegate> {
+@interface MASTServerXMLResponseParser : NSObject <NSXMLParserDelegate> {
 	//id <ServerXMLResponseParserDelegate>	_delegate;
 	NSXMLParser*							_parser;
 	

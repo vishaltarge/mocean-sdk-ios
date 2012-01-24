@@ -26,7 +26,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface QSFileManager : NSObject {
+@interface MASTQSFileManager : NSObject {
 
 }
 

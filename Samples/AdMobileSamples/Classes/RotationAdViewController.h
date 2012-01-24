@@ -6,7 +6,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AdView.h"
+#import "MASTAdView.h"
 
 
 @interface RotationAdViewController : UIViewController {

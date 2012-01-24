@@ -6,21 +6,21 @@
 //  Copyright 2011 AdMobile Mobile. A subsidiary of Mojiva, Inc. All rights reserved.
 //
 
-#import "AdClicker.h"
-#import "AdView.h"
-#import "Utils.h"
+#import "MASTAdClicker.h"
+#import "MASTAdView.h"
+#import "MASTUtils.h"
 
 
-@interface AdClicker (PrivateMethods)
+@interface MASTAdClicker (PrivateMethods)
 
 - (void)click:(NSNotification*)notification;
 - (void)clean:(NSTimer*)timer;
 
 @end
 
-@implementation AdClicker
+@implementation MASTAdClicker
 
-static AdClicker* sharedInstance = nil;
+static MASTAdClicker* sharedInstance = nil;
 
 
 #pragma mark -
@@ -30,7 +30,7 @@ static AdClicker* sharedInstance = nil;
 - (id) init {
     self = [super init];
 	if (self) {
-		[[NotificationCenter sharedInstance] addObserver:self selector:@selector(click:) name:kVerifyRequestNotification object:nil];
+		[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(click:) name:kVerifyRequestNotification object:nil];
         
         _infos = [NSMutableArray new];
         _connections = [NSMutableArray new];
@@ -134,9 +134,9 @@ static AdClicker* sharedInstance = nil;
                     NSMutableDictionary* sendInfo = [NSMutableDictionary dictionaryWithDictionary:info];
                     [sendInfo setObject:[NSURLRequest requestWithURL:url] forKey:@"request"];
                     
-                    [[NotificationCenter sharedInstance] postNotificationName:kOpenVerifiedRequestNotification object:sendInfo];
+                    [[MASTNotificationCenter sharedInstance] postNotificationName:kOpenVerifiedRequestNotification object:sendInfo];
                 } else {
-                    [[NotificationCenter sharedInstance] postNotificationName:kOpenVerifiedRequestNotification object:info];
+                    [[MASTNotificationCenter sharedInstance] postNotificationName:kOpenVerifiedRequestNotification object:info];
                 }
                 
                 [_infos removeObjectAtIndex:ind];
@@ -167,9 +167,9 @@ static AdClicker* sharedInstance = nil;
                     NSMutableDictionary* sendInfo = [NSMutableDictionary dictionaryWithDictionary:info];
                     [sendInfo setObject:[NSURLRequest requestWithURL:url] forKey:@"request"];
                     
-                    [[NotificationCenter sharedInstance] postNotificationName:kOpenVerifiedRequestNotification object:sendInfo];
+                    [[MASTNotificationCenter sharedInstance] postNotificationName:kOpenVerifiedRequestNotification object:sendInfo];
                 } else {
-                    [[NotificationCenter sharedInstance] postNotificationName:kOpenVerifiedRequestNotification object:info];
+                    [[MASTNotificationCenter sharedInstance] postNotificationName:kOpenVerifiedRequestNotification object:info];
                 }
                 
                 [_infos removeObjectAtIndex:ind];
@@ -195,7 +195,7 @@ static AdClicker* sharedInstance = nil;
             NSURLConnection* conn = [_connections objectAtIndex:ind];
             [conn cancel];
             
-            [[NotificationCenter sharedInstance] postNotificationName:kOpenVerifiedRequestNotification object:info];
+            [[MASTNotificationCenter sharedInstance] postNotificationName:kOpenVerifiedRequestNotification object:info];
             
             [_infos removeObjectAtIndex:ind];
             [_connections removeObjectAtIndex:ind];
@@ -225,7 +225,7 @@ static AdClicker* sharedInstance = nil;
 
 - (void)click:(NSNotification*)notification {
     NSDictionary* info = [notification object];
-	AdView* adView = [info objectForKey:@"adView"];
+	MASTAdView* adView = [info objectForKey:@"adView"];
     NSURLRequest* request = [info objectForKey:@"request"];
     
     if (info && adView && request) {

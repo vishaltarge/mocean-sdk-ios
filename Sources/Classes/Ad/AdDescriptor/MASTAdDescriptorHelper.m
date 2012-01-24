@@ -5,17 +5,17 @@
 //  Created by Constantine Mureev on 3/3/11.
 //
 
-#import "AdDescriptorHelper.h"
-#import "OrmmaConstants.h"
+#import "MASTAdDescriptorHelper.h"
+#import "MASTOrmmaConstants.h"
 
-@interface AdDescriptorHelper()
+@interface MASTAdDescriptorHelper()
 
 + (BOOL)isLandscapeMode;
 + (BOOL)isStatusBarHidden;
 
 @end
 
-@implementation AdDescriptorHelper
+@implementation MASTAdDescriptorHelper
 
 + (BOOL)isMedialetsContent:(NSString *)data
 {

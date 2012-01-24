@@ -6,10 +6,10 @@
 //  Copyright 2011 AdMobile Mobile. A subsidiary of Mojiva, Inc. All rights reserved.
 //
 
-#import "TransparentUIWebView.h"
+#import "MASTTransparentUIWebView.h"
 
 
-@implementation TransparentUIWebView
+@implementation MASTTransparentUIWebView
 
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
     if ([self isPointTransparent:point]) {

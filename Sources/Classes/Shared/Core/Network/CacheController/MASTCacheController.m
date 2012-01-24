@@ -4,11 +4,11 @@
 //
 //  Created by Constantine Mureev on 3/15/11.//
 
-#import "CacheController.h"
-#import "NetworkQueue.h"
+#import "MASTCacheController.h"
+#import "MASTNetworkQueue.h"
 
 
-@implementation CacheController
+@implementation MASTCacheController
 
 - (id)init {
     self = [super init];
@@ -23,7 +23,7 @@
     [super dealloc];
 }
 
-- (void)loadLinks:(NSArray*)links forAdView:(AdView*)adView request:(NSURLRequest*)request origData:(NSData*)origData {
+- (void)loadLinks:(NSArray*)links forAdView:(MASTAdView*)adView request:(NSURLRequest*)request origData:(NSData*)origData {
         if (links && [links count] > 0 && adView && request) {
             NSMutableData* resultData = [NSMutableData dataWithData:origData];
             NSMutableArray* cacheReqests = [NSMutableArray new];
@@ -36,21 +36,21 @@
             __block int count = [cacheReqests count];
             
             for (NSURLRequest* r in cacheReqests) {
-                [NetworkQueue loadWithRequest:r completion:^(NSURLRequest *req, NSHTTPURLResponse *response, NSData *data, NSError *error) {
+                [MASTNetworkQueue loadWithRequest:r completion:^(NSURLRequest *req, NSHTTPURLResponse *response, NSData *data, NSError *error) {
                     if (error) {
                         count--;
                         if (count == 0) {                        
                             NSMutableDictionary* info = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:request, resultData, adView, nil]
                                                                                            forKeys:[NSArray arrayWithObjects:@"request", @"data", @"adView", nil]];
-                            [[NotificationCenter sharedInstance] postNotificationName:kFinishAdDownloadNotification object:info];
+                            [[MASTNotificationCenter sharedInstance] postNotificationName:kFinishAdDownloadNotification object:info];
                         }
                     } else {
-                        [resultData setData:[CacheController updateResponse:resultData withNewData:data request:req]];
+                        [resultData setData:[MASTCacheController updateResponse:resultData withNewData:data request:req]];
                         count--;
                         if (count == 0) {                        
                             NSMutableDictionary* info = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:request, resultData, adView, nil]
                                                                                            forKeys:[NSArray arrayWithObjects:@"request", @"data", @"adView", nil]];
-                            [[NotificationCenter sharedInstance] postNotificationName:kFinishAdDownloadNotification object:info];
+                            [[MASTNotificationCenter sharedInstance] postNotificationName:kFinishAdDownloadNotification object:info];
                         }
                     }
                 }];
@@ -69,7 +69,7 @@
     
     NSString* ext = [url pathExtension];
     
-    NSString* path = [dirPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", [Utils md5HashForString:fileName], ext]];
+    NSString* path = [dirPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", [MASTUtils md5HashForString:fileName], ext]];
     
     if ([[NSFileManager defaultManager] isReadableFileAtPath:path]) {
 		NSString *localUrl = [[NSURL fileURLWithPath:path] absoluteString];

@@ -7,7 +7,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ExpandWebView : UIView <UIWebViewDelegate> {
+@interface MASTExpandWebView : UIView <UIWebViewDelegate> {
     CGRect                      _defaultFrame;
 }
 

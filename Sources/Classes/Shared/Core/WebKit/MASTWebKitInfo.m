@@ -5,15 +5,15 @@
 //  Created by Constantine Mureev on 3/24/11.
 //
 
-#import "WebKitInfo.h"
+#import "MASTWebKitInfo.h"
 
 
-@implementation WebKitInfo
+@implementation MASTWebKitInfo
 
 @synthesize ua;
 
 
-static WebKitInfo* sharedInstance = nil;
+static MASTWebKitInfo* sharedInstance = nil;
 
 
 #pragma mark -
@@ -31,7 +31,7 @@ static WebKitInfo* sharedInstance = nil;
         NSString* uaString = [_webView stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
         if (uaString  && [uaString length] > 0) {
             self.ua = uaString;
-            [[NotificationCenter sharedInstance] postNotificationName:kUaDetectedNotification object:uaString];
+            [[MASTNotificationCenter sharedInstance] postNotificationName:kUaDetectedNotification object:uaString];
         }
         else {
             [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.google.com"]]];
@@ -107,7 +107,7 @@ static WebKitInfo* sharedInstance = nil;
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
 	NSString* uaString = [request valueForHTTPHeaderField:@"User-Agent"];
     self.ua = uaString;
-    [[NotificationCenter sharedInstance] postNotificationName:kUaDetectedNotification object:uaString];
+    [[MASTNotificationCenter sharedInstance] postNotificationName:kUaDetectedNotification object:uaString];
 	
 	return NO;
 }

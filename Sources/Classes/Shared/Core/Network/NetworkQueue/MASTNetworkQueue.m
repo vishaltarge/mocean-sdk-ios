@@ -4,18 +4,18 @@
 //  Created by Constantine on 10/5/11.
 //
 
-#import "NetworkQueue.h"
-#import "RequestOperation.h"
-#import "NetworkActivityIndicatorManager.h"
+#import "MASTNetworkQueue.h"
+#import "MASTRequestOperation.h"
+#import "MASTNetworkActivityIndicatorManager.h"
 
-@implementation NetworkQueue
+@implementation MASTNetworkQueue
 
 static NSOperationQueue* get_network_operations_io_queue() {
     static NSOperationQueue* _networkIOQueue;
     static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
 		_networkIOQueue = [NSOperationQueue new];
-        [NetworkActivityIndicatorManager sharedManager];
+        [MASTNetworkActivityIndicatorManager sharedManager];
 	});
 	return _networkIOQueue;
 }
@@ -29,11 +29,11 @@ static NSOperationQueue* get_network_operations_io_queue() {
         urlRequest = (NSURLRequest*)[request retain];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            RequestOperation* operation = [RequestOperation operationWithRequest:urlRequest completion:completion];
+            MASTRequestOperation* operation = [MASTRequestOperation operationWithRequest:urlRequest completion:completion];
             [get_network_operations_io_queue() addOperation:operation];
         });
     } else {
-        RequestOperation* operation = [RequestOperation operationWithRequest:urlRequest completion:completion];
+        MASTRequestOperation* operation = [MASTRequestOperation operationWithRequest:urlRequest completion:completion];
         [get_network_operations_io_queue() addOperation:operation];
     }
 }

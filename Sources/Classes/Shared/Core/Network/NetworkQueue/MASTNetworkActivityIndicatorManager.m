@@ -5,11 +5,11 @@
 //
 
 
-#import "NetworkActivityIndicatorManager.h"
-#import "RequestOperation.h"
+#import "MASTNetworkActivityIndicatorManager.h"
+#import "MASTRequestOperation.h"
 
 
-@implementation NetworkActivityIndicatorManager
+@implementation MASTNetworkActivityIndicatorManager
 @synthesize count = _activityCount;
 @synthesize enabled = _enabled;
 
@@ -23,8 +23,8 @@ static dispatch_queue_t get_setter_queue() {
 	return _setterQueue;
 }
 
-+ (NetworkActivityIndicatorManager *)sharedManager {
-    static NetworkActivityIndicatorManager *_sharedManager = nil;
++ (MASTNetworkActivityIndicatorManager *)sharedManager {
+    static MASTNetworkActivityIndicatorManager *_sharedManager = nil;
     static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{
         _sharedManager = [[self alloc] init];

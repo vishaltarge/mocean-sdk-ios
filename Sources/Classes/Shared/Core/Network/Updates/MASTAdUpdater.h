@@ -6,20 +6,20 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AdView_Private.h"
-#import "AdView.h"
-#import "AdModel.h"
+#import "MASTAdView_Private.h"
+#import "MASTAdView.h"
+#import "MASTAdModel.h"
 
-@interface AdUpdater : NSObject {
+@interface MASTAdUpdater : NSObject {
 	BOOL			_updateStarted;
     BOOL            _viewVisible;
-	AdView*			_adView;
+	MASTAdView*			_adView;
     BOOL            _valid;
 }
 
 - (void)invalidate;
 
-@property (assign) AdView* adView;
+@property (assign) MASTAdView* adView;
 @property (retain) NSTimer* updateTimer;
 @property (assign) NSTimeInterval updateTimeInterval;
 

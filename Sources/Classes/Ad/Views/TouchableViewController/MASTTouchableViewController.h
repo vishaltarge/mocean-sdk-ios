@@ -12,7 +12,7 @@
 - (void) viewDidTouched;
 @end
 
-@interface TouchableViewController : UIViewController {
+@interface MASTTouchableViewController : UIViewController {
 	id <TouchableViewDelegate>	_delegate;
 }
 

@@ -7,12 +7,12 @@
 
 #import <UIKit/UIKit.h>
 
-#import "AdView.h"
-#import "Constants.h"
-#import "QSStrings.h"
+#import "MASTAdView.h"
+#import "MASTConstants.h"
+#import "MASTQSStrings.h"
 
 
-@interface InternalBrowser : UIViewController <UIWebViewDelegate, UIActionSheetDelegate> {
+@interface MASTInternalBrowser : UIViewController <UIWebViewDelegate, UIActionSheetDelegate> {
 	CGRect							_origFrame;
 	UIWebView*						_webView;
     UILabel*                        _titleLabel;
@@ -37,11 +37,11 @@
 }
 
 @property (assign) UIViewController*    viewConreoller;
-@property (assign) AdView*              sendAdView;
+@property (assign) MASTAdView*              sendAdView;
 @property (retain) NSURL*               URL;
 @property (retain) NSURL*               loadingURL;
 
-+ (InternalBrowser*)sharedInstance;
++ (MASTInternalBrowser*)sharedInstance;
 + (void)releaseSharedInstance;
 - (void)close;
 

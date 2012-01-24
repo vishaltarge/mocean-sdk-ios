@@ -7,7 +7,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface NetworkActivityIndicatorManager : NSObject {
+@interface MASTNetworkActivityIndicatorManager : NSObject {
 @private
 	NSInteger _activityCount;
     BOOL _enabled;
@@ -16,7 +16,7 @@
 @property (readonly) NSInteger count;
 @property (nonatomic, assign, getter = isEnabled) BOOL enabled;
 
-+ (NetworkActivityIndicatorManager *)sharedManager;
++ (MASTNetworkActivityIndicatorManager *)sharedManager;
 
 - (void)incrementActivityCount;
 - (void)decrementActivityCount;

@@ -5,20 +5,20 @@
 //  Created by Constantine Mureev on 2/22/11.
 //
 
-#import "AdWebView.h"
-#import "AdInterstitialView.h"
+#import "MASTAdWebView.h"
+#import "MASTAdInterstitialView.h"
 
-#import "NotificationCenter.h"
-#import "OrmmaAdaptor.h"
-#import "OrmmaConstants.h"
-#import "UIWebViewAdditions.h"
+#import "MASTNotificationCenter.h"
+#import "MASTOrmmaAdaptor.h"
+#import "MASTOrmmaConstants.h"
+#import "MASTUIWebViewAdditions.h"
 
-@interface AdWebView()
+@interface MASTAdWebView()
 @property (nonatomic, retain) UIWebView*        webView;
-@property (nonatomic, retain) OrmmaAdaptor*     ormmaAdaptor;
+@property (nonatomic, retain) MASTOrmmaAdaptor*     ormmaAdaptor;
 @end
 
-@implementation AdWebView
+@implementation MASTAdWebView
 
 @synthesize adView, webView, ormmaAdaptor;
 
@@ -64,8 +64,8 @@
     if([[html lowercaseString] rangeOfString:[@"ormma" lowercaseString]].location != NSNotFound ||
        [[html lowercaseString] rangeOfString:[@"mraid" lowercaseString]].location != NSNotFound) {
         // replce ormma placeholder
-        self.ormmaAdaptor = [[[OrmmaAdaptor alloc] initWithWebView:self.webView adView:(AdView*)self.superview] autorelease];
-        self.ormmaAdaptor.interstitial = [self.adView isKindOfClass:[AdInterstitialView class]];
+        self.ormmaAdaptor = [[[MASTOrmmaAdaptor alloc] initWithWebView:self.webView adView:(MASTAdView*)self.superview] autorelease];
+        self.ormmaAdaptor.interstitial = [self.adView isKindOfClass:[MASTAdInterstitialView class]];
         
         NSString* js = [NSString stringWithFormat:@"<script type=\"text/javascript\">%@</script>", [self.ormmaAdaptor getDefaultsJSCode]];
         
@@ -97,7 +97,7 @@
         [senfInfo setObject:self forKey:@"subView"];
         [senfInfo setObject:contentWidth forKey:@"contentWidth"];
         [senfInfo setObject:contentHeight forKey:@"contentHeight"];
-        [[NotificationCenter sharedInstance] postNotificationName:kReadyAdDisplayNotification object:senfInfo];
+        [[MASTNotificationCenter sharedInstance] postNotificationName:kReadyAdDisplayNotification object:senfInfo];
     }
 }
 
@@ -106,7 +106,7 @@
         NSMutableDictionary* senfInfo = [NSMutableDictionary dictionary];
         [senfInfo setObject:adView forKey:@"adView"];
         [senfInfo setObject:self forKey:@"subView"];
-        [[NotificationCenter sharedInstance] postNotificationName:kFailAdDisplayNotification object:senfInfo];
+        [[MASTNotificationCenter sharedInstance] postNotificationName:kFailAdDisplayNotification object:senfInfo];
     }
 }
 
@@ -120,7 +120,7 @@
                 NSMutableDictionary* info = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:request, adView, nil]
                                                                                forKeys:[NSArray arrayWithObjects:@"request", @"adView", nil]];
                 
-                [[NotificationCenter sharedInstance] postNotificationName:kOpenURLNotification object:info];
+                [[MASTNotificationCenter sharedInstance] postNotificationName:kOpenURLNotification object:info];
             }
             
             return NO;

@@ -7,15 +7,15 @@
 
 #import <Foundation/Foundation.h>
 
-#import "NotificationAtlas.h"
-#import "NotificationCenterAdditions.h"
+#import "MASTNotificationAtlas.h"
+#import "MASTNotificationCenterAdditions.h"
 
 
-@interface NotificationCenter : NSNotificationCenter {
+@interface MASTNotificationCenter : NSNotificationCenter {
 
 }
 
-+ (NotificationCenter*)sharedInstance;
++ (MASTNotificationCenter*)sharedInstance;
 + (void)releaseSharedInstance;
 
 @end

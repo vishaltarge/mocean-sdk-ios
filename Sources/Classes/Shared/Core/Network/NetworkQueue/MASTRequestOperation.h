@@ -70,7 +70,7 @@ extern NSString * const OperationDidFinishNotification;
  @see NSOperation
  @see NSURLConnection
  */
-@interface RequestOperation : NSOperation {
+@interface MASTRequestOperation : NSOperation {
 @private    
     NSSet *_runLoopModes;
     
@@ -108,7 +108,7 @@ extern NSString * const OperationDidFinishNotification;
  
  @return A new HTTP request operation
  */
-+ (RequestOperation *)operationWithRequest:(NSURLRequest *)urlRequest 
++ (MASTRequestOperation *)operationWithRequest:(NSURLRequest *)urlRequest 
                                       completion:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSData *data, NSError *error))completion;
 
 /**
@@ -123,7 +123,7 @@ extern NSString * const OperationDidFinishNotification;
  
  @return A new streaming HTTP request operation
  */
-+ (RequestOperation *)streamingOperationWithRequest:(NSURLRequest *)urlRequest
++ (MASTRequestOperation *)streamingOperationWithRequest:(NSURLRequest *)urlRequest
                                               inputStream:(NSInputStream *)inputStream
                                              outputStream:(NSOutputStream *)outputStream
                                                completion:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))completion;

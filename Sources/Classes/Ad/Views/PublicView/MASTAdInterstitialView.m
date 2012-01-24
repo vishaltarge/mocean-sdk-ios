@@ -5,18 +5,18 @@
 //  Created by Constantine Mureev on 2/24/11.
 //
 
-#import "AdInterstitialView.h"
-#import "AdView_Private.h"
-#import "AdDescriptor.h"
-#import "Reachability.h"
+#import "MASTAdInterstitialView.h"
+#import "MASTAdView_Private.h"
+#import "MASTAdDescriptor.h"
+#import "MASTReachability.h"
 
-#import "NotificationCenter.h"
+#import "MASTNotificationCenter.h"
 
-#import "AdWebView.h"
+#import "MASTAdWebView.h"
 
 #define kCloseButtonText @"Close"
 
-@interface AdInterstitialView ()
+@interface MASTAdInterstitialView ()
 
 - (void)showCloseButton;
 - (void)scheduledButtonAction;
@@ -27,7 +27,7 @@
 @end
 
 
-@implementation AdInterstitialView
+@implementation MASTAdInterstitialView
 
 @dynamic delegate, showCloseButtonTime, autocloseInterstitialTime, closeButton;
 
@@ -71,22 +71,22 @@
 - (void)registerObserver {
     // start interstitial ad only if internet available      
     [super registerObserver];
-    [[NotificationCenter sharedInstance] addObserver:self selector:@selector(buttonsAction:) name:kInvalidParamsServerResponseNotification object:nil];
-    [[NotificationCenter sharedInstance] addObserver:self selector:@selector(buttonsAction:) name:kEmptyServerResponseNotification object:nil];
-    [[NotificationCenter sharedInstance] addObserver:self selector:@selector(buttonsAction:) name:kFailAdDisplayNotification object:nil];
-    [[NotificationCenter sharedInstance] addObserver:self selector:@selector(buttonsAction:) name:kFailAdDownloadNotification object:nil];
-    [[NotificationCenter sharedInstance] addObserver:self selector:@selector(closeInterstitial:) name:kInterstitialAdCloseNotification object:nil];
+    [[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(buttonsAction:) name:kInvalidParamsServerResponseNotification object:nil];
+    [[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(buttonsAction:) name:kEmptyServerResponseNotification object:nil];
+    [[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(buttonsAction:) name:kFailAdDisplayNotification object:nil];
+    [[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(buttonsAction:) name:kFailAdDownloadNotification object:nil];
+    [[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(closeInterstitial:) name:kInterstitialAdCloseNotification object:nil];
 }
 
 - (void)dislpayAd:(NSNotification*)notification {
 	NSDictionary *info = [notification object];
-	AdView* adView = [info objectForKey:@"adView"];
+	MASTAdView* adView = [info objectForKey:@"adView"];
 	UIView* subView = [info objectForKey:@"subView"];
     NSString* contentWidth = [info objectForKey:@"contentWidth"];
     NSString* contentHeight = [info objectForKey:@"contentHeight"];
 	
 	if (adView == self) {
-        AdModel* model = [self adModel];
+        MASTAdModel* model = [self adModel];
         UIView* currentAdView = model.currentAdView;
         if (subView != currentAdView) {            
             UIView *oldView = currentAdView;
@@ -132,8 +132,8 @@
                 self.closeButton.hidden = YES;
                 
                 [self addSubview:self.closeButton];
-                if (((AdModel*)_adModel).showCloseButtonTime > 0 && !((AdModel*)_adModel).isDisplayed) {
-                    [NSTimer scheduledTimerWithTimeInterval:((AdModel*)_adModel).showCloseButtonTime
+                if (((MASTAdModel*)_adModel).showCloseButtonTime > 0 && !((MASTAdModel*)_adModel).isDisplayed) {
+                    [NSTimer scheduledTimerWithTimeInterval:((MASTAdModel*)_adModel).showCloseButtonTime
                                                      target:self 
                                                    selector:@selector(showCloseButton)
                                                    userInfo:nil 
@@ -142,8 +142,8 @@
                 else {
                     [self showCloseButton];
                 }
-                if (((AdModel*)_adModel).autocloseInterstitialTime > 0) {
-                    [NSTimer scheduledTimerWithTimeInterval:((AdModel*)_adModel).autocloseInterstitialTime
+                if (((MASTAdModel*)_adModel).autocloseInterstitialTime > 0) {
+                    [NSTimer scheduledTimerWithTimeInterval:((MASTAdModel*)_adModel).autocloseInterstitialTime
                                                      target:self 
                                                    selector:@selector(scheduledButtonAction) 
                                                    userInfo:nil 
@@ -153,13 +153,13 @@
                 [self bringSubviewToFront:self.closeButton];
             }
             
-            if (!((AdModel*)_adModel).isDisplayed) {
-                ((AdModel*)_adModel).startDisplayDate = [NSDate date];
-                ((AdModel*)_adModel).isDisplayed = YES;
+            if (!((MASTAdModel*)_adModel).isDisplayed) {
+                ((MASTAdModel*)_adModel).startDisplayDate = [NSDate date];
+                ((MASTAdModel*)_adModel).isDisplayed = YES;
             }
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                [[NotificationCenter sharedInstance] postNotificationName:kAdDisplayedNotification object:self];
+                [[MASTNotificationCenter sharedInstance] postNotificationName:kAdDisplayedNotification object:self];
             });
         }
 	}
@@ -175,7 +175,7 @@
 
 - (void)buttonsAction:(id)sender {
     if (self.delegate && [self.delegate respondsToSelector:@selector(didClosedAd:usageTimeInterval:)]) {
-        NSDate* _startDate = ((AdModel*)_adModel).startDisplayDate;
+        NSDate* _startDate = ((MASTAdModel*)_adModel).startDisplayDate;
         NSTimeInterval timeInterval = -[_startDate timeIntervalSinceNow];
         [self.delegate didClosedAd:self usageTimeInterval:timeInterval];
     } else {
@@ -183,18 +183,18 @@
             if ([sender isKindOfClass:[NSNotification class]]) {
                 NSNotification* notification = sender;
                 if ([notification object] == self) {
-                    [[NotificationCenter sharedInstance] postNotificationName:kInterstitialAdCloseNotification object:self];
+                    [[MASTNotificationCenter sharedInstance] postNotificationName:kInterstitialAdCloseNotification object:self];
                     self.hidden = YES;
                 } else if ([[notification object] isKindOfClass:[NSDictionary class]]) {
                     NSDictionary* info = [notification object];
-                    AdView* adView = [info objectForKey:@"adView"];
+                    MASTAdView* adView = [info objectForKey:@"adView"];
                     if (adView == self) {
-                        [[NotificationCenter sharedInstance] postNotificationName:kInterstitialAdCloseNotification object:self];
+                        [[MASTNotificationCenter sharedInstance] postNotificationName:kInterstitialAdCloseNotification object:self];
                         self.hidden = YES;
                     }
                 }
             } else {
-                [[NotificationCenter sharedInstance] postNotificationName:kInterstitialAdCloseNotification object:self];
+                [[MASTNotificationCenter sharedInstance] postNotificationName:kInterstitialAdCloseNotification object:self];
                 self.hidden = YES;
             }
         }
@@ -208,13 +208,13 @@
 
 //- (void) didClosedInterstitialAd:(id)sender usageTimeInterval:(NSTimeInterval)usageTimeInterval;
 - (void)closeInterstitial:(NSNotification*)notification {
-    AdView* adView = [notification object];
+    MASTAdView* adView = [notification object];
 	
 	if (adView == self) {
-        id <AdViewDelegate> delegate = [self adModel].delegate;
+        id <MASTAdViewDelegate> delegate = [self adModel].delegate;
         
         if (delegate && [delegate respondsToSelector:@selector(didClosedAd:usageTimeInterval:)]) {
-            NSDate* _startDate = ((AdModel*)_adModel).startDisplayDate;
+            NSDate* _startDate = ((MASTAdModel*)_adModel).startDisplayDate;
             NSTimeInterval timeInterval = -[_startDate timeIntervalSinceNow];
             [delegate didClosedAd:self usageTimeInterval:timeInterval];
         }
@@ -227,30 +227,30 @@
 
 
 // @property (assign) id <AdViewDelegate> delegate;
-- (void)setDelegate:(id <AdViewDelegate>)delegate {
-	((AdModel*)_adModel).delegate = delegate;
+- (void)setDelegate:(id <MASTAdViewDelegate>)delegate {
+	((MASTAdModel*)_adModel).delegate = delegate;
 }
 
-- (id <AdViewDelegate>)delegate {
-	return ((AdModel*)_adModel).delegate;
+- (id <MASTAdViewDelegate>)delegate {
+	return ((MASTAdModel*)_adModel).delegate;
 }
 
 //@property NSTimeInterval showCloseButtonTime;
 - (void)setShowCloseButtonTime:(NSTimeInterval)timeInterval {
-	((AdModel*)_adModel).showCloseButtonTime = timeInterval;
+	((MASTAdModel*)_adModel).showCloseButtonTime = timeInterval;
 }
 
 - (NSTimeInterval)showCloseButtonTime {
-	return ((AdModel*)_adModel).showCloseButtonTime;
+	return ((MASTAdModel*)_adModel).showCloseButtonTime;
 }
 
 //@property NSTimeInterval autocloseInterstitialTime;
 - (void)setAutocloseInterstitialTime:(NSTimeInterval)timeInterval {
-	((AdModel*)_adModel).autocloseInterstitialTime = timeInterval;
+	((MASTAdModel*)_adModel).autocloseInterstitialTime = timeInterval;
 }
 
 - (NSTimeInterval)autocloseInterstitialTime {
-	return ((AdModel*)_adModel).autocloseInterstitialTime;
+	return ((MASTAdModel*)_adModel).autocloseInterstitialTime;
 }
 
 

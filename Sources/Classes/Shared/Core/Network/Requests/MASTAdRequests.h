@@ -7,18 +7,18 @@
 
 #import <Foundation/Foundation.h>
 
-#import "AdView.h"
+#import "MASTAdView.h"
 
-@interface AdRequests : NSObject {
+@interface MASTAdRequests : NSObject {
 	NSMutableArray*			_ads;
 	NSMutableArray*			_requestListsForAds;
 }
 
 - (BOOL)containsRequest:(NSURLRequest*)request;
-- (void)addRequest:(NSURLRequest*)request forAd:(AdView*)adView;
+- (void)addRequest:(NSURLRequest*)request forAd:(MASTAdView*)adView;
 - (void)removeRequest:(NSURLRequest*)request;
-- (void)removeAd:(AdView*)adView;
-- (AdView*)adForRequest:(NSURLRequest*)request;
-- (NSArray*)allRequestsForAd:(AdView*)adView;
+- (void)removeAd:(MASTAdView*)adView;
+- (MASTAdView*)adForRequest:(NSURLRequest*)request;
+- (NSArray*)allRequestsForAd:(MASTAdView*)adView;
 
 @end

@@ -6,17 +6,17 @@
  *
  */
 
-#import "AdView.h"
-#import "AdModel.h"
-#import "InstallManager.h"
-#import "UIViewAdditions.h"
+#import "MASTAdView.h"
+#import "MASTAdModel.h"
+#import "MASTInstallManager.h"
+#import "MASTUIViewAdditions.h"
 
-@interface AdView ()
+@interface MASTAdView ()
 
 - (void)buttonsAction:(id)sender;
 - (void)prepareResources;
 
-@property (readonly) AdModel*   adModel;
+@property (readonly) MASTAdModel*   adModel;
 @property (readonly) NSString*  uid;
 
 - (void)setDefaultValues;

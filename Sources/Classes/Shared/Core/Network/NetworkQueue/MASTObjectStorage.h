@@ -7,7 +7,7 @@
 #import <Foundation/Foundation.h>
 #import <CommonCrypto/CommonDigest.h>
 
-@interface ObjectStorage : NSObject
+@interface MASTObjectStorage : NSObject
 
 + (BOOL)isCached:(NSString*)key;
 + (void)storeObject:(id <NSCoding>)obj key:(NSString*)key;

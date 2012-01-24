@@ -5,10 +5,10 @@
 //  Created by Constantine Mureev on 10/8/10.
 //
 
-#import "ServerXMLResponseParser.h"
+#import "MASTServerXMLResponseParser.h"
 
 
-@implementation ServerXMLResponseParser
+@implementation MASTServerXMLResponseParser
 
 @synthesize parser = _parser;
 //@synthesize delegate = _delegate;

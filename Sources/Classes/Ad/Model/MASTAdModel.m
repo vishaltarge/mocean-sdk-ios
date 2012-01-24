@@ -5,16 +5,16 @@
 //  Created by Constantine Mureev on 3/1/11.
 //
 
-#import "AdModel.h"
+#import "MASTAdModel.h"
 
-#import "Utils.h"
-#import "Constants.h"
-#import "NotificationCenter.h"
-#import "DownloadController.h"
-#import "InternalBrowser.h"
-#import "VideoView.h"
+#import "MASTUtils.h"
+#import "MASTConstants.h"
+#import "MASTNotificationCenter.h"
+#import "MASTDownloadController.h"
+#import "MASTInternalBrowser.h"
+#import "MASTVideoView.h"
 
-@implementation AdModel
+@implementation MASTAdModel
 
 @synthesize delegate, readyForDisplay, testMode, logMode, animateMode, internalOpenMode, track,
 updateTimeInterval, defaultImage, site, adZone, premiumFilter, type, keywords, minSize, maxSize,
@@ -29,13 +29,13 @@ longitude, latitude, timeout, isUserSetMaxSize;
         NSMutableDictionary* info = [NSMutableDictionary dictionary];
         [info setObject:self.adView forKey:@"adView"];
         [info setObject:[NSError errorWithDomain:[NSString stringWithFormat:@"Invalid site property. value - %d", self.site] code:171 userInfo:nil] forKey:@"error"];        
-        [[NotificationCenter sharedInstance] postNotificationName:kInvalidParamsNotification object:info];
+        [[MASTNotificationCenter sharedInstance] postNotificationName:kInvalidParamsNotification object:info];
         return NO;
     } else if (self.adZone <= 0) {
         NSMutableDictionary* info = [NSMutableDictionary dictionary];
         [info setObject:self.adView forKey:@"adView"];
         [info setObject:[NSError errorWithDomain:[NSString stringWithFormat:@"Invalid zone property. value - %d", self.adZone] code:172 userInfo:nil] forKey:@"error"];        
-        [[NotificationCenter sharedInstance] postNotificationName:kInvalidParamsNotification object:info];
+        [[MASTNotificationCenter sharedInstance] postNotificationName:kInvalidParamsNotification object:info];
         return NO;
     }
     
@@ -43,31 +43,31 @@ longitude, latitude, timeout, isUserSetMaxSize;
         NSMutableDictionary* info = [NSMutableDictionary dictionary];
         [info setObject:self.adView forKey:@"adView"];
         [info setObject:[NSError errorWithDomain:[NSString stringWithFormat:@"Invalid premium property. value - %d", self.premiumFilter] code:174 userInfo:nil] forKey:@"error"];        
-        [[NotificationCenter sharedInstance] postNotificationName:kInvalidParamsNotification object:info];
+        [[MASTNotificationCenter sharedInstance] postNotificationName:kInvalidParamsNotification object:info];
     }
     if (minSize.width < 0 || minSize.height < 0) {
         NSMutableDictionary* info = [NSMutableDictionary dictionary];
         [info setObject:self.adView forKey:@"adView"];
         [info setObject:[NSError errorWithDomain:[NSString stringWithFormat:@"Invalid minSize property. value - {%f, %f}", self.minSize.width, self.minSize.height] code:175 userInfo:nil] forKey:@"error"];        
-        [[NotificationCenter sharedInstance] postNotificationName:kInvalidParamsNotification object:info];
+        [[MASTNotificationCenter sharedInstance] postNotificationName:kInvalidParamsNotification object:info];
     }
     if (maxSize.width < 0 || maxSize.height < 0) {
         NSMutableDictionary* info = [NSMutableDictionary dictionary];
         [info setObject:self.adView forKey:@"adView"];
         [info setObject:[NSError errorWithDomain:[NSString stringWithFormat:@"Invalid maxSize property. value - {%f, %f}", self.maxSize.width, self.maxSize.height] code:176 userInfo:nil] forKey:@"error"];        
-        [[NotificationCenter sharedInstance] postNotificationName:kInvalidParamsNotification object:info];
+        [[MASTNotificationCenter sharedInstance] postNotificationName:kInvalidParamsNotification object:info];
     }
     if (advertiserId < 0) {
         NSMutableDictionary* info = [NSMutableDictionary dictionary];
         [info setObject:self.adView forKey:@"adView"];
         [info setObject:[NSError errorWithDomain:[NSString stringWithFormat:@"Invalid advertiserId property. value - %d", self.advertiserId] code:177 userInfo:nil] forKey:@"error"];        
-        [[NotificationCenter sharedInstance] postNotificationName:kInvalidParamsNotification object:info];
+        [[MASTNotificationCenter sharedInstance] postNotificationName:kInvalidParamsNotification object:info];
     }
     if (!(self.type <= 7)) {
         NSMutableDictionary* info = [NSMutableDictionary dictionary];
         [info setObject:self.adView forKey:@"adView"];
         [info setObject:[NSError errorWithDomain:[NSString stringWithFormat:@"Invalid type property. value - %d", self.type] code:178 userInfo:nil] forKey:@"error"];        
-        [[NotificationCenter sharedInstance] postNotificationName:kInvalidParamsNotification object:info];
+        [[MASTNotificationCenter sharedInstance] postNotificationName:kInvalidParamsNotification object:info];
     }
     
     return YES;
@@ -108,11 +108,11 @@ longitude, latitude, timeout, isUserSetMaxSize;
 	if (self.testMode)
         [_banerUrl appendString:@"&test=1"];
     
-	if (self.paramBG != nil && [Utils canGetHexColor:self.paramBG])
-        [_banerUrl appendFormat:@"&paramBG=#%@", [Utils hexColor:self.paramBG]];
+	if (self.paramBG != nil && [MASTUtils canGetHexColor:self.paramBG])
+        [_banerUrl appendFormat:@"&paramBG=#%@", [MASTUtils hexColor:self.paramBG]];
     
-	if (self.paramLINK != nil && [Utils canGetHexColor:self.paramLINK])
-        [_banerUrl appendFormat:@"&paramLINK=#%@", [Utils hexColor:self.paramLINK]];
+	if (self.paramLINK != nil && [MASTUtils canGetHexColor:self.paramLINK])
+        [_banerUrl appendFormat:@"&paramLINK=#%@", [MASTUtils hexColor:self.paramLINK]];
     
     if (self.country)
         [_banerUrl appendFormat:@"&country=%@", self.country];
@@ -159,10 +159,10 @@ longitude, latitude, timeout, isUserSetMaxSize;
     }
     else if ([self.latitude length] !=0 || [self.longitude length]!=0)
     {
-        [[NotificationCenter sharedInstance] postNotificationName:kLocationInvalidParamertsNotification object:nil]; 
+        [[MASTNotificationCenter sharedInstance] postNotificationName:kLocationInvalidParamertsNotification object:nil]; 
     }
     
-    [_banerUrl appendString:[[SharedModel sharedInstance] sharedUrlPart]];
+    [_banerUrl appendString:[[MASTSharedModel sharedInstance] sharedUrlPart]];
     
     if (self.excampaigns) 
         [_banerUrl appendFormat:@"&excampaigns=%@", [self.excampaigns componentsJoinedByString:@","]];
@@ -238,17 +238,17 @@ longitude, latitude, timeout, isUserSetMaxSize;
 }
 
 - (void)cancelAllNetworkConnection {
-    [[DownloadController sharedInstance] cancelAll];
+    [[MASTDownloadController sharedInstance] cancelAll];
 }
 
 - (void)closeInternalBrowser {
-    [[InternalBrowser sharedInstance] close];
+    [[MASTInternalBrowser sharedInstance] close];
 }
 
 - (void)pauseVideoViewPlayer {
     for (UIView *view in self.adView.subviews) {
-        if ([view isKindOfClass:[VideoView class]]) {
-            VideoView *videoView = (VideoView*)view;
+        if ([view isKindOfClass:[MASTVideoView class]]) {
+            MASTVideoView *videoView = (MASTVideoView*)view;
             [videoView pause];
             [videoView setFullscreen:NO animated:NO];
         }

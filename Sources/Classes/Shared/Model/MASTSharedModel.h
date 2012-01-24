@@ -9,19 +9,19 @@
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <CoreTelephony/CTCarrier.h>
 
-#import "AdView.h"
+#import "MASTAdView.h"
 
-#import "AdView.h"
-#import "Constants.h"
-#import "Reachability.h"
+#import "MASTAdView.h"
+#import "MASTConstants.h"
+#import "MASTReachability.h"
 
-#import "LocationManager.h"
-#import "WebKitInfo.h"
-#import "LocationManager.h"
-#import "Utils.h"
+#import "MASTLocationManager.h"
+#import "MASTWebKitInfo.h"
+#import "MASTLocationManager.h"
+#import "MASTUtils.h"
 
 
-@interface SharedModel : NSObject {
+@interface MASTSharedModel : NSObject {
     NSString*       _udidMd5;
 }
 
@@ -33,7 +33,7 @@
 @property (retain) NSString*                mcc;
 @property (retain) NSString*                mnc;
 
-+ (SharedModel*)sharedInstance;
++ (MASTSharedModel*)sharedInstance;
 + (void)releaseSharedInstance;
 
 - (NSString*)sharedUrlPart;

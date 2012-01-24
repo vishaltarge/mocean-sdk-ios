@@ -5,7 +5,7 @@
 //  Created by Constantine Mureev on 3/9/11.
 //
 
-#import "UIViewAdditions.h"
+#import "MASTUIViewAdditions.h"
 
 
 void useCatagory3(){

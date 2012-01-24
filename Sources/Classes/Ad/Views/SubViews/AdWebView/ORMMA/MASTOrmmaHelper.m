@@ -5,9 +5,9 @@
 //  Created by Constantine Mureev on 8/29/11.
 //
 
-#import "OrmmaHelper.h"
+#import "MASTOrmmaHelper.h"
 
-@implementation OrmmaHelper
+@implementation MASTOrmmaHelper
 
 
 + (NSString*)registerOrmmaUpCaseObject {
@@ -24,23 +24,23 @@
 
 + (NSString*)setState:(ORMMAState)state {
     if (state == ORMMAStateDefault) {
-        return [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{state: 'default'}", state]];
+        return [MASTOrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{state: 'default'}", state]];
     } else if (state == ORMMAStateExpanded) {
-        return [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{state: 'expanded'}", state]];
+        return [MASTOrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{state: 'expanded'}", state]];
     } else if (state == ORMMAStateHidden) {
-        return [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{state: 'hidden'}", state]];
+        return [MASTOrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{state: 'hidden'}", state]];
     } else if (state == ORMMAStateResized) {
-        return [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{state: 'resized'}", state]];
+        return [MASTOrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{state: 'resized'}", state]];
     } else {
-        return [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{state: 'default'}", state]];
+        return [MASTOrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{state: 'default'}", state]];
     }
 }
 
 + (NSString*)setViewable:(BOOL)viewable {
     if (viewable) {
-        return [OrmmaHelper fireChangeEvent:@"{viewable: true}"];
+        return [MASTOrmmaHelper fireChangeEvent:@"{viewable: true}"];
     } else {
-        return [OrmmaHelper fireChangeEvent:@"{viewable: false}"];
+        return [MASTOrmmaHelper fireChangeEvent:@"{viewable: false}"];
     }
 }
 
@@ -58,38 +58,38 @@
             break;
 	}
     if (network) {
-        return [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{network: '%@'}", network]];
+        return [MASTOrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{network: '%@'}", network]];
     } else {
         return @"";
     }
 }
 
 + (NSString*)setSize:(CGSize)size {
-    return [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{size: { width: %f, height: %f }}", size.width, size.height]];
+    return [MASTOrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{size: { width: %f, height: %f }}", size.width, size.height]];
 }
 
 + (NSString*)setMaxSize:(CGSize)size {
-    return [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{maxSize: { width: %f, height: %f }}", size.width, size.height]];
+    return [MASTOrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{maxSize: { width: %f, height: %f }}", size.width, size.height]];
 }
 
 + (NSString*)setScreenSize:(CGSize)size {
-    return [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{screenSize: { width: %f, height: %f }}", size.width, size.height]];
+    return [MASTOrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{screenSize: { width: %f, height: %f }}", size.width, size.height]];
 }
 
 + (NSString*)setDefaultPosition:(CGRect)frame {
-    return [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{defaultPosition: { x: %f, y: %f, width: %f, height: %f }}", frame.origin.x, frame.origin.y, frame.size.width, frame.size.height]];
+    return [MASTOrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{defaultPosition: { x: %f, y: %f, width: %f, height: %f }}", frame.origin.x, frame.origin.y, frame.size.width, frame.size.height]];
 }
 
 + (NSString*)setPlacementInterstitial:(BOOL)interstitial {
     if (interstitial) {
-        return [OrmmaHelper fireChangeEvent:@"{placementType: 'interstitial'}"];
+        return [MASTOrmmaHelper fireChangeEvent:@"{placementType: 'interstitial'}"];
     } else {
-        return [OrmmaHelper fireChangeEvent:@"{placementType: 'inline'}"];
+        return [MASTOrmmaHelper fireChangeEvent:@"{placementType: 'inline'}"];
     }
 }
 
 + (NSString*)setExpandPropertiesWithMaxSize:(CGSize)size {
-    return [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{expandProperties: { width: %f, height: %f, useCustomClose: !1, isModal: !1, lockOrientation: !1, useBackground: !1, backgroundColor: \"#ffffff\", backgroundOpacity:1 }}", size.width, size.height]];
+    return [MASTOrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{expandProperties: { width: %f, height: %f, useCustomClose: !1, isModal: !1, lockOrientation: !1, useBackground: !1, backgroundColor: \"#ffffff\", backgroundOpacity:1 }}", size.width, size.height]];
 }
 
 + (NSString*)setOrientation:(UIDeviceOrientation)orientation {
@@ -112,32 +112,32 @@
 			break;
 	}
     
-    return [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{orientation: %i}", orientationAngle]];
+    return [MASTOrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{orientation: %i}", orientationAngle]];
 }
 
 + (NSString*)setSupports:(NSArray*)supports {
     NSString* value = [supports componentsJoinedByString:@", "];
-    return [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{supports: [%@]}", value]];
+    return [MASTOrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{supports: [%@]}", value]];
 }
 
 + (NSString*)setKeyboardShow:(BOOL)isShow {
     if (isShow) {
-        return [OrmmaHelper fireChangeEvent:@"{keyboardState: true}"];
+        return [MASTOrmmaHelper fireChangeEvent:@"{keyboardState: true}"];
     } else {
-        return [OrmmaHelper fireChangeEvent:@"{keyboardState: false}"];
+        return [MASTOrmmaHelper fireChangeEvent:@"{keyboardState: false}"];
     }
 }
 
 + (NSString*)setTilt:(UIAcceleration*)acceleration {
-    return [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{tilt: { x: %f, y: %f, z: %f }}", acceleration.x, acceleration.y, acceleration.z]];
+    return [MASTOrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{tilt: { x: %f, y: %f, z: %f }}", acceleration.x, acceleration.y, acceleration.z]];
 }
 
 + (NSString*)setHeading:(CGFloat)heading {
-    return [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{heading: %f }", heading]];
+    return [MASTOrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{heading: %f }", heading]];
 }
 
 + (NSString*)setLatitude:(CGFloat)latitude longitude:(CGFloat)longitude accuracy:(CGFloat)accuracy {
-    return [OrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{location: { lat: %f, lon: %f, acc: %f }}", latitude, longitude, accuracy]];
+    return [MASTOrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{location: { lat: %f, lon: %f, acc: %f }}", latitude, longitude, accuracy]];
 }
 
 + (NSString*)fireResponseEvent:(NSData*)data uri:(NSString*)uri {

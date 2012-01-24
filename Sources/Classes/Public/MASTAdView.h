@@ -19,7 +19,7 @@
 #endif
 
 
-#import "AdDelegate.h"
+#import "MASTAdDelegate.h"
 
 
 typedef enum {
@@ -58,7 +58,7 @@ typedef enum {
  
  Set the delegate property to an object conforming to the AdViewDelegate protocol if you want to listen the processing of ad content.
  */
-@interface AdView : UIView {
+@interface MASTAdView : UIView {
 	BOOL	_observerSet;
 	id		_adModel;
 }
@@ -388,6 +388,6 @@ If set to YES, the ad server will send a client side impression tracking pixel w
  
  @see AdViewDelegate Protocol Reference for the optional methods this delegate may implement.
  */
-@property (assign) id <AdViewDelegate>	delegate;
+@property (assign) id <MASTAdViewDelegate>	delegate;
 
 @end

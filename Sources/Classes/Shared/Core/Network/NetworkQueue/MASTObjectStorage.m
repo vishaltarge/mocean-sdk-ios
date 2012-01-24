@@ -4,11 +4,11 @@
 //  Created by Constantine on 10/3/11.
 //
 
-#import "ObjectStorage.h"
+#import "MASTObjectStorage.h"
 
 #define kCachePath @"objectStorageCache"
 
-@interface ObjectStorage()
+@interface MASTObjectStorage()
 @property (retain) NSString* diskCachePath;
 @property (retain) NSCache* memoryCache;
 
@@ -20,11 +20,11 @@
 - (void)objectForKey:(NSString*)key block:(void (^)(id obj))block;
 @end
 
-@implementation ObjectStorage
+@implementation MASTObjectStorage
 
 @synthesize diskCachePath, memoryCache;
 
-static ObjectStorage *sharedInstance = nil;
+static MASTObjectStorage *sharedInstance = nil;
 
 
 #pragma mark - Singleton
@@ -82,7 +82,7 @@ static dispatch_queue_t get_disk_io_queue() {
 {
     self = [super init];
     if (self) {
-        self.diskCachePath = [ObjectStorage defaultCachePath];
+        self.diskCachePath = [MASTObjectStorage defaultCachePath];
         self.memoryCache = [[NSCache new] autorelease];
     }
     
@@ -121,21 +121,21 @@ static dispatch_queue_t get_disk_io_queue() {
 
 
 + (BOOL)isCached:(NSString*)key {
-    return [[ObjectStorage sharedObjectStorage] isCached:key];
+    return [[MASTObjectStorage sharedObjectStorage] isCached:key];
 }
 
 + (void)storeObject:(id <NSCoding>)obj key:(NSString*)key {
-    [[ObjectStorage sharedObjectStorage] storeObject:obj key:key];
+    [[MASTObjectStorage sharedObjectStorage] storeObject:obj key:key];
 }
 
 + (void)objectForKey:(NSString*)key block:(void (^)(id obj))block {
-    [[ObjectStorage sharedObjectStorage] objectForKey:key block:block];
+    [[MASTObjectStorage sharedObjectStorage] objectForKey:key block:block];
 }
 
 - (BOOL)isCached:(NSString*)key {
-    key = [ObjectStorage cacheKeyForKey:key];
+    key = [MASTObjectStorage cacheKeyForKey:key];
     
-    ObjectStorage *objectStorage = [ObjectStorage sharedObjectStorage];
+    MASTObjectStorage *objectStorage = [MASTObjectStorage sharedObjectStorage];
     if ([objectStorage.memoryCache objectForKey:key]) {
         return YES;
     } else {
@@ -149,7 +149,7 @@ static dispatch_queue_t get_disk_io_queue() {
 }
 
 - (void)storeObject:(id <NSCoding>)obj key:(NSString*)key {
-    key = [ObjectStorage cacheKeyForKey:key];
+    key = [MASTObjectStorage cacheKeyForKey:key];
     
     // in memory
     [self.memoryCache setObject:obj forKey:key];
@@ -166,7 +166,7 @@ static dispatch_queue_t get_disk_io_queue() {
 }
 
 - (void)objectForKey:(NSString*)key block:(void (^)(id obj))block {
-    key = [ObjectStorage cacheKeyForKey:key];
+    key = [MASTObjectStorage cacheKeyForKey:key];
     
     id obj = [self.memoryCache objectForKey:key];
     if (obj) {

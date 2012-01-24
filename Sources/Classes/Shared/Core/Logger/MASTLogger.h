@@ -7,17 +7,17 @@
 
 #import <Foundation/Foundation.h>
 
-#import "LogBasicFormatter.h"
-#import "NotificationCenter.h"
-#import "AdView.h"
-#import "AdView_Private.h"
+#import "MASTLogBasicFormatter.h"
+#import "MASTNotificationCenter.h"
+#import "MASTAdView.h"
+#import "MASTAdView_Private.h"
 
-@interface Logger : NSObject {
+@interface MASTLogger : NSObject {
     NSMutableDictionary*    _ads;
     NSMutableArray*         _allLogAds;
 }
 
-+ (Logger*)sharedInstance;
++ (MASTLogger*)sharedInstance;
 + (void)releaseSharedInstance;
 
 @end

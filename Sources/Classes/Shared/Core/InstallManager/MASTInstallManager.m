@@ -5,11 +5,11 @@
 //  Created by Constantine Mureev on 3/28/11.
 //
 
-#import "InstallManager.h"
-#import "Constants.h"
-#import "NetworkQueue.h"
+#import "MASTInstallManager.h"
+#import "MASTConstants.h"
+#import "MASTNetworkQueue.h"
 
-@interface InstallManager ()
+@interface MASTInstallManager ()
 
 - (BOOL)notificationDone;
 - (void)save;
@@ -19,11 +19,11 @@
 @end
 
 
-@implementation InstallManager
+@implementation MASTInstallManager
 
 @synthesize advertiserId, groupCode, udid;
 
-static InstallManager* sharedInstance = nil;
+static MASTInstallManager* sharedInstance = nil;
 
 
 #pragma mark -
@@ -107,7 +107,7 @@ static InstallManager* sharedInstance = nil;
             if (![self notificationDone]) {
                 self.advertiserId = adId;
                 self.groupCode = gCode;
-                self.udid = [Utils md5HashForString:[[UIDevice currentDevice] uniqueIdentifier]];
+                self.udid = [MASTUtils md5HashForString:[[UIDevice currentDevice] uniqueIdentifier]];
                 
                 [self performSelector:@selector(sendRequest) withObject:nil afterDelay:2];
             }
@@ -157,7 +157,7 @@ static InstallManager* sharedInstance = nil;
     [url appendFormat:@"&group_code=%@", [self.groupCode stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     [url appendFormat:@"&udid=%@", [self.udid stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         
-    [NetworkQueue loadWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]] completion:^(NSURLRequest *request, NSHTTPURLResponse *response, NSData *data, NSError *error) {
+    [MASTNetworkQueue loadWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]] completion:^(NSURLRequest *request, NSHTTPURLResponse *response, NSData *data, NSError *error) {
         if (error) {
             [self performSelector:@selector(sendRequest) withObject:nil afterDelay:15];
         } else {
@@ -174,18 +174,18 @@ static InstallManager* sharedInstance = nil;
                         NSString *str = [strResponce substringFromIndex:range.location + range.length];
                         range = [str rangeOfString:@"<"];
                         str = [str substringToIndex:range.location];
-                        [[NotificationCenter sharedInstance] postNotificationName:kFailInstallNotification object:str];
+                        [[MASTNotificationCenter sharedInstance] postNotificationName:kFailInstallNotification object:str];
                     }
                     else {
                         //<errorcode>1</errorcode>
-                        [[NotificationCenter sharedInstance] postNotificationName:kFailInstallNotification object:nil];			
+                        [[MASTNotificationCenter sharedInstance] postNotificationName:kFailInstallNotification object:nil];			
                     }
                 }
                 [strResponce release];
                 
             }
             else {
-                [[NotificationCenter sharedInstance] postNotificationName:kFailInstallNotification object:nil];		
+                [[MASTNotificationCenter sharedInstance] postNotificationName:kFailInstallNotification object:nil];		
             }
         }
     }];
@@ -210,7 +210,7 @@ static InstallManager* sharedInstance = nil;
     if(plistData) {
         [plistData writeToFile:plistPath atomically:YES];
         
-        [[NotificationCenter sharedInstance] postNotificationName:kFinishInstallNotification object:nil];
+        [[MASTNotificationCenter sharedInstance] postNotificationName:kFinishInstallNotification object:nil];
     }
 }
 
