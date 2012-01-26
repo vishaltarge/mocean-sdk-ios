@@ -209,15 +209,14 @@ static MASTAdController* sharedInstance = nil;
         [errorInfo setObject:[NSError errorWithDomain:kEmptyServerResponseNotification code:22 userInfo:nil] forKey:@"error"];        
         [[MASTNotificationCenter sharedInstance] postNotificationName:kEmptyServerResponseNotification object:errorInfo];
     } else if (adDescriptor.adContentType != AdContentTypeUndefined) {
-        if (adModel && [adModel.descriptor.serverReponse isEqualToData:adDescriptor.serverReponse]) {
+        /*if (adModel && [adModel.descriptor.serverReponse isEqualToData:adDescriptor.serverReponse]) {
             if (adDescriptor.adContentType == AdContentTypeDefaultHtml) {
                 [pool release];
                 return;
             }
-            
             [pool release];
             return;
-        }
+        }*/
         
         NSMutableDictionary* senfInfo = [NSMutableDictionary dictionary];
         
