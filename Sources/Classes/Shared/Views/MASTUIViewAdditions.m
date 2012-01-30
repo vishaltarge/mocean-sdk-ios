@@ -27,6 +27,8 @@ CGContextRef CreateARGBBitmapContext (size_t pixelsWide, size_t pixelsHigh) {
         return nil;
     
     bitmapData = malloc( bitmapByteCount );
+    memset(bitmapData, 0, bitmapByteCount );
+    
     if (bitmapData == NULL) 
     {
         CGColorSpaceRelease( colorSpace );
