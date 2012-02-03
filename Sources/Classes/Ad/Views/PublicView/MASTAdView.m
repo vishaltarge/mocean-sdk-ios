@@ -639,6 +639,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
                 [delegate didFailToReceiveAd:self withError:error];
             }
         }
+        
     } else if ([name isEqualToString:kFailAdDownloadNotification]) {
         NSDictionary* info = [notification object];
         MASTAdView* ad = [info objectForKey:@"adView"];
@@ -674,6 +675,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
             }
         }
     }
+    [self adModel].loading = NO;
 }
 
 - (void)receiveThirdParty:(NSNotification*)notification {
