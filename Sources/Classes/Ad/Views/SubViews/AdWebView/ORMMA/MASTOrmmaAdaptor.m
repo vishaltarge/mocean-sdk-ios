@@ -315,25 +315,35 @@
                 self.adView.backgroundColor = self.lastBackgroundColor;
                 self.lastBackgroundColor = nil;
                 
-                // resize to normal frame
-                [UIView animateWithDuration:0.2 animations:^(void) {
+                // resize to normal frame without animation
+                self.adView.frame = self.defaultFrame;
+                self.currentState = ORMMAStateDefault;
+                self.nonHideState = self.currentState;
+                [self evalJS:[MASTOrmmaHelper setState:self.currentState]];
+                
+                // resize to normal frame with animation
+                /*[UIView animateWithDuration:0.2 animations:^(void) {
                     self.adView.frame = self.defaultFrame;
                 } completion:^(BOOL finished) {
                     self.currentState = ORMMAStateDefault;
                     self.nonHideState = self.currentState;
                     [self evalJS:[MASTOrmmaHelper setState:self.currentState]];
-                }];
+                }];*/
             }
             
             expandVC = nil;
         } else {
-            [UIView animateWithDuration:0.2 animations:^(void) {
+            self.adView.frame = self.defaultFrame;
+            self.currentState = ORMMAStateDefault;
+            self.nonHideState = self.currentState;
+            [self evalJS:[MASTOrmmaHelper setState:self.currentState]];
+            /*[UIView animateWithDuration:0.2 animations:^(void) {
                 self.adView.frame = self.defaultFrame;
             } completion:^(BOOL finished) {
                 self.currentState = ORMMAStateDefault;
                 self.nonHideState = self.currentState;
                 [self evalJS:[MASTOrmmaHelper setState:self.currentState]];
-            }];
+            }];*/
         }
     } else if ([event isEqualToString:@"expand"]) {
         if (self.currentState != ORMMAStateDefault) {
@@ -406,11 +416,14 @@
                         }
                         
                         // resize
-                        [UIView animateWithDuration:0.3 animations:^(void) {
+                        
+                        self.adView.frame = CGRectMake(newFrame.origin.x, originY, w, h);
+                        [self evalJS:[MASTOrmmaHelper setState:self.currentState]];
+                        /*[UIView animateWithDuration:0.2 animations:^(void) {
                             self.adView.frame = CGRectMake(newFrame.origin.x, originY, w, h);
                         } completion:^(BOOL finished) {
                             [self evalJS:[MASTOrmmaHelper setState:self.currentState]];
-                        }];
+                        }];*/
                     }
                 }
             }
@@ -432,11 +445,13 @@
                 } else {
                     //[[NotificationCenter sharedInstance] postNotificationName:kAdStopUpdateNotification object:self.adView];
                     
-                    [UIView animateWithDuration:0.2 animations:^(void) {
+                    self.adView.frame = CGRectMake(self.adView.frame.origin.x, self.adView.frame.origin.y, w, h);
+                    [self evalJS:[MASTOrmmaHelper setState:self.currentState]];
+                    /*[UIView animateWithDuration:0.2 animations:^(void) {
                         self.adView.frame = CGRectMake(self.adView.frame.origin.x, self.adView.frame.origin.y, w, h);
                     } completion:^(BOOL finished) {
                         [self evalJS:[MASTOrmmaHelper setState:self.currentState]];
-                    }];
+                    }];*/
                 }
             }
         }

@@ -410,10 +410,10 @@
 		AD5D78D014891662001E3B0C /* ExpandWebView */ = {
 			isa = PBXGroup;
 			children = (
-				3B43CD0314CE954A00E2B3CF /* MASTExpandWebView.m */,
 				3B43CD0414CE954A00E2B3CF /* MASTExpandWebView.h */,
-				3B43CD0514CE954A00E2B3CF /* MASTExpandViewController.m */,
+				3B43CD0314CE954A00E2B3CF /* MASTExpandWebView.m */,
 				3B43CD0614CE954A00E2B3CF /* MASTExpandViewController.h */,
+				3B43CD0514CE954A00E2B3CF /* MASTExpandViewController.m */,
 			);
 			path = ExpandWebView;
 			sourceTree = "<group>";
@@ -471,8 +471,8 @@
 		CF4B840C131F84FE004C9F9A /* ResponseParser */ = {
 			isa = PBXGroup;
 			children = (
-				3B43CD1B14CE959300E2B3CF /* MASTServerXMLResponseParser.m */,
 				3B43CD1C14CE959300E2B3CF /* MASTServerXMLResponseParser.h */,
+				3B43CD1B14CE959300E2B3CF /* MASTServerXMLResponseParser.m */,
 			);
 			path = ResponseParser;
 			sourceTree = "<group>";
@@ -545,8 +545,8 @@
 		CF9860F21340D9CF004D6202 /* VideoView */ = {
 			isa = PBXGroup;
 			children = (
-				3B43CCFF14CE953500E2B3CF /* MASTVideoView.m */,
 				3B43CD0014CE953500E2B3CF /* MASTVideoView.h */,
+				3B43CCFF14CE953500E2B3CF /* MASTVideoView.m */,
 			);
 			path = VideoView;
 			sourceTree = "<group>";
@@ -554,8 +554,8 @@
 		CF9860F71340DA5C004D6202 /* TouchableViewController */ = {
 			isa = PBXGroup;
 			children = (
-				3B43CD0B14CE955C00E2B3CF /* MASTTouchableViewController.m */,
 				3B43CD0C14CE955C00E2B3CF /* MASTTouchableViewController.h */,
+				3B43CD0B14CE955C00E2B3CF /* MASTTouchableViewController.m */,
 			);
 			path = TouchableViewController;
 			sourceTree = "<group>";
@@ -676,8 +676,8 @@
 		CFDE16F01313A22900FE2F5A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				3B43CD0F14CE957000E2B3CF /* MASTAdModel.m */,
 				3B43CD1014CE957000E2B3CF /* MASTAdModel.h */,
+				3B43CD0F14CE957000E2B3CF /* MASTAdModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -686,10 +686,10 @@
 			isa = PBXGroup;
 			children = (
 				CF4B840C131F84FE004C9F9A /* ResponseParser */,
-				3B43CD1314CE958700E2B3CF /* MASTAdDescriptorHelper.m */,
 				3B43CD1414CE958700E2B3CF /* MASTAdDescriptorHelper.h */,
-				3B43CD1514CE958700E2B3CF /* MASTAdDescriptor.m */,
+				3B43CD1314CE958700E2B3CF /* MASTAdDescriptorHelper.m */,
 				3B43CD1614CE958700E2B3CF /* MASTAdDescriptor.h */,
+				3B43CD1514CE958700E2B3CF /* MASTAdDescriptor.m */,
 			);
 			path = AdDescriptor;
 			sourceTree = "<group>";
@@ -697,8 +697,8 @@
 		CFDE16F71313A29200FE2F5A /* AdWebView */ = {
 			isa = PBXGroup;
 			children = (
-				3B43CCF114CE951200E2B3CF /* MASTAdWebView.m */,
 				3B43CCF214CE951200E2B3CF /* MASTAdWebView.h */,
+				3B43CCF114CE951200E2B3CF /* MASTAdWebView.m */,
 				FC8821C1140B825C0089CD23 /* ORMMA */,
 			);
 			path = AdWebView;
@@ -718,8 +718,8 @@
 		CFF3289D13B9F8E40070D02A /* TransparentUIView */ = {
 			isa = PBXGroup;
 			children = (
-				3B43CCED14CE94FE00E2B3CF /* MASTTransparentUIView.m */,
 				3B43CCEE14CE94FE00E2B3CF /* MASTTransparentUIView.h */,
+				3B43CCED14CE94FE00E2B3CF /* MASTTransparentUIView.m */,
 			);
 			path = TransparentUIView;
 			sourceTree = "<group>";
@@ -727,8 +727,8 @@
 		CFF328A213B9F9CC0070D02A /* TransparentUIWebView */ = {
 			isa = PBXGroup;
 			children = (
-				3B43CCE914CE94F200E2B3CF /* MASTTransparentUIWebView.m */,
 				3B43CCEA14CE94F200E2B3CF /* MASTTransparentUIWebView.h */,
+				3B43CCE914CE94F200E2B3CF /* MASTTransparentUIWebView.m */,
 			);
 			path = TransparentUIWebView;
 			sourceTree = "<group>";
@@ -745,11 +745,11 @@
 		FC8821C1140B825C0089CD23 /* ORMMA */ = {
 			isa = PBXGroup;
 			children = (
-				3B43CCF514CE952100E2B3CF /* MASTOrmmaHelper.m */,
 				3B43CCF614CE952100E2B3CF /* MASTOrmmaHelper.h */,
+				3B43CCF514CE952100E2B3CF /* MASTOrmmaHelper.m */,
 				3B43CCF714CE952100E2B3CF /* MASTOrmmaConstants.h */,
-				3B43CCF814CE952100E2B3CF /* MASTOrmmaAdaptor.m */,
 				3B43CCF914CE952100E2B3CF /* MASTOrmmaAdaptor.h */,
+				3B43CCF814CE952100E2B3CF /* MASTOrmmaAdaptor.m */,
 			);
 			path = ORMMA;
 			sourceTree = "<group>";
