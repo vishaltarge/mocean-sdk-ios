@@ -22,7 +22,7 @@
 
 - (BOOL)saveToMojivaFolderData:(NSData*)data name:(NSString*)name {
     BOOL result = NO;
-    NSString* dirPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Library/MojivaAd/Cache"];
+    NSString* dirPath = [NSHomeDirectory() stringByAppendingPathComponent:kPathForFolderCache];
     NSString* fileName = name;
     NSString* path = [dirPath stringByAppendingPathComponent:fileName];
     
@@ -47,7 +47,7 @@
 }
 
 - (void)prepareResources {
-    NSString* dirPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Library/MojivaAd/Cache"];
+    NSString* dirPath = [NSHomeDirectory() stringByAppendingPathComponent:kPathForFolderCache];
     
     NSString* path = [dirPath stringByAppendingPathComponent:@"closeIcon.png"];
     UIImage* closeIcon = nil;

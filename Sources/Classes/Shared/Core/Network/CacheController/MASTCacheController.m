@@ -6,7 +6,7 @@
 
 #import "MASTCacheController.h"
 #import "MASTNetworkQueue.h"
-
+#import "MASTConstants.h"
 
 @implementation MASTCacheController
 
@@ -64,7 +64,7 @@
     NSString* stringResponse = [[[NSString alloc] initWithData:origData encoding:NSUTF8StringEncoding] autorelease];
     
     NSString* url = [[request URL] absoluteString];
-    NSString* dirPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Library/MojivaAd/Cache"];
+    NSString* dirPath = [NSHomeDirectory() stringByAppendingPathComponent:kPathForFolderCache];
     NSString* fileName = [NSString stringWithFormat:@"%@/%d", url, [newData length]];
     
     NSString* ext = [url pathExtension];

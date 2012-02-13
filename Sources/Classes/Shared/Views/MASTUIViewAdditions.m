@@ -7,7 +7,6 @@
 
 #import "MASTUIViewAdditions.h"
 
-
 void useCatagory3(){
     NSLog(@"do nothing, just for make catagory linked");
 }

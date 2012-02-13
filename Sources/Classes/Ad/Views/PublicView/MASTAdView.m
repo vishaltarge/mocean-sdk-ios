@@ -19,6 +19,7 @@
 #import "MASTVideoView.h"
 
 #import "MASTLocationManager.h"
+#import "MASTMessages.h"
 
 @implementation MASTAdView
 
@@ -134,12 +135,12 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 #pragma mark Private
 
 - (void)setDefaultValues {
-    self.updateTimeInterval = 120; // 2min
+    self.updateTimeInterval = DEFAULT_UPDATE_TIMEINTERVAL; // 2min
     self.animateMode = YES;
     self.internalOpenMode = NO;
     self.testMode = NO;
     self.premium = AdPremiumBoth;
-    self.timeout = 1000; //1 sec
+    self.timeout = DEFAULT_UPDATE_TIMEINTERVAL; //1 sec
     self.maxSize = CGSizeMake(self.frame.size.width, self.frame.size.height);
     ((MASTAdModel*)_adModel).isUserSetMaxSize = NO;
     
@@ -406,7 +407,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 
 - (BOOL)saveToMojivaFolderData:(NSData*)data name:(NSString*)name {
     BOOL result = NO;
-    NSString* dirPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Library/MojivaAd/Cache"];
+    NSString* dirPath = [NSHomeDirectory() stringByAppendingPathComponent:kPathForFolderCache];
     NSString* fileName = name;
     NSString* path = [dirPath stringByAppendingPathComponent:fileName];
     
@@ -424,7 +425,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 }
 
 - (void)prepareResources {
-    NSString* dirPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Library/MojivaAd/Cache"];
+    NSString* dirPath = [NSHomeDirectory() stringByAppendingPathComponent:kPathForFolderCache];
     
     NSString* path = [dirPath stringByAppendingPathComponent:@"closeIcon.png"];
     UIImage* closeIcon = nil;
@@ -635,7 +636,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
             id <MASTAdViewDelegate> delegate = [self adModel].delegate;
             
             if (delegate && [delegate respondsToSelector:@selector(didFailToReceiveAd: withError:)]) {
-                NSError* error = [NSError errorWithDomain:@"invalid site or zone params" code:1010 userInfo:nil];
+                NSError* error = [NSError errorWithDomain:kErrorInvalidParamsMessage code:1010 userInfo:nil];
                 [delegate didFailToReceiveAd:self withError:error];
             }
         }
@@ -659,7 +660,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
             id <MASTAdViewDelegate> delegate = [self adModel].delegate;
             
             if (delegate && [delegate respondsToSelector:@selector(didFailToReceiveAd: withError:)]) {
-                NSError* error = [NSError errorWithDomain:@"fail to display" code:1011 userInfo:nil];
+                NSError* error = [NSError errorWithDomain:kErrorFailDisplayMessage code:1011 userInfo:nil];
                 [delegate didFailToReceiveAd:self withError:error];
             }
         }
@@ -670,7 +671,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
             id <MASTAdViewDelegate> delegate = [self adModel].delegate;
             
             if (delegate && [delegate respondsToSelector:@selector(didFailToReceiveAd: withError:)]) {
-                NSError* error = [NSError errorWithDomain:@"There is no ads for this time. Try again later..." code:22 userInfo:nil];
+                NSError* error = [NSError errorWithDomain:kErrorNoAdsMessage code:22 userInfo:nil];
                 [delegate didFailToReceiveAd:self withError:error];
             }
         }
@@ -1111,8 +1112,6 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 }
 
 //@property (assign) NSInteger            timeout;
-#define MIN_TIMEOUT_VALUE 0
-#define MAX_TIMEOUT_VALUE 3000
 
 - (void)setTimeout:(NSInteger)timeout {
     // filter

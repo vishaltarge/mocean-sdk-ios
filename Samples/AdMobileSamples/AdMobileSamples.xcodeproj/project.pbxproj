@@ -19,7 +19,8 @@
 		2899E5220DE3E06400AC0155 /* AdMobileSamplesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* AdMobileSamplesViewController.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* AdMobileSamplesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* AdMobileSamplesViewController.m */; };
-		ACC770281382B7F9005074D8 /* ORMMAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACC770271382B7F9005074D8 /* ORMMAViewController.m */; };
+		3B3BEE3514E53B230078B672 /* ORMMAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B3BEE3414E53B230078B672 /* ORMMAViewController.m */; };
+		ACC770281382B7F9005074D8 /* ORMMATopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACC770271382B7F9005074D8 /* ORMMATopViewController.m */; };
 		AD0ECA2F120C1B38008216A6 /* DelegateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0ECA2E120C1B38008216A6 /* DelegateViewController.m */; };
 		AD2D17CE148D0BB300D0B576 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD2D17CD148D0BB300D0B576 /* QuartzCore.framework */; };
 		AD2D17D1148D0C0300D0B576 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD2D17CF148D0C0300D0B576 /* Foundation.framework */; };
@@ -103,6 +104,8 @@
 		28D7ACF70DDB3853001CB0EB /* AdMobileSamplesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdMobileSamplesViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* AdMobileSamples_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMobileSamples_Prefix.pch; sourceTree = "<group>"; };
+		3B3BEE3314E53B230078B672 /* ORMMAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORMMAViewController.h; sourceTree = "<group>"; };
+		3B3BEE3414E53B230078B672 /* ORMMAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORMMAViewController.m; sourceTree = "<group>"; };
 		3BAA930714CEAA36002721E7 /* MASTAdDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTAdDelegate.h; sourceTree = "<group>"; };
 		3BAA930814CEAA36002721E7 /* MASTAdInterstitialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTAdInterstitialView.h; sourceTree = "<group>"; };
 		3BAA930914CEAA36002721E7 /* MASTAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTAdView.h; sourceTree = "<group>"; };
@@ -141,8 +144,8 @@
 		3BAA936314CEADEE002721E7 /* MASTUIViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTUIViewAdditions.h; sourceTree = "<group>"; };
 		3BAA936514CEADEE002721E7 /* MASTUIWebViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTUIWebViewAdditions.h; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* AdMobileSamples-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AdMobileSamples-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
-		ACC770261382B7F9005074D8 /* ORMMAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORMMAViewController.h; sourceTree = "<group>"; };
-		ACC770271382B7F9005074D8 /* ORMMAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORMMAViewController.m; sourceTree = "<group>"; };
+		ACC770261382B7F9005074D8 /* ORMMATopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORMMATopViewController.h; sourceTree = "<group>"; };
+		ACC770271382B7F9005074D8 /* ORMMATopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORMMATopViewController.m; sourceTree = "<group>"; };
 		AD0ECA2D120C1B38008216A6 /* DelegateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelegateViewController.h; sourceTree = "<group>"; };
 		AD0ECA2E120C1B38008216A6 /* DelegateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DelegateViewController.m; sourceTree = "<group>"; };
 		AD2D17CD148D0BB300D0B576 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -690,8 +693,10 @@
 		ACC770251382B7EC005074D8 /* ORMMA */ = {
 			isa = PBXGroup;
 			children = (
-				ACC770261382B7F9005074D8 /* ORMMAViewController.h */,
-				ACC770271382B7F9005074D8 /* ORMMAViewController.m */,
+				3B3BEE3314E53B230078B672 /* ORMMAViewController.h */,
+				3B3BEE3414E53B230078B672 /* ORMMAViewController.m */,
+				ACC770261382B7F9005074D8 /* ORMMATopViewController.h */,
+				ACC770271382B7F9005074D8 /* ORMMATopViewController.m */,
 			);
 			name = ORMMA;
 			sourceTree = "<group>";
@@ -1315,9 +1320,10 @@
 				CF840386130E67B200EC0AF8 /* OpenGLViewController.m in Sources */,
 				CF840387130E67B200EC0AF8 /* EAGLView.m in Sources */,
 				CF84058C130E992300EC0AF8 /* RichJSadViewController.m in Sources */,
-				ACC770281382B7F9005074D8 /* ORMMAViewController.m in Sources */,
+				ACC770281382B7F9005074D8 /* ORMMATopViewController.m in Sources */,
 				CFBBD63113BDC73D007ADECA /* TestingViewController.m in Sources */,
 				FCF61E511414FBA1007B0BCA /* SimpleBannerRetinaViewController.m in Sources */,
+				3B3BEE3514E53B230078B672 /* ORMMAViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

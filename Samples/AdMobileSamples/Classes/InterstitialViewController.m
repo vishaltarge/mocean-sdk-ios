@@ -24,12 +24,13 @@
     [imageView release];
 
 	
-	_adView = [[MASTAdInterstitialView alloc] initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, self.view.frame.size.height) site:8061 zone:16112];
+	_adView = [[MASTAdInterstitialView alloc] initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, self.view.frame.size.height) site:8061 zone:96002];
     _adView.contentAlignment = YES;
     [_adView setBackgroundColor:[UIColor whiteColor]];
     _adView.minSize = CGSizeMake(320, 460);
 	_adView.showCloseButtonTime = 5;
-	_adView.autocloseInterstitialTime = 15;
+	_adView.adServerUrl = @"http://188.187.188.71:8080/new_mcn/request.php";
+    _adView.internalOpenMode = YES;
     
     [self.navigationController.view addSubview:_adView];
     

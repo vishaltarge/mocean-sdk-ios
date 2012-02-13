@@ -152,7 +152,7 @@ static MASTInstallManager* sharedInstance = nil;
 }
 
 - (void)sendRequest {
-    NSMutableString* url = [NSMutableString stringWithFormat:@"http://www.moceanmobile.com/appconversion.php"];
+    NSMutableString* url = [NSMutableString stringWithFormat:kMoceanServerUrl];
     [url appendFormat:@"?advertiser_id=%d", self.advertiserId];
     [url appendFormat:@"&group_code=%@", [self.groupCode stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     [url appendFormat:@"&udid=%@", [self.udid stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];

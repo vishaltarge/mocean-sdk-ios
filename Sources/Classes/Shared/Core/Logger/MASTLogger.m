@@ -6,6 +6,7 @@
 //
 
 #import "MASTLogger.h"
+#import "MASTMessages.h"
 
 @interface MASTLogger()
 
@@ -246,7 +247,7 @@ static MASTLogger* sharedInstance = nil;
 {
 	if (TARGET_IPHONE_SIMULATOR) {
 		if (message && [message length] > 0) {
-			NSString* debugMessage = [[NSString alloc] initWithFormat:@":: Ad %@\nNOTE: this message displays only in the simulator", message];
+			NSString* debugMessage = [[NSString alloc] initWithFormat:@":: Ad %@\n%@", kLoggerWarningMessage, message];
 			
 			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:debugMessage delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil]; 
 			[alert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:YES]; 

@@ -21,6 +21,7 @@
 // THE SOFTWARE.
 
 #import "MASTRequestOperation.h"
+#import "MASTMessages.h"
 
 static NSUInteger const kMinimumInitialDataCapacity = 1024;
 static NSUInteger const kMaximumInitialDataCapacity = 1024 * 1024 * 8;
@@ -334,9 +335,9 @@ didReceiveResponse:(NSURLResponse *)response
     
     NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
     if ([httpResponse statusCode] == 204) {
-        self.error = [NSError errorWithDomain:@"All up to Date" code:777 userInfo:nil];
+        self.error = [NSError errorWithDomain:kErrorNoContentMessage code:777 userInfo:nil];
     } else if ([httpResponse statusCode] != 200) {
-        self.error = [NSError errorWithDomain:@"Server responds with code" code:[httpResponse statusCode] userInfo:nil];
+        self.error = [NSError errorWithDomain:kErrorServerResponseMessage code:[httpResponse statusCode] userInfo:nil];
     }
     
     if (self.outputStream) {

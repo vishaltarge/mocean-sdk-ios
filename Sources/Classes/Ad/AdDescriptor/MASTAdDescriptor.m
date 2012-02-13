@@ -9,7 +9,6 @@
 #import "MASTServerXMLResponseParser.h"
 #import "MASTAdDescriptorHelper.h"
 
-
 @implementation MASTAdDescriptor
 
 @synthesize adContentType, externalCampaign, externalContent, appId, adId, adType, latitude,longitude, zip, campaignId, trackUrl, serverReponse, serverReponseString;

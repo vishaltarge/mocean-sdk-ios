@@ -111,6 +111,7 @@
 		3B43CD1A14CE958700E2B3CF /* MASTAdDescriptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CD1614CE958700E2B3CF /* MASTAdDescriptor.h */; };
 		3B43CD1D14CE959300E2B3CF /* MASTServerXMLResponseParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CD1B14CE959300E2B3CF /* MASTServerXMLResponseParser.m */; };
 		3B43CD1E14CE959300E2B3CF /* MASTServerXMLResponseParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CD1C14CE959300E2B3CF /* MASTServerXMLResponseParser.h */; };
+		3B67257614E9435900FDFFB0 /* MASTMessages.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B67257514E9435900FDFFB0 /* MASTMessages.h */; };
 		AA747D9F0F9514B9006C5449 /* AdMobileSDK_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* AdMobileSDK_Prefix.pch */; settings = {ATTRIBUTES = (Public, ); }; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 		ACA293BB10BFAFB300A0A97A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACA293BA10BFAFB300A0A97A /* UIKit.framework */; };
@@ -221,6 +222,7 @@
 		3B43CD1614CE958700E2B3CF /* MASTAdDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTAdDescriptor.h; sourceTree = "<group>"; };
 		3B43CD1B14CE959300E2B3CF /* MASTServerXMLResponseParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTServerXMLResponseParser.m; sourceTree = "<group>"; };
 		3B43CD1C14CE959300E2B3CF /* MASTServerXMLResponseParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTServerXMLResponseParser.h; sourceTree = "<group>"; };
+		3B67257514E9435900FDFFB0 /* MASTMessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTMessages.h; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* AdMobileSDK_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMobileSDK_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		ACA293BA10BFAFB300A0A97A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -431,8 +433,8 @@
 		ADB1C9C61447F8AC00785D44 /* InternalAVPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				3B43CC6814CE93A900E2B3CF /* MASTInternalAVPlayer.m */,
 				3B43CC6914CE93A900E2B3CF /* MASTInternalAVPlayer.h */,
+				3B43CC6814CE93A900E2B3CF /* MASTInternalAVPlayer.m */,
 			);
 			name = InternalAVPlayer;
 			path = AVPlayer;
@@ -450,8 +452,8 @@
 		CF171B7D131CF4F6006162F1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				3B43CCD914CE94BA00E2B3CF /* MASTSharedModel.m */,
 				3B43CCDA14CE94BA00E2B3CF /* MASTSharedModel.h */,
+				3B43CCD914CE94BA00E2B3CF /* MASTSharedModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -459,11 +461,12 @@
 		CF171C20131D1DD6006162F1 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				3B43CCBB14CE947D00E2B3CF /* MASTUtils.m */,
-				3B43CCBC14CE947D00E2B3CF /* MASTUtils.h */,
-				3B43CCBD14CE947D00E2B3CF /* MASTUIColorAdditions.m */,
-				3B43CCBE14CE947D00E2B3CF /* MASTUIColorAdditions.h */,
+				3B67257514E9435900FDFFB0 /* MASTMessages.h */,
 				3B43CCBF14CE947D00E2B3CF /* MASTConstants.h */,
+				3B43CCBC14CE947D00E2B3CF /* MASTUtils.h */,
+				3B43CCBB14CE947D00E2B3CF /* MASTUtils.m */,
+				3B43CCBE14CE947D00E2B3CF /* MASTUIColorAdditions.h */,
+				3B43CCBD14CE947D00E2B3CF /* MASTUIColorAdditions.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -480,8 +483,8 @@
 		CF4B881E13201C62004C9F9A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				3B43CC7814CE93E200E2B3CF /* MASTAdController.m */,
 				3B43CC7914CE93E200E2B3CF /* MASTAdController.h */,
+				3B43CC7814CE93E200E2B3CF /* MASTAdController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -491,10 +494,10 @@
 			children = (
 				ADB1C9C61447F8AC00785D44 /* InternalAVPlayer */,
 				CF4B882E13201C81004C9F9A /* InternalBrowser */,
-				3B43CC7014CE93C600E2B3CF /* MASTUIWebViewAdditions.m */,
 				3B43CC7114CE93C600E2B3CF /* MASTUIWebViewAdditions.h */,
-				3B43CC7214CE93C600E2B3CF /* MASTUIViewAdditions.m */,
+				3B43CC7014CE93C600E2B3CF /* MASTUIWebViewAdditions.m */,
 				3B43CC7314CE93C600E2B3CF /* MASTUIViewAdditions.h */,
+				3B43CC7214CE93C600E2B3CF /* MASTUIViewAdditions.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -502,8 +505,8 @@
 		CF4B882E13201C81004C9F9A /* InternalBrowser */ = {
 			isa = PBXGroup;
 			children = (
-				3B43CC6C14CE93B800E2B3CF /* MASTInternalBrowser.m */,
 				3B43CC6D14CE93B800E2B3CF /* MASTInternalBrowser.h */,
+				3B43CC6C14CE93B800E2B3CF /* MASTInternalBrowser.m */,
 			);
 			path = InternalBrowser;
 			sourceTree = "<group>";
@@ -536,8 +539,8 @@
 		CF9860CD13405F70004D6202 /* InstallManager */ = {
 			isa = PBXGroup;
 			children = (
-				3B43CC8014CE940000E2B3CF /* MASTInstallManager.m */,
 				3B43CC8114CE940000E2B3CF /* MASTInstallManager.h */,
+				3B43CC8014CE940000E2B3CF /* MASTInstallManager.m */,
 			);
 			path = InstallManager;
 			sourceTree = "<group>";
@@ -563,8 +566,8 @@
 		CFC4484F133C7B3F00B147F6 /* LocationManager */ = {
 			isa = PBXGroup;
 			children = (
-				3B43CC8414CE940D00E2B3CF /* MASTLocationManager.m */,
 				3B43CC8514CE940D00E2B3CF /* MASTLocationManager.h */,
+				3B43CC8414CE940D00E2B3CF /* MASTLocationManager.m */,
 			);
 			path = LocationManager;
 			sourceTree = "<group>";
@@ -572,8 +575,8 @@
 		CFC4E5631330E1E70012F9AC /* FileManager */ = {
 			isa = PBXGroup;
 			children = (
-				3B43CC8C14CE943300E2B3CF /* MASTFileManager.m */,
 				3B43CC8D14CE943300E2B3CF /* MASTFileManager.h */,
+				3B43CC8C14CE943300E2B3CF /* MASTFileManager.m */,
 			);
 			path = FileManager;
 			sourceTree = "<group>";
@@ -631,12 +634,12 @@
 		CFDE16A5131392D700FE2F5A /* NotificationCenter */ = {
 			isa = PBXGroup;
 			children = (
-				3B43CCCD14CE94A700E2B3CF /* MASTNotificationCenterAdditions.m */,
 				3B43CCCE14CE94A700E2B3CF /* MASTNotificationCenterAdditions.h */,
-				3B43CCCF14CE94A700E2B3CF /* MASTNotificationCenter.m */,
+				3B43CCCD14CE94A700E2B3CF /* MASTNotificationCenterAdditions.m */,
 				3B43CCD014CE94A700E2B3CF /* MASTNotificationCenter.h */,
-				3B43CCD114CE94A700E2B3CF /* MASTNotificationAtlas.m */,
+				3B43CCCF14CE94A700E2B3CF /* MASTNotificationCenter.m */,
 				3B43CCD214CE94A700E2B3CF /* MASTNotificationAtlas.h */,
+				3B43CCD114CE94A700E2B3CF /* MASTNotificationAtlas.m */,
 			);
 			path = NotificationCenter;
 			sourceTree = "<group>";
@@ -736,8 +739,8 @@
 		CFF37870133B60830078AC6D /* WebKit */ = {
 			isa = PBXGroup;
 			children = (
-				3B43CC8814CE942300E2B3CF /* MASTWebKitInfo.m */,
 				3B43CC8914CE942300E2B3CF /* MASTWebKitInfo.h */,
+				3B43CC8814CE942300E2B3CF /* MASTWebKitInfo.m */,
 			);
 			path = WebKit;
 			sourceTree = "<group>";
@@ -747,9 +750,9 @@
 			children = (
 				3B43CCF614CE952100E2B3CF /* MASTOrmmaHelper.h */,
 				3B43CCF514CE952100E2B3CF /* MASTOrmmaHelper.m */,
-				3B43CCF714CE952100E2B3CF /* MASTOrmmaConstants.h */,
 				3B43CCF914CE952100E2B3CF /* MASTOrmmaAdaptor.h */,
 				3B43CCF814CE952100E2B3CF /* MASTOrmmaAdaptor.m */,
+				3B43CCF714CE952100E2B3CF /* MASTOrmmaConstants.h */,
 			);
 			path = ORMMA;
 			sourceTree = "<group>";
@@ -757,8 +760,8 @@
 		FC9CFEED141E219100D0280B /* Accelerometer */ = {
 			isa = PBXGroup;
 			children = (
-				3B43CC7C14CE93F300E2B3CF /* MASTAccelerometer.m */,
 				3B43CC7D14CE93F300E2B3CF /* MASTAccelerometer.h */,
+				3B43CC7C14CE93F300E2B3CF /* MASTAccelerometer.m */,
 			);
 			path = Accelerometer;
 			sourceTree = "<group>";
@@ -846,6 +849,7 @@
 				3B43CD1814CE958700E2B3CF /* MASTAdDescriptorHelper.h in Headers */,
 				3B43CD1A14CE958700E2B3CF /* MASTAdDescriptor.h in Headers */,
 				3B43CD1E14CE959300E2B3CF /* MASTServerXMLResponseParser.h in Headers */,
+				3B67257614E9435900FDFFB0 /* MASTMessages.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,7 +6,7 @@
 //
 
 #import "MASTWebKitInfo.h"
-
+#import "MASTConstants.h"
 
 @implementation MASTWebKitInfo
 
@@ -26,7 +26,7 @@ static MASTWebKitInfo* sharedInstance = nil;
 	if (self) {
         _webView = [UIWebView new];
 		[_webView setDelegate:self];
-		[_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.google.com"]]];
+		[_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:kGoogleUrl]]];
         
         NSString* uaString = [_webView stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
         if (uaString  && [uaString length] > 0) {
@@ -34,7 +34,7 @@ static MASTWebKitInfo* sharedInstance = nil;
             [[MASTNotificationCenter sharedInstance] postNotificationName:kUaDetectedNotification object:uaString];
         }
         else {
-            [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.google.com"]]];
+            [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:kGoogleUrl]]];
         }
 	}
 	

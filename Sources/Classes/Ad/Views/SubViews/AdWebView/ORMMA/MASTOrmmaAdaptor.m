@@ -19,6 +19,7 @@
 #import "MASTExpandWebView.h"
 #import "MASTExpandViewController.h"
 #import "MASTUIColorAdditions.h"
+#import "MASTMessages.h"
 
 #define ORMMA_SHAME     @"ormma"
 
@@ -194,48 +195,48 @@
 #endif
     
     NSMutableArray* supports = [NSMutableArray array];
-    [supports addObject:@"'level-1'"];
-    [supports addObject:@"'level-2'"];
-    [supports addObject:@"'level-3'"];
-    [supports addObject:@"'orientation'"];
-    [supports addObject:@"'network'"];
-    [supports addObject:@"'screen'"];
-    [supports addObject:@"'shake'"];
-    [supports addObject:@"'size'"];
-    [supports addObject:@"'tilt'"];
-    [supports addObject:@"'audio'"];
-    [supports addObject:@"'video'"];
-    [supports addObject:@"'map'"];
+    [supports addObject:ORMMA_LEVEL_1];
+    [supports addObject:ORMMA_LEVEL_2];
+    [supports addObject:ORMMA_LEVEL_3];
+    [supports addObject:ORMMA_ORIENTATION];
+    [supports addObject:ORMMA_NETWORK];
+    [supports addObject:ORMMA_SCREEN];
+    [supports addObject:ORMMA_SHAKE];
+    [supports addObject:ORMMA_SIZE];
+    [supports addObject:ORMMA_TILT];
+    [supports addObject:ORMMA_AUDIO];
+    [supports addObject:ORMMA_VIDEO];
+    [supports addObject:ORMMA_MAP];
     
 	if (NSClassFromString(@"EKEventStore")) {
-		[supports addObject:@"'calendar'"]; 
+		[supports addObject:ORMMA_CALENDAR]; 
 	}
 
 #ifdef INCLUDE_LOCATION_MANAGER
     if ([LocationManager headingAvailable]) {
-        [supports addObject:@"'heading'"];
+        [supports addObject:ORMMA_HEADING];
     }
     
     if ([LocationManager sharedInstance].locationManager) {
-        [supports addObject:@"'location'"];
+        [supports addObject:ORMMA_LOCATION];
     }
 #endif
     
     if ([device.model isEqualToString:@"iPhone"]) {
-        [supports addObject:@"'phone'"];
+        [supports addObject:ORMMA_IPHONE];
     }
     
     Class mailClass = (NSClassFromString(@"MFMailComposeViewController"));
     if (mailClass != nil) {
         if ([mailClass canSendMail]) {
-            [supports addObject:@"'email'"];
+            [supports addObject:ORMMA_EMAIL];
         }
     }
     
     Class smsClass = (NSClassFromString(@"MFMessageComposeViewController"));
     if (smsClass != nil) {
         if ([smsClass canSendText]) {
-            [supports addObject:@"'sms'"];
+            [supports addObject:ORMMA_SMS];
         }
     }
     
@@ -273,20 +274,20 @@
 }
 
 - (void)processEvent:(NSString*)event parameters:(NSDictionary*)parameters {
-    if ([event isEqualToString:@"ormmaenabled"]) {
+    if ([event isEqualToString:ORMMA_EVENT_ENABLED]) {
         //
-    } else if ([event isEqualToString:@"show"]) {
+    } else if ([event isEqualToString:ORMMA_EVENT_SHOW]) {
         if (self.adView.hidden) {
             self.currentState = self.nonHideState;
             [self evalJS:[MASTOrmmaHelper setState:self.currentState]];
             [self.adView setHidden:NO];
         }
-    } else if ([event isEqualToString:@"hide"]) {
+    } else if ([event isEqualToString:ORMMA_EVENT_HIDE]) {
         self.nonHideState = self.currentState;
         self.currentState = ORMMAStateHidden;
         [self evalJS:[MASTOrmmaHelper setState:self.currentState]];
         [self.adView setHidden:YES];
-    } else if ([event isEqualToString:@"close"]) {
+    } else if ([event isEqualToString:ORMMA_EVENT_CLOSE]) {
         // if we're in the default state already, there is nothing to do
         if (self.currentState == ORMMAStateDefault) {
             // do same as hide command
@@ -345,10 +346,10 @@
                 [self evalJS:[MASTOrmmaHelper setState:self.currentState]];
             }];*/
         }
-    } else if ([event isEqualToString:@"expand"]) {
+    } else if ([event isEqualToString:ORMMA_EVENT_EXPAND]) {
         if (self.currentState != ORMMAStateDefault) {
             // Already Expanded
-            [self evalJS:[MASTOrmmaHelper fireError:@"Can only expand from the default state." forEvent:event]];
+            [self evalJS:[MASTOrmmaHelper fireError:kErrorExpandInvalidStateMessage forEvent:event]];
         } else {            
             NSString* url = [MASTOrmmaHelper requiredStringFromDictionary:parameters forKey:@"url"];
             CGFloat w = [MASTOrmmaHelper floatFromDictionary:parameters forKey:@"width"];
@@ -358,10 +359,10 @@
             CGSize screenSize = [MASTOrmmaHelper screenSizeForOrientation:orientation];	
             
             if (w > screenSize.width) {
-                [self evalJS:[MASTOrmmaHelper fireError:@"Cannot expand an ad larger than allowed." forEvent:event]];
+                [self evalJS:[MASTOrmmaHelper fireError:kErrorExpandLargerSizeMessage forEvent:event]];
             } else {
                 if (h > screenSize.height) {
-                    [self evalJS:[MASTOrmmaHelper fireError:@"Cannot expand an ad larger than allowed." forEvent:event]];
+                    [self evalJS:[MASTOrmmaHelper fireError:kErrorExpandLargerSizeMessage forEvent:event]];
                 } else {
                     //[[NotificationCenter sharedInstance] postNotificationName:kAdStopUpdateNotification object:self.adView];
                     
@@ -428,20 +429,20 @@
                 }
             }
         }
-    } else if ([event isEqualToString:@"resize"]) {
+    } else if ([event isEqualToString:ORMMA_EVENT_RESIZE]) {
         if (self.currentState != ORMMAStateDefault) {
             // Already Resized
-            [self evalJS:[MASTOrmmaHelper fireError:@"Cannot resize an ad that is not in the default state." forEvent:event]];
+            [self evalJS:[MASTOrmmaHelper fireError:kErrorResizeInvalidStateMessage forEvent:event]];
         } else {
             self.currentState = ORMMAStateResized;
             self.nonHideState = self.currentState;
             CGFloat w = [MASTOrmmaHelper floatFromDictionary:parameters forKey:@"w"];
             if (w > maxSize.width) {
-                [self evalJS:[MASTOrmmaHelper fireError:@"Cannot resize an ad larger than allowed." forEvent:event]];
+                [self evalJS:[MASTOrmmaHelper fireError:kErrorResizeLargerSizeMessage forEvent:event]];
             } else {
                 CGFloat h = [MASTOrmmaHelper floatFromDictionary:parameters forKey:@"h"];
                 if (h > maxSize.height) {
-                    [self evalJS:[MASTOrmmaHelper fireError:@"Cannot resize an ad larger than allowed." forEvent:event]];
+                    [self evalJS:[MASTOrmmaHelper fireError:kErrorResizeLargerSizeMessage forEvent:event]];
                 } else {
                     //[[NotificationCenter sharedInstance] postNotificationName:kAdStopUpdateNotification object:self.adView];
                     
@@ -455,13 +456,13 @@
                 }
             }
         }
-    } else if ([event isEqualToString:@"addasset"]) {
+    } else if ([event isEqualToString:ORMMA_EVENT_ADDASSET]) {
         //
-    } else if ([event isEqualToString:@"removeasset"]) {
+    } else if ([event isEqualToString:ORMMA_EVENT_REMOVEASSET]) {
         //
-    } else if ([event isEqualToString:@"removeallassets"]) {
+    } else if ([event isEqualToString:ORMMA_EVENT_REMOVE_ALL_ASSET]) {
         //
-    } else if ([event isEqualToString:@"calendar"]) {        
+    } else if ([event isEqualToString:ORMMA_EVENT_CALENDAR]) {        
         NSString *dateString = [MASTOrmmaHelper requiredStringFromDictionary:parameters 
                                                                   forKey:@"date"];
         NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
@@ -495,15 +496,15 @@
                                                span:EKSpanThisEvent 
                                               error:nil]; 
                 if (status) {
-                    UIAlertView *eventSavedSuccessfully = [[[UIAlertView alloc] initWithTitle:@"Event Status" 
-                                                                                     message:@"Event successfully added." 
+                    UIAlertView *eventSavedSuccessfully = [[[UIAlertView alloc] initWithTitle:kAlertEventStatutsTitle
+                                                                                     message:kAlertEventAddedMessage 
                                                                                     delegate:nil 
                                                                            cancelButtonTitle:@"Ok" 
                                                                            otherButtonTitles:nil] autorelease];
                     [eventSavedSuccessfully show];
                 } else {
-                    UIAlertView *eventSavedUNSuccessfully = [[[UIAlertView alloc] initWithTitle:@"Event Status" 
-                                                                                       message:@"Event not added." 
+                    UIAlertView *eventSavedUNSuccessfully = [[[UIAlertView alloc] initWithTitle:kAlertEventStatutsTitle 
+                                                                                       message:kAlertEventNotAddedMessage
                                                                                       delegate:nil 
                                                                              cancelButtonTitle:@"Ok" 
                                                                              otherButtonTitles:nil] autorelease];
@@ -511,15 +512,15 @@
                 }
             };
             
-            UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:@"Event Status"
-                                                                message:@"Do you wish to save calendar event?"
+            UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:kAlertEventStatutsTitle
+                                                                message:kAlertEventSaveMessage
                                                        cancelButtonItem:noItem 
                                                        otherButtonItems:yesItem, nil] autorelease];
             [alertView show];         
         }
-    } else if ([event isEqualToString:@"camera"]) {
+    } else if ([event isEqualToString:ORMMA_EVENT_CAMERA]) {
         //
-    } else if ([event isEqualToString:@"email"]) {
+    } else if ([event isEqualToString:ORMMA_EVENT_EMAIL]) {
         NSString *to = [MASTOrmmaHelper requiredStringFromDictionary:parameters forKey:@"to"];
         NSString *subject = [MASTOrmmaHelper requiredStringFromDictionary:parameters forKey:@"subject"];
         NSString *body = [MASTOrmmaHelper requiredStringFromDictionary:parameters forKey:@"body"];
@@ -542,16 +543,16 @@
                 }
                 [rvc presentModalViewController:vc animated:YES];
             } else {
-                [self evalJS:[MASTOrmmaHelper fireError:@"Cannot send email: device mailbox not configured." forEvent:event]];
+                [self evalJS:[MASTOrmmaHelper fireError:kErrorDeviceCannotSendEmailMessage forEvent:event]];
             }
         } else {
-            [self evalJS:[MASTOrmmaHelper fireError:@"Cannot send email: body, subject and to are required." forEvent:event]];
+            [self evalJS:[MASTOrmmaHelper fireError:kErrorEmailFieldsNotRequiredMessage forEvent:event]];
         }
-    } else if ([event isEqualToString:@"phone"]) {
+    } else if ([event isEqualToString:ORMMA_EVENT_PHONE]) {
         NSString *phoneNumber = [MASTOrmmaHelper requiredStringFromDictionary:parameters 
                                                                    forKey:@"number"];
         [self click:[NSString stringWithFormat:@"tel:%@", phoneNumber]];
-    } else if ([event isEqualToString:@"sms"]) {
+    } else if ([event isEqualToString:ORMMA_EVENT_SMS]) {
         NSString *to = [MASTOrmmaHelper requiredStringFromDictionary:parameters forKey:@"to"];
         NSString *body = [MASTOrmmaHelper requiredStringFromDictionary:parameters forKey:@"body"];
         if (body && to && NSClassFromString(@"MFMessageComposeViewController") && [MFMessageComposeViewController canSendText]) {
@@ -570,29 +571,29 @@
             }
             [rvc presentModalViewController:vc animated:YES];
         }
-    } else if ([event isEqualToString:@"open"]) {
+    } else if ([event isEqualToString:ORMMA_EVENT_OPEN]) {
         NSString *url = [MASTOrmmaHelper requiredStringFromDictionary:parameters 
                                                            forKey:@"url"];
         [self click:url];
-    } else if ([event isEqualToString:@"openmap"]) {
+    } else if ([event isEqualToString:ORMMA_EVENT_OPEN_MAP]) {
         NSString *poi = [MASTOrmmaHelper requiredStringFromDictionary:parameters 
                                                            forKey:@"url"];
-        [self click:[NSString stringWithFormat:@"http://maps.google.com/maps?q=%@", [poi stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
-    } else if ([event isEqualToString:@"playaudio"]) {
+        [self click:[NSString stringWithFormat:@"%@%@", kGoogleMapsUrl, [poi stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+    } else if ([event isEqualToString:ORMMA_EVENT_PLAY_AUDIO]) {
         NSString *url = [MASTOrmmaHelper requiredStringFromDictionary:parameters forKey:@"url"];
         NSMutableDictionary* info = [NSMutableDictionary dictionary];
         [info setObject:url forKey:@"url"];
         [info setObject:self.adView forKey:@"adView"];
         [info setObject:parameters forKey:@"properties"];
         [[MASTNotificationCenter sharedInstance] postNotificationName:kPlayAudioNotification object:info];
-    } else if ([event isEqualToString:@"playvideo"]) {
+    } else if ([event isEqualToString:ORMMA_EVENT_PLAY_VIDEO]) {
         NSString *url = [MASTOrmmaHelper requiredStringFromDictionary:parameters forKey:@"url"];
         NSMutableDictionary* info = [NSMutableDictionary dictionary];
         [info setObject:url forKey:@"url"];
         [info setObject:self.adView forKey:@"adView"];
         [info setObject:parameters forKey:@"properties"];
         [[MASTNotificationCenter sharedInstance] postNotificationName:kPlayVideoNotification object:info];
-    } else if ([event isEqualToString:@"request"]) {
+    } else if ([event isEqualToString:ORMMA_EVENT_REQUEST]) {
         NSString *uri = [MASTOrmmaHelper requiredStringFromDictionary:parameters forKey:@"uri"];
         NSString *display = [MASTOrmmaHelper requiredStringFromDictionary:parameters forKey:@"display"];
         NSURLRequest* req = [NSURLRequest requestWithURL:[NSURL URLWithString:uri]];
@@ -627,7 +628,7 @@
                 }
             }];
         }
-    } else if ([event isEqualToString:@"service"]) {
+    } else if ([event isEqualToString:ORMMA_EVENT_SERVICE]) {
         NSString *name = [MASTOrmmaHelper requiredStringFromDictionary:parameters forKey:@"name"];
         NSString *enabled = [MASTOrmmaHelper requiredStringFromDictionary:parameters forKey:@"enabled"];
         if ([name isEqualToString:@"headingChange"] && [enabled isEqualToString:@"Y"]) {
@@ -645,7 +646,7 @@
 
 - (void)moveToDefaultState {
     if (self.currentState == ORMMAStateResized || self.currentState == ORMMAStateExpanded) {
-        [self processEvent:@"close" parameters:[NSDictionary dictionary]];
+        [self processEvent:ORMMA_EVENT_CLOSE parameters:[NSDictionary dictionary]];
     }
 }
 

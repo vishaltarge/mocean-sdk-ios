@@ -10,6 +10,7 @@
 #import "MASTNotificationCenter.h"
 #import "MASTDownloadController.h"
 #import "MASTUIViewAdditions.h"
+#import "MASTMessages.h"
 
 #define degreesToRadian(x) ((x) / 180.0 * M_PI)
 
@@ -117,7 +118,7 @@ static MASTInternalBrowser* sharedInstance = nil;
         _activityItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
          
         _titleLabel = [[UILabel alloc] init];
-        _titleLabel.text = @"Loading...";
+        _titleLabel.text = kLoadingTitle;
         _titleLabel.font = [UIFont boldSystemFontOfSize:20];
         _titleLabel.textAlignment = UITextAlignmentCenter;
         _titleLabel.textColor = [UIColor whiteColor];
@@ -218,7 +219,7 @@ static MASTInternalBrowser* sharedInstance = nil;
 
 - (BOOL)saveToMojivaFolderData:(NSData*)data name:(NSString*)name {
     BOOL result = NO;
-    NSString* dirPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Library/MojivaAd/Cache"];
+    NSString* dirPath = [NSHomeDirectory() stringByAppendingPathComponent:kPathForFolderCache];
     NSString* fileName = name;
     NSString* path = [dirPath stringByAppendingPathComponent:fileName];
     
@@ -236,7 +237,7 @@ static MASTInternalBrowser* sharedInstance = nil;
 }
 
 - (void)prepareResources {
-    NSString* dirPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Library/MojivaAd/Cache"];
+    NSString* dirPath = [NSHomeDirectory() stringByAppendingPathComponent:kPathForFolderCache];
     
     NSString* path = [dirPath stringByAppendingPathComponent:@"backIcon.png"];
     
@@ -385,7 +386,7 @@ static MASTInternalBrowser* sharedInstance = nil;
                                                    delegate:self
                                           cancelButtonTitle:@"Cancel"
                                      destructiveButtonTitle:nil
-                                          otherButtonTitles:@"Open in Safari",
+                                          otherButtonTitles:kOpenLinkInSafariTitle,
                         nil];
         
         if (self.view.window.frame.size.height > 480) {
@@ -454,7 +455,7 @@ static MASTInternalBrowser* sharedInstance = nil;
 
 
 - (void)webViewDidStartLoad:(UIWebView*)webView {
-    _titleLabel.text = @"Loading...";
+    _titleLabel.text = kLoadingTitle;
     _activityItem.customView.hidden = NO;
     [self replaceItemWithToolbar:_navbar tag:1 withItem:_activityItem];
     
