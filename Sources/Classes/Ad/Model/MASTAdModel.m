@@ -23,7 +23,7 @@ paramBG, paramLINK, additionalParameters, adServerUrl, advertiserId, groupCode,
 country, region, city, area, metro, zip, carrier, showCloseButtonTime,
 autocloseInterstitialTime, startDisplayDate, isDisplayed, aligmentCenter, contentSize, frame,
 visibleState, snapshotRAWData, snapshotRAWDataTime, currentAdView, adView, excampaigns, descriptor, loading,
-longitude, latitude, timeout, isUserSetMaxSize;
+longitude, latitude, timeout, isUserSetMaxSize, autoCollapse, showPreviousAdOnError;
 
 - (BOOL)validate {
     if (self.site <= 0) {
@@ -197,6 +197,10 @@ longitude, latitude, timeout, isUserSetMaxSize;
     }
     
     return [self urlIgnoreValifation];
+}
+
+- (BOOL)isFirstDisplay {
+    return !self.isDisplayed;
 }
 
 - (void)dealloc {

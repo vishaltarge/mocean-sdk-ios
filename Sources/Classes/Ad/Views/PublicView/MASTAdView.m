@@ -28,7 +28,7 @@
 
 @dynamic delegate, isLoading, testMode, logMode, animateMode, contentAlignment, track, updateTimeInterval,
 defaultImage, site, zone, premium, type, keywords, minSize, maxSize, contentSize, textColor, additionalParameters,
-adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, carrier, latitude, longitude, timeout;
+adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, carrier, latitude, longitude, timeout, autoCollapse, showPreviousAdOnError;
 
 
 - (id)init {
@@ -142,6 +142,8 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     self.premium = AdPremiumBoth;
     self.timeout = DEFAULT_UPDATE_TIMEINTERVAL; //1 sec
     self.maxSize = CGSizeMake(self.frame.size.width, self.frame.size.height);
+    self.autoCollapse = YES;
+    self.showPreviousAdOnError = YES;
     ((MASTAdModel*)_adModel).isUserSetMaxSize = NO;
     
     [self setLogMode:AdLogModeErrorsOnly];
@@ -626,9 +628,54 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     }
 }
 
+- (void)showDefaultImage:(MASTAdView*)adView {
+    for (UIView *subView in [adView subviews]) {
+        if (![subView isKindOfClass:[UIImageView class]]) {
+            subView.hidden = YES;
+        }
+    }
+}
+
+- (void)hiddenAllSubviews:(MASTAdView*)adView {
+    for (UIView *subView in [adView subviews]) {
+        subView.hidden = YES;
+    }
+}
+
+- (MASTAdView*)adViewFromNotification:(NSNotification*)notification {
+    NSString* name = [notification name];
+    MASTAdView *adView;
+    
+    if ([name isEqualToString:kInvalidParamsServerResponseNotification]) {
+        adView = [notification object];
+    } else {
+        NSDictionary* info = [notification object];
+        adView = [info objectForKey:@"adView"];
+    }
+    return adView;
+}
+
 //- (void)didFailToReceiveAd:(id)sender withError:(NSError*)error;
 - (void)failToReceiveAd:(NSNotification*)notification {
     NSString* name = [notification name];
+    MASTAdView *adView = [self adViewFromNotification:notification];
+    
+    BOOL isSetDefaultImage = YES;
+    if (![self.adModel isFirstDisplay]) {
+        if (self.showPreviousAdOnError) {
+            isSetDefaultImage = NO;
+        }
+    }
+    
+    if (isSetDefaultImage) {
+        if (self.defaultImage) {
+            [self showDefaultImage:adView];
+        } else {
+            if (self.autoCollapse) adView.backgroundColor = [UIColor clearColor];
+            
+            [self hiddenAllSubviews:adView];
+        }
+    }
     
     if ([name isEqualToString:kInvalidParamsServerResponseNotification]) {
         MASTAdView* ad = [notification object];
@@ -676,6 +723,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
             }
         }
     }
+    
     [self adModel].loading = NO;
 }
 
@@ -1126,6 +1174,22 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 
 - (NSInteger)timeout {
     return ((MASTAdModel*)_adModel).timeout;
+}
+
+- (void)setAutoCollapse:(BOOL)autoCollapse {
+    ((MASTAdModel*)_adModel).autoCollapse = autoCollapse;
+}
+
+- (BOOL)autoCollapse {
+    return ((MASTAdModel*)_adModel).autoCollapse;
+}
+
+- (void)setShowPreviousAdOnError:(BOOL)showPreviousAdOnError {
+    ((MASTAdModel*)_adModel).showPreviousAdOnError = showPreviousAdOnError;
+}
+
+- (BOOL)showPreviousAdOnError {
+    return ((MASTAdModel*)_adModel).showPreviousAdOnError;
 }
 
 @end

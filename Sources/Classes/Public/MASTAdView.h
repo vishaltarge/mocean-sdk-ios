@@ -263,6 +263,20 @@ If set to YES, the ad server will send a client side impression tracking pixel w
  */
 @property CGSize						maxSize;
 
+/** A Boolean value that determines whether to hide ad in case error
+ 
+ Use this property to hide ad in case of error.
+ 
+ The default value is YES.*/
+@property BOOL                          autoCollapse;
+
+/** A Boolean value that determines whether to show previous ad in case of error
+ 
+ Use this property to show previous ad in case of error.
+ 
+ The default value is YES.*/
+@property BOOL                          showPreviousAdOnError;
+
 /** Custom request parameters.
  
  Use this property to add custom request parameters.
@@ -374,7 +388,6 @@ If set to YES, the ad server will send a client side impression tracking pixel w
  
  The default value is AdLogModeErrorsOnly. */
 @property AdLogMode                     logMode;
-
 
 /** @name Setting the Delegate */
 

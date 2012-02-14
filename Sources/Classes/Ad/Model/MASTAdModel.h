@@ -77,6 +77,8 @@
 
 @property (retain) NSString*            latitude;
 @property (retain) NSString*            longitude;
+@property (assign) BOOL                 autoCollapse;
+@property (assign) BOOL                 showPreviousAdOnError;
 
 - (NSString*)url;
 - (NSString*)urlIgnoreValifation;
@@ -84,5 +86,6 @@
 - (void)cancelAllNetworkConnection;
 - (void)closeInternalBrowser;
 - (void)pauseVideoViewPlayer;
+- (BOOL)isFirstDisplay;
 
 @end
