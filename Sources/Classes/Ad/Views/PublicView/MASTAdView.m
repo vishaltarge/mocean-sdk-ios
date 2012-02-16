@@ -21,6 +21,13 @@
 #import "MASTLocationManager.h"
 #import "MASTMessages.h"
 
+@interface MASTAdView()  
+
+- (void)closeInterstitial:(NSNotification*)notification;
+- (void)scheduledButtonAction;
+
+@end
+
 @implementation MASTAdView
 
 @synthesize closeButton;
@@ -28,7 +35,7 @@
 
 @dynamic delegate, isLoading, testMode, logMode, animateMode, contentAlignment, track, updateTimeInterval,
 defaultImage, site, zone, premium, type, keywords, minSize, maxSize, contentSize, textColor, additionalParameters,
-adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, carrier, latitude, longitude, timeout, autoCollapse, showPreviousAdOnError;
+adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, carrier, latitude, longitude, timeout, autoCollapse, showPreviousAdOnError, autocloseInterstitialTime, showCloseButtonTime;
 
 
 - (id)init {
@@ -94,7 +101,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     self.closeButton = nil;
     
     ((MASTAdModel*)_adModel).adView = nil;
-    self.delegate = nil;
+    self.delegate = nil; 
     RELEASE_SAFELY(_adModel);
     
     [super dealloc];
@@ -127,6 +134,11 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     //pause video view player
     [_adModel pauseVideoViewPlayer];
     
+    if (self.showCloseButtonTime != 0 || self.autocloseInterstitialTime != 0) {
+        //close interstitial
+        [self scheduledButtonAction];
+    }
+    
     //cloase ORMMA and set it in default state
     [[MASTNotificationCenter sharedInstance] postNotificationName:kORMMASetDefaultStateNotification object:nil];
 }
@@ -144,6 +156,8 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     self.maxSize = CGSizeMake(self.frame.size.width, self.frame.size.height);
     self.autoCollapse = YES;
     self.showPreviousAdOnError = YES;
+    self.autocloseInterstitialTime = -1;
+    self.showCloseButtonTime = -1;
     ((MASTAdModel*)_adModel).isUserSetMaxSize = NO;
     
     [self setLogMode:AdLogModeErrorsOnly];
@@ -168,7 +182,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     [[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(failToReceiveAd:) name:kFailAdDisplayNotification object:nil];
     [[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(ormmaEvent:) name:kORMMAEventNotification object:nil];
     [[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(receiveThirdParty:) name:kThirdPartyNotification object:nil];
-    
+    [[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(closeInterstitial:) name:kInterstitialAdCloseNotification object:nil];
     
 	[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(adDownloaded:) name:kStartAdDisplayNotification object:nil];
 	[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(updateAd:) name:kUpdateAdDisplayNotification object:nil];
@@ -307,6 +321,13 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 	}
 }
 
+- (void)showCloseButton {
+	self.closeButton.hidden = NO;
+}
+
+- (void)scheduledButtonAction {
+    [self buttonsAction:self];
+}
 
 - (void)dislpayAd:(NSNotification*)notification {
 	NSDictionary *info = [notification object];
@@ -358,11 +379,6 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
                 [oldView removeFromSuperview];
             }
             
-            if (!((MASTAdModel*)_adModel).isDisplayed) {
-                ((MASTAdModel*)_adModel).startDisplayDate = [NSDate date];
-                ((MASTAdModel*)_adModel).isDisplayed = YES;
-            }
-            
             if (!self.closeButton) {
                 [self prepareResources];
                 if (self.closeButton) {
@@ -371,10 +387,31 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
                     [self addSubview:self.closeButton];
                 }
                 self.closeButton.hidden = YES;
+                
+                if (((MASTAdModel*)_adModel).showCloseButtonTime >= 0 && !((MASTAdModel*)_adModel).isDisplayed) {
+                    [NSTimer scheduledTimerWithTimeInterval:((MASTAdModel*)_adModel).showCloseButtonTime
+                                                     target:self 
+                                                   selector:@selector(showCloseButton)
+                                                   userInfo:nil 
+                                                    repeats:NO];
+                }
+                
+                if (((MASTAdModel*)_adModel).autocloseInterstitialTime >= 0) {
+                    [NSTimer scheduledTimerWithTimeInterval:((MASTAdModel*)_adModel).autocloseInterstitialTime
+                                                     target:self 
+                                                   selector:@selector(scheduledButtonAction) 
+                                                   userInfo:nil 
+                                                    repeats:NO];
+                }
             } else {
                 [self bringSubviewToFront:self.closeButton];
             }
-
+            
+            if (!((MASTAdModel*)_adModel).isDisplayed) {
+                ((MASTAdModel*)_adModel).startDisplayDate = [NSDate date];
+                ((MASTAdModel*)_adModel).isDisplayed = YES;
+            }
+            
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 [[MASTNotificationCenter sharedInstance] postNotificationName:kAdDisplayedNotification object:self];
             });
@@ -808,10 +845,23 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     }
 }
 
+//- (void) didClosedInterstitialAd:(id)sender usageTimeInterval:(NSTimeInterval)usageTimeInterval;
+- (void)closeInterstitial:(NSNotification*)notification {
+    MASTAdView* adView = [notification object];
+	
+	if (adView == self) {
+        id <MASTAdViewDelegate> delegate = [self adModel].delegate;
+        
+        if (delegate && [delegate respondsToSelector:@selector(didClosedAd:usageTimeInterval:)]) {
+            NSDate* _startDate = ((MASTAdModel*)_adModel).startDisplayDate;
+            NSTimeInterval timeInterval = -[_startDate timeIntervalSinceNow];
+            [delegate didClosedAd:self usageTimeInterval:timeInterval];
+        }
+    }
+}
 
 #pragma mark -
 #pragma mark Propertys
-
 
 - (MASTAdModel*)adModel {
 	return ((MASTAdModel*)_adModel);
@@ -1190,6 +1240,24 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 
 - (BOOL)showPreviousAdOnError {
     return ((MASTAdModel*)_adModel).showPreviousAdOnError;
+}
+
+//@property NSTimeInterval showCloseButtonTime;
+- (void)setShowCloseButtonTime:(NSTimeInterval)timeInterval {
+	((MASTAdModel*)_adModel).showCloseButtonTime = timeInterval;
+}
+
+- (NSTimeInterval)showCloseButtonTime {
+	return ((MASTAdModel*)_adModel).showCloseButtonTime;
+}
+
+//@property NSTimeInterval autocloseInterstitialTime;
+- (void)setAutocloseInterstitialTime:(NSTimeInterval)timeInterval {
+	((MASTAdModel*)_adModel).autocloseInterstitialTime = timeInterval;
+}
+
+- (NSTimeInterval)autocloseInterstitialTime {
+	return ((MASTAdModel*)_adModel).autocloseInterstitialTime;
 }
 
 @end

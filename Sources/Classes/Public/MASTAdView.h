@@ -4,7 +4,7 @@
 //
 //  Created by Constantine Mureev on 2/22/11.
 //
-//  version: 2.9.0
+//  version: 2.10.0
 //
 
 /** Set #define to enable location services code or #undef to disable to exclude location detection from SDK.
@@ -44,19 +44,19 @@ typedef enum {
 	AdLogModeAll = 2,
 } AdLogMode;
 
-/** You use the AdView class to embed advertisement content in your application. To do so, you simply create an AdView object and add it to a UIView. An instance of AdView (or simply, an ad) is a means for displaying advertisement information from ad publisher site. To choose ad publisher site set parameters in the ad initialization method initWithFrame:site:zone: or use the properties site and zone. Use the adServerUrl property to choose ad publisher server.
+/** You use the MASTAdView class to embed advertisement content in your application. To do so, you simply create an MASTAdView object and add it to a UIView. An instance of MASTAdView (or simply, an ad) is a means for displaying advertisement information from ad publisher site. To choose ad publisher site set parameters in the ad initialization method initWithFrame:site:zone: or use the properties site and zone. Use the adServerUrl property to choose ad publisher server.
  
  Ad handles the rendering of any content in its area: HTML, Video, Gif animation or JavaScript. Ad also handles any interactions with that content. So you can link from the banner to ad publisher site. Use the internalOpenMode property to set open mode for ad publisher site. To control all intercations implement AdViewDelegate protocol.
  
  Ad always tries to load the content after creation. The time interval between load requests is managed using the property updateTimeInterval. Also you can update ad content immediately  using the update method. Use the isLoading property to find out if ad is in the process of loading.
  
- To configure ad visual appearance use the properties defaultImage, textColor or contentAlignment. To manage the ad animation use the property animateMode.
+ To configure ad visual appearance use the properties defaultImage, autoCollapse, showPreviousAdOnError, textColor or contentAlignment. To manage the ad animation use the property animateMode.
  
  Advanced ad customization is supported. So you can filter the ad content using the premium property. Use the properties minSize and maxSize to configure ad content size in server response. Also you can set the search parameters or any other parameters using the properties keywords and additionalParameters accordingly. 
  
  To debug ad behavior use the properties testMode and logMode.
  
- Set the delegate property to an object conforming to the AdViewDelegate protocol if you want to listen the processing of ad content.
+ Set the delegate property to an object conforming to the MASTAdViewDelegate protocol if you want to listen the processing of ad content.
  */
 @interface MASTAdView : UIView {
 	BOOL	_observerSet;
@@ -64,22 +64,25 @@ typedef enum {
 }
 
 
-/** @name Initializing an AdView Object */
+/** @name Initializing an MASTAdView Object */
 
 
-/** Initializes and returns an AdView object having the given frame, site and zone.
+/** Initializes and returns an MASTAdView object having the given frame, site and zone.
  
  @param frame A rectangle specifying the initial location and size of the ad view in its superview's coordinates.
  @param site A value that specifies the id of ad publisher site.
  @param zone A value that specifies the id of ad publisher zone.
  
- @return Returns an initialized AdView object or nil if the object could not be successfully initialized.
+ @return Returns an initialized MASTAdView object or nil if the object could not be successfully initialized.
  */
 - (id) initWithFrame:(CGRect)frame
 				site:(NSInteger)site
 				zone:(NSInteger)zone;
 
 
+/**
+ 
+ */
 - (void)stopEverythingAndNotfiyDelegateOnCleanup;
 
 /** @name Configuring the AdView */
@@ -262,6 +265,22 @@ If set to YES, the ad server will send a client side impression tracking pixel w
  Use this property to set the maximal size of the ad content and server response will be close to this size.
  */
 @property CGSize						maxSize;
+
+/** Show close button delay time interval, in seconds.
+ 
+ Setting to 0 will show close button immediately.
+ 
+ The default value is -1.
+ */
+@property NSTimeInterval                showCloseButtonTime;
+
+/** Auto close interstitial time interval, in seconds.
+ 
+ Setting to 0 will disable auto closing interstitial.
+ 
+ The default value is -1.
+ */
+@property NSTimeInterval                autocloseInterstitialTime;
 
 /** A Boolean value that determines whether to hide ad in case error
  

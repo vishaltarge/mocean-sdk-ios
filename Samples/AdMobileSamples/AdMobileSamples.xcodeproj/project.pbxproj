@@ -105,8 +105,8 @@
 		32CA4F630368D1EE00C91783 /* AdMobileSamples_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMobileSamples_Prefix.pch; sourceTree = "<group>"; };
 		3B3BEE3314E53B230078B672 /* ORMMAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORMMAViewController.h; sourceTree = "<group>"; };
 		3B3BEE3414E53B230078B672 /* ORMMAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORMMAViewController.m; sourceTree = "<group>"; };
+		3BA446E514ED2D90005FAA20 /* MASTAdInterstitialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTAdInterstitialView.h; sourceTree = "<group>"; };
 		3BAA930714CEAA36002721E7 /* MASTAdDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTAdDelegate.h; sourceTree = "<group>"; };
-		3BAA930814CEAA36002721E7 /* MASTAdInterstitialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTAdInterstitialView.h; sourceTree = "<group>"; };
 		3BAA930914CEAA36002721E7 /* MASTAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTAdView.h; sourceTree = "<group>"; };
 		3BAA930D14CEAC5B002721E7 /* MASTAdModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTAdModel.h; sourceTree = "<group>"; };
 		3BAA931114CEACEC002721E7 /* MASTReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTReachability.h; sourceTree = "<group>"; };
@@ -475,8 +475,8 @@
 		3BAA930614CEAA36002721E7 /* Public */ = {
 			isa = PBXGroup;
 			children = (
+				3BA446E514ED2D90005FAA20 /* MASTAdInterstitialView.h */,
 				3BAA930714CEAA36002721E7 /* MASTAdDelegate.h */,
-				3BAA930814CEAA36002721E7 /* MASTAdInterstitialView.h */,
 				3BAA930914CEAA36002721E7 /* MASTAdView.h */,
 			);
 			name = Public;
