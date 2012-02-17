@@ -7,8 +7,8 @@
 
 #import "MASTUtils.h"
 #import "MASTConstants.h"
-#import "MASTUIAlertView+Blocks.h"
-#import "MASTUIActionSheet+Blocks.h"
+#import "UIAlertView+Blocks.h"
+#import "UIActionSheet+Blocks.h"
 #import "MASTUIViewAdditions.h"
 #import "MASTUIWebViewAdditions.h"
 #import "MASTUIColorAdditions.m"

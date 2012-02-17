@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MASTRIButtonItem.h"
+#import "RIButtonItem.h"
 
 
 // do nothing, just for make this catagory linked
@@ -15,8 +15,8 @@ void useCatagory5();
 
 @interface UIAlertView (Blocks)
 
--(id)initWithTitle:(NSString *)inTitle message:(NSString *)inMessage cancelButtonItem:(MASTRIButtonItem *)inCancelButtonItem otherButtonItems:(MASTRIButtonItem *)inOtherButtonItems, ... NS_REQUIRES_NIL_TERMINATION;
+-(id)initWithTitle:(NSString *)inTitle message:(NSString *)inMessage cancelButtonItem:(RIButtonItem *)inCancelButtonItem otherButtonItems:(RIButtonItem *)inOtherButtonItems, ... NS_REQUIRES_NIL_TERMINATION;
 
-- (void)addButtonItem:(MASTRIButtonItem *)item;
+- (void)addButtonItem:(RIButtonItem *)item;
 
 @end

@@ -10,7 +10,7 @@
 #import "MASTNotificationCenter.h"
 #import "MASTUIWebViewAdditions.h"
 #import "MASTConstants.h"
-#import "MASTQSStrings.h"
+#import "QSStrings.h"
 
 @interface MASTExpandWebView()
 @property (nonatomic, retain) UIWebView*        webView;
@@ -53,8 +53,8 @@
     UIImage* closeIcon = nil;
     
     if (![[NSFileManager defaultManager] isReadableFileAtPath:path]) {
-        NSData* imageData = [MASTQSStrings decodeBase64WithString:kCloseIconB64];
-        NSData* imageData2x = [MASTQSStrings decodeBase64WithString:kCloseIcon2xB64];
+        NSData* imageData = [QSStrings decodeBase64WithString:kCloseIconB64];
+        NSData* imageData2x = [QSStrings decodeBase64WithString:kCloseIcon2xB64];
         if ([self saveToMojivaFolderData:imageData name:@"closeIcon.png"] &&
             [self saveToMojivaFolderData:imageData2x name:@"closeIcon@2x.png"]) {
             closeIcon = [UIImage imageWithContentsOfFile:path];

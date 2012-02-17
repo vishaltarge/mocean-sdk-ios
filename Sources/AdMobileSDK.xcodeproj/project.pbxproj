@@ -7,22 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3B43CC4D14CE934D00E2B3CF /* MASTUIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CC4714CE934D00E2B3CF /* MASTUIAlertView+Blocks.m */; };
-		3B43CC4E14CE934D00E2B3CF /* MASTUIAlertView+Blocks.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC4814CE934D00E2B3CF /* MASTUIAlertView+Blocks.h */; };
-		3B43CC4F14CE934D00E2B3CF /* MASTUIActionSheet+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CC4914CE934D00E2B3CF /* MASTUIActionSheet+Blocks.m */; };
-		3B43CC5014CE934D00E2B3CF /* MASTUIActionSheet+Blocks.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC4A14CE934D00E2B3CF /* MASTUIActionSheet+Blocks.h */; };
-		3B43CC5114CE934D00E2B3CF /* MASTRIButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CC4B14CE934D00E2B3CF /* MASTRIButtonItem.m */; };
-		3B43CC5214CE934D00E2B3CF /* MASTRIButtonItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC4C14CE934D00E2B3CF /* MASTRIButtonItem.h */; };
-		3B43CC5714CE936F00E2B3CF /* MASTGTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CC5414CE936F00E2B3CF /* MASTGTMNSString+HTML.m */; };
-		3B43CC5814CE936F00E2B3CF /* MASTGTMNSString+HTML.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC5514CE936F00E2B3CF /* MASTGTMNSString+HTML.h */; };
-		3B43CC5914CE936F00E2B3CF /* MASTGTMDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC5614CE936F00E2B3CF /* MASTGTMDefines.h */; };
-		3B43CC5F14CE937E00E2B3CF /* MASTQSUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC5A14CE937E00E2B3CF /* MASTQSUtilities.h */; };
-		3B43CC6014CE937E00E2B3CF /* MASTQSStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CC5B14CE937E00E2B3CF /* MASTQSStrings.m */; };
-		3B43CC6114CE937E00E2B3CF /* MASTQSStrings.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC5C14CE937E00E2B3CF /* MASTQSStrings.h */; };
-		3B43CC6214CE937E00E2B3CF /* MASTQSFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CC5D14CE937E00E2B3CF /* MASTQSFileManager.m */; };
-		3B43CC6314CE937E00E2B3CF /* MASTQSFileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC5E14CE937E00E2B3CF /* MASTQSFileManager.h */; };
-		3B43CC6614CE939800E2B3CF /* MASTReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CC6414CE939800E2B3CF /* MASTReachability.m */; };
-		3B43CC6714CE939800E2B3CF /* MASTReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC6514CE939800E2B3CF /* MASTReachability.h */; };
+		3B43CC4D14CE934D00E2B3CF /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CC4714CE934D00E2B3CF /* UIAlertView+Blocks.m */; };
+		3B43CC4E14CE934D00E2B3CF /* UIAlertView+Blocks.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC4814CE934D00E2B3CF /* UIAlertView+Blocks.h */; };
+		3B43CC4F14CE934D00E2B3CF /* UIActionSheet+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CC4914CE934D00E2B3CF /* UIActionSheet+Blocks.m */; };
+		3B43CC5014CE934D00E2B3CF /* UIActionSheet+Blocks.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC4A14CE934D00E2B3CF /* UIActionSheet+Blocks.h */; };
+		3B43CC5114CE934D00E2B3CF /* RIButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CC4B14CE934D00E2B3CF /* RIButtonItem.m */; };
+		3B43CC5214CE934D00E2B3CF /* RIButtonItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC4C14CE934D00E2B3CF /* RIButtonItem.h */; };
+		3B43CC5714CE936F00E2B3CF /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CC5414CE936F00E2B3CF /* GTMNSString+HTML.m */; };
+		3B43CC5814CE936F00E2B3CF /* GTMNSString+HTML.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC5514CE936F00E2B3CF /* GTMNSString+HTML.h */; };
+		3B43CC5914CE936F00E2B3CF /* GTMDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC5614CE936F00E2B3CF /* GTMDefines.h */; };
+		3B43CC5F14CE937E00E2B3CF /* QSUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC5A14CE937E00E2B3CF /* QSUtilities.h */; };
+		3B43CC6014CE937E00E2B3CF /* QSStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CC5B14CE937E00E2B3CF /* QSStrings.m */; };
+		3B43CC6114CE937E00E2B3CF /* QSStrings.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC5C14CE937E00E2B3CF /* QSStrings.h */; };
+		3B43CC6214CE937E00E2B3CF /* QSFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CC5D14CE937E00E2B3CF /* QSFileManager.m */; };
+		3B43CC6314CE937E00E2B3CF /* QSFileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC5E14CE937E00E2B3CF /* QSFileManager.h */; };
+		3B43CC6614CE939800E2B3CF /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CC6414CE939800E2B3CF /* Reachability.m */; };
+		3B43CC6714CE939800E2B3CF /* Reachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC6514CE939800E2B3CF /* Reachability.h */; };
 		3B43CC6A14CE93A900E2B3CF /* MASTInternalAVPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CC6814CE93A900E2B3CF /* MASTInternalAVPlayer.m */; };
 		3B43CC6B14CE93A900E2B3CF /* MASTInternalAVPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC6914CE93A900E2B3CF /* MASTInternalAVPlayer.h */; };
 		3B43CC6E14CE93B800E2B3CF /* MASTInternalBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CC6C14CE93B800E2B3CF /* MASTInternalBrowser.m */; };
@@ -118,22 +118,22 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3B43CC4714CE934D00E2B3CF /* MASTUIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MASTUIAlertView+Blocks.m"; sourceTree = "<group>"; };
-		3B43CC4814CE934D00E2B3CF /* MASTUIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MASTUIAlertView+Blocks.h"; sourceTree = "<group>"; };
-		3B43CC4914CE934D00E2B3CF /* MASTUIActionSheet+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MASTUIActionSheet+Blocks.m"; sourceTree = "<group>"; };
-		3B43CC4A14CE934D00E2B3CF /* MASTUIActionSheet+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MASTUIActionSheet+Blocks.h"; sourceTree = "<group>"; };
-		3B43CC4B14CE934D00E2B3CF /* MASTRIButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTRIButtonItem.m; sourceTree = "<group>"; };
-		3B43CC4C14CE934D00E2B3CF /* MASTRIButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTRIButtonItem.h; sourceTree = "<group>"; };
-		3B43CC5414CE936F00E2B3CF /* MASTGTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MASTGTMNSString+HTML.m"; sourceTree = "<group>"; };
-		3B43CC5514CE936F00E2B3CF /* MASTGTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MASTGTMNSString+HTML.h"; sourceTree = "<group>"; };
-		3B43CC5614CE936F00E2B3CF /* MASTGTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTGTMDefines.h; sourceTree = "<group>"; };
-		3B43CC5A14CE937E00E2B3CF /* MASTQSUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTQSUtilities.h; sourceTree = "<group>"; };
-		3B43CC5B14CE937E00E2B3CF /* MASTQSStrings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTQSStrings.m; sourceTree = "<group>"; };
-		3B43CC5C14CE937E00E2B3CF /* MASTQSStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTQSStrings.h; sourceTree = "<group>"; };
-		3B43CC5D14CE937E00E2B3CF /* MASTQSFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTQSFileManager.m; sourceTree = "<group>"; };
-		3B43CC5E14CE937E00E2B3CF /* MASTQSFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTQSFileManager.h; sourceTree = "<group>"; };
-		3B43CC6414CE939800E2B3CF /* MASTReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTReachability.m; sourceTree = "<group>"; };
-		3B43CC6514CE939800E2B3CF /* MASTReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTReachability.h; sourceTree = "<group>"; };
+		3B43CC4714CE934D00E2B3CF /* UIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Blocks.m"; sourceTree = "<group>"; };
+		3B43CC4814CE934D00E2B3CF /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Blocks.h"; sourceTree = "<group>"; };
+		3B43CC4914CE934D00E2B3CF /* UIActionSheet+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+Blocks.m"; sourceTree = "<group>"; };
+		3B43CC4A14CE934D00E2B3CF /* UIActionSheet+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+Blocks.h"; sourceTree = "<group>"; };
+		3B43CC4B14CE934D00E2B3CF /* RIButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RIButtonItem.m; sourceTree = "<group>"; };
+		3B43CC4C14CE934D00E2B3CF /* RIButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RIButtonItem.h; sourceTree = "<group>"; };
+		3B43CC5414CE936F00E2B3CF /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
+		3B43CC5514CE936F00E2B3CF /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
+		3B43CC5614CE936F00E2B3CF /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
+		3B43CC5A14CE937E00E2B3CF /* QSUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSUtilities.h; sourceTree = "<group>"; };
+		3B43CC5B14CE937E00E2B3CF /* QSStrings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSStrings.m; sourceTree = "<group>"; };
+		3B43CC5C14CE937E00E2B3CF /* QSStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSStrings.h; sourceTree = "<group>"; };
+		3B43CC5D14CE937E00E2B3CF /* QSFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSFileManager.m; sourceTree = "<group>"; };
+		3B43CC5E14CE937E00E2B3CF /* QSFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSFileManager.h; sourceTree = "<group>"; };
+		3B43CC6414CE939800E2B3CF /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		3B43CC6514CE939800E2B3CF /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		3B43CC6814CE93A900E2B3CF /* MASTInternalAVPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTInternalAVPlayer.m; sourceTree = "<group>"; };
 		3B43CC6914CE93A900E2B3CF /* MASTInternalAVPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTInternalAVPlayer.h; sourceTree = "<group>"; };
 		3B43CC6C14CE93B800E2B3CF /* MASTInternalBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTInternalBrowser.m; sourceTree = "<group>"; };
@@ -443,8 +443,8 @@
 		ADF1FD611201A38F008B99D2 /* Reachability */ = {
 			isa = PBXGroup;
 			children = (
-				3B43CC6414CE939800E2B3CF /* MASTReachability.m */,
-				3B43CC6514CE939800E2B3CF /* MASTReachability.h */,
+				3B43CC6514CE939800E2B3CF /* Reachability.h */,
+				3B43CC6414CE939800E2B3CF /* Reachability.m */,
 			);
 			path = Reachability;
 			sourceTree = "<group>";
@@ -515,11 +515,11 @@
 			isa = PBXGroup;
 			children = (
 				CF6DA0C7137273630051225F /* GTM */,
-				3B43CC5A14CE937E00E2B3CF /* MASTQSUtilities.h */,
-				3B43CC5B14CE937E00E2B3CF /* MASTQSStrings.m */,
-				3B43CC5C14CE937E00E2B3CF /* MASTQSStrings.h */,
-				3B43CC5D14CE937E00E2B3CF /* MASTQSFileManager.m */,
-				3B43CC5E14CE937E00E2B3CF /* MASTQSFileManager.h */,
+				3B43CC5A14CE937E00E2B3CF /* QSUtilities.h */,
+				3B43CC5C14CE937E00E2B3CF /* QSStrings.h */,
+				3B43CC5B14CE937E00E2B3CF /* QSStrings.m */,
+				3B43CC5E14CE937E00E2B3CF /* QSFileManager.h */,
+				3B43CC5D14CE937E00E2B3CF /* QSFileManager.m */,
 				CF6DA0CB137273630051225F /* LICENSE.txt */,
 				CF6DA0D3137273630051225F /* README.txt */,
 			);
@@ -529,9 +529,9 @@
 		CF6DA0C7137273630051225F /* GTM */ = {
 			isa = PBXGroup;
 			children = (
-				3B43CC5414CE936F00E2B3CF /* MASTGTMNSString+HTML.m */,
-				3B43CC5514CE936F00E2B3CF /* MASTGTMNSString+HTML.h */,
-				3B43CC5614CE936F00E2B3CF /* MASTGTMDefines.h */,
+				3B43CC5514CE936F00E2B3CF /* GTMNSString+HTML.h */,
+				3B43CC5414CE936F00E2B3CF /* GTMNSString+HTML.m */,
+				3B43CC5614CE936F00E2B3CF /* GTMDefines.h */,
 			);
 			path = GTM;
 			sourceTree = "<group>";
@@ -769,12 +769,12 @@
 		FCB54BD3142327E400867C7E /* UIAlertView-Blocks */ = {
 			isa = PBXGroup;
 			children = (
-				3B43CC4714CE934D00E2B3CF /* MASTUIAlertView+Blocks.m */,
-				3B43CC4814CE934D00E2B3CF /* MASTUIAlertView+Blocks.h */,
-				3B43CC4914CE934D00E2B3CF /* MASTUIActionSheet+Blocks.m */,
-				3B43CC4A14CE934D00E2B3CF /* MASTUIActionSheet+Blocks.h */,
-				3B43CC4B14CE934D00E2B3CF /* MASTRIButtonItem.m */,
-				3B43CC4C14CE934D00E2B3CF /* MASTRIButtonItem.h */,
+				3B43CC4814CE934D00E2B3CF /* UIAlertView+Blocks.h */,
+				3B43CC4714CE934D00E2B3CF /* UIAlertView+Blocks.m */,
+				3B43CC4A14CE934D00E2B3CF /* UIActionSheet+Blocks.h */,
+				3B43CC4914CE934D00E2B3CF /* UIActionSheet+Blocks.m */,
+				3B43CC4C14CE934D00E2B3CF /* RIButtonItem.h */,
+				3B43CC4B14CE934D00E2B3CF /* RIButtonItem.m */,
 			);
 			path = "UIAlertView-Blocks";
 			sourceTree = "<group>";
@@ -794,15 +794,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA747D9F0F9514B9006C5449 /* AdMobileSDK_Prefix.pch in Headers */,
-				3B43CC4E14CE934D00E2B3CF /* MASTUIAlertView+Blocks.h in Headers */,
-				3B43CC5014CE934D00E2B3CF /* MASTUIActionSheet+Blocks.h in Headers */,
-				3B43CC5214CE934D00E2B3CF /* MASTRIButtonItem.h in Headers */,
-				3B43CC5814CE936F00E2B3CF /* MASTGTMNSString+HTML.h in Headers */,
-				3B43CC5914CE936F00E2B3CF /* MASTGTMDefines.h in Headers */,
-				3B43CC5F14CE937E00E2B3CF /* MASTQSUtilities.h in Headers */,
-				3B43CC6114CE937E00E2B3CF /* MASTQSStrings.h in Headers */,
-				3B43CC6314CE937E00E2B3CF /* MASTQSFileManager.h in Headers */,
-				3B43CC6714CE939800E2B3CF /* MASTReachability.h in Headers */,
+				3B43CC4E14CE934D00E2B3CF /* UIAlertView+Blocks.h in Headers */,
+				3B43CC5014CE934D00E2B3CF /* UIActionSheet+Blocks.h in Headers */,
+				3B43CC5214CE934D00E2B3CF /* RIButtonItem.h in Headers */,
+				3B43CC5814CE936F00E2B3CF /* GTMNSString+HTML.h in Headers */,
+				3B43CC5914CE936F00E2B3CF /* GTMDefines.h in Headers */,
+				3B43CC5F14CE937E00E2B3CF /* QSUtilities.h in Headers */,
+				3B43CC6114CE937E00E2B3CF /* QSStrings.h in Headers */,
+				3B43CC6314CE937E00E2B3CF /* QSFileManager.h in Headers */,
+				3B43CC6714CE939800E2B3CF /* Reachability.h in Headers */,
 				3B43CC6B14CE93A900E2B3CF /* MASTInternalAVPlayer.h in Headers */,
 				3B43CC6F14CE93B800E2B3CF /* MASTInternalBrowser.h in Headers */,
 				3B43CC7514CE93C600E2B3CF /* MASTUIWebViewAdditions.h in Headers */,
@@ -949,13 +949,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3B43CC4D14CE934D00E2B3CF /* MASTUIAlertView+Blocks.m in Sources */,
-				3B43CC4F14CE934D00E2B3CF /* MASTUIActionSheet+Blocks.m in Sources */,
-				3B43CC5114CE934D00E2B3CF /* MASTRIButtonItem.m in Sources */,
-				3B43CC5714CE936F00E2B3CF /* MASTGTMNSString+HTML.m in Sources */,
-				3B43CC6014CE937E00E2B3CF /* MASTQSStrings.m in Sources */,
-				3B43CC6214CE937E00E2B3CF /* MASTQSFileManager.m in Sources */,
-				3B43CC6614CE939800E2B3CF /* MASTReachability.m in Sources */,
+				3B43CC4D14CE934D00E2B3CF /* UIAlertView+Blocks.m in Sources */,
+				3B43CC4F14CE934D00E2B3CF /* UIActionSheet+Blocks.m in Sources */,
+				3B43CC5114CE934D00E2B3CF /* RIButtonItem.m in Sources */,
+				3B43CC5714CE936F00E2B3CF /* GTMNSString+HTML.m in Sources */,
+				3B43CC6014CE937E00E2B3CF /* QSStrings.m in Sources */,
+				3B43CC6214CE937E00E2B3CF /* QSFileManager.m in Sources */,
+				3B43CC6614CE939800E2B3CF /* Reachability.m in Sources */,
 				3B43CC6A14CE93A900E2B3CF /* MASTInternalAVPlayer.m in Sources */,
 				3B43CC6E14CE93B800E2B3CF /* MASTInternalBrowser.m in Sources */,
 				3B43CC7414CE93C600E2B3CF /* MASTUIWebViewAdditions.m in Sources */,

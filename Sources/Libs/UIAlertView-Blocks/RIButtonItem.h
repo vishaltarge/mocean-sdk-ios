@@ -10,7 +10,7 @@
 
 typedef void (^RISimpleAction)();
 
-@interface MASTRIButtonItem : NSObject
+@interface RIButtonItem : NSObject
 {
     NSString *label;
     RISimpleAction action;

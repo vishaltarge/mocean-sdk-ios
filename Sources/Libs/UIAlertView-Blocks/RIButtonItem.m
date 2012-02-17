@@ -6,9 +6,9 @@
 //  Copyright 2011 Random Ideas, LLC. All rights reserved.
 //
 
-#import "MASTRIButtonItem.h"
+#import "RIButtonItem.h"
 
-@implementation MASTRIButtonItem
+@implementation RIButtonItem
 @synthesize label;
 @synthesize action;
 

@@ -9,7 +9,7 @@
 #import "MASTOrmmaConstants.h"
 #import "MASTOrmmaHelper.h"
 #import "MASTUIViewAdditions.h"
-#import "MASTReachability.h"
+#import "Reachability.h"
 #import "MASTNotificationCenter.h"
 #import "MASTLocationManager.h"
 #import "MASTAccelerometer.h"
@@ -93,7 +93,7 @@
 								 object:nil];
         
 		// start up reachability notifications
-        MASTReachability* reachability = [MASTReachability reachabilityForInternetConnection];
+        Reachability* reachability = [Reachability reachabilityForInternetConnection];
         if ([reachability respondsToSelector:@selector(startNotifier)]) {
             [reachability startNotifier];
         }
@@ -138,7 +138,7 @@
     [result appendString:[MASTOrmmaHelper setViewable:[webView isViewVisible]]];
     
     // Network
-    MASTReachability* reachability = [MASTReachability reachabilityForInternetConnection];
+    Reachability* reachability = [Reachability reachabilityForInternetConnection];
     [result appendString:[MASTOrmmaHelper setNetwork:[reachability currentReachabilityStatus]]];
     
     // Frame size
@@ -486,10 +486,10 @@
                                                            sinceDate:ekEvent.startDate] autorelease];
             [ekEvent setCalendar:[eventStore defaultCalendarForNewEvents]];
             
-            MASTRIButtonItem *noItem = [MASTRIButtonItem item];
+            RIButtonItem *noItem = [RIButtonItem item];
             noItem.label = @"No";
             
-            MASTRIButtonItem *yesItem = [MASTRIButtonItem item];
+            RIButtonItem *yesItem = [RIButtonItem item];
             yesItem.label = @"Yes";
             yesItem.action = ^ {
                 BOOL status = [eventStore saveEvent:ekEvent 
@@ -599,7 +599,7 @@
         NSURLRequest* req = [NSURLRequest requestWithURL:[NSURL URLWithString:uri]];
         
         if ([display isEqualToString:@"proxy"]) {
-            MASTReachability* reachability = [MASTReachability reachabilityForInternetConnection];
+            Reachability* reachability = [Reachability reachabilityForInternetConnection];
             if ([reachability currentReachabilityStatus] == NotReachable) {
                 [MASTObjectStorage objectForKey:uri block:^(id obj) {
                     NSData* cachedData = obj;
@@ -733,7 +733,7 @@
 
 
 - (void)handleReachabilityChangedNotification:(NSNotification *)notification {
-    MASTReachability* reachability = [MASTReachability reachabilityForInternetConnection];
+    Reachability* reachability = [Reachability reachabilityForInternetConnection];
 	[self evalJS:[MASTOrmmaHelper setNetwork:[reachability currentReachabilityStatus]]];
 }
 

@@ -9,7 +9,7 @@
 
 #import "MASTAdView.h"
 #import "MASTConstants.h"
-#import "MASTQSStrings.h"
+#import "QSStrings.h"
 
 
 @interface MASTInternalBrowser : UIViewController <UIWebViewDelegate, UIActionSheetDelegate> {

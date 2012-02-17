@@ -1,5 +1,5 @@
 //
-//  AdView.h
+//  MASTAdView.h
 //  AdMobileSDK
 //
 //  Created by Constantine Mureev on 2/22/11.
@@ -46,7 +46,7 @@ typedef enum {
 
 /** You use the MASTAdView class to embed advertisement content in your application. To do so, you simply create an MASTAdView object and add it to a UIView. An instance of MASTAdView (or simply, an ad) is a means for displaying advertisement information from ad publisher site. To choose ad publisher site set parameters in the ad initialization method initWithFrame:site:zone: or use the properties site and zone. Use the adServerUrl property to choose ad publisher server.
  
- Ad handles the rendering of any content in its area: HTML, Video, Gif animation or JavaScript. Ad also handles any interactions with that content. So you can link from the banner to ad publisher site. Use the internalOpenMode property to set open mode for ad publisher site. To control all intercations implement AdViewDelegate protocol.
+ Ad handles the rendering of any content in its area: HTML, Video, Gif animation or JavaScript. Ad also handles any interactions with that content. So you can link from the banner to ad publisher site. Use the internalOpenMode property to set open mode for ad publisher site. To control all intercations implement MASTAdViewDelegate protocol.
  
  Ad always tries to load the content after creation. The time interval between load requests is managed using the property updateTimeInterval. Also you can update ad content immediately  using the update method. Use the isLoading property to find out if ad is in the process of loading.
  
@@ -81,11 +81,11 @@ typedef enum {
 
 
 /**
- 
+ Use this method, if you want quickly to close ad and clear all resource.
  */
 - (void)stopEverythingAndNotfiyDelegateOnCleanup;
 
-/** @name Configuring the AdView */
+/** @name Configuring the MASTAdView */
 
 
 /** Id of the publisher site.
@@ -157,7 +157,7 @@ typedef enum {
  
  Setting the value of this property to NO disables internal browser, so after linking from the banner the ad publisher site will be opened in Safari.
  
- To handle opening/closing internal browser use AdView delegate or viewWillAppear/viewWillDisappear methods of UIViewController.
+ To handle opening/closing internal browser use MASTAdView delegate or viewWillAppear/viewWillDisappear methods of UIViewController.
  
  The default value is NO.
  */
@@ -179,7 +179,7 @@ If set to YES, the ad server will send a client side impression tracking pixel w
  */
 @property (retain) UIColor*             textColor;
 
-/** @name Loading the AdView Content */
+/** @name Loading the MASTAdView Content */
 
 
 /** A Boolean value that determines whether ad is in the process of loading. */
@@ -212,7 +212,7 @@ If set to YES, the ad server will send a client side impression tracking pixel w
 @property (readonly) CGSize				contentSize;
 
 
-/** @name Filtering the AdView Content*/
+/** @name Filtering the MASTAdView Content*/
 
 
 /** Ad premium filter.
@@ -386,7 +386,7 @@ If set to YES, the ad server will send a client side impression tracking pixel w
 @property (retain) NSString*			groupCode;
 
 
-/** @name Debug the AdView */
+/** @name Debug the MASTAdView */
 
 
 /** A Boolean value that determines whether ads test mode is enabled.
@@ -413,12 +413,12 @@ If set to YES, the ad server will send a client side impression tracking pixel w
 
 /** The receiver's delegate.
  
- The AdView is sent messages when content is processing. The delegate must adopt the AdViewDelegate protocol.
+ The MASTAdView is sent messages when content is processing. The delegate must adopt the MASTAdViewDelegate protocol.
  The delegate is not retained.
  
- @warning *Important:* Before releasing an instance of AdView for which you have set a delegate, you must first set its delegate property to nil. This can be done, for example, in your dealloc method.
+ @warning *Important:* Before releasing an instance of MASTAdView for which you have set a delegate, you must first set its delegate property to nil. This can be done, for example, in your dealloc method.
  
- @see AdViewDelegate Protocol Reference for the optional methods this delegate may implement.
+ @see MASTAdViewDelegate Protocol Reference for the optional methods this delegate may implement.
  */
 @property (assign) id <MASTAdViewDelegate>	delegate;
 

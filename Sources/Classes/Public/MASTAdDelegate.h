@@ -1,5 +1,5 @@
 //
-//  AdDelegate.h
+//  MASTAdViewDelegate.h
 //  AdMobileSDK
 //
 //  Created by Constantine Mureev on 2/24/11.

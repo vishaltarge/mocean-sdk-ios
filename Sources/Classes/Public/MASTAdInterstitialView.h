@@ -1,5 +1,5 @@
 //
-//  AdInterstitialView.h
+//  MASTAdInterstitialView.h
 //  AdMobileSDK
 //
 //  Created by Constantine Mureev on 2/24/11.

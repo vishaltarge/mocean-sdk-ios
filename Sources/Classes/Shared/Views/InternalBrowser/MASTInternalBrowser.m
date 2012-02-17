@@ -242,8 +242,8 @@ static MASTInternalBrowser* sharedInstance = nil;
     NSString* path = [dirPath stringByAppendingPathComponent:@"backIcon.png"];
     
     if (![[NSFileManager defaultManager] isReadableFileAtPath:path]) {
-        NSData* imageData = [MASTQSStrings decodeBase64WithString:kBackIconB64];
-        NSData* imageData2x = [MASTQSStrings decodeBase64WithString:kBackIcon2xB64];
+        NSData* imageData = [QSStrings decodeBase64WithString:kBackIconB64];
+        NSData* imageData2x = [QSStrings decodeBase64WithString:kBackIcon2xB64];
         if ([self saveToMojivaFolderData:imageData name:@"backIcon.png"] &&
             [self saveToMojivaFolderData:imageData2x name:@"backIcon@2x.png"]) {
             _backIcon = [[UIImage imageWithContentsOfFile:path] retain];
@@ -256,8 +256,8 @@ static MASTInternalBrowser* sharedInstance = nil;
     path = [dirPath stringByAppendingPathComponent:@"forwardIcon.png"];
     
     if (![[NSFileManager defaultManager] isReadableFileAtPath:path]) {
-        NSData* imageData = [MASTQSStrings decodeBase64WithString:kForwardIconB64];
-        NSData* imageData2x = [MASTQSStrings decodeBase64WithString:kForwardIcon2xB64];
+        NSData* imageData = [QSStrings decodeBase64WithString:kForwardIconB64];
+        NSData* imageData2x = [QSStrings decodeBase64WithString:kForwardIcon2xB64];
         if ([self saveToMojivaFolderData:imageData name:@"forwardIcon.png"] &&
             [self saveToMojivaFolderData:imageData2x name:@"forwardIcon@2x.png"]) {
             _forwardIcon = [[UIImage imageWithContentsOfFile:path] retain];

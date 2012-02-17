@@ -17,7 +17,7 @@
 
 #import "MASTAdView.h"
 #import "MASTNotificationCenter.h"
-#import "MASTUIAlertView+Blocks.h"
+#import "UIAlertView+Blocks.h"
 
 typedef enum ORMMAStateEnum {
 	ORMMAStateHidden = -1,

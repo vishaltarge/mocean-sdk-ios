@@ -27,7 +27,7 @@
 #define __QSUTILITIES_INCLUDE__
 
 // All Utilities Classes Go Here
-#import "MASTQSStrings.h"
-#import "MASTQSFileManager.h"
+#import "QSStrings.h"
+#import "QSFileManager.h"
 
 #endif //__QSUTILITIES_INCLUDE__

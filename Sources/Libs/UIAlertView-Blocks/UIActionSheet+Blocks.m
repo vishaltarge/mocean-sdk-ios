@@ -6,7 +6,7 @@
 //  Copyright 2011 Random Ideas, LLC. All rights reserved.
 //
 
-#import "MASTUIActionSheet+Blocks.h"
+#import "UIActionSheet+Blocks.h"
 #import <objc/runtime.h>
 
 static NSString *RI_BUTTON_ASS_KEY = @"com.random-ideas.BUTTONS";
@@ -19,26 +19,26 @@ void useCatagory6(){
 
 @implementation UIActionSheet (Blocks)
 
--(id)initWithTitle:(NSString *)inTitle cancelButtonItem:(MASTRIButtonItem *)inCancelButtonItem destructiveButtonItem:(MASTRIButtonItem *)inDestructiveItem otherButtonItems:(MASTRIButtonItem *)inOtherButtonItems, ...
+-(id)initWithTitle:(NSString *)inTitle cancelButtonItem:(RIButtonItem *)inCancelButtonItem destructiveButtonItem:(RIButtonItem *)inDestructiveItem otherButtonItems:(RIButtonItem *)inOtherButtonItems, ...
 {
     if((self = [self initWithTitle:inTitle delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil]))
     {
         NSMutableArray *buttonsArray = [NSMutableArray array];
         
-        MASTRIButtonItem *eachItem;
+        RIButtonItem *eachItem;
         va_list argumentList;
         if (inOtherButtonItems)
         {
             [buttonsArray addObject: inOtherButtonItems];
             va_start(argumentList, inOtherButtonItems);
-            while((eachItem = va_arg(argumentList, MASTRIButtonItem *)))
+            while((eachItem = va_arg(argumentList, RIButtonItem *)))
             {
                 [buttonsArray addObject: eachItem];
             }
             va_end(argumentList);
         }
         
-        for(MASTRIButtonItem *item in buttonsArray)
+        for(RIButtonItem *item in buttonsArray)
         {
             [self addButtonWithTitle:item.label];
         }
@@ -63,7 +63,7 @@ void useCatagory6(){
     return self;
 }
 
-- (void)addButtonItem:(MASTRIButtonItem *)item
+- (void)addButtonItem:(RIButtonItem *)item
 {	
     NSMutableArray *buttonsArray = objc_getAssociatedObject(self, RI_BUTTON_ASS_KEY);	
 
@@ -75,7 +75,7 @@ void useCatagory6(){
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
     NSArray *buttonsArray = objc_getAssociatedObject(self, RI_BUTTON_ASS_KEY);
-    MASTRIButtonItem *item = [buttonsArray objectAtIndex:buttonIndex];
+    RIButtonItem *item = [buttonsArray objectAtIndex:buttonIndex];
     if(item.action)
         item.action();
     objc_setAssociatedObject(self, RI_BUTTON_ASS_KEY, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);

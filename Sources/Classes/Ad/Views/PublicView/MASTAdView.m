@@ -10,7 +10,7 @@
 #import "MASTAdDescriptor.h"
 #import "MASTUIViewAdditions.h"
 #import "MASTUtils.h"
-#import "MASTQSStrings.h"
+#import "QSStrings.h"
 
 #import "MASTNotificationCenter.h"
 #import "MASTLocationManager.h"
@@ -439,8 +439,8 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     UIImage* closeIcon = nil;
     
     if (![[NSFileManager defaultManager] isReadableFileAtPath:path]) {
-        NSData* imageData = [MASTQSStrings decodeBase64WithString:kCloseIconB64];
-        NSData* imageData2x = [MASTQSStrings decodeBase64WithString:kCloseIcon2xB64];
+        NSData* imageData = [QSStrings decodeBase64WithString:kCloseIconB64];
+        NSData* imageData2x = [QSStrings decodeBase64WithString:kCloseIcon2xB64];
         if ([self saveToMojivaFolderData:imageData name:@"closeIcon.png"] &&
             [self saveToMojivaFolderData:imageData2x name:@"closeIcon@2x.png"]) {
             closeIcon = [UIImage imageWithContentsOfFile:path];

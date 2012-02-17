@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import "MASTOrmmaAdaptor.h"
-#import "MASTReachability.h"
+#import "Reachability.h"
 
 @interface MASTOrmmaHelper : NSObject
 

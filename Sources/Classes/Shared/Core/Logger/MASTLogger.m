@@ -7,7 +7,7 @@
 
 #import "MASTLogger.h"
 #import "MASTMessages.h"
-#import "MASTGTMNSString+HTML.h"
+#import "GTMNSString+HTML.h"
 
 @interface MASTLogger()
 

@@ -1,5 +1,5 @@
 /**
- * QSStrings.h
+ * QSFileManager.h
  * 
  * Copyright (c) 2010 - 2011, Quasidea Development, LLC
  * For more information, please go to http://www.quasidea.com/
@@ -26,21 +26,17 @@
 #import <Foundation/Foundation.h>
 
 
-@interface MASTQSStrings : NSObject {
+@interface QSFileManager : NSObject {
 
 }
 
-+ (NSString *)implodeArray:(NSArray *)strArray WithGlue:(NSString *)strGlue;
-+ (NSString *)implodeObjectArray:(NSArray *)objArray WithSelector:(SEL)selSelector Glue:(NSString *)strGlue;
-+ (NSString *)trimString:(NSString *)strString;
-+ (NSString *)escapeForXml:(NSString *)strString;
-+ (NSString *)xmlDateStringForDate:(NSDate *)dttDate;
-+ (NSString *)htmlEntities:(NSString *)strString;
++ (NSString *)documentsFilePathForFile:(NSString *)strFile;
 
-+ (NSString *)encodeBase64WithString:(NSString *)strData;
-+ (NSString *)encodeBase64WithData:(NSData *)objData;
-+ (NSData *)decodeBase64WithString:(NSString *)strBase64;
++ (bool)writeDocumentsFile:(NSString *)strFileName WithData:(NSData *)objData;
++ (NSData *)readDocumentsFile:(NSString *)strFileName;
 
-+ (NSString *)encodeBase64UrlWithBase64:(NSString *)strBase64;
++ (bool)writeFile:(NSString *)strFilePath WithData:(NSData *)objData;
++ (NSData *)readFile:(NSString *)strFilePath;
++ (NSInteger)fileSize:(NSString *)strFilePath;
 
 @end
