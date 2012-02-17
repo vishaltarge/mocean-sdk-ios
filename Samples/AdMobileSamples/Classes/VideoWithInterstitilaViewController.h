@@ -7,13 +7,13 @@
 
 #import <UIKit/UIKit.h>
 #import "MASTAdView.h"
-#import "MASTAdInterstitialView.h"
+#import "MASTAdView.h"
 #import "MASTAdDelegate.h"
 
 @interface VideoWithInterstitilaViewController : UIViewController <MASTAdViewDelegate>
 {
 	MASTAdView* _adView;
-	MASTAdInterstitialView* _adInterstitialView;
+	MASTAdView* _adInterstitialView;
 }
 
 @end

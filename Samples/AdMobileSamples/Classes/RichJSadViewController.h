@@ -7,11 +7,11 @@
 
 #import <UIKit/UIKit.h>
 
-#import "MASTAdInterstitialView.h"
+#import "MASTAdView.h"
 
 
 @interface RichJSadViewController : UIViewController {
-	MASTAdInterstitialView* _adView;
+	MASTAdView* _adView;
 }
 
 @end

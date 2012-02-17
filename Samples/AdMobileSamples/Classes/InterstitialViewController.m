@@ -24,7 +24,7 @@
     [imageView release];
 
 	
-	_adView = [[MASTAdInterstitialView alloc] initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, self.view.frame.size.height) site:8061 zone:96002];
+	_adView = [[MASTAdView alloc] initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, self.view.frame.size.height) site:8061 zone:96002];
     _adView.contentAlignment = YES;
     [_adView setBackgroundColor:[UIColor whiteColor]];
     _adView.minSize = CGSizeMake(320, 460);

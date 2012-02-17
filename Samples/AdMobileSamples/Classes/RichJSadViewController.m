@@ -24,7 +24,7 @@
     [imageView release];
 
 
-	_adView = [[MASTAdInterstitialView alloc] initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, self.view.frame.size.height) site:8061 zone:20664];
+	_adView = [[MASTAdView alloc] initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, self.view.frame.size.height) site:8061 zone:20664];
     _adView.contentAlignment = YES;
     _adView.type = AdTypeRichmedia;
     [_adView setBackgroundColor:[UIColor whiteColor]];
