@@ -131,9 +131,6 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     //close internal browser
     [_adModel closeInternalBrowser];
     
-    //pause video view player
-    [_adModel pauseVideoViewPlayer];
-    
     if (self.showCloseButtonTime != 0 || self.autocloseInterstitialTime != 0) {
         //close interstitial
         [self scheduledButtonAction];
@@ -217,16 +214,6 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
             [self addSubview:adWebView];
             [adWebView loadData:descriptor.serverReponse MIMEType:@"text/html" textEncodingName:@"UTF-8" baseURL:nil];
             [adWebView release];
-            
-            model.descriptor = descriptor;
-        }
-        else if (descriptor.adContentType == AdContentTypeMojivaVideo) {
-            MASTVideoView* videoView = [[MASTVideoView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-            videoView.hidden = YES;
-            [self addSubview:videoView];
-            NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:[MASTUtils aHrefUrlfromString:descriptor.serverReponseString]]];
-            [videoView showWithUrl:[MASTUtils videoUrlFromString:descriptor.serverReponseString] request:request];
-            [videoView release];
             
             model.descriptor = descriptor;
         }
@@ -421,27 +408,9 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 }
 
 - (void)visibleAd:(NSNotification*)notification {
-	MASTAdView* adView = [notification object];
-	
-	if (adView == self) {        
-        MASTAdModel* model = [self adModel];
-        if (model && model.descriptor && model.descriptor.adContentType == AdContentTypeMojivaVideo && [model.currentAdView isKindOfClass:[MASTVideoView class]]) {
-            MASTVideoView* videoView = (MASTVideoView*)model.currentAdView;
-            [videoView play];
-        }
-	}
 }
 
 - (void)invisibleAd:(NSNotification*)notification {
-	MASTAdView* adView = [notification object];
-	
-	if (adView == self) {        
-        MASTAdModel* model = [self adModel];
-        if (model && model.descriptor && model.descriptor.adContentType == AdContentTypeMojivaVideo && [model.currentAdView isKindOfClass:[MASTVideoView class]]) {
-            MASTVideoView* videoView = (MASTVideoView*)model.currentAdView;
-            [videoView pause];
-        }
-	}
 }
 
 - (BOOL)saveToMojivaFolderData:(NSData*)data name:(NSString*)name {

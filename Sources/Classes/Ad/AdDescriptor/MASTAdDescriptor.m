@@ -33,8 +33,6 @@
                 adDescriptor.adContentType = AdContentTypeInvalidParams;
             } else if ([adDescriptor.serverReponseString.lowercaseString rangeOfString:@"<!-- error: -1 -->"].location != NSNotFound) {
                 adDescriptor.adContentType = AdContentTypeInvalidParams;
-            } else if ([MASTAdDescriptorHelper isVideoContent:adDescriptor.serverReponseString]) {
-                adDescriptor.adContentType = AdContentTypeMojivaVideo;
             } else if ([MASTAdDescriptorHelper isExternalCampaign:adDescriptor.serverReponseString]) {
                 adDescriptor.externalCampaign = YES;
                 

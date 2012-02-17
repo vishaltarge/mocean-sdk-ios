@@ -65,7 +65,7 @@
        [[html lowercaseString] rangeOfString:[@"mraid" lowercaseString]].location != NSNotFound) {
         // replce ormma placeholder
         self.ormmaAdaptor = [[[MASTOrmmaAdaptor alloc] initWithWebView:self.webView adView:(MASTAdView*)self.superview] autorelease];
-        self.ormmaAdaptor.interstitial = [self.adView isKindOfClass:[MASTAdInterstitialView class]];
+        self.ormmaAdaptor.interstitial = [self.adView isKindOfClass:[MASTAdView class]];
         
         NSString* js = [NSString stringWithFormat:@"<script type=\"text/javascript\">%@</script>", [self.ormmaAdaptor getDefaultsJSCode]];
         
@@ -80,7 +80,6 @@
         [self.ormmaAdaptor moveToDefaultState];
     }
 }
-
 
 #pragma mark - UIWebViewDelegate
 

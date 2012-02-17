@@ -14,6 +14,7 @@
 #import "MASTInternalBrowser.h"
 #import "MASTVideoView.h"
 #import "MASTMessages.h"
+#import "MASTAdWebView.h"
 
 @implementation MASTAdModel
 
@@ -248,16 +249,6 @@ longitude, latitude, timeout, isUserSetMaxSize, autoCollapse, showPreviousAdOnEr
 
 - (void)closeInternalBrowser {
     [[MASTInternalBrowser sharedInstance] close];
-}
-
-- (void)pauseVideoViewPlayer {
-    for (UIView *view in self.adView.subviews) {
-        if ([view isKindOfClass:[MASTVideoView class]]) {
-            MASTVideoView *videoView = (MASTVideoView*)view;
-            [videoView pause];
-            [videoView setFullscreen:NO animated:NO];
-        }
-    }
 }
 
 @end
