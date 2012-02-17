@@ -7,6 +7,7 @@
 
 #import "MASTLogger.h"
 #import "MASTMessages.h"
+#import "MASTGTMNSString+HTML.h"
 
 @interface MASTLogger()
 
@@ -16,6 +17,7 @@
 - (void)enableLogForAd:(MASTAdView*)adView withLevel:(AdLogMode)logMode;
 - (void)disableLogForAd:(MASTAdView*)adView;
 - (BOOL)isLogEnabled:(MASTAdView*)adView forLevel:(AdLogMode)level;
+- (void)printLogInFileWithMessage:(NSString*)message;
 
 + (void)showAlertWithMessage:(NSString*)message;
 + (void)printLogWithMessage:(NSString*)message;
@@ -243,6 +245,34 @@ static MASTLogger* sharedInstance = nil;
    //});
 }
 
+- (void)printLogInFileWithMessage:(NSString*)message {    
+    NSString* dirPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Library/Caches"];
+    NSString* path = [dirPath stringByAppendingPathComponent:@"mOcean_SDK_log.txt"];
+    
+    NSDateFormatter* dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+	[dateFormatter setDateFormat:@"yyyy.MM.dd hh:mm:ss"];
+    
+    NSString *newMessage = [NSString stringWithFormat:[NSString stringWithFormat:@"%@ :: Ad %@\n", [dateFormatter stringFromDate:[NSDate date]], message]];
+    
+    // convert the string to an NSData object
+    NSData *textData = [newMessage dataUsingEncoding:NSUTF8StringEncoding];
+    
+    if (![[NSFileManager defaultManager] isReadableFileAtPath:path]) {
+        [[NSFileManager defaultManager] createFileAtPath:path contents:textData attributes:nil];
+    } else {
+        NSFileHandle *fileHandle = [NSFileHandle fileHandleForUpdatingAtPath:path];
+        
+        // move to the end of the file
+        [fileHandle seekToEndOfFile];
+		
+        // write the data to the end of the file
+        [fileHandle writeData:textData];
+		
+        // clean up
+        [fileHandle closeFile];
+    }
+}
+
 + (void)showAlertWithMessage:(NSString*)message
 {
 	if (TARGET_IPHONE_SIMULATOR) {
@@ -262,6 +292,8 @@ static MASTLogger* sharedInstance = nil;
 {
 	if (message && [message length] > 0) {
 		NSLog(@":: Ad %@", message);
+        
+        [sharedInstance printLogInFileWithMessage:message];
 	}
 }
 

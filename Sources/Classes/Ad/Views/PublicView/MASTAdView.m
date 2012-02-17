@@ -149,7 +149,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     self.internalOpenMode = NO;
     self.testMode = NO;
     self.premium = AdPremiumBoth;
-    self.timeout = DEFAULT_UPDATE_TIMEINTERVAL; //1 sec
+    self.timeout = DEFAULT_TIMEOUT_VALUE; //1 sec
     self.maxSize = CGSizeMake(self.frame.size.width, self.frame.size.height);
     self.autoCollapse = YES;
     self.showPreviousAdOnError = YES;
