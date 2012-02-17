@@ -18,6 +18,6 @@
 
 + (MASTWebKitInfo*)sharedInstance;
 + (void)releaseSharedInstance;
-
++ (NSString*)userAgent;
 
 @end

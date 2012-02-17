@@ -7,6 +7,7 @@
 #import "MASTNetworkQueue.h"
 #import "MASTRequestOperation.h"
 #import "MASTNetworkActivityIndicatorManager.h"
+#import "MASTWebKitInfo.h"
 
 @implementation MASTNetworkQueue
 
@@ -25,6 +26,7 @@ static NSOperationQueue* get_network_operations_io_queue() {
     if (![NSThread isMainThread]) {
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[urlRequest URL]];
         [(NSMutableDictionary*)[request allHTTPHeaderFields] removeObjectForKey:@"Keep-Alive"];
+        [request setValue:[MASTWebKitInfo userAgent] forHTTPHeaderField:@"User-Agent"];
         
         urlRequest = (NSURLRequest*)[request retain];
         

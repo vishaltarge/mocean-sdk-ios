@@ -95,7 +95,9 @@ static MASTWebKitInfo* sharedInstance = nil;
 
 #pragma mark -
 #pragma mark Public
-
++ (NSString*)userAgent {
+    return sharedInstance.ua;
+}
 
 //
 
