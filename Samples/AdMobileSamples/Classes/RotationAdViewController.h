@@ -6,11 +6,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AdView.h"
+#import "MASTAdView.h"
 
 
 @interface RotationAdViewController : UIViewController {
-	AdView* _adView;
+	MASTAdView* _adView;
 }
 
 @end

@@ -12,7 +12,7 @@
 - (id)initWithFrame:(CGRect)frame {
     self = [super init];
     if (self) {        
-        _adView = [[AdInterstitialView alloc] initWithFrame:frame site:8061 zone:16112];
+        _adView = [[MASTAdInterstitialView alloc] initWithFrame:frame site:8061 zone:16112];
         _adView.contentAlignment = YES;
         _adView.minSize = CGSizeMake(320, 460);
         _adView.showCloseButtonTime = 5;

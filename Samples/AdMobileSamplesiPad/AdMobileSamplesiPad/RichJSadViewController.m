@@ -17,7 +17,7 @@
         [self.view addSubview:imageView];
         [imageView release];
         
-        _adView = [[AdInterstitialView alloc] initWithFrame:frame site:8061 zone:20664];
+        _adView = [[MASTAdInterstitialView alloc] initWithFrame:frame site:8061 zone:20664];
         _adView.updateTimeInterval = 60;
         _adView.minSize = CGSizeMake(320, 460);
         _adView.showCloseButtonTime = 5;

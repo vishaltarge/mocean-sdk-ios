@@ -6,12 +6,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AdView.h"
-#import "AdDelegate.h"
+#import "MASTAdView.h"
+#import "MASTAdDelegate.h"
 
-@interface TableViewAnimationViewController : UIViewController <UITableViewDataSource, AdViewDelegate>
+@interface TableViewAnimationViewController : UIViewController <UITableViewDataSource, MASTAdViewDelegate>
 {
-	AdView* _adView;
+	MASTAdView* _adView;
 	
 	UITableView* _tableView;
 }

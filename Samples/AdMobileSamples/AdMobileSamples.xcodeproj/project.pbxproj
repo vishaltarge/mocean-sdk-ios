@@ -49,7 +49,6 @@
 		CFD0702B130A5AB700915735 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CFD07026130A5AB700915735 /* Icon.png */; };
 		CFD0702E130A5AB700915735 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = CFD07029130A5AB700915735 /* Icon-72.png */; };
 		CFED897913B0C4DC00761B9C /* libAdMobileSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CFBA6E0013B0599900CCE607 /* libAdMobileSDK.a */; };
-		FC428BF013EFBCC0001B3B6E /* SAS.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FC428BEF13EFBCC0001B3B6E /* SAS.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +99,9 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* AdMobileSamples_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMobileSamples_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* AdMobileSamples-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AdMobileSamples-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		AC2EB58014F21BB60000B336 /* MASTAdDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTAdDelegate.h; sourceTree = "<group>"; };
+		AC2EB58114F21BB60000B336 /* MASTAdInterstitialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTAdInterstitialView.h; sourceTree = "<group>"; };
+		AC2EB58214F21BB60000B336 /* MASTAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTAdView.h; sourceTree = "<group>"; };
 		ACB48EAD14EFAF7C00AC50F6 /* AdMobileSamplesBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMobileSamplesBaseViewController.h; sourceTree = "<group>"; };
 		ACB48EAE14EFAF7C00AC50F6 /* AdMobileSamplesBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdMobileSamplesBaseViewController.m; sourceTree = "<group>"; };
 		ACC770261382B7F9005074D8 /* ORMMAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORMMAViewController.h; sourceTree = "<group>"; };
@@ -118,9 +120,6 @@
 		AD2D17DE148D0C4A00D0B576 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		ADAF1C6E126876F600AD88B8 /* DefaultImage (320x240).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultImage (320x240).png"; sourceTree = "<group>"; };
 		ADAF1C721268775200AD88B8 /* DefaultImage (320x50).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultImage (320x50).png"; sourceTree = "<group>"; };
-		CF08E18713B3674F00653A17 /* AdDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdDelegate.h; sourceTree = "<group>"; };
-		CF08E18813B3674F00653A17 /* AdInterstitialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdInterstitialView.h; sourceTree = "<group>"; };
-		CF08E18913B3674F00653A17 /* AdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdView.h; sourceTree = "<group>"; };
 		CF1ABF25130E608000A6859F /* Shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.fsh; sourceTree = "<group>"; };
 		CF1ABF26130E608000A6859F /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.vsh; sourceTree = "<group>"; };
 		CF2C608512FC2E4400A103C5 /* RotationAdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RotationAdViewController.h; sourceTree = "<group>"; };
@@ -274,7 +273,6 @@
 		CFD07025130A5AB700915735 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		CFD07026130A5AB700915735 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		CFD07029130A5AB700915735 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
-		FC428BEF13EFBCC0001B3B6E /* SAS.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SAS.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -490,9 +488,9 @@
 		CF08E18613B3674F00653A17 /* Public */ = {
 			isa = PBXGroup;
 			children = (
-				CF08E18713B3674F00653A17 /* AdDelegate.h */,
-				CF08E18813B3674F00653A17 /* AdInterstitialView.h */,
-				CF08E18913B3674F00653A17 /* AdView.h */,
+				AC2EB58014F21BB60000B336 /* MASTAdDelegate.h */,
+				AC2EB58114F21BB60000B336 /* MASTAdInterstitialView.h */,
+				AC2EB58214F21BB60000B336 /* MASTAdView.h */,
 			);
 			name = Public;
 			path = ../../../Sources/Classes/Public;
@@ -502,7 +500,6 @@
 			isa = PBXGroup;
 			children = (
 				CF08E18613B3674F00653A17 /* Public */,
-				FC428BEE13EFBCC0001B3B6E /* Bundles */,
 				CFBA6DF713B0599800CCE607 /* AdMobileSDK.xcodeproj */,
 				CFBBD63213BDD16D007ADECA /* Private */,
 			);
@@ -1173,15 +1170,6 @@
 			path = JSON;
 			sourceTree = "<group>";
 		};
-		FC428BEE13EFBCC0001B3B6E /* Bundles */ = {
-			isa = PBXGroup;
-			children = (
-				FC428BEF13EFBCC0001B3B6E /* SAS.bundle */,
-			);
-			name = Bundles;
-			path = ../../../Sources/Bundles;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1270,7 +1258,6 @@
 				CF6313111345BBED00399622 /* Default@2x.png in Resources */,
 				CF6313121345BBED00399622 /* Default.png in Resources */,
 				CF6313151345BF7F00399622 /* Default-Portrait.png in Resources */,
-				FC428BF013EFBCC0001B3B6E /* SAS.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -42,24 +42,24 @@
     _adView.type = AdTypeAll;
     [_adView update];
 }
-
+/*
 - (void)sendRequest:(NSNotification*)notification {
     if ([notification object] == _adView) {
         self.request = [[_adView adModel] url];
         
-        /*if ([NSThread isMainThread]) {
+        if ([NSThread isMainThread]) {
             [self pickOne:_segmentedControl];
         } else {
             [self performSelectorOnMainThread:@selector(pickOne:)
                                    withObject:_segmentedControl
                                 waitUntilDone:NO];
-        }*/
+        }
     }
-}
+}*/
 
 - (void)adDownloadedWithResponse:(NSNotification*)notification {
     NSDictionary *info = [notification object];
-	AdView* adView = [info objectForKey:@"adView"];
+	MASTAdView* adView = [info objectForKey:@"adView"];
     
     if (_adView == adView) {
         NSData* data = [info objectForKey:@"data"];
@@ -81,12 +81,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [[NotificationCenter sharedInstance] addObserver:self selector:@selector(sendRequest:) name:kStartAdDownloadNotification object:nil];
-    [[NotificationCenter sharedInstance] addObserver:self selector:@selector(adDownloadedWithResponse:) name:kFinishAdDownloadNotification object:nil];
+    //[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(sendRequest:) name:kStartAdDownloadNotification object:nil];
+    //[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(adDownloadedWithResponse:) name:kFinishAdDownloadNotification object:nil];
 	
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     	
-	_adView = [[AdView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50) site:8061 zone:20249];
+	_adView = [[MASTAdView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50) site:8061 zone:20249];
 	_adView.updateTimeInterval = 0; // disable updates
 	_adView.logMode = YES;
     _adView.delegate = self;
@@ -150,7 +150,7 @@
 }
 
 - (void) dealloc {
-    [[NotificationCenter sharedInstance] removeObserver:self];
+    //[[MASTNotificationCenter sharedInstance] removeObserver:self];
     _adView.delegate = nil;
 	[_adView release];
     

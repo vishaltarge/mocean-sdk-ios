@@ -6,14 +6,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AdView.h"
-#import "AdInterstitialView.h"
-#import "AdDelegate.h"
+#import "MASTAdView.h"
+#import "MASTAdInterstitialView.h"
+#import "MASTAdDelegate.h"
 
-@interface VideoWithInterstitilaViewController : UIViewController<AdViewDelegate>
+@interface VideoWithInterstitilaViewController : UIViewController<MASTAdViewDelegate>
 {
-	AdView* _adView;
-	AdInterstitialView* _adInterstitialView;
+	MASTAdView* _adView;
+	MASTAdInterstitialView* _adInterstitialView;
 }
 
 - (id)initWithFrame:(CGRect)frame;

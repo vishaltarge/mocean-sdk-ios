@@ -17,7 +17,7 @@
         [self.view addSubview:imageView];
         [imageView release];
         
-        _adView = [[AdView alloc] initWithFrame:frame site:8061 zone:17487];
+        _adView = [[MASTAdView alloc] initWithFrame:frame site:8061 zone:17487];
         _adView.updateTimeInterval = 15;
         _adView.contentAlignment = YES;
         _adView.type = AdTypeRichmedia;

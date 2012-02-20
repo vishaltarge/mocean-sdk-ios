@@ -6,7 +6,7 @@
 //
 
 #import "TableViewCellSampleViewController.h"
-#import "AdView.h"
+#import "MASTAdView.h"
 
 #define ADS_COUNT 1000
 
@@ -21,7 +21,7 @@
 
 - (void) dealloc
 {
-    for (AdView* ad in _ads) {
+    for (MASTAdView* ad in _ads) {
         [ad removeFromSuperview];
     }
     [_ads release];
@@ -47,7 +47,7 @@
 	if (!cell) {
 		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
 		
-        AdView* ad = [[AdView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50) site:8061 zone:20249];
+        MASTAdView* ad = [[MASTAdView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50) site:8061 zone:20249];
 		ad.updateTimeInterval = 15;
         [_ads addObject:ad];
         

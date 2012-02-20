@@ -68,7 +68,7 @@
 	}
     [imageView release];
 	
-	_adView = [[AdView alloc] initWithFrame:[self getBannerFrame]];
+	_adView = [[MASTAdView alloc] initWithFrame:[self getBannerFrame]];
 	[_adView setAutoresizingMask:[self getBannerAutoresizing]];
     _adView.site = [self getBannerSite];
     _adView.zone = [self getBannerZone];

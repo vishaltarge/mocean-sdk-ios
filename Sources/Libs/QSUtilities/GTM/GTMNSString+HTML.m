@@ -18,7 +18,7 @@
 //
 
 #import "GTMDefines.h"
-#import "GTMNSString+HTML.h"
+#import "QSUtilities.h"
 
 typedef struct {
   NSString *escapeSequence;

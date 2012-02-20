@@ -5,7 +5,7 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/cl/AdInterstitialView</TokenIdentifier>
 			<Abstract>The AdInterstitialView class is subclassing of AdView with advanced customization parameters. An instance of AdInterstitialView  is a means for full-screen displaying ads with specific closing.</Abstract>
-			<DeclaredIn>AdInterstitialView.h</DeclaredIn>
+			<DeclaredIn>MASTAdInterstitialView.h</DeclaredIn>
 			
 			<NodeRef refid="1"/>
 		</Token>
@@ -14,7 +14,7 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdInterstitialView/closeButton</TokenIdentifier>
 			<Abstract>Close button.</Abstract>
-			<DeclaredIn>AdInterstitialView.h</DeclaredIn>			
+			<DeclaredIn>MASTAdInterstitialView.h</DeclaredIn>			
 			
 			<Declaration>@property (retain) UIButton *closeButton</Declaration>
 			
@@ -25,7 +25,7 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdInterstitialView/showCloseButtonTime</TokenIdentifier>
 			<Abstract>Show close button delay time interval, in seconds.</Abstract>
-			<DeclaredIn>AdInterstitialView.h</DeclaredIn>			
+			<DeclaredIn>MASTAdInterstitialView.h</DeclaredIn>			
 			
 			<Declaration>@property NSTimeInterval showCloseButtonTime</Declaration>
 			
@@ -36,7 +36,7 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdInterstitialView/autocloseInterstitialTime</TokenIdentifier>
 			<Abstract>Auto close interstitial time interval, in seconds.</Abstract>
-			<DeclaredIn>AdInterstitialView.h</DeclaredIn>			
+			<DeclaredIn>MASTAdInterstitialView.h</DeclaredIn>			
 			
 			<Declaration>@property NSTimeInterval autocloseInterstitialTime</Declaration>
 			
@@ -47,7 +47,7 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/AdInterstitialView/delegate</TokenIdentifier>
 			<Abstract>The receiver's delegate.</Abstract>
-			<DeclaredIn>AdInterstitialView.h</DeclaredIn>			
+			<DeclaredIn>MASTAdInterstitialView.h</DeclaredIn>			
 			
 	<RelatedTokens>
 		<TokenIdentifier>//apple_ref/occ/instp/AdInterstitialView/delegate</TokenIdentifier>

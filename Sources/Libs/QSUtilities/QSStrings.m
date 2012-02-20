@@ -24,7 +24,6 @@
  */
 
 #import "QSUtilities.h"
-#import "GTMNSString+HTML.h"
 
 static const char _base64EncodingTable[64] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 static const short _base64DecodingTable[256] = {

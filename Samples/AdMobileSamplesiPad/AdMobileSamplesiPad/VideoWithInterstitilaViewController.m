@@ -20,13 +20,13 @@
                                                     alpha:1.0];
         
         
-        _adView = [[AdView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height) site:8061 zone:16109];
+        _adView = [[MASTAdView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height) site:8061 zone:16109];
         _adView.updateTimeInterval = 60;
         _adView.type = AdTypeRichmedia;
         
         [self.view addSubview:_adView];
         
-        _adInterstitialView = [[AdInterstitialView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height) site:8061 zone:16112];
+        _adInterstitialView = [[MASTAdInterstitialView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height) site:8061 zone:16112];
         _adInterstitialView.contentAlignment = YES;
         _adView.contentAlignment = YES;
         _adView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;

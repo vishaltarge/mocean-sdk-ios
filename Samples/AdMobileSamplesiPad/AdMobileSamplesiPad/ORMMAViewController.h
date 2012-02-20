@@ -6,10 +6,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AdView.h"
+#import "MASTAdView.h"
 
 @interface ORMMAViewController : UIViewController {
-	AdView* _adView;
+	MASTAdView* _adView;
 }
 
 - (id)initWithFrame:(CGRect)frame;

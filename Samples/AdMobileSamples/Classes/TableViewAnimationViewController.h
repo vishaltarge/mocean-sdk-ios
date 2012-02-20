@@ -8,7 +8,7 @@
 #import <UIKit/UIKit.h>
 #import "AdMobileSamplesBaseViewController.h"
 
-@interface TableViewAnimationViewController : AdMobileSamplesBaseViewController <UITableViewDataSource, AdViewDelegate>
+@interface TableViewAnimationViewController : AdMobileSamplesBaseViewController <UITableViewDataSource, MASTAdViewDelegate>
 {
 	UITableView* _tableView;
 }

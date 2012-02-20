@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AdView.h"
-#import "AdDelegate.h"
+#import "MASTAdView.h"
+#import "MASTAdDelegate.h"
 
 @interface AdMobileSamplesBaseViewController : UIViewController
 {
-	AdView* _adView;
+	MASTAdView* _adView;
 }
 
 @end

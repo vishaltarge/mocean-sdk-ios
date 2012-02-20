@@ -6,7 +6,7 @@
 //
 
 #import "TableViewCellSampleViewController.h"
-#import "AdView.h"
+#import "MASTAdView.h"
 
 #define ADS_COUNT 1000
 
@@ -46,7 +46,7 @@
 	{
 		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
 		
-        AdView* ad = [[AdView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50) site:8061 zone:20249];
+        MASTAdView* ad = [[MASTAdView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50) site:8061 zone:20249];
 		ad.updateTimeInterval = 5;
         ad.contentAlignment = YES;
         
