@@ -11,7 +11,6 @@
 		16411994120991CA00A2D460 /* TableViewAnimationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16411993120991CA00A2D460 /* TableViewAnimationViewController.m */; };
 		16411A6012099C1800A2D460 /* VideoWithInterstitilaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16411A5F12099C1800A2D460 /* VideoWithInterstitilaViewController.m */; };
 		164E23211206EFE200FF5FD0 /* BannerAnimationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 164E23201206EFE200FF5FD0 /* BannerAnimationViewController.m */; };
-		167994691206E28500AE330E /* InterstitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 167994681206E28500AE330E /* InterstitialViewController.m */; };
 		167994981206E7BB00AE330E /* VideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 167994971206E7BB00AE330E /* VideoViewController.m */; };
 		16BB05AF1209513600DBCF9A /* TableViewCellSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BB05AE1209513600DBCF9A /* TableViewCellSampleViewController.m */; };
 		1D3623260D0F684500981E51 /* AdMobileSamplesAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AdMobileSamplesAppDelegate.m */; };
@@ -19,6 +18,7 @@
 		2899E5220DE3E06400AC0155 /* AdMobileSamplesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* AdMobileSamplesViewController.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* AdMobileSamplesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* AdMobileSamplesViewController.m */; };
+		ACB48EAF14EFAF7C00AC50F6 /* AdMobileSamplesBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACB48EAE14EFAF7C00AC50F6 /* AdMobileSamplesBaseViewController.m */; };
 		ACC770281382B7F9005074D8 /* ORMMAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACC770271382B7F9005074D8 /* ORMMAViewController.m */; };
 		AD0ECA2F120C1B38008216A6 /* DelegateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0ECA2E120C1B38008216A6 /* DelegateViewController.m */; };
 		AD2D17CE148D0BB300D0B576 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD2D17CD148D0BB300D0B576 /* QuartzCore.framework */; };
@@ -33,7 +33,6 @@
 		AD2D17E0148D0C4A00D0B576 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD2D17DE148D0C4A00D0B576 /* MessageUI.framework */; };
 		ADAF1C6F126876F600AD88B8 /* DefaultImage (320x240).png in Resources */ = {isa = PBXBuildFile; fileRef = ADAF1C6E126876F600AD88B8 /* DefaultImage (320x240).png */; };
 		ADAF1C731268775200AD88B8 /* DefaultImage (320x50).png in Resources */ = {isa = PBXBuildFile; fileRef = ADAF1C721268775200AD88B8 /* DefaultImage (320x50).png */; };
-		CF0DF283130BD868005A6FB3 /* DebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF0DF281130BD868005A6FB3 /* DebugViewController.m */; };
 		CF1ABF27130E608000A6859F /* Shader.fsh in Sources */ = {isa = PBXBuildFile; fileRef = CF1ABF25130E608000A6859F /* Shader.fsh */; };
 		CF1ABF28130E608000A6859F /* Shader.vsh in Sources */ = {isa = PBXBuildFile; fileRef = CF1ABF26130E608000A6859F /* Shader.vsh */; };
 		CF1ABF42130E609400A6859F /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = CF1ABF25130E608000A6859F /* Shader.fsh */; };
@@ -51,7 +50,6 @@
 		CFD0702E130A5AB700915735 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = CFD07029130A5AB700915735 /* Icon-72.png */; };
 		CFED897913B0C4DC00761B9C /* libAdMobileSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CFBA6E0013B0599900CCE607 /* libAdMobileSDK.a */; };
 		FC428BF013EFBCC0001B3B6E /* SAS.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FC428BEF13EFBCC0001B3B6E /* SAS.bundle */; };
-		FCF61E511414FBA1007B0BCA /* SimpleBannerRetinaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF61E501414FBA1007B0BCA /* SimpleBannerRetinaViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,8 +86,6 @@
 		164E231F1206EFE200FF5FD0 /* BannerAnimationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerAnimationViewController.h; sourceTree = "<group>"; };
 		164E23201206EFE200FF5FD0 /* BannerAnimationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerAnimationViewController.m; sourceTree = "<group>"; };
 		167994291206DD1A00AE330E /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
-		167994671206E28500AE330E /* InterstitialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterstitialViewController.h; sourceTree = "<group>"; };
-		167994681206E28500AE330E /* InterstitialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterstitialViewController.m; sourceTree = "<group>"; };
 		167994961206E7BB00AE330E /* VideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoViewController.h; sourceTree = "<group>"; };
 		167994971206E7BB00AE330E /* VideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoViewController.m; sourceTree = "<group>"; };
 		16BB05AD1209513600DBCF9A /* TableViewCellSampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCellSampleViewController.h; sourceTree = "<group>"; };
@@ -104,6 +100,8 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* AdMobileSamples_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMobileSamples_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* AdMobileSamples-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AdMobileSamples-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		ACB48EAD14EFAF7C00AC50F6 /* AdMobileSamplesBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMobileSamplesBaseViewController.h; sourceTree = "<group>"; };
+		ACB48EAE14EFAF7C00AC50F6 /* AdMobileSamplesBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdMobileSamplesBaseViewController.m; sourceTree = "<group>"; };
 		ACC770261382B7F9005074D8 /* ORMMAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORMMAViewController.h; sourceTree = "<group>"; };
 		ACC770271382B7F9005074D8 /* ORMMAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORMMAViewController.m; sourceTree = "<group>"; };
 		AD0ECA2D120C1B38008216A6 /* DelegateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelegateViewController.h; sourceTree = "<group>"; };
@@ -123,8 +121,6 @@
 		CF08E18713B3674F00653A17 /* AdDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdDelegate.h; sourceTree = "<group>"; };
 		CF08E18813B3674F00653A17 /* AdInterstitialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdInterstitialView.h; sourceTree = "<group>"; };
 		CF08E18913B3674F00653A17 /* AdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdView.h; sourceTree = "<group>"; };
-		CF0DF281130BD868005A6FB3 /* DebugViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DebugViewController.m; sourceTree = "<group>"; };
-		CF0DF282130BD868005A6FB3 /* DebugViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugViewController.h; sourceTree = "<group>"; };
 		CF1ABF25130E608000A6859F /* Shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.fsh; sourceTree = "<group>"; };
 		CF1ABF26130E608000A6859F /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.vsh; sourceTree = "<group>"; };
 		CF2C608512FC2E4400A103C5 /* RotationAdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RotationAdViewController.h; sourceTree = "<group>"; };
@@ -279,8 +275,6 @@
 		CFD07026130A5AB700915735 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		CFD07029130A5AB700915735 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		FC428BEF13EFBCC0001B3B6E /* SAS.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SAS.bundle; sourceTree = "<group>"; };
-		FCF61E4F1414FBA1007B0BCA /* SimpleBannerRetinaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleBannerRetinaViewController.h; sourceTree = "<group>"; };
-		FCF61E501414FBA1007B0BCA /* SimpleBannerRetinaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleBannerRetinaViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -324,12 +318,10 @@
 		1619F3AF1206D19F00BEA21D /* Simple */ = {
 			isa = PBXGroup;
 			children = (
-				FCF61E4E1414FB4C007B0BCA /* Simple Banner (Retina) */,
 				ACC770251382B7EC005074D8 /* ORMMA */,
 				CF840589130E990B00EC0AF8 /* RichJS */,
 				CF840381130E679D00EC0AF8 /* OpenGL */,
 				167994951206E7AC00AE330E /* Video */,
-				167994631206E25B00AE330E /* Interstitial */,
 				1619F3C81206D34B00BEA21D /* Simple Banner */,
 			);
 			name = Simple;
@@ -362,15 +354,6 @@
 			name = "Simple Banner Animation";
 			sourceTree = "<group>";
 		};
-		167994631206E25B00AE330E /* Interstitial */ = {
-			isa = PBXGroup;
-			children = (
-				167994671206E28500AE330E /* InterstitialViewController.h */,
-				167994681206E28500AE330E /* InterstitialViewController.m */,
-			);
-			name = Interstitial;
-			sourceTree = "<group>";
-		};
 		167994951206E7AC00AE330E /* Video */ = {
 			isa = PBXGroup;
 			children = (
@@ -384,11 +367,12 @@
 			isa = PBXGroup;
 			children = (
 				CFBBD62E13BDC715007ADECA /* Testing */,
-				CF0DF275130BD7E9005A6FB3 /* Debug */,
 				CF2C608412FC2E2600A103C5 /* RotationAdView */,
 				AD0ECA2C120C1B10008216A6 /* Delegate */,
 				16BB05AB12094F2800DBCF9A /* Video with Interstitial */,
 				16BB05A812094EAE00DBCF9A /* TableViewCell */,
+				ACB48EAD14EFAF7C00AC50F6 /* AdMobileSamplesBaseViewController.h */,
+				ACB48EAE14EFAF7C00AC50F6 /* AdMobileSamplesBaseViewController.m */,
 			);
 			name = Advanced;
 			sourceTree = "<group>";
@@ -523,15 +507,6 @@
 				CFBBD63213BDD16D007ADECA /* Private */,
 			);
 			name = AdMobileSDK;
-			sourceTree = "<group>";
-		};
-		CF0DF275130BD7E9005A6FB3 /* Debug */ = {
-			isa = PBXGroup;
-			children = (
-				CF0DF282130BD868005A6FB3 /* DebugViewController.h */,
-				CF0DF281130BD868005A6FB3 /* DebugViewController.m */,
-			);
-			name = Debug;
 			sourceTree = "<group>";
 		};
 		CF1ABF24130E608000A6859F /* Shaders */ = {
@@ -1207,15 +1182,6 @@
 			path = ../../../Sources/Bundles;
 			sourceTree = "<group>";
 		};
-		FCF61E4E1414FB4C007B0BCA /* Simple Banner (Retina) */ = {
-			isa = PBXGroup;
-			children = (
-				FCF61E4F1414FBA1007B0BCA /* SimpleBannerRetinaViewController.h */,
-				FCF61E501414FBA1007B0BCA /* SimpleBannerRetinaViewController.m */,
-			);
-			name = "Simple Banner (Retina)";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1319,7 +1285,6 @@
 				1D3623260D0F684500981E51 /* AdMobileSamplesAppDelegate.m in Sources */,
 				28D7ACF80DDB3853001CB0EB /* AdMobileSamplesViewController.m in Sources */,
 				1619F3CC1206D36400BEA21D /* SimpleBannerViewController.m in Sources */,
-				167994691206E28500AE330E /* InterstitialViewController.m in Sources */,
 				167994981206E7BB00AE330E /* VideoViewController.m in Sources */,
 				164E23211206EFE200FF5FD0 /* BannerAnimationViewController.m in Sources */,
 				16BB05AF1209513600DBCF9A /* TableViewCellSampleViewController.m in Sources */,
@@ -1327,7 +1292,6 @@
 				16411A6012099C1800A2D460 /* VideoWithInterstitilaViewController.m in Sources */,
 				AD0ECA2F120C1B38008216A6 /* DelegateViewController.m in Sources */,
 				CF2C608712FC2E4400A103C5 /* RotationAdViewController.m in Sources */,
-				CF0DF283130BD868005A6FB3 /* DebugViewController.m in Sources */,
 				CF1ABF27130E608000A6859F /* Shader.fsh in Sources */,
 				CF1ABF28130E608000A6859F /* Shader.vsh in Sources */,
 				CF840386130E67B200EC0AF8 /* OpenGLViewController.m in Sources */,
@@ -1335,7 +1299,7 @@
 				CF84058C130E992300EC0AF8 /* RichJSadViewController.m in Sources */,
 				ACC770281382B7F9005074D8 /* ORMMAViewController.m in Sources */,
 				CFBBD63113BDC73D007ADECA /* TestingViewController.m in Sources */,
-				FCF61E511414FBA1007B0BCA /* SimpleBannerRetinaViewController.m in Sources */,
+				ACB48EAF14EFAF7C00AC50F6 /* AdMobileSamplesBaseViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,11 +15,11 @@
 #import <OpenGLES/ES2/glext.h>
 
 #import "EAGLView.h"
-#import "AdView.h"
+
+#import "AdMobileSamplesBaseViewController.h"
 
 
-@interface OpenGLViewController : UIViewController {
-	AdView*			_adView;
+@interface OpenGLViewController : AdMobileSamplesBaseViewController {
 	EAGLView*		eaglView;
     EAGLContext*	context;
     GLuint			program;

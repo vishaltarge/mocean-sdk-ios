@@ -6,13 +6,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AdView.h"
-#import "AdDelegate.h"
+#import "AdMobileSamplesBaseViewController.h"
 
-@interface TableViewAnimationViewController : UIViewController <UITableViewDataSource, AdViewDelegate>
+@interface TableViewAnimationViewController : AdMobileSamplesBaseViewController <UITableViewDataSource, AdViewDelegate>
 {
-	AdView* _adView;
-	
 	UITableView* _tableView;
 }
 

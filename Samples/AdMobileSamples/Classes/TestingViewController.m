@@ -13,12 +13,12 @@
 
 @synthesize request, response;
 
-
+/*
 - (void)textFieldDone:(id)sender {
     [sender resignFirstResponder];
-}
+}*/
 
-- (void)pickOne:(id)sender {
+/*- (void)pickOne:(id)sender {
     if (_segmentedControl.selectedSegmentIndex == 0) {
         if (self.request) {
             _textView.text = self.request;
@@ -32,11 +32,11 @@
             _textView.text = @"";
         }
     }
-} 
+}*/
 
 - (void)update:(id)sender {
     self.request = nil;
-    [self pickOne:_segmentedControl];
+    //[self pickOne:_segmentedControl];
     _adView.site = [[_siteTextField text] intValue];
     _adView.zone = [[_zoneTextField text] intValue];
     _adView.type = AdTypeAll;
@@ -47,13 +47,13 @@
     if ([notification object] == _adView) {
         self.request = [[_adView adModel] url];
         
-        if ([NSThread isMainThread]) {
+        /*if ([NSThread isMainThread]) {
             [self pickOne:_segmentedControl];
         } else {
             [self performSelectorOnMainThread:@selector(pickOne:)
                                    withObject:_segmentedControl
                                 waitUntilDone:NO];
-        }
+        }*/
     }
 }
 
@@ -68,13 +68,13 @@
         self.response = dataResponse;
         [dataResponse release];
         
-        if ([NSThread isMainThread]) {
+        /*if ([NSThread isMainThread]) {
             [self pickOne:_segmentedControl];
         } else {
             [self performSelectorOnMainThread:@selector(pickOne:)
                                    withObject:_segmentedControl
                                 waitUntilDone:NO];
-        }
+        }*/
     }
 }
 
@@ -122,7 +122,7 @@
                      action:@selector(update:)
            forControlEvents:UIControlEventTouchUpInside];
     
-    _segmentedControl = [[UISegmentedControl alloc] initWithItems:
+   /* _segmentedControl = [[UISegmentedControl alloc] initWithItems:
                          [NSArray arrayWithObjects:
                           @"Request",
                           @"Response",
@@ -132,19 +132,19 @@
     _segmentedControl.selectedSegmentIndex = 0;
 	[_segmentedControl addTarget:self
                           action:@selector(pickOne:)
-                forControlEvents:UIControlEventValueChanged];
+                forControlEvents:UIControlEventValueChanged];*/
     
-    _textView = [[UITextView alloc] initWithFrame:CGRectMake(10, 218, self.view.frame.size.width - 20, self.view.frame.size.height - 270)];
-    _textView.editable = NO;
+    //_textView = [[UITextView alloc] initWithFrame:CGRectMake(10, 218, self.view.frame.size.width - 20, self.view.frame.size.height - 270)];
+    //_textView.editable = NO;
     
-	[self.view addSubview:_segmentedControl];
+	//[self.view addSubview:_segmentedControl];
     //segmentedControl.momentary = YES;
     
 	[self.view addSubview:_siteTextField];
 	[self.view addSubview:_zoneTextField];
 	[self.view addSubview:_updateButton];
-	[self.view addSubview:_segmentedControl];
-	[self.view addSubview:_textView];
+	//[self.view addSubview:_segmentedControl];
+	//[self.view addSubview:_textView];
     
 	[self.view addSubview:_adView];
 }
@@ -157,8 +157,8 @@
     [_siteTextField release];
     [_zoneTextField release];
     [_updateButton release];
-    [_segmentedControl release];
-    [_textView release];
+    //[_segmentedControl release];
+    //[_textView release];
      
 	[super dealloc];
 }
@@ -177,13 +177,13 @@
 
 - (void)didFailToReceiveAd:(id)sender withError:(NSError*)error {
     self.response = nil;
-    if ([NSThread isMainThread]) {
+    /*if ([NSThread isMainThread]) {
         [self pickOne:_segmentedControl];
     } else {
         [self performSelectorOnMainThread:@selector(pickOne:)
                                withObject:_segmentedControl
                             waitUntilDone:NO];
-    }
+    }*/
     [_updateButton setTitle:@"Fail! Update Me!" forState:UIControlStateNormal];
     _updateButton.alpha = 1;
     _updateButton.enabled = YES;

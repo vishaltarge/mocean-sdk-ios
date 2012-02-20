@@ -12,14 +12,13 @@
 #import "AdModel.h"
 #import "AdView_Private.h"
 
-
 @interface TestingViewController : UIViewController <AdViewDelegate> {
     UITextField*        _siteTextField;
     UITextField*        _zoneTextField;
     UIButton*           _updateButton;
-    UISegmentedControl* _segmentedControl;
+    //UISegmentedControl* _segmentedControl;
 	AdView*             _adView;
-    UITextView*         _textView;
+    //UITextView*         _textView;
 }
 
 @property (retain) NSString* request;

@@ -6,11 +6,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AdView.h"
+#import "AdMobileSamplesBaseViewController.h"
 
-@interface BannerAnimationViewController : UIViewController <AdViewDelegate>
-{
-	AdView* _adView;
-}
+@interface BannerAnimationViewController : AdMobileSamplesBaseViewController <AdViewDelegate>
 
 @end

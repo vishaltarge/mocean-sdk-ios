@@ -37,16 +37,24 @@ enum {
 
 @synthesize animating, context, displayLink;
 
+-(NSInteger)getBannerZone
+{
+	return 20249;
+}
+
+-(UIImage *)getViewBackgroundImage
+{
+	return nil;
+}
+
 - (void)viewDidLoad
 {	
 	eaglView = [[EAGLView alloc] initWithFrame:self.view.frame];
 	self.view = eaglView;
 	
-	_adView = [[AdView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50) site:8061 zone:20249];
 	_adView.updateTimeInterval = 15;
     
-	[self.view addSubview:_adView];
-	
+
 	EAGLContext *aContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     
     if (!aContext)
@@ -79,8 +87,6 @@ enum {
 
 - (void)dealloc
 {
-	[_adView release];
-	
     if (program)
     {
         glDeleteProgram(program);

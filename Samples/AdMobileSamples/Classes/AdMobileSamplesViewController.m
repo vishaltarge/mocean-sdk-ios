@@ -16,8 +16,6 @@
     NSMutableArray* items = [NSMutableArray array];
     
     [items addObject:@"Simple banner"];
-    [items addObject:@"Simple banner (Retina)"];
-	[items addObject:@"Interstitial"];
 	[items addObject:@"Video"];
 	[items addObject:@"Rich JS Interstitial Ad"];
 	[items addObject:@"OpenGL"];
@@ -33,11 +31,8 @@
     items = [NSMutableArray array];
     
 	[items addObject:@"One Thousend ads!"];
-	[items addObject:@"Video with Interstitial"];
-	[items addObject:@"Orientations support"];
 	[items addObject:@"Test custom site/zone"];
 	[items addObject:@"Ad delegate (callback sample)"];
-	[items addObject:@"Debug"];
     [_sections addObject:items];
 }
 
@@ -54,16 +49,12 @@
         if (indexPath.row == 0)
             viewController = [[SimpleBannerViewController alloc] init];
         else if (indexPath.row == 1)
-            viewController = [[SimpleBannerRetinaViewController alloc] init];
-        else if (indexPath.row == 2)
-            viewController = [[InterstitialViewController alloc] init];
-        else if (indexPath.row == 3)
             viewController = [[VideoViewController alloc] init];
-        else if (indexPath.row == 4)
+        else if (indexPath.row == 2)
             viewController = [[RichJSadViewController alloc] init];
-        else if (indexPath.row == 5)
+        else if (indexPath.row == 3)
             viewController = [[OpenGLViewController alloc] init];
-		else if (indexPath.row == 6)
+		else if (indexPath.row == 4)
             viewController = [[ORMMAViewController alloc] init];
     }
     else if (indexPath.section == 1) {
@@ -76,15 +67,9 @@
         if (indexPath.row == 0)
             viewController = [[TableViewCellSampleViewController alloc] init];
         else if (indexPath.row == 1)
-            viewController = [[VideoWithInterstitilaViewController alloc] init];
-        else if (indexPath.row == 2)
-            viewController = [[RotationAdViewController alloc] init];
-        else if (indexPath.row == 3)
             viewController = [[TestingViewController alloc] init];
-        else if (indexPath.row == 4)
+        else if (indexPath.row == 2)
             viewController = [[DelegateViewController alloc] init];
-        else if (indexPath.row == 5)
-            viewController = [[DebugViewController alloc] init];
     }
     
     if (!viewController) {

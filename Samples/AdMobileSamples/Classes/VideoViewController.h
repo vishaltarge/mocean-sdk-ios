@@ -6,10 +6,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AdView.h"
+#import "AdMobileSamplesBaseViewController.h"
 
-@interface VideoViewController : UIViewController {
-	AdView* _adView;
+@interface VideoViewController : AdMobileSamplesBaseViewController {
+
 }
 
 @end
