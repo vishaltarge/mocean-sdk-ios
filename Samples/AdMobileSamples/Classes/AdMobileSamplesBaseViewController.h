@@ -12,7 +12,8 @@
 
 @interface AdMobileSamplesBaseViewController : UIViewController
 {
-	MASTAdView* _adView;
+	UIBarButtonItem	*_buttonEdit;	
+	MASTAdView		*_adView;
 }
 
 @end

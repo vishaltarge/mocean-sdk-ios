@@ -11,7 +11,7 @@
 
 
 // do nothing, just for make this catagory linked
-void useCatagory5();
+void useCatagory7();
 
 @interface UIAlertView (Blocks)
 

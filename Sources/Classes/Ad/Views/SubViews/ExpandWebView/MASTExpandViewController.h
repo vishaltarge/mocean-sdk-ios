@@ -14,4 +14,9 @@
 @property (nonatomic, retain) MASTAdView* adView;
 @property (nonatomic, retain) UIView* expandView;
 
+@property (assign) BOOL lockOrientation;
+@property (retain) UIButton* closeButton;
+
+- (void)useCustomClose:(BOOL)use;
+
 @end

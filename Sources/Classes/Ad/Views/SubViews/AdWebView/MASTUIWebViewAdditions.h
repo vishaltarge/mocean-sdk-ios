@@ -1,17 +1,15 @@
 //
-//  UIWebViewAdditions.h
-//  AdMobileSDK
-//
-//  Created by Constantine Mureev on 3/3/11.
+//  MASTUIWebViewAdditions.h
+//  Copyright (c) Microsoft. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
 // do nothing, just for make this catagory linked
-void useCatagory9();
+void useCatagory1();
 
-@interface UIWebView (UIView_mOcean)
+@interface UIWebView (MASTWebView)
 
 - (void)disableBouncesForWebView;
 

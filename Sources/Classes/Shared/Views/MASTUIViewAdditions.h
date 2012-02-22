@@ -11,7 +11,7 @@
 
 
 // do nothing, just for make this catagory linked
-void useCatagory3();
+void useCatagory8();
 
 @interface UIView (UIView_mOcean)
 

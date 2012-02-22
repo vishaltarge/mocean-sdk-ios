@@ -21,6 +21,10 @@
 #import "MASTLocationManager.h"
 #import "MASTMessages.h"
 
+#import "MAPNSObject+BlockObservation.h"
+#import "MASTOrmmaSharedDelegate.h"
+#import "MASTOrmmaSharedDataSource.h"
+
 @interface MASTAdView()  
 
 - (void)closeInterstitial:(NSNotification*)notification;
@@ -30,7 +34,7 @@
 
 @implementation MASTAdView
 
-@synthesize closeButton;
+@synthesize closeButton, ormmaDataSource, ormmaDelegate;
 @dynamic adModel, uid;
 
 @dynamic delegate, isLoading, testMode, logMode, animateMode, contentAlignment, track, updateTimeInterval,
@@ -104,6 +108,9 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     self.delegate = nil; 
     RELEASE_SAFELY(_adModel);
     
+	self.ormmaDelegate = nil;
+    self.ormmaDataSource = nil;
+	
     [super dealloc];
 }
 
@@ -207,16 +214,42 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 	if (adView == self) {
         MASTAdModel* model = [self adModel];
         
-        if (descriptor.adContentType == AdContentTypeDefaultHtml) {			
+        if (descriptor.adContentType == AdContentTypeDefaultHtml) {
+			if (!self.ormmaDataSource) {
+				self.ormmaDataSource = [MASTOrmmaSharedDataSource sharedInstance];
+			}
+			
+			if (!self.ormmaDelegate) {
+				self.ormmaDelegate = [MASTOrmmaSharedDelegate sharedInstance];
+			}
+			
             MASTAdWebView* adWebView = [[MASTAdWebView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
             adWebView.adView = self;
             adWebView.hidden = YES;
-            [self addSubview:adWebView];
-            [adWebView loadData:descriptor.serverReponse MIMEType:@"text/html" textEncodingName:@"UTF-8" baseURL:nil];
-            [adWebView release];
-            
+			adWebView.ormmaDelegate = self.ormmaDelegate;
+			adWebView.ormmaDataSource = self.ormmaDataSource;
+			NSString *strHTML = [[NSString alloc] initWithData:descriptor.serverReponse encoding:NSUTF8StringEncoding]; 
+			[adWebView loadHTML:strHTML completion:^(NSError *error) {
+				if (error)
+				{
+					NSMutableDictionary* senfInfo = [NSMutableDictionary dictionary];
+					[senfInfo setObject:self forKey:@"adView"];
+					[senfInfo setObject:adWebView forKey:@"subView"];
+					[[MASTNotificationCenter sharedInstance] postNotificationName:kFailAdDisplayNotification object:senfInfo];
+				}
+				else
+				{
+					NSMutableDictionary* senfInfo = [NSMutableDictionary dictionary];
+					[senfInfo setObject:self forKey:@"adView"];
+					[senfInfo setObject:adWebView forKey:@"subView"];
+					[[MASTNotificationCenter sharedInstance] postNotificationName:kReadyAdDisplayNotification object:senfInfo];
+
+					[self addSubview:adWebView];
+				}
+			}];
+            [adWebView release];            
             model.descriptor = descriptor;
-        }
+		}
 #ifdef INCLUDE_IAD
         else if (descriptor.adContentType == AdContentTypeIAd) {
             IAdAdaptor* iAdAdaptor = [[IAdAdaptor alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) section:nil];
@@ -328,8 +361,8 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
         UIView* currentAdView = model.currentAdView;
         if (subView != currentAdView) {            
             if ([currentAdView isKindOfClass:[MASTAdWebView class]]) {
-                MASTAdWebView* adWebView = (MASTAdWebView*)currentAdView;
-                [adWebView closeOrmma];
+                //MASTAdWebView* adWebView = (MASTAdWebView*)currentAdView;
+                //[adWebView closeOrmma];
             }
             
             UIView *oldView = currentAdView;

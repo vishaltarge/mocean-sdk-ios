@@ -1,13 +1,11 @@
 //
-//  OrmmaHelper.h
-//  AdMobileSDK
-//
-//  Created by Constantine Mureev on 8/29/11.
+//  MASTOrmmaHelper.h
+//  Copyright (c) Microsoft. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import "MASTOrmmaAdaptor.h"
-#import "Reachability.h"
+#import "MASTReachability.h"
 
 @interface MASTOrmmaHelper : NSObject
 
@@ -17,7 +15,7 @@
 
 + (NSString*)setState:(ORMMAState)state;
 + (NSString*)setViewable:(BOOL)viewable;
-+ (NSString*)setNetwork:(NetworkStatus)status;
++ (NSString*)setNetwork:(MASTNetworkStatus)status;
 + (NSString*)setSize:(CGSize)size;
 + (NSString*)setMaxSize:(CGSize)size;
 + (NSString*)setScreenSize:(CGSize)size;
@@ -30,7 +28,7 @@
 + (NSString*)setTilt:(UIAcceleration*)acceleration;
 + (NSString*)setHeading:(CGFloat)heading;
 + (NSString*)setLatitude:(CGFloat)latitude longitude:(CGFloat)longitude accuracy:(CGFloat)accuracy;
-+ (NSString*)fireResponseEvent:(NSData*)data uri:(NSString*)uri;
++ (NSString*)fireResponseEvent:(NSString*)response uri:(NSString*)uri;
 
 + (NSString*)fireChangeEvent:(NSString*)value;
 + (NSString*)fireShakeEventInWebView;

@@ -73,6 +73,14 @@
     _adView.site = [self getBannerSite];
     _adView.zone = [self getBannerZone];
     [self.view addSubview:_adView];
+	
+	_buttonEdit = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(buttonAction:)];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+	[self.navigationItem setRightBarButtonItem:_buttonEdit animated:animated];
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
@@ -84,6 +92,11 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation
 {	
 	return YES;
+}
+
+-(void)buttonAction:(id)sender
+{
+	
 }
 
 #pragma mark -

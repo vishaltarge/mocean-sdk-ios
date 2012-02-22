@@ -45,4 +45,8 @@ void NSProfile(const char *name, void (^work) (void));
 + (NSString*)md5HashForString:(NSString*)string;
 + (NSString*)sha1HashForString:(NSString*)string;
 
++ (NSString*)md5OfString:(NSString*)string;
++ (NSData*)decodeBase64WithString:(NSString*)strBase64;
++ (UIImage*)closeImage;
+
 @end

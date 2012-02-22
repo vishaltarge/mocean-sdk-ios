@@ -21,8 +21,8 @@
 		3B43CC6114CE937E00E2B3CF /* QSStrings.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC5C14CE937E00E2B3CF /* QSStrings.h */; };
 		3B43CC6214CE937E00E2B3CF /* QSFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CC5D14CE937E00E2B3CF /* QSFileManager.m */; };
 		3B43CC6314CE937E00E2B3CF /* QSFileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC5E14CE937E00E2B3CF /* QSFileManager.h */; };
-		3B43CC6614CE939800E2B3CF /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CC6414CE939800E2B3CF /* Reachability.m */; };
-		3B43CC6714CE939800E2B3CF /* Reachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC6514CE939800E2B3CF /* Reachability.h */; };
+		3B43CC6614CE939800E2B3CF /* MASTReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CC6414CE939800E2B3CF /* MASTReachability.m */; };
+		3B43CC6714CE939800E2B3CF /* MASTReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC6514CE939800E2B3CF /* MASTReachability.h */; };
 		3B43CC6A14CE93A900E2B3CF /* MASTInternalAVPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CC6814CE93A900E2B3CF /* MASTInternalAVPlayer.m */; };
 		3B43CC6B14CE93A900E2B3CF /* MASTInternalAVPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC6914CE93A900E2B3CF /* MASTInternalAVPlayer.h */; };
 		3B43CC6E14CE93B800E2B3CF /* MASTInternalBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CC6C14CE93B800E2B3CF /* MASTInternalBrowser.m */; };
@@ -33,12 +33,8 @@
 		3B43CC7714CE93C600E2B3CF /* MASTUIViewAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC7314CE93C600E2B3CF /* MASTUIViewAdditions.h */; };
 		3B43CC7A14CE93E200E2B3CF /* MASTAdController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CC7814CE93E200E2B3CF /* MASTAdController.m */; };
 		3B43CC7B14CE93E200E2B3CF /* MASTAdController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC7914CE93E200E2B3CF /* MASTAdController.h */; };
-		3B43CC7E14CE93F300E2B3CF /* MASTAccelerometer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CC7C14CE93F300E2B3CF /* MASTAccelerometer.m */; };
-		3B43CC7F14CE93F300E2B3CF /* MASTAccelerometer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC7D14CE93F300E2B3CF /* MASTAccelerometer.h */; };
 		3B43CC8214CE940000E2B3CF /* MASTInstallManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CC8014CE940000E2B3CF /* MASTInstallManager.m */; };
 		3B43CC8314CE940000E2B3CF /* MASTInstallManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC8114CE940000E2B3CF /* MASTInstallManager.h */; };
-		3B43CC8614CE940D00E2B3CF /* MASTLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CC8414CE940D00E2B3CF /* MASTLocationManager.m */; };
-		3B43CC8714CE940D00E2B3CF /* MASTLocationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC8514CE940D00E2B3CF /* MASTLocationManager.h */; };
 		3B43CC8A14CE942300E2B3CF /* MASTWebKitInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CC8814CE942300E2B3CF /* MASTWebKitInfo.m */; };
 		3B43CC8B14CE942300E2B3CF /* MASTWebKitInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC8914CE942300E2B3CF /* MASTWebKitInfo.h */; };
 		3B43CC8E14CE943300E2B3CF /* MASTFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CC8C14CE943300E2B3CF /* MASTFileManager.m */; };
@@ -88,13 +84,6 @@
 		3B43CCEC14CE94F200E2B3CF /* MASTTransparentUIWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CCEA14CE94F200E2B3CF /* MASTTransparentUIWebView.h */; };
 		3B43CCEF14CE94FE00E2B3CF /* MASTTransparentUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CCED14CE94FE00E2B3CF /* MASTTransparentUIView.m */; };
 		3B43CCF014CE94FE00E2B3CF /* MASTTransparentUIView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CCEE14CE94FE00E2B3CF /* MASTTransparentUIView.h */; };
-		3B43CCF314CE951200E2B3CF /* MASTAdWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CCF114CE951200E2B3CF /* MASTAdWebView.m */; };
-		3B43CCF414CE951200E2B3CF /* MASTAdWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CCF214CE951200E2B3CF /* MASTAdWebView.h */; };
-		3B43CCFA14CE952100E2B3CF /* MASTOrmmaHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CCF514CE952100E2B3CF /* MASTOrmmaHelper.m */; };
-		3B43CCFB14CE952100E2B3CF /* MASTOrmmaHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CCF614CE952100E2B3CF /* MASTOrmmaHelper.h */; };
-		3B43CCFC14CE952100E2B3CF /* MASTOrmmaConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CCF714CE952100E2B3CF /* MASTOrmmaConstants.h */; };
-		3B43CCFD14CE952100E2B3CF /* MASTOrmmaAdaptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CCF814CE952100E2B3CF /* MASTOrmmaAdaptor.m */; };
-		3B43CCFE14CE952100E2B3CF /* MASTOrmmaAdaptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CCF914CE952100E2B3CF /* MASTOrmmaAdaptor.h */; };
 		3B43CD0114CE953500E2B3CF /* MASTVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CCFF14CE953500E2B3CF /* MASTVideoView.m */; };
 		3B43CD0214CE953500E2B3CF /* MASTVideoView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CD0014CE953500E2B3CF /* MASTVideoView.h */; };
 		3B43CD0714CE954A00E2B3CF /* MASTExpandWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CD0314CE954A00E2B3CF /* MASTExpandWebView.m */; };
@@ -114,6 +103,34 @@
 		3B67257614E9435900FDFFB0 /* MASTMessages.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B67257514E9435900FDFFB0 /* MASTMessages.h */; };
 		AA747D9F0F9514B9006C5449 /* AdMobileSDK_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* AdMobileSDK_Prefix.pch */; settings = {ATTRIBUTES = (Public, ); }; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
+		AC1A0BAA14F3BF2500149819 /* MAPBlocksGlobals.h in Headers */ = {isa = PBXBuildFile; fileRef = AC1A0BA314F3BF2500149819 /* MAPBlocksGlobals.h */; };
+		AC1A0BAB14F3BF2500149819 /* MAPNSDictionary+BlocksKit.h in Headers */ = {isa = PBXBuildFile; fileRef = AC1A0BA414F3BF2500149819 /* MAPNSDictionary+BlocksKit.h */; };
+		AC1A0BAC14F3BF2500149819 /* MAPNSDictionary+BlocksKit.m in Sources */ = {isa = PBXBuildFile; fileRef = AC1A0BA514F3BF2500149819 /* MAPNSDictionary+BlocksKit.m */; };
+		AC1A0BAD14F3BF2500149819 /* MAPNSObject+AssociatedObjects.h in Headers */ = {isa = PBXBuildFile; fileRef = AC1A0BA614F3BF2500149819 /* MAPNSObject+AssociatedObjects.h */; };
+		AC1A0BAE14F3BF2500149819 /* MAPNSObject+AssociatedObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = AC1A0BA714F3BF2500149819 /* MAPNSObject+AssociatedObjects.m */; };
+		AC1A0BAF14F3BF2500149819 /* MAPNSObject+BlockObservation.h in Headers */ = {isa = PBXBuildFile; fileRef = AC1A0BA814F3BF2500149819 /* MAPNSObject+BlockObservation.h */; };
+		AC1A0BB014F3BF2500149819 /* MAPNSObject+BlockObservation.m in Sources */ = {isa = PBXBuildFile; fileRef = AC1A0BA914F3BF2500149819 /* MAPNSObject+BlockObservation.m */; };
+		AC2EB59514F23FC30000B336 /* MASTAdWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = AC2EB58714F23FC30000B336 /* MASTAdWebView.h */; };
+		AC2EB59614F23FC30000B336 /* MASTAdWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2EB58814F23FC30000B336 /* MASTAdWebView.m */; };
+		AC2EB59714F23FC30000B336 /* MASTUIWebViewAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = AC2EB58914F23FC30000B336 /* MASTUIWebViewAdditions.h */; };
+		AC2EB59814F23FC30000B336 /* MASTUIWebViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2EB58A14F23FC30000B336 /* MASTUIWebViewAdditions.m */; };
+		AC2EB59914F23FC30000B336 /* MASTOrmmaAdaptor.h in Headers */ = {isa = PBXBuildFile; fileRef = AC2EB58C14F23FC30000B336 /* MASTOrmmaAdaptor.h */; };
+		AC2EB59A14F23FC30000B336 /* MASTOrmmaAdaptor.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2EB58D14F23FC30000B336 /* MASTOrmmaAdaptor.m */; };
+		AC2EB59B14F23FC30000B336 /* MASTOrmmaConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = AC2EB58E14F23FC30000B336 /* MASTOrmmaConstants.h */; };
+		AC2EB59C14F23FC30000B336 /* MASTOrmmaHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = AC2EB58F14F23FC30000B336 /* MASTOrmmaHelper.h */; };
+		AC2EB59D14F23FC30000B336 /* MASTOrmmaHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2EB59014F23FC30000B336 /* MASTOrmmaHelper.m */; };
+		AC2EB59E14F23FC30000B336 /* MASTOrmmaSharedDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = AC2EB59114F23FC30000B336 /* MASTOrmmaSharedDataSource.h */; };
+		AC2EB59F14F23FC30000B336 /* MASTOrmmaSharedDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2EB59214F23FC30000B336 /* MASTOrmmaSharedDataSource.m */; };
+		AC2EB5A014F23FC30000B336 /* MASTOrmmaSharedDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = AC2EB59314F23FC30000B336 /* MASTOrmmaSharedDelegate.h */; };
+		AC2EB5A114F23FC30000B336 /* MASTOrmmaSharedDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2EB59414F23FC30000B336 /* MASTOrmmaSharedDelegate.m */; };
+		AC2EB5A414F26CC50000B336 /* OrmmaProtocols.h in Headers */ = {isa = PBXBuildFile; fileRef = AC2EB5A314F26CC50000B336 /* OrmmaProtocols.h */; };
+		AC2EB5A614F26DA30000B336 /* Macros.h in Headers */ = {isa = PBXBuildFile; fileRef = AC2EB5A514F26DA30000B336 /* Macros.h */; };
+		AC2EB5BB14F26EEA0000B336 /* MASTExpandView.h in Headers */ = {isa = PBXBuildFile; fileRef = AC2EB5B714F26EEA0000B336 /* MASTExpandView.h */; };
+		AC2EB5BC14F26EEA0000B336 /* MASTExpandView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2EB5B814F26EEA0000B336 /* MASTExpandView.m */; };
+		AC2EB5C514F270970000B336 /* MASTAccelerometer.h in Headers */ = {isa = PBXBuildFile; fileRef = AC2EB5C014F270970000B336 /* MASTAccelerometer.h */; };
+		AC2EB5C614F270970000B336 /* MASTAccelerometer.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2EB5C114F270970000B336 /* MASTAccelerometer.m */; };
+		AC2EB5C714F270970000B336 /* MASTLocationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = AC2EB5C314F270970000B336 /* MASTLocationManager.h */; };
+		AC2EB5C814F270970000B336 /* MASTLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2EB5C414F270970000B336 /* MASTLocationManager.m */; };
 		ACA293BB10BFAFB300A0A97A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACA293BA10BFAFB300A0A97A /* UIKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -132,8 +149,8 @@
 		3B43CC5C14CE937E00E2B3CF /* QSStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSStrings.h; sourceTree = "<group>"; };
 		3B43CC5D14CE937E00E2B3CF /* QSFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSFileManager.m; sourceTree = "<group>"; };
 		3B43CC5E14CE937E00E2B3CF /* QSFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSFileManager.h; sourceTree = "<group>"; };
-		3B43CC6414CE939800E2B3CF /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
-		3B43CC6514CE939800E2B3CF /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		3B43CC6414CE939800E2B3CF /* MASTReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTReachability.m; sourceTree = "<group>"; };
+		3B43CC6514CE939800E2B3CF /* MASTReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTReachability.h; sourceTree = "<group>"; };
 		3B43CC6814CE93A900E2B3CF /* MASTInternalAVPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTInternalAVPlayer.m; sourceTree = "<group>"; };
 		3B43CC6914CE93A900E2B3CF /* MASTInternalAVPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTInternalAVPlayer.h; sourceTree = "<group>"; };
 		3B43CC6C14CE93B800E2B3CF /* MASTInternalBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTInternalBrowser.m; sourceTree = "<group>"; };
@@ -144,12 +161,8 @@
 		3B43CC7314CE93C600E2B3CF /* MASTUIViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTUIViewAdditions.h; sourceTree = "<group>"; };
 		3B43CC7814CE93E200E2B3CF /* MASTAdController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTAdController.m; sourceTree = "<group>"; };
 		3B43CC7914CE93E200E2B3CF /* MASTAdController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTAdController.h; sourceTree = "<group>"; };
-		3B43CC7C14CE93F300E2B3CF /* MASTAccelerometer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTAccelerometer.m; sourceTree = "<group>"; };
-		3B43CC7D14CE93F300E2B3CF /* MASTAccelerometer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTAccelerometer.h; sourceTree = "<group>"; };
 		3B43CC8014CE940000E2B3CF /* MASTInstallManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTInstallManager.m; sourceTree = "<group>"; };
 		3B43CC8114CE940000E2B3CF /* MASTInstallManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTInstallManager.h; sourceTree = "<group>"; };
-		3B43CC8414CE940D00E2B3CF /* MASTLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTLocationManager.m; sourceTree = "<group>"; };
-		3B43CC8514CE940D00E2B3CF /* MASTLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTLocationManager.h; sourceTree = "<group>"; };
 		3B43CC8814CE942300E2B3CF /* MASTWebKitInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTWebKitInfo.m; sourceTree = "<group>"; };
 		3B43CC8914CE942300E2B3CF /* MASTWebKitInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTWebKitInfo.h; sourceTree = "<group>"; };
 		3B43CC8C14CE943300E2B3CF /* MASTFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTFileManager.m; sourceTree = "<group>"; };
@@ -199,13 +212,6 @@
 		3B43CCEA14CE94F200E2B3CF /* MASTTransparentUIWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTTransparentUIWebView.h; sourceTree = "<group>"; };
 		3B43CCED14CE94FE00E2B3CF /* MASTTransparentUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTTransparentUIView.m; sourceTree = "<group>"; };
 		3B43CCEE14CE94FE00E2B3CF /* MASTTransparentUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTTransparentUIView.h; sourceTree = "<group>"; };
-		3B43CCF114CE951200E2B3CF /* MASTAdWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTAdWebView.m; sourceTree = "<group>"; };
-		3B43CCF214CE951200E2B3CF /* MASTAdWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTAdWebView.h; sourceTree = "<group>"; };
-		3B43CCF514CE952100E2B3CF /* MASTOrmmaHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTOrmmaHelper.m; sourceTree = "<group>"; };
-		3B43CCF614CE952100E2B3CF /* MASTOrmmaHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTOrmmaHelper.h; sourceTree = "<group>"; };
-		3B43CCF714CE952100E2B3CF /* MASTOrmmaConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTOrmmaConstants.h; sourceTree = "<group>"; };
-		3B43CCF814CE952100E2B3CF /* MASTOrmmaAdaptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTOrmmaAdaptor.m; sourceTree = "<group>"; };
-		3B43CCF914CE952100E2B3CF /* MASTOrmmaAdaptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTOrmmaAdaptor.h; sourceTree = "<group>"; };
 		3B43CCFF14CE953500E2B3CF /* MASTVideoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTVideoView.m; sourceTree = "<group>"; };
 		3B43CD0014CE953500E2B3CF /* MASTVideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTVideoView.h; sourceTree = "<group>"; };
 		3B43CD0314CE954A00E2B3CF /* MASTExpandWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTExpandWebView.m; sourceTree = "<group>"; };
@@ -225,6 +231,34 @@
 		3B67257514E9435900FDFFB0 /* MASTMessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTMessages.h; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* AdMobileSDK_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMobileSDK_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		AC1A0BA314F3BF2500149819 /* MAPBlocksGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAPBlocksGlobals.h; sourceTree = "<group>"; };
+		AC1A0BA414F3BF2500149819 /* MAPNSDictionary+BlocksKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MAPNSDictionary+BlocksKit.h"; sourceTree = "<group>"; };
+		AC1A0BA514F3BF2500149819 /* MAPNSDictionary+BlocksKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MAPNSDictionary+BlocksKit.m"; sourceTree = "<group>"; };
+		AC1A0BA614F3BF2500149819 /* MAPNSObject+AssociatedObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MAPNSObject+AssociatedObjects.h"; sourceTree = "<group>"; };
+		AC1A0BA714F3BF2500149819 /* MAPNSObject+AssociatedObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MAPNSObject+AssociatedObjects.m"; sourceTree = "<group>"; };
+		AC1A0BA814F3BF2500149819 /* MAPNSObject+BlockObservation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MAPNSObject+BlockObservation.h"; sourceTree = "<group>"; };
+		AC1A0BA914F3BF2500149819 /* MAPNSObject+BlockObservation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MAPNSObject+BlockObservation.m"; sourceTree = "<group>"; };
+		AC2EB58714F23FC30000B336 /* MASTAdWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTAdWebView.h; sourceTree = "<group>"; };
+		AC2EB58814F23FC30000B336 /* MASTAdWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTAdWebView.m; sourceTree = "<group>"; };
+		AC2EB58914F23FC30000B336 /* MASTUIWebViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTUIWebViewAdditions.h; sourceTree = "<group>"; };
+		AC2EB58A14F23FC30000B336 /* MASTUIWebViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTUIWebViewAdditions.m; sourceTree = "<group>"; };
+		AC2EB58C14F23FC30000B336 /* MASTOrmmaAdaptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTOrmmaAdaptor.h; sourceTree = "<group>"; };
+		AC2EB58D14F23FC30000B336 /* MASTOrmmaAdaptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTOrmmaAdaptor.m; sourceTree = "<group>"; };
+		AC2EB58E14F23FC30000B336 /* MASTOrmmaConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTOrmmaConstants.h; sourceTree = "<group>"; };
+		AC2EB58F14F23FC30000B336 /* MASTOrmmaHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTOrmmaHelper.h; sourceTree = "<group>"; };
+		AC2EB59014F23FC30000B336 /* MASTOrmmaHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTOrmmaHelper.m; sourceTree = "<group>"; };
+		AC2EB59114F23FC30000B336 /* MASTOrmmaSharedDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTOrmmaSharedDataSource.h; sourceTree = "<group>"; };
+		AC2EB59214F23FC30000B336 /* MASTOrmmaSharedDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTOrmmaSharedDataSource.m; sourceTree = "<group>"; };
+		AC2EB59314F23FC30000B336 /* MASTOrmmaSharedDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTOrmmaSharedDelegate.h; sourceTree = "<group>"; };
+		AC2EB59414F23FC30000B336 /* MASTOrmmaSharedDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTOrmmaSharedDelegate.m; sourceTree = "<group>"; };
+		AC2EB5A314F26CC50000B336 /* OrmmaProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrmmaProtocols.h; sourceTree = "<group>"; };
+		AC2EB5A514F26DA30000B336 /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
+		AC2EB5B714F26EEA0000B336 /* MASTExpandView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTExpandView.h; sourceTree = "<group>"; };
+		AC2EB5B814F26EEA0000B336 /* MASTExpandView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTExpandView.m; sourceTree = "<group>"; };
+		AC2EB5C014F270970000B336 /* MASTAccelerometer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTAccelerometer.h; sourceTree = "<group>"; };
+		AC2EB5C114F270970000B336 /* MASTAccelerometer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTAccelerometer.m; sourceTree = "<group>"; };
+		AC2EB5C314F270970000B336 /* MASTLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTLocationManager.h; sourceTree = "<group>"; };
+		AC2EB5C414F270970000B336 /* MASTLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTLocationManager.m; sourceTree = "<group>"; };
 		ACA293BA10BFAFB300A0A97A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		ACAE9E4213869CFF00B6D1BF /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		AD1E2636125F3F80003B37DF /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
@@ -409,6 +443,63 @@
 			path = Updates;
 			sourceTree = "<group>";
 		};
+		AC2EB58B14F23FC30000B336 /* ORMMA */ = {
+			isa = PBXGroup;
+			children = (
+				AC2EB58C14F23FC30000B336 /* MASTOrmmaAdaptor.h */,
+				AC2EB58D14F23FC30000B336 /* MASTOrmmaAdaptor.m */,
+				AC2EB58E14F23FC30000B336 /* MASTOrmmaConstants.h */,
+				AC2EB58F14F23FC30000B336 /* MASTOrmmaHelper.h */,
+				AC2EB59014F23FC30000B336 /* MASTOrmmaHelper.m */,
+				AC2EB59114F23FC30000B336 /* MASTOrmmaSharedDataSource.h */,
+				AC2EB59214F23FC30000B336 /* MASTOrmmaSharedDataSource.m */,
+				AC2EB59314F23FC30000B336 /* MASTOrmmaSharedDelegate.h */,
+				AC2EB59414F23FC30000B336 /* MASTOrmmaSharedDelegate.m */,
+			);
+			path = ORMMA;
+			sourceTree = "<group>";
+		};
+		AC2EB5A714F26E4C0000B336 /* BlocksKit */ = {
+			isa = PBXGroup;
+			children = (
+				AC1A0BA314F3BF2500149819 /* MAPBlocksGlobals.h */,
+				AC1A0BA414F3BF2500149819 /* MAPNSDictionary+BlocksKit.h */,
+				AC1A0BA514F3BF2500149819 /* MAPNSDictionary+BlocksKit.m */,
+				AC1A0BA614F3BF2500149819 /* MAPNSObject+AssociatedObjects.h */,
+				AC1A0BA714F3BF2500149819 /* MAPNSObject+AssociatedObjects.m */,
+				AC1A0BA814F3BF2500149819 /* MAPNSObject+BlockObservation.h */,
+				AC1A0BA914F3BF2500149819 /* MAPNSObject+BlockObservation.m */,
+			);
+			path = BlocksKit;
+			sourceTree = "<group>";
+		};
+		AC2EB5B614F26EE90000B336 /* ExpandViewController */ = {
+			isa = PBXGroup;
+			children = (
+				AC2EB5B714F26EEA0000B336 /* MASTExpandView.h */,
+				AC2EB5B814F26EEA0000B336 /* MASTExpandView.m */,
+			);
+			path = ExpandViewController;
+			sourceTree = "<group>";
+		};
+		AC2EB5BF14F270970000B336 /* Accelerometer */ = {
+			isa = PBXGroup;
+			children = (
+				AC2EB5C014F270970000B336 /* MASTAccelerometer.h */,
+				AC2EB5C114F270970000B336 /* MASTAccelerometer.m */,
+			);
+			path = Accelerometer;
+			sourceTree = "<group>";
+		};
+		AC2EB5C214F270970000B336 /* LocationManager */ = {
+			isa = PBXGroup;
+			children = (
+				AC2EB5C314F270970000B336 /* MASTLocationManager.h */,
+				AC2EB5C414F270970000B336 /* MASTLocationManager.m */,
+			);
+			path = LocationManager;
+			sourceTree = "<group>";
+		};
 		AD5D78D014891662001E3B0C /* ExpandWebView */ = {
 			isa = PBXGroup;
 			children = (
@@ -423,6 +514,7 @@
 		ADA9C21611F96D370074E2F3 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				AC2EB5A714F26E4C0000B336 /* BlocksKit */,
 				FCB54BD3142327E400867C7E /* UIAlertView-Blocks */,
 				CF6DA0C6137273630051225F /* QSUtilities */,
 				ADF1FD611201A38F008B99D2 /* Reachability */,
@@ -443,8 +535,8 @@
 		ADF1FD611201A38F008B99D2 /* Reachability */ = {
 			isa = PBXGroup;
 			children = (
-				3B43CC6514CE939800E2B3CF /* Reachability.h */,
-				3B43CC6414CE939800E2B3CF /* Reachability.m */,
+				3B43CC6514CE939800E2B3CF /* MASTReachability.h */,
+				3B43CC6414CE939800E2B3CF /* MASTReachability.m */,
 			);
 			path = Reachability;
 			sourceTree = "<group>";
@@ -461,6 +553,7 @@
 		CF171C20131D1DD6006162F1 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				AC2EB5A514F26DA30000B336 /* Macros.h */,
 				3B67257514E9435900FDFFB0 /* MASTMessages.h */,
 				3B43CCBF14CE947D00E2B3CF /* MASTConstants.h */,
 				3B43CCBC14CE947D00E2B3CF /* MASTUtils.h */,
@@ -563,15 +656,6 @@
 			path = TouchableViewController;
 			sourceTree = "<group>";
 		};
-		CFC4484F133C7B3F00B147F6 /* LocationManager */ = {
-			isa = PBXGroup;
-			children = (
-				3B43CC8514CE940D00E2B3CF /* MASTLocationManager.h */,
-				3B43CC8414CE940D00E2B3CF /* MASTLocationManager.m */,
-			);
-			path = LocationManager;
-			sourceTree = "<group>";
-		};
 		CFC4E5631330E1E70012F9AC /* FileManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -584,6 +668,7 @@
 		CFDE16151312B80000FE2F5A /* Public */ = {
 			isa = PBXGroup;
 			children = (
+				AC2EB5A314F26CC50000B336 /* OrmmaProtocols.h */,
 				3B43CCDD14CE94CA00E2B3CF /* MASTAdView.h */,
 				3B43CCDE14CE94CA00E2B3CF /* MASTAdInterstitialView.h */,
 				3B43CCDF14CE94CA00E2B3CF /* MASTAdDelegate.h */,
@@ -596,7 +681,6 @@
 			isa = PBXGroup;
 			children = (
 				CFDE16EC1313A22900FE2F5A /* Views */,
-				CFDE16F01313A22900FE2F5A /* Model */,
 				CFDE16F11313A22900FE2F5A /* AdDescriptor */,
 			);
 			name = Ad;
@@ -618,9 +702,9 @@
 		CFDE16A4131392D700FE2F5A /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				FC9CFEED141E219100D0280B /* Accelerometer */,
+				AC2EB5BF14F270970000B336 /* Accelerometer */,
+				AC2EB5C214F270970000B336 /* LocationManager */,
 				CF9860CD13405F70004D6202 /* InstallManager */,
-				CFC4484F133C7B3F00B147F6 /* LocationManager */,
 				CFF37870133B60830078AC6D /* WebKit */,
 				CFC4E5631330E1E70012F9AC /* FileManager */,
 				3B43CC9014CE946200E2B3CF /* Network */,
@@ -669,6 +753,8 @@
 		CFDE16EF1313A22900FE2F5A /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				CFDE16F01313A22900FE2F5A /* Model */,
+				AC2EB5B614F26EE90000B336 /* ExpandViewController */,
 				CFDE16F71313A29200FE2F5A /* AdWebView */,
 				CF9860F21340D9CF004D6202 /* VideoView */,
 				AD5D78D014891662001E3B0C /* ExpandWebView */,
@@ -682,7 +768,8 @@
 				3B43CD1014CE957000E2B3CF /* MASTAdModel.h */,
 				3B43CD0F14CE957000E2B3CF /* MASTAdModel.m */,
 			);
-			path = Model;
+			name = Model;
+			path = ../../Model;
 			sourceTree = "<group>";
 		};
 		CFDE16F11313A22900FE2F5A /* AdDescriptor */ = {
@@ -700,9 +787,11 @@
 		CFDE16F71313A29200FE2F5A /* AdWebView */ = {
 			isa = PBXGroup;
 			children = (
-				3B43CCF214CE951200E2B3CF /* MASTAdWebView.h */,
-				3B43CCF114CE951200E2B3CF /* MASTAdWebView.m */,
-				FC8821C1140B825C0089CD23 /* ORMMA */,
+				AC2EB58714F23FC30000B336 /* MASTAdWebView.h */,
+				AC2EB58814F23FC30000B336 /* MASTAdWebView.m */,
+				AC2EB58914F23FC30000B336 /* MASTUIWebViewAdditions.h */,
+				AC2EB58A14F23FC30000B336 /* MASTUIWebViewAdditions.m */,
+				AC2EB58B14F23FC30000B336 /* ORMMA */,
 			);
 			path = AdWebView;
 			sourceTree = "<group>";
@@ -745,27 +834,6 @@
 			path = WebKit;
 			sourceTree = "<group>";
 		};
-		FC8821C1140B825C0089CD23 /* ORMMA */ = {
-			isa = PBXGroup;
-			children = (
-				3B43CCF614CE952100E2B3CF /* MASTOrmmaHelper.h */,
-				3B43CCF514CE952100E2B3CF /* MASTOrmmaHelper.m */,
-				3B43CCF914CE952100E2B3CF /* MASTOrmmaAdaptor.h */,
-				3B43CCF814CE952100E2B3CF /* MASTOrmmaAdaptor.m */,
-				3B43CCF714CE952100E2B3CF /* MASTOrmmaConstants.h */,
-			);
-			path = ORMMA;
-			sourceTree = "<group>";
-		};
-		FC9CFEED141E219100D0280B /* Accelerometer */ = {
-			isa = PBXGroup;
-			children = (
-				3B43CC7D14CE93F300E2B3CF /* MASTAccelerometer.h */,
-				3B43CC7C14CE93F300E2B3CF /* MASTAccelerometer.m */,
-			);
-			path = Accelerometer;
-			sourceTree = "<group>";
-		};
 		FCB54BD3142327E400867C7E /* UIAlertView-Blocks */ = {
 			isa = PBXGroup;
 			children = (
@@ -802,15 +870,13 @@
 				3B43CC5F14CE937E00E2B3CF /* QSUtilities.h in Headers */,
 				3B43CC6114CE937E00E2B3CF /* QSStrings.h in Headers */,
 				3B43CC6314CE937E00E2B3CF /* QSFileManager.h in Headers */,
-				3B43CC6714CE939800E2B3CF /* Reachability.h in Headers */,
+				3B43CC6714CE939800E2B3CF /* MASTReachability.h in Headers */,
 				3B43CC6B14CE93A900E2B3CF /* MASTInternalAVPlayer.h in Headers */,
 				3B43CC6F14CE93B800E2B3CF /* MASTInternalBrowser.h in Headers */,
 				3B43CC7514CE93C600E2B3CF /* MASTUIWebViewAdditions.h in Headers */,
 				3B43CC7714CE93C600E2B3CF /* MASTUIViewAdditions.h in Headers */,
 				3B43CC7B14CE93E200E2B3CF /* MASTAdController.h in Headers */,
-				3B43CC7F14CE93F300E2B3CF /* MASTAccelerometer.h in Headers */,
 				3B43CC8314CE940000E2B3CF /* MASTInstallManager.h in Headers */,
-				3B43CC8714CE940D00E2B3CF /* MASTLocationManager.h in Headers */,
 				3B43CC8B14CE942300E2B3CF /* MASTWebKitInfo.h in Headers */,
 				3B43CC8F14CE943300E2B3CF /* MASTFileManager.h in Headers */,
 				3B43CCA914CE946200E2B3CF /* MASTCacheController.h in Headers */,
@@ -837,10 +903,6 @@
 				3B43CCE714CE94E100E2B3CF /* MASTAdView_Private.h in Headers */,
 				3B43CCEC14CE94F200E2B3CF /* MASTTransparentUIWebView.h in Headers */,
 				3B43CCF014CE94FE00E2B3CF /* MASTTransparentUIView.h in Headers */,
-				3B43CCF414CE951200E2B3CF /* MASTAdWebView.h in Headers */,
-				3B43CCFB14CE952100E2B3CF /* MASTOrmmaHelper.h in Headers */,
-				3B43CCFC14CE952100E2B3CF /* MASTOrmmaConstants.h in Headers */,
-				3B43CCFE14CE952100E2B3CF /* MASTOrmmaAdaptor.h in Headers */,
 				3B43CD0214CE953500E2B3CF /* MASTVideoView.h in Headers */,
 				3B43CD0814CE954A00E2B3CF /* MASTExpandWebView.h in Headers */,
 				3B43CD0A14CE954A00E2B3CF /* MASTExpandViewController.h in Headers */,
@@ -850,6 +912,22 @@
 				3B43CD1A14CE958700E2B3CF /* MASTAdDescriptor.h in Headers */,
 				3B43CD1E14CE959300E2B3CF /* MASTServerXMLResponseParser.h in Headers */,
 				3B67257614E9435900FDFFB0 /* MASTMessages.h in Headers */,
+				AC2EB59514F23FC30000B336 /* MASTAdWebView.h in Headers */,
+				AC2EB59714F23FC30000B336 /* MASTUIWebViewAdditions.h in Headers */,
+				AC2EB59914F23FC30000B336 /* MASTOrmmaAdaptor.h in Headers */,
+				AC2EB59B14F23FC30000B336 /* MASTOrmmaConstants.h in Headers */,
+				AC2EB59C14F23FC30000B336 /* MASTOrmmaHelper.h in Headers */,
+				AC2EB59E14F23FC30000B336 /* MASTOrmmaSharedDataSource.h in Headers */,
+				AC2EB5A014F23FC30000B336 /* MASTOrmmaSharedDelegate.h in Headers */,
+				AC2EB5A414F26CC50000B336 /* OrmmaProtocols.h in Headers */,
+				AC2EB5A614F26DA30000B336 /* Macros.h in Headers */,
+				AC2EB5BB14F26EEA0000B336 /* MASTExpandView.h in Headers */,
+				AC2EB5C514F270970000B336 /* MASTAccelerometer.h in Headers */,
+				AC2EB5C714F270970000B336 /* MASTLocationManager.h in Headers */,
+				AC1A0BAA14F3BF2500149819 /* MAPBlocksGlobals.h in Headers */,
+				AC1A0BAB14F3BF2500149819 /* MAPNSDictionary+BlocksKit.h in Headers */,
+				AC1A0BAD14F3BF2500149819 /* MAPNSObject+AssociatedObjects.h in Headers */,
+				AC1A0BAF14F3BF2500149819 /* MAPNSObject+BlockObservation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -955,15 +1033,13 @@
 				3B43CC5714CE936F00E2B3CF /* GTMNSString+HTML.m in Sources */,
 				3B43CC6014CE937E00E2B3CF /* QSStrings.m in Sources */,
 				3B43CC6214CE937E00E2B3CF /* QSFileManager.m in Sources */,
-				3B43CC6614CE939800E2B3CF /* Reachability.m in Sources */,
+				3B43CC6614CE939800E2B3CF /* MASTReachability.m in Sources */,
 				3B43CC6A14CE93A900E2B3CF /* MASTInternalAVPlayer.m in Sources */,
 				3B43CC6E14CE93B800E2B3CF /* MASTInternalBrowser.m in Sources */,
 				3B43CC7414CE93C600E2B3CF /* MASTUIWebViewAdditions.m in Sources */,
 				3B43CC7614CE93C600E2B3CF /* MASTUIViewAdditions.m in Sources */,
 				3B43CC7A14CE93E200E2B3CF /* MASTAdController.m in Sources */,
-				3B43CC7E14CE93F300E2B3CF /* MASTAccelerometer.m in Sources */,
 				3B43CC8214CE940000E2B3CF /* MASTInstallManager.m in Sources */,
-				3B43CC8614CE940D00E2B3CF /* MASTLocationManager.m in Sources */,
 				3B43CC8A14CE942300E2B3CF /* MASTWebKitInfo.m in Sources */,
 				3B43CC8E14CE943300E2B3CF /* MASTFileManager.m in Sources */,
 				3B43CCAA14CE946200E2B3CF /* MASTCacheController.m in Sources */,
@@ -987,9 +1063,6 @@
 				3B43CCE814CE94E100E2B3CF /* MASTAdInterstitialView.m in Sources */,
 				3B43CCEB14CE94F200E2B3CF /* MASTTransparentUIWebView.m in Sources */,
 				3B43CCEF14CE94FE00E2B3CF /* MASTTransparentUIView.m in Sources */,
-				3B43CCF314CE951200E2B3CF /* MASTAdWebView.m in Sources */,
-				3B43CCFA14CE952100E2B3CF /* MASTOrmmaHelper.m in Sources */,
-				3B43CCFD14CE952100E2B3CF /* MASTOrmmaAdaptor.m in Sources */,
 				3B43CD0114CE953500E2B3CF /* MASTVideoView.m in Sources */,
 				3B43CD0714CE954A00E2B3CF /* MASTExpandWebView.m in Sources */,
 				3B43CD0914CE954A00E2B3CF /* MASTExpandViewController.m in Sources */,
@@ -998,6 +1071,18 @@
 				3B43CD1714CE958700E2B3CF /* MASTAdDescriptorHelper.m in Sources */,
 				3B43CD1914CE958700E2B3CF /* MASTAdDescriptor.m in Sources */,
 				3B43CD1D14CE959300E2B3CF /* MASTServerXMLResponseParser.m in Sources */,
+				AC2EB59614F23FC30000B336 /* MASTAdWebView.m in Sources */,
+				AC2EB59814F23FC30000B336 /* MASTUIWebViewAdditions.m in Sources */,
+				AC2EB59A14F23FC30000B336 /* MASTOrmmaAdaptor.m in Sources */,
+				AC2EB59D14F23FC30000B336 /* MASTOrmmaHelper.m in Sources */,
+				AC2EB59F14F23FC30000B336 /* MASTOrmmaSharedDataSource.m in Sources */,
+				AC2EB5A114F23FC30000B336 /* MASTOrmmaSharedDelegate.m in Sources */,
+				AC2EB5BC14F26EEA0000B336 /* MASTExpandView.m in Sources */,
+				AC2EB5C614F270970000B336 /* MASTAccelerometer.m in Sources */,
+				AC2EB5C814F270970000B336 /* MASTLocationManager.m in Sources */,
+				AC1A0BAC14F3BF2500149819 /* MAPNSDictionary+BlocksKit.m in Sources */,
+				AC1A0BAE14F3BF2500149819 /* MAPNSObject+AssociatedObjects.m in Sources */,
+				AC1A0BB014F3BF2500149819 /* MAPNSObject+BlockObservation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
