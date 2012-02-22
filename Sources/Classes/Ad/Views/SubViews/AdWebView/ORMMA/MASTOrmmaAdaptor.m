@@ -7,7 +7,7 @@
 #import "MASTOrmmaConstants.h"
 #import "MASTOrmmaHelper.h"
 #import "MASTReachability.h"
-//#import "MAPNSObject+BlockObservation.h"
+#import "MAPNSObject+BlockObservation.h"
 #import "Macros.h"
 
 #import "MASTOrmmaSharedDataSource.h"
@@ -262,6 +262,11 @@
     self.ormmaDataSource = nil;
     self.webView = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)moveToDefaultState
+{
+	
 }
 
 - (void)evalJS:(NSString*)js {

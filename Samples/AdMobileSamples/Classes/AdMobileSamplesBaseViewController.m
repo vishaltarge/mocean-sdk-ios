@@ -74,13 +74,25 @@
     _adView.zone = [self getBannerZone];
     [self.view addSubview:_adView];
 	
-	_buttonEdit = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(buttonAction:)];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
+	if (_buttonEdit == nil)
+	{
+		_buttonEdit = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(buttonAction:)];
+	}
 	[self.navigationItem setRightBarButtonItem:_buttonEdit animated:animated];
+}
+
+-(void)buttonAction:(id)sender
+{
+	if (_actionSheet == nil)
+	{
+		_actionSheet = [[UIActionSheet alloc] initWithTitle:@"Action" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Edit params", @"Update", nil];
+	}
+	[_actionSheet showInView:self.view];
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
@@ -99,7 +111,7 @@
 	
 }
 
--(void)buttonAction:(id)sender
+-(void)showEditOption
 {
 	YXModelTableViewController* viewController = [[[YXModelTableViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
 	viewController.title = @"Setters";
@@ -179,7 +191,28 @@
 {
 	_adView.delegate = nil;
 	[_adView release];
+	[_buttonEdit release];
+	[_actionSheet release];
 	[super dealloc];
+}
+
+#pragma mark -
+#pragma mark UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	switch (buttonIndex)
+	{
+		case 0:
+			[self showEditOption];
+			break;
+		case 1:
+			[_adView update];
+			break;
+
+		default:
+			break;
+	}
 }
 
 @end

@@ -421,8 +421,8 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
     if (self.expandVC) {
         [info setObject:self.expandVC.view forKey:@"adView"];
     }
-    
-    [[MASTInternalAVPlayer sharedInstance] playAudio:info];
+	NSNotification *notif = [NSNotification notificationWithName:@"playAudio" object:info];
+    [[MASTInternalAVPlayer sharedInstance] playAudio:notif];
 }
 
 - (void)playVideo:(NSString*)url parameters:(NSDictionary*)parameters ad:(id)sender {
@@ -433,8 +433,8 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
     if (self.expandVC) {
         [info setObject:self.expandVC.view forKey:@"adView"];
     }
-    
-    [[MASTInternalAVPlayer sharedInstance] playVideo:info];
+    NSNotification *notif = [NSNotification notificationWithName:@"playVido" object:info];
+    [[MASTInternalAVPlayer sharedInstance] playVideo:notif];
 }
 
 - (void)sendRequest:(NSString*)url display:(NSString*)display response:(void (^)(NSString* response))response ad:(id)sender {

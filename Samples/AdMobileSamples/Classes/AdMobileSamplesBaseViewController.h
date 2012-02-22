@@ -10,10 +10,11 @@
 #import "MASTAdView.h"
 #import "MASTAdDelegate.h"
 
-@interface AdMobileSamplesBaseViewController : UIViewController
+@interface AdMobileSamplesBaseViewController : UIViewController <UIActionSheetDelegate>
 {
-	UIBarButtonItem	*_buttonEdit;	
 	MASTAdView		*_adView;
+	UIBarButtonItem	*_buttonEdit;
+	UIActionSheet 	*_actionSheet;
 }
 
 @end

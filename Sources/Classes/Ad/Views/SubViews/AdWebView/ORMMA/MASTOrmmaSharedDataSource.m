@@ -13,6 +13,28 @@
 static MASTOrmmaSharedDataSource* sharedInstance = nil;
 
 #pragma mark -
+#pragma mark - Location
+
+- (void)locationDetected:(NSNotification*)notification
+{
+    CLLocation* location = [notification object];
+	NSLog(@"lon = %.4f %.4f",location.coordinate.latitude, location.coordinate.longitude);
+	NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self, kOrmmaKeySender, location, kOrmmaKeyObject, nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kOrmmaLocationUpdated object:dic];
+}
+
+#pragma mark -
+#pragma mark - HeadingUpdated
+
+- (void)headingUpdated:(NSNotification*)notification
+{
+    CLHeading* heading = [notification object];
+    NSNumber* headingNumber = [NSNumber numberWithDouble:heading.trueHeading];
+	NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self, kOrmmaKeySender, headingNumber, kOrmmaKeyObject, nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kOrmmaHeadingUpdated object:dic];
+}
+
+#pragma mark -
 #pragma mark Singleton
 
 - (id)init {
@@ -99,28 +121,6 @@ static MASTOrmmaSharedDataSource* sharedInstance = nil;
 - (BOOL)supportTiltForAd:(id)sender
 {
 	return  YES;
-}
-
-#pragma mark -
-#pragma mark - Location
-
-- (void)locationDetected:(NSNotification*)notification
-{
-    CLLocation* location = [notification object];
-	NSLog(@"lon = %.4f %.4f",location.coordinate.latitude, location.coordinate.longitude);
-	NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self, kOrmmaKeySender, location, kOrmmaKeyObject, nil];
-	[[NSNotificationCenter defaultCenter] postNotificationName:kOrmmaLocationUpdated object:dic];
-}
-
-#pragma mark -
-#pragma mark - HeadingUpdated
-
-- (void)headingUpdated:(NSNotification*)notification
-{
-    CLHeading* heading = [notification object];
-    NSNumber* headingNumber = [NSNumber numberWithDouble:heading.trueHeading];
-	NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self, kOrmmaKeySender, headingNumber, kOrmmaKeyObject, nil];
-	[[NSNotificationCenter defaultCenter] postNotificationName:kOrmmaHeadingUpdated object:dic];
 }
 
 #pragma mark -
