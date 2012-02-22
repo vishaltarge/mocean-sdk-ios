@@ -221,7 +221,7 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
         if ([sender respondsToSelector:@selector(removeUpdateFlag:)]) {
             [sender performSelector:@selector(removeUpdateFlag:) withObject:@"expand"];
         }
-        [[MASTNotificationCenter sharedInstance] postNotificationName:kAdStartUpdateNotification object:[NSDictionary dictionaryWithObject:sender forKey:@"adView"]];
+        [[MASTNotificationCenter sharedInstance] postNotificationName:kAdStartUpdateNotification object:sender];
     } else {
         adControl.frame = self.defaultFrame;
         /*[UIView animateWithDuration:0.2 animations:^(void) {
@@ -302,7 +302,12 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
     if ([sender respondsToSelector:@selector(setUpdateFlag:)]) {
         [sender performSelector:@selector(setUpdateFlag:) withObject:@"expand" afterDelay:2];
     }
-    [[MASTNotificationCenter sharedInstance] postNotificationName:kAdStopUpdateNotification object:[NSDictionary dictionaryWithObject:sender forKey:@"adView"]];
+    
+    double delayInSeconds = 1.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_current_queue(), ^(void){
+        [[MASTNotificationCenter sharedInstance] postNotificationName:kAdStopUpdateNotification object:sender];
+    });
     
     //save options
     [self saveOptions:adControl];
