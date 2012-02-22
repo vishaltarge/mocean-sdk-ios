@@ -39,7 +39,7 @@
 
 @dynamic delegate, isLoading, testMode, logMode, animateMode, contentAlignment, track, updateTimeInterval,
 defaultImage, site, zone, premium, type, keywords, minSize, maxSize, contentSize, textColor, additionalParameters,
-adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, carrier, latitude, longitude, timeout, autoCollapse, showPreviousAdOnError, autocloseInterstitialTime, showCloseButtonTime;
+adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, carrier, latitude, longitude, adCallTimeout, autoCollapse, showPreviousAdOnError, autocloseInterstitialTime, showCloseButtonTime;
 
 
 - (id)init {
@@ -156,7 +156,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     self.internalOpenMode = NO;
     self.testMode = NO;
     self.premium = AdPremiumBoth;
-    self.timeout = DEFAULT_TIMEOUT_VALUE; //1 sec
+    self.adCallTimeout = DEFAULT_TIMEOUT_VALUE; //1 sec
     self.maxSize = CGSizeMake(self.frame.size.width, self.frame.size.height);
     self.autoCollapse = YES;
     self.showPreviousAdOnError = YES;
@@ -1215,19 +1215,19 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 
 //@property (assign) NSInteger            timeout;
 
-- (void)setTimeout:(NSInteger)timeout {
+- (void)setAdCallTimeout:(NSInteger)adCallTimeout {
     // filter
-    if (timeout > MAX_TIMEOUT_VALUE) {
-        timeout = MAX_TIMEOUT_VALUE;
-    } else if (timeout < MIN_TIMEOUT_VALUE) {
-        timeout = MIN_TIMEOUT_VALUE;
+    if (adCallTimeout > MAX_TIMEOUT_VALUE) {
+        adCallTimeout = MAX_TIMEOUT_VALUE;
+    } else if (adCallTimeout < MIN_TIMEOUT_VALUE) {
+        adCallTimeout = MIN_TIMEOUT_VALUE;
     }
     
-    ((MASTAdModel*)_adModel).timeout = timeout;
+    ((MASTAdModel*)_adModel).adCallTimeout = adCallTimeout;
 }
 
-- (NSInteger)timeout {
-    return ((MASTAdModel*)_adModel).timeout;
+- (NSInteger)adCallTimeout {
+    return ((MASTAdModel*)_adModel).adCallTimeout;
 }
 
 - (void)setAutoCollapse:(BOOL)autoCollapse {

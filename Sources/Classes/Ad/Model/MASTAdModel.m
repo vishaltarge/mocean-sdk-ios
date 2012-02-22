@@ -24,7 +24,7 @@ paramBG, paramLINK, additionalParameters, adServerUrl, advertiserId, groupCode,
 country, region, city, area, metro, zip, carrier, showCloseButtonTime,
 autocloseInterstitialTime, startDisplayDate, isDisplayed, aligmentCenter, contentSize, frame,
 visibleState, snapshotRAWData, snapshotRAWDataTime, currentAdView, adView, excampaigns, descriptor, loading,
-longitude, latitude, timeout, isUserSetMaxSize, autoCollapse, showPreviousAdOnError;
+longitude, latitude, adCallTimeout, isUserSetMaxSize, autoCollapse, showPreviousAdOnError;
 
 - (BOOL)validate {
     if (self.site <= 0) {
@@ -183,7 +183,7 @@ longitude, latitude, timeout, isUserSetMaxSize, autoCollapse, showPreviousAdOnEr
         }
 	}
 	
-    [_banerUrl appendFormat:@"&timeout=%d", self.timeout];
+    [_banerUrl appendFormat:@"&timeout=%d", self.adCallTimeout];
     
 	// important! return url - isKindeOfClass NSString!
 	NSString* url = [_banerUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
