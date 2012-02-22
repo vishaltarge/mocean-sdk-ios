@@ -406,25 +406,27 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
                     self.closeButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
                     [self addSubview:self.closeButton];
                 }
-                self.closeButton.hidden = YES;
-                
-                if (((MASTAdModel*)_adModel).showCloseButtonTime >= 0 && !((MASTAdModel*)_adModel).isDisplayed) {
-                    [NSTimer scheduledTimerWithTimeInterval:((MASTAdModel*)_adModel).showCloseButtonTime
-                                                     target:self 
-                                                   selector:@selector(showCloseButton)
-                                                   userInfo:nil 
-                                                    repeats:NO];
-                }
-                
-                if (((MASTAdModel*)_adModel).autocloseInterstitialTime >= 0) {
-                    [NSTimer scheduledTimerWithTimeInterval:((MASTAdModel*)_adModel).autocloseInterstitialTime
-                                                     target:self 
-                                                   selector:@selector(scheduledButtonAction) 
-                                                   userInfo:nil 
-                                                    repeats:NO];
-                }
             } else {
+                [self addSubview:self.closeButton];
                 [self bringSubviewToFront:self.closeButton];
+            }
+            
+            self.closeButton.hidden = YES;
+            
+            if (((MASTAdModel*)_adModel).showCloseButtonTime >= 0 && !((MASTAdModel*)_adModel).isDisplayed) {
+                [NSTimer scheduledTimerWithTimeInterval:((MASTAdModel*)_adModel).showCloseButtonTime
+                                                 target:self 
+                                               selector:@selector(showCloseButton)
+                                               userInfo:nil 
+                                                repeats:NO];
+            }
+            
+            if (((MASTAdModel*)_adModel).autocloseInterstitialTime >= 0) {
+                [NSTimer scheduledTimerWithTimeInterval:((MASTAdModel*)_adModel).autocloseInterstitialTime
+                                                 target:self 
+                                               selector:@selector(scheduledButtonAction) 
+                                               userInfo:nil 
+                                                repeats:NO];
             }
             
             if (!((MASTAdModel*)_adModel).isDisplayed) {
