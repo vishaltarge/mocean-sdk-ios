@@ -10,6 +10,7 @@
 #import "MASTExpandViewController.h"
 #import "MASTUIWebViewAdditions.h"
 #import "MASTInternalAVPlayer.h"
+#import "MASTNotificationCenter.h"
 
 @interface MASTOrmmaSharedDelegate ()
 
@@ -220,6 +221,7 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
         if ([sender respondsToSelector:@selector(removeUpdateFlag:)]) {
             [sender performSelector:@selector(removeUpdateFlag:) withObject:@"expand"];
         }
+        [[MASTNotificationCenter sharedInstance] postNotificationName:kAdStartUpdateNotification object:[NSDictionary dictionaryWithObject:sender forKey:@"adView"]];
     } else {
         adControl.frame = self.defaultFrame;
         /*[UIView animateWithDuration:0.2 animations:^(void) {
@@ -300,6 +302,7 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
     if ([sender respondsToSelector:@selector(setUpdateFlag:)]) {
         [sender performSelector:@selector(setUpdateFlag:) withObject:@"expand" afterDelay:2];
     }
+    [[MASTNotificationCenter sharedInstance] postNotificationName:kAdStopUpdateNotification object:[NSDictionary dictionaryWithObject:sender forKey:@"adView"]];
     
     //save options
     [self saveOptions:adControl];
