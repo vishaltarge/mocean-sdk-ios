@@ -7,7 +7,7 @@
 //
 
 #import "AdMobileSamplesBaseViewController.h"
-
+#import "YXModelTableView.h"
 
 @implementation AdMobileSamplesBaseViewController
 
@@ -94,9 +94,82 @@
 	return YES;
 }
 
--(void)buttonAction:(id)sender
+-(void)addEtitParams:(YXSection *)section
 {
 	
+}
+
+-(void)buttonAction:(id)sender
+{
+	YXModelTableViewController* viewController = [[[YXModelTableViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
+	viewController.title = @"Setters";
+	YXSection * section = [YXSection sectionWithHeader:nil footer:nil];
+	
+	[section addCell:[YXEditableCell cellWithTitle:@"x" placeholder:nil value:[NSString stringWithFormat:@"%.0f", _adView.frame.origin.x] onEdit:nil onFinish:^(id<YXModelCell> sender) {
+		YXEditableCell* cell = (YXEditableCell*)sender;
+		_adView.frame = CGRectMake([cell.value floatValue], _adView.frame.origin.y, _adView.frame.size.width, _adView.frame.size.height);
+	} textFieldDelegate:nil]];
+	
+	[section addCell:[YXEditableCell cellWithTitle:@"y" placeholder:nil value:[NSString stringWithFormat:@"%.0f", _adView.frame.origin.y] onEdit:nil onFinish:^(id<YXModelCell> sender) {
+		YXEditableCell* cell = (YXEditableCell*)sender;
+		_adView.frame = CGRectMake(_adView.frame.origin.x, [cell.value floatValue], _adView.frame.size.width, _adView.frame.size.height);
+	} textFieldDelegate:nil]];
+	
+	[section addCell:[YXEditableCell cellWithTitle:@"width" placeholder:nil value:[NSString stringWithFormat:@"%.0f", _adView.frame.size.width] onEdit:nil onFinish:^(id<YXModelCell> sender) {
+		YXEditableCell* cell = (YXEditableCell*)sender;
+		_adView.frame = CGRectMake(_adView.frame.origin.x, _adView.frame.origin.y, [cell.value floatValue], _adView.frame.size.height);
+	} textFieldDelegate:nil]];
+	
+	[section addCell:[YXEditableCell cellWithTitle:@"height" placeholder:nil value:[NSString stringWithFormat:@"%.0f", _adView.frame.size.height] onEdit:nil onFinish:^(id<YXModelCell> sender) {
+		YXEditableCell* cell = (YXEditableCell*)sender;
+		_adView.frame = CGRectMake(_adView.frame.origin.x, _adView.frame.origin.y, _adView.frame.size.width, [cell.value floatValue]);
+	} textFieldDelegate:nil]];
+	
+	[section addCell:[YXEditableCell cellWithTitle:@"keywords" placeholder:nil value:_adView.keywords onEdit:nil onFinish:^(id<YXModelCell> sender) {
+		YXEditableCell* cell = (YXEditableCell*)sender;
+		_adView.keywords = cell.value;
+	} textFieldDelegate:nil]];
+
+	//minSize
+	[section addCell:[YXEditableCell cellWithTitle:@"min height " placeholder:nil value:[NSString stringWithFormat:@"%.0f", _adView.minSize.height] onEdit:nil onFinish:^(id<YXModelCell> sender) {
+		YXEditableCell* cell = (YXEditableCell*)sender;
+		_adView.minSize = CGSizeMake(_adView.minSize.width, [cell.value floatValue]);
+	} textFieldDelegate:nil]];
+	
+	[section addCell:[YXEditableCell cellWithTitle:@"min width" placeholder:nil value:[NSString stringWithFormat:@"%.0f", _adView.minSize.width] onEdit:nil onFinish:^(id<YXModelCell> sender) {
+		YXEditableCell* cell = (YXEditableCell*)sender;
+		_adView.minSize = CGSizeMake([cell.value floatValue], _adView.minSize.height);
+	} textFieldDelegate:nil]];
+	
+	//maxSize
+	[section addCell:[YXEditableCell cellWithTitle:@"max height " placeholder:nil value:[NSString stringWithFormat:@"%.0f", _adView.maxSize.height] onEdit:nil onFinish:^(id<YXModelCell> sender) {
+		YXEditableCell* cell = (YXEditableCell*)sender;
+		_adView.maxSize = CGSizeMake(_adView.maxSize.width, [cell.value floatValue]);
+	} textFieldDelegate:nil]];
+	
+	[section addCell:[YXEditableCell cellWithTitle:@"max width" placeholder:nil value:[NSString stringWithFormat:@"%.0f", _adView.maxSize.width] onEdit:nil onFinish:^(id<YXModelCell> sender) {
+		YXEditableCell* cell = (YXEditableCell*)sender;
+		_adView.maxSize = CGSizeMake([cell.value floatValue], _adView.maxSize.height);
+	} textFieldDelegate:nil]];
+	
+	//
+	[section addCell:[YXEditableCell cellWithTitle:@"latitude" placeholder:nil value:_adView.latitude onEdit:nil onFinish:^(id<YXModelCell> sender) {
+		YXEditableCell* cell = (YXEditableCell*)sender;
+		_adView.latitude = cell.value;
+	} textFieldDelegate:nil]];
+	
+	[section addCell:[YXEditableCell cellWithTitle:@"longitude" placeholder:nil value:_adView.longitude onEdit:nil onFinish:^(id<YXModelCell> sender) {
+		YXEditableCell* cell = (YXEditableCell*)sender;
+		_adView.longitude = cell.value;
+	} textFieldDelegate:nil]];
+
+	//
+	[self addEtitParams:section];
+	
+	viewController.sections = [NSArray arrayWithObject:section];
+	viewController.view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
+	viewController.tableView.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
+	[self.navigationController pushViewController:viewController animated:YES];	
 }
 
 #pragma mark -
