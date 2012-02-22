@@ -16,25 +16,22 @@
 
 -(UIColor *)getViewBackgroundColor
 {
-	return  [UIColor colorWithRed:35 /255.0f
-							green:31 /255.0f
-							 blue:32 /255.0f
-							alpha:1.0];
+	return [UIColor groupTableViewBackgroundColor];
 }
 
 -(UIImage *)getViewBackgroundImage
 {
-	return [UIImage imageNamed:@"Default.png"];
+	return nil;//[UIImage imageNamed:@"Default.png"];
 }
 
 -(NSInteger)getBannerSite
 {
-	return 8061;
+	return 19829;
 }
 
 -(NSInteger)getBannerZone
 {
-	return 20249;
+	return 88269;
 }
 
 -(CGRect)getBannerFrame
@@ -53,8 +50,11 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	
-    self.view.backgroundColor = [self getViewBackgroundColor];
+
+	if ([self getViewBackgroundColor])
+	{
+		self.view.backgroundColor = [self getViewBackgroundColor];
+	}
 	
     UIImageView* imageView = [[UIImageView alloc] init];//WithImage:[UIImage imageNamed:@"Default.png"]];
     imageView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
@@ -72,6 +72,7 @@
 	[_adView setAutoresizingMask:[self getBannerAutoresizing]];
     _adView.site = [self getBannerSite];
     _adView.zone = [self getBannerZone];
+	_adView.autoCollapse = YES;
     [self.view addSubview:_adView];
 	
 }
@@ -81,7 +82,7 @@
 	[super viewWillAppear:animated];
 	if (_buttonEdit == nil)
 	{
-		_buttonEdit = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(buttonAction:)];
+		_buttonEdit = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(buttonAction:)];
 	}
 	[self.navigationItem setRightBarButtonItem:_buttonEdit animated:animated];
 }
@@ -136,6 +137,18 @@
 		YXEditableCell* cell = (YXEditableCell*)sender;
 		_adView.frame = CGRectMake(_adView.frame.origin.x, _adView.frame.origin.y, _adView.frame.size.width, [cell.value floatValue]);
 	} textFieldDelegate:nil]];
+	
+	//site
+	[section addCell:[YXEditableCell cellWithTitle:@"site" placeholder:nil value:[NSString stringWithFormat:@"%i", _adView.site] onEdit:nil onFinish:^(id<YXModelCell> sender) {
+		YXEditableCell* cell = (YXEditableCell*)sender;
+		_adView.site = [cell.value intValue];
+	} textFieldDelegate:nil]];
+	//zone
+	[section addCell:[YXEditableCell cellWithTitle:@"zone" placeholder:nil value:[NSString stringWithFormat:@"%i", _adView.zone] onEdit:nil onFinish:^(id<YXModelCell> sender) {
+		YXEditableCell* cell = (YXEditableCell*)sender;
+		_adView.zone = [cell.value intValue];
+	} textFieldDelegate:nil]];	
+
 	
 	[section addCell:[YXEditableCell cellWithTitle:@"keywords" placeholder:nil value:_adView.keywords onEdit:nil onFinish:^(id<YXModelCell> sender) {
 		YXEditableCell* cell = (YXEditableCell*)sender;
