@@ -228,7 +228,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
             adWebView.hidden = YES;
 			adWebView.ormmaDelegate = self.ormmaDelegate;
 			adWebView.ormmaDataSource = self.ormmaDataSource;
-			NSString *strHTML = [[NSString alloc] initWithData:descriptor.serverReponse encoding:NSUTF8StringEncoding]; 
+			NSString *strHTML = [[[NSString alloc] initWithData:descriptor.serverReponse encoding:NSUTF8StringEncoding] autorelease]; 
 			[adWebView loadHTML:strHTML completion:^(NSError *error) {
 				if (error)
 				{

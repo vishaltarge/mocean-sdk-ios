@@ -101,6 +101,7 @@
 	if (!cell)
 	{
 		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        [cell autorelease];
 	}
 	
 	cell.textLabel.text = [NSString stringWithFormat:@"Cell %d", indexPath.row];

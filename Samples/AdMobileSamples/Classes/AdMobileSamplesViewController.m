@@ -10,7 +10,7 @@
 @implementation AdMobileSamplesViewController
 
 - (void)viewDidLoad {
-    self.tableView = [[UITableView alloc] initWithFrame:self.tableView.frame style:UITableViewStyleGrouped];
+    self.tableView = [[[UITableView alloc] initWithFrame:self.tableView.frame style:UITableViewStyleGrouped] autorelease];
     _sections = [NSMutableArray new];
     
     NSMutableArray* items = [NSMutableArray array];
@@ -116,6 +116,7 @@
 	
 	if (!cell) {
 		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        [cell autorelease];
 	}
     
     cell.textLabel.text = (NSString*)[(NSArray*)[_sections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];

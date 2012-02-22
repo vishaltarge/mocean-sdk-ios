@@ -39,7 +39,7 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
     static dispatch_once_t once;
     dispatch_once(&once, ^ { 
         sharedDelegate = [self new]; 
-        sharedDelegate.adControls = [NSMutableDictionary new];
+        sharedDelegate.adControls = [NSMutableDictionary dictionary];
     });
     return sharedDelegate;
 }
@@ -284,11 +284,6 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
         [self.expandVC.view addSubview:adControl];
         adControl.frame = newFrame;
         
-        CGFloat originY = 20.0f;
-        if ([UIApplication sharedApplication].isStatusBarHidden) {
-            originY = 0.0f;
-        }
-        
         // resize
         adControl.frame = CGRectMake(0.0, 0.0, w, h);
         /*[UIView animateWithDuration:0.2 animations:^(void) {
@@ -373,7 +368,7 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
     ekEvent.notes = body;
         
     ekEvent.startDate = date;
-    ekEvent.endDate   = [[NSDate alloc] initWithTimeInterval:600 sinceDate:ekEvent.startDate];
+    ekEvent.endDate = [[[NSDate alloc] initWithTimeInterval:600 sinceDate:ekEvent.startDate] autorelease];
     [ekEvent setCalendar:[eventStore defaultCalendarForNewEvents]];
         
     /*MASTRIButtonItem *noItem = [MASTRIButtonItem item];
