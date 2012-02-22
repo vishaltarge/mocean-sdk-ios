@@ -41,7 +41,7 @@
 @property (retain) UIColor*             paramLINK;
 @property (retain) NSDictionary*        additionalParameters;
 @property (retain) NSString*			adServerUrl;
-@property (assign) NSInteger            timeout;
+@property (assign) NSInteger            adCallTimeout;
 
 @property (assign) NSInteger			advertiserId;
 @property (retain) NSString*			groupCode;

@@ -113,7 +113,7 @@ typedef enum {
  
  The max value is 3000ms (milleseconds).
  */
-@property (assign) NSInteger            timeout;
+@property (assign) NSInteger            adCallTimeout;
 
 /** Image for unloaded ad state.
  
