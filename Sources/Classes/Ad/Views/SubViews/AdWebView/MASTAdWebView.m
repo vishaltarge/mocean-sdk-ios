@@ -33,6 +33,7 @@
         self.webView = wView;
 		self.webView.delegate = self;
         self.webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 		[self.webView disableBouncesForWebView];
 		
         self.webView.allowsInlineMediaPlayback = YES;

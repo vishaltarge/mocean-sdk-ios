@@ -255,11 +255,19 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
     
     self.expandVC = [[[MASTExpandViewController alloc] init] autorelease];
     self.expandVC.view.backgroundColor = expandBackgroundColor;
-    self.expandVC.lockOrientation = !lockOrientation;
     
     UIViewController* rootVC = [self viewControllerForView:adControl.superview];
+    
     if (rootVC) {
+        if ([sender respondsToSelector:@selector(setUpdateFlag:)]) {
+            [sender performSelector:@selector(setUpdateFlag:) withObject:@"expand"];
+        }
+        
         [rootVC presentModalViewController:self.expandVC animated:NO];
+    }
+    
+    if (!lockOrientation) {
+        adControl.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     }
     
     if (url) {                        
@@ -273,22 +281,17 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
         
         self.expandVC.expandView = self.expandView;
         [self.expandVC useCustomClose:NO];
-    } else {        
+    } else {       
         // to make shure
         self.expandView = nil;
         self.lastBackgroundColor = adControl.backgroundColor;
         adControl.backgroundColor = expandBackgroundColor;
         
-        CGRect newFrame = [adControl.superview convertRect:adControl.frame toView:self.expandVC.view];
         self.lastSuperView = adControl.superview;
         [self.expandVC.view addSubview:adControl];
-        adControl.frame = newFrame;
         
         // resize
         adControl.frame = CGRectMake(0.0, 0.0, w, h);
-        /*[UIView animateWithDuration:0.2 animations:^(void) {
-            adControl.frame = CGRectMake(0.0, 0.0, w, h);
-        }];*/
         
         self.expandVC.expandView = adControl;
         [self.expandVC useCustomClose:useCustomClose];
