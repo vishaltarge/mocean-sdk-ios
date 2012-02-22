@@ -159,7 +159,7 @@
     [_updateButton release];
     //[_segmentedControl release];
     //[_textView release];
-     
+	
 	[super dealloc];
 }
 

@@ -1,11 +1,9 @@
 //
-//  Accelerometer.h
-//  AdMobileSDK
-//
-//  Created by Constantine Mureev on 9/12/11.
+//  MASTAccelerometer.h
+//  Copyright (c) Microsoft. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface MASTAccelerometer : NSObject <UIAccelerometerDelegate>
 

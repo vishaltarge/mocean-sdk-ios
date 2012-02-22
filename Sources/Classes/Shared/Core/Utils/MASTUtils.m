@@ -8,7 +8,12 @@
 #import "MASTUtils.h"
 #import "MASTConstants.h"
 #import "UIAlertView+Blocks.h"
+
 #import "UIActionSheet+Blocks.h"
+#import "MAPNSObject+AssociatedObjects.h"
+#import "MAPNSObject+BlockObservation.h"
+#import "MAPNSDictionary+BlocksKit.h"
+
 #import "MASTUIViewAdditions.h"
 #import "MASTUIWebViewAdditions.h"
 #import "MASTUIColorAdditions.m"
@@ -52,9 +57,34 @@ NSMutableDictionary* CreateNonRetainingDictionary() {
     return (NSMutableDictionary*)CFDictionaryCreateMutable(nil, 0, &keyCallbacks, &callbacks);
 }
 
+static const char _base64EncodingTable[64] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+static const short _base64DecodingTable[256] = {
+	-2, -2, -2, -2, -2, -2, -2, -2, -2, -1, -1, -2, -1, -1, -2, -2,
+	-2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2,
+	-1, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, 62, -2, -2, -2, 63,
+	52, 53, 54, 55, 56, 57, 58, 59, 60, 61, -2, -2, -2, -2, -2, -2,
+	-2,  0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14,
+	15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, -2, -2, -2, -2, -2,
+	-2, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
+	41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, -2, -2, -2, -2, -2,
+	-2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2,
+	-2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2,
+	-2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2,
+	-2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2,
+	-2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2,
+	-2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2,
+	-2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2,
+	-2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2
+};
 
 @implementation MASTUtils
 
+NSString * NSCacheDirectory() {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES); 
+    NSString *cacheDirectory = [paths objectAtIndex:0];
+    return  cacheDirectory;
+    //return [NSHomeDirectory() stringByAppendingPathComponent: @"/Library/Caches/"];
+}
 
 + (NSString*)platform
 {
@@ -231,6 +261,140 @@ NSMutableDictionary* CreateNonRetainingDictionary() {
     useCatagory4();
     useCatagory5();
     useCatagory6();
+	useCatagory7();
+    useCatagory8();
+    useCatagory9();
+}
+
++ (NSString*)md5OfString:(NSString*)string {
+    // Create pointer to the string as UTF8
+    const char *ptr = [string UTF8String];
+    
+    // Create byte array of unsigned chars
+    unsigned char md5Buffer[CC_MD5_DIGEST_LENGTH];
+    
+    // Create 16 byte MD5 hash value, store in buffer
+    CC_MD5(ptr, strlen(ptr), md5Buffer);
+    
+    // Convert MD5 value in the buffer to NSString of hex values
+    NSMutableString *output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
+    for(int i = 0; i < CC_MD5_DIGEST_LENGTH; i++) 
+        [output appendFormat:@"%02x",md5Buffer[i]];
+    
+    return output;
+}
+
++ (NSData*)decodeBase64WithString:(NSString*)strBase64 {
+	const char * objPointer = [strBase64 cStringUsingEncoding:NSASCIIStringEncoding];
+	int intLength = strlen(objPointer);
+	int intCurrent;
+	int i = 0, j = 0, k;
+    
+	unsigned char * objResult;
+	objResult = calloc(intLength, sizeof(char));
+    
+	// Run through the whole string, converting as we go
+	while ( ((intCurrent = *objPointer++) != '\0') && (intLength-- > 0) ) {
+		if (intCurrent == '=') {
+			if (*objPointer != '=' && ((i % 4) == 1)) {// || (intLength > 0)) {
+				// the padding character is invalid at this point -- so this entire string is invalid
+				free(objResult);
+				return nil;
+			}
+			continue;
+		}
+        
+		intCurrent = _base64DecodingTable[intCurrent];
+		if (intCurrent == -1) {
+			// we're at a whitespace -- simply skip over
+			continue;
+		} else if (intCurrent == -2) {
+			// we're at an invalid character
+			free(objResult);
+			return nil;
+		}
+        
+		switch (i % 4) {
+			case 0:
+				objResult[j] = intCurrent << 2;
+				break;
+                
+			case 1:
+				objResult[j++] |= intCurrent >> 4;
+				objResult[j] = (intCurrent & 0x0f) << 4;
+				break;
+                
+			case 2:
+				objResult[j++] |= intCurrent >>2;
+				objResult[j] = (intCurrent & 0x03) << 6;
+				break;
+                
+			case 3:
+				objResult[j++] |= intCurrent;
+				break;
+		}
+		i++;
+	}
+    
+	// mop things up if we ended on a boundary
+	k = j;
+	if (intCurrent == '=') {
+		switch (i % 4) {
+			case 1:
+				// Invalid state
+				free(objResult);
+				return nil;
+                
+			case 2:
+				k++;
+				// flow through
+			case 3:
+				objResult[k] = 0;
+		}
+	}
+    
+	// Cleanup and setup the return NSData
+	NSData * objData = [[[NSData alloc] initWithBytes:objResult length:j] autorelease];
+	free(objResult);
+	return objData;
+}
+
++ (BOOL)saveData:(NSData*)data dirPath:(NSString*)dirPath fileName:(NSString*)fileName {
+    BOOL result = NO;
+    NSString* path = [dirPath stringByAppendingPathComponent:fileName];
+    
+    if (![[NSFileManager defaultManager] isReadableFileAtPath:path]) {
+        [[NSFileManager defaultManager] createDirectoryAtPath:dirPath withIntermediateDirectories:YES attributes:nil error:nil];
+        
+        if ([data writeToFile:path atomically:YES]) {
+            result = YES;
+        }
+    }
+    else {
+        result = YES;
+    }
+    
+    return result;
+}
+
+
++ (UIImage*)closeImage {
+    NSString* dirPath = [NSCacheDirectory() stringByAppendingPathComponent:@"/MAPCache"];
+    NSString* fileName = @"closeIcon.png";
+    
+    NSString* path = [dirPath stringByAppendingPathComponent:fileName];
+    UIImage* closeIcon = nil;
+    
+    if (![[NSFileManager defaultManager] isReadableFileAtPath:path]) {
+        NSData* imageData = [self decodeBase64WithString:kCloseIconB64];
+        NSData* imageData2x = [self decodeBase64WithString:kCloseIcon2xB64];
+        [self saveData:imageData dirPath:dirPath fileName:@"closeIcon.png"];
+        [self saveData:imageData2x dirPath:dirPath fileName:@"closeIcon@2x.png"];
+    }
+    
+    closeIcon = [UIImage imageWithContentsOfFile:path];
+    
+    return closeIcon;
 }
 
 @end

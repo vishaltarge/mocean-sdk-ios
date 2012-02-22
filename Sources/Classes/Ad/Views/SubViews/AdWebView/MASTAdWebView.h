@@ -1,19 +1,22 @@
 //
-//  AdWebView.h
-//  AdMobileSDK
-//
-//  Created by Constantine Mureev on 2/22/11.
+//  MASTAdWebView.h
+//  Copyright (c) Microsoft. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
+
+#import "OrmmaProtocols.h"
+
+typedef void (^CompletionBlock)(NSError* error);
 
 @interface MASTAdWebView : UIView <UIWebViewDelegate> {
     CGRect                      _defaultFrame;
 }
 
-@property (assign) UIView*  adView;
+@property (nonatomic, assign) UIView*               adView;
+@property (nonatomic, assign) id <OrmmaDelegate>    ormmaDelegate;
+@property (nonatomic, assign) id <OrmmaDataSource>  ormmaDataSource;
 
-- (void)loadData:(NSData *)data MIMEType:(NSString *)MIMEType textEncodingName:(NSString *)encodingName baseURL:(NSURL *)baseURL;
-- (void)closeOrmma;
+- (void)loadHTML:(NSString*)html completion:(CompletionBlock)completion;
 
 @end

@@ -14,10 +14,11 @@
 
 #import <UIKit/UIKit.h>
 
+#import "OrmmaProtocols.h"
+
 #ifdef INCLUDE_LOCATION_MANAGER
 #import <CoreLocation/CoreLocation.h>
 #endif
-
 
 #import "MASTAdDelegate.h"
 
@@ -421,5 +422,16 @@ If set to YES, the ad server will send a client side impression tracking pixel w
  @see MASTAdViewDelegate Protocol Reference for the optional methods this delegate may implement.
  */
 @property (assign) id <MASTAdViewDelegate>	delegate;
+
+
+/** ormmaDelegate
+ 
+ */
+@property (nonatomic, assign) id <OrmmaDelegate>    ormmaDelegate;
+
+/** ormmaDataSource
+ 
+ */
+@property (nonatomic, assign) id <OrmmaDataSource>    ormmaDataSource;
 
 @end

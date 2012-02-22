@@ -12,7 +12,7 @@
 static NSString *RI_BUTTON_ASS_KEY = @"com.random-ideas.BUTTONS";
 
 
-void useCatagory5(){
+void useCatagory7(){
     NSLog(@"do nothing, just for make catagory linked");
 }
 

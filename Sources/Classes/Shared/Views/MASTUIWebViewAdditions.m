@@ -8,7 +8,7 @@
 #import "MASTUIWebViewAdditions.h"
 
 
-void useCatagory4(){
+void useCatagory9(){
     NSLog(@"do nothing, just for make catagory linked");
 }
 

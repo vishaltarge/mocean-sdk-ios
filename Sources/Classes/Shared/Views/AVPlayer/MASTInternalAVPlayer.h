@@ -10,5 +10,7 @@
 @interface MASTInternalAVPlayer : NSObject
 
 + (MASTInternalAVPlayer*)sharedInstance;
+- (void)playAudio:(NSNotification*)notification;
+- (void)playVideo:(NSNotification*)notification;
 
 @end

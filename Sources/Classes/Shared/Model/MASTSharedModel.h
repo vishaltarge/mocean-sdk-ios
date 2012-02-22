@@ -13,7 +13,7 @@
 
 #import "MASTAdView.h"
 #import "MASTConstants.h"
-#import "Reachability.h"
+#import "MASTReachability.h"
 
 #import "MASTLocationManager.h"
 #import "MASTWebKitInfo.h"

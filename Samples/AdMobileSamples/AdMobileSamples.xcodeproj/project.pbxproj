@@ -18,6 +18,23 @@
 		2899E5220DE3E06400AC0155 /* AdMobileSamplesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* AdMobileSamplesViewController.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* AdMobileSamplesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* AdMobileSamplesViewController.m */; };
+		AC1A0B9F14F37DCF00149819 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC1A0B9E14F37DCF00149819 /* CoreLocation.framework */; };
+		AC67690214F4CC8700697079 /* YXButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6768DA14F4CC8700697079 /* YXButtonCell.m */; };
+		AC67690314F4CC8700697079 /* YXCheckmarkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6768DC14F4CC8700697079 /* YXCheckmarkCell.m */; };
+		AC67690414F4CC8700697079 /* YXCheckmarkCellGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6768DE14F4CC8700697079 /* YXCheckmarkCellGroup.m */; };
+		AC67690514F4CC8700697079 /* YXCustomizableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6768E014F4CC8700697079 /* YXCustomizableCell.m */; };
+		AC67690614F4CC8700697079 /* YXDisclosureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6768E214F4CC8700697079 /* YXDisclosureCell.m */; };
+		AC67690714F4CC8700697079 /* YXEditableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6768E414F4CC8700697079 /* YXEditableCell.m */; };
+		AC67690814F4CC8700697079 /* YXEditableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6768E614F4CC8700697079 /* YXEditableViewCell.m */; };
+		AC67690914F4CC8700697079 /* YXKeyValueCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6768E814F4CC8700697079 /* YXKeyValueCell.m */; };
+		AC67690A14F4CC8700697079 /* YXKVCCheckmarkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6768EA14F4CC8700697079 /* YXKVCCheckmarkCell.m */; };
+		AC67690B14F4CC8700697079 /* YXKVCSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6768EC14F4CC8700697079 /* YXKVCSwitchCell.m */; };
+		AC67690C14F4CC8700697079 /* YXLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6768EE14F4CC8700697079 /* YXLabelCell.m */; };
+		AC67690D14F4CC8700697079 /* YXModelTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6768F314F4CC8700697079 /* YXModelTableViewController.m */; };
+		AC67690E14F4CC8700697079 /* YXSection.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6768F514F4CC8700697079 /* YXSection.m */; };
+		AC67690F14F4CC8700697079 /* YXSegmentedControlCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6768F714F4CC8700697079 /* YXSegmentedControlCell.m */; };
+		AC67691014F4CC8700697079 /* YXSegmentedControlViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6768F914F4CC8700697079 /* YXSegmentedControlViewCell.m */; };
+		AC67691114F4CC8700697079 /* YXSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6768FB14F4CC8700697079 /* YXSwitchCell.m */; };
 		ACB48EAF14EFAF7C00AC50F6 /* AdMobileSamplesBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACB48EAE14EFAF7C00AC50F6 /* AdMobileSamplesBaseViewController.m */; };
 		ACC770281382B7F9005074D8 /* ORMMAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACC770271382B7F9005074D8 /* ORMMAViewController.m */; };
 		AD0ECA2F120C1B38008216A6 /* DelegateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0ECA2E120C1B38008216A6 /* DelegateViewController.m */; };
@@ -99,9 +116,46 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* AdMobileSamples_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMobileSamples_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* AdMobileSamples-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AdMobileSamples-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		AC1A0B9E14F37DCF00149819 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		AC2EB58014F21BB60000B336 /* MASTAdDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTAdDelegate.h; sourceTree = "<group>"; };
 		AC2EB58114F21BB60000B336 /* MASTAdInterstitialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTAdInterstitialView.h; sourceTree = "<group>"; };
 		AC2EB58214F21BB60000B336 /* MASTAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTAdView.h; sourceTree = "<group>"; };
+		AC2EB5A214F26CA60000B336 /* OrmmaProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrmmaProtocols.h; sourceTree = "<group>"; };
+		AC6768D914F4CC8700697079 /* YXButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YXButtonCell.h; path = YXModelTableView/YXButtonCell.h; sourceTree = "<group>"; };
+		AC6768DA14F4CC8700697079 /* YXButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YXButtonCell.m; path = YXModelTableView/YXButtonCell.m; sourceTree = "<group>"; };
+		AC6768DB14F4CC8700697079 /* YXCheckmarkCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YXCheckmarkCell.h; path = YXModelTableView/YXCheckmarkCell.h; sourceTree = "<group>"; };
+		AC6768DC14F4CC8700697079 /* YXCheckmarkCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YXCheckmarkCell.m; path = YXModelTableView/YXCheckmarkCell.m; sourceTree = "<group>"; };
+		AC6768DD14F4CC8700697079 /* YXCheckmarkCellGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YXCheckmarkCellGroup.h; path = YXModelTableView/YXCheckmarkCellGroup.h; sourceTree = "<group>"; };
+		AC6768DE14F4CC8700697079 /* YXCheckmarkCellGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YXCheckmarkCellGroup.m; path = YXModelTableView/YXCheckmarkCellGroup.m; sourceTree = "<group>"; };
+		AC6768DF14F4CC8700697079 /* YXCustomizableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YXCustomizableCell.h; path = YXModelTableView/YXCustomizableCell.h; sourceTree = "<group>"; };
+		AC6768E014F4CC8700697079 /* YXCustomizableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YXCustomizableCell.m; path = YXModelTableView/YXCustomizableCell.m; sourceTree = "<group>"; };
+		AC6768E114F4CC8700697079 /* YXDisclosureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YXDisclosureCell.h; path = YXModelTableView/YXDisclosureCell.h; sourceTree = "<group>"; };
+		AC6768E214F4CC8700697079 /* YXDisclosureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YXDisclosureCell.m; path = YXModelTableView/YXDisclosureCell.m; sourceTree = "<group>"; };
+		AC6768E314F4CC8700697079 /* YXEditableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YXEditableCell.h; path = YXModelTableView/YXEditableCell.h; sourceTree = "<group>"; };
+		AC6768E414F4CC8700697079 /* YXEditableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YXEditableCell.m; path = YXModelTableView/YXEditableCell.m; sourceTree = "<group>"; };
+		AC6768E514F4CC8700697079 /* YXEditableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YXEditableViewCell.h; path = YXModelTableView/YXEditableViewCell.h; sourceTree = "<group>"; };
+		AC6768E614F4CC8700697079 /* YXEditableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YXEditableViewCell.m; path = YXModelTableView/YXEditableViewCell.m; sourceTree = "<group>"; };
+		AC6768E714F4CC8700697079 /* YXKeyValueCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YXKeyValueCell.h; path = YXModelTableView/YXKeyValueCell.h; sourceTree = "<group>"; };
+		AC6768E814F4CC8700697079 /* YXKeyValueCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YXKeyValueCell.m; path = YXModelTableView/YXKeyValueCell.m; sourceTree = "<group>"; };
+		AC6768E914F4CC8700697079 /* YXKVCCheckmarkCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YXKVCCheckmarkCell.h; path = YXModelTableView/YXKVCCheckmarkCell.h; sourceTree = "<group>"; };
+		AC6768EA14F4CC8700697079 /* YXKVCCheckmarkCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YXKVCCheckmarkCell.m; path = YXModelTableView/YXKVCCheckmarkCell.m; sourceTree = "<group>"; };
+		AC6768EB14F4CC8700697079 /* YXKVCSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YXKVCSwitchCell.h; path = YXModelTableView/YXKVCSwitchCell.h; sourceTree = "<group>"; };
+		AC6768EC14F4CC8700697079 /* YXKVCSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YXKVCSwitchCell.m; path = YXModelTableView/YXKVCSwitchCell.m; sourceTree = "<group>"; };
+		AC6768ED14F4CC8700697079 /* YXLabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YXLabelCell.h; path = YXModelTableView/YXLabelCell.h; sourceTree = "<group>"; };
+		AC6768EE14F4CC8700697079 /* YXLabelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YXLabelCell.m; path = YXModelTableView/YXLabelCell.m; sourceTree = "<group>"; };
+		AC6768EF14F4CC8700697079 /* YXModelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YXModelCell.h; path = YXModelTableView/YXModelCell.h; sourceTree = "<group>"; };
+		AC6768F014F4CC8700697079 /* YXModelTableView-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "YXModelTableView-Prefix.pch"; path = "YXModelTableView/YXModelTableView-Prefix.pch"; sourceTree = "<group>"; };
+		AC6768F114F4CC8700697079 /* YXModelTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YXModelTableView.h; path = YXModelTableView/YXModelTableView.h; sourceTree = "<group>"; };
+		AC6768F214F4CC8700697079 /* YXModelTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YXModelTableViewController.h; path = YXModelTableView/YXModelTableViewController.h; sourceTree = "<group>"; };
+		AC6768F314F4CC8700697079 /* YXModelTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YXModelTableViewController.m; path = YXModelTableView/YXModelTableViewController.m; sourceTree = "<group>"; };
+		AC6768F414F4CC8700697079 /* YXSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YXSection.h; path = YXModelTableView/YXSection.h; sourceTree = "<group>"; };
+		AC6768F514F4CC8700697079 /* YXSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YXSection.m; path = YXModelTableView/YXSection.m; sourceTree = "<group>"; };
+		AC6768F614F4CC8700697079 /* YXSegmentedControlCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YXSegmentedControlCell.h; path = YXModelTableView/YXSegmentedControlCell.h; sourceTree = "<group>"; };
+		AC6768F714F4CC8700697079 /* YXSegmentedControlCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YXSegmentedControlCell.m; path = YXModelTableView/YXSegmentedControlCell.m; sourceTree = "<group>"; };
+		AC6768F814F4CC8700697079 /* YXSegmentedControlViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YXSegmentedControlViewCell.h; path = YXModelTableView/YXSegmentedControlViewCell.h; sourceTree = "<group>"; };
+		AC6768F914F4CC8700697079 /* YXSegmentedControlViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YXSegmentedControlViewCell.m; path = YXModelTableView/YXSegmentedControlViewCell.m; sourceTree = "<group>"; };
+		AC6768FA14F4CC8700697079 /* YXSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YXSwitchCell.h; path = YXModelTableView/YXSwitchCell.h; sourceTree = "<group>"; };
+		AC6768FB14F4CC8700697079 /* YXSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YXSwitchCell.m; path = YXModelTableView/YXSwitchCell.m; sourceTree = "<group>"; };
 		ACB48EAD14EFAF7C00AC50F6 /* AdMobileSamplesBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMobileSamplesBaseViewController.h; sourceTree = "<group>"; };
 		ACB48EAE14EFAF7C00AC50F6 /* AdMobileSamplesBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdMobileSamplesBaseViewController.m; sourceTree = "<group>"; };
 		ACC770261382B7F9005074D8 /* ORMMAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORMMAViewController.h; sourceTree = "<group>"; };
@@ -212,7 +266,7 @@
 		CFBBD71713BDD7C4007ADECA /* QSHttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSHttpClient.h; sourceTree = "<group>"; };
 		CFBBD71913BDD7C4007ADECA /* QSStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSStrings.h; sourceTree = "<group>"; };
 		CFBBD71B13BDD7C4007ADECA /* QSUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSUtilities.h; sourceTree = "<group>"; };
-		CFBBD71E13BDD7C4007ADECA /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		CFBBD71E13BDD7C4007ADECA /* MASTReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTReachability.h; sourceTree = "<group>"; };
 		CFBBD72213BDD7C4007ADECA /* RhythmAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RhythmAd.h; sourceTree = "<group>"; };
 		CFBBD72313BDD7C4007ADECA /* RhythmAdDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RhythmAdDelegate.h; sourceTree = "<group>"; };
 		CFBBD72413BDD7C4007ADECA /* RhythmVideoAdDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RhythmVideoAdDelegate.h; sourceTree = "<group>"; };
@@ -280,6 +334,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC1A0B9F14F37DCF00149819 /* CoreLocation.framework in Frameworks */,
 				AD2D17DF148D0C4A00D0B576 /* EventKit.framework in Frameworks */,
 				AD2D17E0148D0C4A00D0B576 /* MessageUI.framework in Frameworks */,
 				AD2D17DB148D0C3200D0B576 /* CoreGraphics.framework in Frameworks */,
@@ -300,6 +355,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				AC6768D614F4CC8700697079 /* libraries */,
 				CF0B88F513CFFDAE00BDCDDA /* AdMobileSDK */,
 				16BB05A212094E8200DBCF9A /* Advanced */,
 				16D10198120844220059D8EB /* Animation examples */,
@@ -453,6 +509,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AC1A0B9E14F37DCF00149819 /* CoreLocation.framework */,
 				AD2D17D9148D0C3200D0B576 /* CoreGraphics.framework */,
 				AD2D17DA148D0C3200D0B576 /* CoreTelephony.framework */,
 				AD2D17DD148D0C4A00D0B576 /* EventKit.framework */,
@@ -465,6 +522,56 @@
 				AD2D17D0148D0C0300D0B576 /* UIKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AC6768D614F4CC8700697079 /* libraries */ = {
+			isa = PBXGroup;
+			children = (
+				AC6768D714F4CC8700697079 /* YXModelTableView */,
+			);
+			path = libraries;
+			sourceTree = SOURCE_ROOT;
+		};
+		AC6768D714F4CC8700697079 /* YXModelTableView */ = {
+			isa = PBXGroup;
+			children = (
+				AC6768D914F4CC8700697079 /* YXButtonCell.h */,
+				AC6768DA14F4CC8700697079 /* YXButtonCell.m */,
+				AC6768DB14F4CC8700697079 /* YXCheckmarkCell.h */,
+				AC6768DC14F4CC8700697079 /* YXCheckmarkCell.m */,
+				AC6768DD14F4CC8700697079 /* YXCheckmarkCellGroup.h */,
+				AC6768DE14F4CC8700697079 /* YXCheckmarkCellGroup.m */,
+				AC6768DF14F4CC8700697079 /* YXCustomizableCell.h */,
+				AC6768E014F4CC8700697079 /* YXCustomizableCell.m */,
+				AC6768E114F4CC8700697079 /* YXDisclosureCell.h */,
+				AC6768E214F4CC8700697079 /* YXDisclosureCell.m */,
+				AC6768E314F4CC8700697079 /* YXEditableCell.h */,
+				AC6768E414F4CC8700697079 /* YXEditableCell.m */,
+				AC6768E514F4CC8700697079 /* YXEditableViewCell.h */,
+				AC6768E614F4CC8700697079 /* YXEditableViewCell.m */,
+				AC6768E714F4CC8700697079 /* YXKeyValueCell.h */,
+				AC6768E814F4CC8700697079 /* YXKeyValueCell.m */,
+				AC6768E914F4CC8700697079 /* YXKVCCheckmarkCell.h */,
+				AC6768EA14F4CC8700697079 /* YXKVCCheckmarkCell.m */,
+				AC6768EB14F4CC8700697079 /* YXKVCSwitchCell.h */,
+				AC6768EC14F4CC8700697079 /* YXKVCSwitchCell.m */,
+				AC6768ED14F4CC8700697079 /* YXLabelCell.h */,
+				AC6768EE14F4CC8700697079 /* YXLabelCell.m */,
+				AC6768EF14F4CC8700697079 /* YXModelCell.h */,
+				AC6768F014F4CC8700697079 /* YXModelTableView-Prefix.pch */,
+				AC6768F114F4CC8700697079 /* YXModelTableView.h */,
+				AC6768F214F4CC8700697079 /* YXModelTableViewController.h */,
+				AC6768F314F4CC8700697079 /* YXModelTableViewController.m */,
+				AC6768F414F4CC8700697079 /* YXSection.h */,
+				AC6768F514F4CC8700697079 /* YXSection.m */,
+				AC6768F614F4CC8700697079 /* YXSegmentedControlCell.h */,
+				AC6768F714F4CC8700697079 /* YXSegmentedControlCell.m */,
+				AC6768F814F4CC8700697079 /* YXSegmentedControlViewCell.h */,
+				AC6768F914F4CC8700697079 /* YXSegmentedControlViewCell.m */,
+				AC6768FA14F4CC8700697079 /* YXSwitchCell.h */,
+				AC6768FB14F4CC8700697079 /* YXSwitchCell.m */,
+			);
+			path = YXModelTableView;
 			sourceTree = "<group>";
 		};
 		ACC770251382B7EC005074D8 /* ORMMA */ = {
@@ -488,6 +595,7 @@
 		CF08E18613B3674F00653A17 /* Public */ = {
 			isa = PBXGroup;
 			children = (
+				AC2EB5A214F26CA60000B336 /* OrmmaProtocols.h */,
 				AC2EB58014F21BB60000B336 /* MASTAdDelegate.h */,
 				AC2EB58114F21BB60000B336 /* MASTAdInterstitialView.h */,
 				AC2EB58214F21BB60000B336 /* MASTAdView.h */,
@@ -1041,7 +1149,7 @@
 		CFBBD71D13BDD7C4007ADECA /* Reachability */ = {
 			isa = PBXGroup;
 			children = (
-				CFBBD71E13BDD7C4007ADECA /* Reachability.h */,
+				CFBBD71E13BDD7C4007ADECA /* MASTReachability.h */,
 			);
 			path = Reachability;
 			sourceTree = "<group>";
@@ -1287,6 +1395,22 @@
 				ACC770281382B7F9005074D8 /* ORMMAViewController.m in Sources */,
 				CFBBD63113BDC73D007ADECA /* TestingViewController.m in Sources */,
 				ACB48EAF14EFAF7C00AC50F6 /* AdMobileSamplesBaseViewController.m in Sources */,
+				AC67690214F4CC8700697079 /* YXButtonCell.m in Sources */,
+				AC67690314F4CC8700697079 /* YXCheckmarkCell.m in Sources */,
+				AC67690414F4CC8700697079 /* YXCheckmarkCellGroup.m in Sources */,
+				AC67690514F4CC8700697079 /* YXCustomizableCell.m in Sources */,
+				AC67690614F4CC8700697079 /* YXDisclosureCell.m in Sources */,
+				AC67690714F4CC8700697079 /* YXEditableCell.m in Sources */,
+				AC67690814F4CC8700697079 /* YXEditableViewCell.m in Sources */,
+				AC67690914F4CC8700697079 /* YXKeyValueCell.m in Sources */,
+				AC67690A14F4CC8700697079 /* YXKVCCheckmarkCell.m in Sources */,
+				AC67690B14F4CC8700697079 /* YXKVCSwitchCell.m in Sources */,
+				AC67690C14F4CC8700697079 /* YXLabelCell.m in Sources */,
+				AC67690D14F4CC8700697079 /* YXModelTableViewController.m in Sources */,
+				AC67690E14F4CC8700697079 /* YXSection.m in Sources */,
+				AC67690F14F4CC8700697079 /* YXSegmentedControlCell.m in Sources */,
+				AC67691014F4CC8700697079 /* YXSegmentedControlViewCell.m in Sources */,
+				AC67691114F4CC8700697079 /* YXSwitchCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,8 +1,6 @@
 //
-//  LocationManager.m
-//  AdMobileSDK
-//
-//  Created by Constantine Mureev on 3/25/11.
+//  MASTLocationManager.m
+//  Copyright (c) Microsoft. All rights reserved.
 //
 
 #import "MASTLocationManager.h"
@@ -13,9 +11,9 @@
 @synthesize locationManager = _locationManager,
 currentLocation = _currentLocation, currentHeading = _currentHeading, isUpdatingLocation = _isUpdatingLocation, unknowsState;
 
-#ifdef INCLUDE_LOCATION_MANAGER
+
 @synthesize currentLocationCoordinate = _currentLocationCoordinate;
-#endif
+
 
 static MASTLocationManager* sharedInstance = nil;
 
@@ -23,17 +21,14 @@ static MASTLocationManager* sharedInstance = nil;
 #pragma mark -
 #pragma mark Singleton
 
-
 - (id) init {
     self = [super init];
     
 	if (self) {
-#ifdef INCLUDE_LOCATION_MANAGER
+
         self.delegate = self;
-        
 		_currentLocationCoordinate.latitude = 0.0;
 		_currentLocationCoordinate.longitude = 0.0;
-#endif
 		_isUpdatingLocation = NO;
         self.unknowsState = YES;
 	}
@@ -101,11 +96,9 @@ static MASTLocationManager* sharedInstance = nil;
     }
     if (!_isUpdatingLocation)
     {
-#ifdef INCLUDE_LOCATION_MANAGER
         _isUpdatingLocation = YES;
         [super startUpdatingLocation];
-        [[NotificationCenter sharedInstance] postNotificationName:kLocationStartNotification object:_currentLocation];
-#endif
+        //[[NotificationCenter sharedInstance] postNotificationName:kLocationStartNotification object:_currentLocation];
     }
 }
 
@@ -115,21 +108,15 @@ static MASTLocationManager* sharedInstance = nil;
     }
     if (_isUpdatingLocation)
     {
-#ifdef INCLUDE_LOCATION_MANAGER
         _isUpdatingLocation = NO;
         [super stopUpdatingLocation];
-        [[NotificationCenter sharedInstance] postNotificationName:kLocationStopNotification object:_currentLocation];
-#endif        
+        //[[NotificationCenter sharedInstance] postNotificationName:kLocationStopNotification object:_currentLocation];
     }
 }
 
 - (void)startUpdatingHeading {
-#ifdef INCLUDE_LOCATION_MANAGER
     [super startUpdatingHeading];
-#endif
 }
-
-#ifdef INCLUDE_LOCATION_MANAGER
 
 #pragma mark -
 #pragma mark Private
@@ -152,7 +139,7 @@ static MASTLocationManager* sharedInstance = nil;
     _currentLocation = [newLocation retain];
     _currentLocationCoordinate = _currentLocation.coordinate;
     
-    [[NotificationCenter sharedInstance] postNotificationName:kNewLocationDetectedNotification object:_currentLocation];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kNewLocationDetectedNotification object:_currentLocation];
     
     if (newLocation.horizontalAccuracy < 1000000 )
     {
@@ -162,9 +149,8 @@ static MASTLocationManager* sharedInstance = nil;
 
 - (void)locationManager:(CLLocationManager *)manager  didFailWithError:(NSError *)error
 {
-    [[NotificationCenter sharedInstance] postNotificationName:kLocationErrorNotification object:error];
-
-    //[super startUpdatingLocation];
+    //[[NotificationCenter sharedInstance] postNotificationName:kLocationErrorNotification object:error];
+    [super startUpdatingLocation];
 }
 
 - (void)locationManager:(CLLocationManager *)manager 
@@ -175,11 +161,11 @@ static MASTLocationManager* sharedInstance = nil;
             [_currentHeading release];
         }
         _currentHeading = [newHeading retain];
-        
-        [[NotificationCenter sharedInstance] postNotificationName:kLocationUpdateHeadingNotification object:newHeading];
+
+		[[NSNotificationCenter defaultCenter] postNotificationName:kLocationUpdateHeadingNotification object:_currentHeading];
+
+        //[[NotificationCenter sharedInstance] postNotificationName:kLocationUpdateHeadingNotification object:newHeading];
     }
 }
-
-#endif 
 
 @end

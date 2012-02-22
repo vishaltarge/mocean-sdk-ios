@@ -49,14 +49,14 @@ extern NSString* kAdViewBecomeInvisibleNotification;
 extern NSString* kUaDetectedNotification;
 
 // location
-extern NSString* kNewLocationDetectedNotification;
+/*extern NSString* kNewLocationDetectedNotification;
 extern NSString* kNewLocationSetNotification;
 extern NSString* kLocationStartNotification;
 extern NSString* kLocationStopNotification;
 extern NSString* kLocationInvalidParamertsNotification;
 extern NSString* kLocationErrorNotification;
 extern NSString* kLocationUpdateHeadingNotification;
-extern NSString* kLocationUsedFoundLocationNotification;
+extern NSString* kLocationUsedFoundLocationNotification;*/
 // install notification
 extern NSString* kFinishInstallNotification;
 extern NSString* kFailInstallNotification;

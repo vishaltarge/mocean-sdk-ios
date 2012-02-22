@@ -1,8 +1,6 @@
 //
-//  Accelerometer.m
-//  AdMobileSDK
-//
-//  Created by Constantine Mureev on 9/12/11.
+//  MASTAccelerometer.m
+//  Copyright (c) Microsoft. All rights reserved.
 //
 
 #import "MASTAccelerometer.h"

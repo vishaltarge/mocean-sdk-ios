@@ -115,7 +115,7 @@ static MASTSharedModel* sharedInstance = nil;
     }
     
     // set connection speed
-    NetworkStatus networkState = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
+    MASTNetworkStatus networkState = [[MASTReachability reachabilityForInternetConnection] currentReachabilityStatus];
     if (networkState == ReachableViaWiFi) {
         [result appendFormat:@"&connection_speed=%d", 1];
     }
