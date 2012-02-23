@@ -149,7 +149,7 @@
 - (void)startTimer:(NSNotification*)notification {
     NSDictionary *info = [notification object];
 	MASTAdView* adViewNotify = [info objectForKey:@"adView"];
-    if (adViewNotify == self.adView) {
+    if (adViewNotify == self.adView && self.updateTimeInterval > 0) {
         @synchronized(self) {
             // update timeInterval
             MASTAdModel* adModel = [adViewNotify adModel];
