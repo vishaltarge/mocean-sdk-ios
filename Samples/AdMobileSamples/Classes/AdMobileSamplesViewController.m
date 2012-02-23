@@ -19,19 +19,20 @@
 	[items addObject:@"Video"];
 	[items addObject:@"Rich JS Interstitial Ad"];
 	[items addObject:@"OpenGL"];
-    [items addObject:@"ORMMA"];
+    [items addObject:@"ORMMA example 1"];
+    [items addObject:@"ORMMA example 2"];
+    [items addObject:@"ORMMA example 3"];
     [_sections addObject:items];
     
     items = [NSMutableArray array];
     
 	[items addObject:@"Banner frame animation"];
-	[items addObject:@"UITableView animation"];
+	//[items addObject:@"UITableView animation"];
     [_sections addObject:items];
     
     items = [NSMutableArray array];
     
 	[items addObject:@"One Thousend ads!"];
-	[items addObject:@"Test custom site/zone"];
 	[items addObject:@"Ad delegate (callback sample)"];
     [_sections addObject:items];
 }
@@ -55,20 +56,22 @@
         else if (indexPath.row == 3)
             viewController = [[OpenGLViewController alloc] init];
 		else if (indexPath.row == 4)
-            viewController = [[ORMMAViewController alloc] init];
+			viewController = [[ORMMAViewController alloc] init];
+		else if (indexPath.row == 5)
+			viewController = [[ORMMAViewController alloc] initWithZone:53920 site:17340];
+		else if (indexPath.row == 6)
+			viewController = [[ORMMAViewController alloc] initWithZone:53919 site:17340];
     }
     else if (indexPath.section == 1) {
         if (indexPath.row == 0)
             viewController = [[BannerAnimationViewController alloc] init];
-        else if (indexPath.row == 1)
-            viewController = [[TableViewAnimationViewController alloc] init];
+        //else if (indexPath.row == 1)
+        //    viewController = [[TableViewAnimationViewController alloc] init];
     }
     else if (indexPath.section == 2) {
         if (indexPath.row == 0)
             viewController = [[TableViewCellSampleViewController alloc] init];
         else if (indexPath.row == 1)
-            viewController = [[TestingViewController alloc] init];
-        else if (indexPath.row == 2)
             viewController = [[DelegateViewController alloc] init];
     }
     

@@ -20,6 +20,27 @@
 	return  CGRectMake(0, 0, 320, 240);
 }
 
+-(id)init
+{
+	if (self = [super init])
+	{
+		_newZone = -1;
+		
+		_newSite = -1;
+	}
+	return self;
+}
+
+-(id)initWithZone:(NSInteger)zone site:(NSInteger)site
+{
+	if (self = [super init])
+	{
+		_newZone = zone;
+		_newSite = site;
+	}
+	return self;
+}
+
 - (void)viewDidLoad {
 	[super viewDidLoad];
 
@@ -27,6 +48,16 @@
     _adView.delegate = self;
     _adView.logMode = AdLogModeAll;
     _adView.type = AdTypeRichmedia;
+	
+	if (_newZone != -1)
+	{
+		_adView.zone = _newZone;
+	}
+
+	if (_newSite != -1)
+	{
+		_adView.site = _newSite;
+	}
 }
 
 @end
