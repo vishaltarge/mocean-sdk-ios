@@ -11,6 +11,7 @@
 #import "MASTUIWebViewAdditions.h"
 #import "MASTInternalAVPlayer.h"
 #import "MASTNotificationCenter.h"
+#import "MASTNetworkQueue.h"
 
 @interface MASTOrmmaSharedDelegate ()
 
@@ -455,6 +456,12 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
 }
 
 - (void)sendRequest:(NSString*)url display:(NSString*)display response:(void (^)(NSString* response))response ad:(id)sender {
+    [MASTNetworkQueue loadWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]] completion:^(NSURLRequest *request, NSHTTPURLResponse *resp, NSData *data, NSError *error) {
+        if (!error && data && [data length] > 0) {
+            NSString* responseString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
+            response(responseString);
+        }
+    }];
 }
 
 #pragma mark - MFMessageComposeViewController Delegete

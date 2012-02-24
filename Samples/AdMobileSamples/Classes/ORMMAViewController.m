@@ -48,7 +48,6 @@
     _adView.delegate = self;
     _adView.logMode = AdLogModeAll;
     _adView.type = AdTypeRichmedia;
-	_adView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     
 	if (_newZone != -1)
 	{

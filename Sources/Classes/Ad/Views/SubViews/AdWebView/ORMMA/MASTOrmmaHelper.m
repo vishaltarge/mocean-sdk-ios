@@ -87,6 +87,10 @@
 }
 
 + (NSString*)setExpandPropertiesWithMaxSize:(CGSize)size {
+    return [MASTOrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{expandProperties: { width: %f, height: %f }}", size.width, size.height]];
+}
+
++ (NSString*)setAllExpandPropertiesWithMaxSize:(CGSize)size {
     return [MASTOrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{expandProperties: { width: %f, height: %f, useCustomClose: !1, isModal: !1, lockOrientation: !1, useBackground: !1, backgroundColor: \"#ffffff\", backgroundOpacity:1 }}", size.width, size.height]];
 }
 
