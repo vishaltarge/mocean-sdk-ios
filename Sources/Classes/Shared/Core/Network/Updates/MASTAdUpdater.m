@@ -214,7 +214,7 @@
             _viewVisible = YES;
             
             if (_updateStarted) {
-                [self performSelectorOnMainThread:@selector(startTimerOnMainThread) withObject:nil waitUntilDone:NO];
+                //[self performSelectorOnMainThread:@selector(startTimerOnMainThread) withObject:nil waitUntilDone:NO];
             }
         }
 	}
