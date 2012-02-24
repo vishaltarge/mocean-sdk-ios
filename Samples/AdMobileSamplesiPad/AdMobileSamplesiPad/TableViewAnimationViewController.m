@@ -31,7 +31,7 @@
         
         _adView = [[MASTAdView alloc] initWithFrame:CGRectMake(0, -AD_HEIGHT, self.view.bounds.size.width, AD_HEIGHT) site:8061 zone:20249];
         _adView.updateTimeInterval = 15;
-        _adView.animateMode = NO;
+        _adView.isAdChangeAnimated = NO;
         _adView.contentAlignment = YES;\
         
         _adView.delegate = self;
