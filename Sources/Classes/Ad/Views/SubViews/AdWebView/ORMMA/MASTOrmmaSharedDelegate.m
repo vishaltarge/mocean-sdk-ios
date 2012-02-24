@@ -18,6 +18,7 @@
 @property (nonatomic, retain) MASTExpandView *expandView;
 @property (nonatomic, retain) UIView *lastSuperView;
 @property (nonatomic, retain) UIColor *lastBackgroundColor;
+@property (assign) UIViewAutoresizing lastAutoresizing;
 @property (nonatomic, retain) NSMutableDictionary *adControls;
 @property (nonatomic, assign) CGRect defaultFrame;
 
@@ -30,7 +31,7 @@
 
 @implementation MASTOrmmaSharedDelegate
 
-@synthesize expandVC, expandView, lastSuperView, lastBackgroundColor, defaultFrame, adControls;
+@synthesize expandVC, expandView, lastSuperView, lastBackgroundColor, defaultFrame, adControls, lastAutoresizing;
 
 static MASTOrmmaSharedDelegate *sharedDelegate = nil;
 
@@ -93,6 +94,9 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
     if (self.expandView) 
         [options setObject:self.expandView forKey:@"expandView"];
     
+    NSNumber *mask = [NSNumber numberWithUnsignedInt:self.lastAutoresizing];
+    [options setObject:mask forKey:@"lastAutoresizing"];
+    
     if (self.lastSuperView)
         [options setObject:self.lastSuperView forKey:@"lastSuperView"];
     
@@ -115,6 +119,8 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
     self.lastSuperView = [options objectForKey:@"lastSuperView"];
     self.lastBackgroundColor = [options objectForKey:@"lastBackgroundColor"];
     self.defaultFrame = [self loadDefaultFrame:options];
+    
+    self.lastAutoresizing = [[options objectForKey:@"lastAutoresizing"] unsignedIntValue];
 }
 
 #pragma mark - Support delegate methods
@@ -210,6 +216,10 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
                 self.lastBackgroundColor = nil;
             }
             
+            if (self.lastAutoresizing) {
+                adControl.autoresizingMask = self.lastAutoresizing;
+            }
+            
             // resize to normal frame
             adControl.frame = self.defaultFrame;
             /*[UIView animateWithDuration:0.2 animations:^(void) {
@@ -233,6 +243,7 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
 - (void)expandURL:(NSString*)url parameters:(NSDictionary*)parameters ad:(id)sender {
     UIView *adControl = sender;
     self.defaultFrame = adControl.frame;
+    self.lastAutoresizing = adControl.autoresizingMask;
     
     CGFloat w = [MASTOrmmaHelper floatFromDictionary:parameters forKey:@"width"];
     CGFloat h = [MASTOrmmaHelper floatFromDictionary:parameters forKey:@"height"];
