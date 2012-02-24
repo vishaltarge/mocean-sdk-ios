@@ -275,6 +275,12 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
             [sender performSelector:@selector(setUpdateFlag:) withObject:@"expand"];
         }
         
+        double delayInSeconds = 0.5;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_current_queue(), ^(void){
+            [[MASTNotificationCenter sharedInstance] postNotificationName:kAdStopUpdateNotification object:sender];
+        });
+        
         [rootVC presentModalViewController:self.expandVC animated:NO];
     }
     
@@ -308,16 +314,6 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
         self.expandVC.expandView = adControl;
         [self.expandVC useCustomClose:useCustomClose];
     }
-    
-    if ([sender respondsToSelector:@selector(setUpdateFlag:)]) {
-        [sender performSelector:@selector(setUpdateFlag:) withObject:@"expand" afterDelay:2];
-    }
-    
-    double delayInSeconds = 0.5;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_current_queue(), ^(void){
-        [[MASTNotificationCenter sharedInstance] postNotificationName:kAdStopUpdateNotification object:sender];
-    });
     
     //save options
     [self saveOptions:adControl];
