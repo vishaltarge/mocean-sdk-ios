@@ -7,7 +7,7 @@
 //
 
 #import "AdMobileSamplesBaseViewController.h"
-#import "AdMobileSaplesEditSettersTableVuewController.h"
+#import "AdMobileSamplesEditSettersTableVuewController.h"
 
 @implementation AdMobileSamplesBaseViewController
 
@@ -109,7 +109,7 @@
 
 -(void)showEditOption
 {
-	AdMobileSaplesEditSettersTableVuewController *viewController = [[AdMobileSaplesEditSettersTableVuewController alloc] initWithStyle:UITableViewStyleGrouped banner:_adView];
+	AdMobileSamplesEditSettersTableVuewController *viewController = [[AdMobileSamplesEditSettersTableVuewController alloc] initWithStyle:UITableViewStyleGrouped banner:_adView];
 	viewController.view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
 	viewController.tableView.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
 	[self.navigationController pushViewController:viewController animated:YES];
@@ -124,6 +124,7 @@
 	[_adView release];
 	[_buttonEdit release];
 	[_actionSheet release];
+	
 	[super dealloc];
 }
 

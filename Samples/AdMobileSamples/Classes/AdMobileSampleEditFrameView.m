@@ -43,7 +43,7 @@
 		_adView = adView;
 		//height
 		_sliderHeight = [[UISlider alloc] initWithFrame:CGRectMake(-35, 60, 130, 30)];
-		[_sliderHeight addTarget:self action:@selector( sliderChanged:) forControlEvents:UIControlEventValueChanged];
+		[_sliderHeight addTarget:self action:@selector(sliderChanged:) forControlEvents:UIControlEventValueChanged];
 
 		CGAffineTransform trans = CGAffineTransformMakeRotation(-M_PI * 0.5);
 		_sliderHeight.transform = trans;
@@ -58,7 +58,7 @@
 		
 		//width
 		_sliderWidth = [[UISlider alloc] initWithFrame:CGRectMake(20, 160, 280, 30)];
-		[_sliderWidth addTarget:self action:@selector( sliderChanged:) forControlEvents:UIControlEventValueChanged];
+		[_sliderWidth addTarget:self action:@selector(sliderChanged:) forControlEvents:UIControlEventValueChanged];
 		[self addSubview:_sliderWidth];
 		
 		_labelWidthCurent = [[UILabel alloc] initWithFrame:CGRectMake(20, 145, 280, 20)];
@@ -69,7 +69,7 @@
 		
 		//pos x
 		_sliderPosX = [[UISlider alloc] initWithFrame:CGRectMake(100, 30, 200, 30)];
-		[_sliderPosX addTarget:self action:@selector( sliderChanged:) forControlEvents:UIControlEventValueChanged];
+		[_sliderPosX addTarget:self action:@selector(sliderChanged:) forControlEvents:UIControlEventValueChanged];
 		[self addSubview:_sliderPosX];
 		
 		_labelPosXCurent = [[UILabel alloc] initWithFrame:CGRectMake(100, 10, 200, 20)];
@@ -79,7 +79,7 @@
 		
 		//pos y
 		_sliderPosY = [[UISlider alloc] initWithFrame:CGRectMake(100, 90, 200, 30)];
-		[_sliderPosY addTarget:self action:@selector( sliderChanged:) forControlEvents:UIControlEventValueChanged];
+		[_sliderPosY addTarget:self action:@selector(sliderChanged:) forControlEvents:UIControlEventValueChanged];
 
 		[self addSubview:_sliderPosY];
 		
@@ -87,6 +87,8 @@
 		[_labelPosYCurent setBackgroundColor:[UIColor clearColor]];
 		[_labelPosYCurent setText:@"pos y curent"];
 		[self addSubview:_labelPosYCurent];
+
+		[self update];
     }
     return self;
 }
@@ -101,13 +103,32 @@
 	[_sliderWidth setValue:_adView.frame.size.width];
 	[self sliderChanged:_sliderWidth];
 	
-	[_sliderPosX setMaximumValue:_adView.superview.frame.size.height];
+	[_sliderPosX setMaximumValue:_adView.superview.frame.size.width];
 	[_sliderPosX setValue:_adView.frame.origin.x];
 	[self sliderChanged:_sliderPosY];
 	
-	[_sliderPosY setMaximumValue:_adView.superview.frame.size.width];
+	[_sliderPosY setMaximumValue:_adView.superview.frame.size.height];
+	NSLog(@"%f",_adView.frame.origin.y);
 	[_sliderPosY setValue:_adView.frame.origin.y];
 	[self sliderChanged:_sliderPosX];
+}
+
+-(void)dealloc
+{
+	//height
+	[_sliderHeight release];
+	[_labelHeightCurent release];
+	//width
+	[_sliderWidth release];
+	[_labelWidthCurent release];
+	//pos x
+	[_sliderPosX release];
+	[_labelPosXCurent release];
+	//pos y
+	[_sliderPosY release];
+	[_labelPosYCurent release];
+	
+	[super dealloc];
 }
 
 @end
