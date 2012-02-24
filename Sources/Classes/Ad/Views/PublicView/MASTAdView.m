@@ -151,6 +151,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 #pragma mark Private
 
 - (void)setDefaultValues {
+    self.backgroundColor = [UIColor clearColor];
     self.updateTimeInterval = DEFAULT_UPDATE_TIMEINTERVAL; // 2min
     self.animateMode = YES;
     self.internalOpenMode = NO;
