@@ -94,8 +94,8 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
     if (self.expandView) 
         [options setObject:self.expandView forKey:@"expandView"];
     
-    NSNumber *mask = [NSNumber numberWithUnsignedInt:self.lastAutoresizing];
-    [options setObject:mask forKey:@"lastAutoresizing"];
+    if (self.lastAutoresizing) 
+        [options setObject:[NSNumber numberWithUnsignedInt:self.lastAutoresizing] forKey:@"lastAutoresizing"];
     
     if (self.lastSuperView)
         [options setObject:self.lastSuperView forKey:@"lastSuperView"];
@@ -118,9 +118,8 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
     self.expandView = [options objectForKey:@"expandView"];
     self.lastSuperView = [options objectForKey:@"lastSuperView"];
     self.lastBackgroundColor = [options objectForKey:@"lastBackgroundColor"];
-    self.defaultFrame = [self loadDefaultFrame:options];
-    
     self.lastAutoresizing = [[options objectForKey:@"lastAutoresizing"] unsignedIntValue];
+    self.defaultFrame = [self loadDefaultFrame:options];
 }
 
 #pragma mark - Support delegate methods
