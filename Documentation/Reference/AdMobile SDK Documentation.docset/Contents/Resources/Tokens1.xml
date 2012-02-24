@@ -1,64 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/AdInterstitialView.html">
+	<File path="Classes/MASTAdInterstitialView.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/AdInterstitialView</TokenIdentifier>
-			<Abstract>The AdInterstitialView class is subclassing of AdView with advanced customization parameters. An instance of AdInterstitialView  is a means for full-screen displaying ads with specific closing.</Abstract>
+			<TokenIdentifier>//apple_ref/occ/cl/MASTAdInterstitialView</TokenIdentifier>
+			<Abstract>The MASTAdInterstitialView class is deprecated. You must use MASTAdView class and set showCloseButtonTime or autocloseInterstitialTime properties value is greater than -1.</Abstract>
 			<DeclaredIn>MASTAdInterstitialView.h</DeclaredIn>
 			
 			<NodeRef refid="1"/>
 		</Token>
 		
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/AdInterstitialView/closeButton</TokenIdentifier>
-			<Abstract>Close button.</Abstract>
-			<DeclaredIn>MASTAdInterstitialView.h</DeclaredIn>			
-			
-			<Declaration>@property (retain) UIButton *closeButton</Declaration>
-			
-			
-			<Anchor>//api/name/closeButton</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/AdInterstitialView/showCloseButtonTime</TokenIdentifier>
-			<Abstract>Show close button delay time interval, in seconds.</Abstract>
-			<DeclaredIn>MASTAdInterstitialView.h</DeclaredIn>			
-			
-			<Declaration>@property NSTimeInterval showCloseButtonTime</Declaration>
-			
-			
-			<Anchor>//api/name/showCloseButtonTime</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/AdInterstitialView/autocloseInterstitialTime</TokenIdentifier>
-			<Abstract>Auto close interstitial time interval, in seconds.</Abstract>
-			<DeclaredIn>MASTAdInterstitialView.h</DeclaredIn>			
-			
-			<Declaration>@property NSTimeInterval autocloseInterstitialTime</Declaration>
-			
-			
-			<Anchor>//api/name/autocloseInterstitialTime</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/AdInterstitialView/delegate</TokenIdentifier>
-			<Abstract>The receiver's delegate.</Abstract>
-			<DeclaredIn>MASTAdInterstitialView.h</DeclaredIn>			
-			
-	<RelatedTokens>
-		<TokenIdentifier>//apple_ref/occ/instp/AdInterstitialView/delegate</TokenIdentifier>
-		
-	</RelatedTokens>
-	
-			<Declaration>@property (assign) id&lt;AdViewDelegate&gt; delegate</Declaration>
-			
-			
-			<Anchor>//api/name/delegate</Anchor>
-		</Token>
 		
 	</File>
 </Tokens>
