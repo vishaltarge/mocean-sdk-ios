@@ -94,7 +94,7 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
     if (self.expandView) 
         [options setObject:self.expandView forKey:@"expandView"];
     
-    if (self.lastAutoresizing) 
+    if (self.lastAutoresizing || self.lastAutoresizing == UIViewAutoresizingNone) 
         [options setObject:[NSNumber numberWithUnsignedInt:self.lastAutoresizing] forKey:@"lastAutoresizing"];
     
     if (self.lastSuperView)
@@ -215,7 +215,7 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
                 self.lastBackgroundColor = nil;
             }
             
-            if (self.lastAutoresizing) {
+            if (self.lastAutoresizing || self.lastAutoresizing == UIViewAutoresizingNone) {
                 adControl.autoresizingMask = self.lastAutoresizing;
             }
             
