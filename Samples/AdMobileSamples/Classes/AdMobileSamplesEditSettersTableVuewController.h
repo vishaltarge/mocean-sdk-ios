@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MASTAdView.h"
 
-@interface AdMobileSaplesEditSettersTableVuewController : UITableViewController <UITextFieldDelegate>
+@interface AdMobileSamplesEditSettersTableVuewController : UITableViewController <UITextFieldDelegate>
 {
 	MASTAdView		*_adView;
 	UITextField		*_site;

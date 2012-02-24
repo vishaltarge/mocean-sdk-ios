@@ -36,7 +36,7 @@
 		AC67691014F4CC8700697079 /* YXSegmentedControlViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6768F914F4CC8700697079 /* YXSegmentedControlViewCell.m */; };
 		AC67691114F4CC8700697079 /* YXSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6768FB14F4CC8700697079 /* YXSwitchCell.m */; };
 		ACA0CEB314F766AE003E9623 /* AdMobileSampleEditFrameView.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA0CEB214F766AE003E9623 /* AdMobileSampleEditFrameView.m */; };
-		ACA0CEC414F7A985003E9623 /* AdMobileSaplesEditSettersTableVuewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA0CEC314F7A985003E9623 /* AdMobileSaplesEditSettersTableVuewController.m */; };
+		ACA0CEC414F7A985003E9623 /* AdMobileSamplesEditSettersTableVuewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA0CEC314F7A985003E9623 /* AdMobileSamplesEditSettersTableVuewController.m */; };
 		ACB48EAF14EFAF7C00AC50F6 /* AdMobileSamplesBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACB48EAE14EFAF7C00AC50F6 /* AdMobileSamplesBaseViewController.m */; };
 		ACC770281382B7F9005074D8 /* ORMMAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACC770271382B7F9005074D8 /* ORMMAViewController.m */; };
 		AD0ECA2F120C1B38008216A6 /* DelegateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0ECA2E120C1B38008216A6 /* DelegateViewController.m */; };
@@ -160,8 +160,8 @@
 		AC6768FB14F4CC8700697079 /* YXSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YXSwitchCell.m; path = YXModelTableView/YXSwitchCell.m; sourceTree = "<group>"; };
 		ACA0CEB114F766AE003E9623 /* AdMobileSampleEditFrameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMobileSampleEditFrameView.h; sourceTree = "<group>"; };
 		ACA0CEB214F766AE003E9623 /* AdMobileSampleEditFrameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdMobileSampleEditFrameView.m; sourceTree = "<group>"; };
-		ACA0CEC214F7A985003E9623 /* AdMobileSaplesEditSettersTableVuewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMobileSaplesEditSettersTableVuewController.h; sourceTree = "<group>"; };
-		ACA0CEC314F7A985003E9623 /* AdMobileSaplesEditSettersTableVuewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdMobileSaplesEditSettersTableVuewController.m; sourceTree = "<group>"; };
+		ACA0CEC214F7A985003E9623 /* AdMobileSamplesEditSettersTableVuewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = AdMobileSamplesEditSettersTableVuewController.h; sourceTree = "<group>"; };
+		ACA0CEC314F7A985003E9623 /* AdMobileSamplesEditSettersTableVuewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdMobileSamplesEditSettersTableVuewController.m; sourceTree = "<group>"; };
 		ACB48EAD14EFAF7C00AC50F6 /* AdMobileSamplesBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMobileSamplesBaseViewController.h; sourceTree = "<group>"; };
 		ACB48EAE14EFAF7C00AC50F6 /* AdMobileSamplesBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdMobileSamplesBaseViewController.m; sourceTree = "<group>"; };
 		ACC770261382B7F9005074D8 /* ORMMAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORMMAViewController.h; sourceTree = "<group>"; };
@@ -435,8 +435,8 @@
 				ACB48EAE14EFAF7C00AC50F6 /* AdMobileSamplesBaseViewController.m */,
 				ACA0CEB114F766AE003E9623 /* AdMobileSampleEditFrameView.h */,
 				ACA0CEB214F766AE003E9623 /* AdMobileSampleEditFrameView.m */,
-				ACA0CEC214F7A985003E9623 /* AdMobileSaplesEditSettersTableVuewController.h */,
-				ACA0CEC314F7A985003E9623 /* AdMobileSaplesEditSettersTableVuewController.m */,
+				ACA0CEC214F7A985003E9623 /* AdMobileSamplesEditSettersTableVuewController.h */,
+				ACA0CEC314F7A985003E9623 /* AdMobileSamplesEditSettersTableVuewController.m */,
 			);
 			name = Advanced;
 			sourceTree = "<group>";
@@ -1422,7 +1422,7 @@
 				AC67691014F4CC8700697079 /* YXSegmentedControlViewCell.m in Sources */,
 				AC67691114F4CC8700697079 /* YXSwitchCell.m in Sources */,
 				ACA0CEB314F766AE003E9623 /* AdMobileSampleEditFrameView.m in Sources */,
-				ACA0CEC414F7A985003E9623 /* AdMobileSaplesEditSettersTableVuewController.m in Sources */,
+				ACA0CEC414F7A985003E9623 /* AdMobileSamplesEditSettersTableVuewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,12 +6,12 @@
 //  Copyright (c) 2012 Team Force. All rights reserved.
 //
 
-#import "AdMobileSaplesEditSettersTableVuewController.h"
+#import "AdMobileSamplesEditSettersTableVuewController.h"
 #import "YXEditableCell.h"
 #import "YXEditableViewCell.h"
 #import "AdMobileSampleEditFrameView.h"
 
-@implementation AdMobileSaplesEditSettersTableVuewController
+@implementation AdMobileSamplesEditSettersTableVuewController
 
 - (id)initWithStyle:(UITableViewStyle)style banner:(MASTAdView*)adView
 {
@@ -31,6 +31,13 @@
 		[_zone setDelegate:self];
     }
     return self;
+}
+
+-(void)dealloc
+{
+	[_site release];
+	[_zone release];
+	[super dealloc];
 }
 
 - (void)didReceiveMemoryWarning
