@@ -87,7 +87,7 @@
                 [self evalJS:[MASTOrmmaHelper setViewable:NO]];
             }
         }];
-        [[MASTNotificationCenter sharedInstance] addObserverForName:@"kCloseExpandNotification" object:nil queue:nil usingBlock:^(NSNotification *note) {
+        [[NSNotificationCenter defaultCenter] addObserverForName:@"kCloseExpandNotification" object:nil queue:nil usingBlock:^(NSNotification *note) {
             if (note.object == self.adView && valid) {
                 [self evalJS:@"ormma.close();"];
             }
