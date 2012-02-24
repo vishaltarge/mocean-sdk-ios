@@ -1,6 +1,5 @@
 //
 //  MAPMacros.h
-//  Copyright (c) Microsoft. All rights reserved.
 //
 
 // TYPES

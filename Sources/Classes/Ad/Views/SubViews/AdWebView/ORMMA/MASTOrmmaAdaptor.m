@@ -1,6 +1,5 @@
 //
 //  MSFTOrmmaAdaptor.m
-//  Copyright (c) Microsoft. All rights reserved.
 //
 
 #import "MASTOrmmaAdaptor.h"
@@ -178,7 +177,7 @@
     if (![UIApplication sharedApplication].isStatusBarHidden) {
         expandSize = CGSizeMake(expandSize.width, expandSize.height - 20);
     }    
-    [result appendString:[MASTOrmmaHelper setExpandPropertiesWithMaxSize:expandSize]];
+    [result appendString:[MASTOrmmaHelper setAllExpandPropertiesWithMaxSize:expandSize]];
         
     NSMutableArray* supports = [NSMutableArray array];
     [supports addObject:@"'level-1'"];
@@ -306,12 +305,16 @@
             [self.ormmaDelegate showAd:self.adView];
         }
     } else if ([event isEqualToString:@"hide"]) {
-        self.nonHideState = self.currentState;
-        self.currentState = ORMMAStateHidden;
-        [self evalJS:[MASTOrmmaHelper setState:self.currentState]];
-        
-        if ([self.ormmaDelegate respondsToSelector:@selector(hideAd:)]) {
-            [self.ormmaDelegate hideAd:self.adView];
+        if (self.currentState == ORMMAStateDefault) {
+            self.nonHideState = self.currentState;
+            self.currentState = ORMMAStateHidden;
+            [self evalJS:[MASTOrmmaHelper setState:self.currentState]];
+            
+            if ([self.ormmaDelegate respondsToSelector:@selector(hideAd:)]) {
+                [self.ormmaDelegate hideAd:self.adView];
+            }
+        } else {
+            [self evalJS:[MASTOrmmaHelper fireError:@"Cannot hide an ad that is not in the default state." forEvent:event]];
         }
     } else if ([event isEqualToString:@"close"]) {
         if (self.currentState == ORMMAStateDefault) {
@@ -335,13 +338,17 @@
             [self evalJS:[MASTOrmmaHelper setState:self.currentState]];
         }
     } else if ([event isEqualToString:@"expand"]) {
-        self.currentState = ORMMAStateExpanded;
-        self.nonHideState = self.currentState;
-        [self evalJS:[MASTOrmmaHelper setState:self.currentState]];
-        
-        NSString* url = [MASTOrmmaHelper requiredStringFromDictionary:parameters forKey:@"url"];
-        if ([self.ormmaDelegate respondsToSelector:@selector(expandURL:parameters:ad:)]) {
-            [self.ormmaDelegate expandURL:url parameters:parameters ad:self.adView];
+        if (self.currentState == ORMMAStateDefault) {
+            self.currentState = ORMMAStateExpanded;
+            self.nonHideState = self.currentState;
+            [self evalJS:[MASTOrmmaHelper setState:self.currentState]];
+            
+            NSString* url = [MASTOrmmaHelper requiredStringFromDictionary:parameters forKey:@"url"];
+            if ([self.ormmaDelegate respondsToSelector:@selector(expandURL:parameters:ad:)]) {
+                [self.ormmaDelegate expandURL:url parameters:parameters ad:self.adView];
+            }
+        } else {
+            [self evalJS:[MASTOrmmaHelper fireError:@"Cannot expand an ad that is not in the default state." forEvent:event]];
         }
     } else if ([event isEqualToString:@"resize"]) {
         if (self.currentState != ORMMAStateDefault) {

@@ -1,6 +1,5 @@
 //
 //  MASTAdWebView.h
-//  Copyright (c) Microsoft. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

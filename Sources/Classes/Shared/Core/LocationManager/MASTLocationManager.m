@@ -1,6 +1,5 @@
 //
 //  MASTLocationManager.m
-//  Copyright (c) Microsoft. All rights reserved.
 //
 
 #import "MASTLocationManager.h"
