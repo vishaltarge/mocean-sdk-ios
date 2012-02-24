@@ -230,6 +230,11 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
         if ([sender respondsToSelector:@selector(removeUpdateFlag:)]) {
             [sender performSelector:@selector(removeUpdateFlag:) withObject:@"expand"];
         }
+        
+        if ([(MASTAdView*)adControl updateTimeInterval] > 0) {
+            [[MASTNotificationCenter sharedInstance] postNotificationName:kAdStartUpdateNotification object:sender];
+        }
+        
     } else {
         adControl.frame = self.defaultFrame;
         /*[UIView animateWithDuration:0.2 animations:^(void) {
@@ -286,7 +291,6 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
     if (!lockOrientation) {
         adControl.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     }
-    
     
     if (url) {                        
         self.expandView = [[[MASTExpandView alloc] initWithFrame:CGRectMake(0, 0, w, h)] autorelease];

@@ -28,10 +28,6 @@
     self = [super init];
     if (self) {
         lockOrientation = _lockOrientation;
-        
-        if (!lockOrientation) {
-            self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        }
     }
     return self;
 }
@@ -46,6 +42,9 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor clearColor];
+    if (!lockOrientation) {
+        self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    }
 }
 
 - (void)viewDidUnload {
