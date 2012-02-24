@@ -11,6 +11,7 @@
 #import "MASTUIWebViewAdditions.h"
 #import "MASTInternalAVPlayer.h"
 #import "MASTNotificationCenter.h"
+#import "MASTNetworkQueue.h"
 
 @interface MASTOrmmaSharedDelegate ()
 
@@ -18,6 +19,7 @@
 @property (nonatomic, retain) MASTExpandView *expandView;
 @property (nonatomic, retain) UIView *lastSuperView;
 @property (nonatomic, retain) UIColor *lastBackgroundColor;
+@property (assign) UIViewAutoresizing lastAutoresizing;
 @property (nonatomic, retain) NSMutableDictionary *adControls;
 @property (nonatomic, assign) CGRect defaultFrame;
 
@@ -30,7 +32,7 @@
 
 @implementation MASTOrmmaSharedDelegate
 
-@synthesize expandVC, expandView, lastSuperView, lastBackgroundColor, defaultFrame, adControls;
+@synthesize expandVC, expandView, lastSuperView, lastBackgroundColor, defaultFrame, adControls, lastAutoresizing;
 
 static MASTOrmmaSharedDelegate *sharedDelegate = nil;
 
@@ -93,6 +95,9 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
     if (self.expandView) 
         [options setObject:self.expandView forKey:@"expandView"];
     
+    if (self.lastAutoresizing || self.lastAutoresizing == UIViewAutoresizingNone) 
+        [options setObject:[NSNumber numberWithUnsignedInt:self.lastAutoresizing] forKey:@"lastAutoresizing"];
+    
     if (self.lastSuperView)
         [options setObject:self.lastSuperView forKey:@"lastSuperView"];
     
@@ -114,6 +119,7 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
     self.expandView = [options objectForKey:@"expandView"];
     self.lastSuperView = [options objectForKey:@"lastSuperView"];
     self.lastBackgroundColor = [options objectForKey:@"lastBackgroundColor"];
+    self.lastAutoresizing = [[options objectForKey:@"lastAutoresizing"] unsignedIntValue];
     self.defaultFrame = [self loadDefaultFrame:options];
 }
 
@@ -210,6 +216,10 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
                 self.lastBackgroundColor = nil;
             }
             
+            if (self.lastAutoresizing || self.lastAutoresizing == UIViewAutoresizingNone) {
+                adControl.autoresizingMask = self.lastAutoresizing;
+            }
+            
             // resize to normal frame
             adControl.frame = self.defaultFrame;
             /*[UIView animateWithDuration:0.2 animations:^(void) {
@@ -218,10 +228,14 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
         }
         self.expandVC = nil;
         
-        /*if ([sender respondsToSelector:@selector(removeUpdateFlag:)]) {
+        if ([sender respondsToSelector:@selector(removeUpdateFlag:)]) {
             [sender performSelector:@selector(removeUpdateFlag:) withObject:@"expand"];
-        }*/
-        [[MASTNotificationCenter sharedInstance] postNotificationName:kAdStartUpdateNotification object:sender];
+        }
+        
+        if ([(MASTAdView*)adControl updateTimeInterval] > 0) {
+            [[MASTNotificationCenter sharedInstance] postNotificationName:kAdStartUpdateNotification object:sender];
+        }
+        
     } else {
         adControl.frame = self.defaultFrame;
         /*[UIView animateWithDuration:0.2 animations:^(void) {
@@ -233,6 +247,7 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
 - (void)expandURL:(NSString*)url parameters:(NSDictionary*)parameters ad:(id)sender {
     UIView *adControl = sender;
     self.defaultFrame = adControl.frame;
+    self.lastAutoresizing = adControl.autoresizingMask;
     
     CGFloat w = [MASTOrmmaHelper floatFromDictionary:parameters forKey:@"width"];
     CGFloat h = [MASTOrmmaHelper floatFromDictionary:parameters forKey:@"height"];
@@ -255,15 +270,21 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
         expandBackgroundColor = [UIColor whiteColor];
     }
     
-    self.expandVC = [[[MASTExpandViewController alloc] init] autorelease];
+    self.expandVC = [[[MASTExpandViewController alloc] initWithLockOrientation:lockOrientation] autorelease];
     self.expandVC.view.backgroundColor = expandBackgroundColor;
     
     UIViewController* rootVC = [self viewControllerForView:adControl.superview];
-    
+
     if (rootVC) {
         if ([sender respondsToSelector:@selector(setUpdateFlag:)]) {
             [sender performSelector:@selector(setUpdateFlag:) withObject:@"expand"];
         }
+        
+        double delayInSeconds = 0.5;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_current_queue(), ^(void){
+            [[MASTNotificationCenter sharedInstance] postNotificationName:kAdStopUpdateNotification object:sender];
+        });
         
         [rootVC presentModalViewController:self.expandVC animated:NO];
     }
@@ -288,26 +309,17 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
         self.expandView = nil;
         self.lastBackgroundColor = adControl.backgroundColor;
         adControl.backgroundColor = expandBackgroundColor;
+        adControl.backgroundColor = [UIColor clearColor];
         
         self.lastSuperView = adControl.superview;
         [self.expandVC.view addSubview:adControl];
         
         // resize
         adControl.frame = CGRectMake(0.0, 0.0, w, h);
-        
         self.expandVC.expandView = adControl;
+        
         [self.expandVC useCustomClose:useCustomClose];
     }
-    
-    if ([sender respondsToSelector:@selector(setUpdateFlag:)]) {
-        [sender performSelector:@selector(setUpdateFlag:) withObject:@"expand" afterDelay:2];
-    }
-    
-    double delayInSeconds = 1.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_current_queue(), ^(void){
-        [[MASTNotificationCenter sharedInstance] postNotificationName:kAdStopUpdateNotification object:sender];
-    });
     
     //save options
     [self saveOptions:adControl];
@@ -444,6 +456,12 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
 }
 
 - (void)sendRequest:(NSString*)url display:(NSString*)display response:(void (^)(NSString* response))response ad:(id)sender {
+    [MASTNetworkQueue loadWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]] completion:^(NSURLRequest *request, NSHTTPURLResponse *resp, NSData *data, NSError *error) {
+        if (!error && data && [data length] > 0) {
+            NSString* responseString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
+            response(responseString);
+        }
+    }];
 }
 
 #pragma mark - MFMessageComposeViewController Delegete

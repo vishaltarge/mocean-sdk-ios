@@ -37,7 +37,7 @@
 @synthesize closeButton, ormmaDataSource, ormmaDelegate;
 @dynamic adModel, uid;
 
-@dynamic delegate, isLoading, testMode, logMode, animateMode, contentAlignment, track, updateTimeInterval,
+@dynamic delegate, isLoading, testMode, logMode, isAdChangeAnimated, contentAlignment, track, updateTimeInterval,
 defaultImage, site, zone, premium, type, keywords, minSize, maxSize, contentSize, textColor, additionalParameters,
 adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, carrier, latitude, longitude, adCallTimeout, autoCollapse, showPreviousAdOnError, autocloseInterstitialTime, showCloseButtonTime;
 
@@ -151,8 +151,9 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 #pragma mark Private
 
 - (void)setDefaultValues {
+    self.backgroundColor = [UIColor clearColor];
     self.updateTimeInterval = DEFAULT_UPDATE_TIMEINTERVAL; // 2min
-    self.animateMode = YES;
+    self.isAdChangeAnimated = NO;
     self.internalOpenMode = NO;
     self.testMode = NO;
     self.premium = AdPremiumBoth;
@@ -379,7 +380,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
             }
                         
             // switch animation
-            if (model.animateMode && currentAdView && subView) {
+            if (model.isAdChangeAnimated && currentAdView && subView) {
                 CGRect prevAdFrame = subView.frame;
                 CGRect startAdFrame = CGRectMake(prevAdFrame.origin.x-prevAdFrame.size.width, prevAdFrame.origin.y, prevAdFrame.size.width, prevAdFrame.size.height);
                 subView.frame = startAdFrame;
@@ -920,13 +921,13 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 	return ((MASTAdModel*)_adModel).logMode;
 }
 
-//@property BOOL	animateMode;
-- (void)setAnimateMode:(BOOL)animateMode {
-	((MASTAdModel*)_adModel).animateMode = animateMode;
+//@property BOOL	isAdChangeAnimated;
+- (void)setIsAdChangeAnimated:(BOOL)isAdChangeAnimated {
+	((MASTAdModel*)_adModel).isAdChangeAnimated = isAdChangeAnimated;
 }
 
 - (BOOL)animateMode {
-	return ((MASTAdModel*)_adModel).animateMode;
+	return ((MASTAdModel*)_adModel).isAdChangeAnimated;
 }
 
 //@property BOOL	contentAlignment;

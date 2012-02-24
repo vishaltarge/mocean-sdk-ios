@@ -9,6 +9,7 @@
 #import "MASTReachability.h"
 #import "MAPNSObject+BlockObservation.h"
 #import "Macros.h"
+#import "MASTNotificationCenter.h"
 
 #import "MASTOrmmaSharedDataSource.h"
 
@@ -65,6 +66,12 @@
             
             CGSize screenSize = [MASTOrmmaHelper screenSizeForOrientation:orientation];	
             [self evalJS:[MASTOrmmaHelper setScreenSize:screenSize]];
+            
+            CGSize expandSize = screenSize;
+            if (![UIApplication sharedApplication].isStatusBarHidden) {
+                expandSize = CGSizeMake(expandSize.width, expandSize.height - 20);
+            }    
+            [self evalJS:[MASTOrmmaHelper setExpandPropertiesWithMaxSize:expandSize]];
         }];
         [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillShowNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
             if (self.valid) {
@@ -76,9 +83,14 @@
                 [self evalJS:[MASTOrmmaHelper setKeyboardShow:NO]];
             }
         }];
-        [[NSNotificationCenter defaultCenter] addObserverForName:@"AdControl Became Visible" object:nil queue:nil usingBlock:^(NSNotification *note) {
+        [[MASTNotificationCenter sharedInstance] addObserverForName:kAdViewBecomeVisibleNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
             if (note.object == self.adView && valid) {
                 [self evalJS:[MASTOrmmaHelper setViewable:YES]];
+            }
+        }];
+        [[MASTNotificationCenter sharedInstance] addObserverForName:kAdViewBecomeInvisibleNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
+            if (note.object == self.adView && valid) {
+                [self evalJS:[MASTOrmmaHelper setViewable:NO]];
             }
         }];
         [[NSNotificationCenter defaultCenter] addObserverForName:@"kCloseExpandNotification" object:nil queue:nil usingBlock:^(NSNotification *note) {
@@ -166,7 +178,7 @@
     if (![UIApplication sharedApplication].isStatusBarHidden) {
         expandSize = CGSizeMake(expandSize.width, expandSize.height - 20);
     }    
-    [result appendString:[MASTOrmmaHelper setExpandPropertiesWithMaxSize:expandSize]];
+    [result appendString:[MASTOrmmaHelper setAllExpandPropertiesWithMaxSize:expandSize]];
         
     NSMutableArray* supports = [NSMutableArray array];
     [supports addObject:@"'level-1'"];
@@ -262,6 +274,7 @@
     self.ormmaDataSource = nil;
     self.webView = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[MASTNotificationCenter sharedInstance] removeObserver:self];
 }
 
 - (void)moveToDefaultState
@@ -293,12 +306,16 @@
             [self.ormmaDelegate showAd:self.adView];
         }
     } else if ([event isEqualToString:@"hide"]) {
-        self.nonHideState = self.currentState;
-        self.currentState = ORMMAStateHidden;
-        [self evalJS:[MASTOrmmaHelper setState:self.currentState]];
-        
-        if ([self.ormmaDelegate respondsToSelector:@selector(hideAd:)]) {
-            [self.ormmaDelegate hideAd:self.adView];
+        if (self.currentState == ORMMAStateDefault) {
+            self.nonHideState = self.currentState;
+            self.currentState = ORMMAStateHidden;
+            [self evalJS:[MASTOrmmaHelper setState:self.currentState]];
+            
+            if ([self.ormmaDelegate respondsToSelector:@selector(hideAd:)]) {
+                [self.ormmaDelegate hideAd:self.adView];
+            }
+        } else {
+            [self evalJS:[MASTOrmmaHelper fireError:@"Cannot hide an ad that is not in the default state." forEvent:event]];
         }
     } else if ([event isEqualToString:@"close"]) {
         if (self.currentState == ORMMAStateDefault) {
@@ -322,13 +339,17 @@
             [self evalJS:[MASTOrmmaHelper setState:self.currentState]];
         }
     } else if ([event isEqualToString:@"expand"]) {
-        self.currentState = ORMMAStateExpanded;
-        self.nonHideState = self.currentState;
-        [self evalJS:[MASTOrmmaHelper setState:self.currentState]];
-        
-        NSString* url = [MASTOrmmaHelper requiredStringFromDictionary:parameters forKey:@"url"];
-        if ([self.ormmaDelegate respondsToSelector:@selector(expandURL:parameters:ad:)]) {
-            [self.ormmaDelegate expandURL:url parameters:parameters ad:self.adView];
+        if (self.currentState == ORMMAStateDefault) {
+            self.currentState = ORMMAStateExpanded;
+            self.nonHideState = self.currentState;
+            [self evalJS:[MASTOrmmaHelper setState:self.currentState]];
+            
+            NSString* url = [MASTOrmmaHelper requiredStringFromDictionary:parameters forKey:@"url"];
+            if ([self.ormmaDelegate respondsToSelector:@selector(expandURL:parameters:ad:)]) {
+                [self.ormmaDelegate expandURL:url parameters:parameters ad:self.adView];
+            }
+        } else {
+            [self evalJS:[MASTOrmmaHelper fireError:@"Cannot expand an ad that is not in the default state." forEvent:event]];
         }
     } else if ([event isEqualToString:@"resize"]) {
         if (self.currentState != ORMMAStateDefault) {

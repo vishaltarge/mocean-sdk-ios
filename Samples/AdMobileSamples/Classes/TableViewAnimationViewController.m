@@ -27,7 +27,7 @@
 	[super viewDidLoad];
 	
 	_adView.updateTimeInterval = 15;
-	_adView.animateMode = NO;
+	_adView.isAdChangeAnimated = NO;
 	_adView.delegate = self;
 
 	_tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height - AD_HEIGHT)];

@@ -23,7 +23,7 @@
 
 @property BOOL							testMode;
 @property AdLogMode                     logMode;
-@property BOOL							animateMode;
+@property BOOL							isAdChangeAnimated;
 @property BOOL							internalOpenMode;
 @property NSInteger						track;
 @property NSTimeInterval				updateTimeInterval;

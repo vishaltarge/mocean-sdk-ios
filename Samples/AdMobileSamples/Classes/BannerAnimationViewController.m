@@ -27,7 +27,7 @@
 	[super viewDidLoad];
 
 	_adView.updateTimeInterval = 30;
-	_adView.animateMode = NO;
+	_adView.isAdChangeAnimated = NO;
 	_adView.delegate = self;
 }
 

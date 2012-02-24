@@ -48,7 +48,7 @@
                 NSString* clearHtml = [MASTAdDescriptorHelper stringByStrippingHTMLcomments:adDescriptor.serverReponseString];
                 if ([clearHtml length] > 0) {
                     adDescriptor.adContentType = AdContentTypeDefaultHtml;
-                    adDescriptor.serverReponseString = [MASTAdDescriptorHelper wrapHTML:clearHtml frameSize:frameSize aligmentCenter:aligmentCenter];
+                    //adDescriptor.serverReponseString = [MASTAdDescriptorHelper wrapHTML:clearHtml frameSize:frameSize aligmentCenter:aligmentCenter];
                     adDescriptor.serverReponse = [adDescriptor.serverReponseString dataUsingEncoding:NSUTF8StringEncoding];
                 } else {
                     adDescriptor.adContentType = AdContentTypeUndefined;

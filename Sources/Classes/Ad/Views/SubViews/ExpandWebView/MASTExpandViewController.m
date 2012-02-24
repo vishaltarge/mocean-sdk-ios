@@ -19,8 +19,15 @@
 - (id)init {
     self = [super init];
     if (self) {
-        self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         lockOrientation = NO;
+    }
+    return self;
+}
+
+- (id)initWithLockOrientation:(BOOL)_lockOrientation {
+    self = [super init];
+    if (self) {
+        lockOrientation = _lockOrientation;
     }
     return self;
 }
@@ -35,6 +42,9 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor clearColor];
+    if (!lockOrientation) {
+        self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    }
 }
 
 - (void)viewDidUnload {
@@ -42,7 +52,7 @@
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return lockOrientation;
+    return !lockOrientation || interfaceOrientation == UIInterfaceOrientationPortrait;
 }
 
 - (void)buttonsAction:(id)sender {

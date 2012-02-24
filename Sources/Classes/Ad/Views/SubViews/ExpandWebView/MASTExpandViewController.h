@@ -18,5 +18,6 @@
 @property (retain) UIButton* closeButton;
 
 - (void)useCustomClose:(BOOL)use;
+- (id)initWithLockOrientation:(BOOL)_lockOrientation;
 
 @end
