@@ -255,7 +255,7 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
         expandBackgroundColor = [UIColor whiteColor];
     }
     
-    self.expandVC = [[[MASTExpandViewController alloc] init] autorelease];
+    self.expandVC = [[[MASTExpandViewController alloc] initWithLockOrientation:lockOrientation] autorelease];
     self.expandVC.view.backgroundColor = expandBackgroundColor;
     
     UIViewController* rootVC = [self viewControllerForView:adControl.superview];
