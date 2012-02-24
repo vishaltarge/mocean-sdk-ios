@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Protocols/OrmmaDelegate.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intf/OrmmaDelegate</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OrmmaProtocols.h</DeclaredIn>
+			
+			<NodeRef refid="5"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/OrmmaDelegate/supportAudioForAd:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OrmmaProtocols.h</DeclaredIn>			
+			
+			<Declaration>- (BOOL)supportAudioForAd:(id)sender</Declaration>
+			
+			
+			<Anchor>//api/name/supportAudioForAd:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/OrmmaDelegate/supportVideoForAd:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OrmmaProtocols.h</DeclaredIn>			
+			
+			<Declaration>- (BOOL)supportVideoForAd:(id)sender</Declaration>
+			
+			
+			<Anchor>//api/name/supportVideoForAd:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/OrmmaDelegate/supportMapForAd:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OrmmaProtocols.h</DeclaredIn>			
+			
+			<Declaration>- (BOOL)supportMapForAd:(id)sender</Declaration>
+			
+			
+			<Anchor>//api/name/supportMapForAd:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/OrmmaDelegate/supportCalendarForAd:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OrmmaProtocols.h</DeclaredIn>			
+			
+			<Declaration>- (BOOL)supportCalendarForAd:(id)sender</Declaration>
+			
+			
+			<Anchor>//api/name/supportCalendarForAd:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/OrmmaDelegate/supportEmailForAd:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OrmmaProtocols.h</DeclaredIn>			
+			
+			<Declaration>- (BOOL)supportEmailForAd:(id)sender</Declaration>
+			
+			
+			<Anchor>//api/name/supportEmailForAd:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/OrmmaDelegate/supportSmsForAd:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OrmmaProtocols.h</DeclaredIn>			
+			
+			<Declaration>- (BOOL)supportSmsForAd:(id)sender</Declaration>
+			
+			
+			<Anchor>//api/name/supportSmsForAd:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/OrmmaDelegate/supportPhoneForAd:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OrmmaProtocols.h</DeclaredIn>			
+			
+			<Declaration>- (BOOL)supportPhoneForAd:(id)sender</Declaration>
+			
+			
+			<Anchor>//api/name/supportPhoneForAd:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/OrmmaDelegate/maxSizeForAd:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OrmmaProtocols.h</DeclaredIn>			
+			
+			<Declaration>- (CGSize)maxSizeForAd:(id)sender</Declaration>
+			
+			
+			<Anchor>//api/name/maxSizeForAd:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/OrmmaDelegate/showAd:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OrmmaProtocols.h</DeclaredIn>			
+			
+			<Declaration>- (void)showAd:(id)sender</Declaration>
+			
+			
+			<Anchor>//api/name/showAd:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/OrmmaDelegate/hideAd:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OrmmaProtocols.h</DeclaredIn>			
+			
+			<Declaration>- (void)hideAd:(id)sender</Declaration>
+			
+			
+			<Anchor>//api/name/hideAd:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/OrmmaDelegate/closeFromState:ad:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OrmmaProtocols.h</DeclaredIn>			
+			
+			<Declaration>- (void)closeFromState:(ORMMAState)state ad:(id)sender</Declaration>
+			
+			
+			<Anchor>//api/name/closeFromState:ad:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/OrmmaDelegate/resize:ad:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OrmmaProtocols.h</DeclaredIn>			
+			
+			<Declaration>- (void)resize:(CGSize)size ad:(id)sender</Declaration>
+			
+			
+			<Anchor>//api/name/resize:ad:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/OrmmaDelegate/expandURL:parameters:ad:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OrmmaProtocols.h</DeclaredIn>			
+			
+			<Declaration>- (void)expandURL:(NSString *)url parameters:(NSDictionary *)parameters ad:(id)sender</Declaration>
+			
+			
+			<Anchor>//api/name/expandURL:parameters:ad:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/OrmmaDelegate/phone:ad:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OrmmaProtocols.h</DeclaredIn>			
+			
+			<Declaration>- (void)phone:(NSString *)number ad:(id)sender</Declaration>
+			
+			
+			<Anchor>//api/name/phone:ad:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/OrmmaDelegate/sms:body:ad:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OrmmaProtocols.h</DeclaredIn>			
+			
+			<Declaration>- (void)sms:(NSString *)to body:(NSString *)body ad:(id)sender</Declaration>
+			
+			
+			<Anchor>//api/name/sms:body:ad:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/OrmmaDelegate/email:subject:body:useHtml:ad:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OrmmaProtocols.h</DeclaredIn>			
+			
+			<Declaration>- (void)email:(NSString *)to subject:(NSString *)subject body:(NSString *)body useHtml:(BOOL)useHtml ad:(id)sender</Declaration>
+			
+			
+			<Anchor>//api/name/email:subject:body:useHtml:ad:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/OrmmaDelegate/calendar:body:date:ad:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OrmmaProtocols.h</DeclaredIn>			
+			
+			<Declaration>- (void)calendar:(NSString *)title body:(NSString *)body date:(NSDate *)date ad:(id)sender</Declaration>
+			
+			
+			<Anchor>//api/name/calendar:body:date:ad:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/OrmmaDelegate/openMapWithPOI:ad:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OrmmaProtocols.h</DeclaredIn>			
+			
+			<Declaration>- (void)openMapWithPOI:(NSString *)poi ad:(id)sender</Declaration>
+			
+			
+			<Anchor>//api/name/openMapWithPOI:ad:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/OrmmaDelegate/playAudio:parameters:ad:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OrmmaProtocols.h</DeclaredIn>			
+			
+			<Declaration>- (void)playAudio:(NSString *)url parameters:(NSDictionary *)parameters ad:(id)sender</Declaration>
+			
+			
+			<Anchor>//api/name/playAudio:parameters:ad:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/OrmmaDelegate/playVideo:parameters:ad:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OrmmaProtocols.h</DeclaredIn>			
+			
+			<Declaration>- (void)playVideo:(NSString *)url parameters:(NSDictionary *)parameters ad:(id)sender</Declaration>
+			
+			
+			<Anchor>//api/name/playVideo:parameters:ad:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/OrmmaDelegate/sendRequest:display:response:ad:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OrmmaProtocols.h</DeclaredIn>			
+			
+			<Declaration>- (void)sendRequest:(NSString *)url display:(NSString *)display response:(void ( ^ ) ( NSString *response ))response ad:(id)sender</Declaration>
+			
+			
+			<Anchor>//api/name/sendRequest:display:response:ad:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/OrmmaDelegate/debug:ad:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OrmmaProtocols.h</DeclaredIn>			
+			
+			<Declaration>- (void)debug:(NSString *)query ad:(id)sender</Declaration>
+			
+			
+			<Anchor>//api/name/debug:ad:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/OrmmaDelegate/service:enabled:ad:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OrmmaProtocols.h</DeclaredIn>			
+			
+			<Declaration>- (void)service:(NSString *)name enabled:(BOOL)enabled ad:(id)sender</Declaration>
+			
+			
+			<Anchor>//api/name/service:enabled:ad:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

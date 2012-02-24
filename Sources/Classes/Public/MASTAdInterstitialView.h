@@ -4,7 +4,7 @@
 //
 //  Created by Constantine Mureev on 2/24/11.
 //
-//  version: 2.10.0
+//  version: 2.10.beta
 //
 
 #import <UIKit/UIKit.h>

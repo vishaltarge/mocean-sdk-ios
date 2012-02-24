@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Protocols/OrmmaDataSource.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intf/OrmmaDataSource</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OrmmaProtocols.h</DeclaredIn>
+			
+			<NodeRef refid="4"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/OrmmaDataSource/supportLocationForAd:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OrmmaProtocols.h</DeclaredIn>			
+			
+			<Declaration>- (BOOL)supportLocationForAd:(id)sender</Declaration>
+			
+			
+			<Anchor>//api/name/supportLocationForAd:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/OrmmaDataSource/supportHeadingForAd:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OrmmaProtocols.h</DeclaredIn>			
+			
+			<Declaration>- (BOOL)supportHeadingForAd:(id)sender</Declaration>
+			
+			
+			<Anchor>//api/name/supportHeadingForAd:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/OrmmaDataSource/supportTiltForAd:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OrmmaProtocols.h</DeclaredIn>			
+			
+			<Declaration>- (BOOL)supportTiltForAd:(id)sender</Declaration>
+			
+			
+			<Anchor>//api/name/supportTiltForAd:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>
