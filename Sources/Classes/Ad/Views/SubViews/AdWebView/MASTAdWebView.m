@@ -1,6 +1,5 @@
 //
 //  MASTAdWebView.m
-//  Copyright (c) Microsoft. All rights reserved.
 //
 
 #import "MASTAdWebView.h"

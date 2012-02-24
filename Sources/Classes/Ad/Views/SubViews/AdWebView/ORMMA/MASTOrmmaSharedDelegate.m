@@ -218,9 +218,9 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
         }
         self.expandVC = nil;
         
-        if ([sender respondsToSelector:@selector(removeUpdateFlag:)]) {
+        /*if ([sender respondsToSelector:@selector(removeUpdateFlag:)]) {
             [sender performSelector:@selector(removeUpdateFlag:) withObject:@"expand"];
-        }
+        }*/
         [[MASTNotificationCenter sharedInstance] postNotificationName:kAdStartUpdateNotification object:sender];
     } else {
         adControl.frame = self.defaultFrame;
