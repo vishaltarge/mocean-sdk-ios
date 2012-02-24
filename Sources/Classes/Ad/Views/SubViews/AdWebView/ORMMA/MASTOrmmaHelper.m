@@ -1,6 +1,5 @@
 //
 //  MASTOrmmaHelper.m
-//  Copyright (c) Microsoft. All rights reserved.
 //
 
 #import "MASTOrmmaHelper.h"

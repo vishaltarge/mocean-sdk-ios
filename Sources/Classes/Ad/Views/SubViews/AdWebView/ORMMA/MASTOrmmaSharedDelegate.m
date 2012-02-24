@@ -1,6 +1,5 @@
 //
 //  MASTOrmmaSharedDelegate.m
-//  Copyright (c) Microsoft. All rights reserved.
 //
 
 #import "MASTOrmmaSharedDelegate.h"

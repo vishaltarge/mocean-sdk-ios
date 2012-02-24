@@ -1,6 +1,5 @@
 //
 //  MSFTOrmmaAdaptor.m
-//  Copyright (c) Microsoft. All rights reserved.
 //
 
 #import "MASTOrmmaAdaptor.h"

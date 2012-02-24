@@ -1,6 +1,5 @@
 //
 //  MASTExpandView.m
-//  Copyright (c) Microsoft. All rights reserved.
 //
 
 #import "MASTExpandView.h"

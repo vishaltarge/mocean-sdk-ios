@@ -1,6 +1,5 @@
 //
 //  MASTOrmmaConstants.h
-//  Copyright (c) Microsoft. All rights reserved.
 //
 
 #define ORMMA_PLACEHOLDER @"<!-- ORMMA_PLACEHOLDER -->"

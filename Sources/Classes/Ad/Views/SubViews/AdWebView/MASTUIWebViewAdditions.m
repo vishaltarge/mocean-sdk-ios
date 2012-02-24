@@ -1,6 +1,5 @@
 //
 //  MASTUIWebViewAdditions.m
-//  Copyright (c) Microsoft. All rights reserved.
 //
 
 #import "MASTUIWebViewAdditions.h"
