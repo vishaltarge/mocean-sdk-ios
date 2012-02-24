@@ -230,7 +230,6 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
         if ([sender respondsToSelector:@selector(removeUpdateFlag:)]) {
             [sender performSelector:@selector(removeUpdateFlag:) withObject:@"expand"];
         }
-        [[MASTNotificationCenter sharedInstance] postNotificationName:kAdStartUpdateNotification object:sender];
     } else {
         adControl.frame = self.defaultFrame;
         /*[UIView animateWithDuration:0.2 animations:^(void) {
@@ -269,7 +268,7 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
     self.expandVC.view.backgroundColor = expandBackgroundColor;
     
     UIViewController* rootVC = [self viewControllerForView:adControl.superview];
-    
+
     if (rootVC) {
         if ([sender respondsToSelector:@selector(setUpdateFlag:)]) {
             [sender performSelector:@selector(setUpdateFlag:) withObject:@"expand"];
@@ -288,6 +287,7 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
         adControl.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     }
     
+    
     if (url) {                        
         self.expandView = [[[MASTExpandView alloc] initWithFrame:CGRectMake(0, 0, w, h)] autorelease];
         self.expandView.adView = adControl;
@@ -304,14 +304,15 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
         self.expandView = nil;
         self.lastBackgroundColor = adControl.backgroundColor;
         adControl.backgroundColor = expandBackgroundColor;
+        adControl.backgroundColor = [UIColor clearColor];
         
         self.lastSuperView = adControl.superview;
         [self.expandVC.view addSubview:adControl];
         
         // resize
         adControl.frame = CGRectMake(0.0, 0.0, w, h);
-        
         self.expandVC.expandView = adControl;
+        
         [self.expandVC useCustomClose:useCustomClose];
     }
     
