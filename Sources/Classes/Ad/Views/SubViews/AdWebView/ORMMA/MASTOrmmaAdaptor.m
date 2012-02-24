@@ -9,6 +9,7 @@
 #import "MASTReachability.h"
 #import "MAPNSObject+BlockObservation.h"
 #import "Macros.h"
+#import "MASTNotificationCenter.h"
 
 #import "MASTOrmmaSharedDataSource.h"
 
@@ -76,12 +77,17 @@
                 [self evalJS:[MASTOrmmaHelper setKeyboardShow:NO]];
             }
         }];
-        [[NSNotificationCenter defaultCenter] addObserverForName:@"AdControl Became Visible" object:nil queue:nil usingBlock:^(NSNotification *note) {
+        [[MASTNotificationCenter sharedInstance] addObserverForName:kAdViewBecomeVisibleNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
             if (note.object == self.adView && valid) {
                 [self evalJS:[MASTOrmmaHelper setViewable:YES]];
             }
         }];
-        [[NSNotificationCenter defaultCenter] addObserverForName:@"kCloseExpandNotification" object:nil queue:nil usingBlock:^(NSNotification *note) {
+        [[MASTNotificationCenter sharedInstance] addObserverForName:kAdViewBecomeInvisibleNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
+            if (note.object == self.adView && valid) {
+                [self evalJS:[MASTOrmmaHelper setViewable:NO]];
+            }
+        }];
+        [[MASTNotificationCenter sharedInstance] addObserverForName:@"kCloseExpandNotification" object:nil queue:nil usingBlock:^(NSNotification *note) {
             if (note.object == self.adView && valid) {
                 [self evalJS:@"ormma.close();"];
             }
@@ -262,6 +268,7 @@
     self.ormmaDataSource = nil;
     self.webView = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[MASTNotificationCenter sharedInstance] removeObserver:self];
 }
 
 - (void)moveToDefaultState
