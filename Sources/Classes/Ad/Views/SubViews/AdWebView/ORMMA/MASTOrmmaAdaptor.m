@@ -66,6 +66,12 @@
             
             CGSize screenSize = [MASTOrmmaHelper screenSizeForOrientation:orientation];	
             [self evalJS:[MASTOrmmaHelper setScreenSize:screenSize]];
+            
+            CGSize expandSize = screenSize;
+            if (![UIApplication sharedApplication].isStatusBarHidden) {
+                expandSize = CGSizeMake(expandSize.width, expandSize.height - 20);
+            }    
+            [self evalJS:[MASTOrmmaHelper setExpandPropertiesWithMaxSize:expandSize]];
         }];
         [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillShowNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
             if (self.valid) {
