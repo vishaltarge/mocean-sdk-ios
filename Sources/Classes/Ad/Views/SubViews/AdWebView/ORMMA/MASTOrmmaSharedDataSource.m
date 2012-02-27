@@ -112,17 +112,26 @@ static MASTOrmmaSharedDataSource* sharedInstance = nil;
 
 - (BOOL)supportLocationForAd:(id)sender
 {
+#ifdef INCLUDE_LOCATION_MANAGER
 	return  YES;
+#endif
+	return NO;
 }
 
 - (BOOL)supportHeadingForAd:(id)sender
 {
+#ifdef INCLUDE_LOCATION_MANAGER
 	return  [CLLocationManager headingAvailable];
+#endif
+	return NO;
 }
 
 - (BOOL)supportTiltForAd:(id)sender
 {
+	#ifdef INCLUDE_LOCATION_MANAGER
 	return  YES;
+#endif
+	return NO;
 }
 
 #pragma mark -
