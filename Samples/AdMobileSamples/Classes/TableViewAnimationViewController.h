@@ -8,12 +8,9 @@
 #import <UIKit/UIKit.h>
 #import "AdMobileSamplesBaseViewController.h"
 
-@interface TableViewAnimationViewController : AdMobileSamplesBaseViewController <UITableViewDataSource, MASTAdViewDelegate>
+@interface TableViewAnimationViewController : AdMobileSamplesBaseViewController <UITableViewDataSource, UITableViewDelegate, MASTAdViewDelegate>
 {
 	UITableView* _tableView;
 }
-
-- (void) hideBanner;
-- (void)bannerDidHide:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context;
 
 @end

@@ -27,7 +27,7 @@
     items = [NSMutableArray array];
     
 	[items addObject:@"Banner frame animation"];
-	//[items addObject:@"UITableView animation"];
+	[items addObject:@"Banner in list view"];
     [_sections addObject:items];
     
     items = [NSMutableArray array];
@@ -65,8 +65,8 @@
     else if (indexPath.section == 1) {
         if (indexPath.row == 0)
             viewController = [[BannerAnimationViewController alloc] init];
-        //else if (indexPath.row == 1)
-        //    viewController = [[TableViewAnimationViewController alloc] init];
+        else if (indexPath.row == 1)
+            viewController = [[TableViewAnimationViewController alloc] init];
     }
     else if (indexPath.section == 2) {
         if (indexPath.row == 0)

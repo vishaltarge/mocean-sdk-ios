@@ -9,6 +9,7 @@
 
 #define AD_HEIGHT 50
 #define ROWS_COUNT 20
+#define AD_ROW 5
 
 @implementation TableViewAnimationViewController
 
@@ -19,7 +20,7 @@
 
 -(CGRect)getBannerFrame
 {
-	return CGRectMake(0, -AD_HEIGHT, self.view.bounds.size.width, AD_HEIGHT);
+	return CGRectMake(0, 0, self.view.bounds.size.width, AD_HEIGHT);
 }
 
 - (void)viewDidLoad
@@ -28,11 +29,11 @@
 	
 	_adView.updateTimeInterval = 15;
 	_adView.isAdChangeAnimated = NO;
-	_adView.delegate = self;
 
-	_tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height - AD_HEIGHT)];
+	_tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
 	[_tableView setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth];
 	_tableView.dataSource = self;
+	_tableView.delegate = self;
 	[self.view addSubview:_tableView];
 }
 
@@ -40,48 +41,6 @@
 {
     [_tableView release];
 	[super dealloc];
-}
-
-- (void) hideBanner
-{
-	CGRect adFrame = _adView.frame;
-	adFrame.origin.y = -AD_HEIGHT;
-	CGRect tableViewFrame = _tableView.frame;
-	tableViewFrame.origin.y = 0;
-	tableViewFrame.size.height = self.view.bounds.size.height;
-	
-    [UIView animateWithDuration:0.2 animations:^{
-        _adView.frame = adFrame;
-        _tableView.frame = tableViewFrame;
-    }];
-}
-
-- (void)bannerDidHide:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
-{
-	
-}
-
-#pragma mark -
-#pragma mark AdViewDelegate Members
-
-- (void) didReceiveAd:(id)sender
-{
-	CGRect adFrame = _adView.frame;
-	CGRect tableViewFrame = _tableView.frame;
-	
-	if (adFrame.origin.y >= 0)
-		return;
-    
-	adFrame.origin.y = 0;
-	tableViewFrame.origin.y = AD_HEIGHT;
-	tableViewFrame.size.height -= AD_HEIGHT;
-    
-    [UIView animateWithDuration:0.2 animations:^{
-        _adView.frame = adFrame;
-        _tableView.frame = tableViewFrame;
-    } completion:^(BOOL finished) {
-        [self performSelector:@selector(hideBanner) withObject:nil afterDelay:5];
-    }];
 }
 
 #pragma mark -
@@ -94,19 +53,45 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	static NSString* cellIdentifier = @"cellIdentifier";
-	
+	NSString* cellIdentifier = @"cellIdentifier";
+	if ((indexPath.row % AD_ROW) == 0)
+	{
+		cellIdentifier = [NSString stringWithFormat:@"cellIdentifier_%i",indexPath.row];
+	}
+
 	UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 	
 	if (!cell)
 	{
 		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         [cell autorelease];
+		
+		if ((indexPath.row % AD_ROW) == 0)
+		{
+			MASTAdView* ad = [[MASTAdView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50) site:8061 zone:20249];
+			ad.updateTimeInterval = 5 + indexPath.row;
+			
+			[cell.contentView addSubview:ad];
+			[ad release];			
+		}
 	}
-	
-	cell.textLabel.text = [NSString stringWithFormat:@"Cell %d", indexPath.row];
-	
+	if ((indexPath.row % AD_ROW) != 0)
+	{
+		cell.textLabel.text = [NSString stringWithFormat:@"Cell %d", indexPath.row];
+	}
 	return cell;
+}
+
+#pragma mark -
+#pragma mark UITableViewDelegate Members
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	if ((indexPath.row % AD_ROW) == 0 )
+	{
+		return AD_HEIGHT;
+	}
+	return 44.0f;
 }
 
 @end
