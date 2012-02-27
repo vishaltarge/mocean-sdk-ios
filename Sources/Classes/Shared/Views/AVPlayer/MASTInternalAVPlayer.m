@@ -1,14 +1,10 @@
 //
-//  AVPlayer.m
-//  AdMobileSDK
-//
-//  Created by Constantine Mureev on 3/3/11.
+//  MASTInternalAVPlayer.m
 //
 
+
 #import "MASTInternalAVPlayer.h"
-#import "MASTNotificationCenter.h"
-#import "MASTAdView.h"
-#import "MASTUIViewAdditions.h"
+#import "MASTUIColorAdditions.h"
 #include <objc/runtime.h>
 
 
@@ -25,15 +21,13 @@
 @property (assign) UIStatusBarStyle oldStyle;
 @property (retain) MPMoviePlayerViewController *avPlayer;
 @property (retain) MPMoviePlayerController* avPlayerController;
-@property (assign) UIViewController*    viewConreoller;
-@property (assign) MASTAdView*    adView;
+@property (assign) UIViewController*    viewConroller;
+@property (assign) UIView*    adView;
 
 - (void)registerObserver;
-- (void)playAudio:(NSNotification*)notification;
-- (void)playVideo:(NSNotification*)notification;
 - (void)moviePlayerLoadStateChanged:(NSNotification*)notification;
 - (void)moviePlayBackDidFinish:(NSNotification*)notification;
-
+- (UIViewController*)viewControllerForView:(UIView*)view;
 - (void)playAudio:(NSURL*)audioURL autoPlay:(BOOL)autoplay showControls:(BOOL)showcontrols repeat:(BOOL)autorepeat playInline:(BOOL)Inline fullScreenMode:(BOOL)fullScreen autoExit:(BOOL)exit;
 - (void)playVideo:(NSURL*)videoURL autoPlay:(BOOL)autoplay showControls:(BOOL)showcontrols repeat:(BOOL)autorepeat fullScreenMode:(BOOL)fullScreen autoExit:(BOOL)exit;
 
@@ -41,7 +35,7 @@
 
 @implementation MASTInternalAVPlayer
 
-@synthesize opening, audio, statusBarHidden, autoplay, exitOnComplete, Inline, oldStyle, avPlayer, avPlayerController, viewConreoller, adView;
+@synthesize opening, audio, statusBarHidden, autoplay, exitOnComplete, Inline, oldStyle, avPlayer, avPlayerController, viewConroller, adView;
 
 - (id)init {
     self = [super init];
@@ -53,9 +47,20 @@
     return self;
 }
 
+- (UIViewController*)viewControllerForView:(UIView*)view {
+    id nextResponder = [view nextResponder];
+    if ([nextResponder isKindOfClass:[UIViewController class]]) {
+        return nextResponder;
+    } else if ([nextResponder isKindOfClass:[UIView class]]) {
+        return [self viewControllerForView:nextResponder];
+    } else {
+        return nil;
+    }
+}
+
 - (void)registerObserver {
-	[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(playAudio:) name:kPlayAudioNotification object:nil];
-	[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(playVideo:) name:kPlayVideoNotification object:nil];
+	//[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(playAudio:) name:kPlayAudioNotification object:nil];
+	//[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(playVideo:) name:kPlayVideoNotification object:nil];
 }
 
 + (MASTInternalAVPlayer*)sharedInstance {
@@ -70,8 +75,8 @@
         NSDictionary *info = [notification object];
         NSString* url = [info objectForKey:@"url"];
         NSDictionary* properties = [info objectForKey:@"properties"];
-        
-        if (url && properties) {
+
+        if (url) {
             self.opening = YES;
             self.adView = [info objectForKey:@"adView"];
             
@@ -122,7 +127,7 @@
         NSString* url = [info objectForKey:@"url"];
         NSDictionary* properties = [info objectForKey:@"properties"];
         
-        if (url && properties) {
+        if (url) {
             self.opening = YES;
             self.adView = [info objectForKey:@"adView"];
             
@@ -194,16 +199,20 @@
 	self.Inline = InlineArg;
     
     UIViewController* vc = [UIApplication sharedApplication].keyWindow.rootViewController;
+    //vc = [self viewControllerForView:self.adView];
+    /*if (vc) {
+        self.viewConroller = vc;
+    }*/
     if (vc) {
-        self.viewConreoller = vc;
+        self.viewConroller = vc;
     } else {
-        vc = [self.adView viewControllerForView];
+        vc = [self viewControllerForView:self.adView];
         if (vc) {
-            self.viewConreoller = vc;
+            self.viewConroller = vc;
         }
     }
     
-    [self.viewConreoller presentModalViewController:self.avPlayer animated:YES];
+    [self.viewConroller presentModalViewController:self.avPlayer animated:YES];
 }
 
 - (void)playVideo:(NSURL*)videoURL autoPlay:(BOOL)autoplayArg showControls:(BOOL)showcontrols repeat:(BOOL)autorepeat fullScreenMode:(BOOL)fullScreen autoExit:(BOOL)autoExit {
@@ -233,16 +242,20 @@
 	self.Inline = NO;
     
     UIViewController* vc = [UIApplication sharedApplication].keyWindow.rootViewController;
+    /*vc = [self viewControllerForView:self.adView];
     if (vc) {
-        self.viewConreoller = vc;
+        self.viewConroller = vc;
+    }*/
+    if (vc) {
+        self.viewConroller = vc;
     } else {
-        vc = [self.adView viewControllerForView];
+        vc = [self viewControllerForView:self.adView];
         if (vc) {
-            self.viewConreoller = vc;
+            self.viewConroller = vc;
         }
     }
     
-    [self.viewConreoller presentModalViewController:self.avPlayer animated:YES];
+    [self.viewConroller presentModalViewController:self.avPlayer animated:YES];
 }
 
 - (void)moviePlayerLoadStateChanged:(NSNotification*)notification {
@@ -268,8 +281,10 @@
 		}
          */
 	} else {
-        [self.viewConreoller dismissModalViewControllerAnimated:YES];
-        [[MASTNotificationCenter sharedInstance] postNotificationName:@"Player received unknown error" object:nil];
+        [self.viewConroller dismissModalViewControllerAnimated:YES];
+        NSLog(@"dismiss");
+        
+        //[[MASTNotificationCenter sharedInstance] postNotificationName:@"Player received unknown error" object:nil];
 	}
 }
 

@@ -23,8 +23,6 @@
 		3B43CC6314CE937E00E2B3CF /* QSFileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC5E14CE937E00E2B3CF /* QSFileManager.h */; };
 		3B43CC6614CE939800E2B3CF /* MASTReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CC6414CE939800E2B3CF /* MASTReachability.m */; };
 		3B43CC6714CE939800E2B3CF /* MASTReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC6514CE939800E2B3CF /* MASTReachability.h */; };
-		3B43CC6A14CE93A900E2B3CF /* MASTInternalAVPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CC6814CE93A900E2B3CF /* MASTInternalAVPlayer.m */; };
-		3B43CC6B14CE93A900E2B3CF /* MASTInternalAVPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC6914CE93A900E2B3CF /* MASTInternalAVPlayer.h */; };
 		3B43CC6E14CE93B800E2B3CF /* MASTInternalBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CC6C14CE93B800E2B3CF /* MASTInternalBrowser.m */; };
 		3B43CC6F14CE93B800E2B3CF /* MASTInternalBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC6D14CE93B800E2B3CF /* MASTInternalBrowser.h */; };
 		3B43CC7414CE93C600E2B3CF /* MASTUIWebViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CC7014CE93C600E2B3CF /* MASTUIWebViewAdditions.m */; };
@@ -132,6 +130,8 @@
 		AC2EB5C714F270970000B336 /* MASTLocationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = AC2EB5C314F270970000B336 /* MASTLocationManager.h */; };
 		AC2EB5C814F270970000B336 /* MASTLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2EB5C414F270970000B336 /* MASTLocationManager.m */; };
 		ACA293BB10BFAFB300A0A97A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACA293BA10BFAFB300A0A97A /* UIKit.framework */; };
+		ACB8612114FBF73700F273B2 /* MASTInternalAVPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = ACB8611F14FBF73700F273B2 /* MASTInternalAVPlayer.h */; };
+		ACB8612214FBF73700F273B2 /* MASTInternalAVPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = ACB8612014FBF73700F273B2 /* MASTInternalAVPlayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -151,8 +151,6 @@
 		3B43CC5E14CE937E00E2B3CF /* QSFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSFileManager.h; sourceTree = "<group>"; };
 		3B43CC6414CE939800E2B3CF /* MASTReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTReachability.m; sourceTree = "<group>"; };
 		3B43CC6514CE939800E2B3CF /* MASTReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTReachability.h; sourceTree = "<group>"; };
-		3B43CC6814CE93A900E2B3CF /* MASTInternalAVPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTInternalAVPlayer.m; sourceTree = "<group>"; };
-		3B43CC6914CE93A900E2B3CF /* MASTInternalAVPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTInternalAVPlayer.h; sourceTree = "<group>"; };
 		3B43CC6C14CE93B800E2B3CF /* MASTInternalBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTInternalBrowser.m; sourceTree = "<group>"; };
 		3B43CC6D14CE93B800E2B3CF /* MASTInternalBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTInternalBrowser.h; sourceTree = "<group>"; };
 		3B43CC7014CE93C600E2B3CF /* MASTUIWebViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTUIWebViewAdditions.m; sourceTree = "<group>"; };
@@ -261,6 +259,8 @@
 		AC2EB5C414F270970000B336 /* MASTLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTLocationManager.m; sourceTree = "<group>"; };
 		ACA293BA10BFAFB300A0A97A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		ACAE9E4213869CFF00B6D1BF /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		ACB8611F14FBF73700F273B2 /* MASTInternalAVPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTInternalAVPlayer.h; sourceTree = "<group>"; };
+		ACB8612014FBF73700F273B2 /* MASTInternalAVPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTInternalAVPlayer.m; sourceTree = "<group>"; };
 		AD1E2636125F3F80003B37DF /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		ADA9C50411F975B20074E2F3 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		ADA9C50611F975B20074E2F3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -525,8 +525,8 @@
 		ADB1C9C61447F8AC00785D44 /* InternalAVPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				3B43CC6914CE93A900E2B3CF /* MASTInternalAVPlayer.h */,
-				3B43CC6814CE93A900E2B3CF /* MASTInternalAVPlayer.m */,
+				ACB8611F14FBF73700F273B2 /* MASTInternalAVPlayer.h */,
+				ACB8612014FBF73700F273B2 /* MASTInternalAVPlayer.m */,
 			);
 			name = InternalAVPlayer;
 			path = AVPlayer;
@@ -871,7 +871,6 @@
 				3B43CC6114CE937E00E2B3CF /* QSStrings.h in Headers */,
 				3B43CC6314CE937E00E2B3CF /* QSFileManager.h in Headers */,
 				3B43CC6714CE939800E2B3CF /* MASTReachability.h in Headers */,
-				3B43CC6B14CE93A900E2B3CF /* MASTInternalAVPlayer.h in Headers */,
 				3B43CC6F14CE93B800E2B3CF /* MASTInternalBrowser.h in Headers */,
 				3B43CC7514CE93C600E2B3CF /* MASTUIWebViewAdditions.h in Headers */,
 				3B43CC7714CE93C600E2B3CF /* MASTUIViewAdditions.h in Headers */,
@@ -928,6 +927,7 @@
 				AC1A0BAB14F3BF2500149819 /* MAPNSDictionary+BlocksKit.h in Headers */,
 				AC1A0BAD14F3BF2500149819 /* MAPNSObject+AssociatedObjects.h in Headers */,
 				AC1A0BAF14F3BF2500149819 /* MAPNSObject+BlockObservation.h in Headers */,
+				ACB8612114FBF73700F273B2 /* MASTInternalAVPlayer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1034,7 +1034,6 @@
 				3B43CC6014CE937E00E2B3CF /* QSStrings.m in Sources */,
 				3B43CC6214CE937E00E2B3CF /* QSFileManager.m in Sources */,
 				3B43CC6614CE939800E2B3CF /* MASTReachability.m in Sources */,
-				3B43CC6A14CE93A900E2B3CF /* MASTInternalAVPlayer.m in Sources */,
 				3B43CC6E14CE93B800E2B3CF /* MASTInternalBrowser.m in Sources */,
 				3B43CC7414CE93C600E2B3CF /* MASTUIWebViewAdditions.m in Sources */,
 				3B43CC7614CE93C600E2B3CF /* MASTUIViewAdditions.m in Sources */,
@@ -1083,6 +1082,7 @@
 				AC1A0BAC14F3BF2500149819 /* MAPNSDictionary+BlocksKit.m in Sources */,
 				AC1A0BAE14F3BF2500149819 /* MAPNSObject+AssociatedObjects.m in Sources */,
 				AC1A0BB014F3BF2500149819 /* MAPNSObject+BlockObservation.m in Sources */,
+				ACB8612214FBF73700F273B2 /* MASTInternalAVPlayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,8 +1,7 @@
 //
-//  InternalAVPlayer.h
-//  AdMobileSDK
+//  MASTInternalAVPlayer.h
 //
-//  Created by Constantine Mureev on 3/3/11.
+
 
 #import <UIKit/UIKit.h>
 #import <MediaPlayer/MediaPlayer.h>
