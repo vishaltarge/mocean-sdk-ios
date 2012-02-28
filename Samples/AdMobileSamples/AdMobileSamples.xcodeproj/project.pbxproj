@@ -481,7 +481,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				ACBC2C7814FCEEAF0062307C /* EventKitUI.framework */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -522,6 +521,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ACBC2C7814FCEEAF0062307C /* EventKitUI.framework */,
 				AC1A0B9E14F37DCF00149819 /* CoreLocation.framework */,
 				AD2D17D9148D0C3200D0B576 /* CoreGraphics.framework */,
 				AD2D17DA148D0C3200D0B576 /* CoreTelephony.framework */,
