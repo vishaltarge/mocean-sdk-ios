@@ -28,7 +28,6 @@
     _adView.contentAlignment = YES;
     _adView.type = AdTypeRichmedia;
     [_adView setBackgroundColor:[UIColor whiteColor]];
-    _adView.minSize = CGSizeMake(320, 460);
 	_adView.showCloseButtonTime = 5;
 	_adView.autocloseInterstitialTime = 15;
 	

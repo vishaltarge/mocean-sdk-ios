@@ -18,9 +18,10 @@
 	
 	_adView = [[MASTAdView alloc] initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, self.view.frame.size.height) site:19829 zone:88269];
     _adView.contentAlignment = YES;
+    CGFloat scale = [UIScreen mainScreen].scale;
+    _adView.minSize = CGSizeMake(self.view.frame.size.width*scale, self.view.frame.size.height*scale);
     //_adView.type = AdTypeRichmedia;
     [_adView setBackgroundColor:[UIColor whiteColor]];
-    _adView.minSize = CGSizeMake(320, 460);
 	_adView.showCloseButtonTime = 5;
 	_adView.autocloseInterstitialTime = 15;
 	
