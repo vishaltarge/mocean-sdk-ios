@@ -105,7 +105,11 @@
         [[NSNotificationCenter defaultCenter] addObserverForName:kOrmmaShake object:nil queue:nil usingBlock:^(NSNotification *note) {
             [self evalJS:[MASTOrmmaHelper fireShakeEventInWebView]];
         }];
-		
+        
+		[[MASTNotificationCenter sharedInstance] addObserverForName:kORMMASetDefaultStateNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
+            [self moveToDefaultState];
+        }];
+        
         [self.webView addObserverForKeyPath:@"frame" options:NSKeyValueObservingOptionNew task:^(id obj, NSDictionary *change) {
             NSValue* frameValue = [change objectForKey:@"new"];
             CGRect newFrame = [frameValue CGRectValue];
@@ -278,7 +282,11 @@
 
 - (void)moveToDefaultState
 {
-	
+    if (self.currentState == ORMMAStateExpanded || self.currentState == ORMMAStateResized) {
+        [self evalJS:@"ormma.close();"];
+    } else if (self.currentState == ORMMAStateHidden) {
+        [self evalJS:@"ormma.show();"];
+    }
 }
 
 - (void)evalJS:(NSString*)js {
