@@ -10,8 +10,8 @@
 /** Set #define to enable location services code or #undef to disable to exclude location detection from SDK.
  */
 
-//#undef INCLUDE_LOCATION_MANAGER
-#define INCLUDE_LOCATION_MANAGER
+#undef INCLUDE_LOCATION_MANAGER
+//#define INCLUDE_LOCATION_MANAGER
 
 #import <UIKit/UIKit.h>
 
