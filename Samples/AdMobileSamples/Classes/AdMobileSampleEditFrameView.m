@@ -40,6 +40,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self)
 	{
+		[self setSelectionStyle:UITableViewCellSelectionStyleNone];
 		_adView = adView;
 		//height
 		_sliderHeight = [[UISlider alloc] initWithFrame:CGRectMake(-35, 60, 130, 30)];
@@ -105,12 +106,12 @@
 	
 	[_sliderPosX setMaximumValue:_adView.superview.frame.size.width];
 	[_sliderPosX setValue:_adView.frame.origin.x];
-	[self sliderChanged:_sliderPosY];
+	[self sliderChanged:_sliderPosX];
 	
 	[_sliderPosY setMaximumValue:_adView.superview.frame.size.height];
 	NSLog(@"%f",_adView.frame.origin.y);
 	[_sliderPosY setValue:_adView.frame.origin.y];
-	[self sliderChanged:_sliderPosX];
+	[self sliderChanged:_sliderPosY];
 }
 
 -(void)dealloc

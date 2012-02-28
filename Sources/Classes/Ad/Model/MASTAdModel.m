@@ -144,13 +144,13 @@ longitude, latitude, adCallTimeout, isUserSetMaxSize, autoCollapse, showPrevious
     if (self.latitude == nil && self.longitude == nil)
     {
 #ifdef INCLUDE_LOCATION_MANAGER
-        if ([LocationManager sharedInstance].unknowsState == NO && 
-            [LocationManager sharedInstance].currentLocationCoordinate.latitude != 0.0 &&
-            [LocationManager sharedInstance].currentLocationCoordinate.longitude != 0.0)
+        if ([MASTLocationManager sharedInstance].unknowsState == NO && 
+            [MASTLocationManager sharedInstance].currentLocationCoordinate.latitude != 0.0 &&
+            [MASTLocationManager sharedInstance].currentLocationCoordinate.longitude != 0.0)
         {
-            [[NotificationCenter sharedInstance] postNotificationName:kLocationUsedFoundLocationNotification object:nil];
-            [_banerUrl appendFormat:@"&lat=%f", [LocationManager sharedInstance].currentLocationCoordinate.latitude];
-            [_banerUrl appendFormat:@"&long=%f", [LocationManager sharedInstance].currentLocationCoordinate.longitude];
+            [[MASTNotificationCenter sharedInstance] postNotificationName:kLocationUsedFoundLocationNotification object:nil];
+            [_banerUrl appendFormat:@"&lat=%f", [MASTLocationManager sharedInstance].currentLocationCoordinate.latitude];
+            [_banerUrl appendFormat:@"&long=%f", [MASTLocationManager sharedInstance].currentLocationCoordinate.longitude];
         }
 #endif
     }
