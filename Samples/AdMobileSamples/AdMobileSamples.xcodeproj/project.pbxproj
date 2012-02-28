@@ -38,6 +38,7 @@
 		ACA0CEB314F766AE003E9623 /* AdMobileSampleEditFrameView.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA0CEB214F766AE003E9623 /* AdMobileSampleEditFrameView.m */; };
 		ACA0CEC414F7A985003E9623 /* AdMobileSamplesEditSettersTableVuewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA0CEC314F7A985003E9623 /* AdMobileSamplesEditSettersTableVuewController.m */; };
 		ACB48EAF14EFAF7C00AC50F6 /* AdMobileSamplesBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACB48EAE14EFAF7C00AC50F6 /* AdMobileSamplesBaseViewController.m */; };
+		ACBC2C7914FCEEAF0062307C /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACBC2C7814FCEEAF0062307C /* EventKitUI.framework */; };
 		ACC770281382B7F9005074D8 /* ORMMAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACC770271382B7F9005074D8 /* ORMMAViewController.m */; };
 		AD0ECA2F120C1B38008216A6 /* DelegateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0ECA2E120C1B38008216A6 /* DelegateViewController.m */; };
 		AD2D17CE148D0BB300D0B576 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD2D17CD148D0BB300D0B576 /* QuartzCore.framework */; };
@@ -163,6 +164,7 @@
 		ACA0CEC314F7A985003E9623 /* AdMobileSamplesEditSettersTableVuewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdMobileSamplesEditSettersTableVuewController.m; sourceTree = "<group>"; };
 		ACB48EAD14EFAF7C00AC50F6 /* AdMobileSamplesBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMobileSamplesBaseViewController.h; sourceTree = "<group>"; };
 		ACB48EAE14EFAF7C00AC50F6 /* AdMobileSamplesBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdMobileSamplesBaseViewController.m; sourceTree = "<group>"; };
+		ACBC2C7814FCEEAF0062307C /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
 		ACC770261382B7F9005074D8 /* ORMMAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORMMAViewController.h; sourceTree = "<group>"; };
 		ACC770271382B7F9005074D8 /* ORMMAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORMMAViewController.m; sourceTree = "<group>"; };
 		AD0ECA2D120C1B38008216A6 /* DelegateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelegateViewController.h; sourceTree = "<group>"; };
@@ -339,6 +341,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACBC2C7914FCEEAF0062307C /* EventKitUI.framework in Frameworks */,
 				AC1A0B9F14F37DCF00149819 /* CoreLocation.framework in Frameworks */,
 				AD2D17DF148D0C4A00D0B576 /* EventKit.framework in Frameworks */,
 				AD2D17E0148D0C4A00D0B576 /* MessageUI.framework in Frameworks */,
@@ -478,6 +481,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				ACBC2C7814FCEEAF0062307C /* EventKitUI.framework */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,

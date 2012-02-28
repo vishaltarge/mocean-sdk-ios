@@ -35,12 +35,11 @@
 	}
 }
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier banner:(MASTAdView*)adView;
+- (id)initWithFrame:(CGRect)frame banner:(MASTAdView*)adView
 {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    self = [super initWithFrame:frame];
     if (self)
 	{
-		[self setSelectionStyle:UITableViewCellSelectionStyleNone];
 		_adView = adView;
 		//height
 		_sliderHeight = [[UISlider alloc] initWithFrame:CGRectMake(-35, 60, 130, 30)];
@@ -109,7 +108,7 @@
 	[self sliderChanged:_sliderPosX];
 	
 	[_sliderPosY setMaximumValue:_adView.superview.frame.size.height];
-	NSLog(@"%f",_adView.frame.origin.y);
+
 	[_sliderPosY setValue:_adView.frame.origin.y];
 	[self sliderChanged:_sliderPosY];
 }

@@ -5,6 +5,7 @@
 #import <Foundation/Foundation.h>
 
 #import "OrmmaProtocols.h"
+#import "MASTAdView.h"
 #import "MASTLocationManager.h"
 #import "MASTAccelerometer.h"
 

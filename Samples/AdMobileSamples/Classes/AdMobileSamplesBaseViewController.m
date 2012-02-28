@@ -36,7 +36,7 @@
 
 -(CGRect)getBannerFrame
 {
-	return  CGRectMake(0, 0, 320, 50);
+	return  CGRectMake(0, 0, self.view.frame.size.width, 50);
 }
 
 -(UIViewAutoresizing)getBannerAutoresizing

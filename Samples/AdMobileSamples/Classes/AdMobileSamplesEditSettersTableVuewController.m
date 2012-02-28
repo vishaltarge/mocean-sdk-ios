@@ -9,7 +9,6 @@
 #import "AdMobileSamplesEditSettersTableVuewController.h"
 #import "YXEditableCell.h"
 #import "YXEditableViewCell.h"
-#import "AdMobileSampleEditFrameView.h"
 
 @implementation AdMobileSamplesEditSettersTableVuewController
 
@@ -29,12 +28,15 @@
 		[_zone setPlaceholder:@"zone"];
 		[_zone setText:[NSString stringWithFormat:@"%i",adView.zone]];
 		[_zone setDelegate:self];
+		
+		_editView = [[AdMobileSampleEditFrameView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width - 40, 200) banner:_adView];
     }
     return self;
 }
 
 -(void)dealloc
 {
+	[_editView release];
 	[_site release];
 	[_zone release];
 	[super dealloc];
@@ -117,9 +119,10 @@
 	{
 		if (cell == nil)
 		{
-			cell = [[[AdMobileSampleEditFrameView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier banner:_adView] autorelease];
+			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+			[cell.contentView addSubview:_editView];
 		}
-		[(AdMobileSampleEditFrameView*)cell update];
+		[_editView update];
 	}
 	else 
 	{
@@ -130,7 +133,7 @@
 				cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
 				[cell.textLabel setText:@"site"];
 				[_site setFrame:CGRectMake(70, 11, 240, 34)];
-				[cell addSubview:_site];
+				[cell.contentView addSubview:_site];
 			}
 		}
 		else if (indexPath.row == 2)
@@ -140,7 +143,7 @@
 				cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
 				[cell.textLabel setText:@"zone"];
 				[_zone setFrame:CGRectMake(70, 11, 240, 34)];
-				[cell addSubview:_zone];
+				[cell.contentView addSubview:_zone];
 			}
 		}
 	}
@@ -171,8 +174,6 @@
 	}
 	NSString *str = [NSString stringWithFormat:@"%@%@",textField.text,string];	
 
-	NSLog(@"%@",str);
-	
 	if (textField == _zone)
 	{
 		_adView.zone = [str intValue];

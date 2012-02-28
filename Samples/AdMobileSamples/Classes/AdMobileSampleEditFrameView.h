@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MASTAdView.h"
 
-@interface AdMobileSampleEditFrameView : UITableViewCell
+@interface AdMobileSampleEditFrameView : UIView
 {
 	MASTAdView	*_adView;
 	//height
@@ -26,7 +26,8 @@
 	UILabel		*_labelPosYCurent;
 }
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier banner:(MASTAdView*)adView;
+//- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier banner:(MASTAdView*)adView;
+- (id)initWithFrame:(CGRect)frame banner:(MASTAdView*)adView;
 - (void)update;
 
 @end
