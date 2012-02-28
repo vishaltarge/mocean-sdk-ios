@@ -4,7 +4,7 @@
 //
 //  Created by Constantine Mureev on 2/22/11.
 //
-//  version: 2.10.beta
+//  version: 2.10.0
 //
 
 /** Set #define to enable location services code or #undef to disable to exclude location detection from SDK.
