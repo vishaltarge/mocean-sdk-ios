@@ -121,7 +121,6 @@
 		AC2EB59F14F23FC30000B336 /* MASTOrmmaSharedDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2EB59214F23FC30000B336 /* MASTOrmmaSharedDataSource.m */; };
 		AC2EB5A014F23FC30000B336 /* MASTOrmmaSharedDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = AC2EB59314F23FC30000B336 /* MASTOrmmaSharedDelegate.h */; };
 		AC2EB5A114F23FC30000B336 /* MASTOrmmaSharedDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2EB59414F23FC30000B336 /* MASTOrmmaSharedDelegate.m */; };
-		AC2EB5A414F26CC50000B336 /* OrmmaProtocols.h in Headers */ = {isa = PBXBuildFile; fileRef = AC2EB5A314F26CC50000B336 /* OrmmaProtocols.h */; };
 		AC2EB5A614F26DA30000B336 /* Macros.h in Headers */ = {isa = PBXBuildFile; fileRef = AC2EB5A514F26DA30000B336 /* Macros.h */; };
 		AC2EB5BB14F26EEA0000B336 /* MASTExpandView.h in Headers */ = {isa = PBXBuildFile; fileRef = AC2EB5B714F26EEA0000B336 /* MASTExpandView.h */; };
 		AC2EB5BC14F26EEA0000B336 /* MASTExpandView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2EB5B814F26EEA0000B336 /* MASTExpandView.m */; };
@@ -132,6 +131,7 @@
 		ACA293BB10BFAFB300A0A97A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACA293BA10BFAFB300A0A97A /* UIKit.framework */; };
 		ACB8612114FBF73700F273B2 /* MASTInternalAVPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = ACB8611F14FBF73700F273B2 /* MASTInternalAVPlayer.h */; };
 		ACB8612214FBF73700F273B2 /* MASTInternalAVPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = ACB8612014FBF73700F273B2 /* MASTInternalAVPlayer.m */; };
+		AD5D1A9714FCA021006F0061 /* OrmmaProtocols.h in Headers */ = {isa = PBXBuildFile; fileRef = AD5D1A9614FCA021006F0061 /* OrmmaProtocols.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -249,7 +249,6 @@
 		AC2EB59214F23FC30000B336 /* MASTOrmmaSharedDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTOrmmaSharedDataSource.m; sourceTree = "<group>"; };
 		AC2EB59314F23FC30000B336 /* MASTOrmmaSharedDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTOrmmaSharedDelegate.h; sourceTree = "<group>"; };
 		AC2EB59414F23FC30000B336 /* MASTOrmmaSharedDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTOrmmaSharedDelegate.m; sourceTree = "<group>"; };
-		AC2EB5A314F26CC50000B336 /* OrmmaProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrmmaProtocols.h; sourceTree = "<group>"; };
 		AC2EB5A514F26DA30000B336 /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		AC2EB5B714F26EEA0000B336 /* MASTExpandView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTExpandView.h; sourceTree = "<group>"; };
 		AC2EB5B814F26EEA0000B336 /* MASTExpandView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTExpandView.m; sourceTree = "<group>"; };
@@ -262,6 +261,7 @@
 		ACB8611F14FBF73700F273B2 /* MASTInternalAVPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTInternalAVPlayer.h; sourceTree = "<group>"; };
 		ACB8612014FBF73700F273B2 /* MASTInternalAVPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTInternalAVPlayer.m; sourceTree = "<group>"; };
 		AD1E2636125F3F80003B37DF /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		AD5D1A9614FCA021006F0061 /* OrmmaProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrmmaProtocols.h; sourceTree = "<group>"; };
 		ADA9C50411F975B20074E2F3 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		ADA9C50611F975B20074E2F3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		ADA9C50811F975B20074E2F3 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -668,7 +668,6 @@
 		CFDE16151312B80000FE2F5A /* Public */ = {
 			isa = PBXGroup;
 			children = (
-				AC2EB5A314F26CC50000B336 /* OrmmaProtocols.h */,
 				3B43CCDD14CE94CA00E2B3CF /* MASTAdView.h */,
 				3B43CCDE14CE94CA00E2B3CF /* MASTAdInterstitialView.h */,
 				3B43CCDF14CE94CA00E2B3CF /* MASTAdDelegate.h */,
@@ -743,6 +742,7 @@
 		CFDE16ED1313A22900FE2F5A /* PublicView */ = {
 			isa = PBXGroup;
 			children = (
+				AD5D1A9614FCA021006F0061 /* OrmmaProtocols.h */,
 				3B43CCE314CE94E100E2B3CF /* MASTAdView.m */,
 				3B43CCE414CE94E100E2B3CF /* MASTAdView_Private.h */,
 				3B43CCE514CE94E100E2B3CF /* MASTAdInterstitialView.m */,
@@ -918,7 +918,6 @@
 				AC2EB59C14F23FC30000B336 /* MASTOrmmaHelper.h in Headers */,
 				AC2EB59E14F23FC30000B336 /* MASTOrmmaSharedDataSource.h in Headers */,
 				AC2EB5A014F23FC30000B336 /* MASTOrmmaSharedDelegate.h in Headers */,
-				AC2EB5A414F26CC50000B336 /* OrmmaProtocols.h in Headers */,
 				AC2EB5A614F26DA30000B336 /* Macros.h in Headers */,
 				AC2EB5BB14F26EEA0000B336 /* MASTExpandView.h in Headers */,
 				AC2EB5C514F270970000B336 /* MASTAccelerometer.h in Headers */,
@@ -928,6 +927,7 @@
 				AC1A0BAD14F3BF2500149819 /* MAPNSObject+AssociatedObjects.h in Headers */,
 				AC1A0BAF14F3BF2500149819 /* MAPNSObject+BlockObservation.h in Headers */,
 				ACB8612114FBF73700F273B2 /* MASTInternalAVPlayer.h in Headers */,
+				AD5D1A9714FCA021006F0061 /* OrmmaProtocols.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
