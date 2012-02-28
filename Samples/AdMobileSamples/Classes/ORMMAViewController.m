@@ -12,12 +12,12 @@
 
 -(NSInteger)getBannerZone
 {
-	return 53923;
+	return 50001;
 }
 
 -(CGRect)getBannerFrame
 {
-	return  CGRectMake(0, 0, 320, 240);
+	return  CGRectMake(0, 0, 320, 400);
 }
 
 -(id)init
@@ -44,8 +44,9 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 
-	_adView.updateTimeInterval = 30;
+	_adView.updateTimeInterval = 0;
     _adView.delegate = self;
+	_adView.adServerUrl = @"http://188.187.188.71:8080/new_mcn/request.php";
     _adView.logMode = AdLogModeAll;
     _adView.type = AdTypeRichmedia;
     

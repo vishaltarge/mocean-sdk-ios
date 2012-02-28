@@ -122,7 +122,6 @@
 		AC2EB58014F21BB60000B336 /* MASTAdDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTAdDelegate.h; sourceTree = "<group>"; };
 		AC2EB58114F21BB60000B336 /* MASTAdInterstitialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTAdInterstitialView.h; sourceTree = "<group>"; };
 		AC2EB58214F21BB60000B336 /* MASTAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTAdView.h; sourceTree = "<group>"; };
-		AC2EB5A214F26CA60000B336 /* OrmmaProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrmmaProtocols.h; sourceTree = "<group>"; };
 		AC6768D914F4CC8700697079 /* YXButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YXButtonCell.h; path = YXModelTableView/YXButtonCell.h; sourceTree = "<group>"; };
 		AC6768DA14F4CC8700697079 /* YXButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YXButtonCell.m; path = YXModelTableView/YXButtonCell.m; sourceTree = "<group>"; };
 		AC6768DB14F4CC8700697079 /* YXCheckmarkCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YXCheckmarkCell.h; path = YXModelTableView/YXCheckmarkCell.h; sourceTree = "<group>"; };
@@ -605,7 +604,6 @@
 		CF08E18613B3674F00653A17 /* Public */ = {
 			isa = PBXGroup;
 			children = (
-				AC2EB5A214F26CA60000B336 /* OrmmaProtocols.h */,
 				AC2EB58014F21BB60000B336 /* MASTAdDelegate.h */,
 				AC2EB58114F21BB60000B336 /* MASTAdInterstitialView.h */,
 				AC2EB58214F21BB60000B336 /* MASTAdView.h */,

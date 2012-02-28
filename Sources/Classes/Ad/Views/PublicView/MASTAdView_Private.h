@@ -11,6 +11,8 @@
 #import "MASTInstallManager.h"
 #import "MASTUIViewAdditions.h"
 
+#import "OrmmaProtocols.h"
+
 @interface MASTAdView ()
 
 - (void)buttonsAction:(id)sender;
@@ -18,6 +20,9 @@
 
 @property (readonly) MASTAdModel*   adModel;
 @property (readonly) NSString*  uid;
+
+@property (nonatomic, assign) id <OrmmaDelegate>    ormmaDelegate;
+@property (nonatomic, assign) id <OrmmaDataSource>    ormmaDataSource;
 
 - (void)setDefaultValues;
 - (void)registerObserver;

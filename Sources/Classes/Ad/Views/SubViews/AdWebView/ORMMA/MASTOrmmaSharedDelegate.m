@@ -227,9 +227,11 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
         }
         self.expandVC = nil;
         
+        /*
         if ([sender respondsToSelector:@selector(removeUpdateFlag:)]) {
             [sender performSelector:@selector(removeUpdateFlag:) withObject:@"expand"];
         }
+        */
         
         if ([(MASTAdView*)adControl updateTimeInterval] > 0) {
             [[MASTNotificationCenter sharedInstance] postNotificationName:kAdStartUpdateNotification object:sender];
@@ -275,9 +277,11 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
     UIViewController* rootVC = [self viewControllerForView:adControl.superview];
 
     if (rootVC) {
+        /*
         if ([sender respondsToSelector:@selector(setUpdateFlag:)]) {
             [sender performSelector:@selector(setUpdateFlag:) withObject:@"expand"];
         }
+         */
         
         double delayInSeconds = 0.5;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);

@@ -154,17 +154,6 @@
 		FCF1EBCB13F24A5200364390 = {
 			isa = PBXGroup;
 			children = (
-				AD2411FE14F7C486009D1BA2 /* CoreLocation.framework */,
-				AD2D17E8148D0D1A00D0B576 /* CoreGraphics.framework */,
-				AD2D17E9148D0D1A00D0B576 /* CoreTelephony.framework */,
-				AD2D17EA148D0D1A00D0B576 /* EventKit.framework */,
-				AD2D17EB148D0D1A00D0B576 /* Foundation.framework */,
-				AD2D17EC148D0D1A00D0B576 /* MediaPlayer.framework */,
-				AD2D17ED148D0D1A00D0B576 /* MessageUI.framework */,
-				AD2D17EE148D0D1A00D0B576 /* OpenGLES.framework */,
-				AD2D17EF148D0D1A00D0B576 /* QuartzCore.framework */,
-				AD2D17F0148D0D1A00D0B576 /* SystemConfiguration.framework */,
-				AD2D17F1148D0D1A00D0B576 /* UIKit.framework */,
 				FCF1EBE013F24A5200364390 /* AdMobileSamplesiPad */,
 				FCF1EBD913F24A5200364390 /* Frameworks */,
 				FCF1EBD713F24A5200364390 /* Products */,
@@ -182,6 +171,17 @@
 		FCF1EBD913F24A5200364390 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AD2411FE14F7C486009D1BA2 /* CoreLocation.framework */,
+				AD2D17E8148D0D1A00D0B576 /* CoreGraphics.framework */,
+				AD2D17E9148D0D1A00D0B576 /* CoreTelephony.framework */,
+				AD2D17EA148D0D1A00D0B576 /* EventKit.framework */,
+				AD2D17EB148D0D1A00D0B576 /* Foundation.framework */,
+				AD2D17EC148D0D1A00D0B576 /* MediaPlayer.framework */,
+				AD2D17ED148D0D1A00D0B576 /* MessageUI.framework */,
+				AD2D17EE148D0D1A00D0B576 /* OpenGLES.framework */,
+				AD2D17EF148D0D1A00D0B576 /* QuartzCore.framework */,
+				AD2D17F0148D0D1A00D0B576 /* SystemConfiguration.framework */,
+				AD2D17F1148D0D1A00D0B576 /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -457,6 +457,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -469,6 +470,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -479,6 +481,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -488,6 +491,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
