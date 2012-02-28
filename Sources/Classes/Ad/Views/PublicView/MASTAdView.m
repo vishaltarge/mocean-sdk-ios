@@ -251,54 +251,6 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
             [adWebView release];            
             model.descriptor = descriptor;
 		}
-#ifdef INCLUDE_IAD
-        else if (descriptor.adContentType == AdContentTypeIAd) {
-            IAdAdaptor* iAdAdaptor = [[IAdAdaptor alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) section:nil];
-            iAdAdaptor.hidden = YES;
-            [self addSubview:iAdAdaptor];
-            [iAdAdaptor updateSection:descriptor.adId];
-            [iAdAdaptor release];
-            
-            model.descriptor = descriptor;
-        }
-#endif
-#ifdef INCLUDE_MILLENNIAL
-        else if (descriptor.adContentType == AdContentTypeMillennial) {
-            MillennialAdaptor* millennialAdaptor = [[MillennialAdaptor alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-            millennialAdaptor.hidden = YES;
-            [self addSubview:millennialAdaptor];
-            [millennialAdaptor showWithAdType:descriptor.adType
-                                        appId:descriptor.appId
-                                     latitude:descriptor.latitude
-                                    longitude:descriptor.longitude
-                                          zip:descriptor.zip];
-            [millennialAdaptor release];
-            
-            model.descriptor = descriptor;
-        }
-#endif
-#ifdef INCLUDE_IVDOPIA
-        else if (descriptor.adContentType == AdContentTypeiVdopia) {
-            IVdopiaAdaptor* iVdopiaAdaptor = [[IVdopiaAdaptor alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-            iVdopiaAdaptor.hidden = YES;
-            [self addSubview:iVdopiaAdaptor];
-            [iVdopiaAdaptor showWithAppKey:descriptor.appId];
-            [iVdopiaAdaptor release];
-            
-            model.descriptor = descriptor;
-        }
-#endif
-#ifdef INCLUDE_GREYSTRIPE
-        else if (descriptor.adContentType == AdContentTypeGreystripe) {
-            GreystripeAdaptor* greystripeAdaptor = [[GreystripeAdaptor alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-            greystripeAdaptor.hidden = YES;
-            [self addSubview:greystripeAdaptor];
-            [greystripeAdaptor showWithAppID:descriptor.appId];
-            [greystripeAdaptor release];
-            
-            model.descriptor = descriptor;
-        }
-#endif
 	}
 }
 
