@@ -295,6 +295,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 }
 
 - (void)showCloseButton {
+    [self bringSubviewToFront:self.closeButton];
 	self.closeButton.hidden = NO;
 }
 
@@ -354,15 +355,12 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
             
             if (!self.closeButton) {
                 [self prepareResources];
-                if (self.closeButton) {
+                if (self.closeButton) {                    
                     self.closeButton.frame = CGRectMake(self.frame.size.width - self.closeButton.frame.size.width - 11, 11, self.closeButton.frame.size.width, self.closeButton.frame.size.height);
                     self.closeButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
-                    [self addSubview:self.closeButton];
                 }
-            } else {
-                [self addSubview:self.closeButton];
-                [self bringSubviewToFront:self.closeButton];
             }
+            [self addSubview:self.closeButton];
             
             self.closeButton.hidden = YES;
             
