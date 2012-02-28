@@ -39,6 +39,7 @@
 		ACA0CEC414F7A985003E9623 /* AdMobileSamplesEditSettersTableVuewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA0CEC314F7A985003E9623 /* AdMobileSamplesEditSettersTableVuewController.m */; };
 		ACB48EAF14EFAF7C00AC50F6 /* AdMobileSamplesBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACB48EAE14EFAF7C00AC50F6 /* AdMobileSamplesBaseViewController.m */; };
 		ACBC2C7914FCEEAF0062307C /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACBC2C7814FCEEAF0062307C /* EventKitUI.framework */; };
+		ACBC2C9114FD12DC0062307C /* InterstitialAdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACBC2C8F14FD12DC0062307C /* InterstitialAdViewController.m */; };
 		ACC770281382B7F9005074D8 /* ORMMAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACC770271382B7F9005074D8 /* ORMMAViewController.m */; };
 		AD0ECA2F120C1B38008216A6 /* DelegateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0ECA2E120C1B38008216A6 /* DelegateViewController.m */; };
 		AD2D17CE148D0BB300D0B576 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD2D17CD148D0BB300D0B576 /* QuartzCore.framework */; };
@@ -165,6 +166,8 @@
 		ACB48EAD14EFAF7C00AC50F6 /* AdMobileSamplesBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMobileSamplesBaseViewController.h; sourceTree = "<group>"; };
 		ACB48EAE14EFAF7C00AC50F6 /* AdMobileSamplesBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdMobileSamplesBaseViewController.m; sourceTree = "<group>"; };
 		ACBC2C7814FCEEAF0062307C /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
+		ACBC2C8E14FD12DC0062307C /* InterstitialAdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterstitialAdViewController.h; sourceTree = "<group>"; };
+		ACBC2C8F14FD12DC0062307C /* InterstitialAdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterstitialAdViewController.m; sourceTree = "<group>"; };
 		ACC770261382B7F9005074D8 /* ORMMAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORMMAViewController.h; sourceTree = "<group>"; };
 		ACC770271382B7F9005074D8 /* ORMMAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORMMAViewController.m; sourceTree = "<group>"; };
 		AD0ECA2D120C1B38008216A6 /* DelegateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelegateViewController.h; sourceTree = "<group>"; };
@@ -660,6 +663,8 @@
 			children = (
 				CF84058A130E992300EC0AF8 /* RichJSadViewController.h */,
 				CF84058B130E992300EC0AF8 /* RichJSadViewController.m */,
+				ACBC2C8E14FD12DC0062307C /* InterstitialAdViewController.h */,
+				ACBC2C8F14FD12DC0062307C /* InterstitialAdViewController.m */,
 			);
 			name = RichJS;
 			sourceTree = "<group>";
@@ -1425,6 +1430,7 @@
 				AC67691114F4CC8700697079 /* YXSwitchCell.m in Sources */,
 				ACA0CEB314F766AE003E9623 /* AdMobileSampleEditFrameView.m in Sources */,
 				ACA0CEC414F7A985003E9623 /* AdMobileSamplesEditSettersTableVuewController.m in Sources */,
+				ACBC2C9114FD12DC0062307C /* InterstitialAdViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

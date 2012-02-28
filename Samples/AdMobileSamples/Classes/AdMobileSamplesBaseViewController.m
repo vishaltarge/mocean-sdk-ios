@@ -73,6 +73,7 @@
     _adView.site = [self getBannerSite];
     _adView.zone = [self getBannerZone];
 	_adView.autoCollapse = YES;
+	_adView.contentAlignment = YES;
     [self.view addSubview:_adView];
 	
 }

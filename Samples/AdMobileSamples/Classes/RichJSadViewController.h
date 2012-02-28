@@ -13,5 +13,4 @@
 @interface RichJSadViewController : UIViewController {
 	MASTAdView* _adView;
 }
-
 @end

@@ -37,11 +37,6 @@ enum {
 
 @synthesize animating, context, displayLink;
 
--(NSInteger)getBannerZone
-{
-	return 20249;
-}
-
 -(UIImage *)getViewBackgroundImage
 {
 	return nil;

@@ -17,7 +17,7 @@
 
 -(CGRect)getBannerFrame
 {
-	return  CGRectMake(0, 0, 320, 400);
+	return  CGRectMake(0, 0, 320, 50);
 }
 
 -(id)init

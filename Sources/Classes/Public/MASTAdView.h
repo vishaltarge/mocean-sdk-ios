@@ -11,7 +11,6 @@
  */
 
 #undef INCLUDE_LOCATION_MANAGER
-//#define INCLUDE_LOCATION_MANAGER
 
 #import <UIKit/UIKit.h>
 

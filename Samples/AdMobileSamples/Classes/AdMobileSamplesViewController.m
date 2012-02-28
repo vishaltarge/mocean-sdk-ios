@@ -16,17 +16,18 @@
     NSMutableArray* items = [NSMutableArray array];
     
     [items addObject:@"Simple banner"];
-	[items addObject:@"Video"];
+	//[items addObject:@"Video"];
 	[items addObject:@"Rich JS Interstitial Ad"];
+	[items addObject:@"Interstitial Ad"];
 	[items addObject:@"OpenGL"];
-    [items addObject:@"ORMMA example 1"];
-    [items addObject:@"ORMMA example 2"];
-    [items addObject:@"ORMMA example 3"];
+    [items addObject:@"ORMMA"];
+    //[items addObject:@"ORMMA example 2"];
+    //[items addObject:@"ORMMA example 3"];
     [_sections addObject:items];
     
     items = [NSMutableArray array];
     
-	[items addObject:@"Banner frame animation"];
+	//[items addObject:@"Banner frame animation"];
 	[items addObject:@"Banner in list view"];
     [_sections addObject:items];
     
@@ -50,22 +51,22 @@
         if (indexPath.row == 0)
             viewController = [[SimpleBannerViewController alloc] init];
         else if (indexPath.row == 1)
-            viewController = [[VideoViewController alloc] init];
-        else if (indexPath.row == 2)
             viewController = [[RichJSadViewController alloc] init];
+		else if (indexPath.row == 2)
+			viewController = [[InterstitialAdViewController alloc] init];
         else if (indexPath.row == 3)
             viewController = [[OpenGLViewController alloc] init];
 		else if (indexPath.row == 4)
 			viewController = [[ORMMAViewController alloc] init];
-		else if (indexPath.row == 5)
+		/*else if (indexPath.row == 5)
 			viewController = [[ORMMAViewController alloc] initWithZone:53920 site:17340];
 		else if (indexPath.row == 6)
-			viewController = [[ORMMAViewController alloc] initWithZone:53919 site:17340];
+			viewController = [[ORMMAViewController alloc] initWithZone:53919 site:17340];*/
     }
     else if (indexPath.section == 1) {
-        if (indexPath.row == 0)
+        /*if (indexPath.row == 0)
             viewController = [[BannerAnimationViewController alloc] init];
-        else if (indexPath.row == 1)
+        else */if (indexPath.row == 0)
             viewController = [[TableViewAnimationViewController alloc] init];
     }
     else if (indexPath.section == 2) {

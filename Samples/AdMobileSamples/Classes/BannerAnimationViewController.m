@@ -12,11 +12,6 @@
 
 @implementation BannerAnimationViewController
 
--(NSInteger)getBannerZone
-{
-	return 20249;
-}
-
 -(CGRect)getBannerFrame
 {
 	return CGRectMake(0, -AD_HEIGHT, self.view.bounds.size.width, AD_HEIGHT);
@@ -26,7 +21,7 @@
 {
 	[super viewDidLoad];
 
-	_adView.updateTimeInterval = 30;
+	_adView.updateTimeInterval = 10;
 	_adView.isAdChangeAnimated = NO;
 	_adView.delegate = self;
 }

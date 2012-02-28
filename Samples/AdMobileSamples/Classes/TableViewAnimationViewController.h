@@ -6,11 +6,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AdMobileSamplesBaseViewController.h"
+#import "MASTAdView.h"
+#import "MASTAdDelegate.h"
 
-@interface TableViewAnimationViewController : AdMobileSamplesBaseViewController <UITableViewDataSource, UITableViewDelegate, MASTAdViewDelegate>
+@interface TableViewAnimationViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, MASTAdViewDelegate>
 {
-	UITableView* _tableView;
+	UITableView		*_tableView;
+	NSMutableArray 	*_banners;
 }
 
 @end

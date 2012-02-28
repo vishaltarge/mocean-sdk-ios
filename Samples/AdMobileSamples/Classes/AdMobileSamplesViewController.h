@@ -14,6 +14,7 @@
 #import "VideoViewController.h"
 #import "OpenGLViewController.h"
 #import "RichJSadViewController.h"
+#import "InterstitialAdViewController.h"
 #import "ORMMAViewController.h"
 
 // animation
