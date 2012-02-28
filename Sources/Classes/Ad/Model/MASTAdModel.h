@@ -36,7 +36,6 @@
 @property (retain) NSString*			keywords;
 @property CGSize						minSize;
 @property CGSize						maxSize;
-@property BOOL                          isUserSetMaxSize;
 @property (retain) UIColor*             paramBG;
 @property (retain) UIColor*             paramLINK;
 @property (retain) NSDictionary*        additionalParameters;

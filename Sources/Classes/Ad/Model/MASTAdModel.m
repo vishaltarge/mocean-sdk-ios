@@ -24,7 +24,7 @@ paramBG, paramLINK, additionalParameters, adServerUrl, advertiserId, groupCode,
 country, region, city, area, metro, zip, carrier, showCloseButtonTime,
 autocloseInterstitialTime, startDisplayDate, isDisplayed, aligmentCenter, contentSize, frame,
 visibleState, snapshotRAWData, snapshotRAWDataTime, currentAdView, adView, excampaigns, descriptor, loading,
-longitude, latitude, adCallTimeout, isUserSetMaxSize, autoCollapse, showPreviousAdOnError;
+longitude, latitude, adCallTimeout, autoCollapse, showPreviousAdOnError;
 
 - (BOOL)validate {
     if (self.site <= 0) {
@@ -94,9 +94,14 @@ longitude, latitude, adCallTimeout, isUserSetMaxSize, autoCollapse, showPrevious
 	
 	if (self.minSize.width > 0 && self.minSize.height > 0)
 		[_banerUrl appendFormat:@"&min_size_x=%1.0f&min_size_y=%1.0f", self.minSize.width, self.minSize.height];
-	
-	if (self.maxSize.width > 0 && self.maxSize.height > 0)
-		[_banerUrl appendFormat:@"&size_x=%1.0f&size_y=%1.0f", self.maxSize.width, self.maxSize.height];
+    
+    if (CGSizeEqualToSize(self.maxSize, CGSizeZero)) {
+        CGFloat scale = [UIScreen mainScreen].scale;
+        [_banerUrl appendFormat:@"&size_x=%1.0f&size_y=%1.0f", self.frame.size.width*scale, self.frame.size.height*scale];
+    } else {
+        if (self.maxSize.width > 0 && self.maxSize.height > 0)
+            [_banerUrl appendFormat:@"&size_x=%1.0f&size_y=%1.0f", self.maxSize.width, self.maxSize.height];
+    }
     
 	if (self.keywords != nil)
         [_banerUrl appendFormat:@"&keywords=%@", self.keywords];	

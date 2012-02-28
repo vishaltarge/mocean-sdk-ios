@@ -158,12 +158,11 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     self.testMode = NO;
     self.premium = AdPremiumBoth;
     self.adCallTimeout = DEFAULT_TIMEOUT_VALUE; //1 sec
-    self.maxSize = CGSizeMake(self.frame.size.width, self.frame.size.height);
+    self.maxSize = CGSizeZero;
     self.autoCollapse = YES;
     self.showPreviousAdOnError = YES;
     self.autocloseInterstitialTime = -1;
     self.showCloseButtonTime = -1;
-    ((MASTAdModel*)_adModel).isUserSetMaxSize = NO;
     
     [self setLogMode:AdLogModeErrorsOnly];
     
@@ -513,15 +512,6 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     }
 }
 
-- (void)setNewMaxBannerSize:(CGRect)newFrame {
-    //if the user has not set the custom value
-    if (!((MASTAdModel*)_adModel).isUserSetMaxSize) {
-        //update max banner size
-        self.maxSize = newFrame.size;
-        ((MASTAdModel*)_adModel).isUserSetMaxSize = NO;
-    }
-}
-
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {    
     if ([keyPath isEqualToString:@"view.frame"] || [keyPath isEqualToString:@"frame"]) {
         //CGRect oldFrame = CGRectNull;
@@ -531,7 +521,6 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
         }
         if([object valueForKeyPath:keyPath] != [NSNull null]) {
             newFrame = [[object valueForKeyPath:keyPath] CGRectValue];
-            [self setNewMaxBannerSize:newFrame];
         }
         
         NSMutableDictionary* info = [NSMutableDictionary dictionary];
@@ -1007,7 +996,6 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 
 //@property CGSize	maxSize;
 - (void)setMaxSize:(CGSize)maxSize {
-    ((MASTAdModel*)_adModel).isUserSetMaxSize = YES;
 	((MASTAdModel*)_adModel).maxSize = maxSize;
 }
 
