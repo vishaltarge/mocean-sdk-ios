@@ -70,12 +70,12 @@
     return sharedInstance;
 }
 
-- (void)playAudio:(NSNotification*)notification {
+- (void)playAudio:(NSDictionary*)info {
     if (!self.opening) {
-        NSDictionary *info = [notification object];
+        //NSDictionary *info = [notification object];
         NSString* url = [info objectForKey:@"url"];
         NSDictionary* properties = [info objectForKey:@"properties"];
-
+        
         if (url) {
             self.opening = YES;
             self.adView = [info objectForKey:@"adView"];
@@ -121,9 +121,9 @@
     }
 }
 
-- (void)playVideo:(NSNotification*)notification {
+- (void)playVideo:(NSDictionary*)info {
     if (!self.opening) {
-        NSDictionary *info = [notification object];
+        //NSDictionary *info = [notification object];
         NSString* url = [info objectForKey:@"url"];
         NSDictionary* properties = [info objectForKey:@"properties"];
         
@@ -170,92 +170,71 @@
             [self playVideo:[NSURL URLWithString:url] autoPlay:autoPlay showControls:showControls repeat:repeat fullScreenMode:fullScreenMode autoExit:autoExit];
         }
     }
-
+	
 }
 
-- (void)playAudio:(NSURL*)audioURL autoPlay:(BOOL)autoplayArg showControls:(BOOL)showcontrols repeat:(BOOL)autorepeat playInline:(BOOL)InlineArg fullScreenMode:(BOOL)fullScreen autoExit:(BOOL)autoExit {
-    self.audio = YES;
-	self.oldStyle = [UIApplication sharedApplication].statusBarStyle;
-
-	self.avPlayer = [[[MPMoviePlayerViewController alloc] initWithContentURL:audioURL] autorelease];
-	self.avPlayerController = avPlayer.moviePlayer;	
-
-	self.avPlayerController.controlStyle = showcontrols ? MPMovieControlStyleFullscreen : MPMovieControlStyleNone;
-	self.avPlayerController.repeatMode = autorepeat ? MPMovieRepeatModeOne : MPMovieRepeatModeNone;	
-	self.avPlayerController.shouldAutoplay = autoplayArg;
-	
-	[[NSNotificationCenter defaultCenter] addObserver:self 
-											 selector:@selector(moviePlayerLoadStateChanged:) 
-												 name:MPMoviePlayerLoadStateDidChangeNotification 
-											   object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self 
-											 selector:@selector(moviePlayBackDidFinish:) 
-												 name:MPMoviePlayerPlaybackDidFinishNotification 
-											   object:nil];	
-	[self.avPlayerController prepareToPlay];
-    
-	self.autoplay = autoplayArg;
-	self.exitOnComplete = autoExit;
-	self.Inline = InlineArg;
-    
-    UIViewController* vc = [UIApplication sharedApplication].keyWindow.rootViewController;
-    //vc = [self viewControllerForView:self.adView];
-    /*if (vc) {
-        self.viewConroller = vc;
-    }*/
+- (void)playAudio:(NSURL*)audioURL autoPlay:(BOOL)autoplayArg showControls:(BOOL)showcontrols repeat:(BOOL)autorepeat playInline:(BOOL)InlineArg fullScreenMode:(BOOL)fullScreen autoExit:(BOOL)autoExit {    
+    UIViewController* vc = [self viewControllerForView:self.adView];
     if (vc) {
         self.viewConroller = vc;
-    } else {
-        vc = [self viewControllerForView:self.adView];
-        if (vc) {
-            self.viewConroller = vc;
-        }
+        self.audio = YES;
+        self.oldStyle = [UIApplication sharedApplication].statusBarStyle;
+        
+        self.avPlayer = [[[MPMoviePlayerViewController alloc] initWithContentURL:audioURL] autorelease];
+        self.avPlayerController = avPlayer.moviePlayer;	
+        
+        self.avPlayerController.controlStyle = showcontrols ? MPMovieControlStyleFullscreen : MPMovieControlStyleNone;
+        self.avPlayerController.repeatMode = autorepeat ? MPMovieRepeatModeOne : MPMovieRepeatModeNone;	
+        self.avPlayerController.shouldAutoplay = autoplayArg;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self 
+                                                 selector:@selector(moviePlayerLoadStateChanged:) 
+                                                     name:MPMoviePlayerLoadStateDidChangeNotification 
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self 
+                                                 selector:@selector(moviePlayBackDidFinish:) 
+                                                     name:MPMoviePlayerPlaybackDidFinishNotification 
+                                                   object:nil];	
+        [self.avPlayerController prepareToPlay];
+        
+        self.autoplay = autoplayArg;
+        self.exitOnComplete = autoExit;
+        self.Inline = InlineArg;
+        [self.viewConroller presentModalViewController:self.avPlayer animated:YES];
     }
-    
-    [self.viewConroller presentModalViewController:self.avPlayer animated:YES];
 }
 
-- (void)playVideo:(NSURL*)videoURL autoPlay:(BOOL)autoplayArg showControls:(BOOL)showcontrols repeat:(BOOL)autorepeat fullScreenMode:(BOOL)fullScreen autoExit:(BOOL)autoExit {
-    self.audio = NO;
-	self.oldStyle = [UIApplication sharedApplication].statusBarStyle;
-    
-	self.avPlayer = [[[MPMoviePlayerViewController alloc] initWithContentURL:videoURL] autorelease];
-	self.avPlayerController = avPlayer.moviePlayer;	
-	self.avPlayerController.scalingMode = MPMovieScalingModeAspectFit;
-
-	self.avPlayerController.controlStyle = showcontrols ? MPMovieControlStyleFullscreen : MPMovieControlStyleNone;
-	self.avPlayerController.repeatMode = autorepeat ? MPMovieRepeatModeOne : MPMovieRepeatModeNone;	
-	self.avPlayerController.shouldAutoplay = autoplayArg;
-	
-	self.statusBarHidden = [[UIApplication sharedApplication] isStatusBarHidden];
-	[[NSNotificationCenter defaultCenter] addObserver:self 
-											 selector:@selector(moviePlayerLoadStateChanged:) 
-												 name:MPMoviePlayerLoadStateDidChangeNotification 
-											   object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self 
-											 selector:@selector(moviePlayBackDidFinish:) 
-												 name:MPMoviePlayerPlaybackDidFinishNotification 
-											   object:nil];
-	[self.avPlayerController prepareToPlay];
-	self.autoplay = autoplayArg;
-	self.exitOnComplete = autoExit;
-	self.Inline = NO;
-    
-    UIViewController* vc = [UIApplication sharedApplication].keyWindow.rootViewController;
-    /*vc = [self viewControllerForView:self.adView];
+- (void)playVideo:(NSURL*)videoURL autoPlay:(BOOL)autoplayArg showControls:(BOOL)showcontrols repeat:(BOOL)autorepeat fullScreenMode:(BOOL)fullScreen autoExit:(BOOL)autoExit {    
+    UIViewController* vc = [self viewControllerForView:self.adView];
     if (vc) {
         self.viewConroller = vc;
-    }*/
-    if (vc) {
-        self.viewConroller = vc;
-    } else {
-        vc = [self viewControllerForView:self.adView];
-        if (vc) {
-            self.viewConroller = vc;
-        }
+        self.audio = NO;
+        self.oldStyle = [UIApplication sharedApplication].statusBarStyle;
+        
+        self.avPlayer = [[[MPMoviePlayerViewController alloc] initWithContentURL:videoURL] autorelease];
+        self.avPlayerController = avPlayer.moviePlayer;	
+        self.avPlayerController.scalingMode = MPMovieScalingModeAspectFit;
+        
+        self.avPlayerController.controlStyle = showcontrols ? MPMovieControlStyleFullscreen : MPMovieControlStyleNone;
+        self.avPlayerController.repeatMode = autorepeat ? MPMovieRepeatModeOne : MPMovieRepeatModeNone;	
+        self.avPlayerController.shouldAutoplay = autoplayArg;
+        
+        self.statusBarHidden = [[UIApplication sharedApplication] isStatusBarHidden];
+        [[NSNotificationCenter defaultCenter] addObserver:self 
+                                                 selector:@selector(moviePlayerLoadStateChanged:) 
+                                                     name:MPMoviePlayerLoadStateDidChangeNotification 
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self 
+                                                 selector:@selector(moviePlayBackDidFinish:) 
+                                                     name:MPMoviePlayerPlaybackDidFinishNotification 
+                                                   object:nil];
+        [self.avPlayerController prepareToPlay];
+        self.autoplay = autoplayArg;
+        self.exitOnComplete = autoExit;
+        self.Inline = NO;
+        
+        [self.viewConroller presentModalViewController:self.avPlayer animated:YES];
     }
-    
-    [self.viewConroller presentModalViewController:self.avPlayer animated:YES];
 }
 
 - (void)moviePlayerLoadStateChanged:(NSNotification*)notification {

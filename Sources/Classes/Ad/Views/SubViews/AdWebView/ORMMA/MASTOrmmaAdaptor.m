@@ -287,6 +287,7 @@
 
 - (void)processEvent:(NSURLRequest*)request {
     NSString* event = [[[request URL] host] lowercaseString];
+	NSLog(@"event = %@",event);
     NSString* query = [[request URL] query];
     NSDictionary* parameters = [MASTOrmmaHelper parametersFromJSCall:query];
     

@@ -157,21 +157,6 @@
     return 44.0f;
 }
 
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
-}
-
-
 - (BOOL)textField:(UITextField*)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString*)string
 {
 	NSCharacterSet *validCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
@@ -184,14 +169,17 @@
 	{
 		return NO;// Tell the user they did something wrong.
 	}
+	NSString *str = [NSString stringWithFormat:@"%@%@",textField.text,string];	
+
+	NSLog(@"%@",str);
 	
 	if (textField == _zone)
 	{
-		_adView.zone = [textField.text intValue];
+		_adView.zone = [str intValue];
 	}
 	else if (textField == _site)
 	{
-		_adView.site = [textField.text intValue];
+		_adView.site = [str intValue];
 	}	
 	return YES;
 }

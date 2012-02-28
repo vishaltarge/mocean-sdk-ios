@@ -11,9 +11,9 @@
 #import "MASTInternalAVPlayer.h"
 #import "MASTNotificationCenter.h"
 #import "MASTNetworkQueue.h"
+#import "MASTConstants.h"
 
 @interface MASTOrmmaSharedDelegate ()
-
 @property (nonatomic, retain) MASTExpandViewController *expandVC;
 @property (nonatomic, retain) MASTExpandView *expandView;
 @property (nonatomic, retain) UIView *lastSuperView;
@@ -41,7 +41,7 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
     static dispatch_once_t once;
     dispatch_once(&once, ^ { 
         sharedDelegate = [self new]; 
-        sharedDelegate.adControls = [NSMutableDictionary dictionary];
+        sharedDelegate.adControls = [NSMutableDictionary new];
     });
     return sharedDelegate;
 }
@@ -102,7 +102,7 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
     
     if (self.lastBackgroundColor) 
         [options setObject:self.lastBackgroundColor forKey:@"lastBackgroundColor"];
-         
+	
     [options setObject:[NSNumber numberWithInt:self.defaultFrame.origin.x] forKey:@"frameX"];
     [options setObject:[NSNumber numberWithInt:self.defaultFrame.origin.y] forKey:@"frameY"];
     [options setObject:[NSNumber numberWithInt:self.defaultFrame.size.width] forKey:@"sizeWidth"];
@@ -132,7 +132,7 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
     return YES;
 }
 
-- (BOOL)supportMapForAd:(id)sender {
+- (BOOL)supportMASTForAd:(id)sender {
     return YES;
 }
 
@@ -206,7 +206,6 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
             // we need to close expandView
             self.expandView = nil;
         } else {
-            adControl.frame = [self.lastSuperView convertRect:adControl.frame fromView:adControl.superview];
             [self.lastSuperView addSubview:adControl];
             self.lastSuperView = nil;
             
@@ -222,24 +221,19 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
             // resize to normal frame
             adControl.frame = self.defaultFrame;
             /*[UIView animateWithDuration:0.2 animations:^(void) {
-                adControl.frame = self.defaultFrame;
-            }];*/
+			 adControl.frame = self.defaultFrame;
+			 }];*/
         }
         self.expandVC = nil;
         
         if ([sender respondsToSelector:@selector(removeUpdateFlag:)]) {
             [sender performSelector:@selector(removeUpdateFlag:) withObject:@"expand"];
         }
-        
-        if ([(MASTAdView*)adControl updateTimeInterval] > 0) {
-            [[MASTNotificationCenter sharedInstance] postNotificationName:kAdStartUpdateNotification object:sender];
-        }
-        
     } else {
         adControl.frame = self.defaultFrame;
         /*[UIView animateWithDuration:0.2 animations:^(void) {
-            adControl.frame = self.defaultFrame;
-        }];*/
+		 adControl.frame = self.defaultFrame;
+		 }];*/
     }
 }
 
@@ -273,18 +267,12 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
     self.expandVC.view.backgroundColor = expandBackgroundColor;
     
     UIViewController* rootVC = [self viewControllerForView:adControl.superview];
-
+    
     if (rootVC) {
         if ([sender respondsToSelector:@selector(setUpdateFlag:)]) {
             [sender performSelector:@selector(setUpdateFlag:) withObject:@"expand"];
         }
-        
-        double delayInSeconds = 0.5;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-        dispatch_after(popTime, dispatch_get_current_queue(), ^(void){
-            [[MASTNotificationCenter sharedInstance] postNotificationName:kAdStopUpdateNotification object:sender];
-        });
-        
+		
         [rootVC presentModalViewController:self.expandVC animated:NO];
     }
     
@@ -303,20 +291,19 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
         
         self.expandVC.expandView = self.expandView;
         [self.expandVC useCustomClose:NO];
-    } else {       
+    } else {        
         // to make shure
         self.expandView = nil;
         self.lastBackgroundColor = adControl.backgroundColor;
         adControl.backgroundColor = expandBackgroundColor;
-        adControl.backgroundColor = [UIColor clearColor];
         
         self.lastSuperView = adControl.superview;
         [self.expandVC.view addSubview:adControl];
         
         // resize
         adControl.frame = CGRectMake(0.0, 0.0, w, h);
-        self.expandVC.expandView = adControl;
         
+        self.expandVC.expandView = adControl;
         [self.expandVC useCustomClose:useCustomClose];
     }
     
@@ -330,8 +317,8 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
     
     adControl.frame = CGRectMake(adControl.frame.origin.x, adControl.frame.origin.y, size.width, size.height);
     /*[UIView animateWithDuration:0.2 animations:^(void) {
-        adControl.frame = CGRectMake(adControl.frame.origin.x, adControl.frame.origin.y, size.width, size.height);
-    }];*/
+	 adControl.frame = CGRectMake(adControl.frame.origin.x, adControl.frame.origin.y, size.width, size.height);
+	 }];*/
     
     //save options
     [self saveOptions:adControl];
@@ -370,7 +357,7 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
     [vc setSubject:subject];
     [vc setMessageBody:body  isHTML:useHtml];
     vc.mailComposeDelegate = self;
-            
+	
     UIViewController* rvc = [UIApplication sharedApplication].keyWindow.rootViewController;
     if (!rvc) {
         rvc = [self viewControllerForView:[UIApplication sharedApplication].keyWindow];
@@ -386,47 +373,18 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
     EKEventStore* eventStore = [[[EKEventStore alloc] init] autorelease];
     EKEvent* ekEvent = [EKEvent eventWithEventStore:eventStore];
     ekEvent.title = title;
-        
+	
     ekEvent.notes = body;
-        
+	
     ekEvent.startDate = date;
-    ekEvent.endDate = [[[NSDate alloc] initWithTimeInterval:600 sinceDate:ekEvent.startDate] autorelease];
+    ekEvent.endDate   = [[NSDate alloc] initWithTimeInterval:600 sinceDate:ekEvent.startDate];
     [ekEvent setCalendar:[eventStore defaultCalendarForNewEvents]];
-        
-    /*MASTRIButtonItem *noItem = [MASTRIButtonItem item];
-    noItem.label = @"No";
-        
-    MASTRIButtonItem *yesItem = [MASTRIButtonItem item];
-    yesItem.label = @"Yes";
-    yesItem.action = ^ {
-        BOOL status = [eventStore saveEvent:ekEvent span:EKSpanThisEvent error:nil]; 
-        if (status) {
-            UIAlertView *eventSavedSuccessfully = [[[UIAlertView alloc] initWithTitle:@"Event Status" 
-                                                                                  message:@"Event successfully added." 
-                                                                                 delegate:nil 
-                                                                        cancelButtonTitle:@"Ok" 
-                                                                        otherButtonTitles:nil] autorelease];
-            [eventSavedSuccessfully show];
-        } else {
-            UIAlertView *eventSavedUNSuccessfully = [[[UIAlertView alloc] initWithTitle:@"Event Status" 
-                                                                                    message:@"Event not added." 
-                                                                                   delegate:nil 
-                                                                          cancelButtonTitle:@"Ok" 
-                                                                          otherButtonTitles:nil] autorelease];
-            [eventSavedUNSuccessfully show];
-        }
-    };
     
-    
-    UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:@"Event Status"
-                                                             message:@"Do you wish to save calendar event?"
-                                                    cancelButtonItem:noItem 
-                                                    otherButtonItems:yesItem, nil] autorelease];
-    [alertView show];*/
+    BOOL status = [eventStore saveEvent:ekEvent span:EKSpanThisEvent error:nil];
 }
 
-- (void)openMapWithPOI:(NSString*)poi ad:(id)sender {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://maps.google.com/maps?q=%@", [poi stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+- (void)openMASTWithPOI:(NSString*)poi ad:(id)sender {
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:kGoogleMapsUrl, [poi stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
     [[UIApplication sharedApplication] openURL:url];
 }
 
@@ -437,9 +395,11 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
     [info setObject:url forKey:@"url"];
     if (self.expandVC) {
         [info setObject:self.expandVC.view forKey:@"adView"];
+    } else {
+        [info setObject:sender forKey:@"adView"];
     }
-	NSNotification *notif = [NSNotification notificationWithName:@"playAudio" object:info];
-    [[MASTInternalAVPlayer sharedInstance] playAudio:notif];
+    
+    [[MASTInternalAVPlayer sharedInstance] playAudio:info];
 }
 
 - (void)playVideo:(NSString*)url parameters:(NSDictionary*)parameters ad:(id)sender {
@@ -449,13 +409,16 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
     [info setObject:url forKey:@"url"];
     if (self.expandVC) {
         [info setObject:self.expandVC.view forKey:@"adView"];
+    } else {
+        [info setObject:sender forKey:@"adView"];
     }
-    NSNotification *notif = [NSNotification notificationWithName:@"playVido" object:info];
-    [[MASTInternalAVPlayer sharedInstance] playVideo:notif];
+    
+    [[MASTInternalAVPlayer sharedInstance] playVideo:info];
 }
 
 - (void)sendRequest:(NSString*)url display:(NSString*)display response:(void (^)(NSString* response))response ad:(id)sender {
-    [MASTNetworkQueue loadWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]] completion:^(NSURLRequest *request, NSHTTPURLResponse *resp, NSData *data, NSError *error) {
+    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    [MASTNetworkQueue loadWithURLRequest:request completion:^(NSURLRequest *request, NSHTTPURLResponse *httpResponse, NSData *data, NSError *error) {
         if (!error && data && [data length] > 0) {
             NSString* responseString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
             response(responseString);
@@ -468,13 +431,13 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
 
 - (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result {
     /*UIViewController* rvc = [UIApplication sharedApplication].keyWindow.rootViewController;
-    if (!rvc) {
-        rvc = [self viewControllerForView:[UIApplication sharedApplication].keyWindow];
-    }
-    if (!rvc) {
-        rvc = [self.adView viewControllerForView];
-    }
-    [rvc dismissModalViewControllerAnimated:YES];*/
+	 if (!rvc) {
+	 rvc = [self viewControllerForView:[UIApplication sharedApplication].keyWindow];
+	 }
+	 if (!rvc) {
+	 rvc = [self.adView viewControllerForView];
+	 }
+	 [rvc dismissModalViewControllerAnimated:YES];*/
     [controller dismissModalViewControllerAnimated:YES];
 }
 
@@ -484,13 +447,13 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
     /*UIViewController* rvc = [UIApplication sharedApplication].keyWindow.rootViewController;
-    if (!rvc) {
-        rvc = [[UIApplication sharedApplication].keyWindow viewControllerForView];
-    }
-    if (!rvc) {
-        rvc = [self.adView viewControllerForView];
-    }
-    [rvc dismissModalViewControllerAnimated:YES];*/
+	 if (!rvc) {
+	 rvc = [[UIApplication sharedApplication].keyWindow viewControllerForView];
+	 }
+	 if (!rvc) {
+	 rvc = [self.adView viewControllerForView];
+	 }
+	 [rvc dismissModalViewControllerAnimated:YES];*/
     [controller dismissModalViewControllerAnimated:YES];
 }
 
