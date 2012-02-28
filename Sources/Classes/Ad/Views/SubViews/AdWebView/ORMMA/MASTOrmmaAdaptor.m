@@ -106,7 +106,7 @@
             [self evalJS:[MASTOrmmaHelper fireShakeEventInWebView]];
         }];
         
-		[[MASTNotificationCenter defaultCenter] addObserverForName:kORMMASetDefaultStateNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
+		[[MASTNotificationCenter sharedInstance] addObserverForName:kORMMASetDefaultStateNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
             [self moveToDefaultState];
         }];
         
