@@ -481,6 +481,14 @@
             }
         }
     }
+        
+    // send callback
+    NSMutableDictionary* info = [NSMutableDictionary dictionary];
+    [info setObject:self.adView forKey:@"adView"];
+    [info setObject:event forKey:@"event"];
+    [info setObject:parameters forKey:@"dic"];
+    [[MASTNotificationCenter sharedInstance] postNotificationName:kORMMAEventNotification object:info];
+
 }
 
 - (void)webView:(UIWebView *)view shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
