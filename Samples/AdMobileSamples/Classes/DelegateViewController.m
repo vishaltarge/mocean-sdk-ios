@@ -12,29 +12,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
-	
-	_adView = [[MASTAdView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50) site:19829 zone:88269];
+
+	//_adView = [[MASTAdView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50) site:19829 zone:88269];
 	_adView.updateTimeInterval = 30;
 	_adView.delegate = self;
 	_adView.contentAlignment = YES;
-	
-	[self.view addSubview:_adView];
-    
-    UIBarButtonItem *update = [[UIBarButtonItem alloc] initWithTitle:@"Update" style:UIBarButtonItemStylePlain target:_adView action:@selector(update)];
-    [self.navigationItem setRightBarButtonItem:update];
-    [update release];
-}
-
-- (void) dealloc {
-	_adView.delegate = nil;
-	[_adView release];
-	[super dealloc];
 }
 
 #pragma mark -
 #pragma mark AdViewDelegate methodes
-
 
 - (void)willReceiveAd:(id)sender {
 	if (sender == _adView) {
