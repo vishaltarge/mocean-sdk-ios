@@ -199,7 +199,7 @@ static MASTAdController* sharedInstance = nil;
     MASTAdModel* adModel = [adView adModel];
     
 	NSData* data = [info objectForKey:@"data"];
-	MASTAdDescriptor* adDescriptor = [MASTAdDescriptor descriptorFromContent:data frameSize:[adView adModel].frame.size aligmentCenter:adModel.aligmentCenter];
+	MASTAdDescriptor* adDescriptor = [MASTAdDescriptor descriptorFromContent:data frameSize:[adView adModel].frame.size];
     
 	if (adDescriptor.adContentType == AdContentTypeInvalidParams) {
         [[MASTNotificationCenter sharedInstance] postNotificationName:kInvalidParamsServerResponseNotification object:adView];

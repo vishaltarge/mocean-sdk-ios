@@ -33,6 +33,6 @@ typedef enum {
 @property (retain) NSData* serverReponse;
 @property (retain) NSString* serverReponseString;
 
-+ (MASTAdDescriptor*)descriptorFromContent:(NSData*)data frameSize:(CGSize)frameSize aligmentCenter:(BOOL)aligmentCenter;
++ (MASTAdDescriptor*)descriptorFromContent:(NSData*)data frameSize:(CGSize)frameSize;
 
 @end

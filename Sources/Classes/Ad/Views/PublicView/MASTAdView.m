@@ -247,7 +247,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 
 					[self addSubview:adWebView];
 				}
-			}];
+			} aligment:adView.adModel.aligmentCenter];
             [adWebView release];            
             model.descriptor = descriptor;
 		}

@@ -13,7 +13,7 @@
 
 @synthesize adContentType, externalCampaign, externalContent, appId, adId, adType, latitude,longitude, zip, campaignId, trackUrl, serverReponse, serverReponseString;
 
-+ (MASTAdDescriptor*)descriptorFromContent:(NSData*)data frameSize:(CGSize)frameSize aligmentCenter:(BOOL)aligmentCenter {
++ (MASTAdDescriptor*)descriptorFromContent:(NSData*)data frameSize:(CGSize)frameSize {
 	MASTAdDescriptor* adDescriptor = [MASTAdDescriptor  new];
 	
 	if (data) {
@@ -48,7 +48,6 @@
                 NSString* clearHtml = [MASTAdDescriptorHelper stringByStrippingHTMLcomments:adDescriptor.serverReponseString];
                 if ([clearHtml length] > 0) {
                     adDescriptor.adContentType = AdContentTypeDefaultHtml;
-                    //adDescriptor.serverReponseString = [MASTAdDescriptorHelper wrapHTML:clearHtml frameSize:frameSize aligmentCenter:aligmentCenter];
                     adDescriptor.serverReponse = [adDescriptor.serverReponseString dataUsingEncoding:NSUTF8StringEncoding];
                 } else {
                     adDescriptor.adContentType = AdContentTypeUndefined;

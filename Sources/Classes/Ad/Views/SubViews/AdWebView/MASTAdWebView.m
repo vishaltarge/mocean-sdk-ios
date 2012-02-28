@@ -60,13 +60,20 @@
     [super dealloc];
 }
 
-- (void)loadHTML:(NSString*)html completion:(CompletionBlock)block {
+- (void)loadHTML:(NSString*)html completion:(CompletionBlock)block aligment:(BOOL)aligment {
     self.completion = block;
     self.ormmaAdaptor = [[[MASTOrmmaAdaptor alloc] initWithWebView:self.webView adView:self.adView] autorelease];
     self.ormmaAdaptor.ormmaDelegate = self.ormmaDelegate;
     self.ormmaAdaptor.ormmaDataSource = self.ormmaDataSource;
     
-    html = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;\"/><style>body { margin:0; padding:0; }</style><script type=\"text/javascript\">%@</script><script type=\"text/javascript\">%@</script></head><body>%@</body></html>", ORMMA_JS, [self.ormmaAdaptor getDefaultsJSCode], html];
+    NSString* body = nil;
+    if (aligment) {
+        body = [NSString stringWithFormat:@"<body style=\"display:-webkit-box;-webkit-box-orient:horizontal;-webkit-box-pack:center;-webkit-box-align:center;\">%@</body>", html];
+    } else {
+        body = [NSString stringWithFormat:@"<body>%@</body>", html];
+    }
+    
+    html = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;\"/><style>body { margin:0; padding:0; }</style><script type=\"text/javascript\">%@</script><script type=\"text/javascript\">%@</script></head>%@</html>", ORMMA_JS, [self.ormmaAdaptor getDefaultsJSCode], body];
     
     [self.webView loadHTMLString:html baseURL:nil];
 }
