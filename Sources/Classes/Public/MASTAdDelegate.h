@@ -4,7 +4,7 @@
 //
 //  Created by Constantine Mureev on 2/24/11.
 //
-//  version: 2.10.beta
+//  version: 2.10.0
 //
 
 /** The MASTAdViewDelegate protocol defines methods that a delegate of a MASTAdView object can optionally implement to receive notifications from ad. */

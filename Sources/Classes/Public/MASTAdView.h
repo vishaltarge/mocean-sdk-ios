@@ -4,7 +4,7 @@
 //
 //  Created by Constantine Mureev on 2/22/11.
 //
-//  version: 2.10.beta
+//  version: 2.10.0
 //
 
 /** Set #define to enable location services code or #undef to disable to exclude location detection from SDK.
@@ -14,8 +14,6 @@
 #define INCLUDE_LOCATION_MANAGER
 
 #import <UIKit/UIKit.h>
-
-#import "OrmmaProtocols.h"
 
 #ifdef INCLUDE_LOCATION_MANAGER
 #import <CoreLocation/CoreLocation.h>
@@ -422,16 +420,5 @@ typedef enum {
  @see MASTAdViewDelegate Protocol Reference for the optional methods this delegate may implement.
  */
 @property (assign) id <MASTAdViewDelegate>	delegate;
-
-
-/** ormmaDelegate
- 
- */
-@property (nonatomic, assign) id <OrmmaDelegate>    ormmaDelegate;
-
-/** ormmaDataSource
- 
- */
-@property (nonatomic, assign) id <OrmmaDataSource>    ormmaDataSource;
 
 @end
