@@ -49,9 +49,9 @@ static MASTOrmmaSharedDataSource* sharedInstance = nil;
 #ifdef INCLUDE_LOCATION_MANAGER
 		[[MASTLocationManager sharedInstance] startUpdatingLocation];
 		[[MASTLocationManager sharedInstance] startUpdatingHeading];
+#endif
 		//Accelerometer
 		[[MASTAccelerometer sharedInstance] addDelegate:self];
-#endif
 	}
     
 	return self;
@@ -128,7 +128,7 @@ static MASTOrmmaSharedDataSource* sharedInstance = nil;
 
 - (BOOL)supportTiltForAd:(id)sender
 {
-	#ifdef INCLUDE_LOCATION_MANAGER
+#ifdef INCLUDE_LOCATION_MANAGER
 	return  YES;
 #endif
 	return NO;
