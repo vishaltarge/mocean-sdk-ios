@@ -157,10 +157,10 @@ static MASTAdController* sharedInstance = nil;
     if ( adModel.latitude == nil && adModel.longitude == nil )
     {
 #ifdef INCLUDE_LOCATION_MANAGER
-        if ([LocationManager sharedInstance].currentLocationCoordinate.longitude == 0 &&
-            [LocationManager sharedInstance].currentLocationCoordinate.latitude == 0)
+        if ([MASTLocationManager sharedInstance].currentLocationCoordinate.longitude == 0 &&
+            [MASTLocationManager sharedInstance].currentLocationCoordinate.latitude == 0)
         {
-            [[LocationManager sharedInstance] startUpdatingLocation];                    
+            [[MASTLocationManager sharedInstance] startUpdatingLocation];                    
         }
 #endif
     }
