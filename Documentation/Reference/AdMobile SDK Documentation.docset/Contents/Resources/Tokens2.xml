@@ -4,7 +4,7 @@
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/cl/MASTAdView</TokenIdentifier>
-			<Abstract>You use the MASTAdView class to embed advertisement content in your application. To do so, you simply create the MASTAdView object and add it to a UIView. An instance of MASTAdView(or simply, an ad) is a mean for displaying advertisement information from ad publisher site. To choose ad publisher site, set parameters in the ad initialization methodinitWithFrame:site:zone: or use the properties site and zone. Use the adServerUrl property to choose ad publisher server.</Abstract>
+			<Abstract>You use the MASTAdView class to embed advertisement content in your application. To do so, you simply create the MASTAdView object and add it to a UIView. An instance of MASTAdView(or simply, an ad) is a mean for displaying advertisement information from ad publisher site. To choose ad publisher site, set parameters in the ad initialization method initWithFrame:site:zone: or use the properties site and zone. Use the adServerUrl property to choose alternative ad publisher server.</Abstract>
 			<DeclaredIn>MASTAdView.h</DeclaredIn>
 			
 			<NodeRef refid="2"/>
@@ -34,17 +34,6 @@
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/MASTAdView/stopEverythingAndNotfiyDelegateOnCleanup</TokenIdentifier>
-			<Abstract>Use this method, if you want to close the ad quickly and clear all resource.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>- (void)stopEverythingAndNotfiyDelegateOnCleanup</Declaration>
-			
-			
-			<Anchor>//api/name/stopEverythingAndNotfiyDelegateOnCleanup</Anchor>
-		</Token>
-		
-		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/site</TokenIdentifier>
 			<Abstract>Id of the publisher site.</Abstract>
 			<DeclaredIn>MASTAdView.h</DeclaredIn>			
@@ -64,6 +53,105 @@
 			
 			
 			<Anchor>//api/name/zone</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/contentSize</TokenIdentifier>
+			<Abstract>Size of the ad content must be shown.</Abstract>
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
+			
+			<Declaration>@property (readonly) CGSize contentSize</Declaration>
+			
+			
+			<Anchor>//api/name/contentSize</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/defaultImage</TokenIdentifier>
+			<Abstract>Image for unloaded ad state.</Abstract>
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
+			
+			<Declaration>@property (retain) UIImage *defaultImage</Declaration>
+			
+			
+			<Anchor>//api/name/defaultImage</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/autoCollapse</TokenIdentifier>
+			<Abstract>A Boolean value that determines whether to hide ad in case error depending on other properties</Abstract>
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
+			
+			<Declaration>@property BOOL autoCollapse</Declaration>
+			
+			
+			<Anchor>//api/name/autoCollapse</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/showPreviousAdOnError</TokenIdentifier>
+			<Abstract>A Boolean value that determines whether to show previous ad in case of error depending on other properties</Abstract>
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
+			
+			<Declaration>@property BOOL showPreviousAdOnError</Declaration>
+			
+			
+			<Anchor>//api/name/showPreviousAdOnError</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/closeButton</TokenIdentifier>
+			<Abstract>Close button.</Abstract>
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
+			
+			<Declaration>@property (retain) UIButton *closeButton</Declaration>
+			
+			
+			<Anchor>//api/name/closeButton</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/showCloseButtonTime</TokenIdentifier>
+			<Abstract>Show close button delay time interval, in seconds.</Abstract>
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
+			
+			<Declaration>@property NSTimeInterval showCloseButtonTime</Declaration>
+			
+			
+			<Anchor>//api/name/showCloseButtonTime</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/autocloseInterstitialTime</TokenIdentifier>
+			<Abstract>Auto close interstitial time interval, in seconds.</Abstract>
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
+			
+			<Declaration>@property NSTimeInterval autocloseInterstitialTime</Declaration>
+			
+			
+			<Anchor>//api/name/autocloseInterstitialTime</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/isAdChangeAnimated</TokenIdentifier>
+			<Abstract>A Boolean value that determines whether ad animate mode is enabled.</Abstract>
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
+			
+			<Declaration>@property BOOL isAdChangeAnimated</Declaration>
+			
+			
+			<Anchor>//api/name/isAdChangeAnimated</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/updateTimeInterval</TokenIdentifier>
+			<Abstract>Update time interval, in seconds.</Abstract>
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
+			
+			<Declaration>@property NSTimeInterval updateTimeInterval</Declaration>
+			
+			
+			<Anchor>//api/name/updateTimeInterval</Anchor>
 		</Token>
 		
 		<Token>
@@ -89,39 +177,6 @@
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/defaultImage</TokenIdentifier>
-			<Abstract>Image for unloaded ad state.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property (retain) UIImage *defaultImage</Declaration>
-			
-			
-			<Anchor>//api/name/defaultImage</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/isAdChangeAnimated</TokenIdentifier>
-			<Abstract>A Boolean value that determines whether ad animate mode is enabled.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property BOOL isAdChangeAnimated</Declaration>
-			
-			
-			<Anchor>//api/name/isAdChangeAnimated</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/closeButton</TokenIdentifier>
-			<Abstract>Close button.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property (retain) UIButton *closeButton</Declaration>
-			
-			
-			<Anchor>//api/name/closeButton</Anchor>
-		</Token>
-		
-		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/contentAlignment</TokenIdentifier>
 			<Abstract>A Boolean value that determines whether content alignment is centered vertically and horizontally.</Abstract>
 			<DeclaredIn>MASTAdView.h</DeclaredIn>			
@@ -133,14 +188,25 @@
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/internalOpenMode</TokenIdentifier>
-			<Abstract>A Boolean value that determines whether an ad internal browser is enabled.</Abstract>
+			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/minSize</TokenIdentifier>
+			<Abstract>Minimal size of the ad content can be shown.</Abstract>
 			<DeclaredIn>MASTAdView.h</DeclaredIn>			
 			
-			<Declaration>@property BOOL internalOpenMode</Declaration>
+			<Declaration>@property CGSize minSize</Declaration>
 			
 			
-			<Anchor>//api/name/internalOpenMode</Anchor>
+			<Anchor>//api/name/minSize</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/maxSize</TokenIdentifier>
+			<Abstract>Maximal size of the ad content can be shown.</Abstract>
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
+			
+			<Declaration>@property CGSize maxSize</Declaration>
+			
+			
+			<Anchor>//api/name/maxSize</Anchor>
 		</Token>
 		
 		<Token>
@@ -152,6 +218,17 @@
 			
 			
 			<Anchor>//api/name/track</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/internalOpenMode</TokenIdentifier>
+			<Abstract>A Boolean value that determines whether an ad internal browser is enabled.</Abstract>
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
+			
+			<Declaration>@property BOOL internalOpenMode</Declaration>
+			
+			
+			<Anchor>//api/name/internalOpenMode</Anchor>
 		</Token>
 		
 		<Token>
@@ -177,17 +254,6 @@
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/updateTimeInterval</TokenIdentifier>
-			<Abstract>Update time interval, in seconds.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property NSTimeInterval updateTimeInterval</Declaration>
-			
-			
-			<Anchor>//api/name/updateTimeInterval</Anchor>
-		</Token>
-		
-		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/MASTAdView/update</TokenIdentifier>
 			<Abstract>Starts to update the ad content immediately.</Abstract>
 			<DeclaredIn>MASTAdView.h</DeclaredIn>			
@@ -199,14 +265,14 @@
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/contentSize</TokenIdentifier>
-			<Abstract>Size of the ad content must be shown.</Abstract>
+			<TokenIdentifier>//apple_ref/occ/instm/MASTAdView/stopEverythingAndNotfiyDelegateOnCleanup</TokenIdentifier>
+			<Abstract>Use this method, if you want to close the ad quickly and clear all resource.</Abstract>
 			<DeclaredIn>MASTAdView.h</DeclaredIn>			
 			
-			<Declaration>@property (readonly) CGSize contentSize</Declaration>
+			<Declaration>- (void)stopEverythingAndNotfiyDelegateOnCleanup</Declaration>
 			
 			
-			<Anchor>//api/name/contentSize</Anchor>
+			<Anchor>//api/name/stopEverythingAndNotfiyDelegateOnCleanup</Anchor>
 		</Token>
 		
 		<Token>
@@ -243,72 +309,6 @@
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/minSize</TokenIdentifier>
-			<Abstract>Minimal size of the ad content can be shown.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property CGSize minSize</Declaration>
-			
-			
-			<Anchor>//api/name/minSize</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/maxSize</TokenIdentifier>
-			<Abstract>Maximal size of the ad content can be shown.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property CGSize maxSize</Declaration>
-			
-			
-			<Anchor>//api/name/maxSize</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/showCloseButtonTime</TokenIdentifier>
-			<Abstract>Show close button delay time interval, in seconds.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property NSTimeInterval showCloseButtonTime</Declaration>
-			
-			
-			<Anchor>//api/name/showCloseButtonTime</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/autocloseInterstitialTime</TokenIdentifier>
-			<Abstract>Auto close interstitial time interval, in seconds.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property NSTimeInterval autocloseInterstitialTime</Declaration>
-			
-			
-			<Anchor>//api/name/autocloseInterstitialTime</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/autoCollapse</TokenIdentifier>
-			<Abstract>A Boolean value that determines whether to hide ad in case error</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property BOOL autoCollapse</Declaration>
-			
-			
-			<Anchor>//api/name/autoCollapse</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/showPreviousAdOnError</TokenIdentifier>
-			<Abstract>A Boolean value that determines whether to show previous ad in case of error</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property BOOL showPreviousAdOnError</Declaration>
-			
-			
-			<Anchor>//api/name/showPreviousAdOnError</Anchor>
-		</Token>
-		
-		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/additionalParameters</TokenIdentifier>
 			<Abstract>Custom request parameters.</Abstract>
 			<DeclaredIn>MASTAdView.h</DeclaredIn>			
@@ -317,28 +317,6 @@
 			
 			
 			<Anchor>//api/name/additionalParameters</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/latitude</TokenIdentifier>
-			<Abstract>User location latitude value.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property (retain) NSString *latitude</Declaration>
-			
-			
-			<Anchor>//api/name/latitude</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/longitude</TokenIdentifier>
-			<Abstract>User location longitude value.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property (retain) NSString *longitude</Declaration>
-			
-			
-			<Anchor>//api/name/longitude</Anchor>
 		</Token>
 		
 		<Token>
@@ -394,6 +372,28 @@
 			
 			
 			<Anchor>//api/name/metro</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/latitude</TokenIdentifier>
+			<Abstract>User location latitude value.</Abstract>
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
+			
+			<Declaration>@property (retain) NSString *latitude</Declaration>
+			
+			
+			<Anchor>//api/name/latitude</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/longitude</TokenIdentifier>
+			<Abstract>User location longitude value.</Abstract>
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
+			
+			<Declaration>@property (retain) NSString *longitude</Declaration>
+			
+			
+			<Anchor>//api/name/longitude</Anchor>
 		</Token>
 		
 		<Token>
@@ -477,28 +477,6 @@ Setting the value of this property to YES enables ads test mode and setting it t
 			
 			
 			<Anchor>//api/name/delegate</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/ormmaDelegate</TokenIdentifier>
-			<Abstract>ormmaDelegate</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property (nonatomic, assign) id&lt;OrmmaDelegate&gt; ormmaDelegate</Declaration>
-			
-			
-			<Anchor>//api/name/ormmaDelegate</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/ormmaDataSource</TokenIdentifier>
-			<Abstract>ormmaDataSource</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property (nonatomic, assign) id&lt;OrmmaDataSource&gt; ormmaDataSource</Declaration>
-			
-			
-			<Anchor>//api/name/ormmaDataSource</Anchor>
 		</Token>
 		
 	</File>

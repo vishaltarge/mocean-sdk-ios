@@ -23,8 +23,6 @@
 					<Path>index.html</Path>
 					<Subnodes>
 						<NodeRef refid="3"/>
-						<NodeRef refid="4"/>
-						<NodeRef refid="5"/>
 						
 					</Subnodes>
 				</Node>
@@ -46,14 +44,6 @@
 		<Node id="3">
 			<Name>MASTAdViewDelegate</Name>
 			<Path>Protocols/MASTAdViewDelegate.html</Path>
-		</Node>
-		<Node id="4">
-			<Name>OrmmaDataSource</Name>
-			<Path>Protocols/OrmmaDataSource.html</Path>
-		</Node>
-		<Node id="5">
-			<Name>OrmmaDelegate</Name>
-			<Path>Protocols/OrmmaDelegate.html</Path>
 		</Node>
 		
 	</Library>
