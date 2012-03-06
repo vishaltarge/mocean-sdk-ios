@@ -112,7 +112,12 @@
         return NO;
     } else {
         if (navigationType == UIWebViewNavigationTypeLinkClicked) {
-            [[UIApplication sharedApplication] openURL:[request URL]];
+            if (adView) {
+                NSMutableDictionary* info = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:request, adView, nil]
+                                                                               forKeys:[NSArray arrayWithObjects:@"request", @"adView", nil]];
+                
+                [[MASTNotificationCenter sharedInstance] postNotificationName:kOpenURLNotification object:info];
+            }
             
             return NO;
         }
