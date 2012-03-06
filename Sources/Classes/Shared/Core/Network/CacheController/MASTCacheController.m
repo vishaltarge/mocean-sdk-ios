@@ -71,6 +71,11 @@
     
     NSString* path = [dirPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", [MASTUtils md5HashForString:fileName], ext]];
     
+    if ([newData length] == 0)
+    {
+        return [stringResponse dataUsingEncoding:NSUTF8StringEncoding];
+    }
+    
     if ([[NSFileManager defaultManager] isReadableFileAtPath:path]) {
 		NSString *localUrl = [[NSURL fileURLWithPath:path] absoluteString];
 		stringResponse = [stringResponse stringByReplacingOccurrencesOfString:url withString:localUrl];
