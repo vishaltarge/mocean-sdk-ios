@@ -99,7 +99,7 @@
 		3B43CD1D14CE959300E2B3CF /* MASTServerXMLResponseParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CD1B14CE959300E2B3CF /* MASTServerXMLResponseParser.m */; };
 		3B43CD1E14CE959300E2B3CF /* MASTServerXMLResponseParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CD1C14CE959300E2B3CF /* MASTServerXMLResponseParser.h */; };
 		3B67257614E9435900FDFFB0 /* MASTMessages.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B67257514E9435900FDFFB0 /* MASTMessages.h */; };
-		AA747D9F0F9514B9006C5449 /* AdMobileSDK_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* AdMobileSDK_Prefix.pch */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA747D9F0F9514B9006C5449 /* AdMobileSDK_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* AdMobileSDK_Prefix.pch */; settings = {ATTRIBUTES = (); }; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 		AC1A0BAA14F3BF2500149819 /* MAPBlocksGlobals.h in Headers */ = {isa = PBXBuildFile; fileRef = AC1A0BA314F3BF2500149819 /* MAPBlocksGlobals.h */; };
 		AC1A0BAB14F3BF2500149819 /* MAPNSDictionary+BlocksKit.h in Headers */ = {isa = PBXBuildFile; fileRef = AC1A0BA414F3BF2500149819 /* MAPNSDictionary+BlocksKit.h */; };
@@ -861,7 +861,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA747D9F0F9514B9006C5449 /* AdMobileSDK_Prefix.pch in Headers */,
 				3B43CC4E14CE934D00E2B3CF /* UIAlertView+Blocks.h in Headers */,
 				3B43CC5014CE934D00E2B3CF /* UIActionSheet+Blocks.h in Headers */,
 				3B43CC5214CE934D00E2B3CF /* RIButtonItem.h in Headers */,
@@ -882,6 +881,7 @@
 				3B43CCAB14CE946200E2B3CF /* MASTAdClicker.h in Headers */,
 				3B43CCAD14CE946200E2B3CF /* MASTDownloadController.h in Headers */,
 				3B43CCAF14CE946200E2B3CF /* MASTNetworkActivityIndicatorManager.h in Headers */,
+				AA747D9F0F9514B9006C5449 /* AdMobileSDK_Prefix.pch in Headers */,
 				3B43CCB114CE946200E2B3CF /* MASTNetworkQueue.h in Headers */,
 				3B43CCB314CE946200E2B3CF /* MASTObjectStorage.h in Headers */,
 				3B43CCB514CE946200E2B3CF /* MASTRequestOperation.h in Headers */,
@@ -1116,6 +1116,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = AdMobileSDK;
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1144,6 +1145,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = AdMobileSDK;
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
