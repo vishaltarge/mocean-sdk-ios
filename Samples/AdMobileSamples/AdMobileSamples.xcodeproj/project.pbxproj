@@ -51,8 +51,6 @@
 		AD2D17E0148D0C4A00D0B576 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD2D17DE148D0C4A00D0B576 /* MessageUI.framework */; };
 		ADAF1C6F126876F600AD88B8 /* DefaultImage (320x240).png in Resources */ = {isa = PBXBuildFile; fileRef = ADAF1C6E126876F600AD88B8 /* DefaultImage (320x240).png */; };
 		ADAF1C731268775200AD88B8 /* DefaultImage (320x50).png in Resources */ = {isa = PBXBuildFile; fileRef = ADAF1C721268775200AD88B8 /* DefaultImage (320x50).png */; };
-		CF1ABF27130E608000A6859F /* Shader.fsh in Sources */ = {isa = PBXBuildFile; fileRef = CF1ABF25130E608000A6859F /* Shader.fsh */; };
-		CF1ABF28130E608000A6859F /* Shader.vsh in Sources */ = {isa = PBXBuildFile; fileRef = CF1ABF26130E608000A6859F /* Shader.vsh */; };
 		CF1ABF42130E609400A6859F /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = CF1ABF25130E608000A6859F /* Shader.fsh */; };
 		CF1ABF43130E609400A6859F /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = CF1ABF26130E608000A6859F /* Shader.vsh */; };
 		CF6313111345BBED00399622 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF63130F1345BBED00399622 /* Default@2x.png */; };
@@ -458,10 +456,10 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CF1ABF24130E608000A6859F /* Shaders */,
 				CF6313141345BF7F00399622 /* Default-Portrait.png */,
 				CF63130F1345BBED00399622 /* Default@2x.png */,
 				CF6313101345BBED00399622 /* Default.png */,
-				CF1ABF24130E608000A6859F /* Shaders */,
 				CFD07025130A5AB700915735 /* Icon@2x.png */,
 				CFD07026130A5AB700915735 /* Icon.png */,
 				CFD07029130A5AB700915735 /* Icon-72.png */,
@@ -1335,8 +1333,6 @@
 				16BB05AF1209513600DBCF9A /* TableViewCellSampleViewController.m in Sources */,
 				16411994120991CA00A2D460 /* TableViewAnimationViewController.m in Sources */,
 				AD0ECA2F120C1B38008216A6 /* DelegateViewController.m in Sources */,
-				CF1ABF27130E608000A6859F /* Shader.fsh in Sources */,
-				CF1ABF28130E608000A6859F /* Shader.vsh in Sources */,
 				CF840386130E67B200EC0AF8 /* OpenGLViewController.m in Sources */,
 				CF840387130E67B200EC0AF8 /* EAGLView.m in Sources */,
 				CF84058C130E992300EC0AF8 /* RichJSadViewController.m in Sources */,
@@ -1379,9 +1375,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = AdMobileSamples_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -1389,6 +1386,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)\"";
 				PRODUCT_NAME = AdMobileSamples;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1397,6 +1395,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
@@ -1406,6 +1405,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)\"";
 				PRODUCT_NAME = AdMobileSamples;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = NO;
 			};
@@ -1417,6 +1417,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;

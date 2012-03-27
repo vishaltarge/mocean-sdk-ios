@@ -196,7 +196,7 @@ static MASTAdController* sharedInstance = nil;
     
     NSDictionary *info = [notification object];
 	MASTAdView* adView = [info objectForKey:@"adView"];
-    MASTAdModel* adModel = [adView adModel];
+    //MASTAdModel* adModel = [adView adModel];
     
 	NSData* data = [info objectForKey:@"data"];
 	MASTAdDescriptor* adDescriptor = [MASTAdDescriptor descriptorFromContent:data frameSize:[adView adModel].frame.size];

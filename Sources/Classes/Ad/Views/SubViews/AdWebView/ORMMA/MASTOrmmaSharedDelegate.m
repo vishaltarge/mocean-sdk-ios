@@ -227,8 +227,9 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
         }
         self.expandVC = nil;
         
-        if ([sender respondsToSelector:@selector(removeUpdateFlag:)]) {
-            [sender performSelector:@selector(removeUpdateFlag:) withObject:@"expand"];
+        SEL removeUpdateFlagSel = sel_registerName("removeUpdateFlag:");
+        if ([sender respondsToSelector:removeUpdateFlagSel]) {
+            [sender performSelector:removeUpdateFlagSel withObject:@"expand"];
         }
     } else {
         adControl.frame = self.defaultFrame;
@@ -270,8 +271,9 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
     UIViewController* rootVC = [self viewControllerForView:adControl.superview];
     
     if (rootVC) {
-        if ([sender respondsToSelector:@selector(setUpdateFlag:)]) {
-            [sender performSelector:@selector(setUpdateFlag:) withObject:@"expand"];
+        SEL setUpdateFlagSel = sel_registerName("setUpdateFlag:");
+        if ([sender respondsToSelector:setUpdateFlagSel]) {
+            [sender performSelector:setUpdateFlagSel withObject:@"expand"];
         }
 		
         [rootVC presentModalViewController:self.expandVC animated:NO];
@@ -381,7 +383,7 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
     ekEvent.endDate   = [[NSDate alloc] initWithTimeInterval:600 sinceDate:ekEvent.startDate];
     [ekEvent setCalendar:[eventStore defaultCalendarForNewEvents]];
     
-    BOOL status = [eventStore saveEvent:ekEvent span:EKSpanThisEvent error:nil];
+    [eventStore saveEvent:ekEvent span:EKSpanThisEvent error:nil];
 }
 
 - (void)openMASTWithPOI:(NSString*)poi ad:(id)sender {
@@ -419,7 +421,7 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
 
 - (void)sendRequest:(NSString*)url display:(NSString*)display response:(void (^)(NSString* response))response ad:(id)sender {
     NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-    [MASTNetworkQueue loadWithURLRequest:request completion:^(NSURLRequest *request, NSHTTPURLResponse *httpResponse, NSData *data, NSError *error) {
+    [MASTNetworkQueue loadWithRequest:request completion:^(NSURLRequest *req, NSHTTPURLResponse *httpResponse, NSData *data, NSError *error) {
         if (!error && data && [data length] > 0) {
             NSString* responseString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
             response(responseString);
