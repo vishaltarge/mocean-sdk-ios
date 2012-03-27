@@ -93,19 +93,19 @@
     return [MASTOrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{expandProperties: { width: %f, height: %f, useCustomClose: !1, isModal: !1, lockOrientation: !1, useBackground: !1, backgroundColor: \"#ffffff\", backgroundOpacity:1 }}", size.width, size.height]];
 }
 
-+ (NSString*)setOrientation:(UIDeviceOrientation)orientation {
++ (NSString*)setOrientation:(UIInterfaceOrientation)orientation {
     NSInteger orientationAngle = -1;
 	switch (orientation) {
-		case UIDeviceOrientationPortrait:
+		case UIInterfaceOrientationPortrait:
 			orientationAngle = 0;
 			break;
-		case UIDeviceOrientationPortraitUpsideDown:
+		case UIInterfaceOrientationPortraitUpsideDown:
 			orientationAngle = 180;
 			break;
-		case UIDeviceOrientationLandscapeLeft:
+		case UIInterfaceOrientationLandscapeLeft:
 			orientationAngle = 270;
 			break;
-		case UIDeviceOrientationLandscapeRight:
+		case UIInterfaceOrientationLandscapeRight:
 			orientationAngle = 90;
 			break;
 		default:
@@ -159,7 +159,7 @@
     return [NSString stringWithFormat:@"window.ormmaview.fireErrorEvent('%@', '%@');", message, event];
 }
 
-+ (CGSize)screenSizeForOrientation:(UIDeviceOrientation)orientation {
++ (CGSize)screenSizeForOrientation:(UIInterfaceOrientation)orientation {
 	CGSize size;
 	UIScreen *screen = [UIScreen mainScreen];
 	CGSize screenSize = screen.bounds.size;	

@@ -22,7 +22,7 @@
 + (NSString*)setPlacementInterstitial:(BOOL)interstitial;
 + (NSString*)setExpandPropertiesWithMaxSize:(CGSize)size;
 + (NSString*)setAllExpandPropertiesWithMaxSize:(CGSize)size;
-+ (NSString*)setOrientation:(UIDeviceOrientation)orientation;
++ (NSString*)setOrientation:(UIInterfaceOrientation)orientation;
 + (NSString*)setSupports:(NSArray*)supports;
 + (NSString*)setKeyboardShow:(BOOL)isShow;
 + (NSString*)setTilt:(UIAcceleration*)acceleration;
@@ -34,7 +34,7 @@
 + (NSString*)fireShakeEventInWebView;
 + (NSString*)fireError:(NSString*)message forEvent:(NSString*)event;
 
-+ (CGSize)screenSizeForOrientation:(UIDeviceOrientation)orientation;
++ (CGSize)screenSizeForOrientation:(UIInterfaceOrientation)orientation;
 + (NSDictionary *)parametersFromJSCall:(NSString *)parameterString;
 + (CGFloat)floatFromDictionary:(NSDictionary*)dictionary
 						forKey:(NSString*)key;

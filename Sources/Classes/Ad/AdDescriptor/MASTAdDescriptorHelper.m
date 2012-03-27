@@ -88,7 +88,9 @@
 }
 
 + (BOOL)isLandscapeMode {
-    return ([UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeLeft || [UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeRight);
+    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+    BOOL isLandscapeMode = UIDeviceOrientationIsLandscape(orientation);
+    return isLandscapeMode;
 }
 
 + (BOOL)isStatusBarHidden {

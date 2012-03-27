@@ -58,9 +58,8 @@
             [self evalJS:[MASTOrmmaHelper fireShakeEventInWebView]];
         }];
         [[NSNotificationCenter defaultCenter] addObserverForName:UIDeviceOrientationDidChangeNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
-            UIDevice *device = [UIDevice currentDevice];
-            UIDeviceOrientation orientation = device.orientation;
             
+            UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
             [self evalJS:[MASTOrmmaHelper setOrientation:orientation]];
             
             CGSize screenSize = [MASTOrmmaHelper screenSizeForOrientation:orientation];	
@@ -166,10 +165,8 @@
     // Placement
     [result appendString:[MASTOrmmaHelper setPlacementInterstitial:NO]];
     
-    UIDevice *device = [UIDevice currentDevice];
-    UIDeviceOrientation orientation = device.orientation;
-        
     // Orientation
+    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
     [result appendString:[MASTOrmmaHelper setOrientation:orientation]];
     
     // Screen size
