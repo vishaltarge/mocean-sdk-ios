@@ -51,6 +51,7 @@
         ad.contentAlignment = YES;
         
         [cell.contentView addSubview:ad];
+        [ad update];
         [ad release];
 	}
 	

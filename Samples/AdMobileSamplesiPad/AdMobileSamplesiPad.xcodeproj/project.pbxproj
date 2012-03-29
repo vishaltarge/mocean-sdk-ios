@@ -39,8 +39,6 @@
 		FCF1EC8813F257AD00364390 /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = FCF1EC8213F257AC00364390 /* Default-Portrait.png */; };
 		FCF1EC8913F257AD00364390 /* DefaultImage (320x50).png in Resources */ = {isa = PBXBuildFile; fileRef = FCF1EC8313F257AC00364390 /* DefaultImage (320x50).png */; };
 		FCF1EC8A13F257AD00364390 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = FCF1EC8413F257AC00364390 /* Icon-72.png */; };
-		FCF1EC8B13F257AD00364390 /* Shader.fsh in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC8613F257AC00364390 /* Shader.fsh */; };
-		FCF1EC8C13F257AD00364390 /* Shader.vsh in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC8713F257AC00364390 /* Shader.vsh */; };
 		FCF1EC9013F2618D00364390 /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC8F13F2618C00364390 /* EAGLView.m */; };
 		FCF1EC9313F2667A00364390 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = FCF1EC8613F257AC00364390 /* Shader.fsh */; };
 		FCF1EC9413F2667A00364390 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = FCF1EC8713F257AC00364390 /* Shader.vsh */; };
@@ -408,8 +406,6 @@
 				FCF1EC2213F24CCF00364390 /* TableViewCellSampleViewController.m in Sources */,
 				FCF1EC2513F24CDA00364390 /* VideoWithInterstitilaViewController.m in Sources */,
 				FCF1EC4713F24D7900364390 /* ORMMAViewController.m in Sources */,
-				FCF1EC8B13F257AD00364390 /* Shader.fsh in Sources */,
-				FCF1EC8C13F257AD00364390 /* Shader.vsh in Sources */,
 				FCF1EC9013F2618D00364390 /* EAGLView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

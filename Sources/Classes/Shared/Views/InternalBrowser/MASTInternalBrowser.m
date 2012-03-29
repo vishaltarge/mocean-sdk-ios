@@ -337,8 +337,11 @@ static MASTInternalBrowser* sharedInstance = nil;
 }
 
 - (void)close {
-    _opening = NO;
 	@synchronized(self) {
+        if (_opening == NO)
+            return;
+        
+        _opening = NO;
         [self.viewConreoller dismissModalViewControllerAnimated:YES];
         
         // slow

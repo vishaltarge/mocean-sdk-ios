@@ -32,7 +32,7 @@
         _adView = [[MASTAdView alloc] initWithFrame:CGRectMake(0, -AD_HEIGHT, self.view.bounds.size.width, AD_HEIGHT) site:8061 zone:20249];
         _adView.updateTimeInterval = 15;
         _adView.isAdChangeAnimated = NO;
-        _adView.contentAlignment = YES;\
+        _adView.contentAlignment = YES;
         
         _adView.delegate = self;
         [self.view addSubview:_adView];
@@ -45,6 +45,8 @@
         _tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [self.view addSubview:_tableView];
+        
+        [_adView update];
     }
     
     return self;
@@ -71,6 +73,10 @@
     }];
 	
 	[UIView commitAnimations];
+}
+
+- (void)bannerDidHide:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
+    NSLog(@"bannerDidHide:");
 }
 
 #pragma mark -

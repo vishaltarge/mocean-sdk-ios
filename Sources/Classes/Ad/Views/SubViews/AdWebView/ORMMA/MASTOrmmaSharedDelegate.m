@@ -386,8 +386,15 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
     [eventStore saveEvent:ekEvent span:EKSpanThisEvent error:nil];
 }
 
-- (void)openMASTWithPOI:(NSString*)poi ad:(id)sender {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:kGoogleMapsUrl, [poi stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+- (void)openMapWithPOI:(NSString*)poi ad:(id)sender {
+    NSString* encoded = (NSString*)CFURLCreateStringByAddingPercentEscapes(NULL,
+                                                                           (CFStringRef)poi, 
+                                                                           NULL, 
+                                                                           (CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ", 
+                                                                           CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding));
+    NSString* args = [encoded autorelease];
+    NSString* urlString = [kGoogleMapsUrl stringByAppendingString:args];
+    NSURL *url = [NSURL URLWithString:urlString];
     [[UIApplication sharedApplication] openURL:url];
 }
 

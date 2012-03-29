@@ -82,6 +82,8 @@ enum {
         self.displayLink = aDisplayLink;
         
         animating = TRUE;
+        
+        [_adView update];
     }
     
     return self;

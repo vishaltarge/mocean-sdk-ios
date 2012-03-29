@@ -75,7 +75,8 @@
 	_adView.autoCollapse = YES;
 	_adView.contentAlignment = YES;
     [self.view addSubview:_adView];
-	
+    
+    [_adView update];
 }
 
 -(void)viewWillAppear:(BOOL)animated

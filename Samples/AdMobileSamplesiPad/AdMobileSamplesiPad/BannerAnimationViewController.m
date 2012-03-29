@@ -32,6 +32,8 @@
         _adView.delegate = self;
         
         self.view = _adView;
+        
+        [_adView update];
     }
     
     return self;

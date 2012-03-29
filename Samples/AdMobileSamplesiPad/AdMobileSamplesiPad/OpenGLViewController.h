@@ -28,6 +28,8 @@
     CADisplayLink*	displayLink;
 }
 
+- (id)initWithFrame:(CGRect)frame;
+
 @property (readonly, nonatomic, getter=isAnimating) BOOL animating;
 @property (nonatomic) NSInteger animationFrameInterval;
 

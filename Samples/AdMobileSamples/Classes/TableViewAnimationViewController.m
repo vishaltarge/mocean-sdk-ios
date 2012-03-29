@@ -80,6 +80,7 @@
 			ad.contentAlignment = YES;
 			[cell.contentView addSubview:ad];
 			[_banners addObject:ad];
+            [ad update];
 			[ad release];
 		}
 	}

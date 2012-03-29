@@ -22,4 +22,6 @@
 - (void)webViewDidFinishLoad:(UIWebView*)webView;
 - (void)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;
 
+- (BOOL)isDefaultState;
+
 @end

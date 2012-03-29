@@ -6,10 +6,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MASTAdInterstitialView.h"
+#import "MASTAdView.h"
 
 @interface InterstitialViewController : UIViewController {
-	MASTAdInterstitialView* _adView;
+	MASTAdView* _adView;
 }
 
 - (id)initWithFrame:(CGRect)frame;

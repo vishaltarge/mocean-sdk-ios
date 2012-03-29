@@ -9,8 +9,9 @@
 #import "MAPNSObject+BlockObservation.h"
 #import "Macros.h"
 #import "MASTNotificationCenter.h"
-
 #import "MASTOrmmaSharedDataSource.h"
+#import "MASTAdView_Private.h"
+
 
 #define ORMMA_SHAME     @"ormma"
 
@@ -279,11 +280,18 @@
 
 - (void)moveToDefaultState
 {
+    if (self.currentState == ORMMAStateDefault)
+        return;
+    
     if (self.currentState == ORMMAStateExpanded || self.currentState == ORMMAStateResized) {
-        [self evalJS:@"ormma.close();"];
-    } else if (self.currentState == ORMMAStateHidden) {
-        [self evalJS:@"ormma.show();"];
+        if ([self.ormmaDelegate respondsToSelector:@selector(closeFromState:ad:)]) {
+            [self.ormmaDelegate closeFromState:self.currentState ad:self.adView];
+        }
     }
+    
+    self.currentState = ORMMAStateDefault;
+    self.nonHideState = self.currentState;
+    [self evalJS:[MASTOrmmaHelper setState:self.currentState]];
 }
 
 - (void)evalJS:(NSString*)js {
@@ -310,6 +318,10 @@
         if ([self.ormmaDelegate respondsToSelector:@selector(showAd:)]) {
             [self.ormmaDelegate showAd:self.adView];
         }
+        
+        if (self.currentState == ORMMAStateDefault) {
+            [[MASTNotificationCenter sharedInstance] postNotificationName:kAdStartUpdateNotification object:self.adView];
+        }
     } else if ([event isEqualToString:@"hide"]) {
         if (self.currentState == ORMMAStateDefault) {
             self.nonHideState = self.currentState;
@@ -319,6 +331,8 @@
             if ([self.ormmaDelegate respondsToSelector:@selector(hideAd:)]) {
                 [self.ormmaDelegate hideAd:self.adView];
             }
+
+            [[MASTNotificationCenter sharedInstance] postNotificationName:kAdStopUpdateNotification object:self.adView];
         } else {
             [self evalJS:[MASTOrmmaHelper fireError:@"Cannot hide an ad that is not in the default state." forEvent:event]];
         }
@@ -342,6 +356,8 @@
             self.currentState = ORMMAStateDefault;
             self.nonHideState = self.currentState;
             [self evalJS:[MASTOrmmaHelper setState:self.currentState]];
+
+            [[MASTNotificationCenter sharedInstance] postNotificationName:kAdStartUpdateNotification object:self.adView];
         }
     } else if ([event isEqualToString:@"expand"]) {
         if (self.currentState == ORMMAStateDefault) {
@@ -353,6 +369,8 @@
             if ([self.ormmaDelegate respondsToSelector:@selector(expandURL:parameters:ad:)]) {
                 [self.ormmaDelegate expandURL:url parameters:parameters ad:self.adView];
             }
+
+            [[MASTNotificationCenter sharedInstance] postNotificationName:kAdStopUpdateNotification object:self.adView];
         } else {
             [self evalJS:[MASTOrmmaHelper fireError:@"Cannot expand an ad that is not in the default state." forEvent:event]];
         }
@@ -370,6 +388,8 @@
             if ([self.ormmaDelegate respondsToSelector:@selector(resize:ad:)]) {
                 [self.ormmaDelegate resize:CGSizeMake(w, h) ad:self.adView];
             }
+            
+            [[MASTNotificationCenter sharedInstance] postNotificationName:kAdStopUpdateNotification object:self.adView];
         }
     } else if ([event isEqualToString:@"addasset"]) {
         //
@@ -412,7 +432,7 @@
     } else if ([event isEqualToString:@"phone"]) {
         NSString *phoneNumber = [MASTOrmmaHelper requiredStringFromDictionary:parameters forKey:@"number"];
         if (IS_POPULATED_STRING(phoneNumber)) {
-            if ([self.ormmaDelegate respondsToSelector:@selector(phoneNumber)]) {
+            if ([self.ormmaDelegate respondsToSelector:@selector(phone:ad:)]) {
                 [self.ormmaDelegate phone:phoneNumber ad:self.adView];
             }
         } else {
@@ -507,6 +527,13 @@
         
         [self processEvent:request];
     }
+}
+
+- (BOOL)isDefaultState {
+    if (self.currentState == ORMMAStateDefault)
+        return YES;
+    
+    return NO;
 }
 
 @end

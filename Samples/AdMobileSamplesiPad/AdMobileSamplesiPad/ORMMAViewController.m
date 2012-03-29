@@ -23,6 +23,8 @@
         _adView.type = AdTypeRichmedia;
         _adView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         self.view = _adView;
+        
+        [_adView update];
     }
     
     return self;

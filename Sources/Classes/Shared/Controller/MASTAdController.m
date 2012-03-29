@@ -164,8 +164,6 @@ static MASTAdController* sharedInstance = nil;
         }
 #endif
     }
-
-	[[MASTNotificationCenter sharedInstance] postNotificationName:kStartAdDownloadNotification object:adView];
 }
 
 - (void)registerAd:(NSNotification*)notification {

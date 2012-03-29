@@ -26,7 +26,10 @@
         
         [self.view addSubview:_adView];
         
-        _adInterstitialView = [[MASTAdInterstitialView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height) site:8061 zone:16112];
+        [_adView update];
+        
+        
+        _adInterstitialView = [[MASTAdView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height) site:8061 zone:16112];
         _adInterstitialView.contentAlignment = YES;
         _adView.contentAlignment = YES;
         _adView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -39,6 +42,8 @@
         _adInterstitialView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         
         [self.view addSubview:_adInterstitialView];
+        
+        [_adInterstitialView update];
     }
     
     return self;

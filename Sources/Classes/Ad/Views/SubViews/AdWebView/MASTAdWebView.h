@@ -18,4 +18,6 @@ typedef void (^CompletionBlock)(NSError* error);
 
 - (void)loadHTML:(NSString*)html completion:(CompletionBlock)completion aligment:(BOOL)aligment;
 
+- (void)reset;
+
 @end

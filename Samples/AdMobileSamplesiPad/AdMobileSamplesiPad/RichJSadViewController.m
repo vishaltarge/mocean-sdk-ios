@@ -17,7 +17,7 @@
         [self.view addSubview:imageView];
         [imageView release];
         
-        _adView = [[MASTAdInterstitialView alloc] initWithFrame:frame site:8061 zone:20664];
+        _adView = [[MASTAdView alloc] initWithFrame:frame site:8061 zone:20664];
         _adView.updateTimeInterval = 60;
         _adView.minSize = CGSizeMake(320, 460);
         _adView.showCloseButtonTime = 5;
@@ -26,6 +26,8 @@
         _adView.type = AdTypeRichmedia;
         _adView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         self.view = _adView;
+        
+        [_adView update];
     }
     
     return self;

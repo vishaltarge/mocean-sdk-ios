@@ -89,6 +89,11 @@
     [self.webView loadHTMLString:html baseURL:nil];
 }
 
+- (void)reset {
+    if ([self.ormmaAdaptor isDefaultState] == NO)
+        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:(@"about:blank")]]];
+}
+
 #pragma mark - UIWebViewDelegate
 
 - (void)webViewDidFinishLoad:(UIWebView *)view {

@@ -13,7 +13,7 @@
 @interface VideoWithInterstitilaViewController : UIViewController<MASTAdViewDelegate>
 {
 	MASTAdView* _adView;
-	MASTAdInterstitialView* _adInterstitialView;
+	MASTAdView* _adInterstitialView;
 }
 
 - (id)initWithFrame:(CGRect)frame;

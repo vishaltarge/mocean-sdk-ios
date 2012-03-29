@@ -88,11 +88,7 @@
             if (_updateStarted) {
                 _updateStarted = NO;
                 
-                // stop timer
-                if (self.updateTimer && [self.updateTimer respondsToSelector:@selector(isValid)] && [self.updateTimer isValid]) {
-                    [self.updateTimer invalidate];
-                    self.updateTimer = nil;
-                }
+                [self performSelectorOnMainThread:@selector(stopTimerOnMainThread) withObject:nil waitUntilDone:NO];
             }
         }
     }
@@ -103,7 +99,7 @@
     if (adViewNotify == self.adView) {
         @synchronized(self) {
             // try stop timer
-            if (self.updateTimer && [self.updateTimer respondsToSelector:@selector(isValid)] && [self.updateTimer isValid]) {
+            if (self.updateTimer != nil) {
                 [self.updateTimer invalidate];
                 self.updateTimer = nil;
             }
@@ -124,24 +120,13 @@
 
             self.updateTimeInterval = adModel.updateTimeInterval;
             
-            if (!_updateStarted) {
-                NSNotification* startNotification = [NSNotification notificationWithName:kAdStartUpdateNotification object:self.adView];
-                [self start:startNotification];
-            }
-            else if (_viewVisible) {                
-                // stop timer
-                if (self.updateTimer && [self.updateTimer respondsToSelector:@selector(isValid)] && [self.updateTimer isValid]) {
-                    [self.updateTimer invalidate];
-                    self.updateTimer = nil;
-                }
-                
-                // start timer
-                self.updateTimer = [NSTimer scheduledTimerWithTimeInterval:self.updateTimeInterval
-                                                                    target:self
-                                                                  selector:@selector(sendUpdate:)
-                                                                  userInfo:nil
-                                                                   repeats:NO];
-            }
+            if (_updateStarted == NO)
+                return;
+            
+            // Use the start method to restart the timer if enabled, and with the updated interval.            
+            _updateStarted = NO;
+            NSNotification* startNotification = [NSNotification notificationWithName:kAdStartUpdateNotification object:self.adView];
+            [self start:startNotification];
         }
     }
 }
@@ -184,17 +169,27 @@
 - (void)startTimerOnMainThread {
     if (_viewVisible) {                
         // stop timer
-        if (self.updateTimer && [self.updateTimer respondsToSelector:@selector(isValid)] && [self.updateTimer isValid]) {
+        if (self.updateTimer != nil) {
             [self.updateTimer invalidate];
             self.updateTimer = nil;
         }
         
         // start timer
-        self.updateTimer = [NSTimer scheduledTimerWithTimeInterval:self.updateTimeInterval
-                                                            target:self
-                                                          selector:@selector(sendUpdate:)
-                                                          userInfo:nil
-                                                           repeats:NO];
+        if (self.updateTimeInterval > 0) {
+            self.updateTimer = [NSTimer scheduledTimerWithTimeInterval:self.updateTimeInterval
+                                                                target:self
+                                                              selector:@selector(sendUpdate:)
+                                                              userInfo:nil
+                                                               repeats:NO];
+        }
+    }
+}
+
+- (void)stopTimerOnMainThread {
+    // stop timer
+    if (self.updateTimer != nil) {
+        [self.updateTimer invalidate];
+        self.updateTimer = nil;
     }
 }
 
@@ -214,7 +209,7 @@
             _viewVisible = YES;
             
             if (_updateStarted) {
-                //[self performSelectorOnMainThread:@selector(startTimerOnMainThread) withObject:nil waitUntilDone:NO];
+                [self performSelectorOnMainThread:@selector(startTimerOnMainThread) withObject:nil waitUntilDone:NO];
             }
         }
 	}
@@ -227,11 +222,7 @@
             _viewVisible = NO;
             
             if (_updateStarted) {
-                // stop timer
-                if (self.updateTimer && [self.updateTimer respondsToSelector:@selector(isValid)] && [self.updateTimer isValid]) {
-                    [self.updateTimer invalidate];
-                    self.updateTimer = nil;
-                }
+                [self performSelectorOnMainThread:@selector(stopTimerOnMainThread) withObject:nil waitUntilDone:NO];
             }
         }
 	}

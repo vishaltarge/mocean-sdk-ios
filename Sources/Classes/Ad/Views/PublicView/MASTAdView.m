@@ -121,26 +121,38 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 - (void)callUpdateInBackground {
     NSAutoreleasePool* pool = [NSAutoreleasePool new];
     
+    // Resart the timer and notify the ad to accept updates
+    [[MASTNotificationCenter sharedInstance] postNotificationName:kAdStartUpdateNotification object:self];
     [[MASTNotificationCenter sharedInstance] postNotificationName:kAdUpdateNowNotification object:self];
     
     [pool release];
 }
 
 - (void)update {
-	//[[NotificationCenter sharedInstance] postNotificationName:kAdUpdateNowNotification object:self];
+    [self stopEverythingAndNotfiyDelegateOnCleanup];
     [self performSelectorInBackground:@selector(callUpdateInBackground) withObject:nil];
 }
 
 - (void)stopEverythingAndNotfiyDelegateOnCleanup {
+    // Stop the timer and the view from listening to any updates.
+    [[MASTNotificationCenter sharedInstance] postNotificationName:kAdStopUpdateNotification object:self];
+    
     //stop ad update and cancel all network proccess
     [_adModel cancelAllNetworkConnection];
     
     //close internal browser
     [_adModel closeInternalBrowser];
     
+    if ([[_adModel currentAdView] isKindOfClass:[MASTAdWebView class]]) {
+        [(MASTAdWebView*)[_adModel currentAdView] reset];
+    }
+    
     if (self.showCloseButtonTime != 0 || self.autocloseInterstitialTime != 0) {
         //close interstitial
-        [self scheduledButtonAction];
+        id currentAdView = [_adModel currentAdView];
+        if ((currentAdView != nil) && ([[_adModel currentAdView] isKindOfClass:[MASTAdWebView class]] == NO)) {
+            [self scheduledButtonAction];
+        }
     }
     
     //cloase ORMMA and set it in default state
@@ -188,12 +200,15 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
     [[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(receiveThirdParty:) name:kThirdPartyNotification object:nil];
     [[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(closeInterstitial:) name:kInterstitialAdCloseNotification object:nil];
     
-	[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(adDownloaded:) name:kStartAdDisplayNotification object:nil];
-	[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(updateAd:) name:kUpdateAdDisplayNotification object:nil];
+	
 	[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(addDefaultImage:) name:kAdDisplayDefaultImage object:nil];
-	[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(dislpayAd:) name:kReadyAdDisplayNotification object:nil];
 	[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(visibleAd:) name:kAdViewBecomeVisibleNotification object:nil];
 	[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(invisibleAd:) name:kAdViewBecomeInvisibleNotification object:nil];
+    
+    // If the timer stops, then stop reciving events that update the ad.
+    [[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(startUpdate:) name:kAdStartUpdateNotification object:nil];
+    [[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(stopUpdate:) name:kAdStopUpdateNotification object:nil];
+    
     
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(deviceOrientationDidChange:) name: UIDeviceOrientationDidChangeNotification object: nil];
@@ -206,12 +221,28 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 	_observerSet = YES;
 }
 
+- (void)startUpdate:(NSNotification*)notification {
+    [[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(adDownloaded:) name:kStartAdDisplayNotification object:nil];
+	[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(updateAd:) name:kUpdateAdDisplayNotification object:nil];
+    [[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(dislpayAd:) name:kReadyAdDisplayNotification object:nil];
+}
+
+- (void)stopUpdate:(NSNotification*)notification {
+    [[MASTNotificationCenter sharedInstance] removeObserver:self name:kStartAdDisplayNotification object:nil];
+    [[MASTNotificationCenter sharedInstance] removeObserver:self name:kUpdateAdDisplayNotification object:nil];
+    [[MASTNotificationCenter sharedInstance] removeObserver:self name:kReadyAdDisplayNotification object:nil];
+}
+
 - (void)adDownloaded:(NSNotification*)notification {
 	NSDictionary *info = [notification object];
 	MASTAdView* adView = [info objectForKey:@"adView"];
 	MASTAdDescriptor* descriptor = [info objectForKey:@"descriptor"];
 	
 	if (adView == self) {
+
+        // Lock user interaction until the ad is displayed.
+        self.userInteractionEnabled = NO;
+        
         MASTAdModel* model = [self adModel];
         
         if (descriptor.adContentType == AdContentTypeDefaultHtml) {
@@ -322,6 +353,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
             [self adModel].snapshotRAWData = nil;
             
             model.currentAdView = subView;
+            self.hidden = NO;
             subView.hidden = NO;
             
             // update content size if possible
@@ -387,7 +419,8 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 [[MASTNotificationCenter sharedInstance] postNotificationName:kAdDisplayedNotification object:self];
             });
-            //[[NotificationCenter sharedInstance] postNotificationName:kAdDisplayedNotification object:self];
+            
+            self.userInteractionEnabled = YES;
         }
 	}
 }
@@ -911,15 +944,8 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 	// set new value to model
 	((MASTAdModel*)_adModel).updateTimeInterval = updateTimeInterval;
 	
-	
-	// process
-	if (updateTimeInterval == 0 && oldValue > 0) {
-		[[MASTNotificationCenter sharedInstance] postNotificationName:kAdStopUpdateNotification object:self];
-	}
-	else if(updateTimeInterval > 0 && oldValue == 0) {
-		[[MASTNotificationCenter sharedInstance] postNotificationName:kAdStartUpdateNotification object:self];
-	}
-	else if (updateTimeInterval != oldValue) {
+    // Update the value regardless of the stop or start notion.
+    if (updateTimeInterval != oldValue) {
 		[[MASTNotificationCenter sharedInstance] postNotificationName:kAdChangeUpdateTimeIntervalNotification object:self];
 	}
 }
