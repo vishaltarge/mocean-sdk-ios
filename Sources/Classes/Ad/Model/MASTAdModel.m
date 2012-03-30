@@ -91,16 +91,28 @@ longitude, latitude, adCallTimeout, autoCollapse, showPreviousAdOnError;
 	// required
 	if (self.site > 0) [_banerUrl appendFormat:@"site=%d", self.site];
 	if (self.adZone > 0) [_banerUrl appendFormat:@"&zone=%d", self.adZone];
+    
+    CGSize adjustedMaxSize = self.maxSize;
+    if (!CGSizeEqualToSize(adjustedMaxSize, CGSizeZero)) {
+        if (adjustedMaxSize.width < self.minSize.width) {
+            NSLog(@"MAST SDK Invalid maxSize: maxSize.width < minSize.width");
+            adjustedMaxSize.width = self.minSize.width;
+        }
+        if (adjustedMaxSize.height < self.minSize.height) {
+            NSLog(@"MAST SDK Invalid maxSize: maxSize.height < minSize.height");
+            adjustedMaxSize.height = self.minSize.height;
+        }
+    }
 	
 	if (self.minSize.width > 0 && self.minSize.height > 0)
 		[_banerUrl appendFormat:@"&min_size_x=%1.0f&min_size_y=%1.0f", self.minSize.width, self.minSize.height];
     
-    if (CGSizeEqualToSize(self.maxSize, CGSizeZero)) {
+    if (CGSizeEqualToSize(adjustedMaxSize, CGSizeZero)) {
         CGFloat scale = [UIScreen mainScreen].scale;
         [_banerUrl appendFormat:@"&size_x=%1.0f&size_y=%1.0f", self.frame.size.width*scale, self.frame.size.height*scale];
     } else {
-        if (self.maxSize.width > 0 && self.maxSize.height > 0)
-            [_banerUrl appendFormat:@"&size_x=%1.0f&size_y=%1.0f", self.maxSize.width, self.maxSize.height];
+        if (adjustedMaxSize.width > 0 && adjustedMaxSize.height > 0)
+            [_banerUrl appendFormat:@"&size_x=%1.0f&size_y=%1.0f", adjustedMaxSize.width, adjustedMaxSize.height];
     }
     
 	if (self.keywords != nil)
