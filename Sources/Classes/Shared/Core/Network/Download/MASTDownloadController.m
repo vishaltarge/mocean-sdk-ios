@@ -114,7 +114,10 @@ static MASTDownloadController* sharedInstance = nil;
             NSString* url = [[adView adModel] url];
             
             if (url) {
-                NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+                NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url] 
+                                                         cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                     timeoutInterval:NETWORK_TIMEOUT];
+                
                 [_adRequests addRequest:request forAd:adView];
                                 
                 NSMutableDictionary* info = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:request, adView, nil]
