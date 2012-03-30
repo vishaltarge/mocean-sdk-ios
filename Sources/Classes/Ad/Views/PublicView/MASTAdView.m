@@ -724,9 +724,10 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
         if (self.defaultImage) {
             [self showDefaultImage:adView];
         } else {
-            if (self.autoCollapse) adView.backgroundColor = [UIColor clearColor];
+            if (self.autoCollapse) 
+                adView.hidden = YES;
             
-            [self hiddenAllSubviews:adView];
+            //[self hiddenAllSubviews:adView];
         }
     }
     
