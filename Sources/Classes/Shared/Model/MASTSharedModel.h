@@ -22,10 +22,9 @@
 
 
 @interface MASTSharedModel : NSObject {
-    NSString*       _udidMd5;
+
 }
 
-@property (retain, nonatomic) NSString*     udidMd5;
 @property (retain) NSString*                ua;
 @property (retain) NSString*                latitude;
 @property (retain) NSString*                longitude;

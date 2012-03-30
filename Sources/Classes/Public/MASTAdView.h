@@ -438,6 +438,21 @@ typedef enum {
  The default value is AdLogModeErrorsOnly. */
 @property AdLogMode                     logMode;
 
+
+
+/** @name udid for tracking purposes */
+
+
+/** A NSString value that supplies the application/device tracking identifier.
+ 
+ If nil, a udid value will not be sent to the server. 
+ iOS 5.1 SDK has deprecated using UIDevice's uniqueIdentifier method.
+ The following documentation may be helpful if uniqueIdentifier behavior is desired:
+ https://developer.apple.com/library/ios/#documentation/UIKit/Reference/UIDevice_Class/DeprecationAppendix/AppendixADeprecatedAPI.html#//apple_ref/occ/instp/UIDevice/uniqueIdentifier
+ 
+ The default value is nil.*/
+@property (retain) NSString* udid;
+
 /** @name Setting the Delegate */
 
 

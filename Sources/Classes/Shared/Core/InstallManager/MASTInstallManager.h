@@ -22,6 +22,6 @@
 + (MASTInstallManager*)sharedInstance;
 + (void)releaseSharedInstance;
 
-- (void)sendNotificationWith:(NSInteger)adId groupCode:(NSString*)gCode;
+- (void)sendNotificationWith:(NSInteger)adId groupCode:(NSString*)gCode udid:(NSString*)udid;
 
 @end

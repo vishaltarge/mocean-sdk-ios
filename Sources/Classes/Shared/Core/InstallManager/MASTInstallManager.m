@@ -99,7 +99,7 @@ static MASTInstallManager* sharedInstance = nil;
 
 
 
-- (void)sendNotificationWith:(NSInteger)adId groupCode:(NSString*)gCode {
+- (void)sendNotificationWith:(NSInteger)adId groupCode:(NSString*)gCode udid:(NSString*)u {
     @synchronized(self) {
         if (!_started) {
             _started = YES;
@@ -107,7 +107,7 @@ static MASTInstallManager* sharedInstance = nil;
             if (![self notificationDone]) {
                 self.advertiserId = adId;
                 self.groupCode = gCode;
-                self.udid = [MASTUtils md5HashForString:[[UIDevice currentDevice] uniqueIdentifier]];
+                self.udid = u;
                 
                 [self performSelector:@selector(sendRequest) withObject:nil afterDelay:2];
             }
@@ -154,9 +154,13 @@ static MASTInstallManager* sharedInstance = nil;
 - (void)sendRequest {
     NSMutableString* url = [NSMutableString stringWithFormat:kMoceanServerUrl];
     [url appendFormat:@"?advertiser_id=%d", self.advertiserId];
-    [url appendFormat:@"&group_code=%@", [self.groupCode stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    [url appendFormat:@"&udid=%@", [self.udid stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-        
+    [url appendFormat:@"&group_code=%@", [self.groupCode stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];                       
+    
+    if (self.udid != nil) {
+        NSString* hashedUdid = [MASTUtils md5HashForString:self.udid];
+        [url appendFormat:@"&udid=%@", [hashedUdid stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    }
+    
     [MASTNetworkQueue loadWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]] completion:^(NSURLRequest *request, NSHTTPURLResponse *response, NSData *data, NSError *error) {
         if (error) {
             [self performSelector:@selector(sendRequest) withObject:nil afterDelay:15];

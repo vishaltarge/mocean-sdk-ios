@@ -79,6 +79,8 @@
 @property (assign) BOOL                 autoCollapse;
 @property (assign) BOOL                 showPreviousAdOnError;
 
+@property (retain) NSString*            udid;
+
 - (NSString*)url;
 - (NSString*)urlIgnoreValifation;
 

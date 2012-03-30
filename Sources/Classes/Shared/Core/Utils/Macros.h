@@ -76,8 +76,6 @@
 
 // HARDWARE/DEVICE INFO
 
-#define DEVICE_UDID ([UIDevice currentDevice].uniqueIdentifier)
-
 #define IS_IPAD ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)
 #define IS_IPHONE ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone)
 #define IS_IPOD_TOUCH [[UIDevice currentDevice].model isEqualToString:@"iPod touch"]

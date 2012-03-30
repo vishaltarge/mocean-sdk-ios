@@ -39,7 +39,7 @@
 
 @dynamic delegate, isLoading, testMode, logMode, isAdChangeAnimated, contentAlignment, track, updateTimeInterval,
 defaultImage, site, zone, premium, type, keywords, minSize, maxSize, contentSize, textColor, additionalParameters,
-adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, carrier, latitude, longitude, adCallTimeout, autoCollapse, showPreviousAdOnError, autocloseInterstitialTime, showCloseButtonTime;
+adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, carrier, latitude, longitude, adCallTimeout, autoCollapse, showPreviousAdOnError, autocloseInterstitialTime, showCloseButtonTime, udid;
 
 
 + (void)setLocationDetectionEnabledWithPupose:(NSString*)purpose
@@ -1112,7 +1112,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 	((MASTAdModel*)_adModel).advertiserId = advertiserId;
     
     if (((MASTAdModel*)_adModel).groupCode) {
-        [[MASTInstallManager sharedInstance] sendNotificationWith:advertiserId groupCode:((MASTAdModel*)_adModel).groupCode];
+        [[MASTInstallManager sharedInstance] sendNotificationWith:advertiserId groupCode:((MASTAdModel*)_adModel).groupCode udid:((MASTAdModel*)_adModel).udid];
     }
 }
 
@@ -1125,7 +1125,7 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 	((MASTAdModel*)_adModel).groupCode = groupCode;
     
     if (((MASTAdModel*)_adModel).advertiserId) {
-        [[MASTInstallManager sharedInstance] sendNotificationWith:((MASTAdModel*)_adModel).advertiserId groupCode:groupCode];
+        [[MASTInstallManager sharedInstance] sendNotificationWith:((MASTAdModel*)_adModel).advertiserId groupCode:groupCode udid:((MASTAdModel*)_adModel).udid];
     }
 }
 
@@ -1263,6 +1263,14 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 
 - (NSTimeInterval)autocloseInterstitialTime {
 	return ((MASTAdModel*)_adModel).autocloseInterstitialTime;
+}
+
+- (void)setUdid:(NSString *)u {
+    ((MASTAdModel*)_adModel).udid = u;
+}
+
+- (NSString*)getUdid {
+    return ((MASTAdModel*)_adModel).udid;
 }
 
 @end

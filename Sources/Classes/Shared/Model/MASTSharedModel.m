@@ -16,7 +16,7 @@
 
 @implementation MASTSharedModel
 
-@synthesize udidMd5 = _udidMd5, ua, latitude, longitude, accuracy, mcc, mnc;
+@synthesize ua, latitude, longitude, accuracy, mcc, mnc;
 
 static MASTSharedModel* sharedInstance = nil;
 
@@ -101,10 +101,6 @@ static MASTSharedModel* sharedInstance = nil;
 - (NSString*)sharedUrlPart {
     NSMutableString* result = [NSMutableString string];
     
-	if (self.udidMd5) {
-        [result appendFormat:@"&udid=%@", self.udidMd5];
-    }
-    
 	if (self.ua) {
         [result appendFormat:@"&ua=%@", self.ua];
     }
@@ -168,16 +164,5 @@ static MASTSharedModel* sharedInstance = nil;
 
 #pragma mark -
 #pragma mark Propertys
-
-
-//@property (retain) NSString*                udid;
-- (NSString*)udidMd5; {
-    if (_udidMd5) {
-        return _udidMd5;
-    } else {
-        self.udidMd5 = [MASTUtils md5HashForString:[[UIDevice currentDevice] uniqueIdentifier]];
-        return _udidMd5;
-    }
-}
 
 @end

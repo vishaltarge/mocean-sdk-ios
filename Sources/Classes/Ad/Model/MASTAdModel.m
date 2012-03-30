@@ -24,7 +24,7 @@ paramBG, paramLINK, additionalParameters, adServerUrl, advertiserId, groupCode,
 country, region, city, area, metro, zip, carrier, showCloseButtonTime,
 autocloseInterstitialTime, startDisplayDate, isDisplayed, aligmentCenter, contentSize, frame,
 visibleState, snapshotRAWData, snapshotRAWDataTime, currentAdView, adView, excampaigns, descriptor, loading,
-longitude, latitude, adCallTimeout, autoCollapse, showPreviousAdOnError;
+longitude, latitude, adCallTimeout, autoCollapse, showPreviousAdOnError, udid;
 
 - (BOOL)validate {
     if (self.site <= 0) {
@@ -171,7 +171,11 @@ longitude, latitude, adCallTimeout, autoCollapse, showPreviousAdOnError;
 	
 	[_banerUrl appendString:@"&count=1"];
 	[_banerUrl appendString:@"&key=1"];
-	
+    
+    if (self.udid) {
+        [_banerUrl appendFormat:@"&udid=%@", [MASTUtils md5HashForString:self.udid]];
+    }
+    
 	if (self.additionalParameters) {
         NSArray* keys = [self.additionalParameters allKeys];
         for (NSString* key in keys) {
