@@ -6,7 +6,6 @@
 
 #import "OrmmaProtocols.h"
 #import "MASTAdView.h"
-#import "MASTLocationManager.h"
 #import "MASTAccelerometer.h"
 
 @interface MASTOrmmaSharedDataSource : NSObject <OrmmaDataSource>

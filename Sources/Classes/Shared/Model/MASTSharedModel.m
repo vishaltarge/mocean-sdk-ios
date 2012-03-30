@@ -10,7 +10,7 @@
 @interface MASTSharedModel()
 
 - (void)uaDetected:(NSNotification*)notification;
-- (void)locationDetected:(NSNotification*)notification;
+- (void)locationUpdate:(NSNotification*)notification;
 
 @end
 
@@ -29,7 +29,7 @@ static MASTSharedModel* sharedInstance = nil;
     self = [super init];
 	if (self) {
         [[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(uaDetected:) name:kUaDetectedNotification object:nil];
-        [[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(locationDetected:) name:kNewLocationDetectedNotification object:nil];
+        [[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(locationUpdate:) name:kLocationManagerLocationUpdate object:nil];
         
         if (![MASTWebKitInfo sharedInstance]) {
             // somthing going wrong...
@@ -158,13 +158,11 @@ static MASTSharedModel* sharedInstance = nil;
 }
 
 
-- (void)locationDetected:(NSNotification*)notification {
-#ifdef INCLUDE_LOCATION_MANAGER
+- (void)locationUpdate:(NSNotification*)notification {
     CLLocation* location = [notification object];
     self.latitude = [NSString stringWithFormat:@"%f", location.coordinate.latitude];
     self.longitude = [NSString stringWithFormat:@"%f", location.coordinate.longitude];
     self.accuracy = [NSString stringWithFormat:@"%f", location.horizontalAccuracy];
-#endif
 }
 
 

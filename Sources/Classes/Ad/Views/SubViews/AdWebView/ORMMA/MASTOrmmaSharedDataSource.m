@@ -3,7 +3,11 @@
 //  Copyright (c) Microsoft. All rights reserved.
 //
 
+#import <CoreLocation/CoreLocation.h>
 #import "MASTOrmmaSharedDataSource.h"
+#import "MASTNotificationCenter.h"
+#import "MASTLocationManager.h"
+
 
 @interface MASTOrmmaSharedDataSource() <UIAccelerometerDelegate>
 @end
@@ -15,11 +19,10 @@ static MASTOrmmaSharedDataSource* sharedInstance = nil;
 #pragma mark -
 #pragma mark - Location
 
-- (void)locationDetected:(NSNotification*)notification
+- (void)locationUpdated:(NSNotification*)notification
 {
     CLLocation* location = [notification object];
-	//NSLog(@"lon = %.4f %.4f",location.coordinate.latitude, location.coordinate.longitude);
-	NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self, kOrmmaKeySender, location, kOrmmaKeyObject, nil];
+	NSDictionary* dic = [NSDictionary dictionaryWithObjectsAndKeys:self, kOrmmaKeySender, location, kOrmmaKeyObject, nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:kOrmmaLocationUpdated object:dic];
 }
 
@@ -41,15 +44,9 @@ static MASTOrmmaSharedDataSource* sharedInstance = nil;
     self = [super init];
     
 	if (self) {
-		//location
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationDetected:) name:kNewLocationDetectedNotification object:nil];
-		//HeadingUpdated
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(headingUpdated:) name:kLocationUpdateHeadingNotification object:nil];
+		[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(locationUpdated:) name:kLocationManagerLocationUpdate object:nil];
+		[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(headingUpdated:) name:kLocationManagerHeadingUpdate object:nil];
 
-#ifdef INCLUDE_LOCATION_MANAGER
-		[[MASTLocationManager sharedInstance] startUpdatingLocation];
-		[[MASTLocationManager sharedInstance] startUpdatingHeading];
-#endif
 		//Accelerometer
 		[[MASTAccelerometer sharedInstance] addDelegate:self];
 	}
@@ -112,26 +109,25 @@ static MASTOrmmaSharedDataSource* sharedInstance = nil;
 
 - (BOOL)supportLocationForAd:(id)sender
 {
-#ifdef INCLUDE_LOCATION_MANAGER
-	return  YES;
-#endif
-	return NO;
+    BOOL support = [MASTLocationManager deviceLocationAvailable];
+    if (support)
+        support = [[MASTLocationManager sharedInstance] locationDetectionActive];
+    
+	return support;
 }
 
 - (BOOL)supportHeadingForAd:(id)sender
 {
-#ifdef INCLUDE_LOCATION_MANAGER
-	return  [CLLocationManager headingAvailable];
-#endif
-	return NO;
+    BOOL support = [MASTLocationManager deviceHeadingAvailable];
+    if (support)
+        support = [[MASTLocationManager sharedInstance] locationDetectionActive];
+    
+	return support;
 }
 
 - (BOOL)supportTiltForAd:(id)sender
 {
-#ifdef INCLUDE_LOCATION_MANAGER
-	return  YES;
-#endif
-	return NO;
+	return YES;
 }
 
 #pragma mark -

@@ -42,6 +42,35 @@ defaultImage, site, zone, premium, type, keywords, minSize, maxSize, contentSize
 adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, carrier, latitude, longitude, adCallTimeout, autoCollapse, showPreviousAdOnError, autocloseInterstitialTime, showCloseButtonTime;
 
 
++ (void)setLocationDetectionEnabledWithPupose:(NSString*)purpose
+                          significantUpdating:(BOOL)significantUpdating
+                               headingUpdates:(BOOL)headingUpdates
+                               distanceFilter:(CLLocationDistance)distanceFilter
+                              desiredAccuracy:(CLLocationAccuracy)desiredAccuracy
+                                headingfilter:(CLLocationDegrees)headingfilter {
+    
+    NSMutableDictionary* settings = [NSMutableDictionary dictionary];
+    [settings setValue:purpose forKey:kLocationManagerPurpose];
+    [settings setValue:[NSNumber numberWithBool:significantUpdating] forKey:kLocationManagerSignificantUpdating];
+    [settings setValue:[NSNumber numberWithBool:headingUpdates] forKey:kLocationManagerHeadingUpdates];
+    [settings setValue:[NSNumber numberWithDouble:distanceFilter] forKey:kLocationManagerDistanceFilter];
+    [settings setValue:[NSNumber numberWithDouble:desiredAccuracy] forKey:kLocationManagerDesiredAccuracy];
+    [settings setValue:[NSNumber numberWithDouble:headingfilter] forKey:kLocationManagerHeadingFilter];
+    
+    [[MASTNotificationCenter sharedInstance] postNotificationName:kLocationManagerStart object:settings];
+}
+
++ (void)setLocationDetectionEnabled:(BOOL)enabled {
+    
+    NSString* notifcationName = kLocationManagerStop;
+    
+    if (enabled)
+        notifcationName = kLocationManagerStart;
+    
+    [[MASTNotificationCenter sharedInstance] postNotificationName:notifcationName object:nil];
+}
+
+
 - (id)init {
 	return nil;
 }
@@ -205,6 +234,8 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 	[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(visibleAd:) name:kAdViewBecomeVisibleNotification object:nil];
 	[[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(invisibleAd:) name:kAdViewBecomeInvisibleNotification object:nil];
     
+    [[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(locationUpdate:) name:kLocationManagerLocationUpdate object:nil];
+    
     // If the timer stops, then stop reciving events that update the ad.
     [[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(startUpdate:) name:kAdStartUpdateNotification object:nil];
     [[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(stopUpdate:) name:kAdStopUpdateNotification object:nil];
@@ -219,6 +250,14 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 	[[MASTNotificationCenter sharedInstance] postNotificationName:kRegisterAdNotification object:self];
 	
 	_observerSet = YES;
+}
+
+- (void)locationUpdate:(NSNotification*)notification {
+    CLLocation* location = [notification object];
+    if (location.horizontalAccuracy > 0) {
+        self.latitude = [NSString stringWithFormat:@"%f", location.coordinate.latitude];
+        self.longitude = [NSString stringWithFormat:@"%f", location.coordinate.longitude];
+    }
 }
 
 - (void)startUpdate:(NSNotification*)notification {
@@ -1158,8 +1197,6 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 
 //@property (retain) NSString*            lat;
 - (void)setLatitude:(NSString*)latitude {
-    [[MASTLocationManager sharedInstance] stopUpdatingLocation];
-    [[MASTNotificationCenter sharedInstance] postNotificationName:kNewLocationSetNotification object:latitude];
 	((MASTAdModel*)_adModel).latitude = latitude;
 }
 
@@ -1169,8 +1206,6 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 
 //@property (retain) NSString*            lon;
 - (void)setLongitude:(NSString*)longitude {
-    [[MASTLocationManager sharedInstance] stopUpdatingLocation];
-    [[MASTNotificationCenter sharedInstance] postNotificationName:kNewLocationSetNotification object:longitude];
 	((MASTAdModel*)_adModel).longitude = longitude;
 }
 

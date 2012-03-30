@@ -3,38 +3,27 @@
 //
 
 #import "MASTLocationManager.h"
+#import "MASTNotificationCenter.h"
+
+
+NSString* kLocationManagerPurpose = @"kLocationManagerPurpose";
+NSString* kLocationManagerHeadingUpdates = @"kLocationManagerHeadingUpdates";
+NSString* kLocationManagerSignificantUpdating = @"kLocationManagerSignificantUpdating";
+NSString* kLocationManagerDistanceFilter = @"kLocationManagerDistanceFilter";
+NSString* kLocationManagerDesiredAccuracy = @"kLocationManagerDesiredAccuracy";
+NSString* kLocationManagerHeadingFilter = @"kLocationManagerHeadingFilter";
 
 
 @implementation MASTLocationManager
 
-@synthesize locationManager = _locationManager,
-currentLocation = _currentLocation, currentHeading = _currentHeading, isUpdatingLocation = _isUpdatingLocation, unknowsState;
-
-
-@synthesize currentLocationCoordinate = _currentLocationCoordinate;
-
-
-static MASTLocationManager* sharedInstance = nil;
+@synthesize lastLocation = _lastLocation;
+@synthesize lastHeading = _lastHeading;
 
 
 #pragma mark -
 #pragma mark Singleton
 
-- (id) init {
-    self = [super init];
-    
-	if (self) {
-
-        self.delegate = self;
-		_currentLocationCoordinate.latitude = 0.0;
-		_currentLocationCoordinate.longitude = 0.0;
-		_isUpdatingLocation = NO;
-        self.unknowsState = YES;
-	}
-	
-	return self;
-}
-
+static MASTLocationManager* sharedInstance = nil;
 + (id)sharedInstance {
 	@synchronized(self) {
 		if (nil == sharedInstance) {
@@ -44,127 +33,181 @@ static MASTLocationManager* sharedInstance = nil;
 	return sharedInstance;
 }
 
-- (oneway void)superRelease {
-	[super release];
-}
+#pragma mark -
 
-+ (void)releaseSharedInstance {
-	@synchronized(self) {
-		[sharedInstance superRelease];
-		sharedInstance = nil;
+- (id) init {
+    self = [super init];
+	if (self) {
+        _locationDetectionActive = NO;
+        [[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(startLocationUpdate:) name:kLocationManagerStart object:nil];
+        [[MASTNotificationCenter sharedInstance] addObserver:self selector:@selector(stopLocationUpdate:) name:kLocationManagerStop object:nil];
 	}
+	return self;
 }
 
-+ (id)allocWithZone:(NSZone*)zone {
-	@synchronized(self) {
-		if (nil == sharedInstance) {
-			sharedInstance = [super allocWithZone:zone];
-		}
-	}
-	
-	return sharedInstance;
+- (void)dealloc {
+    [_locationManager setDelegate:nil];
+    [_locationManager stopUpdatingHeading];
+    [_locationManager release];
+    
+    [_lastLocation release];
+    [_lastLocation release];
+    
+    [super dealloc];
 }
-
-- (id)copyWithZone:(NSZone *)zone {
-	return sharedInstance;
-}
-
-- (id)retain {
-	return sharedInstance;
-}
-
-- (unsigned)retainCount {
-	return NSUIntegerMax;
-}
-
-- (oneway void)release {
-	// Do nothing.
-}
-
-- (id)autorelease {
-	return sharedInstance;
-}
-
 
 #pragma mark -
 #pragma mark Public
 
-- (void)startUpdatingLocation {
-    if (self.unknowsState) {
-        self.unknowsState = NO;
-    }
-    if (!_isUpdatingLocation)
-    {
-        _isUpdatingLocation = YES;
-        [super startUpdatingLocation];
-        //[[NotificationCenter sharedInstance] postNotificationName:kLocationStartNotification object:_currentLocation];
++ (BOOL)deviceLocationAvailable {
+   
+    CLAuthorizationStatus authStatus = [CLLocationManager authorizationStatus];
+    if ((authStatus != kCLAuthorizationStatusNotDetermined) && (authStatus != kCLAuthorizationStatusAuthorized))
+        return NO;
+    
+    if ([CLLocationManager locationServicesEnabled] == NO)
+        return NO;
+    
+    return YES;
+}
+
++ (BOOL)deviceHeadingAvailable {
+    
+    CLAuthorizationStatus authStatus = [CLLocationManager authorizationStatus];
+    if ((authStatus != kCLAuthorizationStatusNotDetermined) && (authStatus != kCLAuthorizationStatusAuthorized))
+        return NO;
+    
+    if ([CLLocationManager headingAvailable] == NO)
+        return NO;
+    
+    return YES;
+}
+
+- (BOOL)locationDetectionActive {
+    return _locationDetectionActive;
+}
+
+- (void)startLocationUpdate:(NSNotification*)notification {
+    @synchronized(self) {
+        NSString* purpose = nil;
+        BOOL headingUpdates = NO;
+        BOOL significant = YES;
+        CLLocationDistance distanceFilter = 1000;
+        CLLocationAccuracy desiredAccuracy = kCLLocationAccuracyThreeKilometers;
+        CLLocationDegrees headingFilter = 45;
+        
+        if ((notification != nil) && [notification.object isKindOfClass:[NSDictionary class]]) {
+            NSDictionary* settings = notification.object;
+            
+            id value = [settings valueForKey:kLocationManagerPurpose];
+            if ([value isKindOfClass:[NSString class]])
+                purpose = value;
+            
+            value = [settings valueForKey:kLocationManagerHeadingUpdates];
+            if ([value isKindOfClass:[NSNumber class]])
+                headingUpdates = [value boolValue];
+            
+            value = [settings valueForKey:kLocationManagerSignificantUpdating];
+            if ([value isKindOfClass:[NSNumber class]])
+                significant = [value boolValue];
+            
+            value = [settings valueForKey:kLocationManagerDistanceFilter];
+            if ([value isKindOfClass:[NSNumber class]])
+                distanceFilter = [value doubleValue];
+            
+            value = [settings valueForKey:kLocationManagerDesiredAccuracy];
+            if ([value isKindOfClass:[NSNumber class]])
+                desiredAccuracy = [value doubleValue];
+            
+            value = [settings valueForKey:kLocationManagerHeadingFilter];
+            if ([value isKindOfClass:[NSNumber class]])
+                headingFilter = [value doubleValue];
+        }
+        
+        
+        BOOL available = YES;
+        CLAuthorizationStatus authStatus = [CLLocationManager authorizationStatus];
+        if ((authStatus != kCLAuthorizationStatusNotDetermined) && (authStatus != kCLAuthorizationStatusAuthorized))
+            available = NO;
+        
+        if (available && ([CLLocationManager locationServicesEnabled] == NO))
+            available = NO;
+        
+        if (available == NO) {
+            if (_locationManager != nil) {
+                _locationManager.delegate = nil;
+                [_locationManager stopUpdatingLocation];
+                [_locationManager release];
+                _locationManager = nil;
+                
+                [_lastLocation release];
+                _lastLocation = nil;
+                
+                [_lastHeading release];
+                _lastHeading = nil;
+            }
+        }
+        
+        [_locationManager stopUpdatingLocation];
+        
+        if (_locationManager == nil) {
+            _locationManager = [CLLocationManager new];
+            _locationManager.delegate = self;
+            
+        }
+        
+        if ((_locationDetectionActive == NO) && (purpose != nil))
+            _locationManager.purpose = purpose;
+        
+        _locationManager.distanceFilter = distanceFilter;
+        _locationManager.desiredAccuracy = desiredAccuracy;
+        _locationManager.headingFilter = headingFilter;
+        
+        if (significant && [CLLocationManager significantLocationChangeMonitoringAvailable])
+            [_locationManager startMonitoringSignificantLocationChanges];
+        else
+            [_locationManager startUpdatingLocation];
+        
+        if (headingUpdates && [CLLocationManager headingAvailable])
+            [_locationManager startUpdatingHeading];
+        
+        _locationDetectionActive = YES;
     }
 }
 
-- (void)stopUpdatingLocation {
-    if (self.unknowsState) {
-        self.unknowsState = NO;
-    }
-    if (_isUpdatingLocation)
-    {
-        _isUpdatingLocation = NO;
-        [super stopUpdatingLocation];
-        //[[NotificationCenter sharedInstance] postNotificationName:kLocationStopNotification object:_currentLocation];
+- (void)stopLocationUpdate:(NSNotification*)notification {
+    @synchronized(self) {
+        _locationDetectionActive = NO;
+        [_locationManager stopUpdatingLocation];
     }
 }
-
-- (void)startUpdatingHeading {
-    [super startUpdatingHeading];
-}
-
-#pragma mark -
-#pragma mark Private
-
-
-- (CLLocationManager*)locationManager {
-    return self;
-}
-
 
 #pragma mark -
 #pragma mark CLLocationManagerDelegate
 
-- (void)locationManager:(CLLocationManager*)manager
-	didUpdateToLocation:(CLLocation*)newLocation
-           fromLocation:(CLLocation*)oldLocation {
-    if (_currentLocation) {
-        [_currentLocation release];
-    }
-    _currentLocation = [newLocation retain];
-    _currentLocationCoordinate = _currentLocation.coordinate;
-    
-	[[NSNotificationCenter defaultCenter] postNotificationName:kNewLocationDetectedNotification object:_currentLocation];
-    
-    if (newLocation.horizontalAccuracy < 1000000 )
-    {
-        [self stopUpdatingLocation];
-    }
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    [[MASTNotificationCenter sharedInstance] postNotificationName:kLocationManagerError object:error];
 }
 
-- (void)locationManager:(CLLocationManager *)manager  didFailWithError:(NSError *)error
-{
-    //[[NotificationCenter sharedInstance] postNotificationName:kLocationErrorNotification object:error];
-    [super startUpdatingLocation];
+- (void)locationManager:(CLLocationManager*)manager didUpdateToLocation:(CLLocation*)newLocation fromLocation:(CLLocation*)oldLocation {
+    if (_lastLocation != nil) {
+        [_lastLocation release];
+    }
+    
+    _lastLocation = [newLocation retain];
+    
+	[[MASTNotificationCenter sharedInstance] postNotificationName:kLocationManagerLocationUpdate object:_lastLocation];
 }
 
-- (void)locationManager:(CLLocationManager *)manager 
-	   didUpdateHeading:(CLHeading *)newHeading
-{
-    if (newHeading.trueHeading >= 0 && (newHeading.trueHeading != _currentHeading.trueHeading || !_currentHeading)) {
-        if (_currentHeading) {
-            [_currentHeading release];
-        }
-        _currentHeading = [newHeading retain];
-
-		[[NSNotificationCenter defaultCenter] postNotificationName:kLocationUpdateHeadingNotification object:_currentHeading];
-
-        //[[NotificationCenter sharedInstance] postNotificationName:kLocationUpdateHeadingNotification object:newHeading];
+- (void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading {
+    if (_lastHeading != nil) {
+        [_lastHeading release];
     }
+    
+    _lastHeading = [newHeading retain];
+    
+    [[MASTNotificationCenter sharedInstance] postNotificationName:kLocationManagerHeadingUpdate object:_lastHeading];
 }
 
 @end

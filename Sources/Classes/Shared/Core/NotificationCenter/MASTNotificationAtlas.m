@@ -49,14 +49,11 @@ NSString* kAdViewBecomeInvisibleNotification = @"Ad Become Invisible";
 NSString* kUaDetectedNotification = @"ua detected";
 
 // location
-NSString* kNewLocationDetectedNotification = @"New location found";
-NSString* kNewLocationSetNotification = @"Set new location";
-NSString* kLocationStartNotification = @"Start location search";
-NSString* kLocationStopNotification = @"Stop location search";
-NSString* kLocationInvalidParamertsNotification = @"use both longitude and latitude parameters";
-NSString* kLocationErrorNotification = @"Error find location";
-NSString* kLocationUpdateHeadingNotification = @"Update heading";
-NSString* kLocationUsedFoundLocationNotification = @"Used Found Location";
+NSString* kLocationManagerStart = @"Location Manager Start Update";
+NSString* kLocationManagerStop = @"Location Manager Stop Update";
+NSString* kLocationManagerError = @"Location Manager Error";
+NSString* kLocationManagerLocationUpdate = @"Location Manager Location Update";
+NSString* kLocationManagerHeadingUpdate = @"Location Manager Heading Update";
 
 // install notification
 NSString* kFinishInstallNotification = @"Finish install notifiaction";

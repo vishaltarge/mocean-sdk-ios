@@ -93,7 +93,7 @@
 {
 	if (_actionSheet == nil)
 	{
-		_actionSheet = [[UIActionSheet alloc] initWithTitle:@"Action" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Edit params", @"Update", nil];
+		_actionSheet = [[UIActionSheet alloc] initWithTitle:@"Action" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Edit params", @"Update", @"Enable Location", @"Disable Location", nil];
 	}
 	[_actionSheet showInView:self.view];
 }
@@ -143,6 +143,12 @@
 		case 1:
 			[_adView update];
 			break;
+        case 2:
+            [MASTAdView setLocationDetectionEnabled:YES];
+            break;
+        case 3:
+            [MASTAdView setLocationDetectionEnabled:NO];
+            break;
 
 		default:
 			break;

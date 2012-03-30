@@ -150,17 +150,6 @@
 - (void)sendUpdate:(NSTimer*)timer {
 	@synchronized(self) {
         if (_valid) {
-            MASTAdModel* adModel = [self.adView adModel];
-            if ( adModel.latitude == nil && adModel.longitude == nil )
-            {
-#ifdef INCLUDE_LOCATION_MANAGER
-                if ([MASTLocationManager sharedInstance].currentLocationCoordinate.longitude == 0 &&
-                     [MASTLocationManager sharedInstance].currentLocationCoordinate.latitude == 0)
-                {
-                    [[MASTLocationManager sharedInstance] startUpdatingLocation];                    
-                }
-#endif
-            }
             [[MASTNotificationCenter sharedInstance] postNotificationName:kStartAdDownloadNotification object:self.adView];
         }
 	}

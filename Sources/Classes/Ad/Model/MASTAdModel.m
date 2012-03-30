@@ -146,27 +146,10 @@ longitude, latitude, adCallTimeout, autoCollapse, showPreviousAdOnError;
     if (self.carrier)
         [_banerUrl appendFormat:@"&carrier=%@", self.carrier];
     
-    if (self.latitude == nil && self.longitude == nil)
-    {
-#ifdef INCLUDE_LOCATION_MANAGER
-        if ([MASTLocationManager sharedInstance].unknowsState == NO && 
-            [MASTLocationManager sharedInstance].currentLocationCoordinate.latitude != 0.0 &&
-            [MASTLocationManager sharedInstance].currentLocationCoordinate.longitude != 0.0)
-        {
-            [[MASTNotificationCenter sharedInstance] postNotificationName:kLocationUsedFoundLocationNotification object:nil];
-            [_banerUrl appendFormat:@"&lat=%f", [MASTLocationManager sharedInstance].currentLocationCoordinate.latitude];
-            [_banerUrl appendFormat:@"&long=%f", [MASTLocationManager sharedInstance].currentLocationCoordinate.longitude];
-        }
-#endif
-    }
-    else if ([self.latitude length]>0 && [self.longitude length]>0)
+    if (([self.latitude length] > 0) && ([self.longitude length] > 0))
     {
         [_banerUrl appendFormat:@"&lat=%@", self.latitude];
         [_banerUrl appendFormat:@"&long=%@", self.longitude];
-    }
-    else if ([self.latitude length] !=0 || [self.longitude length]!=0)
-    {
-        [[MASTNotificationCenter sharedInstance] postNotificationName:kLocationInvalidParamertsNotification object:nil]; 
     }
     
     [_banerUrl appendString:[[MASTSharedModel sharedInstance] sharedUrlPart]];

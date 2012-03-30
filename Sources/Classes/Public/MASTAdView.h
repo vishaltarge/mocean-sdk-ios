@@ -7,17 +7,9 @@
 //  version: 2.10.0
 //
 
-/** Set #define to enable location services code or #undef to disable to exclude location detection from SDK.
- */
-
-#undef INCLUDE_LOCATION_MANAGER
 
 #import <UIKit/UIKit.h>
-
-#ifdef INCLUDE_LOCATION_MANAGER
 #import <CoreLocation/CoreLocation.h>
-#endif
-
 #import "MASTAdDelegate.h"
 
 
@@ -63,6 +55,44 @@ typedef enum {
 	BOOL	_observerSet;
 	id		_adModel;
 }
+
+
+/** @name Location Detection Configuration */
+
+
+/** Configures and enables the SDK's location detection feature.  Refer to CLLocation iOS SDK documentation for specifics.
+ 
+ This setting and enablement applies to ALL ads in the SDK.  Using this feature causes the latitude and longitude 
+ properties to be updated as the device's location changes.  To stop SDK location detection use setLocationDetectionEnabled:.
+ 
+ Not all devices support location services and the user may disable them for the device or for specific applications.  If 
+ not available and these methods will not enable location detection.  Refer to CLLocation iOS documentation for details
+ on determining if location services are available or authorized.
+ 
+ @param purpose Message supplied to the device user if iOS prompts for location usage authorization, defaults nil
+ @param significantUpdating Use significant location changes if available (better on battery and recommended), default YES
+ @param headingUpdates Supply heading updates if available, default NO
+ @param distanceFilter If not using significantUpdating, distance delta that triggers update, defaults 1000m
+ @param desiredAccuracy If not using significantUpdating, location accuracy in meters, defaults kCLLocationAccuracyThreeKilometers
+ @param headingFilter If using headingUpdates, degrees delta that triggers update, defaults 45
+ 
+ */
++ (void)setLocationDetectionEnabledWithPupose:(NSString*)purpose
+                          significantUpdating:(BOOL)significantUpdating
+                               headingUpdates:(BOOL)headingUpdates
+                               distanceFilter:(CLLocationDistance)distanceFilter
+                              desiredAccuracy:(CLLocationAccuracy)desiredAccuracy
+                                headingfilter:(CLLocationDegrees)headingfilter;
+
+
+/** @name Location Detection Configuration */
+
+
+/** Enables or disables the SDK's location detection feature.  If enabled is YES will use default values for configuration.
+    Refer to setLocationDetectionEnabledWithPupose for default values.
+ 
+ */
++ (void)setLocationDetectionEnabled:(BOOL)enabled;
 
 
 /** @name Initializing an MASTAdView Object */
@@ -339,18 +369,20 @@ typedef enum {
 
 /** User location latitude value.
  
- Use this property to set latitude. The value @“” will stop coordinates of auto-detection and coordinates will not be sent to the server. Any other values also will stop the coordinates of auto-detection but coordinates will be sent to the server.
+ Use this property to set latitude.
+ If locationDetection is enabled this value will be updated by location detection.
  
- The default value is auto-detected by locationManager and sent to server. 
+ The default value is nil.
  */
 
 @property (retain) NSString*            latitude;
 
 /** User location longitude value.
  
- Use this property to set longitude. The value @“” will stop the coordinates of the auto-detection and these coordinates will not be sent to the server. Any other values also will stop the coordinates of auto-detection but these coordinates will be sent to server.
+ Use this property to set longitude.
+ If locationDetection is enabled this value will be updated by location detection.
  
- The default value is auto-detected by locationManager and sent to server.
+ The default value is nil.
  */
 
 @property (retain) NSString*            longitude;

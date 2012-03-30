@@ -152,18 +152,7 @@ static MASTAdController* sharedInstance = nil;
 }
 
 - (void)statrLoad:(MASTAdView*)adView {
-    MASTAdModel* adModel = [adView adModel];
-
-    if ( adModel.latitude == nil && adModel.longitude == nil )
-    {
-#ifdef INCLUDE_LOCATION_MANAGER
-        if ([MASTLocationManager sharedInstance].currentLocationCoordinate.longitude == 0 &&
-            [MASTLocationManager sharedInstance].currentLocationCoordinate.latitude == 0)
-        {
-            [[MASTLocationManager sharedInstance] startUpdatingLocation];                    
-        }
-#endif
-    }
+    [adView adModel];
 }
 
 - (void)registerAd:(NSNotification*)notification {
@@ -177,7 +166,7 @@ static MASTAdController* sharedInstance = nil;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self addAdView:adView];
     });
-	
+
     [self performSelector:@selector(statrLoad:) withObject:adView afterDelay:0.1];
 }
 

@@ -43,7 +43,7 @@
         [[NSNotificationCenter defaultCenter] addObserverForName:kOrmmaLocationUpdated object:nil queue:nil usingBlock:^(NSNotification *note) {
             NSDictionary* info = [note object];
 			CLLocation* location = [info objectForKey:kOrmmaKeyObject];
-            [self evalJS:[MASTOrmmaHelper setLatitude:location.coordinate.latitude longitude:location.coordinate.longitude accuracy:location.verticalAccuracy]];
+            [self evalJS:[MASTOrmmaHelper setLatitude:location.coordinate.latitude longitude:location.coordinate.longitude accuracy:location.horizontalAccuracy]];
         }];
         [[NSNotificationCenter defaultCenter] addObserverForName:kOrmmaHeadingUpdated object:nil queue:nil usingBlock:^(NSNotification *note) {
             NSDictionary* info = [note object];
@@ -196,6 +196,11 @@
         if ([self.ormmaDataSource respondsToSelector:@selector(supportLocationForAd:)]) {
             if ([self.ormmaDataSource supportLocationForAd:self.adView]) {
                 [supports addObject:@"'location'"];
+                
+                CLLocation* location = [[MASTLocationManager sharedInstance] lastLocation];
+                if (location != nil) {
+                    [self evalJS:[MASTOrmmaHelper setLatitude:location.coordinate.latitude longitude:location.coordinate.longitude accuracy:location.horizontalAccuracy]];
+                }
             }  
         }
         
@@ -203,6 +208,12 @@
         if ([self.ormmaDataSource respondsToSelector:@selector(supportHeadingForAd:)]) {
             if ([self.ormmaDataSource supportHeadingForAd:self.adView]) {
                 [supports addObject:@"'heading'"];
+                
+                CLHeading* heading = [[MASTLocationManager sharedInstance] lastHeading];
+                if (heading != nil) {
+                    NSNumber* headingNumber = [NSNumber numberWithDouble:heading.trueHeading];
+                    [self evalJS:[MASTOrmmaHelper setHeading:[headingNumber floatValue]]];
+                }
             }
         }
         
