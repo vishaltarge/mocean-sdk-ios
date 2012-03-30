@@ -238,6 +238,8 @@ static MASTLogger* sharedInstance = nil;
                         }
                     }
                 }
+            } else if ([obj respondsToSelector:@selector(description)]) {
+                [MASTLogger logWithFormat:@" - %@ - %@", [notification name], [obj description]];
             } else if ([_allLogAds count] > 0) {
                 [MASTLogger logWithFormat:@" - %@", [notification name]];
             }
