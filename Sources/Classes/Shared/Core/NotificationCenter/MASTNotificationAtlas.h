@@ -55,10 +55,6 @@ extern NSString* kLocationManagerError;
 extern NSString* kLocationManagerLocationUpdate;
 extern NSString* kLocationManagerHeadingUpdate;
 
-// install notification
-extern NSString* kFinishInstallNotification;
-extern NSString* kFailInstallNotification;
-
 // updateControll
 extern NSString* kAdStartUpdateNotification;
 extern NSString* kAdStopUpdateNotification;

@@ -400,22 +400,6 @@ typedef enum {
 @property (retain) NSString*            carrier;
 
 
-/** @name Install Notification */
-
-
-/** Id of the advertiser for install notification.
- 
- @warning *Note:* Install notification enabled only if advertiserId and groupCode are specified.
- */
-@property (assign) NSInteger			advertiserId;
-
-/** Group code for install notification.
- 
- @warning *Note:* Install notification enabled only if advertiserId and groupCode are specified.
- */
-@property (retain) NSString*			groupCode;
-
-
 /** @name Debug the MASTAdView */
 
 

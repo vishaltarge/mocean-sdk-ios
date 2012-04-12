@@ -39,7 +39,7 @@
 
 @dynamic delegate, isLoading, testMode, logMode, isAdChangeAnimated, contentAlignment, track, updateTimeInterval,
 defaultImage, site, zone, premium, type, keywords, minSize, maxSize, contentSize, textColor, additionalParameters,
-adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, carrier, latitude, longitude, adCallTimeout, autoCollapse, showPreviousAdOnError, autocloseInterstitialTime, showCloseButtonTime, udid;
+adServerUrl, country, region, city, area, metro, zip, carrier, latitude, longitude, adCallTimeout, autoCollapse, showPreviousAdOnError, autocloseInterstitialTime, showCloseButtonTime, udid;
 
 
 + (void)setLocationDetectionEnabledWithPupose:(NSString*)purpose
@@ -1105,32 +1105,6 @@ adServerUrl, advertiserId, groupCode, country, region, city, area, metro, zip, c
 
 - (NSString*)adServerUrl {
 	return ((MASTAdModel*)_adModel).adServerUrl;
-}
-
-//@property (retain) NSString*	advertiserId;
-- (void)setAdvertiserId:(NSInteger)advertiserId {
-	((MASTAdModel*)_adModel).advertiserId = advertiserId;
-    
-    if (((MASTAdModel*)_adModel).groupCode) {
-        [[MASTInstallManager sharedInstance] sendNotificationWith:advertiserId groupCode:((MASTAdModel*)_adModel).groupCode udid:((MASTAdModel*)_adModel).udid];
-    }
-}
-
-- (NSInteger)advertiserId {
-	return ((MASTAdModel*)_adModel).advertiserId;
-}
-
-//@property (retain) NSString*	groupCode;
-- (void)setGroupCode:(NSString*)groupCode {
-	((MASTAdModel*)_adModel).groupCode = groupCode;
-    
-    if (((MASTAdModel*)_adModel).advertiserId) {
-        [[MASTInstallManager sharedInstance] sendNotificationWith:((MASTAdModel*)_adModel).advertiserId groupCode:groupCode udid:((MASTAdModel*)_adModel).udid];
-    }
-}
-
-- (NSString*)groupCode {
-	return ((MASTAdModel*)_adModel).groupCode;
 }
 
 //@property (retain) NSString*            country;

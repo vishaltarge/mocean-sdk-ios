@@ -31,8 +31,6 @@
 		3B43CC7714CE93C600E2B3CF /* MASTUIViewAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC7314CE93C600E2B3CF /* MASTUIViewAdditions.h */; };
 		3B43CC7A14CE93E200E2B3CF /* MASTAdController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CC7814CE93E200E2B3CF /* MASTAdController.m */; };
 		3B43CC7B14CE93E200E2B3CF /* MASTAdController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC7914CE93E200E2B3CF /* MASTAdController.h */; };
-		3B43CC8214CE940000E2B3CF /* MASTInstallManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CC8014CE940000E2B3CF /* MASTInstallManager.m */; };
-		3B43CC8314CE940000E2B3CF /* MASTInstallManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC8114CE940000E2B3CF /* MASTInstallManager.h */; };
 		3B43CC8A14CE942300E2B3CF /* MASTWebKitInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CC8814CE942300E2B3CF /* MASTWebKitInfo.m */; };
 		3B43CC8B14CE942300E2B3CF /* MASTWebKitInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC8914CE942300E2B3CF /* MASTWebKitInfo.h */; };
 		3B43CC8E14CE943300E2B3CF /* MASTFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CC8C14CE943300E2B3CF /* MASTFileManager.m */; };
@@ -159,8 +157,6 @@
 		3B43CC7314CE93C600E2B3CF /* MASTUIViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTUIViewAdditions.h; sourceTree = "<group>"; };
 		3B43CC7814CE93E200E2B3CF /* MASTAdController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTAdController.m; sourceTree = "<group>"; };
 		3B43CC7914CE93E200E2B3CF /* MASTAdController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTAdController.h; sourceTree = "<group>"; };
-		3B43CC8014CE940000E2B3CF /* MASTInstallManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTInstallManager.m; sourceTree = "<group>"; };
-		3B43CC8114CE940000E2B3CF /* MASTInstallManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTInstallManager.h; sourceTree = "<group>"; };
 		3B43CC8814CE942300E2B3CF /* MASTWebKitInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTWebKitInfo.m; sourceTree = "<group>"; };
 		3B43CC8914CE942300E2B3CF /* MASTWebKitInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTWebKitInfo.h; sourceTree = "<group>"; };
 		3B43CC8C14CE943300E2B3CF /* MASTFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTFileManager.m; sourceTree = "<group>"; };
@@ -629,15 +625,6 @@
 			path = GTM;
 			sourceTree = "<group>";
 		};
-		CF9860CD13405F70004D6202 /* InstallManager */ = {
-			isa = PBXGroup;
-			children = (
-				3B43CC8114CE940000E2B3CF /* MASTInstallManager.h */,
-				3B43CC8014CE940000E2B3CF /* MASTInstallManager.m */,
-			);
-			path = InstallManager;
-			sourceTree = "<group>";
-		};
 		CF9860F21340D9CF004D6202 /* VideoView */ = {
 			isa = PBXGroup;
 			children = (
@@ -703,7 +690,6 @@
 			children = (
 				AC2EB5BF14F270970000B336 /* Accelerometer */,
 				AC2EB5C214F270970000B336 /* LocationManager */,
-				CF9860CD13405F70004D6202 /* InstallManager */,
 				CFF37870133B60830078AC6D /* WebKit */,
 				CFC4E5631330E1E70012F9AC /* FileManager */,
 				3B43CC9014CE946200E2B3CF /* Network */,
@@ -874,7 +860,6 @@
 				3B43CC7514CE93C600E2B3CF /* MASTUIWebViewAdditions.h in Headers */,
 				3B43CC7714CE93C600E2B3CF /* MASTUIViewAdditions.h in Headers */,
 				3B43CC7B14CE93E200E2B3CF /* MASTAdController.h in Headers */,
-				3B43CC8314CE940000E2B3CF /* MASTInstallManager.h in Headers */,
 				3B43CC8B14CE942300E2B3CF /* MASTWebKitInfo.h in Headers */,
 				3B43CC8F14CE943300E2B3CF /* MASTFileManager.h in Headers */,
 				3B43CCA914CE946200E2B3CF /* MASTCacheController.h in Headers */,
@@ -1038,7 +1023,6 @@
 				3B43CC7414CE93C600E2B3CF /* MASTUIWebViewAdditions.m in Sources */,
 				3B43CC7614CE93C600E2B3CF /* MASTUIViewAdditions.m in Sources */,
 				3B43CC7A14CE93E200E2B3CF /* MASTAdController.m in Sources */,
-				3B43CC8214CE940000E2B3CF /* MASTInstallManager.m in Sources */,
 				3B43CC8A14CE942300E2B3CF /* MASTWebKitInfo.m in Sources */,
 				3B43CC8E14CE943300E2B3CF /* MASTFileManager.m in Sources */,
 				3B43CCAA14CE946200E2B3CF /* MASTCacheController.m in Sources */,

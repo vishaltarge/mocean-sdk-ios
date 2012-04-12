@@ -8,7 +8,6 @@
 
 #import "MASTAdView.h"
 #import "MASTAdModel.h"
-#import "MASTInstallManager.h"
 #import "MASTUIViewAdditions.h"
 
 #import "OrmmaProtocols.h"
