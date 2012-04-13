@@ -38,7 +38,7 @@
 @dynamic adModel, uid;
 
 @dynamic delegate, isLoading, testMode, logMode, isAdChangeAnimated, contentAlignment, track, updateTimeInterval,
-defaultImage, site, zone, premium, type, keywords, minSize, maxSize, contentSize, textColor, additionalParameters,
+defaultImage, site, zone, premium, type, keywords, minSize, maxSize, textColor, additionalParameters,
 adServerUrl, country, region, city, area, metro, zip, carrier, latitude, longitude, adCallTimeout, autoCollapse, showPreviousAdOnError, autocloseInterstitialTime, showCloseButtonTime, udid;
 
 
@@ -174,12 +174,17 @@ adServerUrl, country, region, city, area, metro, zip, carrier, latitude, longitu
     
     if ([[_adModel currentAdView] isKindOfClass:[MASTAdWebView class]]) {
         [(MASTAdWebView*)[_adModel currentAdView] reset];
+        
+        if (self.delegate && [self.delegate respondsToSelector:@selector(didClosedAd:usageTimeInterval:)]) {
+            NSDate* _startDate = ((MASTAdModel*)_adModel).startDisplayDate;
+            NSTimeInterval timeInterval = -[_startDate timeIntervalSinceNow];
+            [self.delegate didClosedAd:self usageTimeInterval:timeInterval];
+        }
     }
-    
-    if (self.showCloseButtonTime != 0 || self.autocloseInterstitialTime != 0) {
+    else if (self.showCloseButtonTime != 0 || self.autocloseInterstitialTime != 0) {
         //close interstitial
         id currentAdView = [_adModel currentAdView];
-        if ((currentAdView != nil) && ([[_adModel currentAdView] isKindOfClass:[MASTAdWebView class]] == NO)) {
+        if (currentAdView != nil) {
             [self scheduledButtonAction];
         }
     }
@@ -376,8 +381,6 @@ adServerUrl, country, region, city, area, metro, zip, carrier, latitude, longitu
 	NSDictionary *info = [notification object];
 	MASTAdView* adView = [info objectForKey:@"adView"];
 	UIView* subView = [info objectForKey:@"subView"];
-    NSString* contentWidth = [info objectForKey:@"contentWidth"];
-    NSString* contentHeight = [info objectForKey:@"contentHeight"];
 	
 	if (adView == self) {        
         MASTAdModel* model = [self adModel];
@@ -394,14 +397,7 @@ adServerUrl, country, region, city, area, metro, zip, carrier, latitude, longitu
             model.currentAdView = subView;
             self.hidden = NO;
             subView.hidden = NO;
-            
-            // update content size if possible
-            if (contentHeight && contentWidth) {
-                model.contentSize = CGSizeMake([contentWidth floatValue], [contentHeight floatValue]);
-            } else {
-                model.contentSize = CGSizeZero;
-            }
-                        
+         
             // switch animation
             if (model.isAdChangeAnimated && currentAdView && subView) {
                 CGRect prevAdFrame = subView.frame;
@@ -1067,11 +1063,6 @@ adServerUrl, country, region, city, area, metro, zip, carrier, latitude, longitu
 
 - (CGSize)maxSize {
 	return ((MASTAdModel*)_adModel).maxSize;
-}
-
-//@property (readonly) CGSize contentSize;
-- (CGSize)contentSize {
-    return ((MASTAdModel*)_adModel).contentSize;
 }
 
 //@property (retain) NSString*	paramBG;

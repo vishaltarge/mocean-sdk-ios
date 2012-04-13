@@ -125,14 +125,6 @@ typedef enum {
  */
 @property (assign) NSInteger			zone;
 
-/** Size of the ad content must be shown.
- 
- Use this property to get the actual size of the ad content. Property value updated after ad content downloaded.
- 
- @warning *Note:* If size unavailable property returns CGRectZero.
- */
-@property (readonly) CGSize				contentSize;
-
 /** Image for unloaded ad state.
  
  Set the value of this property, that determines the ad default image for the unloaded state. In this state the content of the ad is invisible and ad default image is displayed. Without connection to the internet default image will be displayed.

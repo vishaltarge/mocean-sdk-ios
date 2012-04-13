@@ -59,7 +59,6 @@
 @property BOOL                          isDisplayed;
 
 @property BOOL                          aligmentCenter;
-@property CGSize                        contentSize;
 
 @property CGRect						frame;
 @property BOOL                          visibleState;

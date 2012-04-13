@@ -8,6 +8,7 @@
 #import "MASTExpandViewController.h"
 #import "MASTUtils.h"
 #import "MASTExpandView.h"
+#import "MASTConstants.h"
 
 @implementation MASTExpandViewController
 
@@ -68,6 +69,15 @@
 
 - (void)useCustomClose:(BOOL)use {
     if (!self.closeButton) {
+        
+        // ORMMA guaranteed close area
+        UIButton* invisButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        invisButton.frame = CGRectMake(self.view.frame.size.width - ORMMA_SQARE_CLOSE_SIZE, 0,
+                                       ORMMA_SQARE_CLOSE_SIZE, ORMMA_SQARE_CLOSE_SIZE);
+        invisButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
+        [invisButton addTarget:self action:@selector(buttonsAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:invisButton];
+        
         
         UIImage* closeImage = [MASTUtils closeImage];
         if (closeImage) {            
