@@ -11,5 +11,6 @@
 @interface MASTSDetailController : UIViewController
 
 @property (nonatomic, retain) UIBarButtonItem* menuButton;
+@property (nonatomic, retain) UIBarButtonItem* rightButton;
 
 @end

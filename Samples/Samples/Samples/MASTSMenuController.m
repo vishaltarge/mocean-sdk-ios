@@ -7,6 +7,7 @@
 //
 
 #import "MASTSMenuController.h"
+#import "MASTSLogController.h"
 
 // Sample ad usage controllers:
 #import "MASTSSimpleImage.h"
@@ -17,8 +18,10 @@
 #import "MASTSAdvancedBottom.h"
 #import "MASTSAdvancedTable.h"
 #import "MASTSAdvancedTopAndBottom.h"
-#import "MASTSAdvancedDelegate.h"
 #import "MASTSCustom.h"
+#import "MASTSDelegateGeneric.h"
+#import "MASTSDelegateOrmma.h"
+#import "MASTSDelegateThirdParty.h"
 
 
 @interface MASTSMenuController ()
@@ -81,7 +84,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -91,9 +94,13 @@
         case 0:
             return 4;
         case 1:
-            return 5;
+            return 4;
         case 2:
             return 1;
+        case 3:
+            return 3;
+        case 4:
+            return 2;
     }
     return 0;
 }
@@ -108,6 +115,10 @@
             return @"Advanced";
         case 2:
             return @"Custom";
+        case 3:
+            return @"Delegate";
+        case 4:
+            return @"Options";
     }
     
     return nil;
@@ -119,13 +130,14 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
         {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
     }
+    cell.accessoryView = nil;
     
     NSString* label = nil;
     
@@ -166,9 +178,6 @@
                 case 3:
                     label = @"Top and Bottom";
                     break;
-                case 4:
-                    label = @"Delegate";
-                    break;
             }
             break;
         }
@@ -177,10 +186,44 @@
             label = @"Custom Ad Setup";
             break;
         }
+        case 3:
+        {
+            switch (indexPath.row)
+            {
+                case 0:
+                    label = @"Generic";
+                    break;
+                case 1:
+                    label = @"ORMMA Events";
+                    break;
+                case 2:
+                    label = @"Third Party Request";
+                    break;
+            }
+            break;
+        }
+        case 4:
+        {
+            switch (indexPath.row)
+            {
+                case 0:
+                {
+                    label = @"SDK Location Updates";
+                    UISwitch* locationSwitch = [[UISwitch new] autorelease];
+                    locationSwitch.on = NO;
+                    [locationSwitch addTarget:self action:@selector(switchLocation:) forControlEvents:UIControlEventValueChanged];
+                    cell.accessoryView = locationSwitch;
+                    break;
+                }
+                case 1:
+                    label = @"SDK Log Viewer";
+                    break;
+            }
+            break;
+        }
     }
     
     cell.textLabel.text = label;
-
     
     return cell;
 }
@@ -231,9 +274,6 @@
                 case 3:
                     testController = [[MASTSAdvancedTopAndBottom new] autorelease];
                     break;
-                case 4:
-                    testController = [[MASTSAdvancedDelegate new] autorelease];
-                    break;
             }
             break;
         }
@@ -245,6 +285,33 @@
                     testController = [[MASTSCustom new] autorelease];
                     break;
             }
+            break;
+        }
+        case 3:
+        {
+            switch (indexPath.row)
+            {
+                case 0:
+                    testController = [[MASTSDelegateGeneric new] autorelease];
+                    break;
+                case 1:
+                    testController = [[MASTSDelegateOrmma new] autorelease];
+                    break;
+                case 2:
+                    testController = [[MASTSDelegateThirdParty new] autorelease];
+                    break;
+            }
+            break;
+        }
+        case 4:
+        {
+            switch (indexPath.row)
+            {
+                case 1:
+                    testController = [[MASTSLogController new] autorelease];
+                    break;
+            }
+            break;
         }
     }
     
@@ -260,6 +327,16 @@
     else
     {
         [self.navigationController pushViewController:testController animated:YES];
+    }
+}
+
+#pragma mark -
+
+- (void)switchLocation:(UISwitch*)sender
+{
+    if (self.delegate != nil)
+    {
+        [self.delegate menuController:self setLocationUsage:sender.on];
     }
 }
 

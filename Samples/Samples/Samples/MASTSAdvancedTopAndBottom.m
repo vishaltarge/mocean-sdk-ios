@@ -9,13 +9,22 @@
 #import "MASTSAdvancedTopAndBottom.h"
 
 @interface MASTSAdvancedTopAndBottom ()
+@property (nonatomic, retain) MASTSAdConfigController* bottomAdConfigController;
 @property (nonatomic, retain) MASTAdView* bottomAdView;
 @property (nonatomic, assign) BOOL bottomFirstAppear;
 @end
 
 @implementation MASTSAdvancedTopAndBottom
 
-@synthesize bottomAdView, bottomFirstAppear;
+@synthesize bottomAdConfigController, bottomAdView, bottomFirstAppear;
+
+- (void)dealloc
+{
+    self.bottomAdConfigController = nil;
+    self.bottomAdView = nil;
+    
+    [super dealloc];
+}
 
 - (id)init
 {
@@ -23,6 +32,9 @@
     if (self)
     {
         self.bottomFirstAppear = YES;
+        
+        self.bottomAdConfigController = [[MASTSAdConfigController new] autorelease];
+        self.bottomAdConfigController.delegate = self;
     }
     return self;
 }
@@ -48,22 +60,35 @@
     self.bottomAdView.showPreviousAdOnError = self.adView.showPreviousAdOnError;
     self.bottomAdView.logMode = self.adView.logMode;
     [self.view addSubview:self.bottomAdView];
+    
+    frame = super.adConfigController.view.frame;
+    frame.origin.y += frame.size.height;
+    self.bottomAdConfigController.view.frame = frame;
+    self.bottomAdConfigController.view.autoresizingMask = super.adConfigController.view.autoresizingMask;
+    [self.view addSubview:self.bottomAdConfigController.view];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    NSInteger site = 19829;
-    NSInteger zone = 88269;
+    NSInteger topSite = 19829;
+    NSInteger topZone = 98466;
+    NSInteger bottomSite = 19829;
+    NSInteger bottomZone = 98465;
     
-    super.adView.site = site;
-    super.adView.zone = zone;
-    self.bottomAdView.site = site;
-    self.bottomAdView.zone = zone;
+    super.adView.site = topSite;
+    super.adView.zone = topZone;
+    self.bottomAdView.site = bottomSite;
+    self.bottomAdView.zone = bottomZone;
     
-    super.adConfigController.site = site;
-    super.adConfigController.zone = zone;
+    super.adView.backgroundColor = [UIColor clearColor];
+    self.bottomAdView.backgroundColor = [UIColor clearColor];
+    
+    super.adConfigController.site = topSite;
+    super.adConfigController.zone = topZone;
+    self.bottomAdConfigController.site = bottomSite;
+    self.bottomAdConfigController.zone = bottomZone;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -79,23 +104,57 @@
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-    
+    [UIView animateWithDuration:.2 
+                     animations:^
+     {
+         self.adConfigController.view.center = self.view.center;
+         CGRect frame = super.adConfigController.view.frame;
+         frame.origin.y += frame.size.height;
+         self.bottomAdConfigController.view.frame = frame;
+     }];
+
+    [super.adView update];
     [self.bottomAdView update];
+}
+
+#pragma mark -
+
+- (void)keyboardDidShow:(id)notification
+{
+    [super keyboardDidShow:notification];
+    
+    CGRect frame = super.adConfigController.view.frame;
+    frame.origin.y -= frame.size.height;
+    super.adConfigController.view.frame = frame;
+    frame.origin.y += frame.size.height;
+    self.bottomAdConfigController.view.frame = frame;
+}
+
+- (void)keyboardWillHide:(id)notification
+{
+    [super keyboardWillHide:notification];
+    
+    CGRect frame = super.adConfigController.view.frame;
+    frame.origin.y += frame.size.height;
+    self.bottomAdConfigController.view.frame = frame;
 }
 
 #pragma mark -
 
 - (void)updateAdWithConfig:(MASTSAdConfigController *)configController
 {
-    [super updateAdWithConfig:configController];
-
+    if (configController == super.adConfigController)
+    {
+        [super updateAdWithConfig:configController];
+        return;
+    }
+    
     NSInteger site = configController.site;
     NSInteger zone = configController.zone;
-
+    
     self.bottomAdView.site = site;
     self.bottomAdView.zone = zone;
-
+    
     [self.bottomAdView update];
 }
 

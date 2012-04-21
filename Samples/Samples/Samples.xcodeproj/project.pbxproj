@@ -16,7 +16,7 @@
 		3C91DDE7153F737500FCF6CD /* MASTSAdConfigController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C91DDC6153F737400FCF6CD /* MASTSAdConfigController.m */; };
 		3C91DDE8153F737500FCF6CD /* MASTSAdvancedAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C91DDC8153F737400FCF6CD /* MASTSAdvancedAnimation.m */; };
 		3C91DDE9153F737500FCF6CD /* MASTSAdvancedBottom.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C91DDCA153F737400FCF6CD /* MASTSAdvancedBottom.m */; };
-		3C91DDEA153F737500FCF6CD /* MASTSAdvancedDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C91DDCC153F737400FCF6CD /* MASTSAdvancedDelegate.m */; };
+		3C91DDEA153F737500FCF6CD /* MASTSDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C91DDCC153F737400FCF6CD /* MASTSDelegate.m */; };
 		3C91DDEB153F737500FCF6CD /* MASTSAdvancedTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C91DDCE153F737400FCF6CD /* MASTSAdvancedTable.m */; };
 		3C91DDEC153F737500FCF6CD /* MASTSAdvancedTopAndBottom.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C91DDD0153F737400FCF6CD /* MASTSAdvancedTopAndBottom.m */; };
 		3C91DDED153F737500FCF6CD /* MASTSCustom.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C91DDD2153F737400FCF6CD /* MASTSCustom.m */; };
@@ -46,6 +46,10 @@
 		3C91DE2E153F761E00FCF6CD /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C91DE28153F761E00FCF6CD /* Icon-72.png */; };
 		3C91DE2F153F761E00FCF6CD /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C91DE29153F761E00FCF6CD /* Icon.png */; };
 		3C91DE30153F761E00FCF6CD /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C91DE2A153F761E00FCF6CD /* Icon@2x.png */; };
+		C54969DE1543453B006F9444 /* MASTSDelegateGeneric.m in Sources */ = {isa = PBXBuildFile; fileRef = C54969DD1543453B006F9444 /* MASTSDelegateGeneric.m */; };
+		C54969E115434556006F9444 /* MASTSDelegateOrmma.m in Sources */ = {isa = PBXBuildFile; fileRef = C54969E015434556006F9444 /* MASTSDelegateOrmma.m */; };
+		C54969E415434566006F9444 /* MASTSDelegateThirdParty.m in Sources */ = {isa = PBXBuildFile; fileRef = C54969E315434566006F9444 /* MASTSDelegateThirdParty.m */; };
+		C54969F115434EF7006F9444 /* MASTSLogController.m in Sources */ = {isa = PBXBuildFile; fileRef = C54969F015434EF7006F9444 /* MASTSLogController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,8 +93,8 @@
 		3C91DDC8153F737400FCF6CD /* MASTSAdvancedAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSAdvancedAnimation.m; sourceTree = "<group>"; };
 		3C91DDC9153F737400FCF6CD /* MASTSAdvancedBottom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSAdvancedBottom.h; sourceTree = "<group>"; };
 		3C91DDCA153F737400FCF6CD /* MASTSAdvancedBottom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSAdvancedBottom.m; sourceTree = "<group>"; };
-		3C91DDCB153F737400FCF6CD /* MASTSAdvancedDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSAdvancedDelegate.h; sourceTree = "<group>"; };
-		3C91DDCC153F737400FCF6CD /* MASTSAdvancedDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSAdvancedDelegate.m; sourceTree = "<group>"; };
+		3C91DDCB153F737400FCF6CD /* MASTSDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSDelegate.h; sourceTree = "<group>"; };
+		3C91DDCC153F737400FCF6CD /* MASTSDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSDelegate.m; sourceTree = "<group>"; };
 		3C91DDCD153F737400FCF6CD /* MASTSAdvancedTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSAdvancedTable.h; sourceTree = "<group>"; };
 		3C91DDCE153F737400FCF6CD /* MASTSAdvancedTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSAdvancedTable.m; sourceTree = "<group>"; };
 		3C91DDCF153F737400FCF6CD /* MASTSAdvancedTopAndBottom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSAdvancedTopAndBottom.h; sourceTree = "<group>"; };
@@ -135,6 +139,14 @@
 		3C91DE28153F761E00FCF6CD /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		3C91DE29153F761E00FCF6CD /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		3C91DE2A153F761E00FCF6CD /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		C54969DC1543453B006F9444 /* MASTSDelegateGeneric.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSDelegateGeneric.h; sourceTree = "<group>"; };
+		C54969DD1543453B006F9444 /* MASTSDelegateGeneric.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSDelegateGeneric.m; sourceTree = "<group>"; };
+		C54969DF15434556006F9444 /* MASTSDelegateOrmma.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSDelegateOrmma.h; sourceTree = "<group>"; };
+		C54969E015434556006F9444 /* MASTSDelegateOrmma.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSDelegateOrmma.m; sourceTree = "<group>"; };
+		C54969E215434566006F9444 /* MASTSDelegateThirdParty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSDelegateThirdParty.h; sourceTree = "<group>"; };
+		C54969E315434566006F9444 /* MASTSDelegateThirdParty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSDelegateThirdParty.m; sourceTree = "<group>"; };
+		C54969EF15434EF7006F9444 /* MASTSLogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSLogController.h; sourceTree = "<group>"; };
+		C54969F015434EF7006F9444 /* MASTSLogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSLogController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -231,6 +243,8 @@
 				3C91DDD6153F737500FCF6CD /* MASTSDetailController.m */,
 				3C91DDC5153F737400FCF6CD /* MASTSAdConfigController.h */,
 				3C91DDC6153F737400FCF6CD /* MASTSAdConfigController.m */,
+				C54969EF15434EF7006F9444 /* MASTSLogController.h */,
+				C54969F015434EF7006F9444 /* MASTSLogController.m */,
 				3C91DDD7153F737500FCF6CD /* MASTSMainWindow_iPad.xib */,
 				3C91DDD8153F737500FCF6CD /* MASTSMainWindow_iPhone.xib */,
 			);
@@ -243,6 +257,7 @@
 				3C91DDFC153F739A00FCF6CD /* Simple */,
 				3C91DDFD153F739F00FCF6CD /* Advanced */,
 				3C91DDFE153F73A600FCF6CD /* Custom */,
+				C54969DB154344C4006F9444 /* Delegate */,
 			);
 			name = "Sample Controllers";
 			sourceTree = "<group>";
@@ -275,8 +290,6 @@
 				3C91DDCE153F737400FCF6CD /* MASTSAdvancedTable.m */,
 				3C91DDCF153F737400FCF6CD /* MASTSAdvancedTopAndBottom.h */,
 				3C91DDD0153F737400FCF6CD /* MASTSAdvancedTopAndBottom.m */,
-				3C91DDCB153F737400FCF6CD /* MASTSAdvancedDelegate.h */,
-				3C91DDCC153F737400FCF6CD /* MASTSAdvancedDelegate.m */,
 			);
 			name = Advanced;
 			sourceTree = "<group>";
@@ -331,6 +344,21 @@
 				3C91DE2A153F761E00FCF6CD /* Icon@2x.png */,
 			);
 			name = Images;
+			sourceTree = "<group>";
+		};
+		C54969DB154344C4006F9444 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				3C91DDCB153F737400FCF6CD /* MASTSDelegate.h */,
+				3C91DDCC153F737400FCF6CD /* MASTSDelegate.m */,
+				C54969DC1543453B006F9444 /* MASTSDelegateGeneric.h */,
+				C54969DD1543453B006F9444 /* MASTSDelegateGeneric.m */,
+				C54969DF15434556006F9444 /* MASTSDelegateOrmma.h */,
+				C54969E015434556006F9444 /* MASTSDelegateOrmma.m */,
+				C54969E215434566006F9444 /* MASTSDelegateThirdParty.h */,
+				C54969E315434566006F9444 /* MASTSDelegateThirdParty.m */,
+			);
+			name = Delegate;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -433,7 +461,7 @@
 				3C91DDE7153F737500FCF6CD /* MASTSAdConfigController.m in Sources */,
 				3C91DDE8153F737500FCF6CD /* MASTSAdvancedAnimation.m in Sources */,
 				3C91DDE9153F737500FCF6CD /* MASTSAdvancedBottom.m in Sources */,
-				3C91DDEA153F737500FCF6CD /* MASTSAdvancedDelegate.m in Sources */,
+				3C91DDEA153F737500FCF6CD /* MASTSDelegate.m in Sources */,
 				3C91DDEB153F737500FCF6CD /* MASTSAdvancedTable.m in Sources */,
 				3C91DDEC153F737500FCF6CD /* MASTSAdvancedTopAndBottom.m in Sources */,
 				3C91DDED153F737500FCF6CD /* MASTSCustom.m in Sources */,
@@ -446,6 +474,10 @@
 				3C91DDF6153F737500FCF6CD /* MASTSSimpleRichMedia.m in Sources */,
 				3C91DDF7153F737500FCF6CD /* MASTSSimpleText.m in Sources */,
 				3C91DDF8153F737500FCF6CD /* MASTSSplitViewController.m in Sources */,
+				C54969DE1543453B006F9444 /* MASTSDelegateGeneric.m in Sources */,
+				C54969E115434556006F9444 /* MASTSDelegateOrmma.m in Sources */,
+				C54969E415434566006F9444 /* MASTSDelegateThirdParty.m in Sources */,
+				C54969F115434EF7006F9444 /* MASTSLogController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,6 +522,7 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -513,6 +546,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -531,6 +565,7 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Samples/Samples-Prefix.pch";
+				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "Samples/Samples-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -542,6 +577,7 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Samples/Samples-Prefix.pch";
+				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "Samples/Samples-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;

@@ -12,6 +12,7 @@
 #import "MASTNotificationCenter.h"
 #import "MASTNetworkQueue.h"
 #import "MASTConstants.h"
+#import "MASTAdView_Private.h"
 
 @interface MASTOrmmaSharedDelegate ()
 
@@ -318,10 +319,40 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
     UIView *adControl = sender;
     self.defaultFrame = adControl.frame;
     
-    adControl.frame = CGRectMake(adControl.frame.origin.x, adControl.frame.origin.y, size.width, size.height);
-    /*[UIView animateWithDuration:0.2 animations:^(void) {
-	 adControl.frame = CGRectMake(adControl.frame.origin.x, adControl.frame.origin.y, size.width, size.height);
-	 }];*/
+    CGRect currentFrame = adControl.frame;
+    CGRect availableBounds = adControl.superview.bounds;
+    
+    CGRect resizedFrame = currentFrame;
+    resizedFrame.size.width = size.width;
+    resizedFrame.size.height = size.height;
+    
+    if (CGRectContainsRect(availableBounds, resizedFrame) == NO) {
+        // The new size doesn't fit within the parent's bounds,
+        // repositon the origin so that it does.
+        
+        CGFloat maxY = CGRectGetMaxY(availableBounds);
+        CGFloat newY = CGRectGetMaxY(resizedFrame);
+        if (newY > maxY) {
+            CGFloat delta = newY - maxY;
+            resizedFrame.origin.y -= delta;
+        }
+        
+        CGFloat maxX = CGRectGetMaxX(availableBounds);
+        CGFloat newX = CGRectGetMaxX(resizedFrame);
+        if (newX > maxX) {
+            CGFloat delta = newX - maxX;
+            resizedFrame.origin.x -= delta;
+        }
+    }
+    
+    adControl.frame = resizedFrame;
+    
+    // The above will also trigger an observer change for the frame which will incorrectly
+    // set the model to the resized frame.  Future ads should be obtained with the callers/autosized
+    // desired frame and not a resized from from another ad.  The following forces the frame
+    // on the model to be preserved.
+    if ([adControl isKindOfClass:[MASTAdView class]])
+        [[(MASTAdView*)adControl adModel] setFrame:currentFrame];
     
     //save options
     [self saveOptions:adControl];

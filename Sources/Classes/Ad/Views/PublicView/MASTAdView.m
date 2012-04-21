@@ -589,7 +589,9 @@ adServerUrl, country, region, city, area, metro, zip, carrier, latitude, longitu
         }
         if([object valueForKeyPath:keyPath] != [NSNull null]) {
             newFrame = [[object valueForKeyPath:keyPath] CGRectValue];
-        }
+            
+            ((MASTAdModel*)_adModel).frame = newFrame;
+        }        
         
         NSMutableDictionary* info = [NSMutableDictionary dictionary];
         [info setObject:self forKey:@"adView"];

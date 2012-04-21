@@ -16,4 +16,8 @@
 @property (nonatomic, retain) MASTAdView* adView;
 @property (nonatomic, retain) MASTSAdConfigController* adConfigController;
 
+
+- (void)keyboardDidShow:(id)notification;
+- (void)keyboardWillHide:(id)notification;
+
 @end

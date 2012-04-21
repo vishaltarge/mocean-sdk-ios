@@ -20,6 +20,8 @@
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
     self.adView.delegate = nil;
     self.adView = nil;
     
@@ -77,8 +79,8 @@
     frame = self.adConfigController.view.bounds;
     frame.origin.y = 65;
     self.adConfigController.view.frame = frame;
-    self.adConfigController.view.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | 
-        UIViewAutoresizingFlexibleRightMargin;
+    self.adConfigController.view.center = self.view.center;
+    self.adConfigController.view.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin;
     [self.view addSubview:self.adConfigController.view];
 }
 
@@ -95,6 +97,21 @@
     // Release any retained subviews of the main view.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardDidShow:)
+                                                 name:UIKeyboardDidShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];    
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -106,14 +123,54 @@
     }
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return YES;
 }
 
+- (void)didAnimateFirstHalfOfRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+
+}
+
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
+    [UIView animateWithDuration:.2 
+                     animations:^
+     {
+         self.adConfigController.view.center = self.view.center;
+     }];
+    
     [self.adView update];
+}
+
+#pragma mark -
+
+- (void)keyboardDidShow:(id)notification
+{
+    NSDictionary* info = [notification userInfo];
+    if (info == nil)
+        return;
+    
+    CGRect windowKeyboardFrame = [[info valueForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGRect viewKeyboardFrame = [self.view.window convertRect:windowKeyboardFrame toView:self.view];
+
+    CGRect frame = self.adConfigController.view.frame;
+    if (CGRectGetMaxY(frame) > CGRectGetMinY(viewKeyboardFrame))
+    {
+        frame.origin.y -= CGRectGetMaxY(frame) - CGRectGetMinY(viewKeyboardFrame);
+        self.adConfigController.view.frame = frame;
+    }
+}
+
+- (void)keyboardWillHide:(id)notification
+{
+    self.adConfigController.view.center= self.view.center;
 }
 
 #pragma mark -

@@ -60,16 +60,17 @@
     
     [[self.view subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
-    CGRect frame = CGRectMake(0, 5, 45, 29);
+    CGRect frame = CGRectMake(0, 5, 35, 29);
     UILabel* label = [[[UILabel alloc] initWithFrame:frame] autorelease];
     label.backgroundColor = [UIColor clearColor];
     label.textAlignment = UITextAlignmentRight;
     label.text = @"Site:";
+    label.font = [UIFont systemFontOfSize:13];
     [self.view addSubview:label];
     self.siteLabel = label;
     
     frame.origin.x += frame.size.width + 1;
-    frame.size.width = 65;
+    frame.size.width = 75;
     UITextField* text = [[[UITextField alloc] initWithFrame:frame] autorelease];
     text.autocapitalizationType = UITextAutocapitalizationTypeNone;
     text.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -80,17 +81,18 @@
     [self.view addSubview:text];
     self.siteText = text;    
     
-    frame.origin.x += frame.size.width + 5;
-    frame.size.width = 45;
+    frame.origin.x += frame.size.width + 3;
+    frame.size.width = 40;
     label = [[[UILabel alloc] initWithFrame:frame] autorelease];
     label.backgroundColor = [UIColor clearColor];
     label.textAlignment = UITextAlignmentRight;
     label.text = @"Zone:";
+    label.font = [UIFont systemFontOfSize:13];
     [self.view addSubview:label];
     self.zoneLabel = label;
     
     frame.origin.x += frame.size.width + 1;
-    frame.size.width = 65;
+    frame.size.width = 75;
     text = [[[UITextField alloc] initWithFrame:frame] autorelease];
     text.autocapitalizationType = UITextAutocapitalizationTypeNone;
     text.autocorrectionType = UITextAutocorrectionTypeNo;

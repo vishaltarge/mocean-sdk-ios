@@ -59,7 +59,7 @@
     self.tableView.tableHeaderView = self.adConfigController.view;
     
     self.adConfigController.site = 19829;
-    self.adConfigController.zone = 88269;
+    self.adConfigController.zone = 102238;
 }
 
 - (void)viewDidUnload

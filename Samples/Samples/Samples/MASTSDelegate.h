@@ -1,5 +1,5 @@
 //
-//  MASTSAdvancedDelegate.h
+//  MASTSDelegate.h
 //  AdMobileSamples
 //
 //  Created by Jason Dickert on 4/18/12.
@@ -8,6 +8,6 @@
 
 #import "MASTSSimple.h"
 
-@interface MASTSAdvancedDelegate : MASTSSimple <MASTAdViewDelegate>
+@interface MASTSDelegate : MASTSSimple <MASTAdViewDelegate>
 
 @end

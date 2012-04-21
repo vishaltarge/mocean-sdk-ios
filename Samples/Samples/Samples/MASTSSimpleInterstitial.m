@@ -14,6 +14,22 @@
 
 @implementation MASTSSimpleInterstitial
 
+- (void)loadView
+{
+    [super loadView];
+
+    // For interstitial, make it the full size of the
+    // parent and setup some interstitial properties.
+    
+    self.adView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth | 
+        UIViewAutoresizingFlexibleHeight;
+    
+    super.adView.frame = super.view.bounds;
+    super.adView.backgroundColor = [UIColor whiteColor];
+    super.adView.autocloseInterstitialTime = 15;
+    super.adView.showCloseButtonTime = 5;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -26,8 +42,11 @@
     
     super.adConfigController.site = site;
     super.adConfigController.zone = zone;
-    
+ 
     super.adConfigController.buttonTitle = @"Show";
+    
+    // Show the ad view over the config controller.
+    [super.view bringSubviewToFront:super.adView];
 }
 
 @end

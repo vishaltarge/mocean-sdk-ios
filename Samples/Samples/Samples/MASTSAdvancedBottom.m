@@ -38,10 +38,12 @@
     [super viewDidLoad];
     
     NSInteger site = 19829;
-    NSInteger zone = 88269;
+    NSInteger zone = 98465;
     
     super.adView.site = site;
     super.adView.zone = zone;
+    
+    super.adView.backgroundColor = [UIColor clearColor];
     
     super.adConfigController.site = site;
     super.adConfigController.zone = zone;

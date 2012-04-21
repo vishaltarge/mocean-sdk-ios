@@ -15,13 +15,16 @@
 
 @implementation MASTSDetailController
 
-@synthesize menuButton;
+@synthesize menuButton, rightButton;
 @synthesize toolbar, titleItem;
 
 - (void)dealloc
 {
     self.toolbar = nil;
     self.titleItem = nil;
+    
+    self.menuButton = nil;
+    self.rightButton = nil;
     
     [super dealloc];
 }
@@ -47,8 +50,7 @@
         if (self.toolbar == nil)
         {
             self.toolbar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 768, 44)] autorelease];
-            self.toolbar.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin |
-            UIViewAutoresizingFlexibleWidth;
+            self.toolbar.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
             
             [self.view addSubview:self.toolbar];
             
@@ -67,6 +69,9 @@
             [toolbarItems addObject:[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                                    target:nil
                                                                                    action:nil] autorelease]];
+            
+            if (self.rightButton != nil)
+                [toolbarItems addObject:self.rightButton];
             
             self.toolbar.items = toolbarItems;
         }
@@ -97,6 +102,29 @@
     
     if (self.menuButton != nil)
         [toolbarItems insertObject:self.menuButton atIndex:0];
+    
+    self.toolbar.items = toolbarItems;
+}
+
+- (void)setRightButton:(UIBarButtonItem *)rb
+{
+    BOOL hadRightButton = self.rightButton != nil;
+    
+    if (rightButton != rb)
+    {
+        [rightButton release];
+        rightButton = [rb retain];
+    }
+    
+    if (self.toolbar == nil)
+        return;
+    
+    NSMutableArray* toolbarItems = [NSMutableArray arrayWithArray:self.toolbar.items];
+    if (hadRightButton)
+        [toolbarItems removeLastObject];
+    
+    if (self.rightButton != nil)
+        [toolbarItems addObject:self.rightButton];
     
     self.toolbar.items = toolbarItems;
 }

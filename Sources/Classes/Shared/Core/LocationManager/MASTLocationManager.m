@@ -179,6 +179,8 @@ static MASTLocationManager* sharedInstance = nil;
     @synchronized(self) {
         _locationDetectionActive = NO;
         [_locationManager stopUpdatingLocation];
+        [_locationManager stopMonitoringSignificantLocationChanges];
+        [_locationManager stopUpdatingHeading];
     }
 }
 

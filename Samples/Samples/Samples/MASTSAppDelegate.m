@@ -10,6 +10,7 @@
 #import "MASTSMenuController.h"
 #import "MASTSDetailController.h"
 #import "MASTSSplitViewController.h"
+#import "MASTAdView.h"
 
 
 @interface MASTSAppDelegate()
@@ -18,13 +19,14 @@
 @property (nonatomic, retain) MASTSDetailController* detailController;
 @property (nonatomic, retain) UIViewController* subDetailController;
 @property (nonatomic, retain) UIPopoverController* popoverController;
+@property (nonatomic, assign) BOOL useLocation;
 @end
 
 
 @implementation MASTSAppDelegate
 
 @synthesize window = _window;
-@synthesize rootController, menuNavController, detailController, subDetailController, popoverController;
+@synthesize rootController, menuNavController, detailController, subDetailController, popoverController, useLocation;
 
 
 - (void)dealloc
@@ -71,6 +73,9 @@
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    
+    // This should be done here to prevent location updates while the application is inactive.
+    [MASTAdView setLocationDetectionEnabled:NO];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -87,6 +92,9 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    if (self.useLocation)
+        [MASTAdView setLocationDetectionEnabled:YES];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -101,7 +109,7 @@
           withBarButtonItem:(UIBarButtonItem *)barButtonItem
        forPopoverController:(UIPopoverController *)pc
 {
-    [barButtonItem setTitle:@"Menu"];
+    [barButtonItem setTitle:@"Samples"];
     
     if (aViewController == menuNavController)
         self.detailController.menuButton = barButtonItem;
@@ -146,12 +154,23 @@
         
         self.detailController.title = controller.title;
         
+        self.detailController.rightButton = controller.navigationItem.rightBarButtonItem;
+        
         [self.subDetailController.view removeFromSuperview];
+        
         [self.detailController.view addSubview:controller.view];
+        [self.detailController.view sendSubviewToBack:controller.view];
+        
         [self.popoverController dismissPopoverAnimated:YES];
         
         self.subDetailController = controller;
     }
+}
+
+- (void)menuController:(MASTSMenuController *)menuController setLocationUsage:(BOOL)usage
+{
+    self.useLocation = usage;
+    [MASTAdView setLocationDetectionEnabled:usage];
 }
 
 @end

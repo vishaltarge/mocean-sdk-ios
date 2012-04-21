@@ -15,6 +15,7 @@
 @required
 
 - (void)menuController:(MASTSMenuController*)menuController presentController:(UIViewController*)controller;
+- (void)menuController:(MASTSMenuController *)menuController setLocationUsage:(BOOL)usage;
 
 @end
 

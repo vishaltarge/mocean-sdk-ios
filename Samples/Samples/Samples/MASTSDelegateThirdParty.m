@@ -1,25 +1,25 @@
 //
-//  MASTSSimpleRichMedia.m
-//  MASTSamples
+//  MASTSDelegateThirdParty.m
+//  Samples
 //
-//  Created by Jason Dickert on 4/17/12.
+//  Created by Jason Dickert on 4/21/12.
 //  Copyright (c) 2012 mOcean Mobile. All rights reserved.
 //
 
-#import "MASTSSimpleRichMedia.h"
+#import "MASTSDelegateThirdParty.h"
 
-@interface MASTSSimpleRichMedia ()
+@interface MASTSDelegateThirdParty ()
 
 @end
 
-@implementation MASTSSimpleRichMedia
+@implementation MASTSDelegateThirdParty
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     NSInteger site = 19829;
-    NSInteger zone = 102238;
+    NSInteger zone = 90038;
     
     super.adView.site = site;
     super.adView.zone = zone;

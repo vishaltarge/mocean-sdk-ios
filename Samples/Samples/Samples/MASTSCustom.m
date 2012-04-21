@@ -30,12 +30,31 @@
     return self;
 }
 
+- (void)loadView
+{
+    [super loadView];
+    
+    // Adjust for the status bar, the navigation bar space will trigger an update layout.
+    CGRect adjustedFrame = super.view.frame;
+    adjustedFrame.size.height -= [[UIApplication sharedApplication] statusBarFrame].size.height;
+    
+    // Place the config view on the bottom.
+    CGRect frame = super.adConfigController.view.frame;
+    frame.origin.y = CGRectGetMaxY(adjustedFrame) - frame.size.height;
+    super.adConfigController.view.frame = frame;
+    
+    // Update the autoresizing mask to include adjusting the top margin to cover 
+    // the navigation bar and rotation.
+    super.adConfigController.view.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | 
+        UIViewAutoresizingFlexibleTopMargin;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     NSInteger site = 19829;
-    NSInteger zone = 88269;
+    NSInteger zone = 102238;
     
     super.adView.site = site;
     super.adView.zone = zone;
@@ -43,6 +62,23 @@
     super.adConfigController.site = site;
     super.adConfigController.zone = zone;
 }
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    [self.adView update];
+}
+
+#pragma mark -
+
+- (void)keyboardWillHide:(id)notification
+{
+    // Place the config view on the bottom.
+    CGRect frame = super.adConfigController.view.frame;
+    frame.origin.y = CGRectGetMaxY(self.view.frame) - frame.size.height;
+    super.adConfigController.view.frame = frame;
+}
+
+#pragma mark -
 
 - (void)menu:(id)sender
 {
