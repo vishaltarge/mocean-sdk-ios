@@ -21,7 +21,7 @@
 @synthesize delegate, readyForDisplay, testMode, logMode, isAdChangeAnimated, internalOpenMode, track,
 updateTimeInterval, defaultImage, site, adZone, premiumFilter, type, keywords, minSize, maxSize,
 paramBG, paramLINK, additionalParameters, adServerUrl, advertiserId, groupCode,
-country, region, city, area, metro, zip, carrier, showCloseButtonTime,
+country, region, city, area, dma, zip, carrier, showCloseButtonTime,
 autocloseInterstitialTime, startDisplayDate, isDisplayed, aligmentCenter, injectionHeaderCode, injectionBodyCode, frame,
 visibleState, snapshotRAWData, snapshotRAWDataTime, currentAdView, adView, excampaigns, descriptor, loading,
 longitude, latitude, adCallTimeout, autoCollapse, showPreviousAdOnError, udid;
@@ -145,8 +145,8 @@ longitude, latitude, adCallTimeout, autoCollapse, showPreviousAdOnError, udid;
     if (self.area)
         [_banerUrl appendFormat:@"&area=%@", self.area];
     
-    if (self.metro)
-        [_banerUrl appendFormat:@"&metro=%@", self.metro];
+    if (self.dma)
+        [_banerUrl appendFormat:@"&dma=%@", self.dma];
     
     if (self.zip)
         [_banerUrl appendFormat:@"&zip=%@", self.zip];
@@ -220,7 +220,7 @@ longitude, latitude, adCallTimeout, autoCollapse, showPreviousAdOnError, udid;
     [region release];
     [city release];
     [area release];
-    [metro release];
+    [dma release];
     [zip release];
     [carrier release];
     [startDisplayDate release];

@@ -39,7 +39,7 @@
 
 @dynamic delegate, isLoading, testMode, logMode, isAdChangeAnimated, contentAlignment, injectionHeaderCode, injectionBodyCode, track, updateTimeInterval,
 defaultImage, site, zone, premium, type, keywords, minSize, maxSize, textColor, additionalParameters,
-adServerUrl, country, region, city, area, metro, zip, carrier, latitude, longitude, adCallTimeout, autoCollapse, showPreviousAdOnError, autocloseInterstitialTime, showCloseButtonTime, udid;
+adServerUrl, country, region, city, area, metro, dma, zip, carrier, latitude, longitude, adCallTimeout, autoCollapse, showPreviousAdOnError, autocloseInterstitialTime, showCloseButtonTime, udid;
 
 
 + (void)setLocationDetectionEnabledWithPupose:(NSString*)purpose
@@ -1161,11 +1161,20 @@ adServerUrl, country, region, city, area, metro, zip, carrier, latitude, longitu
 
 //@property (retain) NSString*            metro;
 - (void)setMetro:(NSString*)metro {
-	((MASTAdModel*)_adModel).metro = metro;
+	[self setDma:metro];
 }
 
 - (NSString*)metro {
-	return ((MASTAdModel*)_adModel).metro;
+	return [self dma];
+}
+
+- (void)setDma:(NSString *)dma
+{
+    ((MASTAdModel*)_adModel).dma = dma;
+}
+
+- (NSString*)dma {
+    return ((MASTAdModel*)_adModel).dma;
 }
 
 //@property (retain) NSString*            zip;

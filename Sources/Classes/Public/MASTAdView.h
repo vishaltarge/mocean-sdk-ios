@@ -381,9 +381,20 @@ typedef enum {
 
 /** Metro code of a user. For US only.
  
+ THIS PROPERTY IS DEPRICATED AND WILL BE REMOVED IN A FUTURE RELEASE.  Use dma instead.
+ 
  The default value is nil.
  */
-@property (retain) NSString*            metro;
+@property (retain) NSString*            metro __attribute__((deprecated));
+
+
+/** DMA code of a user.  For US only.
+ 
+ Replaces metro parameter.
+ 
+ The default value is nil.
+ */
+@property (retain) NSString*            dma;
 
 /** User location latitude value.
  

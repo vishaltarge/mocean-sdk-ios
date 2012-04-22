@@ -49,7 +49,7 @@
 @property (retain) NSString*            region;
 @property (retain) NSString*            city;
 @property (retain) NSString*            area;
-@property (retain) NSString*            metro;
+@property (retain) NSString*            dma;
 @property (retain) NSString*            zip;
 @property (retain) NSString*            carrier;
 
