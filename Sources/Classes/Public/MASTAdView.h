@@ -220,6 +220,32 @@ typedef enum {
  */
 @property BOOL							contentAlignment;
 
+/**
+ * Customize the HTML (or javascript) code to be inserted into the HTML HEAD when creating
+ * webview for ad content.
+ *
+ * Default if not set:
+ * <meta name=\"viewport\" content=\"width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;\"/>
+ *
+ */
+@property (nonatomic, retain) NSString* injectionHeaderCode;
+
+/**
+ * Customize the HTML (or javascript) code to be inserted into the HTML BODY when creating
+ * webview for ad content. By default this will contain one of the strings below based on
+ * the contentAlignment property.  See below for required tags as they have implicit close
+ * tags (in order).  The <body> tag MUST be included and left open, other tags must be properly
+ * terminated.
+ *
+ * Default contentAlignment:
+ *     <body style=\"display:-webkit-box;-webkit-box-orient:horizontal;-webkit-box-pack:center;-webkit-box-align:center;\">
+ * 
+ * Default !contentAlignment:
+ *     <body>
+ *
+ */
+@property (nonatomic, retain) NSString* injectionBodyCode;
+
 /** Minimal size of the ad content can be shown.
  
  Use this property to set the minimal size of the ad content and server response will be close to this size.
@@ -428,6 +454,7 @@ typedef enum {
  
  The default value is nil.*/
 @property (retain) NSString* udid;
+
 
 /** @name Setting the Delegate */
 

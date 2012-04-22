@@ -37,7 +37,7 @@
 @synthesize closeButton, ormmaDataSource, ormmaDelegate;
 @dynamic adModel, uid;
 
-@dynamic delegate, isLoading, testMode, logMode, isAdChangeAnimated, contentAlignment, track, updateTimeInterval,
+@dynamic delegate, isLoading, testMode, logMode, isAdChangeAnimated, contentAlignment, injectionHeaderCode, injectionBodyCode, track, updateTimeInterval,
 defaultImage, site, zone, premium, type, keywords, minSize, maxSize, textColor, additionalParameters,
 adServerUrl, country, region, city, area, metro, zip, carrier, latitude, longitude, adCallTimeout, autoCollapse, showPreviousAdOnError, autocloseInterstitialTime, showCloseButtonTime, udid;
 
@@ -304,7 +304,10 @@ adServerUrl, country, region, city, area, metro, zip, carrier, latitude, longitu
 			adWebView.ormmaDelegate = self.ormmaDelegate;
 			adWebView.ormmaDataSource = self.ormmaDataSource;
 			NSString *strHTML = [[[NSString alloc] initWithData:descriptor.serverReponse encoding:NSUTF8StringEncoding] autorelease]; 
-			[adWebView loadHTML:strHTML completion:^(NSError *error) {
+            
+			[adWebView loadHTML:strHTML 
+                     completion:^(NSError *error)
+            {
 				if (error)
 				{
 					NSMutableDictionary* senfInfo = [NSMutableDictionary dictionary];
@@ -321,7 +324,11 @@ adServerUrl, country, region, city, area, metro, zip, carrier, latitude, longitu
 
 					[self addSubview:adWebView];
 				}
-			} aligment:adView.adModel.aligmentCenter];
+			}
+                       aligment:adView.adModel.aligmentCenter
+            injectionHeaderCode:(NSString*)adView.adModel.injectionHeaderCode
+              injectionBodyCode:(NSString*)adView.adModel.injectionBodyCode];
+            
             [adWebView release];            
             model.descriptor = descriptor;
 		}
@@ -947,6 +954,22 @@ adServerUrl, country, region, city, area, metro, zip, carrier, latitude, longitu
 
 - (BOOL)contentAlignment {
 	return ((MASTAdModel*)_adModel).aligmentCenter;
+}
+
+- (void)setInjectionHeaderCode:(NSString *)injectionHeaderCode {
+    ((MASTAdModel*)_adModel).injectionHeaderCode = injectionHeaderCode;
+}
+
+- (NSString*)injectionHeaderCode {
+    return ((MASTAdModel*)_adModel).injectionHeaderCode;
+}
+
+- (void)setInjectionBodyCode:(NSString *)injectionBodyCode {
+    ((MASTAdModel*)_adModel).injectionBodyCode = injectionBodyCode;
+}
+
+- (NSString*)injectionBodyCode {
+    return ((MASTAdModel*)_adModel).injectionBodyCode;
 }
 
 //@property BOOL	internalOpenMode;

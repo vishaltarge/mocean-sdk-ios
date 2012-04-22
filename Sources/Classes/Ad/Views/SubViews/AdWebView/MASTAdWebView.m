@@ -60,18 +60,25 @@
     [super dealloc];
 }
 
-- (void)loadHTML:(NSString*)html completion:(CompletionBlock)block aligment:(BOOL)aligment {
+- (void)loadHTML:(NSString*)html completion:(CompletionBlock)block aligment:(BOOL)aligment
+        injectionHeaderCode:(NSString*)injectionHeader injectionBodyCode:(NSString*)injectionBody {
     self.completion = block;
     self.ormmaAdaptor = [[[MASTOrmmaAdaptor alloc] initWithWebView:self.webView adView:self.adView] autorelease];
     self.ormmaAdaptor.ormmaDelegate = self.ormmaDelegate;
     self.ormmaAdaptor.ormmaDataSource = self.ormmaDataSource;
     
-    NSString* body = nil;
-    if (aligment) {
-        body = [NSString stringWithFormat:@"<body style=\"display:-webkit-box;-webkit-box-orient:horizontal;-webkit-box-pack:center;-webkit-box-align:center;\">%@</body>", html];
-    } else {
-        body = [NSString stringWithFormat:@"<body>%@</body>", html];
-    }
+    NSString* injectionHeaderCode = @"<meta name=\"viewport\" content=\"width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;\"/>";
+    if ([injectionHeader length] > 0)
+        injectionHeaderCode = injectionHeader;
+    
+    NSString* injectionBodyCode = @"<body>";
+    if (aligment)
+        injectionBodyCode = @"<body style=\"display:-webkit-box;-webkit-box-orient:horizontal;-webkit-box-pack:center;-webkit-box-align:center;\">";
+    
+    if ([injectionBody length] > 0)
+        injectionBodyCode = injectionBody;
+    
+    NSString* body = [NSString stringWithFormat:@"%@%@</body>", injectionBodyCode, html];
     
     NSString* additionalCSS = @"";
     
@@ -84,7 +91,7 @@
         }
     }
     
-    html = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;\"/><style>body { margin:0; padding:0; } %@</style><script type=\"text/javascript\">%@</script><script type=\"text/javascript\">%@</script></head>%@</html>", additionalCSS, ORMMA_JS, [self.ormmaAdaptor getDefaultsJSCode], body];
+    html = [NSString stringWithFormat:@"<html><head>%@<style>body { margin:0; padding:0; } %@</style><script type=\"text/javascript\">%@</script><script type=\"text/javascript\">%@</script></head>%@</html>", injectionHeaderCode, additionalCSS, ORMMA_JS, [self.ormmaAdaptor getDefaultsJSCode], body];
     
     [self.webView loadHTMLString:html baseURL:nil];
 }

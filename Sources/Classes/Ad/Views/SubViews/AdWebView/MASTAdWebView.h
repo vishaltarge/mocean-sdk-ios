@@ -16,7 +16,7 @@ typedef void (^CompletionBlock)(NSError* error);
 @property (nonatomic, assign) id <OrmmaDelegate>    ormmaDelegate;
 @property (nonatomic, assign) id <OrmmaDataSource>  ormmaDataSource;
 
-- (void)loadHTML:(NSString*)html completion:(CompletionBlock)completion aligment:(BOOL)aligment;
+- (void)loadHTML:(NSString*)html completion:(CompletionBlock)completion aligment:(BOOL)aligment injectionHeaderCode:(NSString*)injectionHeader injectionBodyCode:(NSString*)injectionBody;
 
 - (void)reset;
 
