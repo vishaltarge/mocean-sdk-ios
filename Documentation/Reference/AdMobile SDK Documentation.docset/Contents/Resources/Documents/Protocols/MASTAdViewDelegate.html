@@ -12,7 +12,7 @@
 	<body>
 		<header id="top_header">
 			<div id="library" class="hideInXcode">
-				<h1><a id="libraryTitle" href="../index.html">iOS AdMobile SDK v2.10.0 </a></h1>
+				<h1><a id="libraryTitle" href="../index.html">iOS AdMobile SDK v2.11 </a></h1>
 				<a id="developerHome" href="../index.html">AdMobile</a>
 			</div>
 			
@@ -145,7 +145,8 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>The <a href="MASTAdViewDelegate.html">MASTAdViewDelegate</a> protocol defines methods that a delegate of a <a href="../Classes/MASTAdView.html">MASTAdView</a> object can optionally implement to receive notifications from ad.</p>
+						<p>The <a href="MASTAdViewDelegate.html">MASTAdViewDelegate</a> protocol defines methods that a delegate of a <a href="../Classes/MASTAdView.html">MASTAdView</a> object can optionally implement to receive notifications
+from the ad view.</p>
 					</div>
 					
 					
@@ -192,7 +193,7 @@
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/adWillStartFullScreen:">&ndash;&nbsp;adWillStartFullScreen:</a></code>
-		<span class="tooltip"><p>Sent before an ad view will start to display internal browser.</p></span>
+		<span class="tooltip"><p>Sent before an ad view will start to display an ad full screen in the internal browser.</p></span>
 	</span>
 	
 	
@@ -213,7 +214,7 @@
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/didClosedAd:usageTimeInterval:">&ndash;&nbsp;didClosedAd:usageTimeInterval:</a></code>
-		<span class="tooltip"><p>Sent after an ad view closed and tracks the usage time of ad interstitial view.</p></span>
+		<span class="tooltip"><p>Sent after an ad view is closed and tracks the usage time of ad interstitial view.</p></span>
 	</span>
 	
 	
@@ -323,7 +324,7 @@
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>Returns YES to allow SDK open browser otherwise returns NO.</p>
+		<p>Return YES to allow SDK open browser otherwise return NO.</p>
 	</div>
 	
 	
@@ -334,9 +335,9 @@
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Sent before an ad view will start to open URL.</p>
 
-<p>Implement this method with return NO value if you want to control opening ads by your self.</p>
+<p>Implement this method with return NO value if you want to control opening ads with a custom implementation.</p>
 
-<p>This method is optional. If you do not implement this method, the SDK accept YES as return value.</p><div class="warning"><p><strong>Important:</strong> This method may not calling on 3rd party SDKs (Millennial, Greystripe, iVdopia, &hellip;)</p></div>
+<p>If you do not implement this method the return value of YES is used.</p><div class="warning"><p><strong>Important:</strong> This method may not called if using 3rd party SDKs (Millennial, Greystripe, iVdopia, &hellip;)</p></div>
 	</div>
 	
 	
@@ -360,7 +361,7 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Sent before an ad view will start to display internal browser.</p>
+		<p>Sent before an ad view will start to display an ad full screen in the internal browser.</p>
 	</div>		
 	
 	
@@ -385,7 +386,7 @@
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Sent before an ad view will start to display internal browser.</p><div class="warning"><p><strong>Important:</strong> This method called after <a href="#//api/name/adShouldOpen:withUrl:">adShouldOpen:withUrl:</a> returns YES or not implemented.</p></div><div class="warning"><p><strong>Important:</strong> This method is not called on opening ads in Safari (internalOpenMode set to NO). To handle this behaviour implement UIApplicationDelegate protocol</p></div>
+		<p>Sent before an ad view will start to display an ad full screen in the internal browser.</p><div class="warning"><p><strong>Important:</strong> This method is called after <a href="#//api/name/adShouldOpen:withUrl:">adShouldOpen:withUrl:</a> with a YES returned or if adShouldOpen:withUrl is not implemented.</p></div><div class="warning"><p><strong>Important:</strong> This method is not called when opening ads in Safari (internalOpenMode set to NO). To handle this behavior implement UIApplicationDelegate protocol</p></div>
 	</div>
 	
 	
@@ -409,7 +410,7 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Sent after an ad view closed and tracks the usage time of ad interstitial view.</p>
+		<p>Sent after an ad view is closed and tracks the usage time of ad interstitial view.</p>
 	</div>		
 	
 	
@@ -439,7 +440,7 @@
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Sent after an ad view closed and tracks the usage time of ad interstitial view.</p>
+		<p>Sent after an ad view is closed and tracks the usage time of ad interstitial view.</p>
 	</div>
 	
 	
@@ -495,7 +496,7 @@
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Sent if an ad view failed to load ad content.</p>
 
-<p>The same method can be invoked if the server does not currently advertising.</p>
+<p>The same method can be invoked if the server is not currently advertising.</p>
 	</div>
 	
 	
@@ -600,7 +601,7 @@
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Sent if SDK received client side third party campaign.</p>
 
-<p>Generally, this method called if the SDK can’t display ads due to reliance on a third party. For example: AdMob, Rhythm or SmartAdServer</p><div class="warning"><p><strong>Important:</strong> The SDK will never display ads which trigger this method! They are used to call the third party SDKs in your app.</p></div>
+<p>Generally, this method is called if the SDK can’t display ads due to reliance on a third party. For example: AdMob, Rhythm or SmartAdServer</p><div class="warning"><p><strong>Important:</strong> The SDK will never display ads which trigger this method.  They are used to call the third party SDKs in your app.</p></div>
 	</div>
 	
 	
@@ -659,7 +660,8 @@
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Sent after an ad process ORMMA command.</p><div class="warning"><p><strong>Important:</strong> Implement this method only if you want add additional logic for event. By default SDK alreadey emplements all methods and your code could conflict with SDK</p></div>
+		<p>Sent after an ad process ORMMA command.</p><div class="warning"><p><strong>Important:</strong> Implement this method only if you want add additional logic for event. By default SDK alreadey emplements all
+methods and your code could conflict with SDK</p></div>
 	</div>
 	
 	
@@ -738,7 +740,7 @@
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 AdMobile. All rights reserved. (Last updated: 2012-02-28)</span><br />
+						<p><span class="copyright">&copy; 2012 AdMobile. All rights reserved. (Last updated: 2012-04-24)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.4 (build 703)</a>.</span></p>
 						

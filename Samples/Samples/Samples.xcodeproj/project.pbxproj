@@ -122,7 +122,6 @@
 		3C91DDE5153F737500FCF6CD /* MASTSSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSSplitViewController.h; sourceTree = "<group>"; };
 		3C91DDE6153F737500FCF6CD /* MASTSSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSSplitViewController.m; sourceTree = "<group>"; };
 		3C91DE01153F748B00FCF6CD /* MASTAdDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MASTAdDelegate.h; path = ../../../Sources/Classes/Public/MASTAdDelegate.h; sourceTree = "<group>"; };
-		3C91DE02153F748B00FCF6CD /* MASTAdInterstitialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MASTAdInterstitialView.h; path = ../../../Sources/Classes/Public/MASTAdInterstitialView.h; sourceTree = "<group>"; };
 		3C91DE03153F748B00FCF6CD /* MASTAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MASTAdView.h; path = ../../../Sources/Classes/Public/MASTAdView.h; sourceTree = "<group>"; };
 		3C91DE04153F749800FCF6CD /* AdMobileSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AdMobileSDK.xcodeproj; path = ../../../Sources/AdMobileSDK.xcodeproj; sourceTree = "<group>"; };
 		3C91DE13153F751500FCF6CD /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -317,9 +316,8 @@
 		3C91DE00153F747700FCF6CD /* Public */ = {
 			isa = PBXGroup;
 			children = (
-				3C91DE01153F748B00FCF6CD /* MASTAdDelegate.h */,
-				3C91DE02153F748B00FCF6CD /* MASTAdInterstitialView.h */,
 				3C91DE03153F748B00FCF6CD /* MASTAdView.h */,
+				3C91DE01153F748B00FCF6CD /* MASTAdDelegate.h */,
 			);
 			name = Public;
 			sourceTree = "<group>";

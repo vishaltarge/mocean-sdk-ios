@@ -1,482 +1,177 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/MASTAdView.html">
+	<File path="Protocols/MASTAdViewDelegate.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/MASTAdView</TokenIdentifier>
-			<Abstract>You use the MASTAdView class to embed advertisement content in your application. To do so, you simply create the MASTAdView object and add it to a UIView. An instance of MASTAdView(or simply, an ad) is a mean for displaying advertisement information from ad publisher site. To choose ad publisher site, set parameters in the ad initialization method initWithFrame:site:zone: or use the properties site and zone. Use the adServerUrl property to choose alternative ad publisher server.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/intf/MASTAdViewDelegate</TokenIdentifier>
+			<Abstract>The MASTAdViewDelegate protocol defines methods that a delegate of a MASTAdView object can optionally implement to receive notifications
+from the ad view.</Abstract>
+			<DeclaredIn>MASTAdDelegate.h</DeclaredIn>
 			
 			<NodeRef refid="2"/>
 		</Token>
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/MASTAdView/initWithFrame:site:zone:</TokenIdentifier>
-			<Abstract>Initializes and returns an MASTAdView object having the given frame, site and zone.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
+			<TokenIdentifier>//apple_ref/occ/intfm/MASTAdViewDelegate/willReceiveAd:</TokenIdentifier>
+			<Abstract>Sent before an ad view will begin loading ad content.</Abstract>
+			<DeclaredIn>MASTAdDelegate.h</DeclaredIn>			
 			
-			<Declaration>- (id)initWithFrame:(CGRect)frame site:(NSInteger)site zone:(NSInteger)zone</Declaration>
+			<Declaration>- (void)willReceiveAd:(id)sender</Declaration>
 			<Parameters>
 				<Parameter>
-					<Name>frame</Name>
-					<Abstract>A rectangle specifies the initial location and size of the ad view in its superview’s coordinates.</Abstract>
-				</Parameter><Parameter>
-					<Name>site</Name>
-					<Abstract>A value that specifies the id of ad publisher site.</Abstract>
-				</Parameter><Parameter>
-					<Name>zone</Name>
-					<Abstract>A value that specifies the id of ad publisher zone.</Abstract>
+					<Name>sender</Name>
+					<Abstract>The ad view that is about to load ad content.</Abstract>
 				</Parameter>
 			</Parameters>
-			<ReturnValue><Abstract>Returns an initialized MASTAdView object or nil if the object could not be successfully initialized.</Abstract></ReturnValue>
-			<Anchor>//api/name/initWithFrame:site:zone:</Anchor>
+			
+			<Anchor>//api/name/willReceiveAd:</Anchor>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/site</TokenIdentifier>
-			<Abstract>Id of the publisher site.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
+			<TokenIdentifier>//apple_ref/occ/intfm/MASTAdViewDelegate/didReceiveAd:</TokenIdentifier>
+			<Abstract>Sent after an ad view finished loading ad content.</Abstract>
+			<DeclaredIn>MASTAdDelegate.h</DeclaredIn>			
 			
-			<Declaration>@property (assign) NSInteger site</Declaration>
+			<Declaration>- (void)didReceiveAd:(id)sender</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>sender</Name>
+					<Abstract>The ad view has finished loading.</Abstract>
+				</Parameter>
+			</Parameters>
 			
-			
-			<Anchor>//api/name/site</Anchor>
+			<Anchor>//api/name/didReceiveAd:</Anchor>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/zone</TokenIdentifier>
-			<Abstract>Id of the publisher zone.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
+			<TokenIdentifier>//apple_ref/occ/intfm/MASTAdViewDelegate/didReceiveThirdPartyRequest:content:</TokenIdentifier>
+			<Abstract>Sent if SDK received client side third party campaign.</Abstract>
+			<DeclaredIn>MASTAdDelegate.h</DeclaredIn>			
 			
-			<Declaration>@property (assign) NSInteger zone</Declaration>
+			<Declaration>- (void)didReceiveThirdPartyRequest:(id)sender content:(NSDictionary *)content</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>sender</Name>
+					<Abstract>The ad view that receive 3rd party ad content.</Abstract>
+				</Parameter><Parameter>
+					<Name>content</Name>
+					<Abstract>The dictionary of strings (key/values) for third party. You can start processing this content from @“type” key for determining ads type.</Abstract>
+				</Parameter>
+			</Parameters>
 			
-			
-			<Anchor>//api/name/zone</Anchor>
+			<Anchor>//api/name/didReceiveThirdPartyRequest:content:</Anchor>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/contentSize</TokenIdentifier>
-			<Abstract>Size of the ad content must be shown.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
+			<TokenIdentifier>//apple_ref/occ/intfm/MASTAdViewDelegate/didFailToReceiveAd:withError:</TokenIdentifier>
+			<Abstract>Sent if an ad view failed to load ad content.</Abstract>
+			<DeclaredIn>MASTAdDelegate.h</DeclaredIn>			
 			
-			<Declaration>@property (readonly) CGSize contentSize</Declaration>
+			<Declaration>- (void)didFailToReceiveAd:(id)sender withError:(NSError *)error</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>sender</Name>
+					<Abstract>The ad view that failed to load ad content.</Abstract>
+				</Parameter><Parameter>
+					<Name>error</Name>
+					<Abstract>The error that occurred during loading.</Abstract>
+				</Parameter>
+			</Parameters>
 			
-			
-			<Anchor>//api/name/contentSize</Anchor>
+			<Anchor>//api/name/didFailToReceiveAd:withError:</Anchor>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/defaultImage</TokenIdentifier>
-			<Abstract>Image for unloaded ad state.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
+			<TokenIdentifier>//apple_ref/occ/intfm/MASTAdViewDelegate/adWillStartFullScreen:</TokenIdentifier>
+			<Abstract>Sent before an ad view will start to display an ad full screen in the internal browser.</Abstract>
+			<DeclaredIn>MASTAdDelegate.h</DeclaredIn>			
 			
-			<Declaration>@property (retain) UIImage *defaultImage</Declaration>
+			<Declaration>- (void)adWillStartFullScreen:(id)sender</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>sender</Name>
+					<Abstract>The ad view that is about to display internal browser.</Abstract>
+				</Parameter>
+			</Parameters>
 			
-			
-			<Anchor>//api/name/defaultImage</Anchor>
+			<Anchor>//api/name/adWillStartFullScreen:</Anchor>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/autoCollapse</TokenIdentifier>
-			<Abstract>A Boolean value that determines whether to hide ad in case error depending on other properties</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
+			<TokenIdentifier>//apple_ref/occ/intfm/MASTAdViewDelegate/adDidEndFullScreen:</TokenIdentifier>
+			<Abstract>Sent after an ad view finished displaying internal browser.</Abstract>
+			<DeclaredIn>MASTAdDelegate.h</DeclaredIn>			
 			
-			<Declaration>@property BOOL autoCollapse</Declaration>
+			<Declaration>- (void)adDidEndFullScreen:(id)sender</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>sender</Name>
+					<Abstract>The ad view has finished displaying internal browser.</Abstract>
+				</Parameter>
+			</Parameters>
 			
-			
-			<Anchor>//api/name/autoCollapse</Anchor>
+			<Anchor>//api/name/adDidEndFullScreen:</Anchor>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/showPreviousAdOnError</TokenIdentifier>
-			<Abstract>A Boolean value that determines whether to show previous ad in case of error depending on other properties</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
+			<TokenIdentifier>//apple_ref/occ/intfm/MASTAdViewDelegate/adShouldOpen:withUrl:</TokenIdentifier>
+			<Abstract>Sent before an ad view will start to open URL.</Abstract>
+			<DeclaredIn>MASTAdDelegate.h</DeclaredIn>			
 			
-			<Declaration>@property BOOL showPreviousAdOnError</Declaration>
-			
-			
-			<Anchor>//api/name/showPreviousAdOnError</Anchor>
+			<Declaration>- (BOOL)adShouldOpen:(id)sender withUrl:(NSURL *)url</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>sender</Name>
+					<Abstract>The ad view that is about to open URL.</Abstract>
+				</Parameter><Parameter>
+					<Name>url</Name>
+					<Abstract>The URL that should be opened in internal or external browser.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract>Return YES to allow SDK open browser otherwise return NO.</Abstract></ReturnValue>
+			<Anchor>//api/name/adShouldOpen:withUrl:</Anchor>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/closeButton</TokenIdentifier>
-			<Abstract>Close button.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
+			<TokenIdentifier>//apple_ref/occ/intfm/MASTAdViewDelegate/didClosedAd:usageTimeInterval:</TokenIdentifier>
+			<Abstract>Sent after an ad view is closed and tracks the usage time of ad interstitial view.</Abstract>
+			<DeclaredIn>MASTAdDelegate.h</DeclaredIn>			
 			
-			<Declaration>@property (retain) UIButton *closeButton</Declaration>
+			<Declaration>- (void)didClosedAd:(id)sender usageTimeInterval:(NSTimeInterval)usageTimeInterval</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>sender</Name>
+					<Abstract>The ad view was closed.</Abstract>
+				</Parameter><Parameter>
+					<Name>usageTimeInterval</Name>
+					<Abstract>The usage time interval of ad view.</Abstract>
+				</Parameter>
+			</Parameters>
 			
-			
-			<Anchor>//api/name/closeButton</Anchor>
+			<Anchor>//api/name/didClosedAd:usageTimeInterval:</Anchor>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/showCloseButtonTime</TokenIdentifier>
-			<Abstract>Show close button delay time interval, in seconds.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property NSTimeInterval showCloseButtonTime</Declaration>
-			
-			
-			<Anchor>//api/name/showCloseButtonTime</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/autocloseInterstitialTime</TokenIdentifier>
-			<Abstract>Auto close interstitial time interval, in seconds.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property NSTimeInterval autocloseInterstitialTime</Declaration>
-			
-			
-			<Anchor>//api/name/autocloseInterstitialTime</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/isAdChangeAnimated</TokenIdentifier>
-			<Abstract>A Boolean value that determines whether ad animate mode is enabled.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property BOOL isAdChangeAnimated</Declaration>
-			
-			
-			<Anchor>//api/name/isAdChangeAnimated</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/updateTimeInterval</TokenIdentifier>
-			<Abstract>Update time interval, in seconds.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property NSTimeInterval updateTimeInterval</Declaration>
-			
-			
-			<Anchor>//api/name/updateTimeInterval</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/adServerUrl</TokenIdentifier>
-			<Abstract>Publisher server url.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property (retain) NSString *adServerUrl</Declaration>
-			
-			
-			<Anchor>//api/name/adServerUrl</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/adCallTimeout</TokenIdentifier>
-			<Abstract>Maximum server response time.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property (assign) NSInteger adCallTimeout</Declaration>
-			
-			
-			<Anchor>//api/name/adCallTimeout</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/contentAlignment</TokenIdentifier>
-			<Abstract>A Boolean value that determines whether content alignment is centered vertically and horizontally.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property BOOL contentAlignment</Declaration>
-			
-			
-			<Anchor>//api/name/contentAlignment</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/minSize</TokenIdentifier>
-			<Abstract>Minimal size of the ad content can be shown.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property CGSize minSize</Declaration>
-			
-			
-			<Anchor>//api/name/minSize</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/maxSize</TokenIdentifier>
-			<Abstract>Maximal size of the ad content can be shown.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property CGSize maxSize</Declaration>
-			
-			
-			<Anchor>//api/name/maxSize</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/track</TokenIdentifier>
-			<Abstract>A Boolean value that determines whether ad track is enabled.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property BOOL track</Declaration>
-			
-			
-			<Anchor>//api/name/track</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/internalOpenMode</TokenIdentifier>
-			<Abstract>A Boolean value that determines whether an ad internal browser is enabled.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property BOOL internalOpenMode</Declaration>
-			
-			
-			<Anchor>//api/name/internalOpenMode</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/textColor</TokenIdentifier>
-			<Abstract>Color of ad text links.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property (retain) UIColor *textColor</Declaration>
-			
-			
-			<Anchor>//api/name/textColor</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/isLoading</TokenIdentifier>
-			<Abstract>A Boolean value that determines whether ad is in the process of loading.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property (readonly) BOOL isLoading</Declaration>
-			
-			
-			<Anchor>//api/name/isLoading</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/MASTAdView/update</TokenIdentifier>
-			<Abstract>Starts to update the ad content immediately.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>- (void)update</Declaration>
-			
-			
-			<Anchor>//api/name/update</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/MASTAdView/stopEverythingAndNotfiyDelegateOnCleanup</TokenIdentifier>
-			<Abstract>Use this method, if you want to close the ad quickly and clear all resource.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>- (void)stopEverythingAndNotfiyDelegateOnCleanup</Declaration>
-			
-			
-			<Anchor>//api/name/stopEverythingAndNotfiyDelegateOnCleanup</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/premium</TokenIdentifier>
-			<Abstract>Ad premium filter.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property AdPremium premium</Declaration>
-			
-			
-			<Anchor>//api/name/premium</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/type</TokenIdentifier>
-			<Abstract>Ad type filter.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property AdType type</Declaration>
-			
-			
-			<Anchor>//api/name/type</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/keywords</TokenIdentifier>
-			<Abstract>Keywords for search ads.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property (retain) NSString *keywords</Declaration>
-			
-			
-			<Anchor>//api/name/keywords</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/additionalParameters</TokenIdentifier>
-			<Abstract>Custom request parameters.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property (retain) NSDictionary *additionalParameters</Declaration>
-			
-			
-			<Anchor>//api/name/additionalParameters</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/country</TokenIdentifier>
-			<Abstract>The country of visitor. It overrides country detected by IP. It is ISO 3166 to be used for specifying country code.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property (retain) NSString *country</Declaration>
-			
-			
-			<Anchor>//api/name/country</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/region</TokenIdentifier>
-			<Abstract>Region of visitor. ISO 3166-2 is used for United States and Canada and FIBS 10-4 is used for other countries.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property (retain) NSString *region</Declaration>
-			
-			
-			<Anchor>//api/name/region</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/city</TokenIdentifier>
-			<Abstract>City of the device user (with state). For US only.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property (retain) NSString *city</Declaration>
-			
-			
-			<Anchor>//api/name/city</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/area</TokenIdentifier>
-			<Abstract>Area code of a user. For US only.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property (retain) NSString *area</Declaration>
-			
-			
-			<Anchor>//api/name/area</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/metro</TokenIdentifier>
-			<Abstract>Metro code of a user. For US only.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property (retain) NSString *metro</Declaration>
-			
-			
-			<Anchor>//api/name/metro</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/latitude</TokenIdentifier>
-			<Abstract>User location latitude value.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property (retain) NSString *latitude</Declaration>
-			
-			
-			<Anchor>//api/name/latitude</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/longitude</TokenIdentifier>
-			<Abstract>User location longitude value.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property (retain) NSString *longitude</Declaration>
-			
-			
-			<Anchor>//api/name/longitude</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/zip</TokenIdentifier>
-			<Abstract>Zip/Postal code of user (note: parameter is all caps). For US only.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property (retain) NSString *zip</Declaration>
-			
-			
-			<Anchor>//api/name/zip</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/carrier</TokenIdentifier>
-			<Abstract>User carrier.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property (retain) NSString *carrier</Declaration>
-			
-			
-			<Anchor>//api/name/carrier</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/advertiserId</TokenIdentifier>
-			<Abstract>Id of the advertiser for install notification.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property (assign) NSInteger advertiserId</Declaration>
-			
-			
-			<Anchor>//api/name/advertiserId</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/groupCode</TokenIdentifier>
-			<Abstract>Group code for install notification.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property (retain) NSString *groupCode</Declaration>
-			
-			
-			<Anchor>//api/name/groupCode</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/testMode</TokenIdentifier>
-			<Abstract>A Boolean value that determines whether ads test mode is enabled.
-Setting the value of this property to YES enables ads test mode and setting it to NO disables ads test mode.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property BOOL testMode</Declaration>
-			
-			
-			<Anchor>//api/name/testMode</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/logMode</TokenIdentifier>
-			<Abstract>AdLogMode value that determines log level.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property AdLogMode logMode</Declaration>
-			
-			
-			<Anchor>//api/name/logMode</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/delegate</TokenIdentifier>
-			<Abstract>The receiver's delegate.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-	<RelatedTokens>
-		<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/delegate</TokenIdentifier>
-		
-	</RelatedTokens>
-	
-			<Declaration>@property (assign) id&lt;MASTAdViewDelegate&gt; delegate</Declaration>
-			
-			
-			<Anchor>//api/name/delegate</Anchor>
+			<TokenIdentifier>//apple_ref/occ/intfm/MASTAdViewDelegate/ormmaProcess:event:parameters:</TokenIdentifier>
+			<Abstract>Sent after an ad process ORMMA command.</Abstract>
+			<DeclaredIn>MASTAdDelegate.h</DeclaredIn>			
+			
+			<Declaration>- (void)ormmaProcess:(id)sender event:(NSString *)event parameters:(NSDictionary *)parameters</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>sender</Name>
+					<Abstract>The ad view that is about to process ORMMA event.</Abstract>
+				</Parameter><Parameter>
+					<Name>event</Name>
+					<Abstract>The string with name of the event.</Abstract>
+				</Parameter><Parameter>
+					<Name>parameters</Name>
+					<Abstract>The Dictionary with parameters from event.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/ormmaProcess:event:parameters:</Anchor>
 		</Token>
 		
 	</File>
