@@ -173,12 +173,12 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
 }
 
 - (CGSize)maxSizeForAd:(id)sender {
-    UIViewController* vc = [self viewControllerForView:(UIView*)sender];
-    if (vc) {
-        return vc.view.frame.size;
-    } else {
+    UIView* superview = [sender superview];
+    if (superview == nil)
         return CGSizeZero;
-    }
+    
+    CGSize maxSize = superview.bounds.size;
+    return maxSize;
 }
 
 #pragma mark - Main delegate methods
