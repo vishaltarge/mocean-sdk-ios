@@ -80,7 +80,7 @@
     frame.origin.y = 65;
     self.adConfigController.view.frame = frame;
     self.adConfigController.view.center = self.view.center;
-    self.adConfigController.view.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin;
+    self.adConfigController.view.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
     [self.view addSubview:self.adConfigController.view];
 }
 
@@ -140,13 +140,9 @@
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-    [UIView animateWithDuration:.2 
-                     animations:^
-     {
-         self.adConfigController.view.center = self.view.center;
-     }];
-    
-    [self.adView update];
+    // Give the app time to finish rotating then update the ad since it's frame will be different
+    // based on the autoresizingMask supplied in loadView.
+    [self.adView performSelector:@selector(update) withObject:nil afterDelay:.5];
 }
 
 #pragma mark -

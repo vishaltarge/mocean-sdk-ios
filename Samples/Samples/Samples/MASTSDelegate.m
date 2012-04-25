@@ -59,11 +59,6 @@
     self.adView.delegate = self;
 }
 
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-    [super.adView update];
-}
-
 #pragma mark -
 
 - (void)keyboardWillHide:(id)notification

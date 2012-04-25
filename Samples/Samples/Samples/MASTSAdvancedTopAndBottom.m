@@ -43,10 +43,15 @@
 {
     [super loadView];
     
+    CGRect frame = super.adView.frame;
+    frame.size.width = 320;
+    super.adView.frame = frame;
+    super.adView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+    
     // As with the BOTTOM sample, setup the frame for the bottom view.
     CGRect adjustedFrame = super.view.frame;
     adjustedFrame.size.height -= [[UIApplication sharedApplication] statusBarFrame].size.height;
-    CGRect frame = super.adView.frame;
+    frame = super.adView.frame;
     frame.origin.y = CGRectGetMaxY(adjustedFrame) - frame.size.height;
     
     // Setup (or possibly resetup) the BOTTOM ad view (super covers the adView)
@@ -54,12 +59,14 @@
     [self.bottomAdView removeFromSuperview];
     
     self.bottomAdView = [[[MASTAdView alloc] initWithFrame:frame] autorelease];
-    self.bottomAdView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth | 
+    self.bottomAdView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | 
         UIViewAutoresizingFlexibleTopMargin;
     self.bottomAdView.backgroundColor = self.adView.backgroundColor;
     self.bottomAdView.showPreviousAdOnError = self.adView.showPreviousAdOnError;
     self.bottomAdView.logMode = self.adView.logMode;
     [self.view addSubview:self.bottomAdView];
+    
+    super.adConfigController.view.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin;
     
     frame = super.adConfigController.view.frame;
     frame.origin.y += frame.size.height;
@@ -102,19 +109,9 @@
     }
 }
 
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
-    [UIView animateWithDuration:.2 
-                     animations:^
-     {
-         self.adConfigController.view.center = self.view.center;
-         CGRect frame = super.adConfigController.view.frame;
-         frame.origin.y += frame.size.height;
-         self.bottomAdConfigController.view.frame = frame;
-     }];
-
-    [super.adView update];
-    [self.bottomAdView update];
+    return toInterfaceOrientation == UIInterfaceOrientationPortrait;
 }
 
 #pragma mark -

@@ -63,11 +63,6 @@
     super.adConfigController.zone = zone;
 }
 
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-    [self.adView update];
-}
-
 #pragma mark -
 
 - (void)keyboardWillHide:(id)notification

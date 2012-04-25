@@ -22,15 +22,19 @@
     CGRect adjustedFrame = super.view.frame;
     adjustedFrame.size.height -= [[UIApplication sharedApplication] statusBarFrame].size.height;
     
-    // Place the view on the bottom.
+    // Place the view on the bottom and size it to a fixed 320.
     CGRect frame = super.adView.frame;
+    frame.size.width = 320;
     frame.origin.y = CGRectGetMaxY(adjustedFrame) - frame.size.height;
     super.adView.frame = frame;
     
     // Update the autoresizing mask to include adjusting the top margin to cover 
-    // the navigation bar and rotation.
-    self.adView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth | 
+    // the navigation bar and rotation and remove the width resizing and add the
+    // left margine to center it.
+    self.adView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | 
         UIViewAutoresizingFlexibleTopMargin;
+    
+    self.adConfigController.view.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin;
 }
 
 - (void)viewDidLoad
