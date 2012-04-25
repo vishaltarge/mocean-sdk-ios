@@ -18,11 +18,9 @@
 
 @property (nonatomic, retain) MASTExpandViewController *expandVC;
 @property (nonatomic, retain) MASTExpandView *expandView;
-@property (nonatomic, retain) UIView *lastSuperView;
-@property (nonatomic, retain) UIColor *lastBackgroundColor;
-@property (assign) UIViewAutoresizing lastAutoresizing;
 @property (nonatomic, retain) NSMutableDictionary *adControls;
 @property (nonatomic, assign) CGRect defaultFrame;
+@property (nonatomic, assign) BOOL statusBarHidden;
 
 -(UIViewController*)viewControllerForView:(UIView*)view;
 -(CGRect)loadDefaultFrame:(NSDictionary*)frameValue;
@@ -33,7 +31,7 @@
 
 @implementation MASTOrmmaSharedDelegate
 
-@synthesize expandVC, expandView, lastSuperView, lastBackgroundColor, defaultFrame, adControls, lastAutoresizing;
+@synthesize expandVC, expandView, defaultFrame, adControls, statusBarHidden;
 
 static MASTOrmmaSharedDelegate *sharedDelegate = nil;
 
@@ -60,8 +58,6 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
 - (void)dealloc {
     self.expandVC = nil;
     self.expandView = nil;
-    self.lastSuperView = nil;
-    self.lastBackgroundColor = nil;
     self.adControls = nil;
     
     [super dealloc];
@@ -95,16 +91,7 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
     
     if (self.expandView) 
         [options setObject:self.expandView forKey:@"expandView"];
-    
-    if (self.lastAutoresizing || self.lastAutoresizing == UIViewAutoresizingNone) 
-        [options setObject:[NSNumber numberWithUnsignedInt:self.lastAutoresizing] forKey:@"lastAutoresizing"];
-    
-    if (self.lastSuperView)
-        [options setObject:self.lastSuperView forKey:@"lastSuperView"];
-    
-    if (self.lastBackgroundColor) 
-        [options setObject:self.lastBackgroundColor forKey:@"lastBackgroundColor"];
-	
+
     [options setObject:[NSNumber numberWithInt:self.defaultFrame.origin.x] forKey:@"frameX"];
     [options setObject:[NSNumber numberWithInt:self.defaultFrame.origin.y] forKey:@"frameY"];
     [options setObject:[NSNumber numberWithInt:self.defaultFrame.size.width] forKey:@"sizeWidth"];
@@ -118,9 +105,6 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
     
     self.expandVC = [options objectForKey:@"expandVC"];
     self.expandView = [options objectForKey:@"expandView"];
-    self.lastSuperView = [options objectForKey:@"lastSuperView"];
-    self.lastBackgroundColor = [options objectForKey:@"lastBackgroundColor"];
-    self.lastAutoresizing = [[options objectForKey:@"lastAutoresizing"] unsignedIntValue];
     self.defaultFrame = [self loadDefaultFrame:options];
 }
 
@@ -202,29 +186,21 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
     [self loadOptions:adControl];
     
     if (state == ORMMAStateExpanded) {
+        UIView* adWebView = [self.expandVC.view viewWithTag:ORMMA_WEBVIEW_TAG];
+        
+        if (!self.statusBarHidden)
+            [[UIApplication sharedApplication] setStatusBarHidden:NO];
+        
         [self.expandVC dismissModalViewControllerAnimated:NO];
         
         if (self.expandView && self.expandVC) {
             // we need to close expandView
             self.expandView = nil;
         } else {
-            [self.lastSuperView addSubview:adControl];
-            self.lastSuperView = nil;
-            
-            if (self.lastBackgroundColor) {
-                adControl.backgroundColor = self.lastBackgroundColor;
-                self.lastBackgroundColor = nil;
-            }
-            
-            if (self.lastAutoresizing || self.lastAutoresizing == UIViewAutoresizingNone) {
-                adControl.autoresizingMask = self.lastAutoresizing;
-            }
-            
-            // resize to normal frame
-            adControl.frame = self.defaultFrame;
-            /*[UIView animateWithDuration:0.2 animations:^(void) {
-			 adControl.frame = self.defaultFrame;
-			 }];*/
+            // Put the web view ("the ad") back on the ad view.
+            CGRect frame = adControl.bounds;
+            adWebView.frame = frame;
+            [adControl insertSubview:adWebView atIndex:0];
         }
         self.expandVC = nil;
         
@@ -234,17 +210,13 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
         }
     } else {
         adControl.frame = self.defaultFrame;
-        /*[UIView animateWithDuration:0.2 animations:^(void) {
-		 adControl.frame = self.defaultFrame;
-		 }];*/
     }
 }
 
 - (void)expandURL:(NSString*)url parameters:(NSDictionary*)parameters ad:(id)sender {
     UIView *adControl = sender;
-    self.defaultFrame = adControl.frame;
-    self.lastAutoresizing = adControl.autoresizingMask;
-    
+    UIView *adWebView = [adControl viewWithTag:ORMMA_WEBVIEW_TAG];
+
     CGFloat w = [MASTOrmmaHelper floatFromDictionary:parameters forKey:@"width"];
     CGFloat h = [MASTOrmmaHelper floatFromDictionary:parameters forKey:@"height"];
     BOOL lockOrientation = [MASTOrmmaHelper booleanFromDictionary:parameters forKey:@"lockOrientation"];
@@ -269,19 +241,19 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
     self.expandVC = [[[MASTExpandViewController alloc] initWithLockOrientation:lockOrientation] autorelease];
     self.expandVC.view.backgroundColor = expandBackgroundColor;
     
-    UIViewController* rootVC = [self viewControllerForView:adControl.superview];
+    UIViewController* rootVC = [self viewControllerForView:adControl];
     
     if (rootVC) {
         SEL setUpdateFlagSel = sel_registerName("setUpdateFlag:");
         if ([sender respondsToSelector:setUpdateFlagSel]) {
             [sender performSelector:setUpdateFlagSel withObject:@"expand"];
         }
-		
+        
+        self.statusBarHidden = [[UIApplication sharedApplication] isStatusBarHidden];
+        if (!self.statusBarHidden)
+            [[UIApplication sharedApplication] setStatusBarHidden:YES];
+        
         [rootVC presentModalViewController:self.expandVC animated:NO];
-    }
-    
-    if (!lockOrientation) {
-        adControl.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     }
     
     if (url) {                        
@@ -298,14 +270,13 @@ static MASTOrmmaSharedDelegate *sharedDelegate = nil;
     } else {        
         // to make shure
         self.expandView = nil;
-        self.lastBackgroundColor = adControl.backgroundColor;
-        adControl.backgroundColor = expandBackgroundColor;
+        self.expandVC.view.backgroundColor = expandBackgroundColor;
         
-        self.lastSuperView = adControl.superview;
-        [self.expandVC.view addSubview:adControl];
+        // Move the web view from the ad view to the expand view.
+        [self.expandVC.view addSubview:adWebView];
         
         // resize
-        adControl.frame = CGRectMake(0.0, 0.0, w, h);
+        adWebView.frame = CGRectMake(0.0, 0.0, w, h);
         
         self.expandVC.expandView = adControl;
         [self.expandVC useCustomClose:useCustomClose];

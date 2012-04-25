@@ -42,6 +42,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.view.autoresizesSubviews = YES;
+    
     self.view.backgroundColor = [UIColor clearColor];
     if (!lockOrientation) {
         self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;

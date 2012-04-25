@@ -299,6 +299,7 @@ adServerUrl, country, region, city, area, metro, dma, zip, carrier, latitude, lo
 			}
 			
             MASTAdWebView* adWebView = [[MASTAdWebView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+            adWebView.tag = ORMMA_WEBVIEW_TAG;
             adWebView.adView = self;
             adWebView.hidden = YES;
 			adWebView.ormmaDelegate = self.ormmaDelegate;
