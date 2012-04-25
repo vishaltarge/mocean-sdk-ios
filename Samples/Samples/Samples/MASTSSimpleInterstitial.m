@@ -18,16 +18,17 @@
 {
     [super loadView];
 
-    // For interstitial, make it the full size of the
-    // parent and setup some interstitial properties.
-    
-    self.adView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth | 
+    super.adView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth | 
         UIViewAutoresizingFlexibleHeight;
-    
+ 
     super.adView.frame = super.view.bounds;
     super.adView.backgroundColor = [UIColor whiteColor];
     super.adView.autocloseInterstitialTime = 15;
     super.adView.showCloseButtonTime = 5;
+    
+    [super.view bringSubviewToFront:super.adView];
+    
+    super.adView.delegate = self;
 }
 
 - (void)viewDidLoad
@@ -44,9 +45,41 @@
     super.adConfigController.zone = zone;
  
     super.adConfigController.buttonTitle = @"Show";
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:YES];
     
-    // Show the ad view over the config controller.
-    [super.view bringSubviewToFront:super.adView];
+    [super viewWillAppear:animated];
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    return toInterfaceOrientation == UIInterfaceOrientationPortrait;
+}
+
+#pragma mark -
+
+- (void)updateAdWithConfig:(MASTSAdConfigController *)configController
+{
+    [self.navigationController setNavigationBarHidden:YES];
+    
+    [super updateAdWithConfig:configController];
+}
+
+#pragma mark -
+
+- (void)didFailToReceiveAd:(id)sender withError:(NSError *)error
+{
+    [self.navigationController setNavigationBarHidden:NO];
+    self.adView.hidden = YES;
+}
+
+- (void)didClosedAd:(id)sender usageTimeInterval:(NSTimeInterval)usageTimeInterval
+{
+    [self.navigationController setNavigationBarHidden:NO];
+    self.adView.hidden = YES;
 }
 
 @end

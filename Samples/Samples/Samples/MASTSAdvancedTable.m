@@ -117,6 +117,7 @@ static NSInteger AdViewTag = 123;
         {
             CGRect frame = CGRectMake(0, 0, tableView.bounds.size.width, 50);
             MASTAdView* adView = [[[MASTAdView alloc] initWithFrame:frame] autorelease];
+            adView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
             adView.backgroundColor = [UIColor darkGrayColor];
             adView.showPreviousAdOnError = YES;
             adView.autoCollapse = NO;

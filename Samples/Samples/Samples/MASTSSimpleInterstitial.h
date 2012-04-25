@@ -8,6 +8,6 @@
 
 #import "MASTSSimple.h"
 
-@interface MASTSSimpleInterstitial : MASTSSimple
+@interface MASTSSimpleInterstitial : MASTSSimple <MASTAdViewDelegate>
 
 @end

@@ -60,6 +60,16 @@
         splitViewController.viewControllers = [NSArray arrayWithObjects:self.menuNavController, self.detailController, nil];
         
         self.rootController = splitViewController;
+        
+        // Pre-select the first item.
+        NSIndexPath* indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+        
+        [mastsMenuController.tableView selectRowAtIndexPath:indexPath
+                                                   animated:NO
+                                             scrollPosition:UITableViewScrollPositionTop];
+        
+        [mastsMenuController tableView:mastsMenuController.tableView
+               didSelectRowAtIndexPath:indexPath];
     }
     
     [self.window setRootViewController:self.rootController];
@@ -112,7 +122,7 @@
     [barButtonItem setTitle:@"Samples"];
     
     if (aViewController == menuNavController)
-        self.detailController.menuButton = barButtonItem;
+        [[self.subDetailController navigationItem] setLeftBarButtonItem:barButtonItem];
     
     self.popoverController = pc;
 }
@@ -122,7 +132,7 @@
   invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
 {
     if (aViewController == menuNavController)
-        self.detailController.menuButton = nil;
+        [[self.subDetailController navigationItem] setLeftBarButtonItem:nil];
     
     self.popoverController = nil;
 }
@@ -147,23 +157,12 @@
         if (self.subDetailController == controller)
             return;
         
-        CGRect frame = self.detailController.view.bounds;
-        frame.origin.y += 44;
-        frame.size.height -= 44;
-        controller.view.frame = frame;
+        controller.navigationItem.leftBarButtonItem = self.subDetailController.navigationItem.leftBarButtonItem;
         
-        self.detailController.title = controller.title;
-        
-        self.detailController.rightButton = controller.navigationItem.rightBarButtonItem;
-        
-        [self.subDetailController.view removeFromSuperview];
-        
-        [self.detailController.view addSubview:controller.view];
-        [self.detailController.view sendSubviewToBack:controller.view];
+        self.detailController.viewController = controller;
+        self.subDetailController = controller;
         
         [self.popoverController dismissPopoverAnimated:YES];
-        
-        self.subDetailController = controller;
     }
 }
 

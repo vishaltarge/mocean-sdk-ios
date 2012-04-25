@@ -118,7 +118,7 @@
         case 3:
             return @"Delegate";
         case 4:
-            return @"Options";
+            return @"SDK Options";
     }
     
     return nil;
@@ -137,6 +137,7 @@
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
     cell.accessoryView = nil;
     
     NSString* label = nil;
@@ -208,15 +209,16 @@
             {
                 case 0:
                 {
-                    label = @"SDK Location Updates";
+                    label = @"Location Updates";
                     UISwitch* locationSwitch = [[UISwitch new] autorelease];
                     locationSwitch.on = NO;
                     [locationSwitch addTarget:self action:@selector(switchLocation:) forControlEvents:UIControlEventValueChanged];
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     cell.accessoryView = locationSwitch;
                     break;
                 }
                 case 1:
-                    label = @"SDK Log Viewer";
+                    label = @"Log Viewer";
                     break;
             }
             break;

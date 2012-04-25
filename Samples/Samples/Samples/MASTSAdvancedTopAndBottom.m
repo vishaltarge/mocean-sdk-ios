@@ -49,8 +49,13 @@
     super.adView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     
     // As with the BOTTOM sample, setup the frame for the bottom view.
-    CGRect adjustedFrame = super.view.frame;
+    CGRect adjustedFrame = [[UIScreen mainScreen] bounds];
+    if (UIInterfaceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]))
+        adjustedFrame = CGRectMake(adjustedFrame.origin.x, adjustedFrame.origin.y,
+                                   adjustedFrame.size.height, adjustedFrame.size.width);
+    
     adjustedFrame.size.height -= [[UIApplication sharedApplication] statusBarFrame].size.height;
+    
     frame = super.adView.frame;
     frame.origin.y = CGRectGetMaxY(adjustedFrame) - frame.size.height;
     

@@ -11,10 +11,19 @@
 
 
 @interface MASTSCustom ()
-
+@property (nonatomic, retain) UIPopoverController* configPopoverController;
 @end
 
 @implementation MASTSCustom
+
+@synthesize configPopoverController;
+
+- (void)dealloc
+{
+    self.configPopoverController = nil;
+    
+    [super dealloc];
+}
 
 - (id)init
 {
@@ -35,7 +44,11 @@
     [super loadView];
     
     // Adjust for the status bar, the navigation bar space will trigger an update layout.
-    CGRect adjustedFrame = super.view.frame;
+    CGRect adjustedFrame = [[UIScreen mainScreen] bounds];
+    if (UIInterfaceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]))
+        adjustedFrame = CGRectMake(adjustedFrame.origin.x, adjustedFrame.origin.y,
+                                   adjustedFrame.size.height, adjustedFrame.size.width);
+    
     adjustedFrame.size.height -= [[UIApplication sharedApplication] statusBarFrame].size.height;
     
     // Place the config view on the bottom.
@@ -61,6 +74,13 @@
     
     super.adConfigController.site = site;
     super.adConfigController.zone = zone;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [self.configPopoverController dismissPopoverAnimated:NO];
 }
 
 #pragma mark -
@@ -95,19 +115,41 @@
     
     UINavigationController* navController = [[[UINavigationController alloc] initWithRootViewController:configController] autorelease];
     
-    [self presentModalViewController:navController animated:YES];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+    {
+        [self presentModalViewController:navController animated:YES];
+    }
+    else
+    {
+        self.configPopoverController = [[[UIPopoverController alloc] initWithContentViewController:navController] autorelease];
+        [self.configPopoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    }
 }
 
 #pragma mark -
 
 - (void)cancelCustomConfig:(MASTSCustomConfigController *)controller
 {
-    [self dismissModalViewControllerAnimated:YES];
+    if (self.configPopoverController != nil)
+    {
+        [self.configPopoverController dismissPopoverAnimated:YES];
+    }
+    else
+    {
+        [self dismissModalViewControllerAnimated:YES];
+    }
 }
 
 - (void)customConfig:(MASTSCustomConfigController *)controller updatedWithConfig:(NSDictionary *)settings
 {
-    [self dismissModalViewControllerAnimated:YES];
+    if (self.configPopoverController != nil)
+    {
+        [self.configPopoverController dismissPopoverAnimated:YES];
+    }
+    else
+    {
+        [self dismissModalViewControllerAnimated:YES];
+    }
     
     CGRect frame = CGRectMake([[settings valueForKey:@"x"] integerValue],
                               [[settings valueForKey:@"y"] integerValue],

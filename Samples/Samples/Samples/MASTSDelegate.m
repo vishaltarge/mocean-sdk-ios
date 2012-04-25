@@ -28,7 +28,11 @@
     [super loadView];
     
     // Adjust for the status bar, the navigation bar space will trigger an update layout.
-    CGRect adjustedFrame = super.view.frame;
+    CGRect adjustedFrame = [[UIScreen mainScreen] bounds];
+    if (UIInterfaceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]))
+        adjustedFrame = CGRectMake(adjustedFrame.origin.x, adjustedFrame.origin.y,
+                                   adjustedFrame.size.height, adjustedFrame.size.width);
+    
     adjustedFrame.size.height -= [[UIApplication sharedApplication] statusBarFrame].size.height;
     
     // Place the config view on the bottom.
