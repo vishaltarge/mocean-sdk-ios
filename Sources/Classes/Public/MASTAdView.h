@@ -281,8 +281,15 @@ typedef enum {
 /**
  Customize the HTML (or javascript) code to be inserted into the HTML HEAD when creating webview for ad content.
 
- Default if not set:
+ Defaults below if not set where ADVIEWWIDTH is the adview.frame.size.width.
+ Non-Retina:
+ <meta name=\"viewport\" content=\"width=ADVIEWWIDTH; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;\"/>
+ Retina:
+ <meta name=\"viewport\" content=\"width=ADVIEWWIDTH; initial-scale=0.5; maximum-scale=0.5; user-scalable=0;\"/>
+ 
+ @note: To show non-retina ads scaled/zoomed on Retina devices you can use the following (for both device types):
  <meta name=\"viewport\" content=\"width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;\"/>
+ 
  */
 @property (nonatomic, retain) NSString* injectionHeaderCode;
 

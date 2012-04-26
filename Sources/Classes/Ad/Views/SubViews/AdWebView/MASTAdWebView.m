@@ -67,7 +67,15 @@
     self.ormmaAdaptor.ormmaDelegate = self.ormmaDelegate;
     self.ormmaAdaptor.ormmaDataSource = self.ormmaDataSource;
     
-    NSString* injectionHeaderCode = @"<meta name=\"viewport\" content=\"width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;\"/>";
+    CGSize sz = self.bounds.size;
+    CGFloat scale = [[UIScreen mainScreen] scale];
+    NSString* injectionWidth = [NSString stringWithFormat:@"%@", [[NSNumber numberWithFloat:sz.width * scale] description]];
+    NSString* injectionScale = @"1.0";
+    if ([[UIScreen mainScreen] scale] > 1)
+        injectionScale = @"0.5";
+    
+    NSString* injectionHeaderCode = [NSString stringWithFormat:@"<meta name=\"viewport\" content=\"width=%@; initial-scale=%@; minimum-scale=%@; user-scalable=0;\"/>", injectionWidth, injectionScale, injectionScale];
+
     if ([injectionHeader length] > 0)
         injectionHeaderCode = injectionHeader;
     
@@ -80,18 +88,7 @@
     
     NSString* body = [NSString stringWithFormat:@"%@%@</body>", injectionBodyCode, html];
     
-    NSString* additionalCSS = @"";
-    
-    if ([UIScreen mainScreen].scale > 1.5) {
-        UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
-        if (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight) {
-            additionalCSS = [additionalCSS stringByAppendingFormat:@" img { max-width: %1.0fpx; }", [UIScreen mainScreen].applicationFrame.size.height];
-        } else {
-            additionalCSS = [additionalCSS stringByAppendingFormat:@" img { max-width: %1.0fpx; }", [UIScreen mainScreen].applicationFrame.size.width];
-        }
-    }
-    
-    html = [NSString stringWithFormat:@"<html><head>%@<style>body { margin:0; padding:0; } %@</style><script type=\"text/javascript\">%@</script><script type=\"text/javascript\">%@</script></head>%@</html>", injectionHeaderCode, additionalCSS, ORMMA_JS, [self.ormmaAdaptor getDefaultsJSCode], body];
+    html = [NSString stringWithFormat:@"<html><head>%@<style>body { margin:0; padding:0; } </style><script type=\"text/javascript\">%@</script><script type=\"text/javascript\">%@</script></head>%@</html>", injectionHeaderCode, ORMMA_JS, [self.ormmaAdaptor getDefaultsJSCode], body];
     
     [self.webView loadHTMLString:html baseURL:nil];
 }
