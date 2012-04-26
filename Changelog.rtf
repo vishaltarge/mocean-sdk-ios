@@ -1,28 +1,47 @@
-{\rtf1\ansi\ansicpg1252\cocoartf1038\cocoasubrtf360
+{\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf320
 {\fonttbl\f0\fnil\fcharset0 TrebuchetMS;\f1\fnil\fcharset0 Verdana;\f2\fswiss\fcharset0 Helvetica;
 \f3\fnil\fcharset0 LucidaGrande;\f4\fnil\fcharset0 Menlo-Regular;}
 {\colortbl;\red255\green255\blue255;\red52\green52\blue52;\red56\green56\blue56;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww12840\viewh12220\viewkind0
+\paperw11900\paperh16840\margl1440\margr1440\vieww9820\viewh10880\viewkind0
 \deftab720
-\pard\pardeftab720\sa100\ql\qnatural
+\pard\pardeftab720\sa100
 
-\f0\b\fs48 \cf2 Change log
+\f0\b\fs48 \cf2 Change log\
+\pard\pardeftab720\sa100
+
+\fs32 \cf2 v2.11.0
 \fs26 \
-\pard\pardeftab720\sa100\ql\qnatural
+\pard\pardeftab720
+
+\f1\b0\fs24 \cf3 1. Corrected compiler warnings and updated project settings for easer integration\
+2. Orientation usage is now all based off interface vs. device orientation\
+3. Calling update on MASTAdView is now required to get ad content\
+4. Location services no longer require a compile option and are global for the SDK\
+5. Log output now includes parameter description output\
+6. Removed UIDevice uniqueIdentifer usage\
+7. Removed advertiserId, groupCode and contentSize properties\
+8. Created a new universal samples application and removed all old sample project\
+9. Added injectionHeaderCode and injectionBodyCode properties to allow custom injection content\
+10. Replaced the metro property with the dma property\
+11. Resize available space now determined by the ad's superview vs. its controller's view\
+12. Reworked expand implementation so the MASTAdView never leaves the view where it was placed by the developer\
+
+\f0\b\fs26 \cf2 \
+\pard\pardeftab720\sa100
 
 \fs32 \cf2 v2.10.1
 \fs26 \
-\pard\pardeftab720\ql\qnatural
+\pard\pardeftab720
 
 \f1\b0\fs24 \cf3 1. internalOpenMode is honored again for non-rich media ads\
 2. Don't cache links that return empty responses\
 
 \f0\b\fs26 \cf2 \
-\pard\pardeftab720\sa100\ql\qnatural
+\pard\pardeftab720\sa100
 
 \fs32 \cf2 v2.10.0
 \fs26 \
-\pard\pardeftab720\ql\qnatural
+\pard\pardeftab720
 
 \f1\b0\fs24 \cf3 1. The prefix \'91MAST\'92 was added for all classes
 \f2 \
@@ -63,11 +82,11 @@
 \f1 13. The sample applications were updated\
 
 \f0\b\fs26 \cf2 \
-\pard\pardeftab720\sa100\ql\qnatural
+\pard\pardeftab720\sa100
 
 \fs32 \cf2 v2.9.0
 \fs26 \
-\pard\pardeftab720\sa240\ql\qnatural
+\pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. remove all 3rd parties
 \f3 \uc0\u8232 
@@ -87,11 +106,11 @@
 \f3 \uc0\u8232 
 \f1 9. update sample applications
 \f0\b\fs26 \cf2 \
-\pard\pardeftab720\sa100\ql\qnatural
+\pard\pardeftab720\sa100
 
 \fs32 \cf2 v2.8.0
 \fs26 \
-\pard\pardeftab720\sa240\ql\qnatural
+\pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. update ormma implementation
 \f3 \uc0\u8232 
@@ -103,11 +122,11 @@
 \f3 \uc0\u8232 
 \f1 5. improve threading and network communications
 \f0\b\fs26 \cf2 \
-\pard\pardeftab720\sa100\ql\qnatural
+\pard\pardeftab720\sa100
 
 \fs32 \cf2 v2.7.0
 \fs26 \
-\pard\pardeftab720\sa240\ql\qnatural
+\pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. new ormma implementation 
 \f3 \uc0\u8232 
@@ -121,11 +140,11 @@
 \f3 \uc0\u8232 
 \f1 6. fix unclickable  iAds
 \f0\b\fs26 \cf2 \
-\pard\pardeftab720\sa100\ql\qnatural
+\pard\pardeftab720\sa100
 
 \fs32 \cf2 v2.6.3
 \fs26 \
-\pard\pardeftab720\sa240\ql\qnatural
+\pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. add support for Retina display
 \f3 \uc0\u8232 
@@ -145,29 +164,29 @@
 \f3 \uc0\u8232 
 \f1 9. update sample applications
 \f0\b\fs26 \cf2 \
-\pard\pardeftab720\sa100\ql\qnatural
+\pard\pardeftab720\sa100
 
 \fs32 \cf2 v2.6.2
 \fs26 \
-\pard\pardeftab720\sa240\ql\qnatural
+\pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. fix gps params detection.
 \f0\b\fs26 \cf2 \
-\pard\pardeftab720\sa100\ql\qnatural
+\pard\pardeftab720\sa100
 
 \fs32 \cf2 v2.6.1
 \fs26 \
-\pard\pardeftab720\sa240\ql\qnatural
+\pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. fix not touchable ads on big ipad views after rotation.
 \f3 \uc0\u8232 
 \f1 2. fix sdk crash on huge number of touches on ads
 \f0\b\fs26 \cf2 \
-\pard\pardeftab720\sa100\ql\qnatural
+\pard\pardeftab720\sa100
 
 \fs32 \cf2 v2.6.0
 \fs26 \
-\pard\pardeftab720\sa240\ql\qnatural
+\pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. fix SDK crash on setting background color with system texture.
 \f3 \uc0\u8232 
@@ -183,19 +202,19 @@
 \f3 \uc0\u8232 
 \f1 7. update Rhythm SDK
 \f0\b\fs26 \cf2 \
-\pard\pardeftab720\sa100\ql\qnatural
+\pard\pardeftab720\sa100
 
 \fs32 \cf2 v2.5.4
 \fs26 \
-\pard\pardeftab720\sa240\ql\qnatural
+\pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. fix NSRunLoop bug.
 \f0\b\fs26 \cf2 \
-\pard\pardeftab720\sa100\ql\qnatural
+\pard\pardeftab720\sa100
 
 \fs32 \cf2 v2.5.3
 \fs26 \
-\pard\pardeftab720\sa240\ql\qnatural
+\pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. Transparent banners superimposed to each other while animateMode=NO bug fixed
 \f3 \uc0\u8232 
@@ -207,11 +226,11 @@
 \f3 \uc0\u8232 
 \f1 5. Three20 library removed
 \f0\b\fs26 \cf2 \
-\pard\pardeftab720\sa100\ql\qnatural
+\pard\pardeftab720\sa100
 
 \fs32 \cf2 v2.5.2
 \fs26 \
-\pard\pardeftab720\sa240\ql\qnatural
+\pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. Disable location auto detect by default (also disable Rhythm SDK by default)
 \f3 \uc0\u8232 
@@ -223,21 +242,21 @@
 \f3 \uc0\u8232 
 \f1 5. add several redirects support
 \f0\b\fs26 \cf2 \
-\pard\pardeftab720\sa100\ql\qnatural
+\pard\pardeftab720\sa100
 
 \fs32 \cf2 v2.5.1
 \fs26 \
-\pard\pardeftab720\sa240\ql\qnatural
+\pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. Add direct links support (AppStore/iTunes/Maps/sms/mailto/tel)
 \f3 \uc0\u8232 
 \f1 2. update AdViewDelegate protocol
 \f0\b\fs26 \cf2 \
-\pard\pardeftab720\sa100\ql\qnatural
+\pard\pardeftab720\sa100
 
 \fs32 \cf2 v2.5
 \fs26 \
-\pard\pardeftab720\sa240\ql\qnatural
+\pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. Add ORMMA support
 \f3 \uc0\u8232 
@@ -253,11 +272,11 @@
 \f3 \uc0\u8232 
 \f1 6. update documentation
 \f0\b\fs26 \cf2 \
-\pard\pardeftab720\sa100\ql\qnatural
+\pard\pardeftab720\sa100
 
 \fs32 \cf2 v2.4.2
 \fs26 \
-\pard\pardeftab720\sa240\ql\qnatural
+\pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. Optimize transparency support to AdView
 \f3 \uc0\u8232 
@@ -265,19 +284,19 @@
 \f3 \uc0\u8232 
 \f1 3. update sample app
 \f0\b\fs26 \cf2 \
-\pard\pardeftab720\sa100\ql\qnatural
+\pard\pardeftab720\sa100
 
 \fs32 \cf2 v2.4.1
 \fs26 \
-\pard\pardeftab720\sa240\ql\qnatural
+\pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. Add transparency support to AdView
 \f0\b\fs26 \cf2 \
-\pard\pardeftab720\sa100\ql\qnatural
+\pard\pardeftab720\sa100
 
 \fs32 \cf2 v2.4
 \fs26 \
-\pard\pardeftab720\sa240\ql\qnatural
+\pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. Update Millennial SDK to 4.2.5
 \f3 \uc0\u8232 
@@ -291,11 +310,11 @@
 \f3 \uc0\u8232 
 \f1 6. Remove Medialets SDK
 \f0\b\fs26 \cf2 \
-\pard\pardeftab720\sa100\ql\qnatural
+\pard\pardeftab720\sa100
 
 \fs32 \cf2 v2.3
 \fs26 \
-\pard\pardeftab720\sa240\ql\qnatural
+\pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. ORMMA Level 1.
 \f3 \uc0\u8232 
@@ -308,22 +327,22 @@
 \f1 5. Logging LocationManager state.
 \f3 \uc0\u8232 
 \f0\b\fs26 \cf2 \
-\pard\pardeftab720\sa240\ql\qnatural
+\pard\pardeftab720\sa240
 
 \fs32 \cf2 v2.2
 \fs26 \
-\pard\pardeftab720\sa240\ql\qnatural
+\pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. Resolve special references.
 \f3 \uc0\u8232 
 \f1 2. Auto close Interstitial if his content is nil or if server response is <invalid params>.
 \f3 \uc0\u8232 
 \f1 3. White-label SDK.\
-\pard\pardeftab720\sa240\ql\qnatural
+\pard\pardeftab720\sa240
 
 \f0\b\fs32 \cf2 v2.1.1
 \fs26 \
-\pard\pardeftab720\sa240\ql\qnatural
+\pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. update internal browser.
 \f3 \uc0\u8232 
@@ -331,49 +350,49 @@
 \f3 \uc0\u8232 
 \f1 3. improv 3rd part SDKs integration (Google AdMob, Millennial, Greystripe).
 \f0\b\fs26 \cf2 \
-\pard\pardeftab720\sa100\ql\qnatural
+\pard\pardeftab720\sa100
 
 \fs32 \cf2 v2.1.0
 \fs26 \
-\pard\pardeftab720\sa240\ql\qnatural
+\pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. add version with 3rd party SDKs.
 \f3 \uc0\u8232 
 \f1 2. fix memory bugs.
 \f0\b\fs26 \cf2 \
-\pard\pardeftab720\sa100\ql\qnatural
+\pard\pardeftab720\sa100
 
 \fs32 \cf2 v2.0.5
 \fs26 \
-\pard\pardeftab720\sa240\ql\qnatural
+\pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. update sample application.
 \f3 \uc0\u8232 
 \f1 2. improve interstitial displaying.
 \f0\b\fs26 \cf2 \
-\pard\pardeftab720\sa100\ql\qnatural
+\pard\pardeftab720\sa100
 
 \fs32 \cf2 v2.0.4
 \fs26 \
-\pard\pardeftab720\sa240\ql\qnatural
+\pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. add appledoc based documantation
 \f0\b\fs26 \cf2 \
-\pard\pardeftab720\sa100\ql\qnatural
+\pard\pardeftab720\sa100
 
 \fs32 \cf2 v2.0.3
 \fs26 \
-\pard\pardeftab720\sa240\ql\qnatural
+\pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. fix minor bugs.
 \f3 \uc0\u8232 
 \f1 2. add isLoding property
 \f0\b\fs26 \cf2 \
-\pard\pardeftab720\sa100\ql\qnatural
+\pard\pardeftab720\sa100
 
 \fs32 \cf2 v2.0.0
 \fs26 \
-\pard\pardeftab720\sa240\ql\qnatural
+\pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. change public API.
 \f3 \uc0\u8232 
@@ -381,18 +400,18 @@
 \f3 \uc0\u8232 
 \f1 3. improve threading.
 \f0\b\fs26 \cf2 \
-\pard\pardeftab720\sa100\ql\qnatural
+\pard\pardeftab720\sa100
 
 \fs32 \cf2 v1.7.10
 \fs26 \
-\pard\pardeftab720\sa240\ql\qnatural
+\pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. change request escape method\
-\pard\pardeftab720\sa100\ql\qnatural
+\pard\pardeftab720\sa100
 
 \f0\b\fs32 \cf2 v1.7.9
 \fs26 \
-\pard\pardeftab720\sa240\ql\qnatural
+\pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. critical bugfix (sometimes html ad is't drawing on screen).
 \f3 \uc0\u8232 
@@ -401,11 +420,11 @@
 \f1 3. add Debug sample in Advanced section of AdCatalog sample app.
 \f3 \uc0\u8232 
 \f1 4. fix logic when server response with no data.\
-\pard\pardeftab720\sa200\ql\qnatural
+\pard\pardeftab720\sa200
 
 \f0\b\fs32 \cf2 v1.7.8
 \fs26 \
-\pard\pardeftab720\sa240\ql\qnatural
+\pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. update iAd integration
 \f3 \uc0\u8232 
@@ -422,11 +441,11 @@
 \f1 7. improve UI (Interstitial positions, update animations)
 \f3 \uc0\u8232 
 \f1 8. improve threading\
-\pard\pardeftab720\sa100\ql\qnatural
+\pard\pardeftab720\sa100
 
 \f0\b\fs32 \cf2 v1.7.7
 \fs26 \
-\pard\pardeftab720\sa240\ql\qnatural
+\pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. Fix js IAD customer problem.
 \f3 \uc0\u8232 
@@ -435,29 +454,29 @@
 \f1 3. Improve full screen webview appearance.
 \f3 \uc0\u8232 
 \f1 4. Update all 3rd party sdk's\
-\pard\pardeftab720\sa200\ql\qnatural
+\pard\pardeftab720\sa200
 
 \f0\b\fs32 \cf2 v1.7.6
 \fs26 \
-\pard\pardeftab720\sa240\ql\qnatural
+\pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. add new Ad property - BOOL autoRoatation (enable disable full screen web view auto rotation)\
-\pard\pardeftab720\sa200\ql\qnatural
+\pard\pardeftab720\sa200
 
 \f0\b\fs32 \cf2 v1.7.5
 \fs26 \
-\pard\pardeftab720\sa240\ql\qnatural
+\pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. add full orientations support
 \f3 \uc0\u8232 
 \f1 2. add orientation demo in AdCatalog sample
 \f3 \uc0\u8232 
 \f1 3. critical bug fix.\
-\pard\pardeftab720\sa200\ql\qnatural
+\pard\pardeftab720\sa200
 
 \f0\b\fs32 \cf2 v1.7.4
 \fs26 \
-\pard\pardeftab720\sa240\ql\qnatural
+\pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. fix UIWebView bug ((clear WebView immediately after close)).
 \f3 \uc0\u8232 
@@ -470,18 +489,18 @@
 \f1 5. update default params for url.
 \f3 \uc0\u8232 
 \f1 6. add auto detect carrier name. (CoreTelephony framework required, documentation will be updated)\
-\pard\pardeftab720\sa200\ql\qnatural
+\pard\pardeftab720\sa200
 
 \f0\b\fs32 \cf2 v1.7.3
 \fs26 \
-\pard\pardeftab720\sa240\ql\qnatural
+\pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. add 3rd partl libraries headers to SDK\
-\pard\pardeftab720\sa200\ql\qnatural
+\pard\pardeftab720\sa200
 
 \f0\b\fs32 \cf2 v1.7.2
 \fs26 \
-\pard\pardeftab720\sa240\ql\qnatural
+\pard\pardeftab720\sa240
 
 \f1\b0\fs24 \cf3 1. fix trackUrl bug\
 }
