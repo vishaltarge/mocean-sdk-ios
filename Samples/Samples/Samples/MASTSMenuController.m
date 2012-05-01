@@ -211,7 +211,7 @@
                 {
                     label = @"Location Updates";
                     UISwitch* locationSwitch = [[UISwitch new] autorelease];
-                    locationSwitch.on = NO;
+                    locationSwitch.on = [MASTAdView isLocationDetectionEnabled];
                     [locationSwitch addTarget:self action:@selector(switchLocation:) forControlEvents:UIControlEventValueChanged];
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     cell.accessoryView = locationSwitch;
