@@ -130,9 +130,11 @@ static MASTLocationManager* sharedInstance = nil;
         
         
         BOOL available = YES;
-        CLAuthorizationStatus authStatus = [CLLocationManager authorizationStatus];
-        if ((authStatus != kCLAuthorizationStatusNotDetermined) && (authStatus != kCLAuthorizationStatusAuthorized))
-            available = NO;
+        if ([CLLocationManager respondsToSelector:@selector(authorizationStatus)]) {
+            CLAuthorizationStatus authStatus = [CLLocationManager authorizationStatus];
+            if ((authStatus != kCLAuthorizationStatusNotDetermined) && (authStatus != kCLAuthorizationStatusAuthorized))
+                available = NO;
+        }
         
         if (available && ([CLLocationManager locationServicesEnabled] == NO))
             available = NO;

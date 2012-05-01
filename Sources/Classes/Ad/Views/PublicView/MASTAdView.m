@@ -216,6 +216,16 @@ adServerUrl, country, region, city, area, metro, dma, zip, carrier, latitude, lo
     ((MASTAdModel*)_adModel).track = -1;
     ((MASTAdModel*)_adModel).aligmentCenter = NO;
     ((MASTAdModel*)_adModel).isDisplayed = NO;
+    
+    if ([[MASTLocationManager sharedInstance] locationDetectionActive]) {
+        CLLocation* location = [[MASTLocationManager sharedInstance] lastLocation];
+        if (location != nil) {
+            if (location.horizontalAccuracy >= 0) {
+                self.latitude = [NSString stringWithFormat:@"%f", location.coordinate.latitude];
+                self.longitude = [NSString stringWithFormat:@"%f", location.coordinate.longitude];
+            }
+        }
+    }
 }
 
 - (void)registerObserver {
