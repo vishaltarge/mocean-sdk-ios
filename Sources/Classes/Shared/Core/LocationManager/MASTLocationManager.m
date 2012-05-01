@@ -61,9 +61,11 @@ static MASTLocationManager* sharedInstance = nil;
 
 + (BOOL)deviceLocationAvailable {
    
-    CLAuthorizationStatus authStatus = [CLLocationManager authorizationStatus];
-    if ((authStatus != kCLAuthorizationStatusNotDetermined) && (authStatus != kCLAuthorizationStatusAuthorized))
-        return NO;
+    if ([CLLocationManager respondsToSelector:@selector(authorizationStatus)]) {
+        CLAuthorizationStatus authStatus = [CLLocationManager authorizationStatus];
+        if ((authStatus != kCLAuthorizationStatusNotDetermined) && (authStatus != kCLAuthorizationStatusAuthorized))    
+            return NO;
+    }
     
     if ([CLLocationManager locationServicesEnabled] == NO)
         return NO;
@@ -73,9 +75,11 @@ static MASTLocationManager* sharedInstance = nil;
 
 + (BOOL)deviceHeadingAvailable {
     
-    CLAuthorizationStatus authStatus = [CLLocationManager authorizationStatus];
-    if ((authStatus != kCLAuthorizationStatusNotDetermined) && (authStatus != kCLAuthorizationStatusAuthorized))
-        return NO;
+    if ([CLLocationManager respondsToSelector:@selector(authorizationStatus)]) {
+        CLAuthorizationStatus authStatus = [CLLocationManager authorizationStatus];
+        if ((authStatus != kCLAuthorizationStatusNotDetermined) && (authStatus != kCLAuthorizationStatusAuthorized))
+            return NO;
+    }
     
     if ([CLLocationManager headingAvailable] == NO)
         return NO;
