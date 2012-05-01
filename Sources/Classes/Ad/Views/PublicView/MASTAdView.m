@@ -70,6 +70,12 @@ adServerUrl, country, region, city, area, metro, dma, zip, carrier, latitude, lo
     [[MASTNotificationCenter sharedInstance] postNotificationName:notifcationName object:nil];
 }
 
++ (BOOL)isLocationDetectionEnabled {
+    BOOL isLocationDetectionEnabled = [[MASTLocationManager sharedInstance] locationDetectionActive];
+    return isLocationDetectionEnabled;
+}
+
+#pragma mark -
 
 - (id)init {
 	return nil;

@@ -98,6 +98,12 @@ typedef enum {
  */
 + (void)setLocationDetectionEnabled:(BOOL)enabled;
 
+/**
+ Returns the enablement status of location detection.  May return NO even if either setLocationDetectionEnabled methods
+ were called to enable location detection if iOS locaton services are unavailable or unauthorized.
+ */
++ (BOOL)isLocationDetectionEnabled;
+
 
 /** @name Initialization */
 
