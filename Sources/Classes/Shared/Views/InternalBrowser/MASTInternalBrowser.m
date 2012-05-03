@@ -443,6 +443,10 @@ static MASTInternalBrowser* sharedInstance = nil;
     }
     */
     
+    // Let the web view deal with about: schema as-is.
+    if ([[[request URL] scheme] isEqualToString:@"about"])
+        return YES;
+    
     if (![MASTUtils isInternalScheme:[request URL]] && _opening) {
         [self openURLinkExternalBrowser:request];
         self.loadingURL = nil;
