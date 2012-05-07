@@ -454,7 +454,7 @@ adServerUrl, country, region, city, area, metro, dma, zip, carrier, latitude, lo
             
             self.closeButton.hidden = YES;
             
-            if (((MASTAdModel*)_adModel).showCloseButtonTime >= 0 && !((MASTAdModel*)_adModel).isDisplayed) {
+            if (((MASTAdModel*)_adModel).showCloseButtonTime >= 0) {
                 [NSTimer scheduledTimerWithTimeInterval:((MASTAdModel*)_adModel).showCloseButtonTime
                                                  target:self 
                                                selector:@selector(showCloseButton)
