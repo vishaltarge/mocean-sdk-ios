@@ -151,6 +151,18 @@ static MASTInternalBrowser* sharedInstance = nil;
 	return self;
 }
 
+- (void)dealloc {
+    _webView.delegate = nil;
+    [_webView stopLoading];
+    
+    [_navbar release];
+    [_titleLabel release];
+    [_activityItem release];
+    [_device release];
+    
+    [super dealloc];
+}
+
 + (id)sharedInstance {
 	@synchronized(self) {
 		if (nil == sharedInstance) {

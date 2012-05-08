@@ -110,6 +110,9 @@
 }
 
 - (void)dealloc {
+    self.webView.delegate = nil;
+    [self.webView stopLoading];
+    
     self.adView = nil;
 	self.webView = nil;
     self.closeButton = nil;
