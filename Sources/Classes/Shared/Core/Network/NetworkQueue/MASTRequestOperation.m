@@ -327,6 +327,10 @@ static NSThread *_networkRequestThread = nil;
 - (void)connection:(NSURLConnection *)__unused connection 
 didReceiveResponse:(NSURLResponse *)response 
 {
+    if ([response isKindOfClass:[NSHTTPURLResponse class]] == NO) {
+        return;
+    }
+
     self.response = (NSHTTPURLResponse *)response;
     
     if (connectionDelegate && [connectionDelegate respondsToSelector:@selector(connection:didReceiveResponse:)]) {
