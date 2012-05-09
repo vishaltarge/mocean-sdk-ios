@@ -48,7 +48,7 @@
 }
 
 - (void)dealloc {
-    self.webView.delegate = nil;
+    [self.webView setDelegate:nil];
     [self.webView stopLoading];
     
     [self.ormmaAdaptor invalidate];
