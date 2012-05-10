@@ -149,34 +149,9 @@ adServerUrl, country, region, city, area, metro, dma, zip, carrier, latitude, lo
     [super dealloc];
 }
 
-
-#pragma mark -
-#pragma mark Public
-
-- (void)callUpdateInBackground {
-    NSAutoreleasePool* pool = [NSAutoreleasePool new];
-    
-    // Resart the timer and notify the ad to accept updates
-    [[MASTNotificationCenter sharedInstance] postNotificationName:kAdStartUpdateNotification object:self];
-    [[MASTNotificationCenter sharedInstance] postNotificationName:kAdUpdateNowNotification object:self];
-    
-    [pool release];
-}
-
-- (void)update {
-    [self stopEverythingAndNotfiyDelegateOnCleanup];
-    [self performSelectorInBackground:@selector(callUpdateInBackground) withObject:nil];
-}
-
-- (void)stopEverythingAndNotfiyDelegateOnCleanup {
+- (void)resetState {
     // Stop the timer and the view from listening to any updates.
     [[MASTNotificationCenter sharedInstance] postNotificationName:kAdStopUpdateNotification object:self];
-    
-    //stop ad update and cancel all network proccess
-    [_adModel cancelAllNetworkConnection];
-    
-    //close internal browser
-    [_adModel closeInternalBrowser];
     
     if ([[_adModel currentAdView] isKindOfClass:[MASTAdWebView class]]) {
         [(MASTAdWebView*)[_adModel currentAdView] reset];
@@ -196,7 +171,35 @@ adServerUrl, country, region, city, area, metro, dma, zip, carrier, latitude, lo
     }
     
     //cloase ORMMA and set it in default state
-    [[MASTNotificationCenter sharedInstance] postNotificationName:kORMMASetDefaultStateNotification object:nil];
+    [[MASTNotificationCenter sharedInstance] postNotificationName:kORMMASetDefaultStateNotification object:self];
+}
+
+#pragma mark -
+#pragma mark Public
+
+- (void)callUpdateInBackground {
+    NSAutoreleasePool* pool = [NSAutoreleasePool new];
+    
+    // Resart the timer and notify the ad to accept updates
+    [[MASTNotificationCenter sharedInstance] postNotificationName:kAdStartUpdateNotification object:self];
+    [[MASTNotificationCenter sharedInstance] postNotificationName:kAdUpdateNowNotification object:self];
+    
+    [pool release];
+}
+
+- (void)update {
+    [self resetState];
+    [self performSelectorInBackground:@selector(callUpdateInBackground) withObject:nil];
+}
+
+- (void)stopEverythingAndNotfiyDelegateOnCleanup {
+    //stop ad update and cancel all network proccess
+    [_adModel cancelAllNetworkConnection];
+    
+    //close internal browser
+    [_adModel closeInternalBrowser];
+    
+    [self resetState];
 }
 
 #pragma mark -

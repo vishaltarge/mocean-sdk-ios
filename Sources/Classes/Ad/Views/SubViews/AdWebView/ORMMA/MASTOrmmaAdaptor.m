@@ -104,7 +104,9 @@
         }];
         
 		[[MASTNotificationCenter sharedInstance] addObserverForName:kORMMASetDefaultStateNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
-            [self moveToDefaultState];
+            if (note.object == self.adView) {
+                [self moveToDefaultState];
+            }
         }];
         
         [self.webView addObserverForKeyPath:@"frame" options:NSKeyValueObservingOptionNew task:^(id obj, NSDictionary *change) {
