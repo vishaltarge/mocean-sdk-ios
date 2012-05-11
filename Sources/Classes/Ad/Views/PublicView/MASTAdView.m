@@ -455,9 +455,11 @@ adServerUrl, country, region, city, area, metro, dma, zip, carrier, latitude, lo
             }
             [self addSubview:self.closeButton];
             
-            self.closeButton.hidden = YES;
+            
             
             if (((MASTAdModel*)_adModel).showCloseButtonTime >= 0) {
+                self.closeButton.hidden = YES;
+                
                 [NSTimer scheduledTimerWithTimeInterval:((MASTAdModel*)_adModel).showCloseButtonTime
                                                  target:self 
                                                selector:@selector(showCloseButton)
@@ -534,6 +536,7 @@ adServerUrl, country, region, city, area, metro, dma, zip, carrier, latitude, lo
         self.closeButton.frame = CGRectMake(0, 0, closeIcon.size.width, closeIcon.size.height);
         [self.closeButton setImage:closeIcon forState:UIControlStateNormal];
         [self.closeButton addTarget:self action:@selector(buttonsAction:) forControlEvents:UIControlEventTouchUpInside];
+        self.closeButton.hidden = YES;
     }
 }
 
