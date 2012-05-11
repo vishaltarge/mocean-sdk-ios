@@ -2,7 +2,7 @@
 //  MASTAdView.h
 //  AdMobileSDK
 //
-//  version: 2.11.0
+//  version: 2.12.0
 //
 
 
