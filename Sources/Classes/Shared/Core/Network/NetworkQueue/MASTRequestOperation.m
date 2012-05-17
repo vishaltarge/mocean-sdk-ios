@@ -117,9 +117,9 @@ static NSThread *_networkRequestThread = nil;
 
 + (void)networkRequestThreadEntryPoint:(id)__unused object {
     do {
-        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-        [[NSRunLoop currentRunLoop] run];
-        [pool drain];
+        @autoreleasepool {
+            [[NSRunLoop currentRunLoop] run];
+        }
     } while (YES);
 }
 
@@ -193,6 +193,7 @@ static NSThread *_networkRequestThread = nil;
     [_outputStream release]; _outputStream = nil;
     
     [_connection release]; _connection = nil;
+    [_error release]; _error = nil;
 	
     [_uploadProgress release];
     [_downloadProgress release];
@@ -318,7 +319,9 @@ static NSThread *_networkRequestThread = nil;
     }
     
     if (self.completion) {
-        self.completion(self.request, self.response, self.responseBody, self.error);
+        //@autoreleasepool {
+            self.completion(self.request, self.response, self.responseBody, self.error);
+        //}
     }
 }
 

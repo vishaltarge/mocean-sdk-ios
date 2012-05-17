@@ -31,9 +31,7 @@ static NSOperationQueue* get_network_operations_io_queue() {
         
         [(NSMutableDictionary*)[request allHTTPHeaderFields] removeObjectForKey:@"Keep-Alive"];
         [request setValue:[MASTWebKitInfo userAgent] forHTTPHeaderField:@"User-Agent"];
-        
-        urlRequest = (NSURLRequest*)[request retain];
-        
+
         dispatch_async(dispatch_get_main_queue(), ^{
             MASTRequestOperation* operation = [MASTRequestOperation operationWithRequest:urlRequest completion:completion];
             [get_network_operations_io_queue() addOperation:operation];

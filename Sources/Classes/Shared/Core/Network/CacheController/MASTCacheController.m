@@ -26,7 +26,7 @@
 - (void)loadLinks:(NSArray*)links forAdView:(MASTAdView*)adView request:(NSURLRequest*)request origData:(NSData*)origData {
         if (links && [links count] > 0 && adView && request) {
             NSMutableData* resultData = [NSMutableData dataWithData:origData];
-            NSMutableArray* cacheReqests = [NSMutableArray new];
+            NSMutableArray* cacheReqests = [NSMutableArray array];
             
             for (NSString* url in links) {
                 NSURLRequest* newReq = [NSURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:60.0f];
@@ -55,8 +55,6 @@
                     }
                 }];
             }
-            
-            [cacheReqests release];
         }
 }
 

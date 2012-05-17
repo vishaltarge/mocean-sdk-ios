@@ -103,7 +103,6 @@ static MASTDownloadController* sharedInstance = nil;
 }
 
 - (void)downladAd:(MASTAdView*)adView {
-    NSAutoreleasePool* pool = [NSAutoreleasePool new];
     
 	@synchronized(_adRequests) {        
 		if (adView) {
@@ -166,8 +165,6 @@ static MASTDownloadController* sharedInstance = nil;
             }
 		}
 	}
-    
-    [pool drain];
 }
 
 
