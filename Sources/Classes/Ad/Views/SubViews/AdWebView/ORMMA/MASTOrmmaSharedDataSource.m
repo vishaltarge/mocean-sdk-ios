@@ -10,11 +10,57 @@
 
 
 @interface MASTOrmmaSharedDataSource() <UIAccelerometerDelegate>
+{
+    BOOL isShakeDetected,isTiltDetected;
+    UIAcceleration* lastAcceleration;
+}
+
+@property(retain) UIAcceleration* lastAcceleration;
 @end
 
 @implementation MASTOrmmaSharedDataSource
 
+@synthesize lastAcceleration;
 static MASTOrmmaSharedDataSource* sharedInstance = nil;
+
+
+static BOOL accelerationIsShaking(UIAcceleration* last, UIAcceleration* current, double threshold) {
+    double
+    deltaX = fabs(last.x - current.x),
+    deltaY = fabs(last.y - current.y),
+    deltaZ = fabs(last.z - current.z);
+    
+    return
+    (deltaX > threshold && deltaY > threshold) ||
+    (deltaX > threshold && deltaZ > threshold) ||
+    (deltaY > threshold && deltaZ > threshold);
+}
+
+static BOOL accelerationIsTilting(UIAcceleration* last, UIAcceleration* current, double max_threshold, double min_threshold) {
+    
+    double
+    deltaX = fabs(last.x - current.x),
+    deltaY = fabs(last.y - current.y),
+    deltaZ = fabs(last.z - current.z);
+    
+    //check again to make sure that it is not shaking
+    bool isShaking = 
+    (deltaX > max_threshold && deltaY > max_threshold) ||
+    (deltaX > max_threshold && deltaZ > max_threshold) ||
+    (deltaY > max_threshold && deltaZ > max_threshold);
+    
+        
+    
+    //check to make sure if acceleration is titled
+    bool isTilted = 
+    ( deltaX > min_threshold && deltaX < max_threshold ) ||
+    ( deltaY > min_threshold && deltaY < max_threshold ) ||
+    ( deltaZ > min_threshold && deltaZ < max_threshold );
+    
+    
+    //if not shaking and tilted,
+    return !isShaking && isTilted;
+}
 
 #pragma mark -
 #pragma mark - Location
@@ -136,6 +182,8 @@ static MASTOrmmaSharedDataSource* sharedInstance = nil;
 - (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration {
 	// Send accelerometer data
 	NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self, kOrmmaKeySender, acceleration, kOrmmaKeyObject, nil];
+    
+    /*
 	[[NSNotificationCenter defaultCenter] postNotificationName:kOrmmaTiltUpdated object:dic];
 
 	// Deal with shakes
@@ -157,6 +205,51 @@ static MASTOrmmaSharedDataSource* sharedInstance = nil;
         // Shake detected
 		[[NSNotificationCenter defaultCenter] postNotificationName:kOrmmaShake object:dic];
     }
+     */
+    
+    CGFloat kDefaultMaxThreshold = 1.0;
+    CGFloat kDefaultMinThreshold = 0.3;
+    
+    if (self.lastAcceleration == nil)
+    {
+        self.lastAcceleration = acceleration;
+    }
+    
+    if (self.lastAcceleration) {
+        
+        if (!isShakeDetected && accelerationIsShaking(self.lastAcceleration, acceleration, kDefaultMaxThreshold)) {
+            isShakeDetected = YES;
+            
+            // Shake detected
+            [[NSNotificationCenter defaultCenter] postNotificationName:kOrmmaShake object:dic];
+            
+        } else if (isShakeDetected && !accelerationIsShaking(self.lastAcceleration, acceleration, kDefaultMinThreshold)) {
+            
+            isShakeDetected = NO;
+        }
+        
+        if (!isShakeDetected)
+        {
+            
+            /* fall through the tilt checking */
+            
+            if (!isTiltDetected && accelerationIsTilting(self.lastAcceleration,acceleration,kDefaultMaxThreshold,kDefaultMinThreshold))
+            {
+                //tilt detected
+                isTiltDetected = YES;
+                [[NSNotificationCenter defaultCenter] postNotificationName:kOrmmaTiltUpdated object:dic];
+            } else if (isTiltDetected && !accelerationIsTilting(self.lastAcceleration,acceleration,kDefaultMaxThreshold,kDefaultMinThreshold))
+            {
+                isTiltDetected = NO;
+            }
+            
+        } 
+        self.lastAcceleration = acceleration;
+
+    }
+
+    
+    
 }
 
 @end
