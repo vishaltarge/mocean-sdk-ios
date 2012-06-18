@@ -45,11 +45,19 @@
     
     // Adjust for the status bar, the navigation bar space will trigger an update layout.
     CGRect adjustedFrame = [[UIScreen mainScreen] bounds];
+    CGRect adjustedBarFrame = [[UIApplication sharedApplication] statusBarFrame];
     if (UIInterfaceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]))
+    {
         adjustedFrame = CGRectMake(adjustedFrame.origin.x, adjustedFrame.origin.y,
                                    adjustedFrame.size.height, adjustedFrame.size.width);
+        
+        adjustedBarFrame = CGRectMake(adjustedBarFrame.origin.x, adjustedBarFrame.origin.y,
+                                      adjustedBarFrame.size.height, adjustedBarFrame.size.width);
+        
+    }
+    //adjustedFrame.size.height -= [[UIApplication sharedApplication] statusBarFrame].size.height;
+    adjustedFrame.size.height -= adjustedBarFrame.size.height;
     
-    adjustedFrame.size.height -= [[UIApplication sharedApplication] statusBarFrame].size.height;
     
     // Place the config view on the bottom.
     CGRect frame = super.adConfigController.view.frame;
@@ -121,7 +129,8 @@
     }
     else
     {
-        self.configPopoverController = [[[UIPopoverController alloc] initWithContentViewController:navController] autorelease];
+        //self.configPopoverController = [[[UIPopoverController alloc] initWithContentViewController:navController] autorelease];
+        self.configPopoverController = [[UIPopoverController alloc] initWithContentViewController:navController];
         [self.configPopoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
 }
@@ -133,6 +142,7 @@
     if (self.configPopoverController != nil)
     {
         [self.configPopoverController dismissPopoverAnimated:YES];
+        [self.configPopoverController release];
     }
     else
     {
@@ -145,6 +155,7 @@
     if (self.configPopoverController != nil)
     {
         [self.configPopoverController dismissPopoverAnimated:YES];
+        [self.configPopoverController release];
     }
     else
     {
