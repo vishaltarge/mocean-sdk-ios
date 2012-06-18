@@ -3,6 +3,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreMotion/CoreMotion.h>
 #import "MASTOrmmaAdaptor.h"
 #import "MASTReachability.h"
 
@@ -25,7 +26,7 @@
 + (NSString*)setOrientation:(UIInterfaceOrientation)orientation;
 + (NSString*)setSupports:(NSArray*)supports;
 + (NSString*)setKeyboardShow:(BOOL)isShow;
-+ (NSString*)setTilt:(UIAcceleration*)acceleration;
++ (NSString*)setTilt:(CMAccelerometerData*)accelerometerData;
 + (NSString*)setHeading:(CGFloat)heading;
 + (NSString*)setLatitude:(CGFloat)latitude longitude:(CGFloat)longitude accuracy:(CGFloat)accuracy;
 + (NSString*)fireResponseEvent:(NSString*)response uri:(NSString*)uri;

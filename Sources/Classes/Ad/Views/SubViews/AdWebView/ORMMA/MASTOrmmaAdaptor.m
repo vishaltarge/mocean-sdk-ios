@@ -52,7 +52,7 @@
         }];
         [[NSNotificationCenter defaultCenter] addObserverForName:kOrmmaTiltUpdated object:nil queue:nil usingBlock:^(NSNotification *note) {
             NSDictionary* info = [note object];
-            UIAcceleration* acceleration = [info objectForKey:kOrmmaKeyObject];
+            CMAccelerometerData* acceleration = [info objectForKey:kOrmmaKeyObject];
             [self evalJS:[MASTOrmmaHelper setTilt:acceleration]];
         }];
         [[NSNotificationCenter defaultCenter] addObserverForName:kOrmmaShake object:nil queue:nil usingBlock:^(NSNotification *note) {

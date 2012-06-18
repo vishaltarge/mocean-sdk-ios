@@ -3,12 +3,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreMotion/CoreMotion.h>
+#import "OrmmaProtocols.h"
 
-@interface MASTAccelerometer : NSObject <UIAccelerometerDelegate>
+
+@interface MASTAccelerometer : NSObject
 
 + (MASTAccelerometer*)sharedInstance;
++ (CMMotionManager *)sharedMotionManagerInstance;
++ (void)stopMotionManagerUpdates;
 
-- (void)addDelegate:(id <UIAccelerometerDelegate>)delegate;
-- (void)removeDelegate:(id <UIAccelerometerDelegate>)delegate;
+- (void)registerMASTNotificationDeviceMotion;
 
 @end

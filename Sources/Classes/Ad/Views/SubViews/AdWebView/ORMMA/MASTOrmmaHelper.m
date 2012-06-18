@@ -129,8 +129,8 @@
     }
 }
 
-+ (NSString*)setTilt:(UIAcceleration*)acceleration {
-    return [MASTOrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{tilt: { x: %f, y: %f, z: %f }}", acceleration.x, acceleration.y, acceleration.z]];
++ (NSString*)setTilt:(CMAccelerometerData*)accelerometerData {
+    return [MASTOrmmaHelper fireChangeEvent:[NSString stringWithFormat:@"{tilt: { x: %f, y: %f, z: %f }}", accelerometerData.acceleration.x, accelerometerData.acceleration.y, accelerometerData.acceleration.z]];
 }
 
 + (NSString*)setHeading:(CGFloat)heading {
