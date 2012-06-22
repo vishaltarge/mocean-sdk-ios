@@ -111,7 +111,7 @@
         case 0:
             return 8;
         case 1:
-            return 2;
+            return 1;
     }
     
     return 0;
@@ -226,10 +226,6 @@
             switch (indexPath.row)
             {
                 case 0:
-                    setting = @"content alignment";
-                    settingKey = @"contentAlignment";
-                    break;
-                case 1:
                     setting = @"internal open mode";
                     settingKey = @"internalOpenMode";
                     break;

@@ -63,8 +63,7 @@
     [super dealloc];
 }
 
-- (void)loadHTML:(NSString*)html completion:(CompletionBlock)block aligment:(BOOL)aligment
-        injectionHeaderCode:(NSString*)injectionHeader injectionBodyCode:(NSString*)injectionBody {
+- (void)loadHTML:(NSString*)html completion:(CompletionBlock)block injectionHeaderCode:(NSString*)injectionHeader {
     self.completion = block;
     self.ormmaAdaptor = [[[MASTOrmmaAdaptor alloc] initWithWebView:self.webView adView:self.adView] autorelease];
     self.ormmaAdaptor.ormmaDelegate = self.ormmaDelegate;
@@ -77,21 +76,16 @@
     if ([[UIScreen mainScreen] scale] > 1)
         injectionScale = @"0.5";
     
+    // Default viewport
     NSString* injectionHeaderCode = [NSString stringWithFormat:@"<meta name=\"viewport\" content=\"width=%@; initial-scale=%@; minimum-scale=%@; user-scalable=0;\"/>", injectionWidth, injectionScale, injectionScale];
+    
+    // Default body style to center content.
+    injectionHeaderCode = [injectionHeaderCode stringByAppendingString:@"<style>body{margin:0;padding:0;display:-webkit-box;-webkit-box-orient:horizontal;-webkit-box-pack:center;-webkit-box-align:center;}</style>"];
 
     if ([injectionHeader length] > 0)
         injectionHeaderCode = injectionHeader;
     
-    NSString* injectionBodyCode = @"<body>";
-    if (aligment)
-        injectionBodyCode = @"<body style=\"display:-webkit-box;-webkit-box-orient:horizontal;-webkit-box-pack:center;-webkit-box-align:center;\">";
-    
-    if ([injectionBody length] > 0)
-        injectionBodyCode = injectionBody;
-    
-    NSString* body = [NSString stringWithFormat:@"%@%@</body>", injectionBodyCode, html];
-    
-    html = [NSString stringWithFormat:@"<html><head>%@<style>body { margin:0; padding:0; } </style><script type=\"text/javascript\">%@</script><script type=\"text/javascript\">%@</script></head>%@</html>", injectionHeaderCode, ORMMA_JS, [self.ormmaAdaptor getDefaultsJSCode], body];
+    html = [NSString stringWithFormat:@"<html><head>%@<script type=\"text/javascript\">%@</script><script type=\"text/javascript\">%@</script></head><body>%@</body></html>", injectionHeaderCode, ORMMA_JS, [self.ormmaAdaptor getDefaultsJSCode], html];
     
     [self.webView loadHTMLString:html baseURL:nil];
 }

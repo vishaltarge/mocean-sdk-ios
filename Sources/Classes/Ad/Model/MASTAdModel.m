@@ -22,7 +22,7 @@
 updateTimeInterval, defaultImage, site, adZone, premiumFilter, type, keywords, minSize, maxSize,
 paramBG, paramLINK, additionalParameters, adServerUrl, advertiserId, groupCode,
 country, region, city, area, dma, zip, carrier, showCloseButtonTime,
-autocloseInterstitialTime, startDisplayDate, isDisplayed, aligmentCenter, injectionHeaderCode, injectionBodyCode, frame,
+autocloseInterstitialTime, startDisplayDate, isDisplayed, injectionHeaderCode, frame,
 visibleState, snapshotRAWData, snapshotRAWDataTime, currentAdView, adView, excampaigns, descriptor, loading,
 longitude, latitude, adCallTimeout, autoCollapse, showPreviousAdOnError, udid;
 
@@ -229,7 +229,6 @@ longitude, latitude, adCallTimeout, autoCollapse, showPreviousAdOnError, udid;
     [latitude release];
     [longitude release];
     [injectionHeaderCode release];
-    [injectionBodyCode release];
     [snapshotRAWData release];
     [snapshotRAWDataTime release];
     

@@ -18,14 +18,26 @@
 {
     [super viewDidLoad];
     
-    NSInteger site = 19829;
-    NSInteger zone = 98463;
+    NSInteger site = 20564;
+    NSInteger zone = 90375;
     
     super.adView.site = site;
     super.adView.zone = zone;
     
     super.adConfigController.site = site;
     super.adConfigController.zone = zone;
+    
+    super.adView.track = YES;
+    
+    CFUUIDRef uuid = CFUUIDCreate(NULL);
+    CFStringRef uuidString = CFUUIDCreateString(NULL, uuid);
+    NSString* udid = [NSString stringWithString:(NSString*)uuidString];
+    CFRelease(uuidString);
+    CFRelease(uuid);
+    
+    super.adView.udid = udid;
+    
+    super.adView.showPreviousAdOnError = YES;
 }
 
 @end

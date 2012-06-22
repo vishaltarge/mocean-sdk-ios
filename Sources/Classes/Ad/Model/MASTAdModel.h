@@ -58,9 +58,7 @@
 @property (retain) NSDate*              startDisplayDate;
 @property BOOL                          isDisplayed;
 
-@property BOOL                          aligmentCenter;
 @property (retain) NSString*            injectionHeaderCode;
-@property (retain) NSString*            injectionBodyCode;
 
 @property CGRect						frame;
 @property BOOL                          visibleState;

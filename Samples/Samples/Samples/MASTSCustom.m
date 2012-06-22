@@ -117,7 +117,6 @@
     [config setValue:[NSNumber numberWithInteger:self.adView.minSize.height] forKey:@"minHeight"];
     [config setValue:[NSNumber numberWithInteger:self.adView.maxSize.width] forKey:@"maxWidth"];
     [config setValue:[NSNumber numberWithInteger:self.adView.maxSize.height] forKey:@"maxHeight"];
-    [config setValue:[NSNumber numberWithBool:self.adView.contentAlignment] forKey:@"contentAlignment"];
     [config setValue:[NSNumber numberWithBool:self.adView.internalOpenMode] forKey:@"internalOpenMode"];
     [configController setConfig:config];
     
@@ -176,10 +175,7 @@
                       [[settings valueForKey:@"maxHeight"] integerValue]);
     self.adView.maxSize = size;
 
-    id value = [settings valueForKey:@"contentAlignment"];
-    self.adView.contentAlignment = [value boolValue];
-    
-    value = [settings valueForKey:@"internalOpenMode"];
+    id value = [settings valueForKey:@"internalOpenMode"];
     self.adView.internalOpenMode = [value boolValue];
     
     [self.adView update];
