@@ -14,11 +14,9 @@
 #import "MASTAdView_Private.h"
 #import "MASTAdRequests.h"
 #import "MASTUtils.h"
-#import "MASTCacheController.h"
 
 
 @interface MASTDownloadController : NSObject {
-    MASTCacheController*        _cacheController;
 	
 	MASTAdRequests*				_adRequests;
 }

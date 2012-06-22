@@ -35,8 +35,6 @@
 		3B43CC8B14CE942300E2B3CF /* MASTWebKitInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC8914CE942300E2B3CF /* MASTWebKitInfo.h */; };
 		3B43CC8E14CE943300E2B3CF /* MASTFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CC8C14CE943300E2B3CF /* MASTFileManager.m */; };
 		3B43CC8F14CE943300E2B3CF /* MASTFileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC8D14CE943300E2B3CF /* MASTFileManager.h */; };
-		3B43CCA914CE946200E2B3CF /* MASTCacheController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC9214CE946200E2B3CF /* MASTCacheController.h */; };
-		3B43CCAA14CE946200E2B3CF /* MASTCacheController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CC9314CE946200E2B3CF /* MASTCacheController.m */; };
 		3B43CCAB14CE946200E2B3CF /* MASTAdClicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC9514CE946200E2B3CF /* MASTAdClicker.h */; };
 		3B43CCAC14CE946200E2B3CF /* MASTAdClicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43CC9614CE946200E2B3CF /* MASTAdClicker.m */; };
 		3B43CCAD14CE946200E2B3CF /* MASTDownloadController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B43CC9814CE946200E2B3CF /* MASTDownloadController.h */; };
@@ -159,8 +157,6 @@
 		3B43CC8914CE942300E2B3CF /* MASTWebKitInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTWebKitInfo.h; sourceTree = "<group>"; };
 		3B43CC8C14CE943300E2B3CF /* MASTFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTFileManager.m; sourceTree = "<group>"; };
 		3B43CC8D14CE943300E2B3CF /* MASTFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTFileManager.h; sourceTree = "<group>"; };
-		3B43CC9214CE946200E2B3CF /* MASTCacheController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTCacheController.h; sourceTree = "<group>"; };
-		3B43CC9314CE946200E2B3CF /* MASTCacheController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTCacheController.m; sourceTree = "<group>"; };
 		3B43CC9514CE946200E2B3CF /* MASTAdClicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTAdClicker.h; sourceTree = "<group>"; };
 		3B43CC9614CE946200E2B3CF /* MASTAdClicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTAdClicker.m; sourceTree = "<group>"; };
 		3B43CC9814CE946200E2B3CF /* MASTDownloadController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTDownloadController.h; sourceTree = "<group>"; };
@@ -365,7 +361,6 @@
 		3B43CC9014CE946200E2B3CF /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				3B43CC9114CE946200E2B3CF /* CacheController */,
 				3B43CC9414CE946200E2B3CF /* Clicker */,
 				3B43CC9714CE946200E2B3CF /* Download */,
 				3B43CC9A14CE946200E2B3CF /* NetworkQueue */,
@@ -373,15 +368,6 @@
 				3B43CCA614CE946200E2B3CF /* Updates */,
 			);
 			path = Network;
-			sourceTree = "<group>";
-		};
-		3B43CC9114CE946200E2B3CF /* CacheController */ = {
-			isa = PBXGroup;
-			children = (
-				3B43CC9214CE946200E2B3CF /* MASTCacheController.h */,
-				3B43CC9314CE946200E2B3CF /* MASTCacheController.m */,
-			);
-			path = CacheController;
 			sourceTree = "<group>";
 		};
 		3B43CC9414CE946200E2B3CF /* Clicker */ = {
@@ -856,7 +842,6 @@
 				3B43CC7B14CE93E200E2B3CF /* MASTAdController.h in Headers */,
 				3B43CC8B14CE942300E2B3CF /* MASTWebKitInfo.h in Headers */,
 				3B43CC8F14CE943300E2B3CF /* MASTFileManager.h in Headers */,
-				3B43CCA914CE946200E2B3CF /* MASTCacheController.h in Headers */,
 				3B43CCAB14CE946200E2B3CF /* MASTAdClicker.h in Headers */,
 				3B43CCAD14CE946200E2B3CF /* MASTDownloadController.h in Headers */,
 				3B43CCAF14CE946200E2B3CF /* MASTNetworkActivityIndicatorManager.h in Headers */,
@@ -1018,7 +1003,6 @@
 				3B43CC7A14CE93E200E2B3CF /* MASTAdController.m in Sources */,
 				3B43CC8A14CE942300E2B3CF /* MASTWebKitInfo.m in Sources */,
 				3B43CC8E14CE943300E2B3CF /* MASTFileManager.m in Sources */,
-				3B43CCAA14CE946200E2B3CF /* MASTCacheController.m in Sources */,
 				3B43CCAC14CE946200E2B3CF /* MASTAdClicker.m in Sources */,
 				3B43CCAE14CE946200E2B3CF /* MASTDownloadController.m in Sources */,
 				3B43CCB014CE946200E2B3CF /* MASTNetworkActivityIndicatorManager.m in Sources */,

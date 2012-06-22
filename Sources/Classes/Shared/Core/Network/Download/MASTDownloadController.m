@@ -29,7 +29,6 @@ static MASTDownloadController* sharedInstance = nil;
     self = [super init];
 	if (self) {
 		_adRequests = [MASTAdRequests new];
-        _cacheController = [[MASTCacheController alloc] init];
 		
 		// TODO: add shared model
 		//_sharedRequestQueue.userAgent = [SharedModel sharedInstance].userAgent;
@@ -51,7 +50,6 @@ static MASTDownloadController* sharedInstance = nil;
 
 - (oneway void)superRelease {
 	RELEASE_SAFELY(_adRequests);
-	RELEASE_SAFELY(_cacheController);
 	
 	[super release];
 }
@@ -143,18 +141,12 @@ static MASTDownloadController* sharedInstance = nil;
                     } else {
                         if ([_adRequests containsRequest:request]) {
                             NSString* responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                            NSArray* links = [MASTUtils linksFromText:responseString];
                             [responseString release];
                             
-                            if (links && [links count] > 0) {
-                                [_cacheController loadLinks:links forAdView:adView request:request origData:data];
-                            }
-                            else {
-                                if (adView && req) {
-                                    NSMutableDictionary* infoBlock = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:request, data, adView, nil]
-                                                                                                   forKeys:[NSArray arrayWithObjects:@"request", @"data", @"adView", nil]];
-                                    [[MASTNotificationCenter sharedInstance] postNotificationName:kFinishAdDownloadNotification object:infoBlock];
-                                }
+                            if (adView && req) {
+                                NSMutableDictionary* infoBlock = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:request, data, adView, nil]
+                                                                                                    forKeys:[NSArray arrayWithObjects:@"request", @"data", @"adView", nil]];
+                                [[MASTNotificationCenter sharedInstance] postNotificationName:kFinishAdDownloadNotification object:infoBlock];
                             }
                             
                             // remove from ads request array
