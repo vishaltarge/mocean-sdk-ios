@@ -265,7 +265,7 @@ typedef enum {
  
  Specify timeout of ad call. This tells the ad server the maximum time you are willing to wait for an ad response.
  
- The default value is 1000ms (milleseconds).
+ The default value is 3000ms (milleseconds).
  
  The max value is 3000ms (milleseconds).
  */

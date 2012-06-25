@@ -28,9 +28,9 @@
 
 #define MIN_TIMEOUT_VALUE           0
 #define MAX_TIMEOUT_VALUE           3000
-#define DEFAULT_TIMEOUT_VALUE       1000 // 1 sec
+#define DEFAULT_TIMEOUT_VALUE       3000 // 3 sec
 #define DEFAULT_UPDATE_TIMEINTERVAL 120 // 2 min
-#define NETWORK_TIMEOUT             (MAX_TIMEOUT_VALUE * 2)
+#define NETWORK_TIMEOUT             (MAX_TIMEOUT_VALUE * 10)
 
 #define ORMMA_SQARE_CLOSE_SIZE      50
 
