@@ -12,12 +12,13 @@
 @property (nonatomic, assign) id activeResponder;
 @property (nonatomic, retain) NSMutableDictionary* settings;
 @property (nonatomic, retain) NSMutableDictionary* tagKeys;
+@property (nonatomic, retain) NSArray* injectionHeaderValues;
 @end
 
 @implementation MASTSCustomConfigController
 
 @synthesize delegate;
-@synthesize activeResponder, settings, tagKeys;
+@synthesize activeResponder, settings, tagKeys, injectionHeaderValues;
 
 - (void)dealloc
 {
@@ -25,6 +26,7 @@
     self.activeResponder = nil;
     self.settings = nil;
     self.tagKeys = nil;
+    self.injectionHeaderValues = nil;
     
     [super dealloc];
 }
@@ -47,6 +49,10 @@
         self.navigationItem.rightBarButtonItem = doneButton;
         
         self.tagKeys = [NSMutableDictionary dictionary];
+        
+        self.injectionHeaderValues = [NSArray arrayWithObjects:[NSNull null], 
+                                      @"",
+                                      @"<meta name=\"viewport\" content=\"initial-scale=1.0;user-scalable=0;\"/><style>body{margin:0;padding:0;display:-webkit-box;-webkit-box-orient:horizontal;-webkit-box-pack:center;-webkit-box-align:center;}</style>", nil];
     }
     return self;
 }
@@ -101,7 +107,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -112,6 +118,8 @@
             return 8;
         case 1:
             return 1;
+        case 2:
+            return 3;
     }
     
     return 0;
@@ -124,7 +132,9 @@
         case 0:
             return @"Position and Size";
         case 1:
-            return @"Options";            
+            return @"Options";
+        case 2:
+            return @"Injection Header";
     }
     
     return nil;
@@ -132,13 +142,16 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *NumberCellId = @"nCell";
-    static NSString *BooleanCellId = @"bCell";
-    
+    static NSString* NumberCellId = @"nCell";
+    static NSString* BooleanCellId = @"bCell";
+    static NSString* CheckmarkCellId = @"cCell";
+     
     NSString* cellId = NumberCellId;
     
     if (indexPath.section == 1)
         cellId = BooleanCellId;
+    else if (indexPath.section == 2)
+        cellId = CheckmarkCellId;
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     
@@ -172,6 +185,10 @@
             switchField.tag = tag;
             cell.accessoryView = switchField;
             [switchField addTarget:self action:@selector(switchChange:) forControlEvents:UIControlEventValueChanged];
+        }
+        else if (cellId == CheckmarkCellId)
+        {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
         }
     }
     
@@ -232,6 +249,26 @@
             }
             break;
         }
+        case 2:
+        {
+            settingKey = @"injectionHeaderCode";
+            
+            switch (indexPath.row)
+            {
+                case 0:
+                    setting = @"default";
+                    break;
+                    
+                case 1:
+                    setting = @"no injection";
+                    break;
+                    
+                case 2:
+                    setting = @"initial-scale=1.0";
+                    break;
+            }
+            break;
+        }
     }
     
     id value = [self.settings valueForKey:settingKey];
@@ -242,12 +279,23 @@
     {
         UITextField* textField = (UITextField*)cell.accessoryView;
         textField.text = [value description];
-        
     }
     else if (cellId == BooleanCellId)
     {
         UISwitch* switchField = (UISwitch*)cell.accessoryView;
         [switchField setOn:[value boolValue]];
+    }
+    else if (cellId == CheckmarkCellId)
+    {
+        if (value == nil)
+            value = [NSNull null];
+        
+        NSUInteger valueIndex = [self.injectionHeaderValues indexOfObject:value];
+        
+        if (valueIndex == indexPath.row)
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        else 
+            cell.accessoryType = UITableViewCellAccessoryNone;
     }
     
     return cell;
@@ -261,6 +309,27 @@
         [self.activeResponder endEditing:YES];
     
     self.activeResponder = nil;
+    
+    if (indexPath.section == 2)
+    {
+        for (int i = 0, c = self.injectionHeaderValues.count; i < c; ++i)
+        {
+            id value = [self.injectionHeaderValues objectAtIndex:i];
+            if ([[NSNull null] isEqual:value])
+                value = nil;
+            
+            UITableViewCell* cell = [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:2]];
+            if (indexPath.row == i)
+            {
+                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+                [settings setValue:value forKey:@"injectionHeaderCode"];
+            }
+            else
+            {
+                cell.accessoryType = UITableViewCellAccessoryNone;
+            }
+        }
+    }
 }
 
 #pragma mark -

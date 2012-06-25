@@ -118,6 +118,7 @@
     [config setValue:[NSNumber numberWithInteger:self.adView.maxSize.width] forKey:@"maxWidth"];
     [config setValue:[NSNumber numberWithInteger:self.adView.maxSize.height] forKey:@"maxHeight"];
     [config setValue:[NSNumber numberWithBool:self.adView.internalOpenMode] forKey:@"internalOpenMode"];
+    [config setValue:self.adView.injectionHeaderCode forKey:@"injectionHeaderCode"];
     [configController setConfig:config];
     
     UINavigationController* navController = [[[UINavigationController alloc] initWithRootViewController:configController] autorelease];
@@ -177,6 +178,9 @@
 
     id value = [settings valueForKey:@"internalOpenMode"];
     self.adView.internalOpenMode = [value boolValue];
+    
+    value = [settings valueForKey:@"injectionHeaderCode"];
+    self.adView.injectionHeaderCode = value;
     
     [self.adView update];
 }
