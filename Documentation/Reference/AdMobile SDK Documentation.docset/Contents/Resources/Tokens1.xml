@@ -57,6 +57,18 @@ an alternative ad publisher server.</Abstract>
 		</Token>
 		
 		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/MASTAdView/isLocationDetectionEnabled</TokenIdentifier>
+			<Abstract>Returns the enablement status of location detection.  May return NO even if either setLocationDetectionEnabled methods
+were called to enable location detection if iOS locaton services are unavailable or unauthorized.</Abstract>
+			<DeclaredIn>MASTAdView.h</DeclaredIn>			
+			
+			<Declaration>+ (BOOL)isLocationDetectionEnabled</Declaration>
+			
+			
+			<Anchor>//api/name/isLocationDetectionEnabled</Anchor>
+		</Token>
+		
+		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/MASTAdView/initWithFrame:site:zone:</TokenIdentifier>
 			<Abstract>Initializes and returns an instance of MASTAdView having the given frame, site and zone.</Abstract>
 			<DeclaredIn>MASTAdView.h</DeclaredIn>			
@@ -262,17 +274,6 @@ an alternative ad publisher server.</Abstract>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/contentAlignment</TokenIdentifier>
-			<Abstract>A Boolean value that determines whether content alignment is centered vertically and horizontally.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property BOOL contentAlignment</Declaration>
-			
-			
-			<Anchor>//api/name/contentAlignment</Anchor>
-		</Token>
-		
-		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/injectionHeaderCode</TokenIdentifier>
 			<Abstract>Customize the HTML (or javascript) code to be inserted into the HTML HEAD when creating webview for ad content.</Abstract>
 			<DeclaredIn>MASTAdView.h</DeclaredIn>			
@@ -281,21 +282,6 @@ an alternative ad publisher server.</Abstract>
 			
 			
 			<Anchor>//api/name/injectionHeaderCode</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MASTAdView/injectionBodyCode</TokenIdentifier>
-			<Abstract>Customize the HTML (or javascript) code to be inserted into the HTML BODY when creating
-webview for ad content. By default this will contain one of the strings below based on
-the contentAlignment property.  See below for required tags as they have implicit close
-tags (in order).  The body tag MUST be included and left open, other tags must be properly
-terminated.</Abstract>
-			<DeclaredIn>MASTAdView.h</DeclaredIn>			
-			
-			<Declaration>@property (nonatomic, retain) NSString *injectionBodyCode</Declaration>
-			
-			
-			<Anchor>//api/name/injectionBodyCode</Anchor>
 		</Token>
 		
 		<Token>
