@@ -1,0 +1,635 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5B00D02315ADB5D800246737 /* MASTDMMAdController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B00D02215ADB5D800246737 /* MASTDMMAdController.m */; };
+		5BACE20615ADF084003F630C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BACE20515ADF084003F630C /* AVFoundation.framework */; };
+		5BACE20815ADF0B9003F630C /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BACE20715ADF0B9003F630C /* MobileCoreServices.framework */; };
+		C5297A3E15AA58FE007FBD27 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = C5297A3D15AA58FE007FBD27 /* README.txt */; };
+		C5297A4015AA5976007FBD27 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5297A3F15AA5976007FBD27 /* AudioToolbox.framework */; };
+		C5297A5115AB25FD007FBD27 /* MASTDAdController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5297A5015AB25FC007FBD27 /* MASTDAdController.m */; };
+		C5297A5515AB28F6007FBD27 /* MASTDAdMobController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5297A5415AB28F6007FBD27 /* MASTDAdMobController.m */; };
+		C52ED42B15BF1A640031A633 /* libAdMobileSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C52ED42615BEE6410031A633 /* libAdMobileSDK.a */; };
+		C55DC63615AB64B3001D09F7 /* MASTDiAdController.m in Sources */ = {isa = PBXBuildFile; fileRef = C55DC63515AB64B3001D09F7 /* MASTDiAdController.m */; };
+		C57AD24D15AE0FD600A4ACE8 /* MASTDFlickrBookmarkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C57AD24C15AE0FD600A4ACE8 /* MASTDFlickrBookmarkCell.m */; };
+		C57AD25015AE104000A4ACE8 /* MASTDFlickrBookmarkController.m in Sources */ = {isa = PBXBuildFile; fileRef = C57AD24F15AE104000A4ACE8 /* MASTDFlickrBookmarkController.m */; };
+		C57AD25315AE11B600A4ACE8 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C57AD25215AE11B600A4ACE8 /* libGoogleAdMobAds.a */; };
+		C57AD25515AE11E800A4ACE8 /* libMMSDK_4.5.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C57AD25415AE11E800A4ACE8 /* libMMSDK_4.5.5.a */; };
+		C57AD26815AFDE9D00A4ACE8 /* libVDOAdsSimulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C57AD26715AFDE9D00A4ACE8 /* libVDOAdsSimulator.a */; };
+		C57AD27015AFDF1900A4ACE8 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C57AD26F15AFDF1900A4ACE8 /* CFNetwork.framework */; };
+		C57AD27315B04DB800A4ACE8 /* MASTDiVdopiaController.m in Sources */ = {isa = PBXBuildFile; fileRef = C57AD27215B04DB800A4ACE8 /* MASTDiVdopiaController.m */; };
+		C5D0293E15963592004D5055 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D0293D15963592004D5055 /* iAd.framework */; };
+		C5D0295F15963D35004D5055 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D0295715963D34004D5055 /* CoreLocation.framework */; };
+		C5D0296015963D35004D5055 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D0295815963D34004D5055 /* CoreMotion.framework */; };
+		C5D0296115963D35004D5055 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D0295915963D34004D5055 /* CoreTelephony.framework */; };
+		C5D0296215963D35004D5055 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D0295A15963D34004D5055 /* EventKit.framework */; };
+		C5D0296315963D35004D5055 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D0295B15963D34004D5055 /* MediaPlayer.framework */; };
+		C5D0296415963D35004D5055 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D0295C15963D34004D5055 /* MessageUI.framework */; };
+		C5D0296515963D35004D5055 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D0295D15963D34004D5055 /* QuartzCore.framework */; };
+		C5D0296615963D35004D5055 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D0295E15963D35004D5055 /* SystemConfiguration.framework */; };
+		C5DA6D1B15A2C9700066FE0A /* MASTDFlickrDescriptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C5DA6D1A15A2C9700066FE0A /* MASTDFlickrDescriptionCell.m */; };
+		C5DA6D2415A345770066FE0A /* MASTDFlickrDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5DA6D2315A345770066FE0A /* MASTDFlickrDetailController.m */; };
+		C5F3105A15941D6F00A8C970 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5F3105915941D6F00A8C970 /* UIKit.framework */; };
+		C5F3105C15941D6F00A8C970 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5F3105B15941D6F00A8C970 /* Foundation.framework */; };
+		C5F3105E15941D6F00A8C970 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5F3105D15941D6F00A8C970 /* CoreGraphics.framework */; };
+		C5F3106415941D6F00A8C970 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C5F3106215941D6F00A8C970 /* InfoPlist.strings */; };
+		C5F3106615941D6F00A8C970 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C5F3106515941D6F00A8C970 /* main.m */; };
+		C5F3106A15941D6F00A8C970 /* MASTDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C5F3106915941D6F00A8C970 /* MASTDAppDelegate.m */; };
+		C5F3106D15941D6F00A8C970 /* MASTDRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5F3106C15941D6F00A8C970 /* MASTDRootViewController.m */; };
+		C5F3107015941D6F00A8C970 /* MASTDDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5F3106F15941D6F00A8C970 /* MASTDDataViewController.m */; };
+		C5F3107315941D6F00A8C970 /* MASTDModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5F3107215941D6F00A8C970 /* MASTDModelController.m */; };
+		C5F3107615941D6F00A8C970 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5F3107415941D6F00A8C970 /* MainStoryboard_iPhone.storyboard */; };
+		C5F3107915941D6F00A8C970 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5F3107715941D6F00A8C970 /* MainStoryboard_iPad.storyboard */; };
+		C5F3108015941E1400A8C970 /* YAJL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5F3107F15941E1400A8C970 /* YAJL.framework */; };
+		C5F3108815941EB000A8C970 /* MASTDBookmarks.m in Sources */ = {isa = PBXBuildFile; fileRef = C5F3108315941EB000A8C970 /* MASTDBookmarks.m */; };
+		C5F3108915941EB000A8C970 /* MASTDFlickr.m in Sources */ = {isa = PBXBuildFile; fileRef = C5F3108515941EB000A8C970 /* MASTDFlickr.m */; };
+		C5F3108A15941EB000A8C970 /* MASTDFlickrImage.m in Sources */ = {isa = PBXBuildFile; fileRef = C5F3108715941EB000A8C970 /* MASTDFlickrImage.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C52ED42515BEE6410031A633 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5D0294015963738004D5055 /* AdMobileSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CFE1ED4112FA979400600579;
+			remoteInfo = AdMobileSDK;
+		};
+		C52ED42715BEE6410031A633 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5D0294015963738004D5055 /* AdMobileSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CF6CAF8713D4632500158662;
+			remoteInfo = DocGeneration;
+		};
+		C52ED42915BF1A5F0031A633 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5D0294015963738004D5055 /* AdMobileSDK.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = AdMobileSDK;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		5B00D02115ADB5D800246737 /* MASTDMMAdController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTDMMAdController.h; sourceTree = "<group>"; };
+		5B00D02215ADB5D800246737 /* MASTDMMAdController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTDMMAdController.m; sourceTree = "<group>"; };
+		5BACE20515ADF084003F630C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		5BACE20715ADF0B9003F630C /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		C5297A3415AA553C007FBD27 /* GADAdMobExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADAdMobExtras.h; path = GoogleAdMobAdsSDK/GADAdMobExtras.h; sourceTree = SOURCE_ROOT; };
+		C5297A3515AA553C007FBD27 /* GADAdNetworkExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADAdNetworkExtras.h; path = GoogleAdMobAdsSDK/GADAdNetworkExtras.h; sourceTree = SOURCE_ROOT; };
+		C5297A3615AA553D007FBD27 /* GADAdSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADAdSize.h; path = GoogleAdMobAdsSDK/GADAdSize.h; sourceTree = SOURCE_ROOT; };
+		C5297A3715AA553D007FBD27 /* GADBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADBannerView.h; path = GoogleAdMobAdsSDK/GADBannerView.h; sourceTree = SOURCE_ROOT; };
+		C5297A3815AA553D007FBD27 /* GADBannerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADBannerViewDelegate.h; path = GoogleAdMobAdsSDK/GADBannerViewDelegate.h; sourceTree = SOURCE_ROOT; };
+		C5297A3915AA553D007FBD27 /* GADInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADInterstitial.h; path = GoogleAdMobAdsSDK/GADInterstitial.h; sourceTree = SOURCE_ROOT; };
+		C5297A3A15AA553D007FBD27 /* GADInterstitialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADInterstitialDelegate.h; path = GoogleAdMobAdsSDK/GADInterstitialDelegate.h; sourceTree = SOURCE_ROOT; };
+		C5297A3B15AA553D007FBD27 /* GADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADRequest.h; path = GoogleAdMobAdsSDK/GADRequest.h; sourceTree = SOURCE_ROOT; };
+		C5297A3C15AA553D007FBD27 /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADRequestError.h; path = GoogleAdMobAdsSDK/GADRequestError.h; sourceTree = SOURCE_ROOT; };
+		C5297A3D15AA58FE007FBD27 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.txt; path = GoogleAdMobAdsSDK/README.txt; sourceTree = SOURCE_ROOT; };
+		C5297A3F15AA5976007FBD27 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		C5297A4C15AB18E8007FBD27 /* MMAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMAdView.h; path = MMSDK/MMSDK/MMAdView.h; sourceTree = SOURCE_ROOT; };
+		C5297A4F15AB25FC007FBD27 /* MASTDAdController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTDAdController.h; sourceTree = "<group>"; };
+		C5297A5015AB25FC007FBD27 /* MASTDAdController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTDAdController.m; sourceTree = "<group>"; };
+		C5297A5315AB28F6007FBD27 /* MASTDAdMobController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTDAdMobController.h; sourceTree = "<group>"; };
+		C5297A5415AB28F6007FBD27 /* MASTDAdMobController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTDAdMobController.m; sourceTree = "<group>"; };
+		C55DC63415AB64B3001D09F7 /* MASTDiAdController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTDiAdController.h; sourceTree = "<group>"; };
+		C55DC63515AB64B3001D09F7 /* MASTDiAdController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTDiAdController.m; sourceTree = "<group>"; };
+		C57AD24B15AE0FD600A4ACE8 /* MASTDFlickrBookmarkCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTDFlickrBookmarkCell.h; sourceTree = "<group>"; };
+		C57AD24C15AE0FD600A4ACE8 /* MASTDFlickrBookmarkCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTDFlickrBookmarkCell.m; sourceTree = "<group>"; };
+		C57AD24E15AE104000A4ACE8 /* MASTDFlickrBookmarkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTDFlickrBookmarkController.h; sourceTree = "<group>"; };
+		C57AD24F15AE104000A4ACE8 /* MASTDFlickrBookmarkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTDFlickrBookmarkController.m; sourceTree = "<group>"; };
+		C57AD25215AE11B600A4ACE8 /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAdMobAds.a; path = GoogleAdMobAdsSDK/libGoogleAdMobAds.a; sourceTree = "<group>"; };
+		C57AD25415AE11E800A4ACE8 /* libMMSDK_4.5.5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMMSDK_4.5.5.a; path = MMSDK/MMSDK/libMMSDK_4.5.5.a; sourceTree = "<group>"; };
+		C57AD26115AFDE4700A4ACE8 /* libVDOAdsDevice.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libVDOAdsDevice.a; path = "iVdopia-iPhonev4-4.1.0/libVDOAdsDevice.a"; sourceTree = "<group>"; };
+		C57AD26715AFDE9D00A4ACE8 /* libVDOAdsSimulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libVDOAdsSimulator.a; path = "iVdopia-iPhonev4-4.1.0/libVDOAdsSimulator.a"; sourceTree = "<group>"; };
+		C57AD26A15AFDED300A4ACE8 /* VDOAds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VDOAds.h; path = "iVdopia-iPhonev4-4.1.0/VDOAds.h"; sourceTree = SOURCE_ROOT; };
+		C57AD26F15AFDF1900A4ACE8 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		C57AD27115B04DB800A4ACE8 /* MASTDiVdopiaController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTDiVdopiaController.h; sourceTree = "<group>"; };
+		C57AD27215B04DB800A4ACE8 /* MASTDiVdopiaController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTDiVdopiaController.m; sourceTree = "<group>"; };
+		C5D0293D15963592004D5055 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		C5D0294015963738004D5055 /* AdMobileSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AdMobileSDK.xcodeproj; path = ../../Sources/AdMobileSDK.xcodeproj; sourceTree = SOURCE_ROOT; };
+		C5D0294C1596374A004D5055 /* MASTAdDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MASTAdDelegate.h; path = ../../Sources/Classes/Public/MASTAdDelegate.h; sourceTree = SOURCE_ROOT; };
+		C5D0294D1596374A004D5055 /* MASTAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MASTAdView.h; path = ../../Sources/Classes/Public/MASTAdView.h; sourceTree = SOURCE_ROOT; };
+		C5D0295715963D34004D5055 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		C5D0295815963D34004D5055 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		C5D0295915963D34004D5055 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		C5D0295A15963D34004D5055 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
+		C5D0295B15963D34004D5055 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		C5D0295C15963D34004D5055 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		C5D0295D15963D34004D5055 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		C5D0295E15963D35004D5055 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		C5DA6D1915A2C9700066FE0A /* MASTDFlickrDescriptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTDFlickrDescriptionCell.h; sourceTree = "<group>"; };
+		C5DA6D1A15A2C9700066FE0A /* MASTDFlickrDescriptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTDFlickrDescriptionCell.m; sourceTree = "<group>"; };
+		C5DA6D2215A345770066FE0A /* MASTDFlickrDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTDFlickrDetailController.h; sourceTree = "<group>"; };
+		C5DA6D2315A345770066FE0A /* MASTDFlickrDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTDFlickrDetailController.m; sourceTree = "<group>"; };
+		C5F3105515941D6F00A8C970 /* FlickrViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickrViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5F3105915941D6F00A8C970 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		C5F3105B15941D6F00A8C970 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		C5F3105D15941D6F00A8C970 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		C5F3106115941D6F00A8C970 /* FlickrViewer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FlickrViewer-Info.plist"; sourceTree = "<group>"; };
+		C5F3106315941D6F00A8C970 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C5F3106515941D6F00A8C970 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C5F3106715941D6F00A8C970 /* FlickrViewer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FlickrViewer-Prefix.pch"; sourceTree = "<group>"; };
+		C5F3106815941D6F00A8C970 /* MASTDAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MASTDAppDelegate.h; sourceTree = "<group>"; };
+		C5F3106915941D6F00A8C970 /* MASTDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MASTDAppDelegate.m; sourceTree = "<group>"; };
+		C5F3106B15941D6F00A8C970 /* MASTDRootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MASTDRootViewController.h; sourceTree = "<group>"; };
+		C5F3106C15941D6F00A8C970 /* MASTDRootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MASTDRootViewController.m; sourceTree = "<group>"; };
+		C5F3106E15941D6F00A8C970 /* MASTDDataViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MASTDDataViewController.h; sourceTree = "<group>"; };
+		C5F3106F15941D6F00A8C970 /* MASTDDataViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MASTDDataViewController.m; sourceTree = "<group>"; };
+		C5F3107115941D6F00A8C970 /* MASTDModelController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MASTDModelController.h; sourceTree = "<group>"; };
+		C5F3107215941D6F00A8C970 /* MASTDModelController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MASTDModelController.m; sourceTree = "<group>"; };
+		C5F3107515941D6F00A8C970 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		C5F3107815941D6F00A8C970 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		C5F3107F15941E1400A8C970 /* YAJL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = YAJL.framework; sourceTree = "<group>"; };
+		C5F3108215941EB000A8C970 /* MASTDBookmarks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTDBookmarks.h; sourceTree = "<group>"; };
+		C5F3108315941EB000A8C970 /* MASTDBookmarks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTDBookmarks.m; sourceTree = "<group>"; };
+		C5F3108415941EB000A8C970 /* MASTDFlickr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTDFlickr.h; sourceTree = "<group>"; };
+		C5F3108515941EB000A8C970 /* MASTDFlickr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTDFlickr.m; sourceTree = "<group>"; };
+		C5F3108615941EB000A8C970 /* MASTDFlickrImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTDFlickrImage.h; sourceTree = "<group>"; };
+		C5F3108715941EB000A8C970 /* MASTDFlickrImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTDFlickrImage.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C5F3105215941D6F00A8C970 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C52ED42B15BF1A640031A633 /* libAdMobileSDK.a in Frameworks */,
+				C57AD26815AFDE9D00A4ACE8 /* libVDOAdsSimulator.a in Frameworks */,
+				C57AD25315AE11B600A4ACE8 /* libGoogleAdMobAds.a in Frameworks */,
+				C57AD25515AE11E800A4ACE8 /* libMMSDK_4.5.5.a in Frameworks */,
+				C5F3105A15941D6F00A8C970 /* UIKit.framework in Frameworks */,
+				C5297A4015AA5976007FBD27 /* AudioToolbox.framework in Frameworks */,
+				5BACE20615ADF084003F630C /* AVFoundation.framework in Frameworks */,
+				C5F3105E15941D6F00A8C970 /* CoreGraphics.framework in Frameworks */,
+				C5D0295F15963D35004D5055 /* CoreLocation.framework in Frameworks */,
+				C5D0296015963D35004D5055 /* CoreMotion.framework in Frameworks */,
+				C5D0296115963D35004D5055 /* CoreTelephony.framework in Frameworks */,
+				C57AD27015AFDF1900A4ACE8 /* CFNetwork.framework in Frameworks */,
+				C5D0296215963D35004D5055 /* EventKit.framework in Frameworks */,
+				C5F3105C15941D6F00A8C970 /* Foundation.framework in Frameworks */,
+				C5D0296315963D35004D5055 /* MediaPlayer.framework in Frameworks */,
+				C5D0296415963D35004D5055 /* MessageUI.framework in Frameworks */,
+				5BACE20815ADF0B9003F630C /* MobileCoreServices.framework in Frameworks */,
+				C5D0296515963D35004D5055 /* QuartzCore.framework in Frameworks */,
+				C5D0296615963D35004D5055 /* SystemConfiguration.framework in Frameworks */,
+				C5D0293E15963592004D5055 /* iAd.framework in Frameworks */,
+				C5F3108015941E1400A8C970 /* YAJL.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C5297A3315AA5515007FBD27 /* GoogleAdMob */ = {
+			isa = PBXGroup;
+			children = (
+				C5297A3D15AA58FE007FBD27 /* README.txt */,
+				C5297A3415AA553C007FBD27 /* GADAdMobExtras.h */,
+				C5297A3515AA553C007FBD27 /* GADAdNetworkExtras.h */,
+				C5297A3615AA553D007FBD27 /* GADAdSize.h */,
+				C5297A3715AA553D007FBD27 /* GADBannerView.h */,
+				C5297A3815AA553D007FBD27 /* GADBannerViewDelegate.h */,
+				C5297A3915AA553D007FBD27 /* GADInterstitial.h */,
+				C5297A3A15AA553D007FBD27 /* GADInterstitialDelegate.h */,
+				C5297A3B15AA553D007FBD27 /* GADRequest.h */,
+				C5297A3C15AA553D007FBD27 /* GADRequestError.h */,
+			);
+			name = GoogleAdMob;
+			sourceTree = "<group>";
+		};
+		C5297A4B15AB18D6007FBD27 /* MMSDK */ = {
+			isa = PBXGroup;
+			children = (
+				C5297A4C15AB18E8007FBD27 /* MMAdView.h */,
+			);
+			name = MMSDK;
+			sourceTree = "<group>";
+		};
+		C5297A5215AB28B4007FBD27 /* AdControllers */ = {
+			isa = PBXGroup;
+			children = (
+				C5297A4F15AB25FC007FBD27 /* MASTDAdController.h */,
+				C5297A5015AB25FC007FBD27 /* MASTDAdController.m */,
+				C5297A5315AB28F6007FBD27 /* MASTDAdMobController.h */,
+				C5297A5415AB28F6007FBD27 /* MASTDAdMobController.m */,
+				C55DC63415AB64B3001D09F7 /* MASTDiAdController.h */,
+				C55DC63515AB64B3001D09F7 /* MASTDiAdController.m */,
+				5B00D02115ADB5D800246737 /* MASTDMMAdController.h */,
+				5B00D02215ADB5D800246737 /* MASTDMMAdController.m */,
+				C57AD27115B04DB800A4ACE8 /* MASTDiVdopiaController.h */,
+				C57AD27215B04DB800A4ACE8 /* MASTDiVdopiaController.m */,
+			);
+			name = AdControllers;
+			sourceTree = "<group>";
+		};
+		C52ED42115BEE6410031A633 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C52ED42615BEE6410031A633 /* libAdMobileSDK.a */,
+				C52ED42815BEE6410031A633 /* libAdMobileSDK doc generation.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C57AD26915AFDEBC00A4ACE8 /* iVdopia */ = {
+			isa = PBXGroup;
+			children = (
+				C57AD26A15AFDED300A4ACE8 /* VDOAds.h */,
+			);
+			name = iVdopia;
+			sourceTree = "<group>";
+		};
+		C5D0293F15963718004D5055 /* MASTAdView */ = {
+			isa = PBXGroup;
+			children = (
+				C5D0294E15963750004D5055 /* Public */,
+				C5D0294015963738004D5055 /* AdMobileSDK.xcodeproj */,
+			);
+			name = MASTAdView;
+			sourceTree = "<group>";
+		};
+		C5D0294E15963750004D5055 /* Public */ = {
+			isa = PBXGroup;
+			children = (
+				C5D0294D1596374A004D5055 /* MASTAdView.h */,
+				C5D0294C1596374A004D5055 /* MASTAdDelegate.h */,
+			);
+			name = Public;
+			sourceTree = "<group>";
+		};
+		C5F3104A15941D6F00A8C970 = {
+			isa = PBXGroup;
+			children = (
+				C5F3105F15941D6F00A8C970 /* FlickrViewer */,
+				C5F3105815941D6F00A8C970 /* Frameworks */,
+				C5F3105615941D6F00A8C970 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C5F3105615941D6F00A8C970 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C5F3105515941D6F00A8C970 /* FlickrViewer.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C5F3105815941D6F00A8C970 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C57AD25215AE11B600A4ACE8 /* libGoogleAdMobAds.a */,
+				C57AD25415AE11E800A4ACE8 /* libMMSDK_4.5.5.a */,
+				C57AD26115AFDE4700A4ACE8 /* libVDOAdsDevice.a */,
+				C57AD26715AFDE9D00A4ACE8 /* libVDOAdsSimulator.a */,
+				C5F3105915941D6F00A8C970 /* UIKit.framework */,
+				5BACE20515ADF084003F630C /* AVFoundation.framework */,
+				C5F3105B15941D6F00A8C970 /* Foundation.framework */,
+				C5F3105D15941D6F00A8C970 /* CoreGraphics.framework */,
+				C5D0295715963D34004D5055 /* CoreLocation.framework */,
+				C5D0295815963D34004D5055 /* CoreMotion.framework */,
+				C5D0295915963D34004D5055 /* CoreTelephony.framework */,
+				C57AD26F15AFDF1900A4ACE8 /* CFNetwork.framework */,
+				C5297A3F15AA5976007FBD27 /* AudioToolbox.framework */,
+				5BACE20715ADF0B9003F630C /* MobileCoreServices.framework */,
+				C5D0295A15963D34004D5055 /* EventKit.framework */,
+				C5D0295B15963D34004D5055 /* MediaPlayer.framework */,
+				C5D0295C15963D34004D5055 /* MessageUI.framework */,
+				C5D0295D15963D34004D5055 /* QuartzCore.framework */,
+				C5D0295E15963D35004D5055 /* SystemConfiguration.framework */,
+				C5D0293D15963592004D5055 /* iAd.framework */,
+				C5F3107F15941E1400A8C970 /* YAJL.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C5F3105F15941D6F00A8C970 /* FlickrViewer */ = {
+			isa = PBXGroup;
+			children = (
+				C5D0293F15963718004D5055 /* MASTAdView */,
+				C5297A3315AA5515007FBD27 /* GoogleAdMob */,
+				C5297A4B15AB18D6007FBD27 /* MMSDK */,
+				C57AD26915AFDEBC00A4ACE8 /* iVdopia */,
+				C5F3108115941E4B00A8C970 /* Flickr */,
+				C5297A5215AB28B4007FBD27 /* AdControllers */,
+				C5F3107415941D6F00A8C970 /* MainStoryboard_iPhone.storyboard */,
+				C5F3107715941D6F00A8C970 /* MainStoryboard_iPad.storyboard */,
+				C5F3106815941D6F00A8C970 /* MASTDAppDelegate.h */,
+				C5F3106915941D6F00A8C970 /* MASTDAppDelegate.m */,
+				C5F3106B15941D6F00A8C970 /* MASTDRootViewController.h */,
+				C5F3106C15941D6F00A8C970 /* MASTDRootViewController.m */,
+				C5F3106E15941D6F00A8C970 /* MASTDDataViewController.h */,
+				C5F3106F15941D6F00A8C970 /* MASTDDataViewController.m */,
+				C5F3107115941D6F00A8C970 /* MASTDModelController.h */,
+				C5F3107215941D6F00A8C970 /* MASTDModelController.m */,
+				C5DA6D2215A345770066FE0A /* MASTDFlickrDetailController.h */,
+				C5DA6D2315A345770066FE0A /* MASTDFlickrDetailController.m */,
+				C5DA6D1915A2C9700066FE0A /* MASTDFlickrDescriptionCell.h */,
+				C5DA6D1A15A2C9700066FE0A /* MASTDFlickrDescriptionCell.m */,
+				C57AD24E15AE104000A4ACE8 /* MASTDFlickrBookmarkController.h */,
+				C57AD24F15AE104000A4ACE8 /* MASTDFlickrBookmarkController.m */,
+				C57AD24B15AE0FD600A4ACE8 /* MASTDFlickrBookmarkCell.h */,
+				C57AD24C15AE0FD600A4ACE8 /* MASTDFlickrBookmarkCell.m */,
+				C5F3106015941D6F00A8C970 /* Supporting Files */,
+			);
+			path = FlickrViewer;
+			sourceTree = "<group>";
+		};
+		C5F3106015941D6F00A8C970 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C5F3106115941D6F00A8C970 /* FlickrViewer-Info.plist */,
+				C5F3106215941D6F00A8C970 /* InfoPlist.strings */,
+				C5F3106515941D6F00A8C970 /* main.m */,
+				C5F3106715941D6F00A8C970 /* FlickrViewer-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C5F3108115941E4B00A8C970 /* Flickr */ = {
+			isa = PBXGroup;
+			children = (
+				C5F3108415941EB000A8C970 /* MASTDFlickr.h */,
+				C5F3108515941EB000A8C970 /* MASTDFlickr.m */,
+				C5F3108615941EB000A8C970 /* MASTDFlickrImage.h */,
+				C5F3108715941EB000A8C970 /* MASTDFlickrImage.m */,
+				C5F3108215941EB000A8C970 /* MASTDBookmarks.h */,
+				C5F3108315941EB000A8C970 /* MASTDBookmarks.m */,
+			);
+			name = Flickr;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C5F3105415941D6F00A8C970 /* FlickrViewer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C5F3107C15941D6F00A8C970 /* Build configuration list for PBXNativeTarget "FlickrViewer" */;
+			buildPhases = (
+				C5F3105115941D6F00A8C970 /* Sources */,
+				C5F3105215941D6F00A8C970 /* Frameworks */,
+				C5F3105315941D6F00A8C970 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C52ED42A15BF1A5F0031A633 /* PBXTargetDependency */,
+			);
+			name = FlickrViewer;
+			productName = FlickrViewer;
+			productReference = C5F3105515941D6F00A8C970 /* FlickrViewer.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C5F3104C15941D6F00A8C970 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = MASTD;
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = "mOcean Mobile";
+			};
+			buildConfigurationList = C5F3104F15941D6F00A8C970 /* Build configuration list for PBXProject "FlickrViewer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = C5F3104A15941D6F00A8C970;
+			productRefGroup = C5F3105615941D6F00A8C970 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = C52ED42115BEE6410031A633 /* Products */;
+					ProjectRef = C5D0294015963738004D5055 /* AdMobileSDK.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				C5F3105415941D6F00A8C970 /* FlickrViewer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		C52ED42615BEE6410031A633 /* libAdMobileSDK.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libAdMobileSDK.a;
+			remoteRef = C52ED42515BEE6410031A633 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C52ED42815BEE6410031A633 /* libAdMobileSDK doc generation.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libAdMobileSDK doc generation.a";
+			remoteRef = C52ED42715BEE6410031A633 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C5F3105315941D6F00A8C970 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C5F3106415941D6F00A8C970 /* InfoPlist.strings in Resources */,
+				C5F3107615941D6F00A8C970 /* MainStoryboard_iPhone.storyboard in Resources */,
+				C5F3107915941D6F00A8C970 /* MainStoryboard_iPad.storyboard in Resources */,
+				C5297A3E15AA58FE007FBD27 /* README.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C5F3105115941D6F00A8C970 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C5F3106615941D6F00A8C970 /* main.m in Sources */,
+				C5F3106A15941D6F00A8C970 /* MASTDAppDelegate.m in Sources */,
+				C5F3106D15941D6F00A8C970 /* MASTDRootViewController.m in Sources */,
+				C5F3107015941D6F00A8C970 /* MASTDDataViewController.m in Sources */,
+				C5F3107315941D6F00A8C970 /* MASTDModelController.m in Sources */,
+				C5F3108815941EB000A8C970 /* MASTDBookmarks.m in Sources */,
+				C5F3108915941EB000A8C970 /* MASTDFlickr.m in Sources */,
+				C5F3108A15941EB000A8C970 /* MASTDFlickrImage.m in Sources */,
+				C5DA6D1B15A2C9700066FE0A /* MASTDFlickrDescriptionCell.m in Sources */,
+				C5DA6D2415A345770066FE0A /* MASTDFlickrDetailController.m in Sources */,
+				C5297A5115AB25FD007FBD27 /* MASTDAdController.m in Sources */,
+				C5297A5515AB28F6007FBD27 /* MASTDAdMobController.m in Sources */,
+				C55DC63615AB64B3001D09F7 /* MASTDiAdController.m in Sources */,
+				5B00D02315ADB5D800246737 /* MASTDMMAdController.m in Sources */,
+				C57AD24D15AE0FD600A4ACE8 /* MASTDFlickrBookmarkCell.m in Sources */,
+				C57AD25015AE104000A4ACE8 /* MASTDFlickrBookmarkController.m in Sources */,
+				C57AD27315B04DB800A4ACE8 /* MASTDiVdopiaController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C52ED42A15BF1A5F0031A633 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AdMobileSDK;
+			targetProxy = C52ED42915BF1A5F0031A633 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C5F3106215941D6F00A8C970 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C5F3106315941D6F00A8C970 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		C5F3107415941D6F00A8C970 /* MainStoryboard_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C5F3107515941D6F00A8C970 /* en */,
+			);
+			name = MainStoryboard_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		C5F3107715941D6F00A8C970 /* MainStoryboard_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C5F3107815941D6F00A8C970 /* en */,
+			);
+			name = MainStoryboard_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C5F3107A15941D6F00A8C970 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C5F3107B15941D6F00A8C970 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C5F3107D15941D6F00A8C970 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FlickrViewer/FlickrViewer-Prefix.pch";
+				INFOPLIST_FILE = "FlickrViewer/FlickrViewer-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/GoogleAdMobAdsSDK\"",
+					"\"$(SRCROOT)/MMSDK/MMSDK\"",
+					"\"$(SRCROOT)/iVdopia-iPhonev4-4.1.0\"",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		C5F3107E15941D6F00A8C970 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FlickrViewer/FlickrViewer-Prefix.pch";
+				INFOPLIST_FILE = "FlickrViewer/FlickrViewer-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/GoogleAdMobAdsSDK\"",
+					"\"$(SRCROOT)/MMSDK/MMSDK\"",
+					"\"$(SRCROOT)/iVdopia-iPhonev4-4.1.0\"",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C5F3104F15941D6F00A8C970 /* Build configuration list for PBXProject "FlickrViewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C5F3107A15941D6F00A8C970 /* Debug */,
+				C5F3107B15941D6F00A8C970 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C5F3107C15941D6F00A8C970 /* Build configuration list for PBXNativeTarget "FlickrViewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C5F3107D15941D6F00A8C970 /* Debug */,
+				C5F3107E15941D6F00A8C970 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C5F3104C15941D6F00A8C970 /* Project object */;
+}

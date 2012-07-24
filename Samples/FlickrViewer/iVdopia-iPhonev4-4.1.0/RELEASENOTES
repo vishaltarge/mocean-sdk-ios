@@ -1,0 +1,283 @@
+Version 4.1.0
+--------------
+API Version: 3.0
+Please refer to the following location for the detailed changes:
+http://wiki.ivdopia.com/home/integrating-iphone-sdk-4-1
+
+Version 3.4.9
+--------------
+API Version: 2.2
+1. Fixed a crash when the device was rotated while playing the ads.
+
+Version 3.4.8
+--------------
+API Version: 2.1
+1. Fixed a crash when the app was pushed in background
+
+Version 3.4.7
+--------------
+API Version: 2.0
+1. Added fixes for clean call to [close] API. 
+2. Fixed more memory leaks. 
+
+Version 3.4.6
+--------------
+API Version: 1.9
+1. Added fixes for clean call to [close] API. 
+2. Fixed memory leaks. 
+
+Version 3.4.5
+--------------
+API Version: 1.8
+1. Minor bug fixes done.
+
+Version 3.3.1
+--------------
+API Version: 1.7
+1. Added new API - isPreAppAvailable
+2. Added new API - (void)openWithAppKey:(NSString*)applicationKey useLocation:(BOOL)use withFrame:(CGRect) frame startWithBanners: (BOOL) start startWithPreApp: (BOOL) preAppStart;
+3. Added new API - playPreApp
+4. Added new API - isInAppAvailable - This API returns if a playable in-app format is available with the SDK or not
+5. Added new API - isBannerAvailable - This API returns if a playable banner format is available with the SDK or not
+6. Added a new API - rotateBanner - This API allows the user to play a banner on request.
+7. Added new delegate method - playedPreApp : corresponds to playPreApp.
+8. Added new delegate method - noPreApp: corresponds to playPreApp API
+
+Notes:
+1. If older (initialization) API is used you will get noVDOAd, playedVDOAd callback.
+2. Typical usage for this new API along with playInApp is for onDemand playback of all ad positions.
+3. AdUnit control is still available via the portal.
+
+
+Version 3.2.4
+--------------
+API Version: 1.6
+1. Added testEmptyAndSetObject: forKey: call to test and set variables atomically (prevents race conditions).
+2. Modified interstitial call so that clicks are tracked correctly. (Network clicks are not read as real clicks).
+3. Checked all possible callbacks made correctly for noVDOAd and playedVDOAd.
+
+
+Version 3.2.3
+--------------
+API Version: 1.6
+1. Improved load times.
+2. Smoother talk2me
+3. Trackers for deeper ad analytics added
+
+
+Version 3.2.2
+-------------
+API Version: 1.6
+1. MediaPlayer does not release AudioQueue properly, this version works around that issue
+2. Callback bannerTapStarted was not being called properly until 3.2.1.
+3. Crash when stressing the system and restarting and closing app several times in quick succession.
+
+* Note, please ensure you are doing the right work in noVDOAd (as it will not correspond to playVDOAd in case the app resumes).
+* Test Suite passed
+
+
+Version 3.2.1
+-------------
+API Version: 1.6
+1. noVDOAd/playedVDOAd called after the app tries to enter foreground. [You can have your initialization API after this call].
+2. Background caching enabled so that startup time is improved.
+
+* Note, please ensure you are doing the right work in noVDOAd (as it will not correspond to playVDOAd in case the app resumes).
+
+Version: 3.2.0
+--------------
+API Version: 1.6
+1. Interstitial ad priority increased
+2. HTML 5 based advertising enabled
+3. Bug fixes for iOS 4.0.1
+
+* No changes required in header files.
+
+
+Version: 3.1.1
+--------------
+API Version: 1.6
+1. Callbacks for playedVDOAd were not working. Has been fixed in this version.
+
+* No changes required in header files.
+
+Version: 3.1.0
+--------------
+API Version: 1.6
+1. Works with all iPhone OS versions. (ability to create a universal binary)
+2. iPad implements all ad formats.
+
+* No changes required in header files.
+* Please refer to screenshots or http://wiki.ivdopia.com for more details on how to create a universal binary.
+
+Version: 3.0.0
+--------------
+API Version: 1.6
+1. Works with 3.2 and 4.0 OS.
+2. Added a new delegate function bannerTapStarted. This API provides the ability for developers to pause any ongoing activity in their game while the user is checking out the advertisement.
+3. Added a new delegate funciton bannerTapEnded. This API provides the ability for developers to resume the ongoing activity in their game.
+4. Further improved caching for flawless ad performance and maximum inventory utilization.
+5. All delegate functions are now optional so that you may implement the functions that are relevant to you. Demonstrated by iTennis App
+
+* Please update VDOAds.h file to reflect changes in the APIs. Accordingly modify your application code.
+
+Version: 2.2.4
+--------------
+API Version: 1.5
+1. Added a new API playInApp. This API provides the ability to serve
+	a) in-app interstitial Ads - NEW FORMAT!! (A webview having user defined size that expands itself into a full screen webview upon engagement)
+	b) in-app Video Ads (Same as in-app videos as used perviously)
+2. Added new calls to support the new ad type format
+	a) Added call playedInApp: called when
+          i) interstitial ad has been served.
+	    This is called only for in-app interstitial ads, for in-app videos the released call of playedVDOAd continues to work as before.
+   	a) Added call noInApp: called when either
+          i) no Interstitial Ad was downloaded from iVdopia servers
+          ii) Interstitial ads that were downloaded hit limits or failed targeting criteria.
+
+* Please update VDOAds.h file to reflect changes in the APIs. Accordingly modify your application code.
+* You need to create ALL delegate functions even if they are empty declarations
+* For existing customers who are using playedVDOAd and noVDOad, it is best to declare 
+-(void) playedInApp {
+       [self playedVDOAd];
+}
+-(void) noInApp {
+       [self noVDOAd];
+}
+
+Version: 2.2.3
+--------------
+API Version: 1.4
+1. Removed unused API UIEventObservableWindow
+2. Added support for landscape banners
+
+Version: 2.2.2
+--------------
+API Version: 1.4
+
+1. Removed conflict with Reachability.o
+
+Version: 2.2.1
+--------------
+API Version: 1.4
+
+1. Fixed frame conflict issue.
+2. Update for increasing inventory utilization.
+3. Improved and accurate campaign delivery.
+
+Version: 2.2.0
+--------------
+API Version: 1.4
+
+1. Added support for any remnant network.
+    a) Added call noBanner: called when either
+          i) noBanner was downloaded from iVdopia servers
+          ii) Banners that were downloaded hit limits or failed targeting criteria.
+      This is called once per session.
+    b) Added call displayedBanner: called when either banner is displayed for the first time or rotated.
+    c) Added network type detection.
+2. Added talk2me with vdoFX (More information on website).
+
+* Please update VDOAds.h file to reflect changes in the APIs. Accordingly modify your application code.
+* You need to add SystemConfiguration.framework.
+
+Version: 2.1.1
+--------------
+API Version: 1.3
+
+1. Variable bitrate streaming ads for much higher inventory utilization.
+2. Bug fixes for improved performance.
+3. Removed the use of private apis in mediaplayer.
+
+* Expect further releases soon for improved caching algorithm, for better user experience.
+
+Version: 2.1.0 
+--------------
+API Version: 1.3
+
+1. Added Talk2Me
+2. 2.0 Video ad technology
+3. Fixed all memory leak issues
+
+* Version 2 ads are here
+* No API changes have been made, in order to release please drag drop and replace your existing library files.
+
+Version 1.3.9
+-------------
+API Version: 1.3
+
+1. Added API: 
+	- (void)playVDOAd:(NSString*) message;
+   Messages can be displayed by the publisher to let the user know the context of advertising. 
+	Some examples are:  (You can be as creative as you can get, but keep it short and sweet)
+          * Loading Data
+          * Retrieving information
+          * Contacting servers
+          * Our sponsor's message
+2. Fixed "potential" crash in the constructor for 2.2.1 devices:
+	- (void)openWithAppKey:(NSString*)applicationKey useLocation:(BOOL)use withFrame:(CGRect) frame
+3. Improved algorithm for faster (near instant) banner loads.
+4. Improved video advertisement load times for edge networks.
+5. Added functionality for redirect based urls.
+
+Version 1.3.8
+-------------
+1. Improved Edge Network Performance. No API changes.
+
+Version 1.3.7
+-------------
+API Version: 1.2
+
+1. Added new API. 
+    - (void)openWithAppKey:(NSString*)applicationKey useLocation:(BOOL)use withFrame:(CGRect) frame startWithBanners: (BOOL) start;
+   This API can be used to start the vdoAds with banners paused. They will start only when the user initiates a resumeBanners call.
+2. Additional functions demonstrating how to stop banners and how to start/restart banners using Vdopia API.
+
+Version 1.3.6
+-------------
+1. UIWebview link behavior change
+
+Version 1.3.5
+-------------
+1. Changes for OS3: Changed movie player behavior
+
+
+Version 1.3.4
+-------------
+1. Changes in enabling keyWindow after video ad.
+2. Changes to webView behavior on clicking Learn More and Ads by iVdopia.
+
+Version 1.3.3
+-------------
+1. Messaging changes [inapp loadingApplication -> Advertisement]
+2. Advanced targeting support
+3. UI and privacy policy links
+4. Campaign group support for unlimited branding
+
+Version 1.3.2
+-------------
+1. Supports in application advertisement streams separate from pre application advertisements
+2. Query interface and frequency capping supported.
+
+
+Version 1.3.1
+-------------
+API Version: 1.1
+
+1. Added NEW API:
+   playVDOAd: This function is used to play, mid-app video advertisement.
+2. VDOAds now supports the protocol VDOAdsDelegate. The delegate is used to  pass back the following messages:
+    a. playedVDOAd: Invoked after the Video Advertisement successfully plays.
+    b. noVDOAd: If either the advertisement is not available or not cached this function is called.
+3. Reduced the initial load time to the minimum required.
+4. Fixed hangs before loading Video Ads
+5. Fixed hangs after loading Video Ads.
+
+Version 1.2.2
+-------------
+API Version: 1.0
+
+1. Fixed: Top bar showing up at the wrong location
+2. Fixed: Following the human interface guidelines, the click occurs
+   after the touch ends.
+
