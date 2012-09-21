@@ -95,7 +95,6 @@ typedef enum
 // Returning NO or not implementing this message results in the request being discarded.
 // Application developers can use this method to invoke the modal player by capturing the URL, invoking
 // the player and then returning NO.
-// TODO: Default this to YES if not implemented via UIApplication openURL
 - (BOOL)MASTAdView:(MASTAdView*)adView shouldPlayVideo:(NSString*)videoURL;
 
 // The loaded ad is requesting for the application to save a new calendar event.
