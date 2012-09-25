@@ -183,7 +183,9 @@ typedef enum
 
 // Shows and closes the interstitial view.
 // Can only be used if the instance was initialized with initInterstitial.
+// showInterstitialWithDelay will automaticaly close the interstitial after the specified delay.
 - (void)showInterstitial;
+- (void)showInterstitialWithDelay:(NSTimeInterval)delay;
 - (void)closeInterstitial;
 
 // Shows a close button after the specified delay (after the ad is rendered).

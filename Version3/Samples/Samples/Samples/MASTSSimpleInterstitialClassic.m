@@ -1,18 +1,18 @@
 //
-//  MASTSSimpleInterstitial.m
+//  MASTSSimpleInterstitialClassic.m
 //  MASTSamples
 //
 //  Created by Jason Dickert on 4/17/12.
 //  Copyright (c) 2012 mOcean Mobile. All rights reserved.
 //
 
-#import "MASTSSimpleInterstitial.h"
+#import "MASTSSimpleInterstitialClassic.h"
 
-@interface MASTSSimpleInterstitial ()
+@interface MASTSSimpleInterstitialClassic ()
 
 @end
 
-@implementation MASTSSimpleInterstitial
+@implementation MASTSSimpleInterstitialClassic
 
 - (void)loadView
 {
@@ -23,10 +23,9 @@
  
     super.adView.frame = super.view.bounds;
     super.adView.backgroundColor = [UIColor whiteColor];
-    //super.adView.autocloseInterstitialTime = 15;
-    //super.adView.showCloseButtonTime = 5;
-    
+
     [super.view bringSubviewToFront:super.adView];
+    [self.adView showCloseButton:YES afterDelay:5];
     
     super.adView.delegate = self;
 }
@@ -66,17 +65,21 @@
     [self.navigationController setNavigationBarHidden:YES];
     
     [super updateAdWithConfig:configController];
+    
+    self.adView.hidden = NO;
+    [super.view bringSubviewToFront:super.adView];
+    [self.adView showCloseButton:YES afterDelay:5];
 }
 
 #pragma mark -
 
-- (void)didFailToReceiveAd:(id)sender withError:(NSError *)error
+- (void)MASTAdView:(MASTAdView *)adView didFailToReceiveAdWithError:(NSError *)error
 {
     [self.navigationController setNavigationBarHidden:NO];
     self.adView.hidden = YES;
 }
 
-- (void)didClosedAd:(id)sender usageTimeInterval:(NSTimeInterval)usageTimeInterval
+- (void)MASTAdViewCloseButtonPressed:(MASTAdView *)adView
 {
     [self.navigationController setNavigationBarHidden:NO];
     self.adView.hidden = YES;

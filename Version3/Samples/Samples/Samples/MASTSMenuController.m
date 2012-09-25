@@ -11,7 +11,8 @@
 
 // Sample ad usage controllers:
 #import "MASTSSimpleImage.h"
-#import "MASTSSimpleInterstitial.h"
+#import "MASTSSimpleInterstitialClassic.h"
+#import "MASTSSimpleInterstitialDirect.h"
 #import "MASTSSimpleRichMedia.h"
 #import "MASTSSimpleText.h"
 #import "MASTSAdvancedAnimation.h"
@@ -20,7 +21,7 @@
 #import "MASTSAdvancedTopAndBottom.h"
 #import "MASTSCustom.h"
 #import "MASTSDelegateGeneric.h"
-#import "MASTSDelegateOrmma.h"
+#import "MASTSDelegateMRAID.h"
 #import "MASTSDelegateThirdParty.h"
 
 
@@ -92,7 +93,7 @@
     switch (section)
     {
         case 0:
-            return 4;
+            return 5;
         case 1:
             return 4;
         case 2:
@@ -152,12 +153,15 @@
                     label = @"Image";
                     break;
                 case 1:
-                    label = @"Interstitial";
+                    label = @"Interstitial - Classic";
                     break;
                 case 2:
-                    label = @"Rich Media";
+                    label = @"Interstitial - Direct";
                     break;
                 case 3:
+                    label = @"Rich Media";
+                    break;
+                case 4:
                     label = @"Text";
                     break;
             }
@@ -195,7 +199,7 @@
                     label = @"Generic";
                     break;
                 case 1:
-                    label = @"ORMMA Events";
+                    label = @"MRAID Events";
                     break;
                 case 2:
                     label = @"Third Party Request";
@@ -239,12 +243,15 @@
                     testController = [[MASTSSimpleImage new] autorelease];
                     break;
                 case 1:
-                    testController = [[MASTSSimpleInterstitial new] autorelease];
+                    testController = [[MASTSSimpleInterstitialClassic new] autorelease];
                     break;
                 case 2:
-                    testController = [[MASTSSimpleRichMedia new] autorelease];
+                    testController = [[MASTSSimpleInterstitialDirect new] autorelease];
                     break;
                 case 3:
+                    testController = [[MASTSSimpleRichMedia new] autorelease];
+                    break;
+                case 4:
                     testController = [[MASTSSimpleText new] autorelease];
                     break;
             }
@@ -287,7 +294,7 @@
                     testController = [[MASTSDelegateGeneric new] autorelease];
                     break;
                 case 1:
-                    testController = [[MASTSDelegateOrmma new] autorelease];
+                    testController = [[MASTSDelegateMRAID new] autorelease];
                     break;
                 case 2:
                     testController = [[MASTSDelegateThirdParty new] autorelease];

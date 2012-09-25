@@ -26,7 +26,7 @@
 		3C91DDF2153F737500FCF6CD /* MASTSMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C91DDDA153F737500FCF6CD /* MASTSMenuController.m */; };
 		3C91DDF3153F737500FCF6CD /* MASTSSimple.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C91DDDC153F737500FCF6CD /* MASTSSimple.m */; };
 		3C91DDF4153F737500FCF6CD /* MASTSSimpleImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C91DDDE153F737500FCF6CD /* MASTSSimpleImage.m */; };
-		3C91DDF5153F737500FCF6CD /* MASTSSimpleInterstitial.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C91DDE0153F737500FCF6CD /* MASTSSimpleInterstitial.m */; };
+		3C91DDF5153F737500FCF6CD /* MASTSSimpleInterstitialClassic.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C91DDE0153F737500FCF6CD /* MASTSSimpleInterstitialClassic.m */; };
 		3C91DDF6153F737500FCF6CD /* MASTSSimpleRichMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C91DDE2153F737500FCF6CD /* MASTSSimpleRichMedia.m */; };
 		3C91DDF7153F737500FCF6CD /* MASTSSimpleText.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C91DDE4153F737500FCF6CD /* MASTSSimpleText.m */; };
 		3C91DDF8153F737500FCF6CD /* MASTSSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C91DDE6153F737500FCF6CD /* MASTSSplitViewController.m */; };
@@ -40,13 +40,31 @@
 		3C91DE2F153F761E00FCF6CD /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C91DE29153F761E00FCF6CD /* Icon.png */; };
 		3C91DE30153F761E00FCF6CD /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C91DE2A153F761E00FCF6CD /* Icon@2x.png */; };
 		C54969DE1543453B006F9444 /* MASTSDelegateGeneric.m in Sources */ = {isa = PBXBuildFile; fileRef = C54969DD1543453B006F9444 /* MASTSDelegateGeneric.m */; };
-		C54969E115434556006F9444 /* MASTSDelegateOrmma.m in Sources */ = {isa = PBXBuildFile; fileRef = C54969E015434556006F9444 /* MASTSDelegateOrmma.m */; };
+		C54969E115434556006F9444 /* MASTSDelegateMRAID.m in Sources */ = {isa = PBXBuildFile; fileRef = C54969E015434556006F9444 /* MASTSDelegateMRAID.m */; };
 		C54969E415434566006F9444 /* MASTSDelegateThirdParty.m in Sources */ = {isa = PBXBuildFile; fileRef = C54969E315434566006F9444 /* MASTSDelegateThirdParty.m */; };
 		C54969F115434EF7006F9444 /* MASTSLogController.m in Sources */ = {isa = PBXBuildFile; fileRef = C54969F015434EF7006F9444 /* MASTSLogController.m */; };
 		C5ACCB7D1610EDBD0018E0AD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5ACCB7C1610EDBD0018E0AD /* CoreGraphics.framework */; };
-		C5ACCBA4161202C30018E0AD /* MASTAdView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5ACCBA3161202C30018E0AD /* MASTAdView.framework */; };
 		C5D30CD916123DE800CA45A3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C5D30CD716123DE000CA45A3 /* Default-568h@2x.png */; };
+		C5D30CF71612520C00CA45A3 /* libMASTAdView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D30CE9161251E700CA45A3 /* libMASTAdView.a */; };
+		C5D30CFA1612558A00CA45A3 /* MASTSSimpleInterstitialDirect.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D30CF91612558A00CA45A3 /* MASTSSimpleInterstitialDirect.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C5D30CE8161251E700CA45A3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5D30CE3161251E600CA45A3 /* MASTAdView.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C5ACCAA3160CA4FF0018E0AD;
+			remoteInfo = MASTAdView;
+		};
+		C5D30CF51612520700CA45A3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5D30CE3161251E600CA45A3 /* MASTAdView.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = C5ACCAA2160CA4FF0018E0AD;
+			remoteInfo = MASTAdView;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		3C91DDA6153F72AB00FCF6CD /* Samples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Samples.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,8 +102,8 @@
 		3C91DDDC153F737500FCF6CD /* MASTSSimple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSSimple.m; sourceTree = "<group>"; };
 		3C91DDDD153F737500FCF6CD /* MASTSSimpleImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSSimpleImage.h; sourceTree = "<group>"; };
 		3C91DDDE153F737500FCF6CD /* MASTSSimpleImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSSimpleImage.m; sourceTree = "<group>"; };
-		3C91DDDF153F737500FCF6CD /* MASTSSimpleInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSSimpleInterstitial.h; sourceTree = "<group>"; };
-		3C91DDE0153F737500FCF6CD /* MASTSSimpleInterstitial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSSimpleInterstitial.m; sourceTree = "<group>"; };
+		3C91DDDF153F737500FCF6CD /* MASTSSimpleInterstitialClassic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSSimpleInterstitialClassic.h; sourceTree = "<group>"; };
+		3C91DDE0153F737500FCF6CD /* MASTSSimpleInterstitialClassic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSSimpleInterstitialClassic.m; sourceTree = "<group>"; };
 		3C91DDE1153F737500FCF6CD /* MASTSSimpleRichMedia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSSimpleRichMedia.h; sourceTree = "<group>"; };
 		3C91DDE2153F737500FCF6CD /* MASTSSimpleRichMedia.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSSimpleRichMedia.m; sourceTree = "<group>"; };
 		3C91DDE3153F737500FCF6CD /* MASTSSimpleText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSSimpleText.h; sourceTree = "<group>"; };
@@ -103,15 +121,17 @@
 		3C91DE2A153F761E00FCF6CD /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		C54969DC1543453B006F9444 /* MASTSDelegateGeneric.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSDelegateGeneric.h; sourceTree = "<group>"; };
 		C54969DD1543453B006F9444 /* MASTSDelegateGeneric.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSDelegateGeneric.m; sourceTree = "<group>"; };
-		C54969DF15434556006F9444 /* MASTSDelegateOrmma.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSDelegateOrmma.h; sourceTree = "<group>"; };
-		C54969E015434556006F9444 /* MASTSDelegateOrmma.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSDelegateOrmma.m; sourceTree = "<group>"; };
+		C54969DF15434556006F9444 /* MASTSDelegateMRAID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSDelegateMRAID.h; sourceTree = "<group>"; };
+		C54969E015434556006F9444 /* MASTSDelegateMRAID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSDelegateMRAID.m; sourceTree = "<group>"; };
 		C54969E215434566006F9444 /* MASTSDelegateThirdParty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSDelegateThirdParty.h; sourceTree = "<group>"; };
 		C54969E315434566006F9444 /* MASTSDelegateThirdParty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSDelegateThirdParty.m; sourceTree = "<group>"; };
 		C54969EF15434EF7006F9444 /* MASTSLogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSLogController.h; sourceTree = "<group>"; };
 		C54969F015434EF7006F9444 /* MASTSLogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSLogController.m; sourceTree = "<group>"; };
 		C5ACCB7C1610EDBD0018E0AD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		C5ACCBA3161202C30018E0AD /* MASTAdView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MASTAdView.framework; path = ../../Sources/MASTAdView/Products/MASTAdView.framework; sourceTree = "<group>"; };
 		C5D30CD716123DE000CA45A3 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		C5D30CE3161251E600CA45A3 /* MASTAdView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MASTAdView.xcodeproj; path = ../../Sources/MASTAdView/MASTAdView.xcodeproj; sourceTree = "<group>"; };
+		C5D30CF81612558A00CA45A3 /* MASTSSimpleInterstitialDirect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSSimpleInterstitialDirect.h; sourceTree = "<group>"; };
+		C5D30CF91612558A00CA45A3 /* MASTSSimpleInterstitialDirect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSSimpleInterstitialDirect.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,13 +139,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5D30CF71612520C00CA45A3 /* libMASTAdView.a in Frameworks */,
 				3C91DDAB153F72AB00FCF6CD /* UIKit.framework in Frameworks */,
 				3C91DDAD153F72AB00FCF6CD /* Foundation.framework in Frameworks */,
 				3C91DE1E153F751500FCF6CD /* EventKit.framework in Frameworks */,
 				3C91DE20153F751500FCF6CD /* MessageUI.framework in Frameworks */,
 				3C91DE1B153F751500FCF6CD /* CoreLocation.framework in Frameworks */,
 				C5ACCB7D1610EDBD0018E0AD /* CoreGraphics.framework in Frameworks */,
-				C5ACCBA4161202C30018E0AD /* MASTAdView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,6 +155,7 @@
 		3C91DD9B153F72AB00FCF6CD = {
 			isa = PBXGroup;
 			children = (
+				C5D30CE3161251E600CA45A3 /* MASTAdView.xcodeproj */,
 				3C91DDB0153F72AC00FCF6CD /* Samples */,
 				3C91DDA9153F72AB00FCF6CD /* Frameworks */,
 				3C91DDA7153F72AB00FCF6CD /* Products */,
@@ -158,7 +179,6 @@
 				3C91DE18153F751500FCF6CD /* MessageUI.framework */,
 				3C91DE13153F751500FCF6CD /* CoreLocation.framework */,
 				C5ACCB7C1610EDBD0018E0AD /* CoreGraphics.framework */,
-				C5ACCBA3161202C30018E0AD /* MASTAdView.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -224,8 +244,10 @@
 				3C91DDDC153F737500FCF6CD /* MASTSSimple.m */,
 				3C91DDDD153F737500FCF6CD /* MASTSSimpleImage.h */,
 				3C91DDDE153F737500FCF6CD /* MASTSSimpleImage.m */,
-				3C91DDDF153F737500FCF6CD /* MASTSSimpleInterstitial.h */,
-				3C91DDE0153F737500FCF6CD /* MASTSSimpleInterstitial.m */,
+				3C91DDDF153F737500FCF6CD /* MASTSSimpleInterstitialClassic.h */,
+				3C91DDE0153F737500FCF6CD /* MASTSSimpleInterstitialClassic.m */,
+				C5D30CF81612558A00CA45A3 /* MASTSSimpleInterstitialDirect.h */,
+				C5D30CF91612558A00CA45A3 /* MASTSSimpleInterstitialDirect.m */,
 				3C91DDE1153F737500FCF6CD /* MASTSSimpleRichMedia.h */,
 				3C91DDE2153F737500FCF6CD /* MASTSSimpleRichMedia.m */,
 				3C91DDE3153F737500FCF6CD /* MASTSSimpleText.h */,
@@ -281,12 +303,20 @@
 				3C91DDCC153F737400FCF6CD /* MASTSDelegate.m */,
 				C54969DC1543453B006F9444 /* MASTSDelegateGeneric.h */,
 				C54969DD1543453B006F9444 /* MASTSDelegateGeneric.m */,
-				C54969DF15434556006F9444 /* MASTSDelegateOrmma.h */,
-				C54969E015434556006F9444 /* MASTSDelegateOrmma.m */,
+				C54969DF15434556006F9444 /* MASTSDelegateMRAID.h */,
+				C54969E015434556006F9444 /* MASTSDelegateMRAID.m */,
 				C54969E215434566006F9444 /* MASTSDelegateThirdParty.h */,
 				C54969E315434566006F9444 /* MASTSDelegateThirdParty.m */,
 			);
 			name = Delegate;
+			sourceTree = "<group>";
+		};
+		C5D30CE4161251E600CA45A3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C5D30CE9161251E700CA45A3 /* libMASTAdView.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -303,6 +333,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				C5D30CF61612520700CA45A3 /* PBXTargetDependency */,
 			);
 			name = Samples;
 			productName = Samples;
@@ -329,12 +360,28 @@
 			mainGroup = 3C91DD9B153F72AB00FCF6CD;
 			productRefGroup = 3C91DDA7153F72AB00FCF6CD /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = C5D30CE4161251E600CA45A3 /* Products */;
+					ProjectRef = C5D30CE3161251E600CA45A3 /* MASTAdView.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				3C91DDA5153F72AB00FCF6CD /* Samples */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		C5D30CE9161251E700CA45A3 /* libMASTAdView.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libMASTAdView.a;
+			remoteRef = C5D30CE8161251E700CA45A3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		3C91DDA4153F72AB00FCF6CD /* Resources */ = {
@@ -375,18 +422,27 @@
 				3C91DDF2153F737500FCF6CD /* MASTSMenuController.m in Sources */,
 				3C91DDF3153F737500FCF6CD /* MASTSSimple.m in Sources */,
 				3C91DDF4153F737500FCF6CD /* MASTSSimpleImage.m in Sources */,
-				3C91DDF5153F737500FCF6CD /* MASTSSimpleInterstitial.m in Sources */,
+				3C91DDF5153F737500FCF6CD /* MASTSSimpleInterstitialClassic.m in Sources */,
 				3C91DDF6153F737500FCF6CD /* MASTSSimpleRichMedia.m in Sources */,
 				3C91DDF7153F737500FCF6CD /* MASTSSimpleText.m in Sources */,
 				3C91DDF8153F737500FCF6CD /* MASTSSplitViewController.m in Sources */,
 				C54969DE1543453B006F9444 /* MASTSDelegateGeneric.m in Sources */,
-				C54969E115434556006F9444 /* MASTSDelegateOrmma.m in Sources */,
+				C54969E115434556006F9444 /* MASTSDelegateMRAID.m in Sources */,
 				C54969E415434566006F9444 /* MASTSDelegateThirdParty.m in Sources */,
 				C54969F115434EF7006F9444 /* MASTSLogController.m in Sources */,
+				C5D30CFA1612558A00CA45A3 /* MASTSSimpleInterstitialDirect.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C5D30CF61612520700CA45A3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MASTAdView;
+			targetProxy = C5D30CF51612520700CA45A3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		3C91DDB3153F72AC00FCF6CD /* InfoPlist.strings */ = {

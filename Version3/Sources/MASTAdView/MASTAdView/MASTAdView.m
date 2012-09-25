@@ -38,6 +38,9 @@ static NSString* AdViewUserAgent = nil;
 // Update timer
 @property (nonatomic, strong) NSTimer* updateTimer;
 
+// Interstitial delay timer
+@property (nonatomic, strong) NSTimer* interstitialTimer;
+
 // Close button
 @property (nonatomic, assign) NSTimeInterval closeButtonTimeInterval;
 @property (nonatomic, strong) UIButton* closeButton;
@@ -105,7 +108,7 @@ static NSString* AdViewUserAgent = nil;
 @synthesize testMode;
 @synthesize delegate;
 @synthesize connection, dataBuffer, webView;
-@synthesize updateTimer;
+@synthesize updateTimer, interstitialTimer;
 @synthesize closeButtonTimeInterval, closeButton;
 @synthesize tapGesture;
 @synthesize expandCloseControl, resizeCloseControl;
@@ -129,6 +132,8 @@ static NSString* AdViewUserAgent = nil;
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
+
+    [self cancel];
     
     [self.mraidBridge setDelegate:nil];
     self.mraidBridge = nil;
@@ -314,7 +319,7 @@ static NSString* AdViewUserAgent = nil;
 
 - (void)cancel
 {
-    // Cancel any current reques
+    // Cancel any current request
     [self.connection cancel];
     self.connection = nil;
     
@@ -324,6 +329,20 @@ static NSString* AdViewUserAgent = nil;
         [self.updateTimer performSelectorOnMainThread:@selector(invalidate) withObject:nil waitUntilDone:YES];
         self.updateTimer = nil;
     }
+    
+    // Stop the interstitial timer
+    if (self.interstitialTimer != nil)
+    {
+        [self.interstitialTimer performSelectorOnMainThread:@selector(invalidate) withObject:nil waitUntilDone:YES];
+        self.interstitialTimer = nil;
+    }
+    
+    // Close interstitial, if interstitial.
+    [self closeInterstitial];
+    
+    // Do non-interstitial cleanup after this.
+    if (self.placementType != MASTAdViewPlacementTypeInline)
+        return;
     
     // Close any expanded or resized MRAID ad.
     switch ([self.mraidBridge state])
@@ -413,8 +432,43 @@ static NSString* AdViewUserAgent = nil;
     }
 }
 
+- (void)showInterstitialWithDelay:(NSTimeInterval)delay
+{
+    if (self.placementType != MASTAdViewPlacementTypeInterstitial)
+        return;
+    
+    if (self.expandWindow.isHidden == NO)
+        return;
+    
+    [self showInterstitial];
+    
+    // Cancel the interstitial timer.
+    if (self.interstitialTimer != nil)
+    {
+        [self.interstitialTimer performSelectorOnMainThread:@selector(invalidate) withObject:nil waitUntilDone:YES];
+        self.interstitialTimer = nil;
+    }
+    
+    // Create the interstitial timer that will close the interstial when it triggers.
+    self.interstitialTimer = [[NSTimer alloc] initWithFireDate:nil
+                                                      interval:delay
+                                                        target:self
+                                                      selector:@selector(closeInterstitial)
+                                                      userInfo:nil
+                                                       repeats:NO];
+    
+    [[NSRunLoop mainRunLoop] addTimer:self.interstitialTimer forMode:NSDefaultRunLoopMode];
+}
+
 - (void)closeInterstitial
 {
+    // Cancel the interstitial timer.
+    if (self.interstitialTimer != nil)
+    {
+        [self.interstitialTimer performSelectorOnMainThread:@selector(invalidate) withObject:nil waitUntilDone:YES];
+        self.interstitialTimer = nil;
+    }
+    
     if (self.placementType != MASTAdViewPlacementTypeInterstitial)
         return;
     
@@ -667,8 +721,8 @@ static NSString* AdViewUserAgent = nil;
         return;
     }
     
-    NSTimer* timer = [[NSTimer alloc] initWithFireDate:nil 
-                                              interval:self.closeButtonTimeInterval 
+    NSTimer* timer = [[NSTimer alloc] initWithFireDate:[NSDate dateWithTimeIntervalSinceNow:self.closeButtonTimeInterval]
+                                              interval:0
                                                 target:self 
                                               selector:@selector(showCloseButton) 
                                               userInfo:nil 
@@ -685,9 +739,17 @@ static NSString* AdViewUserAgent = nil;
     }
     else
     {
-        // TODO: Fetch built-in close button.
-        self.closeButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        self.closeButton.frame = CGRectMake(0, 0, 20, 20);
+        // TODO: Cache image/data.
+        NSData* buttonData = [NSData dataWithBytesNoCopy:MASTCloseButton_png
+                                                  length:MASTCloseButton_png_len
+                                            freeWhenDone:NO];
+        
+        UIImage* buttonImage = [UIImage imageWithData:buttonData];
+
+        self.closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.closeButton setImage:buttonImage forState:UIControlStateNormal];
+
+        self.closeButton.frame = CGRectMake(0, 0, 22, 22);
     }
     
     self.closeButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
@@ -736,14 +798,28 @@ static NSString* AdViewUserAgent = nil;
     switch (self.placementType)
     {
         case MASTAdViewPlacementTypeInline:
+        {
+            // Place in top right.
+            CGRect frame = self.closeButton.frame;
+            frame.origin.x = CGRectGetMaxX(self.bounds) - frame.size.width - frame.size.width/2;
+            frame.origin.y = CGRectGetMinY(self.bounds) + frame.size.width/2;
+            self.closeButton.frame = frame;
             [self addSubview:self.closeButton];
             [self bringSubviewToFront:self.closeButton];
             break;
-            
+        }
+
         case MASTAdViewPlacementTypeInterstitial:
+        {
+            // Place in top right.
+            CGRect frame = self.closeButton.frame;
+            frame.origin.x = CGRectGetMaxX(self.expandView.bounds) - frame.size.width - frame.size.width/2;;
+            frame.origin.y = CGRectGetMinY(self.expandView.bounds) + frame.size.width/2;
+            self.closeButton.frame = frame;
             [self.expandView addSubview:self.closeButton];
             [self.expandView bringSubviewToFront:self.closeButton];
             break;
+        }
     }
 }
 

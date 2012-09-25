@@ -1,18 +1,18 @@
 //
-//  MASTSDelegateOrmma.m
+//  MASTSDelegateMRAID.m
 //  Samples
 //
 //  Created by Jason Dickert on 4/21/12.
 //  Copyright (c) 2012 mOcean Mobile. All rights reserved.
 //
 
-#import "MASTSDelegateOrmma.h"
+#import "MASTSDelegateMRAID.h"
 
-@interface MASTSDelegateOrmma ()
+@interface MASTSDelegateMRAID ()
 
 @end
 
-@implementation MASTSDelegateOrmma
+@implementation MASTSDelegateMRAID
 
 - (void)viewDidLoad
 {

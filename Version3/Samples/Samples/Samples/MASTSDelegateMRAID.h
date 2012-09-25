@@ -1,5 +1,5 @@
 //
-//  MASTSDelegateOrmma.h
+//  MASTSDelegateMRAID.h
 //  Samples
 //
 //  Created by Jason Dickert on 4/21/12.
@@ -8,6 +8,6 @@
 
 #import "MASTSDelegate.h"
 
-@interface MASTSDelegateOrmma : MASTSDelegate
+@interface MASTSDelegateMRAID : MASTSDelegate
 
 @end

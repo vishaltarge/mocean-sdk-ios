@@ -1,5 +1,5 @@
 //
-//  MASTSSimpleInterstitial.h
+//  MASTSSimpleInterstitialClassic.h
 //  MASTSamples
 //
 //  Created by Jason Dickert on 4/17/12.
@@ -8,6 +8,6 @@
 
 #import "MASTSSimple.h"
 
-@interface MASTSSimpleInterstitial : MASTSSimple <MASTAdViewDelegate>
+@interface MASTSSimpleInterstitialClassic : MASTSSimple <MASTAdViewDelegate>
 
 @end
