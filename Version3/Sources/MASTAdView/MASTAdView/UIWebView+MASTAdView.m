@@ -1,10 +1,10 @@
 //
-//  UIWebView+MASTAdView.m
-//  MRAID2
+//  MASTAdView
 //
-//  Created by Jason Dickert on 7/20/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Created on 9/21/12.
+//  Copyright (c) 2011, 2012 Mocean Mobile. All rights reserved.
 //
+
 
 #import "UIWebView+MASTAdView.h"
 
