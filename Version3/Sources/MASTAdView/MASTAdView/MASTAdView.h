@@ -16,6 +16,7 @@
 #import <EventKit/EventKit.h>
 #import <MessageUI/MessageUI.h>
 #import <CoreLocation/CoreLocation.h>
+#import <CoreGraphics/CoreGraphics.h>
 
 //
 // This is the only header required for integrating into projects that will use the MASTAdView SDK.

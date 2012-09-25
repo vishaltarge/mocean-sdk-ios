@@ -26,21 +26,9 @@
 		C5ACCAE6160CB32B0018E0AD /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5ACCAE4160CB32B0018E0AD /* EventKit.framework */; };
 		C5ACCAE8160CB3660018E0AD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5ACCAE7160CB3660018E0AD /* UIKit.framework */; };
 		C5ACCAEA160CB3EB0018E0AD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5ACCAE9160CB3EB0018E0AD /* MessageUI.framework */; };
-		C5ACCB03160CE7020018E0AD /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5ACCAF2160CE69C0018E0AD /* CoreFoundation.framework */; };
-		C5ACCB09160CE7020018E0AD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C5ACCB07160CE7020018E0AD /* InfoPlist.strings */; };
-		C5ACCB10160CE86E0018E0AD /* MASTMRAIDController.js in Resources */ = {isa = PBXBuildFile; fileRef = C5ACCACB160CB2A60018E0AD /* MASTMRAIDController.js */; };
 		C5ACCB52160CED380018E0AD /* MASTMoceanAdDescriptor.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C5ACCABD160CB2A60018E0AD /* MASTMoceanAdDescriptor.h */; };
+		C5ACCB7F1610EDFF0018E0AD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5ACCB7E1610EDFF0018E0AD /* CoreGraphics.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		C5ACCB4F160CEBFD0018E0AD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C5ACCA9A160CA4FF0018E0AD /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C5ACCB01160CE7020018E0AD;
-			remoteInfo = MASTAdViewResources;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		C5ACCAA1160CA4FF0018E0AD /* CopyFiles */ = {
@@ -80,7 +68,7 @@
 		C5ACCAC8160CB2A60018E0AD /* MASTMRAIDOrientationProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTMRAIDOrientationProperties.m; sourceTree = "<group>"; };
 		C5ACCAC9160CB2A60018E0AD /* MASTMRAIDResizeProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTMRAIDResizeProperties.h; sourceTree = "<group>"; };
 		C5ACCACA160CB2A60018E0AD /* MASTMRAIDResizeProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTMRAIDResizeProperties.m; sourceTree = "<group>"; };
-		C5ACCACB160CB2A60018E0AD /* MASTMRAIDController.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = MASTMRAIDController.js; path = ../MASTAdView/MASTMRAIDController.js; sourceTree = "<group>"; };
+		C5ACCACB160CB2A60018E0AD /* MASTMRAIDController.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = MASTMRAIDController.js; sourceTree = "<group>"; };
 		C5ACCACC160CB2A60018E0AD /* NSDate+MASTAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+MASTAdView.h"; sourceTree = "<group>"; };
 		C5ACCACD160CB2A60018E0AD /* NSDate+MASTAdView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+MASTAdView.m"; sourceTree = "<group>"; };
 		C5ACCACE160CB2A60018E0AD /* NSDictionary+MASTAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+MASTAdView.h"; sourceTree = "<group>"; };
@@ -91,12 +79,15 @@
 		C5ACCAE4160CB32B0018E0AD /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		C5ACCAE7160CB3660018E0AD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C5ACCAE9160CB3EB0018E0AD /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		C5ACCAF2160CE69C0018E0AD /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
-		C5ACCB02160CE7020018E0AD /* MASTAdViewResources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MASTAdViewResources.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		C5ACCB06160CE7020018E0AD /* MASTAdViewResources-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MASTAdViewResources-Info.plist"; sourceTree = "<group>"; };
-		C5ACCB08160CE7020018E0AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		C5ACCB0A160CE7020018E0AD /* MASTAdViewResources-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MASTAdViewResources-Prefix.pch"; sourceTree = "<group>"; };
 		C5ACCB59160CF0DB0018E0AD /* ReadMe.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = ReadMe.txt; sourceTree = "<group>"; };
+		C5ACCB7E1610EDFF0018E0AD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		C5ACCB8B161102870018E0AD /* MASTMRAIDControllerJS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MASTMRAIDControllerJS.h; sourceTree = "<group>"; };
+		C5ACCB981611E24E0018E0AD /* MASTBrowserBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MASTBrowserBack.png; sourceTree = "<group>"; };
+		C5ACCB991611E24E0018E0AD /* MASTBrowserForward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MASTBrowserForward.png; sourceTree = "<group>"; };
+		C5ACCB9A1611E24E0018E0AD /* MASTCloseButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MASTCloseButton.png; sourceTree = "<group>"; };
+		C5ACCB9B1611E2860018E0AD /* MASTBrowserBackPNG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTBrowserBackPNG.h; sourceTree = "<group>"; };
+		C5ACCB9C1611E2980018E0AD /* MASTBrowserForwardPNG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTBrowserForwardPNG.h; sourceTree = "<group>"; };
+		C5ACCB9D1611E2A30018E0AD /* MASTCloseButtonPNG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTCloseButtonPNG.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,14 +100,7 @@
 				C5ACCAE6160CB32B0018E0AD /* EventKit.framework in Frameworks */,
 				C5ACCAEA160CB3EB0018E0AD /* MessageUI.framework in Frameworks */,
 				C5ACCAE5160CB32B0018E0AD /* CoreLocation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C5ACCAFF160CE7020018E0AD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C5ACCB03160CE7020018E0AD /* CoreFoundation.framework in Frameworks */,
+				C5ACCB7F1610EDFF0018E0AD /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,7 +112,6 @@
 			children = (
 				C5ACCB59160CF0DB0018E0AD /* ReadMe.txt */,
 				C5ACCAA8160CA4FF0018E0AD /* MASTAdView */,
-				C5ACCB04160CE7020018E0AD /* MASTAdViewResources */,
 				C5ACCAA5160CA4FF0018E0AD /* Frameworks */,
 				C5ACCAA4160CA4FF0018E0AD /* Products */,
 			);
@@ -138,7 +121,6 @@
 			isa = PBXGroup;
 			children = (
 				C5ACCAA3160CA4FF0018E0AD /* libMASTAdView.a */,
-				C5ACCB02160CE7020018E0AD /* MASTAdViewResources.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -151,7 +133,7 @@
 				C5ACCAE4160CB32B0018E0AD /* EventKit.framework */,
 				C5ACCAE9160CB3EB0018E0AD /* MessageUI.framework */,
 				C5ACCAE3160CB32B0018E0AD /* CoreLocation.framework */,
-				C5ACCAF2160CE69C0018E0AD /* CoreFoundation.framework */,
+				C5ACCB7E1610EDFF0018E0AD /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -180,6 +162,8 @@
 				C5ACCAC8160CB2A60018E0AD /* MASTMRAIDOrientationProperties.m */,
 				C5ACCAC9160CB2A60018E0AD /* MASTMRAIDResizeProperties.h */,
 				C5ACCACA160CB2A60018E0AD /* MASTMRAIDResizeProperties.m */,
+				C5ACCB8D1611031B0018E0AD /* Generated Source */,
+				C5ACCB8C161102A80018E0AD /* Generated Output */,
 				C5ACCAA9160CA4FF0018E0AD /* Supporting Files */,
 			);
 			path = MASTAdView;
@@ -206,23 +190,26 @@
 			name = Extensions;
 			sourceTree = "<group>";
 		};
-		C5ACCB04160CE7020018E0AD /* MASTAdViewResources */ = {
+		C5ACCB8C161102A80018E0AD /* Generated Output */ = {
 			isa = PBXGroup;
 			children = (
-				C5ACCB05160CE7020018E0AD /* Supporting Files */,
+				C5ACCB8B161102870018E0AD /* MASTMRAIDControllerJS.h */,
+				C5ACCB9D1611E2A30018E0AD /* MASTCloseButtonPNG.h */,
+				C5ACCB9B1611E2860018E0AD /* MASTBrowserBackPNG.h */,
+				C5ACCB9C1611E2980018E0AD /* MASTBrowserForwardPNG.h */,
 			);
-			path = MASTAdViewResources;
+			name = "Generated Output";
 			sourceTree = "<group>";
 		};
-		C5ACCB05160CE7020018E0AD /* Supporting Files */ = {
+		C5ACCB8D1611031B0018E0AD /* Generated Source */ = {
 			isa = PBXGroup;
 			children = (
 				C5ACCACB160CB2A60018E0AD /* MASTMRAIDController.js */,
-				C5ACCB07160CE7020018E0AD /* InfoPlist.strings */,
-				C5ACCB06160CE7020018E0AD /* MASTAdViewResources-Info.plist */,
-				C5ACCB0A160CE7020018E0AD /* MASTAdViewResources-Prefix.pch */,
+				C5ACCB9A1611E24E0018E0AD /* MASTCloseButton.png */,
+				C5ACCB981611E24E0018E0AD /* MASTBrowserBack.png */,
+				C5ACCB991611E24E0018E0AD /* MASTBrowserForward.png */,
 			);
-			name = "Supporting Files";
+			name = "Generated Source";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,6 +219,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C5ACCAB1160CA4FF0018E0AD /* Build configuration list for PBXNativeTarget "MASTAdView" */;
 			buildPhases = (
+				C5ACCB89161101CF0018E0AD /* Generated Source */,
 				C5ACCA9F160CA4FF0018E0AD /* Sources */,
 				C5ACCAA0160CA4FF0018E0AD /* Frameworks */,
 				C5ACCAA1160CA4FF0018E0AD /* CopyFiles */,
@@ -239,29 +227,11 @@
 			buildRules = (
 			);
 			dependencies = (
-				C5ACCB50160CEBFD0018E0AD /* PBXTargetDependency */,
 			);
 			name = MASTAdView;
 			productName = MASTAdView;
 			productReference = C5ACCAA3160CA4FF0018E0AD /* libMASTAdView.a */;
 			productType = "com.apple.product-type.library.static";
-		};
-		C5ACCB01160CE7020018E0AD /* MASTAdViewResources */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C5ACCB0B160CE7020018E0AD /* Build configuration list for PBXNativeTarget "MASTAdViewResources" */;
-			buildPhases = (
-				C5ACCAFE160CE7020018E0AD /* Sources */,
-				C5ACCAFF160CE7020018E0AD /* Frameworks */,
-				C5ACCB00160CE7020018E0AD /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = MASTAdViewResources;
-			productName = MASTAdViewResources;
-			productReference = C5ACCB02160CE7020018E0AD /* MASTAdViewResources.bundle */;
-			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
 
@@ -285,22 +255,26 @@
 			projectRoot = "";
 			targets = (
 				C5ACCAA2160CA4FF0018E0AD /* MASTAdView */,
-				C5ACCB01160CE7020018E0AD /* MASTAdViewResources */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXResourcesBuildPhase section */
-		C5ACCB00160CE7020018E0AD /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
+/* Begin PBXShellScriptBuildPhase section */
+		C5ACCB89161101CF0018E0AD /* Generated Source */ = {
+			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C5ACCB09160CE7020018E0AD /* InfoPlist.strings in Resources */,
-				C5ACCB10160CE86E0018E0AD /* MASTMRAIDController.js in Resources */,
+			);
+			inputPaths = (
+			);
+			name = "Generated Source";
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd $SRCROOT/$TARGET_NAME\nxxd -i MASTMRAIDController.js MASTMRAIDControllerJS.h\nxxd -i MASTCloseButton.png MASTCloseButtonPNG.h\nxxd -i MASTBrowserBack.png MASTBrowserBackPNG.h\nxxd -i MASTBrowserForward.png MASTBrowserForwardPNG.h\n";
 		};
-/* End PBXResourcesBuildPhase section */
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C5ACCA9F160CA4FF0018E0AD /* Sources */ = {
@@ -323,33 +297,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C5ACCAFE160CE7020018E0AD /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		C5ACCB50160CEBFD0018E0AD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C5ACCB01160CE7020018E0AD /* MASTAdViewResources */;
-			targetProxy = C5ACCB4F160CEBFD0018E0AD /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		C5ACCB07160CE7020018E0AD /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C5ACCB08160CE7020018E0AD /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		C5ACCAAF160CA4FF0018E0AD /* Debug */ = {
@@ -422,42 +370,6 @@
 			};
 			name = Release;
 		};
-		C5ACCB0C160CE7020018E0AD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MASTAdViewResources/MASTAdViewResources-Prefix.pch";
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				INFOPLIST_FILE = "MASTAdViewResources/MASTAdViewResources-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Debug;
-		};
-		C5ACCB0D160CE7020018E0AD /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				COMBINE_HIDPI_IMAGES = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MASTAdViewResources/MASTAdViewResources-Prefix.pch";
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				INFOPLIST_FILE = "MASTAdViewResources/MASTAdViewResources-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -475,15 +387,6 @@
 			buildConfigurations = (
 				C5ACCAB2160CA4FF0018E0AD /* Debug */,
 				C5ACCAB3160CA4FF0018E0AD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C5ACCB0B160CE7020018E0AD /* Build configuration list for PBXNativeTarget "MASTAdViewResources" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C5ACCB0C160CE7020018E0AD /* Debug */,
-				C5ACCB0D160CE7020018E0AD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

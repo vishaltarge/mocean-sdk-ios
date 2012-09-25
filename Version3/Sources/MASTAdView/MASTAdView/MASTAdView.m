@@ -16,6 +16,11 @@
 #import "MASTAdTracking.h"
 #import "MASTAdBrowser.h"
 
+#import "MASTMRAIDControllerJS.h"
+#import "MASTCloseButtonPNG.h"
+#import "MASTBrowserBackPNG.h"
+#import "MASTBrowserForwardPNG.h"
+
 #import <objc/runtime.h>
 
 
@@ -934,15 +939,12 @@ static NSString* AdViewUserAgent = nil;
 {
     self.invokeTracking = NO;
     
-    NSBundle* bundle = [NSBundle bundleWithURL:[[NSBundle mainBundle] URLForResource:@"MASTAdViewResources" withExtension:@"bundle"]];
+    // TODO: Load into an in memory cache.
+    NSData* jsData = [NSData dataWithBytesNoCopy:MASTMRAIDController_js
+                                          length:MASTMRAIDController_js_len
+                                    freeWhenDone:NO];
     
-    if (bundle == nil)
-    {
-        NSLog(@"MASTAdViewResources missing.  Verify the bundle is configured properly in the project.");
-    }
-    
-    NSString* mraidPath = [bundle pathForResource:@"mraid" ofType:@"js"];
-    NSString* mraidScript = [NSString stringWithContentsOfFile:mraidPath encoding:NSUTF8StringEncoding error:nil];
+    NSString* mraidScript = [[NSString alloc] initWithData:jsData encoding:NSUTF8StringEncoding];
     
     NSString* htmlContent = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"user-scalable=0;\"/><script>%@</script><style>body{margin:0;padding:0;}</style></head><body>%@</body></html>", mraidScript, mraidHtml];
 
