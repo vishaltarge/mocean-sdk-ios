@@ -125,7 +125,7 @@ static NSString* AdViewUserAgent = nil;
 
 - (NSString*)version
 {
-    return @"3.0 alpha1";
+    return @"3.0alpha1";
 }
 
 - (void)dealloc
@@ -257,6 +257,7 @@ static NSString* AdViewUserAgent = nil;
     
     // Set values that are not to be overriden.
     [args setValue:AdViewUserAgent forKey:@"ua"];
+    [args setValue:self.version forKey:@"version"];
     [args setValue:@"1" forKey:@"count"];
     [args setValue:@"3" forKey:@"key"];
     [args setValue:self.site forKey:@"site"];
@@ -749,7 +750,7 @@ static NSString* AdViewUserAgent = nil;
         self.closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.closeButton setImage:buttonImage forState:UIControlStateNormal];
 
-        self.closeButton.frame = CGRectMake(0, 0, 22, 22);
+        self.closeButton.frame = CGRectMake(0, 0, 35, 35);
     }
     
     self.closeButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
