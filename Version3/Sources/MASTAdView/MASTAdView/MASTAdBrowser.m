@@ -6,6 +6,9 @@
 //
 
 #import "MASTAdBrowser.h"
+#import "MASTBrowserBackPNG.h"
+#import "MASTBrowserForwardPNG.h"
+
 
 @interface MASTAdBrowser () <UIWebViewDelegate>
 @property (nonatomic, strong) UIWebView* webView;
@@ -58,9 +61,20 @@
         [items addObject:item];
         
         // Back
-        item = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRewind
-                                                             target:self
-                                                             action:@selector(toolbarBack:)];
+        NSData* buttonData = [NSData dataWithBytesNoCopy:MASTBrowserBack_png
+                                                  length:MASTBrowserBack_png_len
+                                            freeWhenDone:NO];
+        
+        UIImage* buttonImage = [UIImage imageWithData:buttonData];
+        buttonImage = [UIImage imageWithCGImage:buttonImage.CGImage
+                                          scale:2.0
+                                    orientation:UIImageOrientationUp];
+        
+        item = [[UIBarButtonItem alloc] initWithImage:buttonImage
+                                                style:UIBarButtonItemStylePlain
+                                               target:self
+                                               action:@selector(toolbarBack:)];
+        
         [items addObject:item];
         
         item = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
@@ -70,9 +84,19 @@
         
 
         // Forward
-        item = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward
-                                                             target:self
-                                                             action:@selector(toolbarForward:)];
+        buttonData = [NSData dataWithBytesNoCopy:MASTBrowserForward_png
+                                          length:MASTBrowserForward_png_len
+                                    freeWhenDone:NO];
+        
+        buttonImage = [UIImage imageWithData:buttonData];
+        buttonImage = [UIImage imageWithCGImage:buttonImage.CGImage
+                                          scale:2.0
+                                    orientation:UIImageOrientationUp];
+        
+        item = [[UIBarButtonItem alloc] initWithImage:buttonImage
+                                                style:UIBarButtonItemStylePlain
+                                               target:self
+                                               action:@selector(toolbarForward:)];
         [items addObject:item];
         
         item = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
@@ -177,6 +201,8 @@
 
 - (void)toolbarAction:(id)sender
 {
+    // TODO: Prompt user with action sheet vs. just jumping to Safari.
+    
     [self.delegate MASTAdBrowserWillLeaveApplication:self];
     
     [[UIApplication sharedApplication] openURL:[self.webView.request URL]];

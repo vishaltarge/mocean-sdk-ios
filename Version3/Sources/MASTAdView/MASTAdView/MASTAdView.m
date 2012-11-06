@@ -5,10 +5,12 @@
 //  Copyright (c) 2011, 2012 Mocean Mobile. All rights reserved.
 //
 
+#import "MASTDefaults.h"
 #import "MASTAdView.h"
 #import "UIWebView+MASTAdView.h"
 #import "NSDictionary+MASTAdView.h"
 #import "NSDate+MASTAdView.h"
+#import "UIImageView+MASTAdView.h"
 #import "MASTMRAIDBridge.h"
 #import "MASTMoceanAdResponse.h"
 #import "MASTMoceanAdDescriptor.h"
@@ -18,17 +20,14 @@
 
 #import "MASTMRAIDControllerJS.h"
 #import "MASTCloseButtonPNG.h"
-#import "MASTBrowserBackPNG.h"
-#import "MASTBrowserForwardPNG.h"
 
 #import <objc/runtime.h>
 
 
-const NSTimeInterval AdViewNetworkTimeout = 10;
 static NSString* AdViewUserAgent = nil;
 
 
-@interface MASTAdView () <UIGestureRecognizerDelegate, UIWebViewDelegate, MASTMRAIDBridgeDelegate, MASTAdBrowserDelegate, CLLocationManagerDelegate>
+@interface MASTAdView () <UIGestureRecognizerDelegate, UIWebViewDelegate, MASTMRAIDBridgeDelegate, MASTAdBrowserDelegate, CLLocationManagerDelegate, EKEventEditViewDelegate>
 
 // Ad fetching
 @property (nonatomic, strong) NSURLConnection* connection;
@@ -104,8 +103,8 @@ static NSString* AdViewUserAgent = nil;
 
 @synthesize labelView, imageView, expandView, resizeView;
 @synthesize site, zone, useInternalBrowser, placementType;
-@synthesize server, serverParameters;
-@synthesize testMode;
+@synthesize adServerURL, adRequestParameters;
+@synthesize test;
 @synthesize delegate;
 @synthesize connection, dataBuffer, webView;
 @synthesize updateTimer, interstitialTimer;
@@ -123,17 +122,22 @@ static NSString* AdViewUserAgent = nil;
 @synthesize locationManager;
 @synthesize locationDetectionEnabled;
 
-- (NSString*)version
+
+#pragma mark -
+
++ (NSString*)version
 {
-    return @"3.0alpha1";
+    return MAST_DEFAULT_VERSION;
 }
+
+#pragma mark -
 
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
 
-    [self cancel];
+    [self reset];
     
     [self.mraidBridge setDelegate:nil];
     self.mraidBridge = nil;
@@ -182,8 +186,8 @@ static NSString* AdViewUserAgent = nil;
         
         placementType = MASTAdViewPlacementTypeInline;
         
-        self.server = @"http://ads.mocean.mobi/ad";
-        serverParameters = [NSMutableDictionary new];
+        self.adServerURL = MAST_DEFAULT_AD_SERVER_URL;
+        adRequestParameters = [NSMutableDictionary new];
         
         self.closeButtonTimeInterval = -1;
 
@@ -206,7 +210,10 @@ static NSString* AdViewUserAgent = nil;
 - (void)internalUpdate
 {
     // Don't update if the internal browser is up.
-    // TODO: Impelemnt after adding the internal browser.
+    if ([self adBrowserOpen])
+    {
+        return;
+    }
     
     // Don't update if an MRAID ad is expanded or resized.
     switch ([self.mraidBridge state])
@@ -231,7 +238,10 @@ static NSString* AdViewUserAgent = nil;
                                                  code:0
                                              userInfo:nil];
             
-            [self.delegate MASTAdView:self didFailToReceiveAdWithError:error];
+            [self invokeDelegateBlock:^
+            {
+                [self.delegate MASTAdView:self didFailToReceiveAdWithError:error];
+            }];
         }
         
         return;
@@ -253,22 +263,22 @@ static NSString* AdViewUserAgent = nil;
     [args setValue:[NSString stringWithFormat:@"%d", (int)size_y] forKey:@"size_y"];
     
     // Import developer args..
-    [args addEntriesFromDictionary:self.serverParameters];
+    [args addEntriesFromDictionary:self.adRequestParameters];
     
     // Set values that are not to be overriden.
     [args setValue:AdViewUserAgent forKey:@"ua"];
-    [args setValue:self.version forKey:@"version"];
+    [args setValue:[MASTAdView version] forKey:@"version"];
     [args setValue:@"1" forKey:@"count"];
     [args setValue:@"3" forKey:@"key"];
     [args setValue:self.site forKey:@"site"];
     [args setValue:self.zone forKey:@"zone"];
     
-    if (self.testMode)
+    if (self.test)
     {
         [args setValue:@"1" forKey:@"test"];
     }
     
-    NSMutableString* url = [NSMutableString stringWithFormat:@"%@?", self.server];
+    NSMutableString* url = [NSMutableString stringWithFormat:@"%@?", self.adServerURL];
     
     for (NSString* argKey in args.allKeys)
     {
@@ -282,7 +292,7 @@ static NSString* AdViewUserAgent = nil;
 
     NSURLRequest* request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:requestUrl]
                                                   cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                              timeoutInterval:AdViewNetworkTimeout];
+                                              timeoutInterval:MAST_DEFAULT_NETWORK_TIMEOUT];
     
     self.dataBuffer = nil;
     
@@ -293,7 +303,7 @@ static NSString* AdViewUserAgent = nil;
 
 - (void)update
 {
-    [self cancel];
+    [self reset];
     
     [self internalUpdate];
 }
@@ -306,7 +316,7 @@ static NSString* AdViewUserAgent = nil;
         return;
     }
     
-    [self cancel];
+    [self reset];
 
     self.updateTimer = [[NSTimer alloc] initWithFireDate:nil
                                                 interval:interval
@@ -318,11 +328,16 @@ static NSString* AdViewUserAgent = nil;
     [[NSRunLoop mainRunLoop] addTimer:self.updateTimer forMode:NSDefaultRunLoopMode];
 }
 
-- (void)cancel
+- (void)reset
 {
-    // Cancel any current request
-    [self.connection cancel];
-    self.connection = nil;
+    // Close the ad browser if open.
+    if ([self adBrowserOpen])
+    {
+        [self closeAdBrowser];
+    }
+    
+    // Close interstitial if interstitial.
+    [self closeInterstitial];
     
     // Stop/reset the timer.
     if (self.updateTimer != nil)
@@ -338,8 +353,12 @@ static NSString* AdViewUserAgent = nil;
         self.interstitialTimer = nil;
     }
     
-    // Close interstitial, if interstitial.
-    [self closeInterstitial];
+    // Cancel any current request
+    [self.connection cancel];
+    self.connection = nil;
+    
+    // Stop location detection
+    [self setLocationDetectionEnabled:NO];
     
     // Do non-interstitial cleanup after this.
     if (self.placementType != MASTAdViewPlacementTypeInline)
@@ -395,7 +414,7 @@ static NSString* AdViewUserAgent = nil;
     
     NSURLRequest* request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:url]
                                                   cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                              timeoutInterval:AdViewNetworkTimeout];
+                                              timeoutInterval:MAST_DEFAULT_NETWORK_TIMEOUT];
     
     self.dataBuffer = nil;
     
@@ -426,14 +445,16 @@ static NSString* AdViewUserAgent = nil;
     
     [self performAdTracking];
     
-    if (self.mraidBridge != nil)
+    if ((self.mraidBridge != nil) && (self.webView.isLoading == NO))
     {
-        BOOL isViewable = self.window != nil;
-        [self.mraidBridge setViewable:isViewable forWebView:self.webView];
+        [self.mraidBridge setViewable:YES forWebView:self.webView];
+        [self.mraidBridge setState:MASTMRAIDBridgeStateDefault forWebView:self.webView];
     }
+    
+    [self prepareCloseButton];
 }
 
-- (void)showInterstitialWithDelay:(NSTimeInterval)delay
+- (void)showInterstitialWithDuration:(NSTimeInterval)delay
 {
     if (self.placementType != MASTAdViewPlacementTypeInterstitial)
         return;
@@ -483,6 +504,12 @@ static NSString* AdViewUserAgent = nil;
     // Restore the previous (the app's) key window.
     [self.preExpandKeyWindow makeKeyWindow];
     self.preExpandKeyWindow = nil;
+    
+    if (self.mraidBridge != nil)
+    {
+        [self.mraidBridge setViewable:NO forWebView:self.webView];
+        [self.mraidBridge setState:MASTMRAIDBridgeStateHidden forWebView:self.webView];
+    }
 }
 
 #pragma mark - Internal Browser
@@ -496,6 +523,17 @@ static NSString* AdViewUserAgent = nil;
     }
     
     return adBrowser;
+}
+
+- (BOOL)adBrowserOpen
+{
+    if (adBrowser == nil)
+        return NO;
+    
+    if (adBrowser.view.superview == nil)
+        return NO;
+    
+    return YES;
 }
 
 - (void)openAdBrowserWithURL:(NSURL*)url
@@ -537,11 +575,15 @@ static NSString* AdViewUserAgent = nil;
         [self.preExpandKeyWindow makeKeyWindow];
         self.preExpandKeyWindow = nil;
     }
+    
+    [self restartUpdateTimer];
 }
 
 - (void)MASTAdBrowser:(MASTAdBrowser *)browser didFailLoadWithError:(NSError *)error
 {
     // TODO: Display dialog?
+    
+    // TODO: Load URL with UIApplication openURL?
 }
 
 - (void)MASTAdBrowserClose:(MASTAdBrowser *)browser
@@ -551,10 +593,7 @@ static NSString* AdViewUserAgent = nil;
 
 - (void)MASTAdBrowserWillLeaveApplication:(MASTAdBrowser*)browser
 {
-    if ([self.delegate respondsToSelector:@selector(MASTAdViewWillLeaveApplication:)])
-    {
-        [self.delegate MASTAdViewWillLeaveApplication:self];
-    }
+    [self invokeDelegateSelector:@selector(MASTAdViewWillLeaveApplication:)];
 }
 
 #pragma mark - Gestures
@@ -566,10 +605,13 @@ static NSString* AdViewUserAgent = nil;
     
     NSURL* url = [NSURL URLWithString:self.adDescriptor.url];
     
-    BOOL shouldOpen = YES;
+    __block BOOL shouldOpen = YES;
     if ([self.delegate respondsToSelector:@selector(MASTAdView:shouldOpenURL:)])
     {
-        shouldOpen = [self.delegate MASTAdView:self shouldOpenURL:url];
+        [self invokeDelegateBlock:^
+        {
+            shouldOpen = [self.delegate MASTAdView:self shouldOpenURL:url];
+        }];
     }
     
     if (shouldOpen == NO)
@@ -734,11 +776,18 @@ static NSString* AdViewUserAgent = nil;
 
 - (void)showCloseButton
 {
+    __block UIButton* customButton = nil;
+    
     if ([self.delegate respondsToSelector:@selector(MASTAdViewCustomCloseButton:)])
     {
-        self.closeButton = [self.delegate MASTAdViewCustomCloseButton:self];
+        [self invokeDelegateBlock:^
+        {
+            customButton = [self.delegate MASTAdViewCustomCloseButton:self];
+        }];
     }
-    else
+    self.closeButton = customButton;
+    
+    if (customButton == nil)
     {
         // TODO: Cache image/data.
         NSData* buttonData = [NSData dataWithBytesNoCopy:MASTCloseButton_png
@@ -750,7 +799,7 @@ static NSString* AdViewUserAgent = nil;
         self.closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.closeButton setImage:buttonImage forState:UIControlStateNormal];
 
-        self.closeButton.frame = CGRectMake(0, 0, 35, 35);
+        self.closeButton.frame = CGRectMake(0, 0, 28, 28);
     }
     
     self.closeButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
@@ -889,19 +938,20 @@ static NSString* AdViewUserAgent = nil;
     }
     
     // If it's not MRAID then nothing to do but notify the delegate.
-    if ([self.delegate respondsToSelector:@selector(MASTAdViewCloseButtonPressed:)])
-        [self.delegate MASTAdViewCloseButtonPressed:self];
+    [self invokeDelegateSelector:@selector(MASTAdViewCloseButtonPressed:)];
 }
 
 #pragma mark - Resetting
 
 - (void)resetImageAd
 {
+    [self.imageView setImages:nil withDurations:nil];
     [self.imageView removeFromSuperview];
 }
 
 - (void)resetTextAd
 {
+    [self.labelView setText:nil];
     [self.labelView removeFromSuperview];
 }
 
@@ -919,9 +969,17 @@ static NSString* AdViewUserAgent = nil;
 #pragma mark - Image Ad Handling
 
 // Main thread
-- (void)renderImageAd:(UIImage*)image
+- (void)renderImageAd:(id)imageArg
 {
-    self.imageView.image = image;
+    if ([imageArg isKindOfClass:[UIImage class]])
+    {
+        self.imageView.image = imageArg;
+    }
+    else
+    {
+        [self.imageView setImages:[imageArg objectAtIndex:0]
+                    withDurations:[imageArg objectAtIndex:1]];
+    }
     
     switch (self.placementType)
     {
@@ -941,15 +999,14 @@ static NSString* AdViewUserAgent = nil;
     [self prepareCloseButton];
     [self performAdTracking];
     
-    if ([self.delegate respondsToSelector:@selector(MASTAdViewDidRecieveAd:)])
-    {
-        [self.delegate MASTAdViewDidRecieveAd:self];
-    }
+    [self invokeDelegateSelector:@selector(MASTAdViewDidRecieveAd:)];
 }
 
 // Background thread
 - (void)loadImageAd:(MASTMoceanAdDescriptor*)ad
 {
+    static int foo = 0;
+
     @autoreleasepool
     {
         NSError* error = nil;
@@ -958,8 +1015,6 @@ static NSString* AdViewUserAgent = nil;
                                                   options:NSDataReadingUncached
                                                     error:&error];
         
-        UIImage* image = [UIImage imageWithData:imageData];
-        
         if ((imageData == nil) || (error != nil))
         {
             if (error == nil)
@@ -967,15 +1022,65 @@ static NSString* AdViewUserAgent = nil;
             
             if ([self.delegate respondsToSelector:@selector(MASTAdView:didFailToReceiveAdWithError:)])
             {
-                [self.delegate MASTAdView:self didFailToReceiveAdWithError:error];
+                [self invokeDelegateBlock:^
+                 {
+                     [self.delegate MASTAdView:self didFailToReceiveAdWithError:error];
+                 }];
             }
-
+            
             return;
         }
         
+
+        // This can be either a single image to render or a array with two elements,
+        // the first the list of images and the second a list of intervals.
+        id renderImageArg = nil;
+        
+        if (memcmp(imageData.bytes, "GIF89a", 6) == 0)
+        {
+            CGImageSourceRef imageSourceRef = CGImageSourceCreateWithData((__bridge CFDataRef)imageData, NULL);
+            
+            size_t imageSourceRefCount = CGImageSourceGetCount(imageSourceRef);
+            if (imageSourceRefCount > 1)
+            {
+                NSMutableArray* delayImages = [NSMutableArray new];
+                NSMutableArray* delayIntervals = [NSMutableArray new];
+                
+                for (int i = 0; i < imageSourceRefCount; ++i)
+                {
+                    // Fetch the image.
+                    CGImageRef imageRef = CGImageSourceCreateImageAtIndex(imageSourceRef, i, NULL);
+                    UIImage* image = [UIImage imageWithCGImage:imageRef];
+                    [delayImages addObject:image];
+                    CFRelease(imageRef);
+                    
+                    // Fetch the delay.
+                    CFDictionaryRef imagePropertiesRef = CGImageSourceCopyPropertiesAtIndex(imageSourceRef, i, NULL);
+                    NSDictionary* imageProperties = (__bridge NSDictionary*)imagePropertiesRef;
+                    NSDictionary* gifProperties = [imageProperties objectForKey:(__bridge NSString*)kCGImagePropertyGIFDictionary];
+                    NSTimeInterval delay = [[gifProperties objectForKey:(__bridge NSString*)kCGImagePropertyGIFUnclampedDelayTime] doubleValue];
+                    if (delay <= 0)
+                        delay = .10;
+                    [delayIntervals addObject:[NSNumber numberWithFloat:delay]];
+                    CFRelease(imagePropertiesRef);
+                }
+                
+                renderImageArg = [NSArray arrayWithObjects:delayImages, delayIntervals, nil];
+            }
+
+            CFRelease(imageSourceRef);
+        }
+        
+        if (renderImageArg == nil)
+        {
+            renderImageArg = [UIImage imageWithData:imageData];
+        }
+        
         self.adDescriptor = ad;
-        [self performSelectorOnMainThread:@selector(renderImageAd:) withObject:image waitUntilDone:NO];
+        [self performSelectorOnMainThread:@selector(renderImageAd:) withObject:renderImageArg waitUntilDone:NO];
     }
+    
+    ++foo;
 }
 
 #pragma mark - Text Ad Handling
@@ -1003,10 +1108,7 @@ static NSString* AdViewUserAgent = nil;
     [self prepareCloseButton];
     [self performAdTracking];
     
-    if ([self.delegate respondsToSelector:@selector(MASTAdViewDidRecieveAd:)])
-    {
-        [self.delegate MASTAdViewDidRecieveAd:self];
-    }
+    [self invokeDelegateSelector:@selector(MASTAdViewDidRecieveAd:)];
 }
 
 #pragma mark - MRAID Ad Handling
@@ -1056,41 +1158,50 @@ static NSString* AdViewUserAgent = nil;
     [self resetImageAd];
     [self resetTextAd];
     
-    if ([self.delegate respondsToSelector:@selector(MASTAdViewDidRecieveAd:)])
-    {
-        [self.delegate MASTAdViewDidRecieveAd:self];
-    }
+    [self invokeDelegateSelector:@selector(MASTAdViewDidRecieveAd:)];
 }
 
 // UIWebView callback thread
 - (void)mraidSupports:(UIWebView*)wv
 {
     // SMS defaults to availability if developer doesn't implement check.
-    BOOL smsAvailable = [MFMessageComposeViewController canSendText];
+    __block BOOL smsAvailable = [MFMessageComposeViewController canSendText];
     if (smsAvailable && ([self.delegate respondsToSelector:@selector(MASTAdViewSupportsSMS:)] == YES))
     {
-        smsAvailable = [self.delegate MASTAdViewSupportsSMS:self];
+        [self invokeDelegateBlock:^
+        {
+             smsAvailable = [self.delegate MASTAdViewSupportsSMS:self];
+        }];
     }
     
     // Phone defaults to availability if developer doesn't implement check.
-    BOOL phoneAvailable = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"tel://"]];
+    __block BOOL phoneAvailable = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"tel://"]];
     if (phoneAvailable && ([self.delegate respondsToSelector:@selector(MASTAdViewSupportsPhone:)] == YES))
     {
-        phoneAvailable = [self.delegate MASTAdViewSupportsPhone:self];
+        [self invokeDelegateBlock:^
+        {
+            phoneAvailable = [self.delegate MASTAdViewSupportsPhone:self];
+        }];
     }
     
     // Calendar defaults to disabled if check not implemented by developer.
-    BOOL calendarAvailable = [self.delegate respondsToSelector:@selector(MASTAdViewSupportsCalendar:)];
+    __block BOOL calendarAvailable = [self.delegate respondsToSelector:@selector(MASTAdViewSupportsCalendar:)];
     if (calendarAvailable)
     {
-        calendarAvailable = [self.delegate MASTAdViewSupportsCalendar:self];
+        [self invokeDelegateBlock:^
+        {
+            calendarAvailable = [self.delegate MASTAdViewSupportsCalendar:self];
+        }];
     }
     
     // Store picture defaults to disabled if check not implemented by developer.
-    BOOL storePictureAvailable = [self.delegate respondsToSelector:@selector(MASTAdViewSupportsstorePicture:)];
+    __block BOOL storePictureAvailable = [self.delegate respondsToSelector:@selector(MASTAdViewSupportsstorePicture:)];
     if (storePictureAvailable)
     {
-        storePictureAvailable = [self.delegate MASTAdViewSupportsstorePicture:self];
+        [self invokeDelegateBlock:^
+        {
+            storePictureAvailable = [self.delegate MASTAdViewSupportsStorePicture:self];
+        }];
     }
     
     [self.mraidBridge setSupported:smsAvailable forFeature:MASTMRAIDBridgeSupportsSMS forWebView:wv];
@@ -1107,11 +1218,7 @@ static NSString* AdViewUserAgent = nil;
 {
     if (self.placementType == MASTAdViewPlacementTypeInterstitial)
     {
-        if ([self.delegate respondsToSelector:@selector(MASTAdViewCloseButtonPressed:)])
-        {
-            [self.delegate MASTAdViewCloseButtonPressed:self];
-        }
-        
+        [self invokeDelegateSelector:@selector(MASTAdViewCloseButtonPressed:)];
         return;
     }
     
@@ -1123,16 +1230,12 @@ static NSString* AdViewUserAgent = nil;
             return;
             
         case MASTMRAIDBridgeStateDefault:
-            // TODO: Need to close the ad?
-            // Not really sure what to do execpt ping the delegate.
+            // MRAID leaves this open ended on the SDK so ignoring the request.
             break;
             
         case MASTMRAIDBridgeStateExpanded:
         {
-            if ([self.delegate respondsToSelector:@selector(MASTAdViewWillCollapse:)])
-            {
-                [self.delegate MASTAdViewWillCollapse:self];
-            }
+            [self invokeDelegateSelector:@selector(MASTAdViewWillCollapse:)];
             
             // Put the webview back on the base ad view (self).
             [self.webView setFrame:self.bounds];
@@ -1152,16 +1255,14 @@ static NSString* AdViewUserAgent = nil;
             [self prepareCloseButton];
             [self restartUpdateTimer];
             
-            if ([self.delegate respondsToSelector:@selector(MASTAdViewDidCollapse:)])
-            {
-                [self.delegate MASTAdViewDidCollapse:self];
-            }
-            
+            [self invokeDelegateSelector:@selector(MASTAdViewDidCollapse:)];
             break;
         }
 
         case MASTMRAIDBridgeStateResized:
         {
+            [self invokeDelegateSelector:@selector(MASTAdViewWillCollapse:)];
+            
             [self.webView setFrame:self.bounds];
             [self addSubview:self.webView];
             
@@ -1172,6 +1273,8 @@ static NSString* AdViewUserAgent = nil;
             
             [self prepareCloseButton];
             [self restartUpdateTimer];
+            
+            [self invokeDelegateSelector:@selector(MASTAdViewDidCollapse:)];
             break;
         }
     }
@@ -1179,10 +1282,13 @@ static NSString* AdViewUserAgent = nil;
 
 - (void)mraidBridge:(MASTMRAIDBridge *)bridge openURL:(NSString*)url
 {
-    BOOL shouldOpen = YES;
+    __block BOOL shouldOpen = YES;
     if ([self.delegate respondsToSelector:@selector(MASTAdView:shouldOpenURL:)])
     {
-        shouldOpen = [self.delegate MASTAdView:self shouldOpenURL:[NSURL URLWithString:url]];
+        [self invokeDelegateBlock:^
+        {
+            shouldOpen = [self.delegate MASTAdView:self shouldOpenURL:[NSURL URLWithString:url]];
+        }];
     }
     
     if (shouldOpen == NO)
@@ -1195,11 +1301,8 @@ static NSString* AdViewUserAgent = nil;
         return;
     }
     
-    if ([self.delegate respondsToSelector:@selector(MASTAdViewWillLeaveApplication:)])
-    {
-        [self.delegate MASTAdViewWillLeaveApplication:self];
-    }
-    
+    [self invokeDelegateSelector:@selector(MASTAdViewWillLeaveApplication:)];
+
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
 
@@ -1261,10 +1364,7 @@ static NSString* AdViewUserAgent = nil;
         return;
     }
     
-    if ([self.delegate respondsToSelector:@selector(MASTAdViewWillExpand:)])
-    {
-        [self.delegate MASTAdViewWillExpand:self];
-    }
+    [self invokeDelegateSelector:@selector(MASTAdViewWillExpand:)];
     
     // Reset the exanded view's rotation.
     [self rotateExpandView:0];
@@ -1291,10 +1391,7 @@ static NSString* AdViewUserAgent = nil;
     
     [self prepareCloseButton];
     
-    if ([self.delegate respondsToSelector:@selector(MASTAdViewDidExpand:)])
-    {
-        [self.delegate MASTAdViewDidExpand:self];
-    }
+    [self invokeDelegateSelector:@selector(MASTAdViewDidExpand:)];
 }
 
 - (void)mraidBridgeUpdatedResizeProperties:(MASTMRAIDBridge *)bridge
@@ -1361,6 +1458,14 @@ static NSString* AdViewUserAgent = nil;
     convertRect.size.height = requestedSize.height;
     convertRect.size.width = requestedSize.width;
     
+    if ([self.delegate respondsToSelector:@selector(MASTAdView:willResizeToFrame:)])
+    {
+        [self invokeDelegateBlock:^
+        {
+            [self.delegate MASTAdView:self willResizeToFrame:convertRect];
+        }];
+    }
+
     [self.resizeView setFrame:convertRect];
     [self.resizeView addSubview:self.webView];
     [self.webView setFrame:self.resizeView.bounds];
@@ -1412,24 +1517,32 @@ static NSString* AdViewUserAgent = nil;
     // Update the bridge.
     [bridge setCurrentPosition:convertRect forWebView:self.webView];
     [bridge setState:MASTMRAIDBridgeStateResized forWebView:self.webView];
+    
+    if ([self.delegate respondsToSelector:@selector(MASTAdView:didResizeToFrame:)])
+    {
+        [self invokeDelegateBlock:^
+        {
+            [self.delegate MASTAdView:self didResizeToFrame:convertRect];
+        }];
+    }
 }
 
 - (void)mraidBridge:(MASTMRAIDBridge*)bridge playVideo:(NSString*)url
 {
     // Default to launching the player and allow a developer to override.
-    BOOL play = YES;
+    __block BOOL play = YES;
     
     if ([self.delegate respondsToSelector:@selector(MASTAdView:shouldPlayVideo:)])
     {
-        play = [self.delegate MASTAdView:self shouldPlayVideo:url];
+        [self invokeDelegateBlock:^
+        {
+            play = [self.delegate MASTAdView:self shouldPlayVideo:url];
+        }];
     }
     
     if (play)
     {
-        if ([self.delegate respondsToSelector:@selector(MASTAdViewWillLeaveApplication:)])
-        {
-            [self.delegate MASTAdViewWillLeaveApplication:self];
-        }
+        [self invokeDelegateSelector:@selector(MASTAdViewWillLeaveApplication:)];
         
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
     }
@@ -1557,23 +1670,79 @@ static NSString* AdViewUserAgent = nil;
     event.startDate = start;
     event.endDate = end;
     
-    BOOL save = [self.delegate MASTAdView:self shouldSaveCalendarEvent:event inEventStore:store];
+    __block UIViewController* rootController = nil;
     
-    if (save)
+    [self invokeDelegateBlock:^
     {
-        NSError* error = nil;
-        [store saveEvent:event span:EKSpanThisEvent error:&error];
+        rootController = [self.delegate MASTAdView:self
+                           shouldSaveCalendarEvent:event
+                                      inEventStore:store];
         
-        if (error != nil)
+        // Included in this block since this block occurs on the main thread and the
+        // following must be on the main thread since it's interacting with the UI.
+        if (rootController != nil)
         {
-            NSString* errorMessage = [error description];
-            [self.mraidBridge sendErrorMessage:errorMessage
+            EKEventEditViewController* eventViewController = [EKEventEditViewController new];
+            eventViewController.eventStore = store;
+            eventViewController.event = event;
+            
+            if ([rootController respondsToSelector:@selector(presentViewController:animated:completion:)])
+            {
+                [rootController presentViewController:eventViewController
+                                             animated:YES
+                                           completion:nil];
+            }
+            else
+            {
+                [rootController presentModalViewController:eventViewController
+                                                  animated:YES];
+            }
+        }
+    }];
+}
+
+#pragma mark - EKEventEditViewDelegate
+
+- (void)eventEditViewController:(EKEventEditViewController *)controller
+          didCompleteWithAction:(EKEventEditViewAction)action
+{
+    switch (action)
+    {
+        case EKEventEditViewActionCanceled:
+        case EKEventEditViewActionDeleted:
+        {
+            [self.mraidBridge sendErrorMessage:@"user canceled"
                                      forAction:@"createCalendarEvent"
                                     forWebView:self.webView];
-
-            // TODO: Notify delegate of error.
-            // TODO: Log error.
+            break;
         }
+            
+        case EKEventEditViewActionSaved:
+        {
+            NSError* error = nil;
+            [controller.eventStore saveEvent:controller.event span:EKSpanThisEvent error:&error];
+            
+            if (error != nil)
+            {
+                NSString* errorMessage = [error description];
+                [self.mraidBridge sendErrorMessage:errorMessage
+                                         forAction:@"createCalendarEvent"
+                                        forWebView:self.webView];
+                
+                // TODO: Log error.
+            }
+            break;
+        }
+    }
+    
+    UIViewController* parentViewController = [controller parentViewController];
+    if ([controller respondsToSelector:@selector(presentingViewController)])
+    {
+        [parentViewController dismissViewControllerAnimated:YES completion:nil];
+    }
+    else
+    {
+        [parentViewController dismissModalViewControllerAnimated:YES];
     }
 }
 
@@ -1603,7 +1772,12 @@ static NSString* AdViewUserAgent = nil;
     
     UIImage* image = [UIImage imageWithData:imageData];
     
-    BOOL save = [self.delegate MASTAdView:self shouldSavePhotoToCameraRoll:image];
+    __block BOOL save = NO;
+    
+    [self invokeDelegateBlock:^
+    {
+        save = [self.delegate MASTAdView:self shouldSavePhotoToCameraRoll:image];
+    }];
 
     if (save)
     {
@@ -1694,9 +1868,12 @@ static NSString* AdViewUserAgent = nil;
                 
                 if ([self.delegate respondsToSelector:@selector(MASTAdView:didReceiveThirdPartyRequest:withParams:)])
                 {
-                    [self.delegate MASTAdView:self 
-                            didReceiveThirdPartyRequest:thirdPartyDescriptor.properties
-                                   withParams:thirdPartyDescriptor.params];
+                    [self invokeDelegateBlock:^
+                    {
+                        [self.delegate MASTAdView:self
+                      didReceiveThirdPartyRequest:thirdPartyDescriptor.properties
+                                       withParams:thirdPartyDescriptor.params];
+                    }];
                 }
 
                 return;
@@ -1725,13 +1902,59 @@ static NSString* AdViewUserAgent = nil;
         self.invokeTracking = NO;
         
         NSString* track = self.adDescriptor.track;
+        
         if ([track length] > 0)
         {
             NSURL* url = [NSURL URLWithString:track];
             
-            MASTAdTracking* adTracking = [[MASTAdTracking alloc] initWithURL:url];
-            adTracking = nil;
+            MASTAdTracking* track = [[MASTAdTracking alloc] initWithURL:url
+                                                              userAgent:AdViewUserAgent];
+            if (track == nil)
+            {
+                // TODO: Log error
+            }
         }
+    }
+}
+
+#pragma mark - Delegate Callbacks
+
+// This helper is used for delegate methods that only take self as an argument and
+// have a void return.
+//
+// Should NEVER pass a selector that may have a return object since the compiler/ARC
+// may not know how to deal with the memory constraints on anything returned.  For
+// delegate methods that expect to return something use the block method below and
+// not this helper.
+// Can be called from any thread.
+- (void)invokeDelegateSelector:(SEL)selector
+{
+    if ([self.delegate respondsToSelector:selector])
+    {
+        [self invokeDelegateBlock:^
+        {
+            // Working around the warning until Apple fixes it.  As stated above
+            // the delegate methods used here should have void return types.
+            #pragma clang diagnostic push
+            #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+            [self.delegate performSelector:selector withObject:self];
+            #pragma clang diagnostic pop
+        }];
+    }
+}
+
+// Can be called on any thread but if called on the non-main thread
+// will block until the main thread executes the block.
+- (void)invokeDelegateBlock:(dispatch_block_t)block
+{
+    if ([NSThread isMainThread])
+    {
+        block();
+    }
+    else
+    {
+        dispatch_queue_t queue = dispatch_get_main_queue();
+        dispatch_sync(queue, block);
     }
 }
 
@@ -1757,6 +1980,14 @@ static NSString* AdViewUserAgent = nil;
         {
             return NO;
         }
+        
+        if ([self.delegate respondsToSelector:@selector(MASTAdView:didProcessRichmediaRequest:)])
+        {
+            [self invokeDelegateBlock:^
+            {
+                [self.delegate MASTAdView:self didProcessRichmediaRequest:request];
+            }];
+        }
     }
     
     if ([@"about" isEqualToString:scheme])
@@ -1769,10 +2000,13 @@ static NSString* AdViewUserAgent = nil;
     if ((navigationType == UIWebViewNavigationTypeLinkClicked) ||
         (navigationType == UIWebViewNavigationTypeOther))
     {   
-        BOOL shouldOpen = YES;
+        __block BOOL shouldOpen = YES;
         if ([self.delegate respondsToSelector:@selector(MASTAdView:shouldOpenURL:)])
         {
-            shouldOpen = [self.delegate MASTAdView:self shouldOpenURL:request.URL];
+            [self invokeDelegateBlock:^
+            {
+                 shouldOpen = [self.delegate MASTAdView:self shouldOpenURL:request.URL];
+            }];
         }
         
         if (shouldOpen == NO)
@@ -1794,7 +2028,7 @@ static NSString* AdViewUserAgent = nil;
         
         if ([self.delegate respondsToSelector:@selector(MASTAdViewWillLeaveApplication:)])
         {
-            [self.delegate MASTAdViewWillLeaveApplication:self];
+            [self invokeDelegateSelector:@selector(MASTAdViewWillLeaveApplication:)];
         }
         
         [[UIApplication sharedApplication] openURL:request.URL];
@@ -1889,7 +2123,10 @@ static NSString* AdViewUserAgent = nil;
     
     if ([self.delegate respondsToSelector:@selector(MASTAdView:didFailToReceiveAdWithError:)])
     {
-        [self.delegate MASTAdView:self didFailToReceiveAdWithError:error];
+        [self invokeDelegateBlock:^
+        {
+            [self.delegate MASTAdView:self didFailToReceiveAdWithError:error];
+        }];
     }
 }
 
@@ -1906,7 +2143,10 @@ static NSString* AdViewUserAgent = nil;
     
     if ([self.delegate respondsToSelector:@selector(MASTAdView:didFailToReceiveAdWithError:)])
     {
-        [self.delegate MASTAdView:self didFailToReceiveAdWithError:error];
+        [self invokeDelegateBlock:^
+        {
+            [self.delegate MASTAdView:self didFailToReceiveAdWithError:error];
+        }];
     }
 }
 
@@ -1928,7 +2168,10 @@ static NSString* AdViewUserAgent = nil;
                                                  code:0
                                              userInfo:nil];
             
-            [self.delegate MASTAdView:self didFailToReceiveAdWithError:error];
+            [self invokeDelegateBlock:^
+            {
+                [self.delegate MASTAdView:self didFailToReceiveAdWithError:error];
+            }];
         }
         
         return;
@@ -1947,7 +2190,10 @@ static NSString* AdViewUserAgent = nil;
                                                  code:0
                                              userInfo:nil];
             
-            [self.delegate MASTAdView:self didFailToReceiveAdWithError:error];
+            [self invokeDelegateBlock:^
+            {
+                [self.delegate MASTAdView:self didFailToReceiveAdWithError:error];
+            }];
         }
         
         return;
@@ -1992,7 +2238,7 @@ static NSString* AdViewUserAgent = nil;
         self.locationManager = nil;
         locationDetectionEnabled = NO;
         
-        [self.serverParameters removeObjectsForKeys:[NSArray arrayWithObjects:@"lat", @"long", nil]];
+        [self.adRequestParameters removeObjectsForKeys:[NSArray arrayWithObjects:@"lat", @"long", nil]];
         
         return;
     }
@@ -2067,22 +2313,22 @@ static NSString* AdViewUserAgent = nil;
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
-    [self.serverParameters removeObjectsForKeys:[NSArray arrayWithObjects:@"lat", @"long", nil]];
+    [self.adRequestParameters removeObjectsForKeys:[NSArray arrayWithObjects:@"lat", @"long", nil]];
 }
 
 - (void)locationManager:(CLLocationManager*)manager didUpdateToLocation:(CLLocation*)newLocation fromLocation:(CLLocation*)oldLocation
 {
     if (newLocation == nil)
     {
-        [self.serverParameters removeObjectsForKeys:[NSArray arrayWithObjects:@"lat", @"long", nil]];
+        [self.adRequestParameters removeObjectsForKeys:[NSArray arrayWithObjects:@"lat", @"long", nil]];
         return;
     }
     
     NSString* lat = [NSString stringWithFormat:@"%f", newLocation.coordinate.latitude];
     NSString* lon = [NSString stringWithFormat:@"%f", newLocation.coordinate.longitude];
     
-    [self.serverParameters setValue:lat forKey:@"lat"];
-    [self.serverParameters setValue:lon forKey:@"long"];
+    [self.adRequestParameters setValue:lat forKey:@"lat"];
+    [self.adRequestParameters setValue:lon forKey:@"long"];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading

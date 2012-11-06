@@ -9,6 +9,6 @@
 
 @interface MASTAdTracking : NSObject
 
-- (id)initWithURL:(NSURL*)url;
+- (id)initWithURL:(NSURL*)url userAgent:(NSString*)userAgent;
 
 @end

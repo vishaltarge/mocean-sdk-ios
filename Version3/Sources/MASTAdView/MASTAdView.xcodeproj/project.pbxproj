@@ -42,6 +42,9 @@
 		C5ACCAEA160CB3EB0018E0AD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5ACCAE9160CB3EB0018E0AD /* MessageUI.framework */; };
 		C5ACCB52160CED380018E0AD /* MASTMoceanAdDescriptor.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C5ACCABD160CB2A60018E0AD /* MASTMoceanAdDescriptor.h */; };
 		C5ACCB7F1610EDFF0018E0AD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5ACCB7E1610EDFF0018E0AD /* CoreGraphics.framework */; };
+		C5D30D79161A186100CA45A3 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D30D78161A186100CA45A3 /* EventKitUI.framework */; };
+		C5E1DB9D1635A252007F4959 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5E1DB9C1635A252007F4959 /* ImageIO.framework */; };
+		C5E1DBA21635C2F2007F4959 /* UIImageView+MASTAdView.m in Sources */ = {isa = PBXBuildFile; fileRef = C5E1DBA11635C2F2007F4959 /* UIImageView+MASTAdView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -59,6 +62,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C51F3FCE161CB41F007009DB /* MASTDefaults.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MASTDefaults.h; sourceTree = "<group>"; };
 		C5ACCAA3160CA4FF0018E0AD /* libMASTAdView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMASTAdView.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5ACCAA6160CA4FF0018E0AD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C5ACCAAA160CA4FF0018E0AD /* MASTAdView-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MASTAdView-Prefix.pch"; sourceTree = "<group>"; };
@@ -102,6 +106,10 @@
 		C5ACCB9B1611E2860018E0AD /* MASTBrowserBackPNG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTBrowserBackPNG.h; sourceTree = "<group>"; };
 		C5ACCB9C1611E2980018E0AD /* MASTBrowserForwardPNG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTBrowserForwardPNG.h; sourceTree = "<group>"; };
 		C5ACCB9D1611E2A30018E0AD /* MASTCloseButtonPNG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTCloseButtonPNG.h; sourceTree = "<group>"; };
+		C5D30D78161A186100CA45A3 /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
+		C5E1DB9C1635A252007F4959 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		C5E1DBA01635C2F2007F4959 /* UIImageView+MASTAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+MASTAdView.h"; sourceTree = "<group>"; };
+		C5E1DBA11635C2F2007F4959 /* UIImageView+MASTAdView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+MASTAdView.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,9 +120,11 @@
 				C5ACCAA7160CA4FF0018E0AD /* Foundation.framework in Frameworks */,
 				C5ACCAE8160CB3660018E0AD /* UIKit.framework in Frameworks */,
 				C5ACCAE6160CB32B0018E0AD /* EventKit.framework in Frameworks */,
+				C5D30D79161A186100CA45A3 /* EventKitUI.framework in Frameworks */,
 				C5ACCAEA160CB3EB0018E0AD /* MessageUI.framework in Frameworks */,
 				C5ACCAE5160CB32B0018E0AD /* CoreLocation.framework in Frameworks */,
 				C5ACCB7F1610EDFF0018E0AD /* CoreGraphics.framework in Frameworks */,
+				C5E1DB9D1635A252007F4959 /* ImageIO.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,9 +155,11 @@
 				C5ACCAA6160CA4FF0018E0AD /* Foundation.framework */,
 				C5ACCAE7160CB3660018E0AD /* UIKit.framework */,
 				C5ACCAE4160CB32B0018E0AD /* EventKit.framework */,
+				C5D30D78161A186100CA45A3 /* EventKitUI.framework */,
 				C5ACCAE9160CB3EB0018E0AD /* MessageUI.framework */,
 				C5ACCAE3160CB32B0018E0AD /* CoreLocation.framework */,
 				C5ACCB7E1610EDFF0018E0AD /* CoreGraphics.framework */,
+				C5E1DB9C1635A252007F4959 /* ImageIO.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -156,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				C5ACCAE2160CB2E90018E0AD /* Extensions */,
+				C51F3FCE161CB41F007009DB /* MASTDefaults.h */,
 				C5ACCAAB160CA4FF0018E0AD /* MASTAdView.h */,
 				C5ACCAAD160CA4FF0018E0AD /* MASTAdView.m */,
 				C5ACCAB7160CB2A60018E0AD /* MASTAdBrowser.h */,
@@ -200,6 +213,8 @@
 				C5ACCACF160CB2A60018E0AD /* NSDictionary+MASTAdView.m */,
 				C5ACCAD0160CB2A60018E0AD /* UIWebView+MASTAdView.h */,
 				C5ACCAD1160CB2A60018E0AD /* UIWebView+MASTAdView.m */,
+				C5E1DBA01635C2F2007F4959 /* UIImageView+MASTAdView.h */,
+				C5E1DBA11635C2F2007F4959 /* UIImageView+MASTAdView.m */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -324,6 +339,7 @@
 				C5ACCADD160CB2A60018E0AD /* NSDate+MASTAdView.m in Sources */,
 				C5ACCADE160CB2A60018E0AD /* NSDictionary+MASTAdView.m in Sources */,
 				C5ACCADF160CB2A60018E0AD /* UIWebView+MASTAdView.m in Sources */,
+				C5E1DBA21635C2F2007F4959 /* UIImageView+MASTAdView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
