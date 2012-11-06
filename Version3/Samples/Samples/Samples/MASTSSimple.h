@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <MASTAdView/MASTAdView.h>
+#import "MASTAdView.h"
 #import "MASTSAdConfigController.h"
 
 

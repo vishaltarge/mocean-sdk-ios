@@ -19,7 +19,7 @@
 - (void)dealloc
 {
     [self.interstitialAdView setDelegate:nil];
-    [self.interstitialAdView cancel];
+    [self.interstitialAdView reset];
     self.interstitialAdView = nil;
     
     [super dealloc];
@@ -30,7 +30,7 @@
     
     // Remove the banner ad from the view form the Simple base class.
     [self.adView removeFromSuperview];
-    [self.adView cancel];
+    [self.adView reset];
     
     // This method for interstitial doesn't require developers to place
     // and manage the interstitial view itself.  Instead it can display

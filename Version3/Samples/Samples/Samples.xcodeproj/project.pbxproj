@@ -43,21 +43,24 @@
 		C54969E115434556006F9444 /* MASTSDelegateMRAID.m in Sources */ = {isa = PBXBuildFile; fileRef = C54969E015434556006F9444 /* MASTSDelegateMRAID.m */; };
 		C54969E415434566006F9444 /* MASTSDelegateThirdParty.m in Sources */ = {isa = PBXBuildFile; fileRef = C54969E315434566006F9444 /* MASTSDelegateThirdParty.m */; };
 		C54969F115434EF7006F9444 /* MASTSLogController.m in Sources */ = {isa = PBXBuildFile; fileRef = C54969F015434EF7006F9444 /* MASTSLogController.m */; };
+		C57D7BB51648A4F80084B896 /* MASTSSimpleAnimatedGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = C57D7BB41648A4F80084B896 /* MASTSSimpleAnimatedGIF.m */; };
 		C5ACCB7D1610EDBD0018E0AD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5ACCB7C1610EDBD0018E0AD /* CoreGraphics.framework */; };
 		C5D30CD916123DE800CA45A3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C5D30CD716123DE000CA45A3 /* Default-568h@2x.png */; };
-		C5D30CF71612520C00CA45A3 /* libMASTAdView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D30CE9161251E700CA45A3 /* libMASTAdView.a */; };
 		C5D30CFA1612558A00CA45A3 /* MASTSSimpleInterstitialDirect.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D30CF91612558A00CA45A3 /* MASTSSimpleInterstitialDirect.m */; };
+		C5D30D7C161A1C9800CA45A3 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D30D7B161A1C9800CA45A3 /* EventKitUI.framework */; };
+		C5D30D8A161A261600CA45A3 /* libMASTAdView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D30D89161A25CD00CA45A3 /* libMASTAdView.a */; };
+		C5E1DB9F1635C15A007F4959 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5E1DB9E1635C15A007F4959 /* ImageIO.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		C5D30CE8161251E700CA45A3 /* PBXContainerItemProxy */ = {
+		C5D30D88161A25CD00CA45A3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C5D30CE3161251E600CA45A3 /* MASTAdView.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = C5ACCAA3160CA4FF0018E0AD;
 			remoteInfo = MASTAdView;
 		};
-		C5D30CF51612520700CA45A3 /* PBXContainerItemProxy */ = {
+		C5D30D8B161A261E00CA45A3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C5D30CE3161251E600CA45A3 /* MASTAdView.xcodeproj */;
 			proxyType = 1;
@@ -127,11 +130,15 @@
 		C54969E315434566006F9444 /* MASTSDelegateThirdParty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSDelegateThirdParty.m; sourceTree = "<group>"; };
 		C54969EF15434EF7006F9444 /* MASTSLogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSLogController.h; sourceTree = "<group>"; };
 		C54969F015434EF7006F9444 /* MASTSLogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSLogController.m; sourceTree = "<group>"; };
+		C57D7BB31648A4F80084B896 /* MASTSSimpleAnimatedGIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSSimpleAnimatedGIF.h; sourceTree = "<group>"; };
+		C57D7BB41648A4F80084B896 /* MASTSSimpleAnimatedGIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSSimpleAnimatedGIF.m; sourceTree = "<group>"; };
 		C5ACCB7C1610EDBD0018E0AD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		C5D30CD716123DE000CA45A3 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		C5D30CE3161251E600CA45A3 /* MASTAdView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MASTAdView.xcodeproj; path = ../../Sources/MASTAdView/MASTAdView.xcodeproj; sourceTree = "<group>"; };
 		C5D30CF81612558A00CA45A3 /* MASTSSimpleInterstitialDirect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSSimpleInterstitialDirect.h; sourceTree = "<group>"; };
 		C5D30CF91612558A00CA45A3 /* MASTSSimpleInterstitialDirect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSSimpleInterstitialDirect.m; sourceTree = "<group>"; };
+		C5D30D7B161A1C9800CA45A3 /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
+		C5E1DB9E1635C15A007F4959 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,13 +146,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C5D30CF71612520C00CA45A3 /* libMASTAdView.a in Frameworks */,
 				3C91DDAB153F72AB00FCF6CD /* UIKit.framework in Frameworks */,
 				3C91DDAD153F72AB00FCF6CD /* Foundation.framework in Frameworks */,
 				3C91DE1E153F751500FCF6CD /* EventKit.framework in Frameworks */,
+				C5D30D7C161A1C9800CA45A3 /* EventKitUI.framework in Frameworks */,
 				3C91DE20153F751500FCF6CD /* MessageUI.framework in Frameworks */,
 				3C91DE1B153F751500FCF6CD /* CoreLocation.framework in Frameworks */,
 				C5ACCB7D1610EDBD0018E0AD /* CoreGraphics.framework in Frameworks */,
+				C5E1DB9F1635C15A007F4959 /* ImageIO.framework in Frameworks */,
+				C5D30D8A161A261600CA45A3 /* libMASTAdView.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,6 +164,7 @@
 		3C91DD9B153F72AB00FCF6CD = {
 			isa = PBXGroup;
 			children = (
+				C5E1DB9E1635C15A007F4959 /* ImageIO.framework */,
 				C5D30CE3161251E600CA45A3 /* MASTAdView.xcodeproj */,
 				3C91DDB0153F72AC00FCF6CD /* Samples */,
 				3C91DDA9153F72AB00FCF6CD /* Frameworks */,
@@ -176,6 +186,7 @@
 				3C91DDAC153F72AB00FCF6CD /* Foundation.framework */,
 				3C91DDAA153F72AB00FCF6CD /* UIKit.framework */,
 				3C91DE16153F751500FCF6CD /* EventKit.framework */,
+				C5D30D7B161A1C9800CA45A3 /* EventKitUI.framework */,
 				3C91DE18153F751500FCF6CD /* MessageUI.framework */,
 				3C91DE13153F751500FCF6CD /* CoreLocation.framework */,
 				C5ACCB7C1610EDBD0018E0AD /* CoreGraphics.framework */,
@@ -244,6 +255,8 @@
 				3C91DDDC153F737500FCF6CD /* MASTSSimple.m */,
 				3C91DDDD153F737500FCF6CD /* MASTSSimpleImage.h */,
 				3C91DDDE153F737500FCF6CD /* MASTSSimpleImage.m */,
+				C57D7BB31648A4F80084B896 /* MASTSSimpleAnimatedGIF.h */,
+				C57D7BB41648A4F80084B896 /* MASTSSimpleAnimatedGIF.m */,
 				3C91DDDF153F737500FCF6CD /* MASTSSimpleInterstitialClassic.h */,
 				3C91DDE0153F737500FCF6CD /* MASTSSimpleInterstitialClassic.m */,
 				C5D30CF81612558A00CA45A3 /* MASTSSimpleInterstitialDirect.h */,
@@ -311,10 +324,10 @@
 			name = Delegate;
 			sourceTree = "<group>";
 		};
-		C5D30CE4161251E600CA45A3 /* Products */ = {
+		C5D30D84161A25CD00CA45A3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C5D30CE9161251E700CA45A3 /* libMASTAdView.a */,
+				C5D30D89161A25CD00CA45A3 /* libMASTAdView.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -333,7 +346,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				C5D30CF61612520700CA45A3 /* PBXTargetDependency */,
+				C5D30D8C161A261E00CA45A3 /* PBXTargetDependency */,
 			);
 			name = Samples;
 			productName = Samples;
@@ -362,7 +375,7 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = C5D30CE4161251E600CA45A3 /* Products */;
+					ProductGroup = C5D30D84161A25CD00CA45A3 /* Products */;
 					ProjectRef = C5D30CE3161251E600CA45A3 /* MASTAdView.xcodeproj */;
 				},
 			);
@@ -374,11 +387,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		C5D30CE9161251E700CA45A3 /* libMASTAdView.a */ = {
+		C5D30D89161A25CD00CA45A3 /* libMASTAdView.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libMASTAdView.a;
-			remoteRef = C5D30CE8161251E700CA45A3 /* PBXContainerItemProxy */;
+			remoteRef = C5D30D88161A25CD00CA45A3 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -431,16 +444,17 @@
 				C54969E415434566006F9444 /* MASTSDelegateThirdParty.m in Sources */,
 				C54969F115434EF7006F9444 /* MASTSLogController.m in Sources */,
 				C5D30CFA1612558A00CA45A3 /* MASTSSimpleInterstitialDirect.m in Sources */,
+				C57D7BB51648A4F80084B896 /* MASTSSimpleAnimatedGIF.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		C5D30CF61612520700CA45A3 /* PBXTargetDependency */ = {
+		C5D30D8C161A261E00CA45A3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = MASTAdView;
-			targetProxy = C5D30CF51612520700CA45A3 /* PBXContainerItemProxy */;
+			targetProxy = C5D30D8B161A261E00CA45A3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -459,7 +473,6 @@
 		3C91DDBC153F72AC00FCF6CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -487,7 +500,6 @@
 		3C91DDBD153F72AC00FCF6CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -510,11 +522,6 @@
 		3C91DDBF153F72AC00FCF6CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../../../../Desktop\"",
-					"\"$(SRCROOT)/../../Sources/MASTAdView/Products\"",
-				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Samples/Samples-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
@@ -528,11 +535,6 @@
 		3C91DDC0153F72AC00FCF6CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../../../../Desktop\"",
-					"\"$(SRCROOT)/../../Sources/MASTAdView/Products\"",
-				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Samples/Samples-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;

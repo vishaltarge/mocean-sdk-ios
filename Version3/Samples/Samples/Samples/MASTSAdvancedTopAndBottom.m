@@ -60,7 +60,7 @@
     frame.origin.y = CGRectGetMaxY(adjustedFrame) - frame.size.height;
     
     // Setup (or possibly resetup) the BOTTOM ad view (super covers the adView)
-    [self.bottomAdView cancel];
+    [self.bottomAdView reset];
     [self.bottomAdView removeFromSuperview];
     
     self.bottomAdView = [[[MASTAdView alloc] initWithFrame:frame] autorelease];

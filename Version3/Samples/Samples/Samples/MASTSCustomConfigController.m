@@ -12,13 +12,12 @@
 @property (nonatomic, assign) id activeResponder;
 @property (nonatomic, retain) NSMutableDictionary* settings;
 @property (nonatomic, retain) NSMutableDictionary* tagKeys;
-@property (nonatomic, retain) NSArray* injectionHeaderValues;
 @end
 
 @implementation MASTSCustomConfigController
 
 @synthesize delegate;
-@synthesize activeResponder, settings, tagKeys, injectionHeaderValues;
+@synthesize activeResponder, settings, tagKeys;
 
 - (void)dealloc
 {
@@ -26,7 +25,6 @@
     self.activeResponder = nil;
     self.settings = nil;
     self.tagKeys = nil;
-    self.injectionHeaderValues = nil;
     
     [super dealloc];
 }
@@ -49,10 +47,6 @@
         self.navigationItem.rightBarButtonItem = doneButton;
         
         self.tagKeys = [NSMutableDictionary dictionary];
-        
-        self.injectionHeaderValues = [NSArray arrayWithObjects:[NSNull null], 
-                                      @"",
-                                      @"<meta name=\"viewport\" content=\"initial-scale=1.0;user-scalable=0;\"/><style>body{margin:0;padding:0;display:-webkit-box;-webkit-box-orient:horizontal;-webkit-box-pack:center;-webkit-box-align:center;}</style>", nil];
     }
     return self;
 }
@@ -118,8 +112,6 @@
             return 8;
         case 1:
             return 1;
-        case 2:
-            return 3;
     }
     
     return 0;
@@ -133,8 +125,6 @@
             return @"Position and Size";
         case 1:
             return @"Options";
-        case 2:
-            return @"Injection Header";
     }
     
     return nil;
@@ -243,28 +233,8 @@
             switch (indexPath.row)
             {
                 case 0:
-                    setting = @"internal open mode";
-                    settingKey = @"internalOpenMode";
-                    break;
-            }
-            break;
-        }
-        case 2:
-        {
-            settingKey = @"injectionHeaderCode";
-            
-            switch (indexPath.row)
-            {
-                case 0:
-                    setting = @"default";
-                    break;
-                    
-                case 1:
-                    setting = @"no injection";
-                    break;
-                    
-                case 2:
-                    setting = @"initial-scale=1.0";
+                    setting = @"use internal browser";
+                    settingKey = @"useInternalBrowser";
                     break;
             }
             break;
@@ -290,7 +260,7 @@
         if (value == nil)
             value = [NSNull null];
         
-        NSUInteger valueIndex = [self.injectionHeaderValues indexOfObject:value];
+        NSUInteger valueIndex = 0;
         
         if (valueIndex == indexPath.row)
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -309,27 +279,6 @@
         [self.activeResponder endEditing:YES];
     
     self.activeResponder = nil;
-    
-    if (indexPath.section == 2)
-    {
-        for (int i = 0, c = self.injectionHeaderValues.count; i < c; ++i)
-        {
-            id value = [self.injectionHeaderValues objectAtIndex:i];
-            if ([[NSNull null] isEqual:value])
-                value = nil;
-            
-            UITableViewCell* cell = [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:2]];
-            if (indexPath.row == i)
-            {
-                cell.accessoryType = UITableViewCellAccessoryCheckmark;
-                [settings setValue:value forKey:@"injectionHeaderCode"];
-            }
-            else
-            {
-                cell.accessoryType = UITableViewCellAccessoryNone;
-            }
-        }
-    }
 }
 
 #pragma mark -

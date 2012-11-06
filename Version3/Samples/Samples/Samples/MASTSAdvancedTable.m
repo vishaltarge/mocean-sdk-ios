@@ -7,7 +7,7 @@
 //
 
 #import "MASTSAdvancedTable.h"
-#import <MASTAdView/MASTAdView.h>
+#import "MASTAdView.h"
 
 
 @interface MASTSAdvancedTable ()

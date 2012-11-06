@@ -63,7 +63,7 @@
         
     // Setup (or possibly resetup) the ad view.
     
-    [self.adView cancel];
+    [self.adView reset];
     [self.adView removeFromSuperview];
     
     CGRect frame = self.view.bounds;

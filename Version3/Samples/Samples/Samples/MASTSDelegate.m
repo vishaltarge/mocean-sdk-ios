@@ -85,102 +85,213 @@
 
 #pragma mark -
 
-- (void)willReceiveAd:(id)sender
+- (void)MASTAdViewDidRecieveAd:(MASTAdView*)adView
 {
-    NSMutableString* entry = [NSMutableString stringWithString:@"willReceiveAd"];
-    [entry appendFormat:@"\nsender: %@", [sender description]];
+    NSMutableString* entry = [NSMutableString stringWithString:@"MASTAdViewDidRecieveAd:"];
+    [entry appendFormat:@"\nadView: %@", [adView description]];
     
-    [self performSelectorOnMainThread:@selector(writeEntry:) 
-                           withObject:entry
-                        waitUntilDone:NO];
+    [self writeEntry:entry];
 }
 
-- (void)didReceiveAd:(id)sender
+- (void)MASTAdView:(MASTAdView*)adView didFailToReceiveAdWithError:(NSError*)error
 {
-    NSMutableString* entry = [NSMutableString stringWithString:@"didReceiveAd:"];
-    [entry appendFormat:@"\nsender: %@", [sender description]];
-    
-    [self performSelectorOnMainThread:@selector(writeEntry:)
-                           withObject:entry
-                        waitUntilDone:NO];
-}
-
-- (void)didReceiveThirdPartyRequest:(id)sender content:(NSDictionary*)content
-{
-    NSMutableString* entry = [NSMutableString stringWithString:@"didReceiveThirdPartyRequest:content:"];
-    [entry appendFormat:@"\nsender: %@", [sender description]];
-    [entry appendFormat:@"\ncontent: %@", [content description]];
-    
-    [self performSelectorOnMainThread:@selector(writeEntry:) 
-                           withObject:entry
-                        waitUntilDone:NO];
-}
-
-- (void)didFailToReceiveAd:(id)sender withError:(NSError*)error
-{
-    NSMutableString* entry = [NSMutableString stringWithString:@"didFailToReceiveAd:withError:"];
-    [entry appendFormat:@"\nsender: %@", [sender description]];
+    NSMutableString* entry = [NSMutableString stringWithString:@"MASTAdView:didFailToReceiveAdWithError:"];
+    [entry appendFormat:@"\nadView: %@", [adView description]];
     [entry appendFormat:@"\nerror: %@", [error description]];
     
-    [self performSelectorOnMainThread:@selector(writeEntry:)
-                           withObject:entry
-                        waitUntilDone:NO];
+    [self writeEntry:entry];
 }
 
-- (void)adWillStartFullScreen:(id)sender
+- (BOOL)MASTAdView:(MASTAdView*)adView shouldOpenURL:(NSURL*)url
 {
-    NSMutableString* entry = [NSMutableString stringWithString:@"adWillStartFullScreen:"];
-    [entry appendFormat:@"\nsender: %@", [sender description]];
-    
-    [self performSelectorOnMainThread:@selector(writeEntry:)
-                           withObject:entry
-                        waitUntilDone:NO];
-}
-
-- (void)adDidEndFullScreen:(id)sender
-{
-    NSMutableString* entry = [NSMutableString stringWithString:@"adDidEndFullScreen:"];
-    [entry appendFormat:@"\nsender: %@", [sender description]];
-    
-    [self performSelectorOnMainThread:@selector(writeEntry:)
-                           withObject:entry
-                        waitUntilDone:NO];
-}
-
-- (BOOL)adShouldOpen:(id)sender withUrl:(NSURL*)url
-{
-    NSMutableString* entry = [NSMutableString stringWithString:@"adShouldOpen:withUrl:"];
-    [entry appendFormat:@"\nsender: %@", [sender description]];
+    NSMutableString* entry = [NSMutableString stringWithString:@"MASTAdView:shouldOpenURL:"];
+    [entry appendFormat:@"\nadView: %@", [adView description]];
     [entry appendFormat:@"\nurl: %@", [url description]];
     
-    [self performSelectorOnMainThread:@selector(writeEntry:)
-                           withObject:entry
-                        waitUntilDone:NO];
+    [self writeEntry:entry];
     
     return YES;
 }
 
-- (void)didClosedAd:(id)sender usageTimeInterval:(NSTimeInterval)usageTimeInterval
+- (void)MASTAdViewCloseButtonPressed:(MASTAdView*)adView
 {
-    NSMutableString* entry = [NSMutableString stringWithString:@"didClosedAd:usageTimeInterval:"];
-    [entry appendFormat:@"\nsender: %@", [sender description]];
-    [entry appendFormat:@"\nusageTimeInterval: %f", usageTimeInterval];
+    NSMutableString* entry = [NSMutableString stringWithString:@"MASTAdViewCloseButtonPressed:"];
+    [entry appendFormat:@"\nadView: %@", [adView description]];
     
-    [self performSelectorOnMainThread:@selector(writeEntry:)
-                           withObject:entry
-                        waitUntilDone:NO];
+    [self writeEntry:entry];
 }
 
-- (void)ormmaProcess:(id)sender event:(NSString*)event parameters:(NSDictionary*)parameters
+- (UIButton*)MASTAdViewCustomCloseButton:(MASTAdView*)adView
 {
-    NSMutableString* entry = [NSMutableString stringWithString:@"ormmaProcess:event:parameters:"];
-    [entry appendFormat:@"\nsender: %@", [sender description]];
-    [entry appendFormat:@"\nevent: %@", event];
-    [entry appendFormat:@"\nparameters: %@", [parameters description]];
+    NSMutableString* entry = [NSMutableString stringWithString:@"MASTAdViewCustomCloseButton:"];
+    [entry appendFormat:@"\nadView: %@", [adView description]];
     
-    [self performSelectorOnMainThread:@selector(writeEntry:) 
-                           withObject:entry
-                        waitUntilDone:NO];
+    [self writeEntry:entry];
+    
+    return nil;
+}
+
+- (void)MASTAdViewWillExpand:(MASTAdView*)adView
+{
+    NSMutableString* entry = [NSMutableString stringWithString:@"MASTAdViewWillExpand:"];
+    [entry appendFormat:@"\nadView: %@", [adView description]];
+    
+    [self writeEntry:entry];
+}
+
+- (void)MASTAdViewDidExpand:(MASTAdView*)adView
+{
+    NSMutableString* entry = [NSMutableString stringWithString:@"MASTAdViewDidExpand:"];
+    [entry appendFormat:@"\nadView: %@", [adView description]];
+    
+    [self writeEntry:entry];
+}
+
+- (void)MASTAdView:(MASTAdView *)adView willResizeToFrame:(CGRect)frame
+{
+    NSMutableString* entry = [NSMutableString stringWithString:@"MASTAdView:willResizeToFrame:"];
+    [entry appendFormat:@"\nadView: %@", [adView description]];
+    [entry appendFormat:@"\nframe: %@", [((NSDictionary*)CGRectCreateDictionaryRepresentation(frame)) description]];
+    
+    [self writeEntry:entry];
+}
+
+- (void)MASTAdView:(MASTAdView *)adView didResizeToFrame:(CGRect)frame
+{
+    NSMutableString* entry = [NSMutableString stringWithString:@"MASTAdView:didResizeToFrame:"];
+    [entry appendFormat:@"\nadView: %@", [adView description]];
+    [entry appendFormat:@"\nframe: %@", [((NSDictionary*)CGRectCreateDictionaryRepresentation(frame)) description]];
+    
+    [self writeEntry:entry];
+}
+
+- (void)MASTAdViewWillCollapse:(MASTAdView*)adView
+{
+    NSMutableString* entry = [NSMutableString stringWithString:@"MASTAdViewWillCollapse"];
+    [entry appendFormat:@"\nadView: %@", [adView description]];
+    
+    [self writeEntry:entry];
+}
+
+- (void)MASTAdViewDidCollapse:(MASTAdView*)adView
+{
+    NSMutableString* entry = [NSMutableString stringWithString:@"MASTAdViewDidCollapse:"];
+    [entry appendFormat:@"\nadView: %@", [adView description]];
+    
+    [self writeEntry:entry];
+}
+
+- (void)MASTAdViewWillLeaveApplication:(MASTAdView*)adView
+{
+    NSMutableString* entry = [NSMutableString stringWithString:@"MASTAdViewWillLeaveApplication:"];
+    [entry appendFormat:@"\nadView: %@", [adView description]];
+    
+    [self writeEntry:entry];
+}
+
+- (BOOL)MASTAdView:(MASTAdView*)adView shouldLogEvent:(NSString*)event ofType:(MASTAdViewLogEventType)type
+{
+    NSMutableString* entry = [NSMutableString stringWithString:@"MASTAdView:shouldLogEvent:ofType:"];
+    [entry appendFormat:@"\nadView: %@", [adView description]];
+    [entry appendFormat:@"\nevent: %@", [event description]];
+    [entry appendFormat:@"\ntype: %d", type];
+    
+    [self writeEntry:entry];
+    
+    return YES;
+}
+
+- (BOOL)MASTAdViewSupportsSMS:(MASTAdView*)adView
+{
+    NSMutableString* entry = [NSMutableString stringWithString:@"MASTAdViewSupportsSMS:"];
+    [entry appendFormat:@"\nadView: %@", [adView description]];
+    
+    [self writeEntry:entry];
+    
+    return YES;
+}
+
+- (BOOL)MASTAdViewSupportsPhone:(MASTAdView*)adView
+{
+    NSMutableString* entry = [NSMutableString stringWithString:@"MASTAdViewSupportsPhone:"];
+    [entry appendFormat:@"\nadView: %@", [adView description]];
+    
+    [self writeEntry:entry];
+    
+    return YES;
+}
+
+- (BOOL)MASTAdViewSupportsCalendar:(MASTAdView*)adView
+{
+    NSMutableString* entry = [NSMutableString stringWithString:@"MASTAdViewSupportsCalendar:"];
+    [entry appendFormat:@"\nadView: %@", [adView description]];
+    
+    [self writeEntry:entry];
+    
+    return YES;
+}
+
+- (BOOL)MASTAdViewSupportsStorePicture:(MASTAdView*)adView
+{
+    NSMutableString* entry = [NSMutableString stringWithString:@"MASTAdViewSupportsStorePicture:"];
+    [entry appendFormat:@"\nadView: %@", [adView description]];
+    
+    [self writeEntry:entry];
+    
+    return YES;
+}
+
+- (void)MASTAdView:(MASTAdView*)adView didReceiveThirdPartyRequest:(NSDictionary*)properties withParams:(NSDictionary*)params
+{
+    NSMutableString* entry = [NSMutableString stringWithString:@"MASTAdView:didReceiveThirdPartyRequest:withParams"];
+    [entry appendFormat:@"\nadView: %@", [adView description]];
+    [entry appendFormat:@"\nproperties: %@", [properties description]];
+    [entry appendFormat:@"\nparams: %@", [params description]];
+    
+    [self writeEntry:entry];
+}
+
+- (BOOL)MASTAdView:(MASTAdView*)adView shouldPlayVideo:(NSString*)videoURL
+{
+    NSMutableString* entry = [NSMutableString stringWithString:@"MASTAdView:shouldPlayVideo:"];
+    [entry appendFormat:@"\nadView: %@", [adView description]];
+    [entry appendFormat:@"\nvideoURL: %@", [videoURL description]];
+    
+    [self writeEntry:entry];
+    
+    return YES;
+}
+
+- (UIViewController*)MASTAdView:(MASTAdView*)adView shouldSaveCalendarEvent:(EKEvent*)event inEventStore:(EKEventStore*)eventStore
+{
+    NSMutableString* entry = [NSMutableString stringWithString:@"MASTAdView:shouldSaveCalendarEvent:inEventStore:"];
+    [entry appendFormat:@"\nadView: %@", [adView description]];
+    [entry appendFormat:@"\nevent: %@", [event description]];
+    [entry appendFormat:@"\neventStore: %@", [eventStore description]];
+    
+    [self writeEntry:entry];
+    
+    return self;
+}
+
+- (BOOL)MASTAdView:(MASTAdView*)adView shouldSavePhotoToCameraRoll:(UIImage*)image
+{
+    NSMutableString* entry = [NSMutableString stringWithString:@"MASTAdView:shouldSavePhotoToCameraRoll:"];
+    [entry appendFormat:@"\nadView: %@", [adView description]];
+    [entry appendFormat:@"\nimage: %@", [image description]];
+    
+    [self writeEntry:entry];
+    
+    return YES;
+}
+
+- (void)MASTAdView:(MASTAdView *)adView didProcessRichmediaRequest:(NSURLRequest*)event
+{
+    NSMutableString* entry = [NSMutableString stringWithString:@"MASTAdView:didProcessRichmediaRequest:"];
+    [entry appendFormat:@"\nadView: %@", [adView description]];
+    [entry appendFormat:@"\nevent: %@", [event description]];
+    
+    [self writeEntry:entry];
 }
 
 @end

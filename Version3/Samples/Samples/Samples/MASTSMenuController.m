@@ -11,6 +11,7 @@
 
 // Sample ad usage controllers:
 #import "MASTSSimpleImage.h"
+#import "MASTSSimpleAnimatedGIF.h"
 #import "MASTSSimpleInterstitialClassic.h"
 #import "MASTSSimpleInterstitialDirect.h"
 #import "MASTSSimpleRichMedia.h"
@@ -93,7 +94,7 @@
     switch (section)
     {
         case 0:
-            return 5;
+            return 6;
         case 1:
             return 4;
         case 2:
@@ -153,15 +154,18 @@
                     label = @"Image";
                     break;
                 case 1:
-                    label = @"Interstitial - Classic";
+                    label = @"Animated GIF";
                     break;
                 case 2:
-                    label = @"Interstitial - Direct";
+                    label = @"Interstitial - Classic";
                     break;
                 case 3:
-                    label = @"Rich Media";
+                    label = @"Interstitial - Direct";
                     break;
                 case 4:
+                    label = @"Rich Media";
+                    break;
+                case 5:
                     label = @"Text";
                     break;
             }
@@ -243,15 +247,18 @@
                     testController = [[MASTSSimpleImage new] autorelease];
                     break;
                 case 1:
-                    testController = [[MASTSSimpleInterstitialClassic new] autorelease];
+                    testController = [[MASTSSimpleAnimatedGIF new] autorelease];
                     break;
                 case 2:
-                    testController = [[MASTSSimpleInterstitialDirect new] autorelease];
+                    testController = [[MASTSSimpleInterstitialClassic new] autorelease];
                     break;
                 case 3:
-                    testController = [[MASTSSimpleRichMedia new] autorelease];
+                    testController = [[MASTSSimpleInterstitialDirect new] autorelease];
                     break;
                 case 4:
+                    testController = [[MASTSSimpleRichMedia new] autorelease];
+                    break;
+                case 5:
                     testController = [[MASTSSimpleText new] autorelease];
                     break;
             }

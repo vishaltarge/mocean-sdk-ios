@@ -63,21 +63,16 @@
 
 #pragma mark - MASTAdViewDelegate
 
-- (void)willReceiveAd:(id)sender
+- (void)MASTAdViewDidRecieveAd:(MASTAdView *)adView
 {
-    NSLog(@"willReceiveAd");
-}
-
-- (void)didReceiveAd:(id)sender
-{
-    NSLog(@"didReceiveAd");
+    NSLog(@"MASTAdViewDidRecieveAd:");
 
     [self performSelectorOnMainThread:@selector(animateShowAd) withObject:nil waitUntilDone:NO];
 }
 
-- (void)didFailToReceiveAd:(id)sender withError:(NSError *)error
+- (void)MASTAdView:(MASTAdView *)adView didFailToReceiveAdWithError:(NSError *)error
 {
-    NSLog(@"didFailToReceiveAd");
+    NSLog(@"MASTAdView:didFailToReceiveAdWithError:");
     
     [self performSelectorOnMainThread:@selector(animateHideAd) withObject:nil waitUntilDone:NO];
 }

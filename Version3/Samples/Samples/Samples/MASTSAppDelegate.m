@@ -10,7 +10,7 @@
 #import "MASTSMenuController.h"
 #import "MASTSDetailController.h"
 #import "MASTSSplitViewController.h"
-#import <MASTAdView/MASTAdView.h>
+#import "MASTAdView.h"
 
 
 @interface MASTSAppDelegate()
