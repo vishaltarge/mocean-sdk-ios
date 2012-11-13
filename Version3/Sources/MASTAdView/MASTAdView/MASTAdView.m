@@ -37,6 +37,9 @@ static NSString* AdViewUserAgent = nil;
 // Update timer
 @property (nonatomic, strong) NSTimer* updateTimer;
 
+// Set to skip the next timer update
+@property (nonatomic, assign) BOOL skipNextUpdateTick;
+
 // Interstitial delay timer
 @property (nonatomic, strong) NSTimer* interstitialTimer;
 
@@ -107,7 +110,7 @@ static NSString* AdViewUserAgent = nil;
 @synthesize test;
 @synthesize delegate;
 @synthesize connection, dataBuffer, webView;
-@synthesize updateTimer, interstitialTimer;
+@synthesize updateTimer, skipNextUpdateTick, interstitialTimer;
 @synthesize closeButtonTimeInterval, closeButton;
 @synthesize tapGesture;
 @synthesize expandCloseControl, resizeCloseControl;
@@ -230,7 +233,10 @@ static NSString* AdViewUserAgent = nil;
     
     if (([self.site length] == 0) || ([self.zone length]== 0))
     {
-        // TODO: SDK Debug/Logging
+        [self logEvent:@"Can not update without a proper site and zone."
+                ofType:MASTAdViewLogEventTypeError
+                  func:__func__
+                  line:__LINE__];
         
         if ([self.delegate respondsToSelector:@selector(MASTAdView:didFailToReceiveAdWithError:)])
         {
@@ -288,7 +294,10 @@ static NSString* AdViewUserAgent = nil;
     
     NSString* requestUrl = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
-    NSLog(@"MASTAdRequest URL:%@", requestUrl);
+    [self logEvent:[NSString stringWithFormat:@"Ad request:%@", requestUrl]
+            ofType:MASTAdViewLogEventTypeDebug
+              func:__func__
+              line:__LINE__];
 
     NSURLRequest* request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:requestUrl]
                                                   cachePolicy:NSURLRequestUseProtocolCachePolicy
@@ -299,6 +308,17 @@ static NSString* AdViewUserAgent = nil;
     self.connection = [[NSURLConnection alloc] initWithRequest:request 
                                                       delegate:self 
                                               startImmediately:YES];
+}
+
+- (void)internalUpdateTimerTick
+{
+    if (self.window == nil)
+        return;
+    
+    if (self.skipNextUpdateTick)
+        self.skipNextUpdateTick = NO;
+    
+    [self internalUpdate];
 }
 
 - (void)update
@@ -321,7 +341,7 @@ static NSString* AdViewUserAgent = nil;
     self.updateTimer = [[NSTimer alloc] initWithFireDate:nil
                                                 interval:interval
                                                   target:self
-                                                selector:@selector(internalUpdate)
+                                                selector:@selector(internalUpdateTimerTick)
                                                 userInfo:nil
                                                  repeats:YES];
     
@@ -581,9 +601,10 @@ static NSString* AdViewUserAgent = nil;
 
 - (void)MASTAdBrowser:(MASTAdBrowser *)browser didFailLoadWithError:(NSError *)error
 {
-    // TODO: Display dialog?
-    
-    // TODO: Load URL with UIApplication openURL?
+    [self logEvent:[NSString stringWithFormat:@"Internal browser unable to load content.: %@", [error description]]
+            ofType:MASTAdViewLogEventTypeError
+              func:__func__
+              line:__LINE__];
 }
 
 - (void)MASTAdBrowserClose:(MASTAdBrowser *)browser
@@ -594,6 +615,8 @@ static NSString* AdViewUserAgent = nil;
 - (void)MASTAdBrowserWillLeaveApplication:(MASTAdBrowser*)browser
 {
     [self invokeDelegateSelector:@selector(MASTAdViewWillLeaveApplication:)];
+    
+    self.skipNextUpdateTick = YES;
 }
 
 #pragma mark - Gestures
@@ -1302,6 +1325,8 @@ static NSString* AdViewUserAgent = nil;
     }
     
     [self invokeDelegateSelector:@selector(MASTAdViewWillLeaveApplication:)];
+    
+    self.skipNextUpdateTick = YES;
 
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
@@ -1544,6 +1569,8 @@ static NSString* AdViewUserAgent = nil;
     {
         [self invokeDelegateSelector:@selector(MASTAdViewWillLeaveApplication:)];
         
+        self.skipNextUpdateTick = YES;
+        
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
     }
 }
@@ -1640,7 +1667,7 @@ static NSString* AdViewUserAgent = nil;
 {
     if ([self.delegate respondsToSelector:@selector(MASTAdView:shouldSaveCalendarEvent:inEventStore:)] == NO)
     {
-        [self.mraidBridge sendErrorMessage:@"access denied"
+        [self.mraidBridge sendErrorMessage:@"Access denied."
                                  forAction:@"createCalendarEvent"
                                 forWebView:self.webView];
         return;
@@ -1649,7 +1676,9 @@ static NSString* AdViewUserAgent = nil;
     NSDictionary* jDict = [NSDictionary dictionaryWithJavaScriptObject:jEvent];
     if ([jDict count] == 0)
     {
-        // TODO: Notify MRAID of error/failure.
+        [self.mraidBridge sendErrorMessage:@"Unable to parse event data."
+                                 forAction:@"createCalendarEvent"
+                                forWebView:self.webView];
         return;
     }
 
@@ -1698,6 +1727,13 @@ static NSString* AdViewUserAgent = nil;
                                                   animated:YES];
             }
         }
+        else
+        {
+            // User didn't supply a controler to present the event edit controller on.
+            [self.mraidBridge sendErrorMessage:@"Access denied."
+                                     forAction:@"createCalendarEvent"
+                                    forWebView:self.webView];
+        }
     }];
 }
 
@@ -1711,7 +1747,7 @@ static NSString* AdViewUserAgent = nil;
         case EKEventEditViewActionCanceled:
         case EKEventEditViewActionDeleted:
         {
-            [self.mraidBridge sendErrorMessage:@"user canceled"
+            [self.mraidBridge sendErrorMessage:@"User canceled."
                                      forAction:@"createCalendarEvent"
                                     forWebView:self.webView];
             break;
@@ -1729,7 +1765,10 @@ static NSString* AdViewUserAgent = nil;
                                          forAction:@"createCalendarEvent"
                                         forWebView:self.webView];
                 
-                // TODO: Log error.
+                [self logEvent:[NSString stringWithFormat:@"Unable to save calendar event for ad: %@", errorMessage]
+                        ofType:MASTAdViewLogEventTypeError
+                          func:__func__
+                          line:__LINE__];
             }
             break;
         }
@@ -1766,7 +1805,11 @@ static NSString* AdViewUserAgent = nil;
                                  forAction:@"storePicture"
                                 forWebView:self.webView];
         
-        // TODO: SDK Debug/Error log
+        [self logEvent:[NSString stringWithFormat:@"Error obtaining photo requested to save to camera roll: %@", error.description]
+                ofType:MASTAdViewLogEventTypeError
+                  func:__func__
+                  line:__LINE__];
+        
         return;
     }
     
@@ -1807,10 +1850,17 @@ static NSString* AdViewUserAgent = nil;
     MASTMoceanAdResponse* response = [[MASTMoceanAdResponse alloc] initWithXML:content];
     [response parse];
     
-    // TODO: Notify delegate there's no ad available.
-    // Let delegate determine if any current ad should persist.
     if ([response.adDescriptors count] == 0)
+    {
+        // This isn't an "error" since everything is working, there simply are no ads to render.
+        
+        [self logEvent:@"No ad available in response."
+                ofType:MASTAdViewLogEventTypeDebug
+                  func:__func__
+                  line:__LINE__];
+
         return;
+    }
     
     MASTMoceanAdDescriptor* ad = [response.adDescriptors objectAtIndex:0];
     [self renderWithAdDescriptor:ad];
@@ -1885,7 +1935,11 @@ static NSString* AdViewUserAgent = nil;
     
     if ([contentString length] == 0)
     {
-        // TODO: SDK Log/Error, nothing to render.
+        [self logEvent:[NSString stringWithFormat:@"Ad descriptor missing ad content: %@", [ad description]]
+                ofType:MASTAdViewLogEventTypeError
+                  func:__func__
+                  line:__LINE__];
+
         return;
     }
     
@@ -1907,11 +1961,14 @@ static NSString* AdViewUserAgent = nil;
         {
             NSURL* url = [NSURL URLWithString:track];
             
-            MASTAdTracking* track = [[MASTAdTracking alloc] initWithURL:url
-                                                              userAgent:AdViewUserAgent];
-            if (track == nil)
+            MASTAdTracking* tracking = [[MASTAdTracking alloc] initWithURL:url
+                                                                 userAgent:AdViewUserAgent];
+            if (tracking == nil)
             {
-                // TODO: Log error
+                [self logEvent:[NSString stringWithFormat:@"Unable to perform ad tracking with URL: %@", track]
+                        ofType:MASTAdViewLogEventTypeError
+                          func:__func__
+                          line:__LINE__];
             }
         }
     }
@@ -2012,24 +2069,25 @@ static NSString* AdViewUserAgent = nil;
         if (shouldOpen == NO)
             return NO;
         
-        // TODO: When an internal browser is implemented verify that the URL is NOT an iTunes/AppStore URL.
-        // If it is ALWAYS send it to the external openURL else the browser will just whitescreen as it won't
-        // load the store (goofy Apple thing, why they don't support a web based store on iOS is beyond me).
+        BOOL canOpenInternal = YES;
+        if ([request.URL.host hasSuffix:@"itunes.apple.com"])
+        {
+            // TODO: May need to follow all redirects to determine if it's an itunes link.
+            // http://developer.apple.com/library/ios/#qa/qa1629/_index.html
+            
+            canOpenInternal = NO;
+        }
         
-        // TODO: Determine if internal should be used.
-        // If internal used, then load that up and return NO, else fall through with openURL and return NO.
-        
-        if (self.useInternalBrowser)
+        if (canOpenInternal && self.useInternalBrowser)
         {
             [self openAdBrowserWithURL:request.URL];
             
             return NO;
         }
         
-        if ([self.delegate respondsToSelector:@selector(MASTAdViewWillLeaveApplication:)])
-        {
-            [self invokeDelegateSelector:@selector(MASTAdViewWillLeaveApplication:)];
-        }
+        [self invokeDelegateSelector:@selector(MASTAdViewWillLeaveApplication:)];
+        
+        self.skipNextUpdateTick = YES;
         
         [[UIApplication sharedApplication] openURL:request.URL];
         
@@ -2118,8 +2176,10 @@ static NSString* AdViewUserAgent = nil;
 {
     [self resetWebAd];
     
-    // TODO: SDK/Log error
-    
+    [self logEvent:[error description]
+            ofType:MASTAdViewLogEventTypeError
+              func:__func__
+              line:__LINE__];
     
     if ([self.delegate respondsToSelector:@selector(MASTAdView:didFailToReceiveAdWithError:)])
     {
@@ -2139,7 +2199,10 @@ static NSString* AdViewUserAgent = nil;
     
     self.connection = nil;
     
-    // TODO: SDK Debug/Log
+    [self logEvent:[error description]
+            ofType:MASTAdViewLogEventTypeError
+              func:__func__
+              line:__LINE__];
     
     if ([self.delegate respondsToSelector:@selector(MASTAdView:didFailToReceiveAdWithError:)])
     {
@@ -2221,6 +2284,34 @@ static NSString* AdViewUserAgent = nil;
     
     self.connection = nil;
     self.dataBuffer = nil;
+}
+
+#pragma mark - Logging
+
+- (void)logEvent:(NSString*)event ofType:(MASTAdViewLogEventType)type func:(const char*)func line:(int)line
+{
+    NSString* eventString = [NSString stringWithFormat:@"[%d, %s] %@", line, func, event];
+    
+    __block BOOL shouldLog = YES;
+    if ([self.delegate respondsToSelector:@selector(MASTAdView:shouldLogEvent:ofType:)])
+    {
+        [self invokeDelegateBlock:^
+         {
+             shouldLog = [self.delegate MASTAdView:self shouldLogEvent:eventString ofType:type];
+         }];
+    }
+    
+    if (shouldLog == NO)
+        return;
+    
+    NSString* typeString = @"Info";
+    if (type == MASTAdViewLogEventTypeError)
+        typeString = @"Error";
+    
+    NSString* logEvent = [NSString stringWithFormat:@"MASTAdView:%@\n\tType:%@\n\tEvent:%@",
+                          self, typeString, eventString];
+    
+    NSLog(@"%@", logEvent);
 }
 
 #pragma mark - Location Services

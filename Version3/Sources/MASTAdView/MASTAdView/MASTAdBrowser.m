@@ -227,6 +227,18 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
+    if ([request.URL.host hasSuffix:@"itunes.apple.com"])
+    {
+        // TODO: May need to follow all redirects to determine if it's an itunes link.
+        // http://developer.apple.com/library/ios/#qa/qa1629/_index.html
+        
+        [self.delegate MASTAdBrowserWillLeaveApplication:self];
+        
+        [[UIApplication sharedApplication] openURL:[request URL]];
+        
+        return NO;
+    }
+    
     return YES;
 }
 
