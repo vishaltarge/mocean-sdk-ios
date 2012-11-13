@@ -87,10 +87,10 @@
     NSInteger bottomSite = 19829;
     NSInteger bottomZone = 98465;
     
-    super.adView.site = [NSString stringWithFormat:@"%d", topSite];
-    super.adView.zone = [NSString stringWithFormat:@"%d", topZone];
-    self.bottomAdView.site = [NSString stringWithFormat:@"%d", bottomSite];
-    self.bottomAdView.zone = [NSString stringWithFormat:@"%d", bottomZone];
+    super.adView.site = topSite;
+    super.adView.zone = topZone;
+    self.bottomAdView.site = bottomSite;
+    self.bottomAdView.zone = bottomZone;
     
     super.adView.backgroundColor = [UIColor clearColor];
     self.bottomAdView.backgroundColor = [UIColor clearColor];
@@ -152,8 +152,8 @@
     NSInteger site = configController.site;
     NSInteger zone = configController.zone;
     
-    self.bottomAdView.site = [NSString stringWithFormat:@"%d", site];
-    self.bottomAdView.zone = [NSString stringWithFormat:@"%d", zone];
+    self.bottomAdView.site = site;
+    self.bottomAdView.zone = zone;
     
     [self.bottomAdView update];
 }

@@ -346,11 +346,11 @@ typedef enum
 
 /** Specifies the site for the ad network.
  */
-@property (nonatomic, copy) NSString* site;
+@property (nonatomic, assign) NSInteger site;
 
 /** Specifies the zone for the ad network.
  */
-@property (nonatomic, copy) NSString* zone;
+@property (nonatomic, assign) NSInteger zone;
 
 
 ///---------------------------------------------------------------------------------------

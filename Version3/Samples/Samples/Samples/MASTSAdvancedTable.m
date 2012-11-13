@@ -133,8 +133,8 @@ static NSInteger AdViewTag = 123;
     else
     {
         MASTAdView* adView = (MASTAdView*)[cell.contentView viewWithTag:AdViewTag];
-        adView.site = [NSString stringWithFormat:@"%d", self.adConfigController.site];
-        adView.zone = [NSString stringWithFormat:@"%d", self.adConfigController.zone];
+        adView.site = self.adConfigController.site;
+        adView.zone = self.adConfigController.zone;
         [adView update];
     }
     
@@ -167,8 +167,8 @@ static NSInteger AdViewTag = 123;
         {
             MASTAdView* adView = (MASTAdView*)[cell.contentView viewWithTag:AdViewTag];
             
-            adView.site = [NSString stringWithFormat:@"%d", configController.site];
-            adView.zone = [NSString stringWithFormat:@"%d", configController.zone];
+            adView.site = configController.site;
+            adView.zone = configController.zone;
             [adView update];
         }
     }

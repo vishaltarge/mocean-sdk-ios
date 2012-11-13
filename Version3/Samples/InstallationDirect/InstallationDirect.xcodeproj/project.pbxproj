@@ -20,11 +20,12 @@
 		C51F402316269804007009DB /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C51F402116269804007009DB /* MainStoryboard_iPad.storyboard */; };
 		C51F402616269804007009DB /* MASTSMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C51F402516269804007009DB /* MASTSMainViewController.m */; };
 		C51F402916269804007009DB /* MASTSFlipsideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C51F402816269804007009DB /* MASTSFlipsideViewController.m */; };
-		C51F404C1626A743007009DB /* libMASTAdView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C51F40421626A677007009DB /* libMASTAdView.a */; };
 		C51F40511626A78E007009DB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C51F404D1626A78E007009DB /* CoreLocation.framework */; };
 		C51F40521626A78E007009DB /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C51F404E1626A78E007009DB /* EventKit.framework */; };
 		C51F40531626A78E007009DB /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C51F404F1626A78E007009DB /* EventKitUI.framework */; };
 		C51F40541626A78E007009DB /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C51F40501626A78E007009DB /* MessageUI.framework */; };
+		C5B72F7B1652F09F00856916 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5B72F7A1652F09F00856916 /* ImageIO.framework */; };
+		C5B72F7C1652F0A700856916 /* libMASTAdView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C51F40421626A677007009DB /* libMASTAdView.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		C51F404E1626A78E007009DB /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		C51F404F1626A78E007009DB /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
 		C51F40501626A78E007009DB /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		C5B72F7A1652F09F00856916 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,7 +85,8 @@
 				C51F40531626A78E007009DB /* EventKitUI.framework in Frameworks */,
 				C51F40541626A78E007009DB /* MessageUI.framework in Frameworks */,
 				C51F40511626A78E007009DB /* CoreLocation.framework in Frameworks */,
-				C51F404C1626A743007009DB /* libMASTAdView.a in Frameworks */,
+				C5B72F7B1652F09F00856916 /* ImageIO.framework in Frameworks */,
+				C5B72F7C1652F0A700856916 /* libMASTAdView.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,6 +121,7 @@
 				C51F404F1626A78E007009DB /* EventKitUI.framework */,
 				C51F40501626A78E007009DB /* MessageUI.framework */,
 				C51F404D1626A78E007009DB /* CoreLocation.framework */,
+				C5B72F7A1652F09F00856916 /* ImageIO.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

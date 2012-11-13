@@ -48,8 +48,8 @@
     NSInteger site = 19829;
     NSInteger zone = 98465;
     
-    super.adView.site = [NSString stringWithFormat:@"%d", site];
-    super.adView.zone = [NSString stringWithFormat:@"%d", zone];
+    super.adView.site = site;
+    super.adView.zone = zone;
     
     super.adView.backgroundColor = [UIColor clearColor];
     

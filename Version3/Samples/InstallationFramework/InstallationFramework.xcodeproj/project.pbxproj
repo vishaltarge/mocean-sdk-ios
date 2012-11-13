@@ -24,6 +24,7 @@
 		C51F40991626C2E1007009DB /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C51F40951626C2E1007009DB /* EventKit.framework */; };
 		C51F409A1626C2E1007009DB /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C51F40961626C2E1007009DB /* EventKitUI.framework */; };
 		C51F409B1626C2E1007009DB /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C51F40971626C2E1007009DB /* MessageUI.framework */; };
+		C5B72F6E1652F05300856916 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5B72F6D1652F05300856916 /* ImageIO.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		C51F40951626C2E1007009DB /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		C51F40961626C2E1007009DB /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
 		C51F40971626C2E1007009DB /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		C5B72F6D1652F05300856916 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				C51F409A1626C2E1007009DB /* EventKitUI.framework in Frameworks */,
 				C51F409B1626C2E1007009DB /* MessageUI.framework in Frameworks */,
 				C51F40981626C2E1007009DB /* CoreLocation.framework in Frameworks */,
+				C5B72F6E1652F05300856916 /* ImageIO.framework in Frameworks */,
 				C51F40931626C2AE007009DB /* MASTAdView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -97,6 +100,7 @@
 				C51F40961626C2E1007009DB /* EventKitUI.framework */,
 				C51F40971626C2E1007009DB /* MessageUI.framework */,
 				C51F40941626C2E1007009DB /* CoreLocation.framework */,
+				C5B72F6D1652F05300856916 /* ImageIO.framework */,
 				C51F40921626C2AE007009DB /* MASTAdView.framework */,
 			);
 			name = Frameworks;
@@ -336,6 +340,7 @@
 				C51F408E1626C070007009DB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

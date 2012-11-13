@@ -65,8 +65,8 @@
         NSInteger site = super.adConfigController.site;
         NSInteger zone = super.adConfigController.zone;
         
-        self.interstitialAdView.site = [NSString stringWithFormat:@"%d", site];
-        self.interstitialAdView.zone = [NSString stringWithFormat:@"%d", zone];
+        self.interstitialAdView.site = site;
+        self.interstitialAdView.zone = zone;
         
         self.interstitialAdView.delegate = self;
         [self.interstitialAdView showCloseButton:YES afterDelay:3];
@@ -87,8 +87,8 @@
     NSInteger site = configController.site;
     NSInteger zone = configController.zone;
     
-    self.interstitialAdView.site = [NSString stringWithFormat:@"%d", site];
-    self.interstitialAdView.zone = [NSString stringWithFormat:@"%d", zone];
+    self.interstitialAdView.site = site;
+    self.interstitialAdView.zone = zone;
     
     [self.interstitialAdView update];
 }

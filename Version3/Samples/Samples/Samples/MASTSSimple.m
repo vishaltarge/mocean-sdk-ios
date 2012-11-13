@@ -173,8 +173,8 @@
     NSInteger site = configController.site;
     NSInteger zone = configController.zone;
     
-    self.adView.site = [NSString stringWithFormat:@"%d", site];
-    self.adView.zone = [NSString stringWithFormat:@"%d", zone];
+    self.adView.site = site;
+    self.adView.zone = zone;
     
     [self.adView update];
 }

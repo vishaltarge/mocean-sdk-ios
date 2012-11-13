@@ -21,8 +21,8 @@
     NSInteger site = 19829;
     NSInteger zone = 146951;
     
-    super.adView.site = [NSString stringWithFormat:@"%d", site];
-    super.adView.zone = [NSString stringWithFormat:@"%d", zone];
+    super.adView.site = site;
+    super.adView.zone = zone;
     
     super.adConfigController.site = site;
     super.adConfigController.zone = zone;

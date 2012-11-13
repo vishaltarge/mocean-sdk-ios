@@ -231,7 +231,7 @@ static NSString* AdViewUserAgent = nil;
             return;
     }
     
-    if (([self.site length] == 0) || ([self.zone length]== 0))
+    if ((self.site == 0) || (self.zone == 0))
     {
         [self logEvent:@"Can not update without a proper site and zone."
                 ofType:MASTAdViewLogEventTypeError
@@ -276,8 +276,8 @@ static NSString* AdViewUserAgent = nil;
     [args setValue:[MASTAdView version] forKey:@"version"];
     [args setValue:@"1" forKey:@"count"];
     [args setValue:@"3" forKey:@"key"];
-    [args setValue:self.site forKey:@"site"];
-    [args setValue:self.zone forKey:@"zone"];
+    [args setValue:[NSString stringWithFormat:@"%d", self.site] forKey:@"site"];
+    [args setValue:[NSString stringWithFormat:@"%d", self.zone] forKey:@"zone"];
     
     if (self.test)
     {
@@ -2025,7 +2025,12 @@ static NSString* AdViewUserAgent = nil;
     {
         NSString* l = [[request URL] query];
         NSString* logString = (__bridge_transfer NSString*)CFURLCreateStringByReplacingPercentEscapes(NULL, (__bridge CFStringRef)l, CFSTR(""));
-        NSLog(@"UIWebView console: %@", logString);
+        
+        [self logEvent:[NSString stringWithFormat:@"UIWebView console: %@", logString]
+                ofType:MASTAdViewLogEventTypeDebug
+                  func:__func__
+                  line:__LINE__];
+        
         return NO;
     }
     
