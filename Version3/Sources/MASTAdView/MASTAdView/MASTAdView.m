@@ -2075,7 +2075,14 @@ static NSString* AdViewUserAgent = nil;
             return NO;
         
         BOOL canOpenInternal = YES;
-        if ([request.URL.host hasSuffix:@"itunes.apple.com"])
+        
+        if ([[request.URL.scheme lowercaseString] hasPrefix:@"http"])
+        {
+            canOpenInternal = NO;
+        }
+        
+        NSString* host = [request.URL.host lowercaseString];
+        if ([host hasSuffix:@"itunes.apple.com"] || [host hasSuffix:@"phobos.apple.com"])
         {
             // TODO: May need to follow all redirects to determine if it's an itunes link.
             // http://developer.apple.com/library/ios/#qa/qa1629/_index.html

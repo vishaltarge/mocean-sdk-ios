@@ -68,11 +68,16 @@ typedef enum
 @optional
 
 /** Sent after an ad has been downloaded and rendered.
+ 
+ @param adView The MASTAdView instance sending the message.
  */
 - (void)MASTAdViewDidRecieveAd:(MASTAdView*)adView;
 
 
 /** Sent if an error was encoutered while donloading or rendering an ad.
+ 
+ @param adView The MASTAdView instance sending the message.
+ @param error The error encountered while attempting to receive or render the ad.
  */
 - (void)MASTAdView:(MASTAdView*)adView didFailToReceiveAdWithError:(NSError*)error;
 
@@ -81,6 +86,8 @@ typedef enum
  
  Not implementing this method behaves as if `YES` was returned.
  
+ @param adView The MASTAdView instance sending the message.
+ @param url The URL to open.
  @return `YES` Allow the SDK to open the link with UIApplication's openURL: or the internal browser.
  @return `NO` Ignore the request
  */
@@ -94,6 +101,8 @@ typedef enum
  collapse expanded or resized ads.
  
  The common use case is for interstitial ads so the developer will know when to call closeInterstitial.
+ 
+ @param adView The MASTAdView instance sending the message.
  */
 - (void)MASTAdViewCloseButtonPressed:(MASTAdView*)adView;
 
@@ -108,6 +117,7 @@ typedef enum
  @warning Developers should take care of adding action handlers to the button as it will 
  be reused and may persist beyond the handlers lifetime.
  
+ @param adView The MASTAdView instance sending the message.
  @return UIButton instance.
  */
 - (UIButton*)MASTAdViewCustomCloseButton:(MASTAdView*)adView;
@@ -117,6 +127,8 @@ typedef enum
  
  The ad view itself is not expanded, instead a new window is displayed with the
  expanded ad content.
+ 
+ @param adView The MASTAdView instance sending the message.
  */
 - (void)MASTAdViewWillExpand:(MASTAdView*)adView;
 
@@ -125,6 +137,8 @@ typedef enum
  
  The ad view itself is not expanded, instead a new window is displayed with the
  expanded ad content.
+ 
+ @param adView The MASTAdView instance sending the message.
  */
 - (void)MASTAdViewDidExpand:(MASTAdView*)adView;
 
@@ -134,6 +148,7 @@ typedef enum
  The ad view itself is not resized, instead a new window is displayed with the
  resized ad content.
  
+  @param adView The MASTAdView instance sending the message.
   @param frame The frame relative to the window where the resized content is displayed.
  */
 - (void)MASTAdView:(MASTAdView *)adView willResizeToFrame:(CGRect)frame;
@@ -144,22 +159,29 @@ typedef enum
  The ad view itself is not resized, instead a new window is displayed with the
  resized ad content.
  
+ @param adView The MASTAdView instance sending the message.
  @param frame The frame relative to the window where the resized content is displayed.
  */
 - (void)MASTAdView:(MASTAdView *)adView didResizeToFrame:(CGRect)frame;
 
 
 /** Sent before ad content is collaped if expanded or resized.
+ 
+ @param adView The MASTAdView instance sending the message.
  */
 - (void)MASTAdViewWillCollapse:(MASTAdView*)adView;
 
 
 /** Sent after ad content is collaped if expanded or resized.
+ 
+ @param adView The MASTAdView instance sending the message.
  */
 - (void)MASTAdViewDidCollapse:(MASTAdView*)adView;
 
 
 /** Sent before the ad opens a URL that invokes another application (ex: Safari or App Store).
+ 
+ @param adView The MASTAdView instance sending the message.
  */
 - (void)MASTAdViewWillLeaveApplication:(MASTAdView*)adView;
 
@@ -169,6 +191,7 @@ typedef enum
  Logging in the SDK is done with NSLog().  Implement and return `NO` to log to application specific
  log files.
  
+ @param adView The MASTAdView instance sending the message.
  @param event The log event to log.
  @param type The event type.
  @return `YES` Log the event to NSLog().
@@ -184,6 +207,7 @@ typedef enum
  
  This message is not sent of the device does not support SMS.
  
+ @param adView The MASTAdView instance sending the message.
  @return `NO` Informs richmedia ads that SMS is not supported.
  @return `YES` Informs richmedia ads that SMS is supported.
  */
@@ -197,6 +221,7 @@ typedef enum
  
  This message is not sent of the device does not support phone dialing.
  
+ @param adView The MASTAdView instance sending the message.
  @return `NO` Informs richmedia ads that phone calls is not supported.
  @return `YES` Informs richmedia ads that phone calls is supported.
  */
@@ -210,6 +235,7 @@ typedef enum
  
  @see MASTAdView:shouldSaveCalendarEvent:inEventStore:
  
+ @param adView The MASTAdView instance sending the message.
  @return `NO` Informs richmedia ads that calendar access is not supported.
  @return `YES` Informs richmedia ads that calendar access is supported.
  */
@@ -223,6 +249,7 @@ typedef enum
  
  @see MASTAdView:shouldSavePhotoToCameraRoll:
  
+ @param adView The MASTAdView instance sending the message.
  @return `NO` Informs richmedia ads that storing pictures is not supported.
  @return `YES` Informs richmedia ads that storing pictures is supported.
  */
@@ -234,6 +261,7 @@ typedef enum
  This can be implemented to invoke a third party ad SDK to render the requested content.  The adView 
  does no further processing of the third party request.
  
+ @param adView The MASTAdView instance sending the message.
  @param properties Properties of the request.
  @param params Params for the third party SDK.
  */
@@ -246,6 +274,8 @@ typedef enum
  
  Developers can use an application player and return NO to play the video directly.
  
+ @param adView The MASTAdView instance sending the message.
+ @param videoURL The URL string of the video to play.
  @return `NO` Do not open the URL and play the video.
  @return `YES` Invoke UIApplication openURL: to play the video.
  */
@@ -257,6 +287,9 @@ typedef enum
  Application developers can implement the dialog directly if desired by capturing the event
  and eventStore and returning `nil`.  If not implemented the SDK will ignore the request.
  
+ @param adView The MASTAdView instance sending the message.
+ @param event The event to save.
+ @param eventStore the store to save the event too.
  @return A view controller instance that will be the base of presenting the event edit view
  controller to allow the user to edit and save or cancel the calendar event.
  */
@@ -273,6 +306,8 @@ typedef enum
  prompted by iOS on the first attempt at accessing the camera roll.  If the user selects No then
  pictures will not be saved to the camera roll even if this method is implemented and returns `YES`.
  
+ @param adView The MASTAdView instance sending the message.
+ @param image The image to save.
  @return `NO` Do not save the image to the camera roll.
  @return `YES` Attempt to save the image to the camera roll.
  */
@@ -284,10 +319,13 @@ typedef enum
  Applications can use this to react to various events if necessary but the SDK will have
  already processed them as necessary (expanded in result of an expand request).
  
- @warning *Note:* Developers should not attempt to implement the specified event.  The SDK will
+ @warning Developers should not attempt to implement the specified event.  The SDK will
  have already processed the event with the SDK implementation.
  
  See the IAB MRAID 2 specification on the event types.
+ 
+ @param adView The MASTAdView instance sending the message.
+ @param event The NSURLRequest containing the event request.
  */
 - (void)MASTAdView:(MASTAdView *)adView didProcessRichmediaRequest:(NSURLRequest*)event;
 
@@ -313,6 +351,8 @@ typedef enum
  The view can be added to other views as with any other UIView object.  The frame is
  used to determine the size of the ad in the requested to the ad server.  If not known
  at initialization time, ensure that the view's frame is set prior to calling update.
+ 
+ @param frame The area to place the view.
  */
 - (id)initWithFrame:(CGRect)frame;
 
@@ -371,7 +411,7 @@ typedef enum
  
  For more information see http://developer.moceanmobile.com/Mocean_Ad_Request_API.
  
- @warning *Note:* All parameter key and values must be NSString instances.
+ @warning All parameter key and values must be NSString instances.
  */
 @property (nonatomic, readonly) NSMutableDictionary* adRequestParameters;
 
@@ -400,6 +440,8 @@ typedef enum
 
 /** Issues an immediate ad update and cancels any pending ad update.
  Will automatically update every interval seconds.
+ 
+ @param interval The delay between requesting updates after the initial update.
  */
 - (void)updateWithTimeInterval:(NSTimeInterval)interval;
 
@@ -437,6 +479,8 @@ typedef enum
 /** Shows the interstitial and automatically closes after the specified duration.
  
  Can only be used if the instance was initialized with initInterstitial.
+ 
+ @param duration The amount of time to display the interstitial before closing it.
  */
 - (void)showInterstitialWithDuration:(NSTimeInterval)duration;
 
@@ -463,8 +507,8 @@ typedef enum
  The setting applies for all subsequent updates.  The button can be customized using the 
  MASTAdViewCustomCloseButton: delegate method.
  
- @parameter showCloseButton Set to `YES` to display the close button after rendering ads.
- @parameter afterDelay The time to delay showing the close button after rendering the ad.  A
+ @param showCloseButton Set to `YES` to display the close button after rendering ads.
+ @param delay The time to delay showing the close button after rendering the ad.  A
  value of 0 will show the button immediately.
  */
 - (void)showCloseButton:(BOOL)showCloseButton afterDelay:(NSTimeInterval)delay;
@@ -499,25 +543,28 @@ typedef enum
  When enabling location detection with this method the most power efficient 
  options are used based on the devices capabilities.  To specify more control
  over location options enable with setLocationDetectionEnabledWithPurpose:...
+ 
+ @param enabled `YES` to enable location detection with defaults, `NO` to disable location detection.
  */
 - (void)setLocationDetectionEnabled:(BOOL)enabled;
 
 
-/** Used to enable location detection with control on over how the location is determined.
+/** Used to enable location detection with control over how the location is acquired.
 
- @param significantUpdating If set to `YES` uses the startMonitoringSignificantLocationChanges 
- if available on the device.  If not available then this parameter is ignored.  When available
- and set to `YES` this parameter causes the distanceFilter and desiredAccuracy parameters to 
- be ignored.  If set to `NO` then startUpdatingLocation is used and the distanceFilter and 
- desiredAccuracy parameters are applied.
- 
- A call to reset will stop location detection.
- 
- @see CLLocationManager for reference on the purpose, distanceFilter and desiredAccuracy parameters.
+ @see [CLLocationManager](http://developer.apple.com/library/ios/#documentation/CoreLocation/Reference/CLLocationManager_Class/CLLocationManager/CLLocationManager.html) for reference on the purpose, distanceFilter and desiredAccuracy parameters.
  
  @warning It is possible to configure location detection to use significant power and reduce
  battery life of the device.  For most applications where location detection is desired use 
- setLocationDetectionEnabled: for optimal battery life based on the devices capabilities.
+ setLocationDetectionEnabled: for optimal battery life based on the device's capabilities.
+ 
+ @param purpose Message to present to the user as to why location is being used.  Can be nil.
+ @param significantUpdating If set to `YES` uses the startMonitoringSignificantLocationChanges
+ if available on the device.  If not available then this parameter is ignored.  When available
+ and set to `YES` this parameter causes the distanceFilter and desiredAccuracy parameters to
+ be ignored.  If set to `NO` then startUpdatingLocation is used and the distanceFilter and
+ desiredAccuracy parameters are applied.
+ @param distanceFilter Amount of distance used to trigger updates.
+ @param desiredAccuracy Acuracy needed for updates.
  */
 - (void)setLocationDetectionEnabledWithPupose:(NSString*)purpose
                           significantUpdating:(BOOL)significantUpdating
@@ -575,14 +622,14 @@ typedef enum
 
 /** Instructs the ad server to return test ads for the configured site/zone.
  
- @warning *Note:* This should never be set to `YES` for application releases.
+ @warning This should never be set to `YES` for application releases.
  */
 @property (nonatomic, assign) BOOL test;
 
 
 /** Specifies the log level.  All logging is via NSLog().
  
- @see MASTAdView:shouldLogEvent:ofType:
+ @see [MASTAdViewDelegate MASTAdView:shouldLogEvent:ofType:]
  */
 @property (nonatomic, assign) MASTAdViewLogEventType logLevel;
 
@@ -593,7 +640,9 @@ typedef enum
  ad set with this method.  Call reset prior to calling this if update was used
  to download an ad from the ad network.
  
- @warning *Note:*: This not intended to be used in application releases.
+ @warning This not intended to be used in application releases.
+ 
+ @param adDescriptor The ad descriptor to render.
  */
 - (void)renderWithAdDescriptor:(MASTMoceanAdDescriptor*)adDescriptor;
 

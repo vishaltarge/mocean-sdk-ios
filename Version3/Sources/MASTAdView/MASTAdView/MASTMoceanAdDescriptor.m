@@ -20,15 +20,33 @@
 
 @synthesize attributes, parentDelegate, elementStack, elementValues, stringBuffer;
 
-- (id)initWithParser:(NSXMLParser*)parser attributes:(NSDictionary*)a
++ (id)descriptorWithRichMediaContent:(NSString*)content
+{
+    MASTMoceanAdDescriptor* descriptor = [[MASTMoceanAdDescriptor alloc] initWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:@"richmedia", @"type", nil]];
+    
+    [[descriptor elementValues] setValue:content forKey:@"content"];
+    
+    return descriptor;
+}
+
+- (id)initWithAttributes:(NSDictionary*)a
 {
     self = [super init];
     if (self)
     {
         self.attributes = a;
-        self.parentDelegate = parser.delegate;
         self.elementStack = [NSMutableArray new];
         self.elementValues = [NSMutableDictionary new];
+    }
+    return self;
+}
+
+- (id)initWithParser:(NSXMLParser*)parser attributes:(NSDictionary*)a
+{
+    self = [self initWithAttributes:a];
+    if (self)
+    {
+        self.parentDelegate = parser.delegate;
         parser.delegate = self;
     }
     return self;

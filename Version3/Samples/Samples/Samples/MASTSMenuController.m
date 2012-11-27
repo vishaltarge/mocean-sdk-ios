@@ -21,6 +21,7 @@
 #import "MASTSAdvancedTable.h"
 #import "MASTSAdvancedTopAndBottom.h"
 #import "MASTSCustom.h"
+#import "MASTSCustomLocal.h"
 #import "MASTSDelegateGeneric.h"
 #import "MASTSDelegateMRAID.h"
 #import "MASTSDelegateThirdParty.h"
@@ -98,7 +99,7 @@
         case 1:
             return 4;
         case 2:
-            return 1;
+            return 2;
         case 3:
             return 3;
         case 4:
@@ -192,7 +193,15 @@
         }
         case 2:
         {
-            label = @"Custom Ad Setup";
+            switch (indexPath.row)
+            {
+                case 0:
+                    label = @"Custom Ad Setup";
+                    break;
+                case 1:
+                    label = @"Local Ad";
+                    break;
+            }
             break;
         }
         case 3:
@@ -289,6 +298,9 @@
             {
                 case 0:
                     testController = [[MASTSCustom new] autorelease];
+                    break;
+                case 1:
+                    testController = [[MASTSCustomLocal new] autorelease];
                     break;
             }
             break;

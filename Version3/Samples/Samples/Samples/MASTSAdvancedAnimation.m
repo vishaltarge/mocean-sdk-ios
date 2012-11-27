@@ -91,4 +91,5 @@
     [self animateHideAd];
     [super updateAdWithConfig:configController];
 }
+
 @end

@@ -13,11 +13,13 @@
 @interface MASTAdBrowser () <UIWebViewDelegate>
 @property (nonatomic, strong) UIWebView* webView;
 @property (nonatomic, strong) UIToolbar* toolbar;
+@property (nonatomic, strong) UIBarButtonItem* backButton;
+@property (nonatomic, strong) UIBarButtonItem* forwardButton;
 @end
 
 @implementation MASTAdBrowser
 
-@synthesize delegate, URL;
+@synthesize delegate, URL, backButton, forwardButton;
 
 - (void)dealloc
 {
@@ -76,6 +78,8 @@
                                                action:@selector(toolbarBack:)];
         
         [items addObject:item];
+        self.backButton = item;
+        self.backButton.enabled = NO;
         
         item = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                              target:nil
@@ -98,6 +102,8 @@
                                                target:self
                                                action:@selector(toolbarForward:)];
         [items addObject:item];
+        self.forwardButton = item;
+        self.forwardButton.enabled = NO;
         
         item = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                              target:nil
@@ -132,6 +138,7 @@
         self.webView = [[UIWebView alloc] initWithFrame:self.view.frame];
         self.webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         
+        self.webView.delegate = self;
         self.webView.allowsInlineMediaPlayback = YES;
         self.webView.mediaPlaybackRequiresUserAction = YES;
     }
@@ -152,6 +159,12 @@
     
     if (self.webView.request == nil)
         [self load];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    self.backButton.enabled = self.webView.canGoBack;
+    self.forwardButton.enabled = self.webView.canGoForward;
 }
 
 - (void)didReceiveMemoryWarning
@@ -187,22 +200,29 @@
 - (void)toolbarBack:(id)sender
 {
     [self.webView goBack];
+    
+    self.backButton.enabled = self.webView.canGoBack;
+    self.forwardButton.enabled = self.webView.canGoForward;
 }
 
 - (void)toolbarForward:(id)sender
 {
     [self.webView goForward];
+    
+    self.backButton.enabled = self.webView.canGoBack;
+    self.forwardButton.enabled = self.webView.canGoForward;
 }
 
 - (void)toolbarReload:(id)sender
 {
     [self.webView reload];
+    
+    self.backButton.enabled = self.webView.canGoBack;
+    self.forwardButton.enabled = self.webView.canGoForward;
 }
 
 - (void)toolbarAction:(id)sender
 {
-    // TODO: Prompt user with action sheet vs. just jumping to Safari.
-    
     [self.delegate MASTAdBrowserWillLeaveApplication:self];
     
     [[UIApplication sharedApplication] openURL:[self.webView.request URL]];
@@ -217,17 +237,25 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    
+    self.backButton.enabled = self.webView.canGoBack;
+    self.forwardButton.enabled = self.webView.canGoForward;
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
+    self.backButton.enabled = self.webView.canGoBack;
+    self.forwardButton.enabled = self.webView.canGoForward;
+    
     [self.delegate MASTAdBrowser:self didFailLoadWithError:error];
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    if ([request.URL.host hasSuffix:@"itunes.apple.com"])
+    NSString* host = [request.URL.host lowercaseString];
+
+    if (([[request.URL.scheme lowercaseString] hasPrefix:@"http"] == NO) ||
+        [host hasSuffix:@"itunes.apple.com"] ||
+        [host hasSuffix:@"phobos.apple.com"])
     {
         // TODO: May need to follow all redirects to determine if it's an itunes link.
         // http://developer.apple.com/library/ios/#qa/qa1629/_index.html

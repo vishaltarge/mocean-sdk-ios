@@ -45,6 +45,7 @@
 		C54969F115434EF7006F9444 /* MASTSLogController.m in Sources */ = {isa = PBXBuildFile; fileRef = C54969F015434EF7006F9444 /* MASTSLogController.m */; };
 		C57D7BB51648A4F80084B896 /* MASTSSimpleAnimatedGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = C57D7BB41648A4F80084B896 /* MASTSSimpleAnimatedGIF.m */; };
 		C5ACCB7D1610EDBD0018E0AD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5ACCB7C1610EDBD0018E0AD /* CoreGraphics.framework */; };
+		C5B722D8165C0A3E0061F385 /* MASTSCustomLocal.m in Sources */ = {isa = PBXBuildFile; fileRef = C5B722D7165C0A3E0061F385 /* MASTSCustomLocal.m */; };
 		C5D30CD916123DE800CA45A3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C5D30CD716123DE000CA45A3 /* Default-568h@2x.png */; };
 		C5D30CFA1612558A00CA45A3 /* MASTSSimpleInterstitialDirect.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D30CF91612558A00CA45A3 /* MASTSSimpleInterstitialDirect.m */; };
 		C5D30D7C161A1C9800CA45A3 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D30D7B161A1C9800CA45A3 /* EventKitUI.framework */; };
@@ -133,6 +134,8 @@
 		C57D7BB31648A4F80084B896 /* MASTSSimpleAnimatedGIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSSimpleAnimatedGIF.h; sourceTree = "<group>"; };
 		C57D7BB41648A4F80084B896 /* MASTSSimpleAnimatedGIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSSimpleAnimatedGIF.m; sourceTree = "<group>"; };
 		C5ACCB7C1610EDBD0018E0AD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		C5B722D6165C0A3E0061F385 /* MASTSCustomLocal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSCustomLocal.h; sourceTree = "<group>"; };
+		C5B722D7165C0A3E0061F385 /* MASTSCustomLocal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSCustomLocal.m; sourceTree = "<group>"; };
 		C5D30CD716123DE000CA45A3 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		C5D30CE3161251E600CA45A3 /* MASTAdView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MASTAdView.xcodeproj; path = ../../Sources/MASTAdView/MASTAdView.xcodeproj; sourceTree = "<group>"; };
 		C5D30CF81612558A00CA45A3 /* MASTSSimpleInterstitialDirect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSSimpleInterstitialDirect.h; sourceTree = "<group>"; };
@@ -291,6 +294,8 @@
 				3C91DDD2153F737400FCF6CD /* MASTSCustom.m */,
 				3C91DDD3153F737500FCF6CD /* MASTSCustomConfigController.h */,
 				3C91DDD4153F737500FCF6CD /* MASTSCustomConfigController.m */,
+				C5B722D6165C0A3E0061F385 /* MASTSCustomLocal.h */,
+				C5B722D7165C0A3E0061F385 /* MASTSCustomLocal.m */,
 			);
 			name = Custom;
 			sourceTree = "<group>";
@@ -445,6 +450,7 @@
 				C54969F115434EF7006F9444 /* MASTSLogController.m in Sources */,
 				C5D30CFA1612558A00CA45A3 /* MASTSSimpleInterstitialDirect.m in Sources */,
 				C57D7BB51648A4F80084B896 /* MASTSSimpleAnimatedGIF.m in Sources */,
+				C5B722D8165C0A3E0061F385 /* MASTSCustomLocal.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

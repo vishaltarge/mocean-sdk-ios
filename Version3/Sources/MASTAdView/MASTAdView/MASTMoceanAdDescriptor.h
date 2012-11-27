@@ -9,6 +9,8 @@
 
 @interface MASTMoceanAdDescriptor : NSObject <NSXMLParserDelegate>
 
++ (id)descriptorWithRichMediaContent:(NSString*)content;
+
 - (id)initWithParser:(NSXMLParser*)parser attributes:(NSDictionary*)attributes;
 
 @property (nonatomic, readonly) NSString* type;
