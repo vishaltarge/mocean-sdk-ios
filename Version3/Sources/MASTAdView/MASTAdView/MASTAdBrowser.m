@@ -19,7 +19,8 @@
 
 @implementation MASTAdBrowser
 
-@synthesize delegate, URL, backButton, forwardButton;
+@synthesize delegate, URL;
+@synthesize webView, toolbar, backButton, forwardButton;
 
 - (void)dealloc
 {
