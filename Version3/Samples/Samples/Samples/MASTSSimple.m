@@ -137,9 +137,7 @@
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-    // Give the app time to finish rotating then update the ad since it's frame will be different
-    // based on the autoresizingMask supplied in loadView.
-    [self.adView performSelector:@selector(update) withObject:nil afterDelay:.5];
+
 }
 
 #pragma mark -

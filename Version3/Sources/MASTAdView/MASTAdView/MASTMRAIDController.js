@@ -17,7 +17,7 @@ console.error = console.log;
 
 window.mraid_init = function()
 {
-    console.log('mraid_init');
+    console.log("mraid_init");
     
     var mraid = window.mraid = {};
     
@@ -49,8 +49,6 @@ window.mraid_init = function()
     // MAST SDK
     mraid.nativeInvoke = function(call)
     {
-        console.log("nativeInvoke");
-        
         var iframe = document.createElement("IFRAME");
         iframe.setAttribute("src", call);
         document.documentElement.appendChild(iframe);
@@ -68,8 +66,6 @@ window.mraid_init = function()
         ERROR                   :"error",
         STATE_CHANGE            :"stateChange",
         VIEWABLE_CHANGE         :"viewableChange",
-        CALENDAR_EVENT_ADDED    :"calendarEventAdded",
-        PICTURE_ADDED           :"pictureAdded",
         SIZE_CHANGE             :"sizeChange"
     };
     
@@ -207,7 +203,7 @@ window.mraid_init = function()
     // MRAID
     mraid.supports = function(feature)
     {
-        console.log("supports:" + feature);
+        console.log("supports");
         
         return supportedFeatures[feature];
     };
@@ -314,6 +310,8 @@ window.mraid_init = function()
     // MRAID
     mraid.open = function(url)
     {
+        console.log("open");
+        
         var invoke = "mraid://open?url=" + encodeURIComponent(url);
         mraid.nativeInvoke(invoke);
     };
@@ -327,7 +325,24 @@ window.mraid_init = function()
     // MRAID
     mraid.close = function()
     {
+        console.log("close");
+        
         var invoke = "mraid://close";
+        mraid.nativeInvoke(invoke);
+    };
+    
+    
+    //////////
+    //
+    // video
+    //
+    
+    // MRAID
+    mraid.playVideo = function(url)
+    {
+        console.log("playVideo");
+        
+        var invoke = "mraid://playVideo?url=" + encodeURIComponent(url);
         mraid.nativeInvoke(invoke);
     };
     
@@ -349,7 +364,7 @@ window.mraid_init = function()
     {
         console.log("setExpandProperties");
         
-        var writableFields = ["width", "height", "useCustomClose", "allowOrientationChange", "forceOrientation"];
+        var writableFields = ["width", "height", "useCustomClose"];
         
         for (wf in writableFields)
         {
@@ -502,6 +517,8 @@ window.mraid_init = function()
     // MRAID
     mraid.getOrientationProperties = function()
     {
+        console.log("getOrientationProperties");
+        
         return orientationProperties;
     };
     
@@ -569,12 +586,10 @@ window.mraid_init = function()
     // MRAID
     mraid.getCurrentPosition = function()
     {
-        console.log("getCurrentPosition1");
+        console.log("getCurrentPosition");
         
         var invoke = "mraid://updateCurrentPosition";
         mraid.nativeInvoke(invoke);
-        
-        console.log("getCurrentPosition2");
         
         return currentPosition;
     };
@@ -643,24 +658,27 @@ window.mraid_init = function()
     // MRAID
     mraid.storePicture = function(url)
     {
+        console.log("storePicture");
+        
         var invoke = "mraid://storePicture?url=" + encodeURIComponent(url);
         mraid.nativeInvoke(invoke);
     };
     
-    // MAST SDK
-    mraid.firePictureAddedEvent = function(success)
+    
+    //////////
+    //
+    // calendar
+    //
+    
+    // MRAID
+    mraid.createCalendarEvent = function(parameters)
     {
-        console.log("firePictureAddedEvent handler");
+        console.log("createCalendarEvent");
         
-        var handlers = listeners[EVENTS.PICTURE_ADDED];
-        if (handlers)
-        {
-            for (var i = 0; i < handlers.length; ++i)
-            {
-                handlers[i](success);
-            }
-        }
+        var invoke = "mraid://createCalendarEvent?event=" + encodeURIComponent(JSON.stringify(parameters));
+        mraid.nativeInvoke(invoke);
     };
+    
 };
 
 if (!window.mraid)

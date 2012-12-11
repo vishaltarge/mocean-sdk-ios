@@ -1028,8 +1028,6 @@ static NSString* AdViewUserAgent = nil;
 // Background thread
 - (void)loadImageAd:(MASTMoceanAdDescriptor*)ad
 {
-    static int foo = 0;
-
     @autoreleasepool
     {
         NSError* error = nil;
@@ -1053,7 +1051,6 @@ static NSString* AdViewUserAgent = nil;
             
             return;
         }
-        
 
         // This can be either a single image to render or a array with two elements,
         // the first the list of images and the second a list of intervals.
@@ -1102,8 +1099,6 @@ static NSString* AdViewUserAgent = nil;
         self.adDescriptor = ad;
         [self performSelectorOnMainThread:@selector(renderImageAd:) withObject:renderImageArg waitUntilDone:NO];
     }
-    
-    ++foo;
 }
 
 #pragma mark - Text Ad Handling
@@ -1148,7 +1143,7 @@ static NSString* AdViewUserAgent = nil;
     
     NSString* mraidScript = [[NSString alloc] initWithData:jsData encoding:NSUTF8StringEncoding];
     
-    NSString* htmlContent = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"user-scalable=0;\"/><script>%@</script><style>body{margin:0;padding:0;}</style></head><body>%@</body></html>", mraidScript, mraidHtml];
+    NSString* htmlContent = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"user-scalable=0;\"/><script>%@</script><style>*:not(input){-webkit-touch-callout:none;-webkit-user-select:none;}body{margin:0;padding:0;}</style></head><body>%@</body></html>", mraidScript, mraidHtml];
 
     self.mraidBridge = [MASTMRAIDBridge new];
     self.mraidBridge.delegate = self;
@@ -1163,6 +1158,7 @@ static NSString* AdViewUserAgent = nil;
     self.webView.allowsInlineMediaPlayback = YES;
     
     [self.webView disableScrolling];
+    [self.webView disableSelection];
     
     switch (self.placementType)
     {
@@ -1198,7 +1194,7 @@ static NSString* AdViewUserAgent = nil;
     }
     
     // Phone defaults to availability if developer doesn't implement check.
-    __block BOOL phoneAvailable = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"tel://"]];
+    __block BOOL phoneAvailable = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"tel:"]];
     if (phoneAvailable && ([self.delegate respondsToSelector:@selector(MASTAdViewSupportsPhone:)] == YES))
     {
         [self invokeDelegateBlock:^
@@ -1218,7 +1214,7 @@ static NSString* AdViewUserAgent = nil;
     }
     
     // Store picture defaults to disabled if check not implemented by developer.
-    __block BOOL storePictureAvailable = [self.delegate respondsToSelector:@selector(MASTAdViewSupportsstorePicture:)];
+    __block BOOL storePictureAvailable = [self.delegate respondsToSelector:@selector(MASTAdViewSupportsStorePicture:)];
     if (storePictureAvailable)
     {
         [self invokeDelegateBlock:^
@@ -1268,6 +1264,10 @@ static NSString* AdViewUserAgent = nil;
             [self.expandWindow resignKeyWindow];
             [self.expandWindow setHidden:YES];
             
+            // Reset expand view rotation.
+            // TODO: This should probably reset to the devices UI orientation vs. 0.
+            [self rotateExpandView:0];
+
             // Restore the previous (the app's) key window.
             [self.preExpandKeyWindow makeKeyWindow];
             self.preExpandKeyWindow = nil;
@@ -1419,6 +1419,26 @@ static NSString* AdViewUserAgent = nil;
     [self invokeDelegateSelector:@selector(MASTAdViewDidExpand:)];
 }
 
+- (void)mraidBridgeUpdatedOrientationProperties:(MASTMRAIDBridge *)bridge
+{
+    if (bridge.state != MASTMRAIDBridgeStateExpanded)
+        return;
+    
+    switch (bridge.orientationProperties.forceOrientation)
+    {
+        case MASTMRAIDOrientationPropertiesForceOrientationPortrait:
+            [self rotateExpandView:0];
+            break;
+            
+        case MASTMRAIDOrientationPropertiesForceOrientationLandscape:
+            [self rotateExpandView:90];
+            break;
+            
+        case MASTMRAIDOrientationPropertiesForceOrientationNone:
+            break;
+    }
+}
+
 - (void)mraidBridgeUpdatedResizeProperties:(MASTMRAIDBridge *)bridge
 {
     
@@ -1478,10 +1498,15 @@ static NSString* AdViewUserAgent = nil;
     
     convertRect.origin.x += requestedOffset.x;
     convertRect.origin.y += requestedOffset.y;
-                             
-    // Now apply the new size to the frame.
+
     convertRect.size.height = requestedSize.height;
     convertRect.size.width = requestedSize.width;
+    
+    if (bridge.resizeProperties.allowOffscreen == NO)
+    {
+        // TODO: adjust the offsets or reign in the size if the
+        // bounds is now outside of the screen.
+    }
     
     if ([self.delegate respondsToSelector:@selector(MASTAdView:willResizeToFrame:)])
     {
@@ -1641,12 +1666,16 @@ static NSString* AdViewUserAgent = nil;
             break;
     }
     
-    if (self.mraidBridge.state == MASTMRAIDBridgeStateExpanded)
+    if ((self.mraidBridge != nil) && (self.mraidBridge.state == MASTMRAIDBridgeStateExpanded))
     {
         if (self.mraidBridge.orientationProperties.allowOrientationChange)
         {
             [self rotateExpandView:degrees];
         }
+    }
+    else
+    {
+        [self rotateExpandView:degrees];
     }
 
     // Workaround for pre-iOS 5 UIWebView not telling JS about the change.
@@ -1665,76 +1694,109 @@ static NSString* AdViewUserAgent = nil;
 // Background thread (Event Kit can be slow to load)
 - (void)createCalendarEvent:(NSString*)jEvent
 {
-    if ([self.delegate respondsToSelector:@selector(MASTAdView:shouldSaveCalendarEvent:inEventStore:)] == NO)
+    @autoreleasepool
     {
-        [self.mraidBridge sendErrorMessage:@"Access denied."
-                                 forAction:@"createCalendarEvent"
-                                forWebView:self.webView];
-        return;
-    }
-    
-    NSDictionary* jDict = [NSDictionary dictionaryWithJavaScriptObject:jEvent];
-    if ([jDict count] == 0)
-    {
-        [self.mraidBridge sendErrorMessage:@"Unable to parse event data."
-                                 forAction:@"createCalendarEvent"
-                                forWebView:self.webView];
-        return;
-    }
-
-    EKEventStore* store = [[EKEventStore alloc] init];
-    EKEvent* event = [EKEvent eventWithEventStore:store];
-    
-    NSDate* start = [NSDate dateFromW3CCalendarDate:[jDict valueForKey:@"start"]];
-    if (start == nil)
-        start = [NSDate date];
-    
-    NSDate* end = [NSDate dateFromW3CCalendarDate:[jDict valueForKey:@"end"]];
-    if (end == nil)
-        end = [start dateByAddingTimeInterval:3600];
-    
-    event.title = [jDict valueForKey:@"summary"];
-    event.notes = [jDict valueForKey:@"description"];
-    event.location = [jDict valueForKey:@"location"];
-    event.startDate = start;
-    event.endDate = end;
-    
-    __block UIViewController* rootController = nil;
-    
-    [self invokeDelegateBlock:^
-    {
-        rootController = [self.delegate MASTAdView:self
-                           shouldSaveCalendarEvent:event
-                                      inEventStore:store];
-        
-        // Included in this block since this block occurs on the main thread and the
-        // following must be on the main thread since it's interacting with the UI.
-        if (rootController != nil)
+        if ([self.delegate respondsToSelector:@selector(MASTAdView:shouldSaveCalendarEvent:inEventStore:)] == NO)
         {
-            EKEventEditViewController* eventViewController = [EKEventEditViewController new];
-            eventViewController.eventStore = store;
-            eventViewController.event = event;
-            
-            if ([rootController respondsToSelector:@selector(presentViewController:animated:completion:)])
-            {
-                [rootController presentViewController:eventViewController
-                                             animated:YES
-                                           completion:nil];
-            }
-            else
-            {
-                [rootController presentModalViewController:eventViewController
-                                                  animated:YES];
-            }
-        }
-        else
-        {
-            // User didn't supply a controler to present the event edit controller on.
             [self.mraidBridge sendErrorMessage:@"Access denied."
                                      forAction:@"createCalendarEvent"
                                     forWebView:self.webView];
+            return;
         }
-    }];
+        
+        NSDictionary* jDict = [NSDictionary dictionaryWithJavaScriptObject:jEvent];
+        if ([jDict count] == 0)
+        {
+            [self.mraidBridge sendErrorMessage:@"Unable to parse event data."
+                                     forAction:@"createCalendarEvent"
+                                    forWebView:self.webView];
+            return;
+        }
+        
+        EKEventStore* store = [[EKEventStore alloc] init];
+        EKEvent* event = [EKEvent eventWithEventStore:store];
+        
+        NSDate* start = [NSDate dateFromW3CCalendarDate:[jDict valueForKey:@"start"]];
+        if (start == nil)
+            start = [NSDate date];
+        
+        NSDate* end = [NSDate dateFromW3CCalendarDate:[jDict valueForKey:@"end"]];
+        if (end == nil)
+            end = [start dateByAddingTimeInterval:3600];
+        
+        event.title = [jDict valueForKey:@"summary"];
+        event.notes = [jDict valueForKey:@"description"];
+        event.location = [jDict valueForKey:@"location"];
+        event.startDate = start;
+        event.endDate = end;
+        
+        id reminder = [jDict valueForKey:@"reminder"];
+        if (reminder != nil)
+        {
+            EKAlarm* alarm = nil;
+            
+            if ([reminder isKindOfClass:[NSString class]])
+            {
+                NSDate* reminderDate = [NSDate dateFromW3CCalendarDate:reminder];
+                if (reminderDate != nil)
+                {
+                    alarm = [EKAlarm alarmWithAbsoluteDate:reminderDate];
+                }
+                else
+                {
+                    alarm = [EKAlarm alarmWithRelativeOffset:[reminder doubleValue] / 1000.0];
+                }
+            }
+            
+            if (alarm != nil)
+            {
+                [event addAlarm:alarm];
+            }
+        }
+        
+        __block UIViewController* rootController = nil;
+        
+        [self invokeDelegateBlock:^
+         {
+             rootController = [self.delegate MASTAdView:self
+                                shouldSaveCalendarEvent:event
+                                           inEventStore:store];
+             
+             // Included in this block since this block occurs on the main thread and the
+             // following must be on the main thread since it's interacting with the UI.
+             if (rootController != nil)
+             {
+                 EKEventEditViewController* eventViewController = [EKEventEditViewController new];
+                 eventViewController.eventStore = store;
+                 eventViewController.event = event;
+                 eventViewController.editViewDelegate = self;
+                 
+                 if ([rootController respondsToSelector:@selector(presentViewController:animated:completion:)])
+                 {
+                     [rootController presentViewController:eventViewController
+                                                  animated:YES
+                                                completion:nil];
+                 }
+                 else
+                 {
+                     [rootController presentModalViewController:eventViewController
+                                                       animated:YES];
+                 }
+                 
+                 if (self.mraidBridge.state == MASTMRAIDBridgeStateExpanded)
+                 {
+                     [self.expandWindow setHidden:YES];
+                 }
+             }
+             else
+             {
+                 // User didn't supply a controler to present the event edit controller on.
+                 [self.mraidBridge sendErrorMessage:@"Access denied."
+                                          forAction:@"createCalendarEvent"
+                                         forWebView:self.webView];
+             }
+         }];
+    }
 }
 
 #pragma mark - EKEventEditViewDelegate
@@ -1742,6 +1804,11 @@ static NSString* AdViewUserAgent = nil;
 - (void)eventEditViewController:(EKEventEditViewController *)controller
           didCompleteWithAction:(EKEventEditViewAction)action
 {
+    if (self.mraidBridge.state == MASTMRAIDBridgeStateExpanded)
+    {
+        [self.expandWindow setHidden:NO];
+    }
+    
     switch (action)
     {
         case EKEventEditViewActionCanceled:
@@ -1790,41 +1857,44 @@ static NSString* AdViewUserAgent = nil;
 // Background thread
 - (void)loadAndSavePhoto:(NSString*)imageURL
 {
-    if ([self.delegate respondsToSelector:@selector(MASTAdView:shouldSavePhotoToCameraRoll:)] == NO)
+    @autoreleasepool
     {
-        return;
-    }
-    
-    NSError* error = nil;
-    NSData* imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageURL]
-                                                                   options:NSDataReadingUncached 
-                                                                     error:&error];
-    if (error != nil)
-    {
-        [self.mraidBridge sendErrorMessage:error.description
-                                 forAction:@"storePicture"
-                                forWebView:self.webView];
+        if ([self.delegate respondsToSelector:@selector(MASTAdView:shouldSavePhotoToCameraRoll:)] == NO)
+        {
+            return;
+        }
         
-        [self logEvent:[NSString stringWithFormat:@"Error obtaining photo requested to save to camera roll: %@", error.description]
-                ofType:MASTAdViewLogEventTypeError
-                  func:__func__
-                  line:__LINE__];
+        NSError* error = nil;
+        NSData* imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageURL]
+                                                  options:NSDataReadingUncached
+                                                    error:&error];
+        if (error != nil)
+        {
+            [self.mraidBridge sendErrorMessage:error.description
+                                     forAction:@"storePicture"
+                                    forWebView:self.webView];
+            
+            [self logEvent:[NSString stringWithFormat:@"Error obtaining photo requested to save to camera roll: %@", error.description]
+                    ofType:MASTAdViewLogEventTypeError
+                      func:__func__
+                      line:__LINE__];
+            
+            return;
+        }
         
-        return;
-    }
-    
-    UIImage* image = [UIImage imageWithData:imageData];
-    
-    __block BOOL save = NO;
-    
-    [self invokeDelegateBlock:^
-    {
-        save = [self.delegate MASTAdView:self shouldSavePhotoToCameraRoll:image];
-    }];
-
-    if (save)
-    {
-        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+        UIImage* image = [UIImage imageWithData:imageData];
+        
+        __block BOOL save = NO;
+        
+        [self invokeDelegateBlock:^
+         {
+             save = [self.delegate MASTAdView:self shouldSavePhotoToCameraRoll:image];
+         }];
+        
+        if (save)
+        {
+            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+        }
     }
 }
 
@@ -1833,8 +1903,9 @@ static NSString* AdViewUserAgent = nil;
 // Connection/background thread
 - (void)loadContent:(NSData*)content
 {
-    NSString* debugString = [[NSString alloc] initWithData:content encoding:NSUTF8StringEncoding];
-    NSLog(@"loadContent: %@", debugString);
+    // DEV: Use to output content of the buffered response.
+    //NSString* debugString = [[NSString alloc] initWithData:content encoding:NSUTF8StringEncoding];
+    //NSLog(@"loadContent: %@", debugString);
     
     if (self.isExpandedURL)
     {
@@ -2112,7 +2183,7 @@ static NSString* AdViewUserAgent = nil;
 
 - (void)webViewDidStartLoad:(UIWebView *)wv
 {
-    NSLog(@"webViewDidStartLoad");
+    
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)wv
@@ -2121,11 +2192,7 @@ static NSString* AdViewUserAgent = nil;
     // strings being autorelease.
     @autoreleasepool
     {
-        NSLog(@"webViewDidFinishLoad");
-        
-        // Disable selection
-        NSString* script = @"window.getSelection().removeAllRanges();";    
-        [wv stringByEvaluatingJavaScriptFromString:script];
+        [wv disableSelection];
         
         if (self.mraidBridge != nil)
         {

@@ -24,8 +24,42 @@
     self.adView.site = site;
     self.adView.zone = zone;
     
+    self.adView.delegate = self;
+    
     super.adConfigController.site = site;
     super.adConfigController.zone = zone;
+}
+
+#pragma mark MASTAdViewDelegate
+
+- (BOOL)MASTAdViewSupportsCalendar:(MASTAdView *)adView
+{
+    return YES;
+}
+
+- (BOOL)MASTAdViewSupportsPhone:(MASTAdView *)adView
+{
+    return YES;
+}
+
+- (BOOL)MASTAdViewSupportsSMS:(MASTAdView *)adView
+{
+    return YES;
+}
+
+- (BOOL)MASTAdViewSupportsStorePicture:(MASTAdView *)adView
+{
+    return YES;
+}
+
+- (BOOL)MASTAdView:(MASTAdView *)adView shouldSavePhotoToCameraRoll:(UIImage *)image
+{
+    return YES;
+}
+
+- (UIViewController*)MASTAdView:(MASTAdView *)adView shouldSaveCalendarEvent:(EKEvent *)event inEventStore:(EKEventStore *)eventStore
+{
+    return self;
 }
 
 @end

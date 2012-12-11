@@ -10,4 +10,6 @@
 
 - (void)disableScrolling;
 
+- (void)disableSelection;
+
 @end

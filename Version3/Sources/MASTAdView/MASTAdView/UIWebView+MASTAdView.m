@@ -35,4 +35,10 @@
     [scrollView setBounces:NO];
 }
 
+- (void)disableSelection
+{
+    NSString * js = @"window.getSelection().removeAllRanges();";
+    [self stringByEvaluatingJavaScriptFromString:js];
+}
+
 @end

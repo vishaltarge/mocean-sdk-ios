@@ -8,6 +8,6 @@
 
 #import "MASTSSimple.h"
 
-@interface MASTSSimpleRichMedia : MASTSSimple
+@interface MASTSSimpleRichMedia : MASTSSimple <MASTAdViewDelegate>
 
 @end

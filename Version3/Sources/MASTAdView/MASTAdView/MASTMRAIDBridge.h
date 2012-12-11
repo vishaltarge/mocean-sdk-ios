@@ -51,6 +51,8 @@ typedef enum
 
 - (void)mraidBridge:(MASTMRAIDBridge*)bridge expandWithURL:(NSString*)url;
 
+- (void)mraidBridgeUpdatedOrientationProperties:(MASTMRAIDBridge *)bridge;
+
 - (void)mraidBridgeUpdatedResizeProperties:(MASTMRAIDBridge *)bridge;
 
 - (void)mraidBridgeResize:(MASTMRAIDBridge*)bridge;

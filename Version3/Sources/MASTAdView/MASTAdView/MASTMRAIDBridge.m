@@ -58,7 +58,8 @@ static NSString* MRAIDBridgeCommandStorePicture = @"storePicture";
 - (void)sendErrorMessage:(NSString*)message forAction:(NSString*)action forWebView:(UIWebView*)webView;
 {
     NSString* script = [NSString stringWithFormat:@"mraid.fireErrorEvent('%@','%@');", message, action];
-    [webView stringByEvaluatingJavaScriptFromString:script];
+    
+    [webView performSelectorOnMainThread:@selector(stringByEvaluatingJavaScriptFromString:) withObject:script waitUntilDone:YES];
 }
 
 - (void)setSupported:(BOOL)s forFeature:(MASTMRAIDBridgeSupports)f forWebView:(UIWebView*)webView
@@ -258,7 +259,7 @@ static NSString* MRAIDBridgeCommandStorePicture = @"storePicture";
     {
         if (self.delegate)
         {
-            NSString* url = [args valueForKey:MRAIDBridgeArgURL];
+            NSString* url = [[args valueForKey:MRAIDBridgeArgURL] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
             [self.delegate mraidBridge:self openURL:url];
         }
     }
@@ -278,7 +279,7 @@ static NSString* MRAIDBridgeCommandStorePicture = @"storePicture";
     {
         if (self.delegate)
         {
-            NSString* url = [args valueForKey:MRAIDBridgeArgURL];
+            NSString* url = [[args valueForKey:MRAIDBridgeArgURL] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
             [self.delegate mraidBridge:self expandWithURL:url];
         }
     }
@@ -298,12 +299,17 @@ static NSString* MRAIDBridgeCommandStorePicture = @"storePicture";
     {
         MASTMRAIDOrientationProperties* properties = [MASTMRAIDOrientationProperties propertiesFromArgs:args];
         orientationProperties = properties;
+        
+        if (self.delegate)
+        {
+            [self.delegate mraidBridgeUpdatedOrientationProperties:self];
+        }
     }
     else if ([command isEqualToString:MRAIDBridgeCommandPlayVideo])
     {
         if (self.delegate)
         {
-            NSString* url = [args valueForKey:MRAIDBridgeArgURL];
+            NSString* url = [[args valueForKey:MRAIDBridgeArgURL] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
             [self.delegate mraidBridge:self playVideo:url];
         }
     }
@@ -319,7 +325,7 @@ static NSString* MRAIDBridgeCommandStorePicture = @"storePicture";
     {
         if (self.delegate)
         {
-            NSString* url = [args valueForKey:MRAIDBridgeArgURL];
+            NSString* url = [[args valueForKey:MRAIDBridgeArgURL] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
             [self.delegate mraidBridge:self storePicture:url];
         }
     }
