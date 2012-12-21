@@ -233,7 +233,11 @@ typedef enum
  Implement to indicate if calendar events can be created.
  The default behavior is to NOT allow calendar access.
  
- @see MASTAdView:shouldSaveCalendarEvent:inEventStore:
+ On iOS 6 and later user permission is required to access the calendar.  If this message is 
+ implemented and returns YES then the SDK will ask the user for permission during [MASTAdView update]
+ or [MASTAdView updateWithTimeInterval:]. Refer to iOS EKEventStore documentation for more information.
+ 
+ @see [MASTAdViewDelegate MASTAdView:shouldSaveCalendarEvent:inEventStore:]
  
  @param adView The MASTAdView instance sending the message.
  @return `NO` Informs richmedia ads that calendar access is not supported.
@@ -247,7 +251,7 @@ typedef enum
  Implement to indicate if storing pictures is supported. The default behavior is to NOT allow storing
  of pictures.
  
- @see MASTAdView:shouldSavePhotoToCameraRoll:
+ @see [MASTAdViewDelegate MASTAdView:shouldSavePhotoToCameraRoll:]
  
  @param adView The MASTAdView instance sending the message.
  @return `NO` Informs richmedia ads that storing pictures is not supported.
@@ -333,6 +337,11 @@ typedef enum
 
 
 /** Renders text, image and richmedia ads.
+ 
+ TODO: Include more information here and possibly a quick sample.
+ 
+ The -ObjC linker option is required when including the MASTAdView SDK.
+ 
  */
 @interface MASTAdView : UIView
 
@@ -434,12 +443,25 @@ typedef enum
 ///---------------------------------------------------------------------------------------
 
 /** Issues an immediate ad update and cancles any existing ad update.
+ 
+ If [MASTAdViewDelegate MASTAdViewSupportsCalendar:] is implemented by the delegate then 
+ this message will determine if a request to the user for access to the calendar is needed.
+ If so, the instance will request access from the user.  Developers desiring to control when
+ this request occurs can do so prior to calling update.  Refer to iOS EKEventStore
+ documentation for more information.
+ 
  */
 - (void)update;
 
 
 /** Issues an immediate ad update and cancels any pending ad update.
  Will automatically update every interval seconds.
+ 
+ If [MASTAdViewDelegate MASTAdViewSupportsCalendar:] is implemented by the delegate then
+ this message will determine if a request to the user for access to the calendar is needed.
+ If so, the instance will request access from the user.  Developers desiring to control when
+ this request occurs can do so prior to calling update.  Refer to iOS EKEventStore
+ documentation for more information.
  
  @param interval The delay between requesting updates after the initial update.
  */

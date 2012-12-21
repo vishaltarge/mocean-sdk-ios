@@ -325,6 +325,9 @@ static NSString* AdViewUserAgent = nil;
 {
     [self reset];
     
+    // If iOS 6 determine if the calendar can be used and ask user for authorization if necessary.
+    [self checkCalendarAuthorizationStatus];
+    
     [self internalUpdate];
 }
 
@@ -335,6 +338,9 @@ static NSString* AdViewUserAgent = nil;
         [self update];
         return;
     }
+    
+    // If iOS 6 determine if the calendar can be used and ask user for authorization if necessary.
+    [self checkCalendarAuthorizationStatus];
     
     [self reset];
 
@@ -1157,7 +1163,7 @@ static NSString* AdViewUserAgent = nil;
     self.webView.mediaPlaybackRequiresUserAction = NO;
     self.webView.allowsInlineMediaPlayback = YES;
     
-    [self.webView disableScrolling];
+    //[self.webView disableScrolling];
     [self.webView disableSelection];
     
     switch (self.placementType)
@@ -1207,10 +1213,22 @@ static NSString* AdViewUserAgent = nil;
     __block BOOL calendarAvailable = [self.delegate respondsToSelector:@selector(MASTAdViewSupportsCalendar:)];
     if (calendarAvailable)
     {
-        [self invokeDelegateBlock:^
+        // For iOS 6 and later check if the application has authorization to use the calendar.
+        if ([EKEventStore respondsToSelector:@selector(authorizationStatusForEntityType:)])
         {
-            calendarAvailable = [self.delegate MASTAdViewSupportsCalendar:self];
-        }];
+            if ([EKEventStore authorizationStatusForEntityType:EKEntityTypeEvent] != EKAuthorizationStatusAuthorized)
+            {
+                calendarAvailable = NO;
+            }
+        }
+        
+        if (calendarAvailable)
+        {
+            [self invokeDelegateBlock:^
+            {
+                calendarAvailable = [self.delegate MASTAdViewSupportsCalendar:self];
+            }];
+        }
     }
     
     // Store picture defaults to disabled if check not implemented by developer.
@@ -1691,6 +1709,47 @@ static NSString* AdViewUserAgent = nil;
 
 #pragma mark - Calendar Interactions
 
+// Any thread
+- (void)checkCalendarAuthorizationStatus
+{
+    if ([EKEventStore respondsToSelector:@selector(authorizationStatusForEntityType:)])
+    {
+        EKAuthorizationStatus status = [EKEventStore authorizationStatusForEntityType:EKEntityTypeEvent];
+        if (status == EKAuthorizationStatusNotDetermined)
+        {
+            __block BOOL calendarAvailable = [self.delegate respondsToSelector:@selector(MASTAdViewSupportsCalendar:)];
+            if (calendarAvailable)
+            {
+                [self invokeDelegateBlock:^
+                 {
+                     calendarAvailable = [self.delegate MASTAdViewSupportsCalendar:self];
+                 }];
+            }
+            
+            if (calendarAvailable == NO)
+            {
+                return;
+            }
+            
+            [self performSelectorInBackground:@selector(requestCalendarAuthorizationStatus) withObject:nil];
+        }
+    }
+}
+
+// Background thread - iOS 6 only
+- (void)requestCalendarAuthorizationStatus
+{
+    @autoreleasepool
+    {
+        EKEventStore* store = [EKEventStore new];
+        
+        [store requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error)
+        {
+             // Result not needed.  Only needed so that EKEventStore will know the answer when asked later.
+        }];
+    }
+}
+
 // Background thread (Event Kit can be slow to load)
 - (void)createCalendarEvent:(NSString*)jEvent
 {
@@ -1842,6 +1901,20 @@ static NSString* AdViewUserAgent = nil;
     }
     
     UIViewController* parentViewController = [controller parentViewController];
+    if (parentViewController == nil)
+    {
+        // This should only be possible in iOS 5 and later since parentViewController will
+        // return the result.  If not though attempt to dismiss the dialog directly.
+        if ([controller respondsToSelector:@selector(presentingViewController)])
+        {
+            parentViewController = [controller presentingViewController];
+        }
+        else
+        {
+            [controller dismissModalViewControllerAnimated:YES];
+        }
+    }
+    
     if ([controller respondsToSelector:@selector(presentingViewController)])
     {
         [parentViewController dismissViewControllerAnimated:YES completion:nil];
