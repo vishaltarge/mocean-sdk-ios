@@ -14,8 +14,6 @@ static NSString* MRAIDBridgePTypeInline = @"inline";
 static NSString* MRAIDBridgePTypeInterstitial = @"interstitial";
 
 static NSString* MRAIDBridgeArgURL = @"url";
-static NSString* MRAIDBridgeArgWidth = @"width";
-static NSString* MRAIDBridgeArgHeight = @"height";
 static NSString* MRAIDBridgeArgEvent = @"event";
 
 static NSString* MRAIDBridgeSLoading = @"loading";

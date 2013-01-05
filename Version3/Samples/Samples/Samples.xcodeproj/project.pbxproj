@@ -167,7 +167,6 @@
 		3C91DD9B153F72AB00FCF6CD = {
 			isa = PBXGroup;
 			children = (
-				C5E1DB9E1635C15A007F4959 /* ImageIO.framework */,
 				C5D30CE3161251E600CA45A3 /* MASTAdView.xcodeproj */,
 				3C91DDB0153F72AC00FCF6CD /* Samples */,
 				3C91DDA9153F72AB00FCF6CD /* Frameworks */,
@@ -193,6 +192,7 @@
 				3C91DE18153F751500FCF6CD /* MessageUI.framework */,
 				3C91DE13153F751500FCF6CD /* CoreLocation.framework */,
 				C5ACCB7C1610EDBD0018E0AD /* CoreGraphics.framework */,
+				C5E1DB9E1635C15A007F4959 /* ImageIO.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

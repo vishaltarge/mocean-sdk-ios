@@ -17,6 +17,7 @@
 #import "MASTMoceanThirdPartyDescriptor.h"
 #import "MASTAdTracking.h"
 #import "MASTAdBrowser.h"
+#import "MASTModalViewController.h"
 
 #import "MASTMRAIDControllerJS.h"
 #import "MASTCloseButtonPNG.h"
@@ -63,14 +64,11 @@ static NSString* AdViewUserAgent = nil;
 // Internal Browser
 @property (nonatomic, strong) MASTAdBrowser* adBrowser;
 
-// Used to track if the adBrowser caused the display of the expand window.
-@property (nonatomic, assign) BOOL adBrowserExpanded;
+// Used to render interstitial, expand and internal browser.
+@property (nonatomic, strong) UIViewController* modalViewController;
 
-// Tracks the pre-expand state key window.
-@property (nonatomic, strong) UIWindow* preExpandKeyWindow;
-
-// Window used as the base for expanding.
-@property (nonatomic, strong) UIWindow* expandWindow;
+// Used to track state of the status bar prior to modal view.
+@property (nonatomic, assign) BOOL statusBarHidden;
 
 // Determines if this ad is an expand URL ad.
 @property (nonatomic, assign) BOOL isExpandedURL;
@@ -116,9 +114,8 @@ static NSString* AdViewUserAgent = nil;
 @synthesize expandCloseControl, resizeCloseControl;
 @synthesize adDescriptor;
 @synthesize mraidBridge;
-@synthesize adBrowser, adBrowserExpanded;
-@synthesize expandWindow;
-@synthesize preExpandKeyWindow;
+@synthesize adBrowser;
+@synthesize modalViewController, statusBarHidden;
 @synthesize isExpandedURL;
 @synthesize expandedAdView;
 @synthesize invokeTracking;
@@ -144,9 +141,7 @@ static NSString* AdViewUserAgent = nil;
     
     [self.mraidBridge setDelegate:nil];
     self.mraidBridge = nil;
-    
-    self.preExpandKeyWindow = nil;
-    
+
     [self.webView setDelegate:nil];
     [self.webView stopLoading];
     self.webView = nil;
@@ -458,16 +453,13 @@ static NSString* AdViewUserAgent = nil;
         return;
 
     // If the expand window isn't hidden, then the interstitial is up.
-    if (self.expandWindow.isHidden == NO)
+    if (self.modalViewController.view.superview != nil)
         return;
     
     // Reset the exanded view's rotation.
-    [self rotateExpandView:0];
+    [self rotateModalView:0];
     
-    self.preExpandKeyWindow = [[UIApplication sharedApplication] keyWindow];
-
-    // Make the expandWindow the current key window and show it.
-    [self.expandWindow makeKeyAndVisible];
+    [self presentModalView:self.expandView];
     
     [self performAdTracking];
     
@@ -485,7 +477,7 @@ static NSString* AdViewUserAgent = nil;
     if (self.placementType != MASTAdViewPlacementTypeInterstitial)
         return;
     
-    if (self.expandWindow.isHidden == NO)
+    if (self.modalViewController.view.superview != nil)
         return;
     
     [self showInterstitial];
@@ -520,16 +512,10 @@ static NSString* AdViewUserAgent = nil;
     if (self.placementType != MASTAdViewPlacementTypeInterstitial)
         return;
     
-    if (self.expandWindow.isHidden == YES)
+    if (self.modalViewController.view.superview == nil)
         return;
     
-    // Resign and hide the expand window.
-    [self.expandWindow resignKeyWindow];
-    [self.expandWindow setHidden:YES];
-    
-    // Restore the previous (the app's) key window.
-    [self.preExpandKeyWindow makeKeyWindow];
-    self.preExpandKeyWindow = nil;
+    [self dismissModalView:self.expandView];
     
     if (self.mraidBridge != nil)
     {
@@ -564,44 +550,16 @@ static NSString* AdViewUserAgent = nil;
 
 - (void)openAdBrowserWithURL:(NSURL*)url
 {
-    self.adBrowserExpanded = self.expandWindow.hidden;
-    
-    if (self.adBrowserExpanded)
-    {
-        // Reset the exanded view's rotation.
-        [self rotateExpandView:0];
-        
-        self.preExpandKeyWindow = [[UIApplication sharedApplication] keyWindow];
-        
-        // Make the expandWindow the current key window and show it.
-        [self.expandWindow makeKeyAndVisible];
-    }
-    
     self.adBrowser.URL = url;
     
-    // Add the browser ads the top most expand window subview.
-    self.adBrowser.view.frame = self.expandView.bounds;
-    
-    [self.expandView addSubview:self.adBrowser.view];
-    [self.expandView bringSubviewToFront:self.adBrowser.view];
+    [self presentModalView:self.adBrowser.view];
 }
 
 - (void)closeAdBrowser
 {
-    [self.adBrowser.view removeFromSuperview];
+    [self dismissModalView:self.adBrowser.view];
     self.adBrowser = nil;
-    
-    if (self.adBrowserExpanded)
-    {
-        // Resign and hide the expand window.
-        [self.expandWindow resignKeyWindow];
-        [self.expandWindow setHidden:YES];
-        
-        // Restore the previous (the app's) key window.
-        [self.preExpandKeyWindow makeKeyWindow];
-        self.preExpandKeyWindow = nil;
-    }
-    
+
     [self restartUpdateTimer];
 }
 
@@ -665,21 +623,17 @@ static NSString* AdViewUserAgent = nil;
 
 #pragma mark - Window containers
 
-- (UIWindow*)expandWindow
+- (UIViewController*)modalViewController
 {
-    if (expandWindow == nil)
+    if (modalViewController == nil)
     {
-        expandWindow = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-        expandWindow.windowLevel = UIWindowLevelStatusBar;
-        expandWindow.autoresizesSubviews = YES;
-        expandWindow.backgroundColor = [UIColor blackColor];
-        expandWindow.opaque = YES;
+        modalViewController = [MASTModalViewController new];
     }
     
-    return expandWindow;
+    return modalViewController;
 }
 
-- (void)rotateExpandView:(CGFloat)degrees
+- (void)rotateModalView:(CGFloat)degrees
 {
     CGAffineTransform transform = CGAffineTransformIdentity;
     if (degrees != 0)
@@ -691,12 +645,84 @@ static NSString* AdViewUserAgent = nil;
     [UIView animateWithDuration:.30
                      animations:^
      {
-         self.expandView.transform = transform;
+         CGRect rotatedRect = CGRectApplyAffineTransform(self.modalViewController.view.frame, transform);
+         
+         self.modalViewController.view.transform = transform;
+         self.modalViewController.view.bounds = CGRectMake(0, 0, rotatedRect.size.width, rotatedRect.size.height);
      }
                      completion:^(BOOL finished)
      {
-         self.expandView.frame = self.expandWindow.bounds;
+         if (self.mraidBridge != nil)
+         {
+             // Fetch the position relative to the screenSize.
+             CGRect absoluteFrame = self.expandView.bounds;
+             
+             [self.mraidBridge setDefaultPosition:absoluteFrame forWebView:self.webView];
+             [self.mraidBridge setCurrentPosition:absoluteFrame forWebView:self.webView];
+             
+             // TODO: Is there a state change for this?
+         }
      }];
+}
+
+- (BOOL)presentingModalView
+{
+    if (self.modalViewController.view.superview != nil)
+         return YES;
+    
+    return NO;
+}
+
+- (void)presentModalView:(UIView*)view
+{
+    [self.modalViewController.view addSubview:view];
+    
+    if (self.modalViewController.view.superview == nil)
+    {
+        self.statusBarHidden = [[UIApplication sharedApplication] isStatusBarHidden];
+        
+        if (self.statusBarHidden == NO)
+        {
+            [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+        }
+        
+        UIViewController* rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
+        
+        if ([rootViewController respondsToSelector:@selector(presentViewController:animated:completion:)])
+        {
+            [rootViewController presentViewController:self.modalViewController animated:YES completion:nil];
+        }
+        else
+        {
+            [rootViewController presentModalViewController:self.modalViewController animated:YES];
+        }
+    }
+}
+
+- (void)dismissModalView:(UIView*)view
+{
+    if (self.modalViewController.view.superview == nil)
+        return;
+    
+    if ([view superview] == self.modalViewController.view)
+        [view removeFromSuperview];
+    
+    if ([self.modalViewController.view.subviews count] > 0)
+        return;
+    
+    if (self.statusBarHidden == NO)
+    {
+        [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+    }
+    
+    if ([self.modalViewController respondsToSelector:@selector(dismissViewControllerAnimated:completion:)])
+    {
+        [self.modalViewController dismissViewControllerAnimated:YES completion:nil];
+    }
+    else
+    {
+        [self.modalViewController dismissModalViewControllerAnimated:YES];
+    }
 }
 
 #pragma mark - Native containers
@@ -741,13 +767,14 @@ static NSString* AdViewUserAgent = nil;
 {
     if (expandView == nil)
     {
-        expandView = [[UIView alloc] initWithFrame:self.expandWindow.bounds];
+        expandView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         expandView.autoresizesSubviews = YES;
+        expandView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight |
+            UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin |
+            UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
         expandView.backgroundColor = [UIColor blackColor];
         expandView.opaque = YES;
         expandView.userInteractionEnabled = YES;
-        
-        [self.expandWindow addSubview:expandView];
     }
     
     return expandView;
@@ -1158,7 +1185,9 @@ static NSString* AdViewUserAgent = nil;
     self.webView.delegate = self;
     self.webView.opaque = NO;
     self.webView.backgroundColor = [UIColor clearColor];
-    self.webView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin |  UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+    self.webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight |
+        UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin |
+        UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
     self.webView.autoresizesSubviews = YES;
     self.webView.mediaPlaybackRequiresUserAction = NO;
     self.webView.allowsInlineMediaPlayback = YES;
@@ -1278,25 +1307,20 @@ static NSString* AdViewUserAgent = nil;
             [self.webView setFrame:self.bounds];
             [self addSubview:self.webView];
             
-            // Resign and hide the expand window.
-            [self.expandWindow resignKeyWindow];
-            [self.expandWindow setHidden:YES];
-            
             // Reset expand view rotation.
             // TODO: This should probably reset to the devices UI orientation vs. 0.
-            [self rotateExpandView:0];
-
-            // Restore the previous (the app's) key window.
-            [self.preExpandKeyWindow makeKeyWindow];
-            self.preExpandKeyWindow = nil;
-
+            [self rotateModalView:0];
+            
             [self.mraidBridge setCurrentPosition:self.frame forWebView:self.webView];
             [self.mraidBridge setState:MASTMRAIDBridgeStateDefault forWebView:self.webView];
             
             [self prepareCloseButton];
             [self restartUpdateTimer];
             
+            [self dismissModalView:self.expandView];
+
             [self invokeDelegateSelector:@selector(MASTAdViewDidCollapse:)];
+
             break;
         }
 
@@ -1410,17 +1434,14 @@ static NSString* AdViewUserAgent = nil;
     [self invokeDelegateSelector:@selector(MASTAdViewWillExpand:)];
     
     // Reset the exanded view's rotation.
-    [self rotateExpandView:0];
-    
-    self.preExpandKeyWindow = [[UIApplication sharedApplication] keyWindow];
+    [self rotateModalView:0];
     
     // Move the webView to the expandView and update it's frame to match.
     [self.expandView addSubview:self.webView];
     [self.webView setFrame:self.expandView.bounds];
     
-    // Make the expandWindow the current key window and show it.
-    [self.expandWindow makeKeyAndVisible];
-
+    [self presentModalView:self.expandView];
+    
     [bridge setCurrentPosition:self.webView.frame forWebView:self.webView];
     [bridge setState:MASTMRAIDBridgeStateExpanded forWebView:self.webView];
     
@@ -1445,11 +1466,11 @@ static NSString* AdViewUserAgent = nil;
     switch (bridge.orientationProperties.forceOrientation)
     {
         case MASTMRAIDOrientationPropertiesForceOrientationPortrait:
-            [self rotateExpandView:0];
+            [self rotateModalView:0];
             break;
             
         case MASTMRAIDOrientationPropertiesForceOrientationLandscape:
-            [self rotateExpandView:90];
+            [self rotateModalView:90];
             break;
             
         case MASTMRAIDOrientationPropertiesForceOrientationNone:
@@ -1522,8 +1543,31 @@ static NSString* AdViewUserAgent = nil;
     
     if (bridge.resizeProperties.allowOffscreen == NO)
     {
-        // TODO: adjust the offsets or reign in the size if the
-        // bounds is now outside of the screen.
+        CGSize maxSize = [self screenSizeIncludingStatusBar:YES];
+        CGRect maxFrame = CGRectMake(0, 0, maxSize.width, maxSize.height);
+        
+        if (CGRectContainsRect(maxFrame, convertRect) == NO)
+        {
+            if (convertRect.origin.x < 0)
+            {
+                CGFloat diff = convertRect.origin.x * -1;
+                convertRect.origin.x = 0;
+                convertRect.size.width += diff;
+            }
+            
+            if (convertRect.origin.y < 0)
+            {
+                CGFloat diff = convertRect.origin.y * -1;
+                convertRect.origin.y = 0;
+                convertRect.size.height += diff;
+            }
+            
+            if (convertRect.size.width > maxFrame.size.width)
+                convertRect.size.width = maxFrame.size.width;
+            
+            if (convertRect.size.height > maxFrame.size.height)
+                convertRect.size.height = maxFrame.size.height;
+        }
     }
     
     if ([self.delegate respondsToSelector:@selector(MASTAdView:willResizeToFrame:)])
@@ -1665,7 +1709,8 @@ static NSString* AdViewUserAgent = nil;
 
 - (void)deviceOrientationDidChangeNotification
 {
-    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    UIDeviceOrientation deviceOrientation = [[UIDevice currentDevice] orientation];
+    UIInterfaceOrientation interfaceOrientation = deviceOrientation;
     
     NSInteger degrees = 0;
     switch (interfaceOrientation) 
@@ -1688,12 +1733,12 @@ static NSString* AdViewUserAgent = nil;
     {
         if (self.mraidBridge.orientationProperties.allowOrientationChange)
         {
-            [self rotateExpandView:degrees];
+            [self rotateModalView:degrees];
         }
     }
     else
     {
-        [self rotateExpandView:degrees];
+        [self rotateModalView:degrees];
     }
 
     // Workaround for pre-iOS 5 UIWebView not telling JS about the change.
@@ -1844,7 +1889,7 @@ static NSString* AdViewUserAgent = nil;
                  
                  if (self.mraidBridge.state == MASTMRAIDBridgeStateExpanded)
                  {
-                     [self.expandWindow setHidden:YES];
+                     // TODO: [self.expandWindow setHidden:YES];
                  }
              }
              else
@@ -1865,7 +1910,7 @@ static NSString* AdViewUserAgent = nil;
 {
     if (self.mraidBridge.state == MASTMRAIDBridgeStateExpanded)
     {
-        [self.expandWindow setHidden:NO];
+        // TODO: [self.expandWindow setHidden:NO];
     }
     
     switch (action)
@@ -2304,7 +2349,7 @@ static NSString* AdViewUserAgent = nil;
             
             BOOL hidden = self.hidden;
             if (self.placementType == MASTAdViewPlacementTypeInterstitial)
-                hidden = self.expandWindow.hidden;
+                hidden = self.modalViewController.view.superview == nil;
             
             [self.mraidBridge setViewable:(hidden == NO) forWebView:wv];
             

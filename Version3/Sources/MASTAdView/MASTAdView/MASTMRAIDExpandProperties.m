@@ -11,8 +11,6 @@ static NSString* MASTMRAIDExpandPropertiesWidth = @"width";
 static NSString* MASTMRAIDExpandPropertiesHeight = @"height";
 static NSString* MASTMRAIDExpandPropertiesUseCustomClose = @"useCustomClose";
 static NSString* MASTMRAIDExpandPropertiesIsModal = @"isModal";
-static NSString* MASTMRAIDExpandPropertiesAllowOrientationChange = @"allowOrientationChange";
-static NSString* MASTMRAIDExpandPropertiesFOrientation = @"forceOrientation";
 
 @implementation MASTMRAIDExpandProperties
 

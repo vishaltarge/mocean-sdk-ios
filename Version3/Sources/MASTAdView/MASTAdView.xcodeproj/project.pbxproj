@@ -32,6 +32,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		C52AE2581694CCB8004FEB5F /* MASTModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C52AE2571694CCB8004FEB5F /* MASTModalViewController.m */; };
 		C5ACCAA7160CA4FF0018E0AD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5ACCAA6160CA4FF0018E0AD /* Foundation.framework */; };
 		C5ACCAAC160CA4FF0018E0AD /* MASTAdView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C5ACCAAB160CA4FF0018E0AD /* MASTAdView.h */; };
 		C5ACCAAE160CA4FF0018E0AD /* MASTAdView.m in Sources */ = {isa = PBXBuildFile; fileRef = C5ACCAAD160CA4FF0018E0AD /* MASTAdView.m */; };
@@ -74,6 +75,8 @@
 
 /* Begin PBXFileReference section */
 		C51F3FCE161CB41F007009DB /* MASTDefaults.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MASTDefaults.h; sourceTree = "<group>"; };
+		C52AE2561694CCB8004FEB5F /* MASTModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTModalViewController.h; sourceTree = "<group>"; };
+		C52AE2571694CCB8004FEB5F /* MASTModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTModalViewController.m; sourceTree = "<group>"; };
 		C5ACCAA3160CA4FF0018E0AD /* libMASTAdView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMASTAdView.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5ACCAA6160CA4FF0018E0AD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C5ACCAAA160CA4FF0018E0AD /* MASTAdView-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MASTAdView-Prefix.pch"; sourceTree = "<group>"; };
@@ -200,6 +203,8 @@
 				C5ACCAC8160CB2A60018E0AD /* MASTMRAIDOrientationProperties.m */,
 				C5ACCAC9160CB2A60018E0AD /* MASTMRAIDResizeProperties.h */,
 				C5ACCACA160CB2A60018E0AD /* MASTMRAIDResizeProperties.m */,
+				C52AE2561694CCB8004FEB5F /* MASTModalViewController.h */,
+				C52AE2571694CCB8004FEB5F /* MASTModalViewController.m */,
 				C5ACCB8D1611031B0018E0AD /* Generated Source */,
 				C5ACCB8C161102A80018E0AD /* Generated Output */,
 				C5ACCAA9160CA4FF0018E0AD /* Supporting Files */,
@@ -366,6 +371,7 @@
 				C5ACCADE160CB2A60018E0AD /* NSDictionary+MASTAdView.m in Sources */,
 				C5ACCADF160CB2A60018E0AD /* UIWebView+MASTAdView.m in Sources */,
 				C5E1DBA21635C2F2007F4959 /* UIImageView+MASTAdView.m in Sources */,
+				C52AE2581694CCB8004FEB5F /* MASTModalViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
