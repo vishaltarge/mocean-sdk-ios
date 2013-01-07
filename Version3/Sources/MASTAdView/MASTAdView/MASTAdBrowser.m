@@ -42,11 +42,17 @@
     [super viewDidLoad];
     
     self.view.autoresizesSubviews = YES;
+    self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight |
+        UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin |
+        UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+    
     self.view.backgroundColor = [UIColor whiteColor];
     
     if (self.toolbar == nil)
     {
-        self.toolbar = [UIToolbar new];
+        self.toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.view.bounds) - 44,
+                                                                   CGRectGetWidth(self.view.bounds), 44)];
+        
         self.toolbar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
         self.toolbar.barStyle = UIBarStyleBlack;
         
@@ -136,7 +142,7 @@
     
     if (self.webView == nil)
     {
-        self.webView = [[UIWebView alloc] initWithFrame:self.view.frame];
+        self.webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
         self.webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         
         self.webView.delegate = self;

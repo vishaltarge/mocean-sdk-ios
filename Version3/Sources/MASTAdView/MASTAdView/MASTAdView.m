@@ -6,6 +6,7 @@
 //
 
 #import "MASTDefaults.h"
+#import "MASTConstants.h"
 #import "MASTAdView.h"
 #import "UIWebView+MASTAdView.h"
 #import "NSDictionary+MASTAdView.h"
@@ -550,6 +551,8 @@ static NSString* AdViewUserAgent = nil;
 
 - (void)openAdBrowserWithURL:(NSURL*)url
 {
+    self.adBrowser.view.frame = self.modalViewController.view.bounds;
+    
     self.adBrowser.URL = url;
     
     [self presentModalView:self.adBrowser.view];
@@ -654,13 +657,14 @@ static NSString* AdViewUserAgent = nil;
      {
          if (self.mraidBridge != nil)
          {
-             // Fetch the position relative to the screenSize.
-             CGRect absoluteFrame = self.expandView.bounds;
-             
-             [self.mraidBridge setDefaultPosition:absoluteFrame forWebView:self.webView];
-             [self.mraidBridge setCurrentPosition:absoluteFrame forWebView:self.webView];
-             
-             // TODO: Is there a state change for this?
+             if (self.mraidBridge.state == MASTMRAIDBridgeStateExpanded)
+             {
+                 // Fetch the position relative to the screenSize.
+                 CGRect absoluteFrame = self.expandView.bounds;
+                 
+                 [self.mraidBridge setCurrentPosition:absoluteFrame forWebView:self.webView];
+                 [self.mraidBridge setMaxSize:absoluteFrame.size forWebView:self.webView];
+             }
          }
      }];
 }
@@ -810,6 +814,27 @@ static NSString* AdViewUserAgent = nil;
 - (void)prepareCloseButton
 {
     [self.closeButton removeFromSuperview];
+    
+    if (self.mraidBridge != nil)
+    {
+        switch (self.mraidBridge.state)
+        {
+            case MASTMRAIDBridgeStateExpanded:
+                // When expanded use the built in button or the custom one, else nothing else.
+                if (self.mraidBridge.expandProperties.useCustomClose == NO)
+                {
+                    [self showCloseButton];
+                }
+                return;
+                
+            case MASTMRAIDBridgeStateResized:
+                // The ad creative MUST supply it's own close button.
+                return;
+                
+            default:
+                break;
+        }
+    }
     
     if (self.closeButtonTimeInterval < 0)
         return;
@@ -1065,9 +1090,16 @@ static NSString* AdViewUserAgent = nil;
     {
         NSError* error = nil;
         
-        NSData* imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:ad.img]
-                                                  options:NSDataReadingUncached
-                                                    error:&error];
+        NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:ad.img]
+                                                                    cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+                                                                timeoutInterval:MAST_DEFAULT_NETWORK_TIMEOUT];
+        
+        [request setValue:AdViewUserAgent forHTTPHeaderField:MASTUserAgentHeader];
+        
+        NSURLResponse* response = nil;
+        NSData* imageData = [NSURLConnection sendSynchronousRequest:request
+                                                  returningResponse:&response
+                                                              error:nil];
         
         if ((imageData == nil) || (error != nil))
         {
@@ -1308,8 +1340,10 @@ static NSString* AdViewUserAgent = nil;
             [self addSubview:self.webView];
             
             // Reset expand view rotation.
-            // TODO: This should probably reset to the devices UI orientation vs. 0.
             [self rotateModalView:0];
+            
+            CGSize maxSize = [self screenSizeIncludingStatusBar:YES];
+            [self.mraidBridge setMaxSize:maxSize forWebView:self.webView];
             
             [self.mraidBridge setCurrentPosition:self.frame forWebView:self.webView];
             [self.mraidBridge setState:MASTMRAIDBridgeStateDefault forWebView:self.webView];
@@ -1433,12 +1467,15 @@ static NSString* AdViewUserAgent = nil;
     
     [self invokeDelegateSelector:@selector(MASTAdViewWillExpand:)];
     
-    // Reset the exanded view's rotation.
+    // Reset the exanded view's frame and rotation.
+    self.expandView.frame = self.modalViewController.view.bounds;
     [self rotateModalView:0];
     
     // Move the webView to the expandView and update it's frame to match.
     [self.expandView addSubview:self.webView];
     [self.webView setFrame:self.expandView.bounds];
+    
+    [self.webView scrollToTop];
     
     [self presentModalView:self.expandView];
     

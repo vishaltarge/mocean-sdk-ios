@@ -41,4 +41,27 @@
     [self stringByEvaluatingJavaScriptFromString:js];
 }
 
+- (void)scrollToTop
+{
+    UIScrollView* scrollView = nil;
+    
+    if ([self respondsToSelector:@selector(scrollView)])
+    {
+        scrollView = [self scrollView];
+    }
+    else
+    {
+        for (id sv in [self subviews])
+        {
+            if ([sv isKindOfClass:[UIScrollView class]])
+            {
+                scrollView = sv;
+                break;
+            }
+        }
+    }
+    
+    [scrollView setContentOffset:CGPointZero animated:NO];
+}
+
 @end

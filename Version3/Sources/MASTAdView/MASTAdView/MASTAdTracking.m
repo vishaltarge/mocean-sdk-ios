@@ -6,9 +6,8 @@
 //
 
 #import "MASTAdTracking.h"
-
-
-#define kMASTAdTrackingTimeout 5
+#import "MASTDefaults.h"
+#import "MASTConstants.h"
 
 
 @interface MASTAdTracking()
@@ -20,8 +19,6 @@
 @implementation MASTAdTracking
 
 @synthesize connection, userAgent;
-
-static NSString* UserAgentHeader = @"User-Agent";
 
 - (void)dealloc
 {
@@ -37,9 +34,9 @@ static NSString* UserAgentHeader = @"User-Agent";
         
         NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL:url
                                                                     cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
-                                                                timeoutInterval:kMASTAdTrackingTimeout];
+                                                                timeoutInterval:MAST_DEFAULT_NETWORK_TIMEOUT];
         
-        [request setValue:self.userAgent forHTTPHeaderField:UserAgentHeader];
+        [request setValue:self.userAgent forHTTPHeaderField:MASTUserAgentHeader];
         
         self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
         
@@ -66,7 +63,7 @@ static NSString* UserAgentHeader = @"User-Agent";
 {
     NSMutableURLRequest* mutableRequest = [request mutableCopy];
     
-    [mutableRequest setValue:self.userAgent forHTTPHeaderField:UserAgentHeader];
+    [mutableRequest setValue:self.userAgent forHTTPHeaderField:MASTUserAgentHeader];
     
     return mutableRequest;
 }

@@ -124,6 +124,7 @@
 		C5E1DB9C1635A252007F4959 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		C5E1DBA01635C2F2007F4959 /* UIImageView+MASTAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+MASTAdView.h"; sourceTree = "<group>"; };
 		C5E1DBA11635C2F2007F4959 /* UIImageView+MASTAdView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+MASTAdView.m"; sourceTree = "<group>"; };
+		C5FE826B169B4BF900FEDEB6 /* MASTConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MASTConstants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +184,7 @@
 			children = (
 				C5ACCAE2160CB2E90018E0AD /* Extensions */,
 				C51F3FCE161CB41F007009DB /* MASTDefaults.h */,
+				C5FE826B169B4BF900FEDEB6 /* MASTConstants.h */,
 				C5ACCAAB160CA4FF0018E0AD /* MASTAdView.h */,
 				C5ACCAAD160CA4FF0018E0AD /* MASTAdView.m */,
 				C5ACCAB7160CB2A60018E0AD /* MASTAdBrowser.h */,
