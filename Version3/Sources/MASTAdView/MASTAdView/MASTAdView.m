@@ -1339,10 +1339,12 @@ static NSString* AdViewUserAgent = nil;
             [self.webView setFrame:self.bounds];
             [self addSubview:self.webView];
             
+            [self.webView scrollToTop];
+            
             // Reset expand view rotation.
             [self rotateModalView:0];
             
-            CGSize maxSize = [self screenSizeIncludingStatusBar:YES];
+            CGSize maxSize = [self.superview bounds].size;
             [self.mraidBridge setMaxSize:maxSize forWebView:self.webView];
             
             [self.mraidBridge setCurrentPosition:self.frame forWebView:self.webView];
@@ -1366,6 +1368,8 @@ static NSString* AdViewUserAgent = nil;
             [self addSubview:self.webView];
             
             [self.resizeView removeFromSuperview];
+            
+            [self.webView scrollToTop];
             
             [self.mraidBridge setCurrentPosition:self.frame forWebView:self.webView];
             [self.mraidBridge setState:MASTMRAIDBridgeStateDefault forWebView:self.webView];
@@ -1566,11 +1570,9 @@ static NSString* AdViewUserAgent = nil;
                       forWebView:self.webView];
         return;
     }
-    
-    UIWindow* window = [[UIApplication sharedApplication] keyWindow];
-    
+
     CGRect currentFrame = self.frame;
-    CGRect convertRect = [window convertRect:currentFrame fromView:self.superview];
+    CGRect convertRect = [self.superview convertRect:currentFrame fromView:self];
     
     convertRect.origin.x += requestedOffset.x;
     convertRect.origin.y += requestedOffset.y;
@@ -1580,7 +1582,7 @@ static NSString* AdViewUserAgent = nil;
     
     if (bridge.resizeProperties.allowOffscreen == NO)
     {
-        CGSize maxSize = [self screenSizeIncludingStatusBar:YES];
+        CGSize maxSize = [self.superview bounds].size;
         CGRect maxFrame = CGRectMake(0, 0, maxSize.width, maxSize.height);
         
         if (CGRectContainsRect(maxFrame, convertRect) == NO)
@@ -1630,7 +1632,7 @@ static NSString* AdViewUserAgent = nil;
     [self.resizeView setFrame:convertRect];
     [self.resizeView addSubview:self.webView];
     [self.webView setFrame:self.resizeView.bounds];
-    [window addSubview:self.resizeView];
+    [self.superview addSubview:self.resizeView];
     
     // Adjust for status bar (resize doesn't hide the status bar).
     CGRect statusBarFrame = [[UIApplication sharedApplication] statusBarFrame];
@@ -2375,7 +2377,7 @@ static NSString* AdViewUserAgent = nil;
             CGSize screenSize = [self screenSizeIncludingStatusBar:NO];
             [self.mraidBridge setScreenSize:screenSize forWebView:wv];
             
-            CGSize maxSize = [self screenSizeIncludingStatusBar:YES];
+            CGSize maxSize = [self.superview bounds].size;
             [self.mraidBridge setMaxSize:maxSize forWebView:wv];
             
             // Fetch the position relative to the screenSize.
