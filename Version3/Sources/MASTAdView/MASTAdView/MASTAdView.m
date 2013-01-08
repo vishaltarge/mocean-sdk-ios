@@ -1585,25 +1585,37 @@ static NSString* AdViewUserAgent = nil;
         
         if (CGRectContainsRect(maxFrame, convertRect) == NO)
         {
-            if (convertRect.origin.x < 0)
+            // Adjust height and width to fit.
+            if (CGRectGetWidth(convertRect) > CGRectGetWidth(maxFrame))
             {
-                CGFloat diff = convertRect.origin.x * -1;
-                convertRect.origin.x = 0;
-                convertRect.size.width += diff;
+                convertRect.size.width = CGRectGetWidth(maxFrame);
+            }
+            if (CGRectGetHeight(convertRect) > CGRectGetHeight(maxFrame))
+            {
+                convertRect.size.height = CGRectGetHeight(maxFrame);
             }
             
-            if (convertRect.origin.y < 0)
+            // Adjust X
+            if (CGRectGetMinX(convertRect) < CGRectGetMinX(maxFrame))
             {
-                CGFloat diff = convertRect.origin.y * -1;
-                convertRect.origin.y = 0;
-                convertRect.size.height += diff;
+                convertRect.origin.x = CGRectGetMinX(maxFrame);
+            }
+            else if (CGRectGetMaxX(convertRect) > CGRectGetMaxX(maxFrame))
+            {
+                CGFloat diff = CGRectGetMaxX(convertRect) - CGRectGetMaxX(maxFrame);
+                convertRect.origin.x -= diff;
             }
             
-            if (convertRect.size.width > maxFrame.size.width)
-                convertRect.size.width = maxFrame.size.width;
-            
-            if (convertRect.size.height > maxFrame.size.height)
-                convertRect.size.height = maxFrame.size.height;
+            // Adjust Y
+            if (CGRectGetMinY(convertRect) < CGRectGetMinY(maxFrame))
+            {
+                convertRect.origin.y = CGRectGetMinX(maxFrame);
+            }
+            else if (CGRectGetMaxY(convertRect) > CGRectGetMaxY(maxFrame))
+            {
+                CGFloat diff = CGRectGetMaxY(convertRect) - CGRectGetMaxY(maxFrame);
+                convertRect.origin.y -= diff;
+            }
         }
     }
     
