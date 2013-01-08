@@ -95,7 +95,8 @@
     }
     else if ([scanner scanDouble:doubleValue])
     {
-        value = [NSNumber numberWithDouble:*doubleValue];
+        if (doubleValue != nil)
+            value = [NSNumber numberWithDouble:*doubleValue];
     }
     
     return value;

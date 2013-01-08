@@ -29,7 +29,8 @@
 static NSString* AdViewUserAgent = nil;
 
 
-@interface MASTAdView () <UIGestureRecognizerDelegate, UIWebViewDelegate, MASTMRAIDBridgeDelegate, MASTAdBrowserDelegate, CLLocationManagerDelegate, EKEventEditViewDelegate>
+@interface MASTAdView () <UIGestureRecognizerDelegate, UIWebViewDelegate, MASTMRAIDBridgeDelegate,
+    MASTAdBrowserDelegate, MASTModalViewControllerDelegate, CLLocationManagerDelegate, EKEventEditViewDelegate>
 
 // Ad fetching
 @property (nonatomic, strong) NSURLConnection* connection;
@@ -66,7 +67,7 @@ static NSString* AdViewUserAgent = nil;
 @property (nonatomic, strong) MASTAdBrowser* adBrowser;
 
 // Used to render interstitial, expand and internal browser.
-@property (nonatomic, strong) UIViewController* modalViewController;
+@property (nonatomic, strong) MASTModalViewController* modalViewController;
 
 // Used to track state of the status bar prior to modal view.
 @property (nonatomic, assign) BOOL statusBarHidden;
@@ -193,13 +194,6 @@ static NSString* AdViewUserAgent = nil;
         self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
         self.tapGesture.delegate = self;
         [self addGestureRecognizer:self.tapGesture];
-        
-        [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self 
-                                                 selector:@selector(deviceOrientationDidChangeNotification)
-                                                     name:UIDeviceOrientationDidChangeNotification
-                                                   object:nil];
     }
     return self;
 }
@@ -457,9 +451,6 @@ static NSString* AdViewUserAgent = nil;
     if (self.modalViewController.view.superview != nil)
         return;
     
-    // Reset the exanded view's rotation.
-    [self rotateModalView:0];
-    
     [self presentModalView:self.expandView];
     
     [self performAdTracking];
@@ -631,42 +622,10 @@ static NSString* AdViewUserAgent = nil;
     if (modalViewController == nil)
     {
         modalViewController = [MASTModalViewController new];
+        modalViewController.delegate = self;
     }
     
     return modalViewController;
-}
-
-- (void)rotateModalView:(CGFloat)degrees
-{
-    CGAffineTransform transform = CGAffineTransformIdentity;
-    if (degrees != 0)
-    {
-        CGFloat radians = degrees * M_PI / 180.0;
-        transform = CGAffineTransformMakeRotation(radians);
-    }
-    
-    [UIView animateWithDuration:.30
-                     animations:^
-     {
-         CGRect rotatedRect = CGRectApplyAffineTransform(self.modalViewController.view.frame, transform);
-         
-         self.modalViewController.view.transform = transform;
-         self.modalViewController.view.bounds = CGRectMake(0, 0, rotatedRect.size.width, rotatedRect.size.height);
-     }
-                     completion:^(BOOL finished)
-     {
-         if (self.mraidBridge != nil)
-         {
-             if (self.mraidBridge.state == MASTMRAIDBridgeStateExpanded)
-             {
-                 // Fetch the position relative to the screenSize.
-                 CGRect absoluteFrame = self.expandView.bounds;
-                 
-                 [self.mraidBridge setCurrentPosition:absoluteFrame forWebView:self.webView];
-                 [self.mraidBridge setMaxSize:absoluteFrame.size forWebView:self.webView];
-             }
-         }
-     }];
 }
 
 - (BOOL)presentingModalView
@@ -726,6 +685,47 @@ static NSString* AdViewUserAgent = nil;
     else
     {
         [self.modalViewController dismissModalViewControllerAnimated:YES];
+    }
+}
+
+#pragma mark - MASTModalViewControllerDelegate
+
+- (void)MASTModalViewControllerDidRotate:(MASTModalViewController*)controller
+{
+    UIInterfaceOrientation interfaceOrientation = controller.interfaceOrientation;
+    
+    NSInteger degrees = 0;
+    switch (interfaceOrientation)
+    {
+        case UIInterfaceOrientationPortrait:
+            degrees = 0;
+            break;
+        case UIInterfaceOrientationLandscapeLeft:
+            degrees = -90;
+            break;
+        case UIInterfaceOrientationLandscapeRight:
+            degrees = 90;
+            break;
+        case UIInterfaceOrientationPortraitUpsideDown:
+            degrees = 180;
+            break;
+    }
+    
+    if ((self.mraidBridge != nil) && (self.mraidBridge.state == MASTMRAIDBridgeStateExpanded))
+    {
+        CGRect absoluteFrame = self.expandView.bounds;
+        [self.mraidBridge setCurrentPosition:absoluteFrame forWebView:self.webView];
+        [self.mraidBridge setMaxSize:absoluteFrame.size forWebView:self.webView];
+    }
+    
+    // Workaround for pre-iOS 5 UIWebView not telling JS about the change.
+    if ([[[UIDevice currentDevice] systemVersion] integerValue] < 5)
+    {
+        NSString* script = [NSString stringWithFormat:@"window.__defineGetter__('orientation',function(){return %i;});", degrees];
+        
+        script = [script stringByAppendingString:@"(function(){var event = document.createEvent('Events'); event.initEvent('orientationchange',true, false); window.dispatchEvent(event);})();"];
+        
+        [self.webView stringByEvaluatingJavaScriptFromString:script];
     }
 }
 
@@ -1340,10 +1340,7 @@ static NSString* AdViewUserAgent = nil;
             [self addSubview:self.webView];
             
             [self.webView scrollToTop];
-            
-            // Reset expand view rotation.
-            [self rotateModalView:0];
-            
+
             CGSize maxSize = [self.superview bounds].size;
             [self.mraidBridge setMaxSize:maxSize forWebView:self.webView];
             
@@ -1471,10 +1468,9 @@ static NSString* AdViewUserAgent = nil;
     
     [self invokeDelegateSelector:@selector(MASTAdViewWillExpand:)];
     
-    // Reset the exanded view's frame and rotation.
+    // Reset the exanded view's frame.
     self.expandView.frame = self.modalViewController.view.bounds;
-    [self rotateModalView:0];
-    
+
     // Move the webView to the expandView and update it's frame to match.
     [self.expandView addSubview:self.webView];
     [self.webView setFrame:self.expandView.bounds];
@@ -1501,17 +1497,19 @@ static NSString* AdViewUserAgent = nil;
 
 - (void)mraidBridgeUpdatedOrientationProperties:(MASTMRAIDBridge *)bridge
 {
+    self.modalViewController.allowRotation = bridge.orientationProperties.allowOrientationChange;
+    
     if (bridge.state != MASTMRAIDBridgeStateExpanded)
         return;
     
     switch (bridge.orientationProperties.forceOrientation)
     {
         case MASTMRAIDOrientationPropertiesForceOrientationPortrait:
-            [self rotateModalView:0];
+            [self.modalViewController forceRotateToInterfaceOrientation:UIInterfaceOrientationPortrait];
             break;
             
         case MASTMRAIDOrientationPropertiesForceOrientationLandscape:
-            [self rotateModalView:90];
+            [self.modalViewController forceRotateToInterfaceOrientation:UIInterfaceOrientationLandscapeLeft];
             break;
             
         case MASTMRAIDOrientationPropertiesForceOrientationNone:
@@ -1753,53 +1751,6 @@ static NSString* AdViewUserAgent = nil;
         
         [self.mraidBridge setDefaultPosition:absoluteFrame forWebView:self.webView];
         [self.mraidBridge setCurrentPosition:absoluteFrame forWebView:self.webView];
-    }
-}
-
-#pragma mark - Notification Center
-
-- (void)deviceOrientationDidChangeNotification
-{
-    UIDeviceOrientation deviceOrientation = [[UIDevice currentDevice] orientation];
-    UIInterfaceOrientation interfaceOrientation = deviceOrientation;
-    
-    NSInteger degrees = 0;
-    switch (interfaceOrientation) 
-    { 
-        case UIInterfaceOrientationPortrait:
-            degrees = 0;
-            break;
-        case UIInterfaceOrientationLandscapeLeft:
-            degrees = -90; 
-            break;
-        case UIInterfaceOrientationLandscapeRight: 
-            degrees = 90;
-            break;
-        case UIInterfaceOrientationPortraitUpsideDown: 
-            degrees = 180;
-            break;
-    }
-    
-    if ((self.mraidBridge != nil) && (self.mraidBridge.state == MASTMRAIDBridgeStateExpanded))
-    {
-        if (self.mraidBridge.orientationProperties.allowOrientationChange)
-        {
-            [self rotateModalView:degrees];
-        }
-    }
-    else
-    {
-        [self rotateModalView:degrees];
-    }
-
-    // Workaround for pre-iOS 5 UIWebView not telling JS about the change.
-    if ([[[UIDevice currentDevice] systemVersion] integerValue] < 5)
-    {
-        NSString* script = [NSString stringWithFormat:@"window.__defineGetter__('orientation',function(){return %i;});", degrees];
-        
-        script = [script stringByAppendingString:@"(function(){var event = document.createEvent('Events'); event.initEvent('orientationchange',true, false); window.dispatchEvent(event);})();"];
-        
-        [self.webView stringByEvaluatingJavaScriptFromString:script];
     }
 }
 

@@ -8,14 +8,6 @@
 #import <UIKit/UIKit.h>
 
 
-typedef enum
-{
-    MASTMRAIDExpandPropertiesForceOrientationPortrait = 0,
-    MASTMRAIDExpandPropertiesForceOrientationLandscape,
-    MASTMRAIDExpandPropertiesForceOrientationNone,
-}MASTMRAIDExpandPropertiesForceOrientation;
-
-
 @interface MASTMRAIDExpandProperties : NSObject
 
 + (MASTMRAIDExpandProperties*)propertiesFromArgs:(NSDictionary*)args;
