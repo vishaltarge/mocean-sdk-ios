@@ -2,7 +2,7 @@
 //  MASTDefaults.h
 //  MASTAdView
 //
-//  Copyright (c) 2011, 2012 Mocean Mobile. All rights reserved.
+//  Copyright (c) 2011, 2012, 2013 Mocean Mobile. All rights reserved.
 //
 
 #ifndef MASTAdView_MASTDefaults_h

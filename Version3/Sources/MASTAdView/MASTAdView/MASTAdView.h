@@ -2,7 +2,7 @@
 //  MASTAdView
 //
 //  Created on 9/21/12.
-//  Copyright (c) 2011, 2012 Mocean Mobile. All rights reserved.
+//  Copyright (c) 2011, 2012, 2013 Mocean Mobile. All rights reserved.
 //
 //
 //
@@ -50,8 +50,9 @@ typedef enum
  */
 typedef enum
 {
-    MASTAdViewLogEventTypeError = 0,
-    MASTAdViewLogEventTypeDebug = 1
+    MASTADViewLogEventTypeNone = 0,
+    MASTAdViewLogEventTypeError = 1,
+    MASTAdViewLogEventTypeDebug = 2,
 } MASTAdViewLogEventType;
 
 
@@ -189,7 +190,8 @@ typedef enum
 /** Sent when the ad view is about to log an event.
  
  Logging in the SDK is done with NSLog().  Implement and return `NO` to log to application specific
- log files.
+ log files.  This message will only be sent if the event type is equal to or higher than the MASTADView
+ instance logLevel property.
  
  @param adView The MASTAdView instance sending the message.
  @param event The log event to log.

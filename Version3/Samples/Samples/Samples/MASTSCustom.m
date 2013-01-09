@@ -124,7 +124,6 @@
     }
     else
     {
-        //self.configPopoverController = [[[UIPopoverController alloc] initWithContentViewController:navController] autorelease];
         self.configPopoverController = [[UIPopoverController alloc] initWithContentViewController:navController];
         [self.configPopoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }

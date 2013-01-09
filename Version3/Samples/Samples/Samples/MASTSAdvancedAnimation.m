@@ -79,12 +79,22 @@
 
 #pragma mark
 
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
-    [self animateHideAd];
-    
-    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    return toInterfaceOrientation == UIInterfaceOrientationPortrait;
 }
+
+- (BOOL)shouldAutorotate
+{
+    return NO;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+#pragma mark -
 
 - (void)updateAdWithConfig:(MASTSAdConfigController *)configController
 {

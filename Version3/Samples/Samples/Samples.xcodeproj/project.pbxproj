@@ -42,7 +42,6 @@
 		C54969DE1543453B006F9444 /* MASTSDelegateGeneric.m in Sources */ = {isa = PBXBuildFile; fileRef = C54969DD1543453B006F9444 /* MASTSDelegateGeneric.m */; };
 		C54969E115434556006F9444 /* MASTSDelegateMRAID.m in Sources */ = {isa = PBXBuildFile; fileRef = C54969E015434556006F9444 /* MASTSDelegateMRAID.m */; };
 		C54969E415434566006F9444 /* MASTSDelegateThirdParty.m in Sources */ = {isa = PBXBuildFile; fileRef = C54969E315434566006F9444 /* MASTSDelegateThirdParty.m */; };
-		C54969F115434EF7006F9444 /* MASTSLogController.m in Sources */ = {isa = PBXBuildFile; fileRef = C54969F015434EF7006F9444 /* MASTSLogController.m */; };
 		C57D7BB51648A4F80084B896 /* MASTSSimpleAnimatedGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = C57D7BB41648A4F80084B896 /* MASTSSimpleAnimatedGIF.m */; };
 		C5ACCB7D1610EDBD0018E0AD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5ACCB7C1610EDBD0018E0AD /* CoreGraphics.framework */; };
 		C5B722D8165C0A3E0061F385 /* MASTSCustomLocal.m in Sources */ = {isa = PBXBuildFile; fileRef = C5B722D7165C0A3E0061F385 /* MASTSCustomLocal.m */; };
@@ -51,6 +50,7 @@
 		C5D30D7C161A1C9800CA45A3 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D30D7B161A1C9800CA45A3 /* EventKitUI.framework */; };
 		C5D30D8A161A261600CA45A3 /* libMASTAdView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D30D89161A25CD00CA45A3 /* libMASTAdView.a */; };
 		C5E1DB9F1635C15A007F4959 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5E1DB9E1635C15A007F4959 /* ImageIO.framework */; };
+		C5FE8271169D148800FEDEB6 /* UINavigationController+Rotation.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FE8270169D148800FEDEB6 /* UINavigationController+Rotation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,8 +129,6 @@
 		C54969E015434556006F9444 /* MASTSDelegateMRAID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSDelegateMRAID.m; sourceTree = "<group>"; };
 		C54969E215434566006F9444 /* MASTSDelegateThirdParty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSDelegateThirdParty.h; sourceTree = "<group>"; };
 		C54969E315434566006F9444 /* MASTSDelegateThirdParty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSDelegateThirdParty.m; sourceTree = "<group>"; };
-		C54969EF15434EF7006F9444 /* MASTSLogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSLogController.h; sourceTree = "<group>"; };
-		C54969F015434EF7006F9444 /* MASTSLogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSLogController.m; sourceTree = "<group>"; };
 		C57D7BB31648A4F80084B896 /* MASTSSimpleAnimatedGIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSSimpleAnimatedGIF.h; sourceTree = "<group>"; };
 		C57D7BB41648A4F80084B896 /* MASTSSimpleAnimatedGIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSSimpleAnimatedGIF.m; sourceTree = "<group>"; };
 		C5ACCB7C1610EDBD0018E0AD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -142,6 +140,8 @@
 		C5D30CF91612558A00CA45A3 /* MASTSSimpleInterstitialDirect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSSimpleInterstitialDirect.m; sourceTree = "<group>"; };
 		C5D30D7B161A1C9800CA45A3 /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
 		C5E1DB9E1635C15A007F4959 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		C5FE826F169D148800FEDEB6 /* UINavigationController+Rotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Rotation.h"; sourceTree = "<group>"; };
+		C5FE8270169D148800FEDEB6 /* UINavigationController+Rotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+Rotation.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,8 +232,6 @@
 				3C91DDD6153F737500FCF6CD /* MASTSDetailController.m */,
 				3C91DDC5153F737400FCF6CD /* MASTSAdConfigController.h */,
 				3C91DDC6153F737400FCF6CD /* MASTSAdConfigController.m */,
-				C54969EF15434EF7006F9444 /* MASTSLogController.h */,
-				C54969F015434EF7006F9444 /* MASTSLogController.m */,
 				3C91DDD7153F737500FCF6CD /* MASTSMainWindow_iPad.xib */,
 				3C91DDD8153F737500FCF6CD /* MASTSMainWindow_iPhone.xib */,
 			);
@@ -243,6 +241,7 @@
 		3C91DDFB153F739000FCF6CD /* Sample Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				C5FE826D169D144300FEDEB6 /* Extensions */,
 				3C91DDFC153F739A00FCF6CD /* Simple */,
 				3C91DDFD153F739F00FCF6CD /* Advanced */,
 				3C91DDFE153F73A600FCF6CD /* Custom */,
@@ -335,6 +334,15 @@
 				C5D30D89161A25CD00CA45A3 /* libMASTAdView.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		C5FE826D169D144300FEDEB6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C5FE826F169D148800FEDEB6 /* UINavigationController+Rotation.h */,
+				C5FE8270169D148800FEDEB6 /* UINavigationController+Rotation.m */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -447,10 +455,10 @@
 				C54969DE1543453B006F9444 /* MASTSDelegateGeneric.m in Sources */,
 				C54969E115434556006F9444 /* MASTSDelegateMRAID.m in Sources */,
 				C54969E415434566006F9444 /* MASTSDelegateThirdParty.m in Sources */,
-				C54969F115434EF7006F9444 /* MASTSLogController.m in Sources */,
 				C5D30CFA1612558A00CA45A3 /* MASTSSimpleInterstitialDirect.m in Sources */,
 				C57D7BB51648A4F80084B896 /* MASTSSimpleAnimatedGIF.m in Sources */,
 				C5B722D8165C0A3E0061F385 /* MASTSCustomLocal.m in Sources */,
+				C5FE8271169D148800FEDEB6 /* UINavigationController+Rotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

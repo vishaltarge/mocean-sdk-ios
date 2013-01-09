@@ -2,7 +2,7 @@
 //  MASTAdView
 //
 //  Created on 9/21/12.
-//  Copyright (c) 2011, 2012 Mocean Mobile. All rights reserved.
+//  Copyright (c) 2011, 2012, 2013 Mocean Mobile. All rights reserved.
 //
 
 #import "MASTDefaults.h"
@@ -107,7 +107,7 @@ static NSString* AdViewUserAgent = nil;
 @synthesize labelView, imageView, expandView, resizeView;
 @synthesize site, zone, useInternalBrowser, placementType;
 @synthesize adServerURL, adRequestParameters;
-@synthesize test;
+@synthesize test, logLevel;
 @synthesize delegate;
 @synthesize connection, dataBuffer, webView;
 @synthesize updateTimer, skipNextUpdateTick, interstitialTimer;
@@ -137,7 +137,6 @@ static NSString* AdViewUserAgent = nil;
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
 
     [self reset];
     
@@ -1208,7 +1207,7 @@ static NSString* AdViewUserAgent = nil;
     
     NSString* mraidScript = [[NSString alloc] initWithData:jsData encoding:NSUTF8StringEncoding];
     
-    NSString* htmlContent = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"user-scalable=0;\"/><script>%@</script><style>*:not(input){-webkit-touch-callout:none;-webkit-user-select:none;}body{margin:0;padding:0;}</style></head><body>%@</body></html>", mraidScript, mraidHtml];
+    NSString* htmlContent = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"user-scalable=0;\"/><script>%@</script><style>*:not(input){-webkit-touch-callout:none;-webkit-user-select:none;-webkit-text-size-adjust:none;}body{margin:0;padding:0;}</style></head><body>%@</body></html>", mraidScript, mraidHtml];
 
     self.mraidBridge = [MASTMRAIDBridge new];
     self.mraidBridge.delegate = self;
@@ -2489,6 +2488,9 @@ static NSString* AdViewUserAgent = nil;
 
 - (void)logEvent:(NSString*)event ofType:(MASTAdViewLogEventType)type func:(const char*)func line:(int)line
 {
+    if (type >= self.logLevel)
+        return;
+    
     NSString* eventString = [NSString stringWithFormat:@"[%d, %s] %@", line, func, event];
     
     __block BOOL shouldLog = YES;

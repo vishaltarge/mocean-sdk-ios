@@ -11,6 +11,7 @@
 #import "MASTSDetailController.h"
 #import "MASTSSplitViewController.h"
 #import "MASTAdView.h"
+#import "UINavigationController+Rotation.h"
 
 
 @interface MASTSAppDelegate()
@@ -45,6 +46,10 @@
     mastsMenuController.delegate = self;
     self.menuNavController = [[[UINavigationController alloc] initWithRootViewController:mastsMenuController] autorelease];
 
+    
+    self.rootController = self.menuNavController;
+    
+    /*
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
     {
         self.rootController = self.menuNavController;
@@ -70,6 +75,7 @@
         [mastsMenuController tableView:mastsMenuController.tableView
                didSelectRowAtIndexPath:indexPath];
     }
+     */
     
     [self.window setRootViewController:self.rootController];
     
@@ -141,6 +147,9 @@
 
 - (void)menuController:(MASTSMenuController*)menuController presentController:(UIViewController*)controller
 {
+    [self.menuNavController pushViewController:controller animated:YES];
+    
+    /*
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
     {
         [self.menuNavController pushViewController:controller animated:YES];
@@ -157,6 +166,7 @@
         
         [self.popoverController dismissPopoverAnimated:YES];
     }
+     */
 }
 
 @end

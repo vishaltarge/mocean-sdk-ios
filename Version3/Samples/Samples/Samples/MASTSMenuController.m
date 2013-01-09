@@ -7,7 +7,6 @@
 //
 
 #import "MASTSMenuController.h"
-#import "MASTSLogController.h"
 
 // Sample ad usage controllers:
 #import "MASTSSimpleImage.h"
@@ -87,7 +86,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 5;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -102,8 +101,6 @@
             return 2;
         case 3:
             return 3;
-        case 4:
-            return 1;
     }
     return 0;
 }
@@ -120,8 +117,6 @@
             return @"Custom";
         case 3:
             return @"Delegate";
-        case 4:
-            return @"SDK Options";
     }
     
     return nil;
@@ -135,10 +130,10 @@
     {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         
-        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-        {
+        //if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+        //{
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        }
+        //}
     }
     cell.selectionStyle = UITableViewCellSelectionStyleBlue;
     cell.accessoryView = nil;
@@ -216,16 +211,6 @@
                     break;
                 case 2:
                     label = @"Third Party Request";
-                    break;
-            }
-            break;
-        }
-        case 4:
-        {
-            switch (indexPath.row)
-            {
-                case 0:
-                    label = @"Log Viewer";
                     break;
             }
             break;
@@ -317,16 +302,6 @@
                     break;
                 case 2:
                     testController = [[MASTSDelegateThirdParty new] autorelease];
-                    break;
-            }
-            break;
-        }
-        case 4:
-        {
-            switch (indexPath.row)
-            {
-                case 0:
-                    testController = [[MASTSLogController new] autorelease];
                     break;
             }
             break;

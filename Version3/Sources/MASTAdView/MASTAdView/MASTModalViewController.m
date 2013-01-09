@@ -78,7 +78,7 @@
     {
         case UIInterfaceOrientationPortrait:
         case UIInterfaceOrientationPortraitUpsideDown:
-            return UIInterfaceOrientationPortrait;
+            return UIInterfaceOrientationMaskPortrait;
 
         case UIInterfaceOrientationLandscapeLeft:
         case UIInterfaceOrientationLandscapeRight:
