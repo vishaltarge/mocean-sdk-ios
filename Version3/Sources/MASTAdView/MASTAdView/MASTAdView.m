@@ -97,7 +97,7 @@ static NSString* AdViewUserAgent = nil;
 
 // Returns the current frame as it is positioned in it's window.
 // If not on a window, returns the raw frame as-is.
-- (CGRect)absoluteFrame;
+- (CGRect)absoluteFrameForView:(UIView*)view;
 
 @end
 
@@ -1409,7 +1409,7 @@ static NSString* AdViewUserAgent = nil;
 
 - (void)mraidBridgeUpdateCurrentPosition:(MASTMRAIDBridge*)bridge
 {
-    CGRect absoluteFrame = [self absoluteFrame];
+    CGRect absoluteFrame = [self absoluteFrameForView:self];
     [self.mraidBridge setCurrentPosition:absoluteFrame forWebView:self.webView];
 }
 
@@ -1569,7 +1569,7 @@ static NSString* AdViewUserAgent = nil;
     }
 
     CGRect currentFrame = self.frame;
-    CGRect convertRect = [self.superview convertRect:currentFrame fromView:self];
+    CGRect convertRect = currentFrame;
     
     convertRect.origin.x += requestedOffset.x;
     convertRect.origin.y += requestedOffset.y;
@@ -1739,18 +1739,40 @@ static NSString* AdViewUserAgent = nil;
     }
 }
 
+// Updates MRAID on size changes.  Note that this also makes an assumption that if this instance
+// changes that the resize view may also change if in a resized state.  This is becuase both views
+// share the same autoresizingmask and superview.
 - (void)setFrame:(CGRect)frame
 {
     [super setFrame:frame];
 
     if (self.mraidBridge != nil)
     {
-        // Fetch the position relative to the screenSize.
-        CGRect absoluteFrame = [self absoluteFrame];
+        CGRect absoluteFrame = [self absoluteFrameForView:self];
         
-        [self.mraidBridge setDefaultPosition:absoluteFrame forWebView:self.webView];
-        [self.mraidBridge setCurrentPosition:absoluteFrame forWebView:self.webView];
+        if (self.placementType == MASTAdViewPlacementTypeInterstitial)
+            absoluteFrame = self.expandView.bounds;
+        
+        switch (self.mraidBridge.state)
+        {
+            case MASTMRAIDBridgeStateDefault:
+                [self.mraidBridge setDefaultPosition:absoluteFrame forWebView:self.webView];
+                [self.mraidBridge setCurrentPosition:absoluteFrame forWebView:self.webView];
+                break;
+                
+            case MASTMRAIDBridgeStateResized:
+                absoluteFrame = [self absoluteFrameForView:self.resizeView];
+                [self.mraidBridge setCurrentPosition:absoluteFrame forWebView:self.webView];
+            default:
+                break;
+        }
     }
+}
+
+- (void)setAutoresizingMask:(UIViewAutoresizing)autoresizingMask
+{
+    super.autoresizingMask = autoresizingMask;
+    self.resizeView.autoresizingMask = autoresizingMask;
 }
 
 #pragma mark - Calendar Interactions
@@ -2331,7 +2353,7 @@ static NSString* AdViewUserAgent = nil;
             [self.mraidBridge setMaxSize:maxSize forWebView:wv];
             
             // Fetch the position relative to the screenSize.
-            CGRect absoluteFrame = [self absoluteFrame];
+            CGRect absoluteFrame = [self absoluteFrameForView:self];
             
             if (self.placementType == MASTAdViewPlacementTypeInterstitial)
                 absoluteFrame = self.expandView.bounds;
@@ -2648,13 +2670,13 @@ static NSString* AdViewUserAgent = nil;
     return screenSize;
 }
 
-- (CGRect)absoluteFrame
+- (CGRect)absoluteFrameForView:(UIView*)view
 {
     UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     
     CGRect windowRect = [[[UIApplication sharedApplication] keyWindow] bounds];
     
-    CGRect rectAbsolute = [self convertRect:self.bounds toView:nil];
+    CGRect rectAbsolute = [view convertRect:view.bounds toView:nil];
 
     if (UIInterfaceOrientationIsLandscape(interfaceOrientation))
     {
