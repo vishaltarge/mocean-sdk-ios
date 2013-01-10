@@ -183,6 +183,8 @@ static NSString* AdViewUserAgent = nil;
     {
         self.autoresizesSubviews = YES;
         
+        self.logLevel = MASTAdViewLogEventTypeError;
+        
         placementType = MASTAdViewPlacementTypeInline;
         
         self.adServerURL = MAST_DEFAULT_AD_SERVER_URL;
@@ -2510,10 +2512,7 @@ static NSString* AdViewUserAgent = nil;
 
 - (void)logEvent:(NSString*)event ofType:(MASTAdViewLogEventType)type func:(const char*)func line:(int)line
 {
-    // Since the compiler dosn't like casting and comparing enumes as expected...
-    NSInteger t = type;
-    NSInteger l = self.logLevel;
-    if (t >= l)
+    if (type > self.logLevel)
         return;
     
     NSString* eventString = [NSString stringWithFormat:@"[%d, %s] %@", line, func, event];
