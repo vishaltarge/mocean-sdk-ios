@@ -2510,7 +2510,10 @@ static NSString* AdViewUserAgent = nil;
 
 - (void)logEvent:(NSString*)event ofType:(MASTAdViewLogEventType)type func:(const char*)func line:(int)line
 {
-    if (type >= self.logLevel)
+    // Since the compiler dosn't like casting and comparing enumes as expected...
+    NSInteger t = type;
+    NSInteger l = self.logLevel;
+    if (t >= l)
         return;
     
     NSString* eventString = [NSString stringWithFormat:@"[%d, %s] %@", line, func, event];
