@@ -54,9 +54,9 @@
     return YES;
 }
 
-- (UIViewController*)MASTAdView:(MASTAdView *)adView shouldSaveCalendarEvent:(EKEvent *)event inEventStore:(EKEventStore *)eventStore
+- (BOOL)MASTAdView:(MASTAdView *)adView shouldSaveCalendarEvent:(EKEvent *)event inEventStore:(EKEventStore *)eventStore
 {
-    return self;
+    return YES;
 }
 
 @end

@@ -241,7 +241,7 @@
     return YES;
 }
 
-- (UIViewController*)MASTAdView:(MASTAdView*)adView shouldSaveCalendarEvent:(EKEvent*)event inEventStore:(EKEventStore*)eventStore
+- (BOOL)MASTAdView:(MASTAdView*)adView shouldSaveCalendarEvent:(EKEvent*)event inEventStore:(EKEventStore*)eventStore
 {
     NSMutableString* entry = [NSMutableString stringWithString:@"MASTAdView:shouldSaveCalendarEvent:inEventStore:"];
     [entry appendFormat:@"\nadView: %@", [adView description]];
@@ -250,7 +250,7 @@
     
     [self writeEntry:entry];
     
-    return self;
+    return YES;
 }
 
 - (BOOL)MASTAdView:(MASTAdView*)adView shouldSavePhotoToCameraRoll:(UIImage*)image

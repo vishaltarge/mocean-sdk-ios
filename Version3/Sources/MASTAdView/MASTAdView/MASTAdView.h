@@ -296,10 +296,10 @@ typedef enum
  @param adView The MASTAdView instance sending the message.
  @param event The event to save.
  @param eventStore the store to save the event too.
- @return A view controller instance that will be the base of presenting the event edit view
- controller to allow the user to edit and save or cancel the calendar event.
+ @return `NO` Do not attempt to add the calendar event.
+ @return `YES` Present the calendar event editor to the user to allow them to edit and save or cancel the event.
  */
-- (UIViewController*)MASTAdView:(MASTAdView*)adView shouldSaveCalendarEvent:(EKEvent*)event inEventStore:(EKEventStore*)eventStore;
+- (BOOL)MASTAdView:(MASTAdView*)adView shouldSaveCalendarEvent:(EKEvent*)event inEventStore:(EKEventStore*)eventStore;
 
 
 /** Sent when a richmedia ad attempts to save a picture to the camera roll.
@@ -334,6 +334,17 @@ typedef enum
  @param event The NSURLRequest containing the event request.
  */
 - (void)MASTAdView:(MASTAdView *)adView didProcessRichmediaRequest:(NSURLRequest*)event;
+
+
+/** Sent to allow the application to override the controller used to present modal controllers.
+ 
+ The SDK by default will use the [[[UIApplication sharedApplication] keyWindow] rootViewController]
+ to display modal dialogs.  These include richmedia expand, internal browser and calendar event
+ creation.  To override using this controller implement this message and return the view controller
+ that can be used to present modal view controllers.
+ 
+ */
+- (UIViewController*)MASTAdViewPresentationController:(MASTAdView*)adView;
 
 @end
 

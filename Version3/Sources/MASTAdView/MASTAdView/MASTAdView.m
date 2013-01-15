@@ -69,6 +69,9 @@ static NSString* AdViewUserAgent = nil;
 // Used to render interstitial, expand and internal browser.
 @property (nonatomic, strong) MASTModalViewController* modalViewController;
 
+// Used to re-expand the ad if a calendar event is  created.
+@property (nonatomic, assign) BOOL calendarReExpand;
+
 // Used to track state of the status bar prior to modal view.
 @property (nonatomic, assign) BOOL statusBarHidden;
 
@@ -117,7 +120,7 @@ static NSString* AdViewUserAgent = nil;
 @synthesize adDescriptor;
 @synthesize mraidBridge;
 @synthesize adBrowser;
-@synthesize modalViewController, statusBarHidden;
+@synthesize modalViewController, calendarReExpand, statusBarHidden;
 @synthesize isExpandedURL;
 @synthesize expandedAdView;
 @synthesize invokeTracking;
@@ -542,7 +545,7 @@ static NSString* AdViewUserAgent = nil;
     if (self.modalViewController.view.superview == nil)
         return;
     
-    [self dismissModalView:self.expandView];
+    [self dismissModalView:self.expandView animated:YES];
     
     if (self.mraidBridge != nil)
     {
@@ -586,7 +589,7 @@ static NSString* AdViewUserAgent = nil;
 
 - (void)closeAdBrowser
 {
-    [self dismissModalView:self.adBrowser.view];
+    [self dismissModalView:self.adBrowser.view animated:YES];
     self.adBrowser = nil;
 
     [self restartUpdateTimer];
@@ -686,6 +689,11 @@ static NSString* AdViewUserAgent = nil;
         
         UIViewController* rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
         
+        if ([self.delegate respondsToSelector:@selector(MASTAdViewPresentationController:)])
+        {
+            rootViewController = [self.delegate MASTAdViewPresentationController:self];
+        }
+        
         if ([rootViewController respondsToSelector:@selector(presentViewController:animated:completion:)])
         {
             [rootViewController presentViewController:self.modalViewController animated:YES completion:nil];
@@ -697,7 +705,7 @@ static NSString* AdViewUserAgent = nil;
     }
 }
 
-- (void)dismissModalView:(UIView*)view
+- (void)dismissModalView:(UIView*)view animated:(BOOL)animated
 {
     if (self.modalViewController.view.superview == nil)
         return;
@@ -715,11 +723,11 @@ static NSString* AdViewUserAgent = nil;
     
     if ([self.modalViewController respondsToSelector:@selector(dismissViewControllerAnimated:completion:)])
     {
-        [self.modalViewController dismissViewControllerAnimated:YES completion:nil];
+        [self.modalViewController dismissViewControllerAnimated:animated completion:nil];
     }
     else
     {
-        [self.modalViewController dismissModalViewControllerAnimated:YES];
+        [self.modalViewController dismissModalViewControllerAnimated:animated];
     }
 }
 
@@ -1388,7 +1396,7 @@ static NSString* AdViewUserAgent = nil;
             [self prepareCloseButton];
             [self restartUpdateTimer];
             
-            [self dismissModalView:self.expandView];
+            [self dismissModalView:self.expandView animated:YES];
 
             [self invokeDelegateSelector:@selector(MASTAdViewDidCollapse:)];
 
@@ -1920,33 +1928,46 @@ static NSString* AdViewUserAgent = nil;
             }
         }
         
-        __block UIViewController* rootController = nil;
-        
         [self invokeDelegateBlock:^
          {
-             rootController = [self.delegate MASTAdView:self
-                                shouldSaveCalendarEvent:event
-                                           inEventStore:store];
+             BOOL shouldSave = [self.delegate MASTAdView:self
+                                 shouldSaveCalendarEvent:event
+                                            inEventStore:store];
+             
+             UIViewController* rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
+             
+             if ([self.delegate respondsToSelector:@selector(MASTAdViewPresentationController:)])
+             {
+                 rootViewController = [self.delegate MASTAdViewPresentationController:self];
+             }
              
              // Included in this block since this block occurs on the main thread and the
              // following must be on the main thread since it's interacting with the UI.
-             if (rootController != nil)
+             if (shouldSave && (rootViewController != nil))
              {
                  EKEventEditViewController* eventViewController = [EKEventEditViewController new];
                  eventViewController.eventStore = store;
                  eventViewController.event = event;
                  eventViewController.editViewDelegate = self;
                  
-                 if ([rootController respondsToSelector:@selector(presentViewController:animated:completion:)])
+                 self.calendarReExpand = NO;
+                 if ([self presentingModalView])
                  {
-                     [rootController presentViewController:eventViewController
-                                                  animated:YES
-                                                completion:nil];
+                     self.calendarReExpand = YES;
+                     
+                     [self dismissModalView:self.expandView animated:NO];
+                 }
+                 
+                 if ([rootViewController respondsToSelector:@selector(presentViewController:animated:completion:)])
+                 {
+                     [rootViewController presentViewController:eventViewController
+                                                      animated:YES
+                                                    completion:nil];
                  }
                  else
                  {
-                     [rootController presentModalViewController:eventViewController
-                                                       animated:YES];
+                     [rootViewController presentModalViewController:eventViewController
+                                                           animated:YES];
                  }
                  
                  if (self.mraidBridge.state == MASTMRAIDBridgeStateExpanded)
@@ -1970,11 +1991,6 @@ static NSString* AdViewUserAgent = nil;
 - (void)eventEditViewController:(EKEventEditViewController *)controller
           didCompleteWithAction:(EKEventEditViewAction)action
 {
-    if (self.mraidBridge.state == MASTMRAIDBridgeStateExpanded)
-    {
-        // TODO: [self.expandWindow setHidden:NO];
-    }
-    
     switch (action)
     {
         case EKEventEditViewActionCanceled:
@@ -2022,13 +2038,20 @@ static NSString* AdViewUserAgent = nil;
         }
     }
     
+    BOOL animated = self.calendarReExpand == NO;
+    
     if ([controller respondsToSelector:@selector(presentingViewController)])
     {
-        [parentViewController dismissViewControllerAnimated:YES completion:nil];
+        [parentViewController dismissViewControllerAnimated:animated completion:nil];
     }
     else
     {
-        [parentViewController dismissModalViewControllerAnimated:YES];
+        [parentViewController dismissModalViewControllerAnimated:animated];
+    }
+    
+    if (self.calendarReExpand)
+    {
+        [self presentModalView:self.expandView];
     }
 }
 
