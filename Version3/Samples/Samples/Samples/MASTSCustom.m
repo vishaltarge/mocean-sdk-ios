@@ -118,7 +118,7 @@
     else
     {
         self.configPopoverController = [[UIPopoverController alloc] initWithContentViewController:navController];
-        [self.configPopoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        [self.configPopoverController presentPopoverFromBarButtonItem:self.navigationItem.rightBarButtonItem permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
 }
 
