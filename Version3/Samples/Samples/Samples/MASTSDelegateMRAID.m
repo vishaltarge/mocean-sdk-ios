@@ -23,9 +23,6 @@
     
     self.adView.site = site;
     self.adView.zone = zone;
-    
-    super.adConfigController.site = site;
-    super.adConfigController.zone = zone;
 }
 
 @end

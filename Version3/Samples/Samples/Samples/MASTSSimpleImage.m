@@ -24,9 +24,6 @@
     
     super.adView.site = site;
     super.adView.zone = zone;
-    
-    super.adConfigController.site = site;
-    super.adConfigController.zone = zone;
 }
 
 @end

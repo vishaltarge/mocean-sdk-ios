@@ -24,6 +24,15 @@
     
     [super dealloc];
 }
+
+- (void)refresh:(id)sender
+{
+    MASTSAdConfigPrompt* prompt = [[[MASTSAdConfigPrompt alloc] initWithDelegate:self
+                                                                            site:self.interstitialAdView.site
+                                                                            zone:self.interstitialAdView.zone] autorelease];
+    [prompt show];
+}
+
 - (void)loadView
 {
     [super loadView];
@@ -44,14 +53,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    NSInteger site = 19829;
-    NSInteger zone = 88269;
-    
-    super.adConfigController.site = site;
-    super.adConfigController.zone = zone;
-    
-    super.adConfigController.buttonTitle = @"Show";
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -62,11 +63,8 @@
     {
         self.interstitialAdView = [[MASTAdView alloc] initInterstitial];
         
-        NSInteger site = super.adConfigController.site;
-        NSInteger zone = super.adConfigController.zone;
-        
-        self.interstitialAdView.site = site;
-        self.interstitialAdView.zone = zone;
+        self.interstitialAdView.site = 19829;
+        self.interstitialAdView.zone = 88269;
         
         self.interstitialAdView.delegate = self;
         [self.interstitialAdView showCloseButton:YES afterDelay:3];
@@ -82,11 +80,8 @@
 
 #pragma mark -
 
-- (void)updateAdWithConfig:(MASTSAdConfigController *)configController
+- (void)configPrompt:(MASTSAdConfigPrompt *)prompt refreshWithSite:(NSInteger)site zone:(NSInteger)zone
 {
-    NSInteger site = configController.site;
-    NSInteger zone = configController.zone;
-    
     self.interstitialAdView.site = site;
     self.interstitialAdView.zone = zone;
     

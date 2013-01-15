@@ -489,6 +489,16 @@ typedef enum
 - (void)reset;
 
 
+/** Removes any displayed ad content and any associated state.
+ 
+ -Collapses any expanded or resized richmedia ads.
+ -Closes interstitial.
+ 
+ Unlike reset, it does not reset the instance to it's default state.
+ */
+- (void)removeContent;
+
+
 ///---------------------------------------------------------------------------------------
 /// @name Controlling interstitial presentation
 ///---------------------------------------------------------------------------------------

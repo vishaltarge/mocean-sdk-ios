@@ -400,6 +400,40 @@ static NSString* AdViewUserAgent = nil;
     [self resetWebAd];
 }
 
+- (void)removeContent
+{
+    [self closeInterstitial];
+    
+    // Stop the interstitial timer
+    if (self.interstitialTimer != nil)
+    {
+        [self.interstitialTimer performSelectorOnMainThread:@selector(invalidate) withObject:nil waitUntilDone:YES];
+        self.interstitialTimer = nil;
+    }
+    
+    // Do non-interstitial cleanup after this.
+    if (self.placementType != MASTAdViewPlacementTypeInline)
+        return;
+    
+    // Close any expanded or resized MRAID ad.
+    switch ([self.mraidBridge state])
+    {
+        case MASTMRAIDBridgeStateLoading:
+        case MASTMRAIDBridgeStateDefault:
+        case MASTMRAIDBridgeStateHidden:
+            break;
+            
+        case MASTMRAIDBridgeStateExpanded:
+        case MASTMRAIDBridgeStateResized:
+            [self mraidBridgeClose:self.mraidBridge];
+            break;
+    }
+    
+    [self resetImageAd];
+    [self resetTextAd];
+    [self resetWebAd];
+}
+
 - (void)restartUpdateTimer
 {
     if (self.updateTimer != nil)
@@ -1053,6 +1087,8 @@ static NSString* AdViewUserAgent = nil;
 // Main thread
 - (void)renderImageAd:(id)imageArg
 {
+    self.imageView.frame = self.bounds;
+    
     if ([imageArg isKindOfClass:[UIImage class]])
     {
         self.imageView.image = imageArg;
@@ -1172,6 +1208,7 @@ static NSString* AdViewUserAgent = nil;
 // Main thread
 - (void)renderTextAd:(NSString*)text
 {
+    self.labelView.frame = self.bounds;
     self.labelView.text = text;
     
     switch (self.placementType)
@@ -1209,7 +1246,7 @@ static NSString* AdViewUserAgent = nil;
     
     NSString* mraidScript = [[NSString alloc] initWithData:jsData encoding:NSUTF8StringEncoding];
     
-    NSString* htmlContent = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"user-scalable=0;\"/><script>%@</script><style>*:not(input){-webkit-touch-callout:none;-webkit-user-select:none;-webkit-text-size-adjust:none;}body{margin:0;padding:0;}</style></head><body>%@</body></html>", mraidScript, mraidHtml];
+    NSString* htmlContent = [NSString stringWithFormat:MAST_RICHMEDIA_FORMAT, mraidScript, mraidHtml];
 
     self.mraidBridge = [MASTMRAIDBridge new];
     self.mraidBridge.delegate = self;
@@ -2064,14 +2101,47 @@ static NSString* AdViewUserAgent = nil;
     MASTMoceanAdResponse* response = [[MASTMoceanAdResponse alloc] initWithXML:content];
     [response parse];
     
-    if ([response.adDescriptors count] == 0)
+    if (([response.errorCode length] > 0) || ([response.adDescriptors count] == 0))
     {
-        // This isn't an "error" since everything is working, there simply are no ads to render.
+        NSError* error = nil;
         
-        [self logEvent:@"No ad available in response."
-                ofType:MASTAdViewLogEventTypeDebug
-                  func:__func__
-                  line:__LINE__];
+        if ([response.errorCode length] > 0)
+        {
+            error = [NSError errorWithDomain:response.errorMessage
+                                        code:[response.errorCode integerValue]
+                                    userInfo:nil];
+            
+            MASTAdViewLogEventType eventType = MASTAdViewLogEventTypeError;
+            
+            if ([@"404" isEqualToString:response.errorCode])
+            {
+                eventType = MASTAdViewLogEventTypeDebug;
+            }
+
+            [self logEvent:[NSString stringWithFormat:@"Error response from server. Error code: %@.  Error message:%@", response.errorCode, response.errorMessage]
+                    ofType:MASTAdViewLogEventTypeDebug
+                      func:__func__
+                      line:__LINE__];
+        }
+        else
+        {
+            error = [NSError errorWithDomain:@"No ad available in response."
+                                        code:0
+                                    userInfo:nil];
+            
+            [self logEvent:error.domain
+                    ofType:MASTAdViewLogEventTypeDebug
+                      func:__func__
+                      line:__LINE__];
+        }
+
+        if ([self.delegate respondsToSelector:@selector(MASTAdView:didFailToReceiveAdWithError:)])
+        {
+            [self invokeDelegateBlock:^
+             {
+                 [self.delegate MASTAdView:self didFailToReceiveAdWithError:error];
+             }];
+        }
 
         return;
     }

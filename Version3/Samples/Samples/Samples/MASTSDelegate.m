@@ -9,7 +9,7 @@
 #import "MASTSDelegate.h"
 
 @interface MASTSDelegate ()
-@property (nonatomic, retain) UITextView* textView;
+
 @end
 
 @implementation MASTSDelegate
@@ -35,23 +35,12 @@
     
     adjustedFrame.size.height -= [[UIApplication sharedApplication] statusBarFrame].size.height;
     
-    // Place the config view on the bottom.
-    CGRect frame = super.adConfigController.view.frame;
-    frame.origin.y = CGRectGetMaxY(adjustedFrame) - frame.size.height;
-    super.adConfigController.view.frame = frame;
-    
-    // Update the autoresizing mask to include adjusting the top margin to cover 
-    // the navigation bar and rotation.
-    super.adConfigController.view.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | 
-        UIViewAutoresizingFlexibleTopMargin;
-
-    
     // Create a text view that captures delegate usage.
     [self.textView removeFromSuperview];
 
-    frame = super.view.bounds;
+    CGRect frame = super.view.bounds;
     frame.origin.y = CGRectGetMaxY(self.adView.frame);
-    frame.size.height -= frame.origin.y + CGRectGetHeight(super.adConfigController.view.frame);
+    frame.size.height -= frame.origin.y;
     self.textView = [[[UITextView alloc] initWithFrame:frame] autorelease];
     self.textView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin |
         UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
@@ -61,16 +50,6 @@
     [self.view sendSubviewToBack:self.textView];
     
     self.adView.delegate = self;
-}
-
-#pragma mark -
-
-- (void)keyboardWillHide:(id)notification
-{
-    // Place the config view on the bottom.
-    CGRect frame = super.adConfigController.view.frame;
-    frame.origin.y = CGRectGetMaxY(self.view.frame) - frame.size.height;
-    super.adConfigController.view.frame = frame;
 }
 
 #pragma mark - 

@@ -12,7 +12,6 @@
 		3C91DDB5153F72AC00FCF6CD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3C91DDB3153F72AC00FCF6CD /* InfoPlist.strings */; };
 		3C91DDB7153F72AC00FCF6CD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C91DDB6153F72AC00FCF6CD /* main.m */; };
 		3C91DDBB153F72AC00FCF6CD /* MASTSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C91DDBA153F72AC00FCF6CD /* MASTSAppDelegate.m */; };
-		3C91DDE7153F737500FCF6CD /* MASTSAdConfigController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C91DDC6153F737400FCF6CD /* MASTSAdConfigController.m */; };
 		3C91DDE8153F737500FCF6CD /* MASTSAdvancedAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C91DDC8153F737400FCF6CD /* MASTSAdvancedAnimation.m */; };
 		3C91DDE9153F737500FCF6CD /* MASTSAdvancedBottom.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C91DDCA153F737400FCF6CD /* MASTSAdvancedBottom.m */; };
 		3C91DDEA153F737500FCF6CD /* MASTSDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C91DDCC153F737400FCF6CD /* MASTSDelegate.m */; };
@@ -39,6 +38,14 @@
 		3C91DE2E153F761E00FCF6CD /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C91DE28153F761E00FCF6CD /* Icon-72.png */; };
 		3C91DE2F153F761E00FCF6CD /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C91DE29153F761E00FCF6CD /* Icon.png */; };
 		3C91DE30153F761E00FCF6CD /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C91DE2A153F761E00FCF6CD /* Icon@2x.png */; };
+		C511CA4216A44E3F005F61FB /* MASTSDelegateLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = C511CA4116A44E3E005F61FB /* MASTSDelegateLogging.m */; };
+		C511CA4916A45D48005F61FB /* MASTSError.m in Sources */ = {isa = PBXBuildFile; fileRef = C511CA4816A45D48005F61FB /* MASTSError.m */; };
+		C511CA4F16A45E3C005F61FB /* MASTSErrorHide.m in Sources */ = {isa = PBXBuildFile; fileRef = C511CA4E16A45E3C005F61FB /* MASTSErrorHide.m */; };
+		C511CA5216A462F5005F61FB /* MASTSErrorImage.m in Sources */ = {isa = PBXBuildFile; fileRef = C511CA5116A462F5005F61FB /* MASTSErrorImage.m */; };
+		C511CA5416A4655E005F61FB /* errorImage.png in Resources */ = {isa = PBXBuildFile; fileRef = C511CA5316A4655E005F61FB /* errorImage.png */; };
+		C511CA6416A489D1005F61FB /* MASTSAdConfigPrompt.m in Sources */ = {isa = PBXBuildFile; fileRef = C511CA6316A489D1005F61FB /* MASTSAdConfigPrompt.m */; };
+		C511CA6716A4B320005F61FB /* MASTSErrorReset.m in Sources */ = {isa = PBXBuildFile; fileRef = C511CA6616A4B320005F61FB /* MASTSErrorReset.m */; };
+		C511CA6A16A4BA36005F61FB /* MASTSDelegateNoContent.m in Sources */ = {isa = PBXBuildFile; fileRef = C511CA6916A4BA36005F61FB /* MASTSDelegateNoContent.m */; };
 		C54969DE1543453B006F9444 /* MASTSDelegateGeneric.m in Sources */ = {isa = PBXBuildFile; fileRef = C54969DD1543453B006F9444 /* MASTSDelegateGeneric.m */; };
 		C54969E115434556006F9444 /* MASTSDelegateMRAID.m in Sources */ = {isa = PBXBuildFile; fileRef = C54969E015434556006F9444 /* MASTSDelegateMRAID.m */; };
 		C54969E415434566006F9444 /* MASTSDelegateThirdParty.m in Sources */ = {isa = PBXBuildFile; fileRef = C54969E315434566006F9444 /* MASTSDelegateThirdParty.m */; };
@@ -80,8 +87,6 @@
 		3C91DDB8153F72AC00FCF6CD /* Samples-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Samples-Prefix.pch"; sourceTree = "<group>"; };
 		3C91DDB9153F72AC00FCF6CD /* MASTSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MASTSAppDelegate.h; sourceTree = "<group>"; };
 		3C91DDBA153F72AC00FCF6CD /* MASTSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MASTSAppDelegate.m; sourceTree = "<group>"; };
-		3C91DDC5153F737400FCF6CD /* MASTSAdConfigController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSAdConfigController.h; sourceTree = "<group>"; };
-		3C91DDC6153F737400FCF6CD /* MASTSAdConfigController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSAdConfigController.m; sourceTree = "<group>"; };
 		3C91DDC7153F737400FCF6CD /* MASTSAdvancedAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSAdvancedAnimation.h; sourceTree = "<group>"; };
 		3C91DDC8153F737400FCF6CD /* MASTSAdvancedAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSAdvancedAnimation.m; sourceTree = "<group>"; };
 		3C91DDC9153F737400FCF6CD /* MASTSAdvancedBottom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSAdvancedBottom.h; sourceTree = "<group>"; };
@@ -123,6 +128,21 @@
 		3C91DE28153F761E00FCF6CD /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		3C91DE29153F761E00FCF6CD /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		3C91DE2A153F761E00FCF6CD /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		C511CA4016A44E3E005F61FB /* MASTSDelegateLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSDelegateLogging.h; sourceTree = "<group>"; };
+		C511CA4116A44E3E005F61FB /* MASTSDelegateLogging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSDelegateLogging.m; sourceTree = "<group>"; };
+		C511CA4716A45D48005F61FB /* MASTSError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSError.h; sourceTree = "<group>"; };
+		C511CA4816A45D48005F61FB /* MASTSError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSError.m; sourceTree = "<group>"; };
+		C511CA4D16A45E3C005F61FB /* MASTSErrorHide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSErrorHide.h; sourceTree = "<group>"; };
+		C511CA4E16A45E3C005F61FB /* MASTSErrorHide.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSErrorHide.m; sourceTree = "<group>"; };
+		C511CA5016A462F5005F61FB /* MASTSErrorImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSErrorImage.h; sourceTree = "<group>"; };
+		C511CA5116A462F5005F61FB /* MASTSErrorImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSErrorImage.m; sourceTree = "<group>"; };
+		C511CA5316A4655E005F61FB /* errorImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = errorImage.png; sourceTree = "<group>"; };
+		C511CA6216A489D1005F61FB /* MASTSAdConfigPrompt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSAdConfigPrompt.h; sourceTree = "<group>"; };
+		C511CA6316A489D1005F61FB /* MASTSAdConfigPrompt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSAdConfigPrompt.m; sourceTree = "<group>"; };
+		C511CA6516A4B320005F61FB /* MASTSErrorReset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSErrorReset.h; sourceTree = "<group>"; };
+		C511CA6616A4B320005F61FB /* MASTSErrorReset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSErrorReset.m; sourceTree = "<group>"; };
+		C511CA6816A4BA36005F61FB /* MASTSDelegateNoContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSDelegateNoContent.h; sourceTree = "<group>"; };
+		C511CA6916A4BA36005F61FB /* MASTSDelegateNoContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSDelegateNoContent.m; sourceTree = "<group>"; };
 		C54969DC1543453B006F9444 /* MASTSDelegateGeneric.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSDelegateGeneric.h; sourceTree = "<group>"; };
 		C54969DD1543453B006F9444 /* MASTSDelegateGeneric.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSDelegateGeneric.m; sourceTree = "<group>"; };
 		C54969DF15434556006F9444 /* MASTSDelegateMRAID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSDelegateMRAID.h; sourceTree = "<group>"; };
@@ -230,8 +250,8 @@
 				3C91DDE6153F737500FCF6CD /* MASTSSplitViewController.m */,
 				3C91DDD5153F737500FCF6CD /* MASTSDetailController.h */,
 				3C91DDD6153F737500FCF6CD /* MASTSDetailController.m */,
-				3C91DDC5153F737400FCF6CD /* MASTSAdConfigController.h */,
-				3C91DDC6153F737400FCF6CD /* MASTSAdConfigController.m */,
+				C511CA6216A489D1005F61FB /* MASTSAdConfigPrompt.h */,
+				C511CA6316A489D1005F61FB /* MASTSAdConfigPrompt.m */,
 				3C91DDD7153F737500FCF6CD /* MASTSMainWindow_iPad.xib */,
 				3C91DDD8153F737500FCF6CD /* MASTSMainWindow_iPhone.xib */,
 			);
@@ -246,6 +266,7 @@
 				3C91DDFD153F739F00FCF6CD /* Advanced */,
 				3C91DDFE153F73A600FCF6CD /* Custom */,
 				C54969DB154344C4006F9444 /* Delegate */,
+				C511CA4316A45A8B005F61FB /* Error */,
 			);
 			name = "Sample Controllers";
 			sourceTree = "<group>";
@@ -291,10 +312,10 @@
 			children = (
 				3C91DDD1153F737400FCF6CD /* MASTSCustom.h */,
 				3C91DDD2153F737400FCF6CD /* MASTSCustom.m */,
-				3C91DDD3153F737500FCF6CD /* MASTSCustomConfigController.h */,
-				3C91DDD4153F737500FCF6CD /* MASTSCustomConfigController.m */,
 				C5B722D6165C0A3E0061F385 /* MASTSCustomLocal.h */,
 				C5B722D7165C0A3E0061F385 /* MASTSCustomLocal.m */,
+				3C91DDD3153F737500FCF6CD /* MASTSCustomConfigController.h */,
+				3C91DDD4153F737500FCF6CD /* MASTSCustomConfigController.m */,
 			);
 			name = Custom;
 			sourceTree = "<group>";
@@ -309,8 +330,24 @@
 				3C91DE28153F761E00FCF6CD /* Icon-72.png */,
 				3C91DE29153F761E00FCF6CD /* Icon.png */,
 				3C91DE2A153F761E00FCF6CD /* Icon@2x.png */,
+				C511CA5316A4655E005F61FB /* errorImage.png */,
 			);
 			name = Images;
+			sourceTree = "<group>";
+		};
+		C511CA4316A45A8B005F61FB /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				C511CA4716A45D48005F61FB /* MASTSError.h */,
+				C511CA4816A45D48005F61FB /* MASTSError.m */,
+				C511CA4D16A45E3C005F61FB /* MASTSErrorHide.h */,
+				C511CA4E16A45E3C005F61FB /* MASTSErrorHide.m */,
+				C511CA5016A462F5005F61FB /* MASTSErrorImage.h */,
+				C511CA5116A462F5005F61FB /* MASTSErrorImage.m */,
+				C511CA6516A4B320005F61FB /* MASTSErrorReset.h */,
+				C511CA6616A4B320005F61FB /* MASTSErrorReset.m */,
+			);
+			name = Error;
 			sourceTree = "<group>";
 		};
 		C54969DB154344C4006F9444 /* Delegate */ = {
@@ -324,6 +361,10 @@
 				C54969E015434556006F9444 /* MASTSDelegateMRAID.m */,
 				C54969E215434566006F9444 /* MASTSDelegateThirdParty.h */,
 				C54969E315434566006F9444 /* MASTSDelegateThirdParty.m */,
+				C511CA4016A44E3E005F61FB /* MASTSDelegateLogging.h */,
+				C511CA4116A44E3E005F61FB /* MASTSDelegateLogging.m */,
+				C511CA6816A4BA36005F61FB /* MASTSDelegateNoContent.h */,
+				C511CA6916A4BA36005F61FB /* MASTSDelegateNoContent.m */,
 			);
 			name = Delegate;
 			sourceTree = "<group>";
@@ -424,6 +465,7 @@
 				3C91DE2F153F761E00FCF6CD /* Icon.png in Resources */,
 				3C91DE30153F761E00FCF6CD /* Icon@2x.png in Resources */,
 				C5D30CD916123DE800CA45A3 /* Default-568h@2x.png in Resources */,
+				C511CA5416A4655E005F61FB /* errorImage.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,7 +478,6 @@
 			files = (
 				3C91DDB7153F72AC00FCF6CD /* main.m in Sources */,
 				3C91DDBB153F72AC00FCF6CD /* MASTSAppDelegate.m in Sources */,
-				3C91DDE7153F737500FCF6CD /* MASTSAdConfigController.m in Sources */,
 				3C91DDE8153F737500FCF6CD /* MASTSAdvancedAnimation.m in Sources */,
 				3C91DDE9153F737500FCF6CD /* MASTSAdvancedBottom.m in Sources */,
 				3C91DDEA153F737500FCF6CD /* MASTSDelegate.m in Sources */,
@@ -459,6 +500,13 @@
 				C57D7BB51648A4F80084B896 /* MASTSSimpleAnimatedGIF.m in Sources */,
 				C5B722D8165C0A3E0061F385 /* MASTSCustomLocal.m in Sources */,
 				C5FE8271169D148800FEDEB6 /* UINavigationController+Rotation.m in Sources */,
+				C511CA4216A44E3F005F61FB /* MASTSDelegateLogging.m in Sources */,
+				C511CA4916A45D48005F61FB /* MASTSError.m in Sources */,
+				C511CA4F16A45E3C005F61FB /* MASTSErrorHide.m in Sources */,
+				C511CA5216A462F5005F61FB /* MASTSErrorImage.m in Sources */,
+				C511CA6416A489D1005F61FB /* MASTSAdConfigPrompt.m in Sources */,
+				C511CA6716A4B320005F61FB /* MASTSErrorReset.m in Sources */,
+				C511CA6A16A4BA36005F61FB /* MASTSDelegateNoContent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

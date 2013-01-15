@@ -8,14 +8,15 @@
 
 #import "MASTSSimple.h"
 
-@interface MASTSSimple ()
+
+@interface MASTSSimple () 
 @property (nonatomic, assign) BOOL firstAppear;
 @end
 
 
 @implementation MASTSSimple
 
-@synthesize adView, adConfigController;
+@synthesize adView;
 @synthesize firstAppear;
 
 - (void)dealloc
@@ -24,9 +25,6 @@
     
     self.adView.delegate = nil;
     self.adView = nil;
-    
-    self.adConfigController.delegate = nil;
-    self.adConfigController = nil;
     
     [super dealloc];
 }
@@ -37,20 +35,18 @@
     if (self)
     {
         self.firstAppear = YES;
-        self.adConfigController = [[MASTSAdConfigController new] autorelease];
-        self.adConfigController.delegate = self;
+        
+        self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh:)] autorelease];
     }
     return self;
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (void)refresh:(id)sender
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self)
-    {
-        // Custom initialization
-    }
-    return self;
+    MASTSAdConfigPrompt* prompt = [[[MASTSAdConfigPrompt alloc] initWithDelegate:self
+                                                                           site:self.adView.site
+                                                                           zone:self.adView.zone] autorelease];
+    [prompt show];
 }
 
 - (void)loadView
@@ -72,13 +68,6 @@
     self.adView.backgroundColor = [UIColor lightGrayColor];
     self.adView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
     [self.view addSubview:self.adView];
-    
-    frame = self.adConfigController.view.bounds;
-    frame.origin.y = 65;
-    self.adConfigController.view.frame = frame;
-    self.adConfigController.view.center = self.view.center;
-    self.adConfigController.view.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
-    [self.view addSubview:self.adConfigController.view];
 }
 
 - (void)viewDidLoad
@@ -96,17 +85,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardDidShow:)
-                                                 name:UIKeyboardDidShowNotification
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillHide:)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:nil];    
+    [super viewWillAppear:animated];  
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -125,9 +104,21 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+#pragma mark -
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return YES;
+}
+
+- (BOOL)shouldAutorotate
+{
+    return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskAll;
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
@@ -137,39 +128,17 @@
 
 #pragma mark -
 
-- (void)keyboardDidShow:(id)notification
+- (void)configPrompt:(MASTSAdConfigPrompt *)prompt refreshWithSite:(NSInteger)site zone:(NSInteger)zone
 {
-    NSDictionary* info = [notification userInfo];
-    if (info == nil)
-        return;
-    
-    CGRect windowKeyboardFrame = [[info valueForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    CGRect viewKeyboardFrame = [self.view.window convertRect:windowKeyboardFrame toView:self.view];
-
-    CGRect frame = self.adConfigController.view.frame;
-    if (CGRectGetMaxY(frame) > CGRectGetMinY(viewKeyboardFrame))
-    {
-        frame.origin.y -= CGRectGetMaxY(frame) - CGRectGetMinY(viewKeyboardFrame);
-        self.adConfigController.view.frame = frame;
-    }
-}
-
-- (void)keyboardWillHide:(id)notification
-{
-    self.adConfigController.view.center= self.view.center;
-}
-
-#pragma mark -
-
-- (void)updateAdWithConfig:(MASTSAdConfigController *)configController
-{
-    NSInteger site = configController.site;
-    NSInteger zone = configController.zone;
-    
     self.adView.site = site;
     self.adView.zone = zone;
     
     [self.adView update];
+}
+
+- (void)configPromptCancel:(MASTSAdConfigPrompt *)prompt
+{
+    
 }
 
 @end

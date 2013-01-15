@@ -25,9 +25,6 @@
     self.adView.zone = zone;
     
     self.adView.delegate = self;
-    
-    super.adConfigController.site = site;
-    super.adConfigController.zone = zone;
 }
 
 #pragma mark MASTAdViewDelegate

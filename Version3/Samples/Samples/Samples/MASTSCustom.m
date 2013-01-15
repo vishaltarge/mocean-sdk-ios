@@ -29,14 +29,31 @@
 {
     self = [super init];
     if (self)
-    {
-        UIBarButtonItem* menuButton = [[[UIBarButtonItem alloc] initWithTitle:@"Menu"
-                                                                        style:UIBarButtonItemStyleBordered
-                                                                       target:self
-                                                                       action:@selector(menu:)] autorelease];
-        self.navigationItem.rightBarButtonItem = menuButton;
+    {   
+        UISegmentedControl* seg = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Menu", @"Refresh", nil]];
+        seg.segmentedControlStyle = UISegmentedControlStyleBar;
+        seg.momentary = YES;
+        [seg addTarget:self action:@selector(barMenu:) forControlEvents:UIControlEventValueChanged];
+        
+        UIBarButtonItem* segButton = [[[UIBarButtonItem alloc] initWithCustomView:seg] autorelease];
+        
+        self.navigationItem.rightBarButtonItem = segButton;
     }
     return self;
+}
+
+- (void)barMenu:(UISegmentedControl*)seg
+{
+    switch (seg.selectedSegmentIndex)
+    {
+        case 0: // menu
+            [self menu:seg];
+            break;
+            
+        case 1: // refresh (this is a hack since we know refresh exits)
+            [self performSelector:@selector(refresh:) withObject:seg];
+            break;
+    }
 }
 
 - (void)loadView
@@ -57,17 +74,6 @@
     }
     //adjustedFrame.size.height -= [[UIApplication sharedApplication] statusBarFrame].size.height;
     adjustedFrame.size.height -= adjustedBarFrame.size.height;
-    
-    
-    // Place the config view on the bottom.
-    CGRect frame = super.adConfigController.view.frame;
-    frame.origin.y = CGRectGetMaxY(adjustedFrame) - frame.size.height;
-    super.adConfigController.view.frame = frame;
-    
-    // Update the autoresizing mask to include adjusting the top margin to cover 
-    // the navigation bar and rotation.
-    super.adConfigController.view.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | 
-        UIViewAutoresizingFlexibleTopMargin;
 }
 
 - (void)viewDidLoad
@@ -79,9 +85,6 @@
     
     super.adView.site = site;
     super.adView.zone = zone;
-    
-    super.adConfigController.site = site;
-    super.adConfigController.zone = zone;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -89,16 +92,6 @@
     [super viewWillDisappear:animated];
     
     [self.configPopoverController dismissPopoverAnimated:NO];
-}
-
-#pragma mark -
-
-- (void)keyboardWillHide:(id)notification
-{
-    // Place the config view on the bottom.
-    CGRect frame = super.adConfigController.view.frame;
-    frame.origin.y = CGRectGetMaxY(self.view.frame) - frame.size.height;
-    super.adConfigController.view.frame = frame;
 }
 
 #pragma mark -

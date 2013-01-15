@@ -24,6 +24,11 @@
 #import "MASTSDelegateGeneric.h"
 #import "MASTSDelegateMRAID.h"
 #import "MASTSDelegateThirdParty.h"
+#import "MASTSDelegateLogging.h"
+#import "MASTSDelegateNoContent.h"
+#import "MASTSErrorHide.h"
+#import "MASTSErrorImage.h"
+#import "MASTSErrorReset.h"
 
 
 @interface MASTSMenuController ()
@@ -86,7 +91,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -100,6 +105,8 @@
         case 2:
             return 2;
         case 3:
+            return 5;
+        case 4:
             return 3;
     }
     return 0;
@@ -117,6 +124,8 @@
             return @"Custom";
         case 3:
             return @"Delegate";
+        case 4:
+            return @"Error";
     }
     
     return nil;
@@ -212,6 +221,28 @@
                 case 2:
                     label = @"Third Party Request";
                     break;
+                case 3:
+                    label = @"Logging";
+                    break;
+                case 4:
+                    label = @"No Content Zone";
+                    break;
+            }
+            break;
+        }
+        case 4:
+        {
+            switch (indexPath.row)
+            {
+                case 0:
+                    label = @"Hide";
+                    break;
+                case 1:
+                    label = @"Image";
+                    break;
+                case 2:
+                    label = @"Reset";
+                    break;
             }
             break;
         }
@@ -302,6 +333,28 @@
                     break;
                 case 2:
                     testController = [[MASTSDelegateThirdParty new] autorelease];
+                    break;
+                case 3:
+                    testController = [[MASTSDelegateLogging new] autorelease];
+                    break;
+                case 4:
+                    testController = [[MASTSDelegateNoContent new] autorelease];
+                    break;
+            }
+            break;
+        }
+        case 4:
+        {
+            switch (indexPath.row)
+            {
+                case 0:
+                    testController = [[MASTSErrorHide new] autorelease];
+                    break;
+                case 1:
+                    testController = [[MASTSErrorImage new] autorelease];
+                    break;
+                case 2:
+                    testController = [[MASTSErrorReset new] autorelease];
                     break;
             }
             break;

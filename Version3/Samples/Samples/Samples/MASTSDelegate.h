@@ -10,4 +10,8 @@
 
 @interface MASTSDelegate : MASTSSimple <MASTAdViewDelegate>
 
+@property (nonatomic, retain) UITextView* textView;
+
+- (void)writeEntry:(NSString*)entry;
+
 @end

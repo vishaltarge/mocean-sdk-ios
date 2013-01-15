@@ -24,8 +24,6 @@
     super.adView.site = site;
     super.adView.zone = zone;
     
-    [super.adConfigController.view removeFromSuperview];
-    
     // A bit goofy but keeps setFirstAppear hidden in the parent class and
     // overrides it to not do an update since the site and zone are invalid
     // given the goal of this sample is to show locally derived ad content.
@@ -43,11 +41,9 @@
 {
     [super viewDidAppear:animated];
     
-    NSString* content = @"<html><head><style type='text/css'>body{background-color:orange;}</style><script src=\"mraid.js\"></script><script type='text/javascript'>function showAd(){} function openUrl(){mraid.open('http://phobos.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=284417350&mt=8');} if (mraid.getState() == 'loading'){mraid.addEventListener('ready',showAd);}else{showAd();}</script></head><body><span style='size:10px;' onclick='openUrl();'>Open</span></body></html>";
+    NSString* content = @"<html><head><style type='text/css'>body{background-color:orange;}</style><script src=\"mraid.js\"></script><script type='text/javascript'>function showAd(){} function openUrl(){mraid.open('http://phobos.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=284417350&mt=8');} if (mraid.getState() == 'loading'){mraid.addEventListener('ready',showAd);}else{showAd();}</script></head><body style='margin:0;border:0;'><div align='center'><span style='size:10px;' onclick='openUrl();'>Open</span></div></body></html>";
     
     MASTMoceanAdDescriptor* descriptor = [MASTMoceanAdDescriptor descriptorWithRichMediaContent:content];
-    
-    super.adView.useInternalBrowser = YES;
     
     [super.adView renderWithAdDescriptor:descriptor];
 }

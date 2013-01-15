@@ -15,4 +15,7 @@
 
 @property (nonatomic, readonly) NSArray* adDescriptors;
 
+@property (nonatomic, strong) NSString* errorCode;
+@property (nonatomic, strong) NSString* errorMessage;
+
 @end

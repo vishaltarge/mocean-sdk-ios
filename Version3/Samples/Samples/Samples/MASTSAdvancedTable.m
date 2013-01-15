@@ -11,20 +11,13 @@
 
 
 @interface MASTSAdvancedTable ()
-@property (nonatomic, retain) MASTSAdConfigController* adConfigController;
+@property (nonatomic, assign) NSInteger tableSite;
+@property (nonatomic, assign) NSInteger tableZone;
 @end
 
 @implementation MASTSAdvancedTable
 
-@synthesize adConfigController;
-
-- (void)dealloc
-{
-    self.adConfigController.delegate = nil;
-    self.adConfigController = nil;
-    
-    [super dealloc];
-}
+@synthesize tableSite, tableZone;
 
 - (id)init
 {
@@ -39,39 +32,54 @@
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
-    if (self) {
-        self.adConfigController = [[MASTSAdConfigController new] autorelease];
-        self.adConfigController.delegate = self;
+    if (self)
+    {
+        self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh:)] autorelease];
     }
     return self;
+}
+
+- (void)refresh:(id)sender
+{
+    MASTSAdConfigPrompt* prompt = [[[MASTSAdConfigPrompt alloc] initWithDelegate:self
+                                                                            site:self.tableSite
+                                                                            zone:self.tableZone] autorelease];
+    [prompt show];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    self.tableView.tableHeaderView = self.adConfigController.view;
-    
-    self.adConfigController.site = 19829;
-    self.adConfigController.zone = 102238;
+    self.tableSite  = 19829;
+    self.tableZone = 102238;
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
+
+#pragma mark -
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return interfaceOrientation == UIInterfaceOrientationPortrait;
+    return YES;
+}
+
+- (BOOL)shouldAutorotate
+{
+    return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskAll;
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    
 }
 
 #pragma mark - Table view data source
@@ -133,8 +141,8 @@ static NSInteger AdViewTag = 123;
     else
     {
         MASTAdView* adView = (MASTAdView*)[cell.contentView viewWithTag:AdViewTag];
-        adView.site = self.adConfigController.site;
-        adView.zone = self.adConfigController.zone;
+        adView.site = self.tableSite;
+        adView.zone = self.tableZone;
         [adView update];
     }
     
@@ -157,8 +165,16 @@ static NSInteger AdViewTag = 123;
 
 #pragma mark -
 
-- (void)updateAdWithConfig:(MASTSAdConfigController *)configController
+- (void)configPromptCancel:(MASTSAdConfigPrompt *)prompt
 {
+    
+}
+
+- (void)configPrompt:(MASTSAdConfigPrompt*)prompt refreshWithSite:(NSInteger)site zone:(NSInteger)zone
+{
+    self.tableSite = site;
+    self.tableZone = zone;
+    
     NSArray* cells = [self.tableView visibleCells];
     
     for (UITableViewCell* cell in cells)
@@ -167,8 +183,8 @@ static NSInteger AdViewTag = 123;
         {
             MASTAdView* adView = (MASTAdView*)[cell.contentView viewWithTag:AdViewTag];
             
-            adView.site = configController.site;
-            adView.zone = configController.zone;
+            adView.site = site;
+            adView.zone = zone;
             [adView update];
         }
     }

@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MASTSAdConfigController.h"
+#import "MASTSAdConfigPrompt.h"
 
-@interface MASTSAdvancedTable : UITableViewController <MASTSAdConfigDelegate>
+@interface MASTSAdvancedTable : UITableViewController <MASTSAdConfigPromptDelegate>
 
 @end

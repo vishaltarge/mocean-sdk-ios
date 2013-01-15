@@ -36,9 +36,6 @@
     
     super.adView.site = site;
     super.adView.zone = zone;
-    
-    super.adConfigController.site = site;
-    super.adConfigController.zone = zone;
 }
 
 #pragma mark - animations
@@ -77,29 +74,12 @@
     [self performSelectorOnMainThread:@selector(animateHideAd) withObject:nil waitUntilDone:NO];
 }
 
-#pragma mark
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{
-    return toInterfaceOrientation == UIInterfaceOrientationPortrait;
-}
-
-- (BOOL)shouldAutorotate
-{
-    return NO;
-}
-
-- (NSUInteger)supportedInterfaceOrientations
-{
-    return UIInterfaceOrientationMaskPortrait;
-}
-
 #pragma mark -
 
-- (void)updateAdWithConfig:(MASTSAdConfigController *)configController
+- (void)configPrompt:(MASTSAdConfigPrompt*)prompt refreshWithSite:(NSInteger)site zone:(NSInteger)zone
 {
     [self animateHideAd];
-    [super updateAdWithConfig:configController];
+    [super configPrompt:prompt refreshWithSite:site zone:zone];
 }
 
 @end

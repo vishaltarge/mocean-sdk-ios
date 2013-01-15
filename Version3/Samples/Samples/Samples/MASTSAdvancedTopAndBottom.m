@@ -9,22 +9,13 @@
 #import "MASTSAdvancedTopAndBottom.h"
 
 @interface MASTSAdvancedTopAndBottom ()
-@property (nonatomic, retain) MASTSAdConfigController* bottomAdConfigController;
 @property (nonatomic, retain) MASTAdView* bottomAdView;
 @property (nonatomic, assign) BOOL bottomFirstAppear;
 @end
 
 @implementation MASTSAdvancedTopAndBottom
 
-@synthesize bottomAdConfigController, bottomAdView, bottomFirstAppear;
-
-- (void)dealloc
-{
-    self.bottomAdConfigController = nil;
-    self.bottomAdView = nil;
-    
-    [super dealloc];
-}
+@synthesize bottomAdView, bottomFirstAppear;
 
 - (id)init
 {
@@ -33,10 +24,39 @@
     {
         self.bottomFirstAppear = YES;
         
-        self.bottomAdConfigController = [[MASTSAdConfigController new] autorelease];
-        self.bottomAdConfigController.delegate = self;
+        UISegmentedControl* seg = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Top", @"Bottom", nil]];
+        seg.segmentedControlStyle = UISegmentedControlStyleBar;
+        seg.momentary = YES;
+        [seg addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
+        
+        UIBarButtonItem* segButton = [[[UIBarButtonItem alloc] initWithCustomView:seg] autorelease];
+        
+        self.navigationItem.rightBarButtonItem = segButton;
     }
     return self;
+}
+
+- (void)refresh:(UISegmentedControl*)seg
+{
+    MASTAdView* adViewToConfigure = nil;
+    
+    switch (seg.selectedSegmentIndex)
+    {
+        case 0: // top
+            adViewToConfigure = self.adView;
+            break;
+        case 1: // bottom
+            adViewToConfigure = self.bottomAdView;
+            break;
+    }
+    
+    MASTSAdConfigPrompt* prompt = [[[MASTSAdConfigPrompt alloc] initWithDelegate:self
+                                                                            site:adViewToConfigure.site
+                                                                            zone:adViewToConfigure.zone] autorelease];
+    // use the tag to pass the top/bottom notion to the prompt handler
+    prompt.tag = seg.selectedSegmentIndex;
+    
+    [prompt show];
 }
 
 - (void)loadView
@@ -44,38 +64,22 @@
     [super loadView];
     
     CGRect frame = super.adView.frame;
-    frame.size.width = 320;
     super.adView.frame = frame;
-    super.adView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-    
-    // As with the BOTTOM sample, setup the frame for the bottom view.
-    CGRect adjustedFrame = [[UIScreen mainScreen] bounds];
-    if (UIInterfaceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]))
-        adjustedFrame = CGRectMake(adjustedFrame.origin.x, adjustedFrame.origin.y,
-                                   adjustedFrame.size.height, adjustedFrame.size.width);
-    
-    adjustedFrame.size.height -= [[UIApplication sharedApplication] statusBarFrame].size.height;
-    
-    frame = super.adView.frame;
-    frame.origin.y = CGRectGetMaxY(adjustedFrame) - frame.size.height;
+    super.adView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
     
     // Setup (or possibly resetup) the BOTTOM ad view (super covers the adView)
     [self.bottomAdView reset];
     [self.bottomAdView removeFromSuperview];
     
+    frame = super.adView.frame;
+    frame.size.width = CGRectGetWidth(super.view.bounds);
+    frame.origin.y = CGRectGetMaxY(super.view.bounds) - frame.size.height;
+    
     self.bottomAdView = [[[MASTAdView alloc] initWithFrame:frame] autorelease];
     self.bottomAdView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | 
-        UIViewAutoresizingFlexibleTopMargin;
+        UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
     self.bottomAdView.backgroundColor = self.adView.backgroundColor;
     [self.view addSubview:self.bottomAdView];
-    
-    super.adConfigController.view.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin;
-    
-    frame = super.adConfigController.view.frame;
-    frame.origin.y += frame.size.height;
-    self.bottomAdConfigController.view.frame = frame;
-    self.bottomAdConfigController.view.autoresizingMask = super.adConfigController.view.autoresizingMask;
-    [self.view addSubview:self.bottomAdConfigController.view];
 }
 
 - (void)viewDidLoad
@@ -83,9 +87,9 @@
     [super viewDidLoad];
     
     NSInteger topSite = 19829;
-    NSInteger topZone = 98466;
+    NSInteger topZone = 88269;
     NSInteger bottomSite = 19829;
-    NSInteger bottomZone = 98465;
+    NSInteger bottomZone = 88269;
     
     super.adView.site = topSite;
     super.adView.zone = topZone;
@@ -94,11 +98,6 @@
     
     super.adView.backgroundColor = [UIColor clearColor];
     self.bottomAdView.backgroundColor = [UIColor clearColor];
-    
-    super.adConfigController.site = topSite;
-    super.adConfigController.zone = topZone;
-    self.bottomAdConfigController.site = bottomSite;
-    self.bottomAdConfigController.zone = bottomZone;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -114,55 +113,13 @@
 
 #pragma mark -
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+- (void)configPrompt:(MASTSAdConfigPrompt *)prompt refreshWithSite:(NSInteger)site zone:(NSInteger)zone
 {
-    return toInterfaceOrientation == UIInterfaceOrientationPortrait;
-}
-
-- (BOOL)shouldAutorotate
-{
-    return NO;
-}
-
-- (NSUInteger)supportedInterfaceOrientations
-{
-    return UIInterfaceOrientationMaskPortrait;
-}
-
-#pragma mark -
-
-- (void)keyboardDidShow:(id)notification
-{
-    [super keyboardDidShow:notification];
-    
-    CGRect frame = super.adConfigController.view.frame;
-    frame.origin.y -= frame.size.height;
-    super.adConfigController.view.frame = frame;
-    frame.origin.y += frame.size.height;
-    self.bottomAdConfigController.view.frame = frame;
-}
-
-- (void)keyboardWillHide:(id)notification
-{
-    [super keyboardWillHide:notification];
-    
-    CGRect frame = super.adConfigController.view.frame;
-    frame.origin.y += frame.size.height;
-    self.bottomAdConfigController.view.frame = frame;
-}
-
-#pragma mark -
-
-- (void)updateAdWithConfig:(MASTSAdConfigController *)configController
-{
-    if (configController == super.adConfigController)
+    if (prompt.tag == 0)
     {
-        [super updateAdWithConfig:configController];
+        [super configPrompt:prompt refreshWithSite:site zone:zone];
         return;
     }
-    
-    NSInteger site = configController.site;
-    NSInteger zone = configController.zone;
     
     self.bottomAdView.site = site;
     self.bottomAdView.zone = zone;

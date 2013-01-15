@@ -39,11 +39,6 @@
     
     self.adView.site = site;
     self.adView.zone = zone;
-    
-    super.adConfigController.site = site;
-    super.adConfigController.zone = zone;
- 
-    super.adConfigController.buttonTitle = @"Show";
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -60,11 +55,11 @@
 
 #pragma mark -
 
-- (void)updateAdWithConfig:(MASTSAdConfigController *)configController
+- (void)configPrompt:(MASTSAdConfigPrompt *)prompt refreshWithSite:(NSInteger)site zone:(NSInteger)zone
 {
     [self.navigationController setNavigationBarHidden:YES];
     
-    [super updateAdWithConfig:configController];
+    [super configPrompt:prompt refreshWithSite:site zone:zone];
     
     self.adView.hidden = NO;
     [super.view bringSubviewToFront:super.adView];

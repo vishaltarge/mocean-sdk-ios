@@ -8,16 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "MASTAdView.h"
-#import "MASTSAdConfigController.h"
+#import "MASTSAdConfigPrompt.h"
 
 
-@interface MASTSSimple : UIViewController <MASTSAdConfigDelegate>
+@interface MASTSSimple : UIViewController <MASTSAdConfigPromptDelegate>
 
 @property (nonatomic, retain) MASTAdView* adView;
-@property (nonatomic, retain) MASTSAdConfigController* adConfigController;
-
-
-- (void)keyboardDidShow:(id)notification;
-- (void)keyboardWillHide:(id)notification;
 
 @end

@@ -18,7 +18,7 @@
 
 @implementation MASTMoceanAdResponse
 
-@synthesize descriptors, xmlParser, parsingDescriptor;
+@synthesize descriptors, xmlParser, errorCode, errorMessage, parsingDescriptor;
 
 - (void)dealloc
 {
@@ -61,6 +61,10 @@
     {
         self.parsingDescriptor = [[MASTMoceanAdDescriptor alloc] initWithParser:parser attributes:attributeDict];
     }
+    else if ([@"error" isEqualToString:elementName])
+    {
+        self.errorCode = [attributeDict valueForKey:@"code"];
+    }
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
@@ -74,7 +78,17 @@
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
 {
-    
+    if (self.errorCode != nil)
+    {
+        if (self.errorMessage == nil)
+        {
+            self.errorMessage = string;
+        }
+        else
+        {
+            self.errorMessage = [self.errorMessage stringByAppendingString:string];
+        }
+    }
 }
 
 - (void)parser:(NSXMLParser *)parser foundCDATA:(NSData *)CDATABlock
