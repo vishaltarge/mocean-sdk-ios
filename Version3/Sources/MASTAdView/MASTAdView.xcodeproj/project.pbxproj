@@ -32,6 +32,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		C511CA7616A601EE005F61FB /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C511CA7516A601EE005F61FB /* CoreTelephony.framework */; };
 		C52AE2581694CCB8004FEB5F /* MASTModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C52AE2571694CCB8004FEB5F /* MASTModalViewController.m */; };
 		C5ACCAA7160CA4FF0018E0AD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5ACCAA6160CA4FF0018E0AD /* Foundation.framework */; };
 		C5ACCAAC160CA4FF0018E0AD /* MASTAdView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C5ACCAAB160CA4FF0018E0AD /* MASTAdView.h */; };
@@ -74,6 +75,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C511CA7516A601EE005F61FB /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		C51F3FCE161CB41F007009DB /* MASTDefaults.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MASTDefaults.h; sourceTree = "<group>"; };
 		C52AE2561694CCB8004FEB5F /* MASTModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTModalViewController.h; sourceTree = "<group>"; };
 		C52AE2571694CCB8004FEB5F /* MASTModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTModalViewController.m; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				C5ACCAE5160CB32B0018E0AD /* CoreLocation.framework in Frameworks */,
 				C5ACCB7F1610EDFF0018E0AD /* CoreGraphics.framework in Frameworks */,
 				C5E1DB9D1635A252007F4959 /* ImageIO.framework in Frameworks */,
+				C511CA7616A601EE005F61FB /* CoreTelephony.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,6 +178,7 @@
 				C5ACCAE3160CB32B0018E0AD /* CoreLocation.framework */,
 				C5ACCB7E1610EDFF0018E0AD /* CoreGraphics.framework */,
 				C5E1DB9C1635A252007F4959 /* ImageIO.framework */,
+				C511CA7516A601EE005F61FB /* CoreTelephony.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

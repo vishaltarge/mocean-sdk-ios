@@ -46,6 +46,7 @@
 		C511CA6416A489D1005F61FB /* MASTSAdConfigPrompt.m in Sources */ = {isa = PBXBuildFile; fileRef = C511CA6316A489D1005F61FB /* MASTSAdConfigPrompt.m */; };
 		C511CA6716A4B320005F61FB /* MASTSErrorReset.m in Sources */ = {isa = PBXBuildFile; fileRef = C511CA6616A4B320005F61FB /* MASTSErrorReset.m */; };
 		C511CA6A16A4BA36005F61FB /* MASTSDelegateNoContent.m in Sources */ = {isa = PBXBuildFile; fileRef = C511CA6916A4BA36005F61FB /* MASTSDelegateNoContent.m */; };
+		C511CA7916A605A7005F61FB /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C511CA7816A605A5005F61FB /* CoreTelephony.framework */; };
 		C54969DE1543453B006F9444 /* MASTSDelegateGeneric.m in Sources */ = {isa = PBXBuildFile; fileRef = C54969DD1543453B006F9444 /* MASTSDelegateGeneric.m */; };
 		C54969E115434556006F9444 /* MASTSDelegateMRAID.m in Sources */ = {isa = PBXBuildFile; fileRef = C54969E015434556006F9444 /* MASTSDelegateMRAID.m */; };
 		C54969E415434566006F9444 /* MASTSDelegateThirdParty.m in Sources */ = {isa = PBXBuildFile; fileRef = C54969E315434566006F9444 /* MASTSDelegateThirdParty.m */; };
@@ -143,6 +144,7 @@
 		C511CA6616A4B320005F61FB /* MASTSErrorReset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSErrorReset.m; sourceTree = "<group>"; };
 		C511CA6816A4BA36005F61FB /* MASTSDelegateNoContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSDelegateNoContent.h; sourceTree = "<group>"; };
 		C511CA6916A4BA36005F61FB /* MASTSDelegateNoContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSDelegateNoContent.m; sourceTree = "<group>"; };
+		C511CA7816A605A5005F61FB /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		C54969DC1543453B006F9444 /* MASTSDelegateGeneric.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSDelegateGeneric.h; sourceTree = "<group>"; };
 		C54969DD1543453B006F9444 /* MASTSDelegateGeneric.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASTSDelegateGeneric.m; sourceTree = "<group>"; };
 		C54969DF15434556006F9444 /* MASTSDelegateMRAID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTSDelegateMRAID.h; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 				3C91DE1B153F751500FCF6CD /* CoreLocation.framework in Frameworks */,
 				C5ACCB7D1610EDBD0018E0AD /* CoreGraphics.framework in Frameworks */,
 				C5E1DB9F1635C15A007F4959 /* ImageIO.framework in Frameworks */,
+				C511CA7916A605A7005F61FB /* CoreTelephony.framework in Frameworks */,
 				C5D30D8A161A261600CA45A3 /* libMASTAdView.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -213,6 +216,7 @@
 				3C91DE13153F751500FCF6CD /* CoreLocation.framework */,
 				C5ACCB7C1610EDBD0018E0AD /* CoreGraphics.framework */,
 				C5E1DB9E1635C15A007F4959 /* ImageIO.framework */,
+				C511CA7816A605A5005F61FB /* CoreTelephony.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

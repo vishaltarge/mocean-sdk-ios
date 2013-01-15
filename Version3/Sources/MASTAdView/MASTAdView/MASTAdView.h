@@ -22,6 +22,8 @@
 #import <CoreLocation/CoreLocation.h>
 #import <CoreGraphics/CoreGraphics.h>
 #import <ImageIO/ImageIO.h>
+#import <CoreTelephony/CTTelephonyNetworkInfo.h>
+
 
 
 // This header is provided for support and debugging of locally generated ads.

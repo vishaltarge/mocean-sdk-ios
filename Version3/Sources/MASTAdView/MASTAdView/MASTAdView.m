@@ -24,6 +24,7 @@
 #import "MASTCloseButtonPNG.h"
 
 #import <objc/runtime.h>
+#import <CoreTelephony/CTCarrier.h>
 
 
 static NSString* AdViewUserAgent = nil;
@@ -258,12 +259,28 @@ static NSString* AdViewUserAgent = nil;
     // Args passed to the ad server.
     NSMutableDictionary* args = [NSMutableDictionary new];
     
+    
     // Set default args that can be overriden.
     [args setValue:[NSString stringWithFormat:@"%d", (int)size_x] forKey:@"size_x"];
     [args setValue:[NSString stringWithFormat:@"%d", (int)size_y] forKey:@"size_y"];
     
+    
+    // Fetch the defaults for the cell info (can be overriden as well).
+    CTTelephonyNetworkInfo* networkInfo = [CTTelephonyNetworkInfo new];
+    CTCarrier* carrier = [networkInfo subscriberCellularProvider];
+    NSString* mcc = [carrier mobileCountryCode];
+    NSString* mnc = [carrier mobileNetworkCode];
+    
+    if ([mcc length] > 0)
+        [args setValue:[NSString stringWithFormat:@"%@", mcc] forKey:@"mcc"];
+
+    if ([mnc length] > 0)
+        [args setValue:[NSString stringWithFormat:@"%@", mnc] forKey:@"mnc"];
+    
+
     // Import developer args..
     [args addEntriesFromDictionary:self.adRequestParameters];
+    
     
     // Set values that are not to be overriden.
     [args setValue:AdViewUserAgent forKey:@"ua"];
@@ -274,9 +291,8 @@ static NSString* AdViewUserAgent = nil;
     [args setValue:[NSString stringWithFormat:@"%d", self.zone] forKey:@"zone"];
     
     if (self.test)
-    {
         [args setValue:@"1" forKey:@"test"];
-    }
+    
     
     NSMutableString* url = [NSMutableString stringWithFormat:@"%@?", self.adServerURL];
     
