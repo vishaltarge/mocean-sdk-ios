@@ -340,11 +340,19 @@ typedef enum
 
 /** Sent to allow the application to override the controller used to present modal controllers.
  
- The SDK by default will use the [[[UIApplication sharedApplication] keyWindow] rootViewController]
- to display modal dialogs.  These include richmedia expand, internal browser and calendar event
- creation.  To override using this controller implement this message and return the view controller
- that can be used to present modal view controllers.
+ The SDK by default will use the application's rootViewController property to display modal dialogs.
+ These include richmedia expand, internal browser and calendar event creation.  To override using
+ this controller implement this message and return the view controller that can be used to present
+ modal view controllers.
  
+ Note: Application's SHOULD have a rootViewController set but the iOS SDK will allow an application
+ to run without one.  If the application can not set up the rootViewController as expected then this
+ method MUST be implemented to return a view controller that can be used to present modal dialogs.
+ Without one certain SDK features will not work including showInterstitial, richmedia expand and
+ the internal browser.
+ 
+ @param adView The MASTAdView instance sending the message.
+ @return UIViewController to use as the presenting view controller for any SDK modal view controller.
  */
 - (UIViewController*)MASTAdViewPresentationController:(MASTAdView*)adView;
 
