@@ -643,6 +643,16 @@ typedef enum
  */
 @property (nonatomic, readonly) UIImageView* imageView;
 
+/** Web view ad container.
+ 
+ This can be modified to change aspects of the web view such as background color, etc..
+ 
+ @warning Do not attempt to move or affect the relationship of the view within its superview.
+ @warning Do not attempt to change the delegate or affect how content is rendered as this may
+ interfere with richmedia ads.
+ */
+@property (nonatomic, strong) UIWebView* webView;
+
 /** Richmedia expand view container.
  
  This view is the container used to hold the view to be expanded.  For richmedia ads that request

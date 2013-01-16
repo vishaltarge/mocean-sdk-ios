@@ -36,7 +36,6 @@ static NSString* AdViewUserAgent = nil;
 // Ad fetching
 @property (nonatomic, strong) NSURLConnection* connection;
 @property (nonatomic, strong) NSMutableData* dataBuffer;
-@property (nonatomic, strong) UIWebView* webView;
 
 // Update timer
 @property (nonatomic, strong) NSTimer* updateTimer;
@@ -149,7 +148,6 @@ static NSString* AdViewUserAgent = nil;
 
     [self.webView setDelegate:nil];
     [self.webView stopLoading];
-    self.webView = nil;
     
     [self setLocationDetectionEnabled:NO];
 }
@@ -795,7 +793,9 @@ static NSString* AdViewUserAgent = nil;
     if (labelView == nil)
     {
         labelView = [[UILabel alloc] initWithFrame:self.bounds];
-        labelView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        labelView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight |
+            UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin |
+            UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
         labelView.numberOfLines = 4;
         labelView.textAlignment = UITextAlignmentCenter;
         labelView.minimumFontSize = 10;
@@ -815,7 +815,9 @@ static NSString* AdViewUserAgent = nil;
     if (imageView == nil)
     {
         imageView = [[UIImageView alloc] initWithFrame:self.bounds];
-        imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight |
+            UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin |
+            UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
         imageView.contentMode = UIViewContentModeScaleAspectFit;
         imageView.backgroundColor = self.backgroundColor;
         imageView.opaque = YES;
@@ -824,6 +826,28 @@ static NSString* AdViewUserAgent = nil;
     }
     
     return imageView;
+}
+
+- (UIWebView*)webView
+{
+    if (webView == nil)
+    {
+        webView = [[UIWebView alloc] initWithFrame:self.bounds];
+        webView.delegate = self;
+        webView.opaque = NO;
+        webView.backgroundColor = [UIColor clearColor];
+        webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight |
+            UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin |
+            UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+            webView.autoresizesSubviews = YES;
+        webView.mediaPlaybackRequiresUserAction = NO;
+        webView.allowsInlineMediaPlayback = YES;
+        
+        //[webView disableScrolling];
+        [webView disableSelection];
+    }
+    
+    return webView;
 }
 
 - (UIView*)expandView
@@ -1101,9 +1125,7 @@ static NSString* AdViewUserAgent = nil;
     self.mraidBridge = nil;
     
     [self.webView removeFromSuperview];
-    [self.webView setDelegate:nil];
     [self.webView stopLoading];
-    self.webView = nil;
 }
 
 #pragma mark - Image Ad Handling
@@ -1263,6 +1285,8 @@ static NSString* AdViewUserAgent = nil;
 {
     self.invokeTracking = NO;
     
+    [self.webView stopLoading];
+    
     // TODO: Load into an in memory cache.
     NSData* jsData = [NSData dataWithBytesNoCopy:MASTMRAIDController_js
                                           length:MASTMRAIDController_js_len
@@ -1274,20 +1298,6 @@ static NSString* AdViewUserAgent = nil;
 
     self.mraidBridge = [MASTMRAIDBridge new];
     self.mraidBridge.delegate = self;
-    
-    self.webView = [[UIWebView alloc] initWithFrame:self.bounds];
-    self.webView.delegate = self;
-    self.webView.opaque = NO;
-    self.webView.backgroundColor = [UIColor clearColor];
-    self.webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight |
-        UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin |
-        UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
-    self.webView.autoresizesSubviews = YES;
-    self.webView.mediaPlaybackRequiresUserAction = NO;
-    self.webView.allowsInlineMediaPlayback = YES;
-    
-    //[self.webView disableScrolling];
-    [self.webView disableSelection];
     
     switch (self.placementType)
     {
