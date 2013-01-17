@@ -104,8 +104,8 @@
 				C51F40971626C2E1007009DB /* MessageUI.framework */,
 				C51F40941626C2E1007009DB /* CoreLocation.framework */,
 				C5B72F6D1652F05300856916 /* ImageIO.framework */,
-				C51F40921626C2AE007009DB /* MASTAdView.framework */,
 				C511CA8D16A87CEE005F61FB /* CoreTelephony.framework */,
+				C51F40921626C2AE007009DB /* MASTAdView.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
