@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C511CA9C16A87D7D005F61FB /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C511CA9B16A87D7D005F61FB /* CoreTelephony.framework */; };
 		C51F400716269804007009DB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C51F400616269804007009DB /* UIKit.framework */; };
 		C51F400916269804007009DB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C51F400816269804007009DB /* Foundation.framework */; };
 		C51F400B16269804007009DB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C51F400A16269804007009DB /* CoreGraphics.framework */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C511CA9B16A87D7D005F61FB /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		C51F400216269804007009DB /* InstallationDirect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstallationDirect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C51F400616269804007009DB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C51F400816269804007009DB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -86,6 +88,7 @@
 				C51F40541626A78E007009DB /* MessageUI.framework in Frameworks */,
 				C51F40511626A78E007009DB /* CoreLocation.framework in Frameworks */,
 				C5B72F7B1652F09F00856916 /* ImageIO.framework in Frameworks */,
+				C511CA9C16A87D7D005F61FB /* CoreTelephony.framework in Frameworks */,
 				C5B72F7C1652F0A700856916 /* libMASTAdView.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -122,6 +125,7 @@
 				C51F40501626A78E007009DB /* MessageUI.framework */,
 				C51F404D1626A78E007009DB /* CoreLocation.framework */,
 				C5B72F7A1652F09F00856916 /* ImageIO.framework */,
+				C511CA9B16A87D7D005F61FB /* CoreTelephony.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

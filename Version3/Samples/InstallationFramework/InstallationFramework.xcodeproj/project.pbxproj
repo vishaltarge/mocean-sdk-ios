@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C511CA8E16A87CEE005F61FB /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C511CA8D16A87CEE005F61FB /* CoreTelephony.framework */; };
 		C51F406A1626C070007009DB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C51F40691626C070007009DB /* UIKit.framework */; };
 		C51F406C1626C070007009DB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C51F406B1626C070007009DB /* Foundation.framework */; };
 		C51F406E1626C070007009DB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C51F406D1626C070007009DB /* CoreGraphics.framework */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C511CA8D16A87CEE005F61FB /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		C51F40651626C070007009DB /* InstallationFramework.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstallationFramework.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C51F40691626C070007009DB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C51F406B1626C070007009DB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -66,6 +68,7 @@
 				C51F409B1626C2E1007009DB /* MessageUI.framework in Frameworks */,
 				C51F40981626C2E1007009DB /* CoreLocation.framework in Frameworks */,
 				C5B72F6E1652F05300856916 /* ImageIO.framework in Frameworks */,
+				C511CA8E16A87CEE005F61FB /* CoreTelephony.framework in Frameworks */,
 				C51F40931626C2AE007009DB /* MASTAdView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -102,6 +105,7 @@
 				C51F40941626C2E1007009DB /* CoreLocation.framework */,
 				C5B72F6D1652F05300856916 /* ImageIO.framework */,
 				C51F40921626C2AE007009DB /* MASTAdView.framework */,
+				C511CA8D16A87CEE005F61FB /* CoreTelephony.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
