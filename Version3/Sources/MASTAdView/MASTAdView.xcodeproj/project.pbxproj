@@ -35,7 +35,7 @@
 		C511CA7616A601EE005F61FB /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C511CA7516A601EE005F61FB /* CoreTelephony.framework */; };
 		C52AE2581694CCB8004FEB5F /* MASTModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C52AE2571694CCB8004FEB5F /* MASTModalViewController.m */; };
 		C5ACCAA7160CA4FF0018E0AD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5ACCAA6160CA4FF0018E0AD /* Foundation.framework */; };
-		C5ACCAAC160CA4FF0018E0AD /* MASTAdView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C5ACCAAB160CA4FF0018E0AD /* MASTAdView.h */; };
+		C5ACCAAC160CA4FF0018E0AD /* MASTAdView.h in Copy Files */ = {isa = PBXBuildFile; fileRef = C5ACCAAB160CA4FF0018E0AD /* MASTAdView.h */; };
 		C5ACCAAE160CA4FF0018E0AD /* MASTAdView.m in Sources */ = {isa = PBXBuildFile; fileRef = C5ACCAAD160CA4FF0018E0AD /* MASTAdView.m */; };
 		C5ACCAD2160CB2A60018E0AD /* MASTAdBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = C5ACCAB8160CB2A60018E0AD /* MASTAdBrowser.m */; };
 		C5ACCAD3160CB2A60018E0AD /* MASTAdTracking.m in Sources */ = {isa = PBXBuildFile; fileRef = C5ACCABA160CB2A60018E0AD /* MASTAdTracking.m */; };
@@ -53,7 +53,7 @@
 		C5ACCAE6160CB32B0018E0AD /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5ACCAE4160CB32B0018E0AD /* EventKit.framework */; };
 		C5ACCAE8160CB3660018E0AD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5ACCAE7160CB3660018E0AD /* UIKit.framework */; };
 		C5ACCAEA160CB3EB0018E0AD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5ACCAE9160CB3EB0018E0AD /* MessageUI.framework */; };
-		C5ACCB52160CED380018E0AD /* MASTMoceanAdDescriptor.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C5ACCABD160CB2A60018E0AD /* MASTMoceanAdDescriptor.h */; };
+		C5ACCB52160CED380018E0AD /* MASTMoceanAdDescriptor.h in Copy Files */ = {isa = PBXBuildFile; fileRef = C5ACCABD160CB2A60018E0AD /* MASTMoceanAdDescriptor.h */; };
 		C5ACCB7F1610EDFF0018E0AD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5ACCB7E1610EDFF0018E0AD /* CoreGraphics.framework */; };
 		C5D30D79161A186100CA45A3 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D30D78161A186100CA45A3 /* EventKitUI.framework */; };
 		C5E1DB9D1635A252007F4959 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5E1DB9C1635A252007F4959 /* ImageIO.framework */; };
@@ -61,15 +61,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		C5ACCAA1160CA4FF0018E0AD /* CopyFiles */ = {
+		C5ACCAA1160CA4FF0018E0AD /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = include;
 			dstSubfolderSpec = 16;
 			files = (
-				C5ACCB52160CED380018E0AD /* MASTMoceanAdDescriptor.h in CopyFiles */,
-				C5ACCAAC160CA4FF0018E0AD /* MASTAdView.h in CopyFiles */,
+				C5ACCB52160CED380018E0AD /* MASTMoceanAdDescriptor.h in Copy Files */,
+				C5ACCAAC160CA4FF0018E0AD /* MASTAdView.h in Copy Files */,
 			);
+			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -273,7 +274,7 @@
 				C5ACCB89161101CF0018E0AD /* Generated Source */,
 				C5ACCA9F160CA4FF0018E0AD /* Sources */,
 				C5ACCAA0160CA4FF0018E0AD /* Frameworks */,
-				C5ACCAA1160CA4FF0018E0AD /* CopyFiles */,
+				C5ACCAA1160CA4FF0018E0AD /* Copy Files */,
 			);
 			buildRules = (
 			);

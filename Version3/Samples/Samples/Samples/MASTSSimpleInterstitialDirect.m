@@ -2,7 +2,7 @@
 //  MASTSSimpleInterstitialDirect.m
 //  Samples
 //
-//  Created by Jason Dickert on 9/25/12.
+//  Created on 9/25/12.
 //  Copyright (c) 2012 mOcean Mobile. All rights reserved.
 //
 

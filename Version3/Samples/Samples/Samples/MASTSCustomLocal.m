@@ -2,7 +2,7 @@
 //  MASTSCustomLocal.m
 //  Samples
 //
-//  Created by Jason Dickert on 11/20/12.
+//  Created on 11/20/12.
 //  Copyright (c) 2012 mOcean Mobile. All rights reserved.
 //
 

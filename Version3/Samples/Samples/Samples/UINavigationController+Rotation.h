@@ -2,7 +2,7 @@
 //  UINavigationController+Rotation.h
 //  Samples
 //
-//  Created by Jason Dickert on 1/8/13.
+//  Created on 1/8/13.
 //  Copyright (c) 2013 mOcean Mobile. All rights reserved.
 //
 

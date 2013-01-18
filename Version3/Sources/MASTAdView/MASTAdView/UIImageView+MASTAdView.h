@@ -2,7 +2,7 @@
 //  UIImageView+MASTAdView.h
 //  MASTAdView
 //
-//  Created by Jason Dickert on 10/22/12.
+//  Created on 10/22/12.
 //  Copyright (c) 2012 Mocean Mobile. All rights reserved.
 //
 

@@ -2,7 +2,7 @@
 //  MASTSViewController.m
 //  InstallationFramework
 //
-//  Created by Jason Dickert on 10/11/12.
+//  Created on 10/11/12.
 //  Copyright (c) 2012 Mocean Mobile. All rights reserved.
 //
 
