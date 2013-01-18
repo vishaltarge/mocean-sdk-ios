@@ -963,7 +963,7 @@ static NSString* AdViewUserAgent = nil;
         self.closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.closeButton setImage:buttonImage forState:UIControlStateNormal];
 
-        self.closeButton.frame = CGRectMake(0, 0, 28, 28);
+        self.closeButton.frame = CGRectMake(0, 0, 36, 36);
     }
     
     self.closeButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
