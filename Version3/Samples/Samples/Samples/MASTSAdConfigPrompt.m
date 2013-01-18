@@ -18,6 +18,15 @@
 
 @synthesize delegate, siteField, zoneField;
 
+- (void)dealloc
+{
+    self.siteField = nil;
+    self.zoneField = nil;
+    self.delegate = nil;
+    
+    [super dealloc];
+}
+
 - (id)initWithDelegate:(id<MASTSAdConfigPromptDelegate>)d site:(NSInteger)site zone:(NSInteger)zone;
 {
     self = [super initWithTitle:@"Site and Zone"
@@ -29,7 +38,7 @@
     {
         self.delegate = d;
         
-        self.siteField = [[UITextField alloc] initWithFrame:CGRectMake(12, 45, 118, 31)];
+        self.siteField = [[[UITextField alloc] initWithFrame:CGRectMake(12, 45, 118, 31)] autorelease];
         [self.siteField setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
 		[self.siteField setBorderStyle:UITextBorderStyleRoundedRect];
 		[self.siteField setBackgroundColor:[UIColor clearColor]];
@@ -38,7 +47,7 @@
         [self.siteField setPlaceholder:@"Site"];
         [self addSubview:self.siteField];
         
-        self.zoneField = [[UITextField alloc] initWithFrame:CGRectMake(154, 45, 118, 31)];
+        self.zoneField = [[[UITextField alloc] initWithFrame:CGRectMake(154, 45, 118, 31)] autorelease];
         [self.zoneField setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
 		[self.zoneField setBorderStyle:UITextBorderStyleRoundedRect];
 		[self.zoneField setBackgroundColor:[UIColor clearColor]];

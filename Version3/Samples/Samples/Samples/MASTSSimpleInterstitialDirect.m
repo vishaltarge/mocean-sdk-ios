@@ -61,7 +61,7 @@
     
     if (self.interstitialAdView == nil)
     {
-        self.interstitialAdView = [[MASTAdView alloc] initInterstitial];
+        self.interstitialAdView = [[[MASTAdView alloc] initInterstitial] autorelease];
         
         self.interstitialAdView.site = 19829;
         self.interstitialAdView.zone = 88269;

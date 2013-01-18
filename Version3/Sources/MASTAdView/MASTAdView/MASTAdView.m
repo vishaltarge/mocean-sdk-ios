@@ -2168,7 +2168,7 @@ static NSString* AdViewUserAgent = nil;
             }
 
             [self logEvent:[NSString stringWithFormat:@"Error response from server. Error code: %@.  Error message:%@", response.errorCode, response.errorMessage]
-                    ofType:MASTAdViewLogEventTypeDebug
+                    ofType:eventType
                       func:__func__
                       line:__LINE__];
         }

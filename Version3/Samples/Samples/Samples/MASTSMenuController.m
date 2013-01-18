@@ -63,11 +63,13 @@
 {
     [super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    UILabel* versionLabel = [[[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, 30)] autorelease];
+    versionLabel.backgroundColor = [UIColor clearColor];
+    versionLabel.opaque = NO;
+    versionLabel.textAlignment = UITextAlignmentCenter;
+    versionLabel.text = [@"MASTAdView " stringByAppendingString:[MASTAdView version]];
+    
+    self.tableView.tableHeaderView = versionLabel;
 }
 
 - (void)viewDidUnload

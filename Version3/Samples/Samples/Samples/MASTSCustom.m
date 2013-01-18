@@ -30,7 +30,7 @@
     self = [super init];
     if (self)
     {   
-        UISegmentedControl* seg = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Menu", @"Refresh", nil]];
+        UISegmentedControl* seg = [[[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Menu", @"Refresh", nil]] autorelease];
         seg.segmentedControlStyle = UISegmentedControlStyleBar;
         seg.momentary = YES;
         [seg addTarget:self action:@selector(barMenu:) forControlEvents:UIControlEventValueChanged];
@@ -117,7 +117,7 @@
     }
     else
     {
-        self.configPopoverController = [[UIPopoverController alloc] initWithContentViewController:navController];
+        self.configPopoverController = [[[UIPopoverController alloc] initWithContentViewController:navController] autorelease];
         [self.configPopoverController presentPopoverFromBarButtonItem:self.navigationItem.rightBarButtonItem permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
 }
@@ -129,7 +129,7 @@
     if (self.configPopoverController != nil)
     {
         [self.configPopoverController dismissPopoverAnimated:YES];
-        [self.configPopoverController release];
+        self.configPopoverController = nil;
     }
     else
     {
@@ -142,7 +142,7 @@
     if (self.configPopoverController != nil)
     {
         [self.configPopoverController dismissPopoverAnimated:YES];
-        [self.configPopoverController release];
+        self.configPopoverController = nil;
     }
     else
     {

@@ -257,9 +257,6 @@
     }
     else if (cellId == CheckmarkCellId)
     {
-        if (value == nil)
-            value = [NSNull null];
-        
         NSUInteger valueIndex = 0;
         
         if (valueIndex == indexPath.row)

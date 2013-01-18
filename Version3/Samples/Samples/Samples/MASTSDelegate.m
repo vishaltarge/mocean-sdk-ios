@@ -130,7 +130,9 @@
 {
     NSMutableString* entry = [NSMutableString stringWithString:@"MASTAdView:willResizeToFrame:"];
     [entry appendFormat:@"\nadView: %@", [adView description]];
-    [entry appendFormat:@"\nframe: %@", [((NSDictionary*)CGRectCreateDictionaryRepresentation(frame)) description]];
+    CFDictionaryRef ref = CGRectCreateDictionaryRepresentation(frame);
+    [entry appendFormat:@"\nframe: %@", [((NSDictionary*)ref) description]];
+    CFRelease(ref);
     
     [self writeEntry:entry];
 }
@@ -139,7 +141,9 @@
 {
     NSMutableString* entry = [NSMutableString stringWithString:@"MASTAdView:didResizeToFrame:"];
     [entry appendFormat:@"\nadView: %@", [adView description]];
-    [entry appendFormat:@"\nframe: %@", [((NSDictionary*)CGRectCreateDictionaryRepresentation(frame)) description]];
+    CFDictionaryRef ref = CGRectCreateDictionaryRepresentation(frame);
+    [entry appendFormat:@"\nframe: %@", [((NSDictionary*)ref) description]];
+    CFRelease(ref);
     
     [self writeEntry:entry];
 }

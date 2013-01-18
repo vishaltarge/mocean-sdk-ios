@@ -11,7 +11,7 @@
 //
 // Should only be changed by Mocean development team releasing source.
 //
-static NSString* MAST_DEFAULT_VERSION = @"3.0.1";
+static NSString* MAST_DEFAULT_VERSION = @"3.0.2";
 
 
 //

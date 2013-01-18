@@ -22,4 +22,5 @@ Release Notes:
 - Changed calendar create event delegate message to return a BOOL vs. a UIViewController, the controller can now be returned in the new delegate mentioned above.
 - Updated size of the SDK close button to increase hit area
 
-
+3.0.2
+- Corrected log type for 404 ad descriptor.

@@ -24,7 +24,7 @@
     {
         self.bottomFirstAppear = YES;
         
-        UISegmentedControl* seg = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Top", @"Bottom", nil]];
+        UISegmentedControl* seg = [[[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Top", @"Bottom", nil]] autorelease];
         seg.segmentedControlStyle = UISegmentedControlStyleBar;
         seg.momentary = YES;
         [seg addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
