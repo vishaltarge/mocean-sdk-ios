@@ -11,9 +11,11 @@
 typedef enum
 {
     MASTMRAIDResizeCustomClosePositionTopLeft = 0,
+    MASTMRAIDResizeCustomClosePositionTopCenter,
     MASTMRAIDResizeCustomClosePositionTopRight,
     MASTMRAIDResizeCustomClosePositionCenter,
     MASTMRAIDResizeCustomClosePositionBottomLeft,
+    MASTMRAIDResizeCustomClosePositionBottomCenter,
     MASTMRAIDResizeCustomClosePositionBottomRight
 }MASTMRAIDResizeCustomClosePosition;
 

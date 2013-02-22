@@ -95,7 +95,11 @@
     if (self.firstAppear)
     {
         self.firstAppear = NO;
-        [self.adView update];
+        
+        if ((self.adView.site > 0) && (self.adView.zone > 0))
+        {
+            [self.adView update];
+        }
     }
 }
 

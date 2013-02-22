@@ -142,7 +142,7 @@
     
     if (self.webView == nil)
     {
-        self.webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
+        self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height - 44)];
         self.webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         
         self.webView.delegate = self;
@@ -152,31 +152,6 @@
     
     [self.view addSubview:self.webView];
     [self.view addSubview:self.toolbar];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    CGRect frame = self.view.bounds;
-    frame.size.height -= 44;
-    self.webView.frame = frame;
-    
-    frame.origin.y = CGRectGetMaxY(frame);
-    frame.size.height = 44;
-    self.toolbar.frame = frame;
-    
-    if (self.webView.request == nil)
-        [self load];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    self.backButton.enabled = self.webView.canGoBack;
-    self.forwardButton.enabled = self.webView.canGoForward;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
 }
 
 - (void)setURL:(NSURL *)url

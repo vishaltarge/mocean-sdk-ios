@@ -86,7 +86,7 @@
         [self.delegate configPromptCancel:self];
         return;
     }
-    
+
     [self.delegate configPrompt:self
                 refreshWithSite:[self.siteField.text integerValue]
                            zone:[self.zoneField.text integerValue]];

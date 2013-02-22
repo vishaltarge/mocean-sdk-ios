@@ -23,4 +23,23 @@ Release Notes:
 - Updated size of the SDK close button to increase hit area
 
 3.0.2
+- Updated project settings for Xcode 4.6.
 - Corrected log type for 404 ad descriptor.
+- Corrected MRAID feature name for tel (was phone).
+- Hard coded isModal to true in MRAID controller and removed from native code.
+- Corrected MRAID controller to fire resize event when state changes to resize even if already in the resize state.
+- Removed MRAID bridge resize parameters for height and width (not specified in MRAID 2).  No change in behavior for MRAID 1 or MRAID 2 ads.
+- Added compiler warning suppression to MASTDefaults.
+- Track the close button timer so it can be properly invalidated as needed.
+- Refactored logic used to report to the MRAID bridge various size and position data as well as the isViewable flag.
+- Added code to verify the rootViewController is available before hiding the status bar when presenting a modal controller.  A rootViewController MUST be provided either by the keyWindow or though the MASTAdViewDelegate.
+- Removed auto resizing flags from the resize view.  It is the responsibility of the MRAID ad to detect new sizing and issue a new resize with new resizeProperties as necessary.
+- Properly invoke MRAID state change on the controller after a two part expand so the inline ad knows the two part has expanded.
+- Properly close a two part expand when the inline ad invokes close.
+- Corrected resize offset adjustment for the Y coordinate when enforcing allowOffscreen = false constraints in MRAID resize.
+- Corrected status bar height adjustment for resize close control when device is landscape.
+- Added missing MRAID top-center and bottom-center custom close position options for resizeProperties.
+- Added invoke of didFailToReceiveAdWithError when an ad descriptor has no content and content is expected.
+- Minor log entry formatting updates for entries that have extra detail.
+- Corrected internal browser view layout so tool bar does not cover the web view.
+

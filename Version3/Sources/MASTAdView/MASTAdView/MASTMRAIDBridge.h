@@ -31,7 +31,7 @@ typedef enum
 typedef enum
 {
     MASTMRAIDBridgeSupportsSMS = 0,
-    MASTMRAIDBridgeSupportsPhone,
+    MASTMRAIDBridgeSupportsTel,
     MASTMRAIDBridgeSupportsCalendar,
     MASTMRAIDBridgeSupportsStorePicture,
     MASTMRAIDBridgeSupportsInlineVideo

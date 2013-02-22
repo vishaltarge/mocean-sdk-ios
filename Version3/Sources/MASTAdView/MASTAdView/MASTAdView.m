@@ -48,7 +48,9 @@ static NSString* AdViewUserAgent = nil;
 
 // Close button
 @property (nonatomic, assign) NSTimeInterval closeButtonTimeInterval;
+@property (nonatomic, strong) NSTimer* closeButtonTimer;
 @property (nonatomic, strong) UIButton* closeButton;
+
 
 // Gesture for non-mraid/web ads
 @property (nonatomic, strong) UITapGestureRecognizer* tapGesture;
@@ -114,7 +116,7 @@ static NSString* AdViewUserAgent = nil;
 @synthesize delegate;
 @synthesize connection, dataBuffer, webView;
 @synthesize updateTimer, skipNextUpdateTick, interstitialTimer;
-@synthesize closeButtonTimeInterval, closeButton;
+@synthesize closeButtonTimeInterval, closeButtonTimer, closeButton;
 @synthesize tapGesture;
 @synthesize expandCloseControl, resizeCloseControl;
 @synthesize adDescriptor;
@@ -140,6 +142,8 @@ static NSString* AdViewUserAgent = nil;
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [self.closeButtonTimer invalidate];
 
     [self reset];
     
@@ -302,7 +306,7 @@ static NSString* AdViewUserAgent = nil;
     
     NSString* requestUrl = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
-    [self logEvent:[NSString stringWithFormat:@"Ad request:%@", requestUrl]
+    [self logEvent:[NSString stringWithFormat:@"Ad request: %@", requestUrl]
             ofType:MASTAdViewLogEventTypeDebug
               func:__func__
               line:__LINE__];
@@ -509,7 +513,7 @@ static NSString* AdViewUserAgent = nil;
     
     if ((self.mraidBridge != nil) && (self.webView.isLoading == NO))
     {
-        [self.mraidBridge setViewable:YES forWebView:self.webView];
+        [self mraidUpdateLayoutForNewState:MASTMRAIDBridgeStateDefault];
         [self.mraidBridge setState:MASTMRAIDBridgeStateDefault forWebView:self.webView];
     }
     
@@ -563,7 +567,7 @@ static NSString* AdViewUserAgent = nil;
     
     if (self.mraidBridge != nil)
     {
-        [self.mraidBridge setViewable:NO forWebView:self.webView];
+        [self mraidUpdateLayoutForNewState:MASTMRAIDBridgeStateHidden];
         [self.mraidBridge setState:MASTMRAIDBridgeStateHidden forWebView:self.webView];
     }
 }
@@ -696,16 +700,26 @@ static NSString* AdViewUserAgent = nil;
     {
         self.statusBarHidden = [[UIApplication sharedApplication] isStatusBarHidden];
         
-        if (self.statusBarHidden == NO)
-        {
-            [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
-        }
-        
         UIViewController* rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
         
         if ([self.delegate respondsToSelector:@selector(MASTAdViewPresentationController:)])
         {
             rootViewController = [self.delegate MASTAdViewPresentationController:self];
+        }
+        
+        if (rootViewController == nil)
+        {
+            [self logEvent:@"Unable to present modal view controller becuase rootViewController is nil.  Be sure to set the keyWindow's rootViewController or provide one with MASTAdViewPResentionController:."
+                    ofType:MASTAdViewLogEventTypeError
+                      func:__func__
+                      line:__LINE__];
+
+            return;
+        }
+        
+        if (self.statusBarHidden == NO)
+        {
+            [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
         }
         
         if ([rootViewController respondsToSelector:@selector(presentViewController:animated:completion:)])
@@ -768,11 +782,9 @@ static NSString* AdViewUserAgent = nil;
             break;
     }
     
-    if ((self.mraidBridge != nil) && (self.mraidBridge.state == MASTMRAIDBridgeStateExpanded))
+    if (self.mraidBridge != nil)
     {
-        CGRect absoluteFrame = self.expandView.bounds;
-        [self.mraidBridge setCurrentPosition:absoluteFrame forWebView:self.webView];
-        [self.mraidBridge setMaxSize:absoluteFrame.size forWebView:self.webView];
+        [self mraidUpdateLayoutForNewState:self.mraidBridge.state];
     }
     
     // Workaround for pre-iOS 5 UIWebView not telling JS about the change.
@@ -874,6 +886,8 @@ static NSString* AdViewUserAgent = nil;
         resizeView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         resizeView.backgroundColor = [UIColor clearColor];
         resizeView.opaque = NO;
+        resizeView.autoresizesSubviews = YES;
+        resizeView.autoresizingMask = UIViewAutoresizingNone;
     }
     
     return resizeView;
@@ -896,6 +910,7 @@ static NSString* AdViewUserAgent = nil;
 
 - (void)prepareCloseButton
 {
+    [self.closeButtonTimer invalidate];
     [self.closeButton removeFromSuperview];
     
     if (self.mraidBridge != nil)
@@ -928,14 +943,14 @@ static NSString* AdViewUserAgent = nil;
         return;
     }
     
-    NSTimer* timer = [[NSTimer alloc] initWithFireDate:[NSDate dateWithTimeIntervalSinceNow:self.closeButtonTimeInterval]
-                                              interval:0
-                                                target:self 
-                                              selector:@selector(showCloseButton) 
-                                              userInfo:nil 
-                                               repeats:NO];
-
-    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+    self.closeButtonTimer = [[NSTimer alloc] initWithFireDate:[NSDate dateWithTimeIntervalSinceNow:self.closeButtonTimeInterval]
+                                                     interval:0
+                                                       target:self
+                                                     selector:@selector(showCloseButton)
+                                                     userInfo:nil
+                                                      repeats:NO];
+    
+    [[NSRunLoop mainRunLoop] addTimer:self.closeButtonTimer forMode:NSDefaultRunLoopMode];
 }
 
 - (void)showCloseButton
@@ -1375,11 +1390,70 @@ static NSString* AdViewUserAgent = nil;
     }
     
     [self.mraidBridge setSupported:smsAvailable forFeature:MASTMRAIDBridgeSupportsSMS forWebView:wv];
-    [self.mraidBridge setSupported:phoneAvailable forFeature:MASTMRAIDBridgeSupportsPhone forWebView:wv];
+    [self.mraidBridge setSupported:phoneAvailable forFeature:MASTMRAIDBridgeSupportsTel forWebView:wv];
     [self.mraidBridge setSupported:calendarAvailable forFeature:MASTMRAIDBridgeSupportsCalendar forWebView:wv];
     [self.mraidBridge setSupported:storePictureAvailable forFeature:MASTMRAIDBridgeSupportsStorePicture forWebView:wv];
     
     [self.mraidBridge setSupported:YES forFeature:MASTMRAIDBridgeSupportsInlineVideo forWebView:wv];
+}
+
+- (void)mraidUpdateLayoutForNewState:(MASTMRAIDBridgeState)state
+{
+    CGSize screenSize = [self screenSizeIncludingStatusBar:NO];
+    CGSize maxSize = [self.superview bounds].size;
+    CGRect defaultFrame = [self absoluteFrameForView:self];
+    CGRect currentFrame = [self absoluteFrameForView:self.webView];
+    
+    BOOL viewable = NO;
+    
+    if (self.placementType == MASTAdViewPlacementTypeInline)
+    {
+        if (state == MASTMRAIDBridgeStateExpanded)
+        {
+            // This doesn't take any consideration to the app being suspended (and obviously terminated).
+            viewable = YES;
+            
+            // While expanded the status bar is hidden so the max size is now the screen size.
+            maxSize = self.expandView.bounds.size;
+        }
+        else
+        {
+            if (self.window != nil)
+            {
+                if (self.hidden == NO)
+                {
+                    if (CGRectIntersectsRect(CGRectMake(0, 0, maxSize.width, maxSize.height), currentFrame))
+                    {
+                        viewable = YES;
+                    }
+                }
+            }
+        }
+    }
+    else
+    {
+        maxSize = screenSize;
+        defaultFrame = CGRectMake(0, 0, maxSize.width, maxSize.height);
+        currentFrame = CGRectZero;
+        
+        if (self.modalViewController.view.superview != nil)
+        {
+            viewable = YES;
+            currentFrame = [self absoluteFrameForView:self.webView];
+        }
+    }
+    
+    if ([self adBrowserOpen])
+    {
+        // When the browser is up, it's modal and even expanded ads are covered.
+        viewable = NO;
+    }
+    
+    [self.mraidBridge setScreenSize:screenSize forWebView:self.webView];
+    [self.mraidBridge setMaxSize:maxSize forWebView:self.webView];
+    [self.mraidBridge setDefaultPosition:defaultFrame forWebView:self.webView];
+    [self.mraidBridge setCurrentPosition:currentFrame forWebView:self.webView];
+    [self.mraidBridge setViewable:viewable forWebView:self.webView];
 }
 
 #pragma mark - MASTMRAIDBridgeDelegate
@@ -1407,16 +1481,19 @@ static NSString* AdViewUserAgent = nil;
         {
             [self invokeDelegateSelector:@selector(MASTAdViewWillCollapse:)];
             
+            if (self.expandedAdView != nil)
+            {
+                [self.expandedAdView mraidBridgeClose:self.expandedAdView.mraidBridge];
+                self.expandedAdView = nil;
+            }
+            
             // Put the webview back on the base ad view (self).
             [self.webView setFrame:self.bounds];
             [self addSubview:self.webView];
             
             [self.webView scrollToTop];
 
-            CGSize maxSize = [self.superview bounds].size;
-            [self.mraidBridge setMaxSize:maxSize forWebView:self.webView];
-            
-            [self.mraidBridge setCurrentPosition:self.frame forWebView:self.webView];
+            [self mraidUpdateLayoutForNewState:MASTMRAIDBridgeStateDefault];
             [self.mraidBridge setState:MASTMRAIDBridgeStateDefault forWebView:self.webView];
             
             [self prepareCloseButton];
@@ -1440,7 +1517,7 @@ static NSString* AdViewUserAgent = nil;
             
             [self.webView scrollToTop];
             
-            [self.mraidBridge setCurrentPosition:self.frame forWebView:self.webView];
+            [self mraidUpdateLayoutForNewState:MASTMRAIDBridgeStateDefault];
             [self.mraidBridge setState:MASTMRAIDBridgeStateDefault forWebView:self.webView];
             
             [self prepareCloseButton];
@@ -1482,8 +1559,7 @@ static NSString* AdViewUserAgent = nil;
 
 - (void)mraidBridgeUpdateCurrentPosition:(MASTMRAIDBridge*)bridge
 {
-    CGRect absoluteFrame = [self absoluteFrameForView:self];
-    [self.mraidBridge setCurrentPosition:absoluteFrame forWebView:self.webView];
+    [self mraidUpdateLayoutForNewState:bridge.state];
 }
 
 - (void)mraidBridgeUpdatedExpandProperties:(MASTMRAIDBridge*)bridge
@@ -1530,11 +1606,14 @@ static NSString* AdViewUserAgent = nil;
     }
     
     // If there's a URL then use the expandedAdView (a different container) to 
-    // render the ad and leave the current ad as-is.
+    // render the ad and just update the state of the current ad to expanded.
     if (hasURL)
     {
         self.expandedAdView = [MASTAdView new];
         [self.expandedAdView showExpanded:url];
+        
+        [self mraidUpdateLayoutForNewState:MASTMRAIDBridgeStateExpanded];
+        
         return;
     }
     
@@ -1551,7 +1630,7 @@ static NSString* AdViewUserAgent = nil;
     
     [self presentModalView:self.expandView];
     
-    [bridge setCurrentPosition:self.webView.frame forWebView:self.webView];
+    [self mraidUpdateLayoutForNewState:MASTMRAIDBridgeStateExpanded];
     [bridge setState:MASTMRAIDBridgeStateExpanded forWebView:self.webView];
     
     // Setup the "guaranteed" close area (invisible).
@@ -1635,7 +1714,7 @@ static NSString* AdViewUserAgent = nil;
     // If a size isn't available just fail.
     if (CGSizeEqualToSize(requestedSize, CGSizeZero))
     {
-        [bridge sendErrorMessage:@"Missing requested size arguments or unset resizeProperties."
+        [bridge sendErrorMessage:@"Size required in resizeProperties."
                        forAction:@"resize"
                       forWebView:self.webView];
         return;
@@ -1681,7 +1760,7 @@ static NSString* AdViewUserAgent = nil;
             // Adjust Y
             if (CGRectGetMinY(convertRect) < CGRectGetMinY(maxFrame))
             {
-                convertRect.origin.y = CGRectGetMinX(maxFrame);
+                convertRect.origin.y = CGRectGetMinY(maxFrame);
             }
             else if (CGRectGetMaxY(convertRect) > CGRectGetMaxY(maxFrame))
             {
@@ -1699,48 +1778,71 @@ static NSString* AdViewUserAgent = nil;
         }];
     }
 
-    [self.resizeView setFrame:convertRect];
+    self.resizeView.frame = convertRect;
     [self.resizeView addSubview:self.webView];
     [self.webView setFrame:self.resizeView.bounds];
+
     [self.superview addSubview:self.resizeView];
     
     // Adjust for status bar (resize doesn't hide the status bar).
     CGRect statusBarFrame = [[UIApplication sharedApplication] statusBarFrame];
-    convertRect.origin.y -= statusBarFrame.size.height;
+    if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation]))
+    {
+        convertRect.origin.y -= statusBarFrame.size.height;
+    }
+    else
+    {
+        convertRect.origin.y -= statusBarFrame.size.width;
+    }
+    
+    const CGFloat closeControlSize = 50;
     
     // Setup the "guaranteed" close area (invisible).
-    CGRect closeControlFrame = CGRectMake(CGRectGetMaxX(self.resizeView.bounds) - 50,
+    CGRect closeControlFrame = CGRectMake(CGRectGetMaxX(self.resizeView.bounds) - closeControlSize,
                                           CGRectGetMinY(self.resizeView.bounds), 
-                                          50, 50);
+                                          closeControlSize, closeControlSize);
     
     // Unlike expand the ad can specify the general location of the control area
-    switch (bridge.resizeProperties.customClosePosition) {
+    switch (bridge.resizeProperties.customClosePosition)
+    {
         case MASTMRAIDResizeCustomClosePositionTopRight:
             // Already configured above.
+            break;
+            
+        case MASTMRAIDResizeCustomClosePositionTopCenter:
+            closeControlFrame = CGRectMake(self.resizeView.center.x - closeControlSize/2,
+                                           CGRectGetMinY(self.resizeView.bounds),
+                                           closeControlSize, closeControlSize);
             break;
             
         case MASTMRAIDResizeCustomClosePositionTopLeft:
             closeControlFrame = CGRectMake(CGRectGetMinX(self.resizeView.bounds),
                                            CGRectGetMinY(self.resizeView.bounds), 
-                                           50, 50);
+                                           closeControlSize, closeControlSize);
             break;
             
         case MASTMRAIDResizeCustomClosePositionBottomLeft:
             closeControlFrame = CGRectMake(CGRectGetMinX(self.resizeView.bounds),
-                                           CGRectGetMaxY(self.resizeView.bounds) - 50, 
-                                           50, 50);
+                                           CGRectGetMaxY(self.resizeView.bounds) - closeControlSize, 
+                                           closeControlSize, closeControlSize);
             break;
             
         case MASTMRAIDResizeCustomClosePositionBottomRight:
-            closeControlFrame = CGRectMake(CGRectGetMaxX(self.resizeView.bounds) - 50,
-                                           CGRectGetMaxY(self.resizeView.bounds) - 50, 
-                                           50, 50);
+            closeControlFrame = CGRectMake(CGRectGetMaxX(self.resizeView.bounds) - closeControlSize,
+                                           CGRectGetMaxY(self.resizeView.bounds) - closeControlSize, 
+                                           closeControlSize, closeControlSize);
+            break;
+            
+        case MASTMRAIDResizeCustomClosePositionBottomCenter:
+            closeControlFrame = CGRectMake(self.resizeView.center.x - closeControlSize/2,
+                                           CGRectGetMaxY(self.resizeView.bounds) - closeControlSize,
+                                           closeControlSize, closeControlSize);
             break;
             
         case MASTMRAIDResizeCustomClosePositionCenter:
-            closeControlFrame = CGRectMake(self.resizeView.center.x - 25,
-                                           self.resizeView.center.y - 25,
-                                           50, 50);
+            closeControlFrame = CGRectMake(self.resizeView.center.x - closeControlSize/2,
+                                           self.resizeView.center.y - closeControlSize/2,
+                                           closeControlSize, closeControlSize);
             break;
     }
     
@@ -1748,7 +1850,7 @@ static NSString* AdViewUserAgent = nil;
     [self.resizeView addSubview:self.resizeCloseControl];
     
     // Update the bridge.
-    [bridge setCurrentPosition:convertRect forWebView:self.webView];
+    [self mraidUpdateLayoutForNewState:MASTMRAIDBridgeStateResized];
     [bridge setState:MASTMRAIDBridgeStateResized forWebView:self.webView];
     
     if ([self.delegate respondsToSelector:@selector(MASTAdView:didResizeToFrame:)])
@@ -1797,6 +1899,8 @@ static NSString* AdViewUserAgent = nil;
 
 - (void)didMoveToWindow
 {
+    [super didMoveToWindow];
+    
     if (self.adDescriptor == nil)
         return;
     
@@ -1807,8 +1911,7 @@ static NSString* AdViewUserAgent = nil;
     
     if (self.mraidBridge != nil)
     {
-        BOOL isViewable = self.window != nil;
-        [self.mraidBridge setViewable:isViewable forWebView:self.webView];
+        [self mraidUpdateLayoutForNewState:self.mraidBridge.state];
     }
 }
 
@@ -1821,31 +1924,8 @@ static NSString* AdViewUserAgent = nil;
 
     if (self.mraidBridge != nil)
     {
-        CGRect absoluteFrame = [self absoluteFrameForView:self];
-        
-        if (self.placementType == MASTAdViewPlacementTypeInterstitial)
-            absoluteFrame = self.expandView.bounds;
-        
-        switch (self.mraidBridge.state)
-        {
-            case MASTMRAIDBridgeStateDefault:
-                [self.mraidBridge setDefaultPosition:absoluteFrame forWebView:self.webView];
-                [self.mraidBridge setCurrentPosition:absoluteFrame forWebView:self.webView];
-                break;
-                
-            case MASTMRAIDBridgeStateResized:
-                absoluteFrame = [self absoluteFrameForView:self.resizeView];
-                [self.mraidBridge setCurrentPosition:absoluteFrame forWebView:self.webView];
-            default:
-                break;
-        }
+        [self mraidUpdateLayoutForNewState:self.mraidBridge.state];
     }
-}
-
-- (void)setAutoresizingMask:(UIViewAutoresizing)autoresizingMask
-{
-    super.autoresizingMask = autoresizingMask;
-    self.resizeView.autoresizingMask = autoresizingMask;
 }
 
 #pragma mark - Calendar Interactions
@@ -2167,7 +2247,7 @@ static NSString* AdViewUserAgent = nil;
                 eventType = MASTAdViewLogEventTypeDebug;
             }
 
-            [self logEvent:[NSString stringWithFormat:@"Error response from server. Error code: %@.  Error message:%@", response.errorCode, response.errorMessage]
+            [self logEvent:[NSString stringWithFormat:@"Error response from server. Error code: %@.  Error message: %@", response.errorCode, response.errorMessage]
                     ofType:eventType
                       func:__func__
                       line:__LINE__];
@@ -2213,6 +2293,8 @@ static NSString* AdViewUserAgent = nil;
     }
     
     // Text or HTML ads will load either way so update the current descsriptor.
+    // TODO: Move this to where the ad descriptor is set since a no-content descriptor
+    // will not actually render and the descriptor won't match the currently rendered ad.
     self.adDescriptor = ad;
     
     if ([ad.type hasPrefix:@"text"])
@@ -2268,14 +2350,27 @@ static NSString* AdViewUserAgent = nil;
     
     if ([contentString length] == 0)
     {
-        [self logEvent:[NSString stringWithFormat:@"Ad descriptor missing ad content: %@", [ad description]]
+        NSString* errorMessage = [NSString stringWithFormat:@"Ad descriptor missing ad content: %@", [ad description]];
+        
+        [self logEvent:errorMessage
                 ofType:MASTAdViewLogEventTypeError
                   func:__func__
                   line:__LINE__];
+        
+        if ([self.delegate respondsToSelector:@selector(MASTAdView:didFailToReceiveAdWithError:)])
+        {
+            [self invokeDelegateBlock:^
+             {
+                 NSError* error = [NSError errorWithDomain:errorMessage
+                                                      code:0
+                                                  userInfo:nil];
+                 [self.delegate MASTAdView:self didFailToReceiveAdWithError:error];
+             }];
+        }
 
         return;
     }
-    
+
     // All other ad types flow to the MRAID/HTML handler.
     [self performSelectorOnMainThread:@selector(renderMRAIDAd:) withObject:contentString waitUntilDone:NO];
 }
@@ -2466,22 +2561,10 @@ static NSString* AdViewUserAgent = nil;
                 mraidPlacementType = MASTMRAIDBridgePlacementTypeInterstitial;
             }
             [self.mraidBridge setPlacementType:mraidPlacementType forWebView:wv];
-            
-            CGSize screenSize = [self screenSizeIncludingStatusBar:NO];
-            [self.mraidBridge setScreenSize:screenSize forWebView:wv];
-            
-            CGSize maxSize = [self.superview bounds].size;
-            [self.mraidBridge setMaxSize:maxSize forWebView:wv];
-            
-            // Fetch the position relative to the screenSize.
-            CGRect absoluteFrame = [self absoluteFrameForView:self];
-            
-            if (self.placementType == MASTAdViewPlacementTypeInterstitial)
-                absoluteFrame = self.expandView.bounds;
-            
-            [self.mraidBridge setDefaultPosition:absoluteFrame forWebView:wv];
-            [self.mraidBridge setCurrentPosition:absoluteFrame forWebView:wv];
 
+            [self mraidUpdateLayoutForNewState:MASTMRAIDBridgeStateDefault];
+
+            CGSize screenSize = [self screenSizeIncludingStatusBar:NO];
             MASTMRAIDExpandProperties* expandProperties = [[MASTMRAIDExpandProperties alloc] initWithSize:screenSize];
             [self.mraidBridge setExpandProperties:expandProperties forWebView:wv];
             
@@ -2490,12 +2573,6 @@ static NSString* AdViewUserAgent = nil;
             
             MASTMRAIDOrientationProperties* orientationProperties = [MASTMRAIDOrientationProperties new];
             [self.mraidBridge setOrientationProperties:orientationProperties forWebView:wv];
-            
-            BOOL hidden = self.hidden;
-            if (self.placementType == MASTAdViewPlacementTypeInterstitial)
-                hidden = self.modalViewController.view.superview == nil;
-            
-            [self.mraidBridge setViewable:(hidden == NO) forWebView:wv];
             
             if (self.isExpandedURL == NO)
             {
@@ -2652,7 +2729,7 @@ static NSString* AdViewUserAgent = nil;
     if (type == MASTAdViewLogEventTypeError)
         typeString = @"Error";
     
-    NSString* logEvent = [NSString stringWithFormat:@"MASTAdView:%@\n\tType:%@\n\tEvent:%@",
+    NSString* logEvent = [NSString stringWithFormat:@"MASTAdView: %@\n\tType: %@\n\tEvent: %@",
                           self, typeString, eventString];
     
     NSLog(@"%@", logEvent);
@@ -2770,7 +2847,6 @@ static NSString* AdViewUserAgent = nil;
 {
 
 }
-
 
 #pragma mark - UI helpers
 

@@ -73,6 +73,11 @@
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
     return toInterfaceOrientation == UIInterfaceOrientationPortrait;
@@ -85,7 +90,15 @@
     self.interstitialAdView.site = site;
     self.interstitialAdView.zone = zone;
     
-    [self.interstitialAdView update];
+    // Since the UIAlertView seems to nil out the keyWindow used by the SDK, must "wait" for the
+    // alert view to finish and hide itself before attempting to update the ad.  Else if the update
+    // happens too quickly the showInterstitial may occur before the dialog is dismissed and without
+    // providing the MASTAdViewPresentingViewController to return one it won't be able to show.
+    //
+    // Applications should generally not have to deal with this since most interstitials will be
+    // sourced by view transitions.  This is here simply becuase Samples uses a UIAlertView to
+    // manually refresh ads for sample purposes.
+    [self.interstitialAdView performSelector:@selector(update) withObject:nil afterDelay:1];
 }
 
 #pragma mark -

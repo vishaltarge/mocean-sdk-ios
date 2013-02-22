@@ -18,6 +18,5 @@
 @property (nonatomic, assign) NSInteger width;
 @property (nonatomic, assign) NSInteger height;
 @property (nonatomic, assign) BOOL useCustomClose;
-@property (nonatomic, assign) BOOL isModal;
 
 @end

@@ -10,11 +10,10 @@
 static NSString* MASTMRAIDExpandPropertiesWidth = @"width";
 static NSString* MASTMRAIDExpandPropertiesHeight = @"height";
 static NSString* MASTMRAIDExpandPropertiesUseCustomClose = @"useCustomClose";
-static NSString* MASTMRAIDExpandPropertiesIsModal = @"isModal";
 
 @implementation MASTMRAIDExpandProperties
 
-@synthesize width, height, useCustomClose, isModal;
+@synthesize width, height, useCustomClose;
 
 
 + (MASTMRAIDExpandProperties*)propertiesFromArgs:(NSDictionary*)args
@@ -28,7 +27,6 @@ static NSString* MASTMRAIDExpandPropertiesIsModal = @"isModal";
     properties.width = [[args valueForKey:MASTMRAIDExpandPropertiesWidth] integerValue];
     properties.height = [[args valueForKey:MASTMRAIDExpandPropertiesHeight] integerValue];
     properties.useCustomClose = [[args valueForKey:MASTMRAIDExpandPropertiesUseCustomClose] isEqualToString:@"true"];
-    properties.isModal = [[args valueForKey:MASTMRAIDExpandPropertiesIsModal] isEqualToString:@"true"];
 
     return properties;
 }
@@ -41,7 +39,6 @@ static NSString* MASTMRAIDExpandPropertiesIsModal = @"isModal";
         self.width = 0;
         self.height = 0;
         self.useCustomClose = false;
-        self.isModal = true;
     }
     return self;
 }
@@ -63,11 +60,7 @@ static NSString* MASTMRAIDExpandPropertiesIsModal = @"isModal";
     if (self.useCustomClose)
         ucc = @"true";
     
-    NSString* im = @"false";
-    if (self.isModal)
-        im = @"true";
-    
-    NSString* desc = [NSString stringWithFormat:@"{width:%d,height:%d,useCustomClose:%@,isModal:%@}", self.width, self.height, ucc, im];
+    NSString* desc = [NSString stringWithFormat:@"{width:%d,height:%d,useCustomClose:%@}", self.width, self.height, ucc];
     
     return desc;
 }

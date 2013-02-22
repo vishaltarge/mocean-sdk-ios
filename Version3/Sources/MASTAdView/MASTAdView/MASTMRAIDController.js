@@ -108,7 +108,7 @@ window.mraid_init = function()
         {
             if (listener)
             {
-                handlers.remove(listener);
+                delete handlers[listener];
             }
             else
             {
@@ -186,7 +186,7 @@ window.mraid_init = function()
     
     var FEATURES = mraid.FEATURES = {
         SMS             :"sms",
-        PHONE           :"phone",
+        TEL             :"tel",
         CALENDAR        :"calendar",
         STORE_PICTURE   :"storePicture",
         INLINE_VIDEO    :"inlineVideo"
@@ -233,6 +233,11 @@ window.mraid_init = function()
         
         if (diff)
         {
+            mraid.fireChangeEvent(EVENTS.STATE_CHANGE, state);
+        }
+        else if (state === STATES.RESIZED)
+        {
+            // spec says resized -> resized fires an event
             mraid.fireChangeEvent(EVENTS.STATE_CHANGE, state);
         }
     };
@@ -356,7 +361,7 @@ window.mraid_init = function()
         width:0,
         height:0,
         useCustomClose:false,
-        isModal:false
+        isModal:true
     };
     
     // MRAID
@@ -464,16 +469,11 @@ window.mraid_init = function()
     };
     
     // MRAID
-    mraid.resize = function(width, height)
+    mraid.resize = function()
     {
         console.log("resize");
         
         var invoke = "mraid://resize";
-        
-        if (width || height)
-        {
-            invoke += "?width=" + width + "&height=" + height;
-        }
         mraid.nativeInvoke(invoke);
     };
     

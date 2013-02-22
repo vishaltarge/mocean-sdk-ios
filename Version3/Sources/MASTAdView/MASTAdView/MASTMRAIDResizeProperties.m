@@ -15,9 +15,11 @@ static NSString* MASTMRAIDResizePropertiesOffsetY = @"offsetY";
 static NSString* MASTMRAIDResizePropertiesAllowOffscreen = @"allowOffscreen";
 
 static NSString* MASTMRAIDResizePropertiesCCPositionTopLeft = @"top-left";
+static NSString* MASTMRAIDResizePropertiesCCPositionTopCenter = @"top-center";
 static NSString* MASTMRAIDResizePropertiesCCPositionTopRight = @"top-right";
 static NSString* MASTMRAIDResizePropertiesCCPositionCenter = @"center";
 static NSString* MASTMRAIDResizePropertiesCCPositionBottomLeft = @"bottom-left";
+static NSString* MASTMRAIDResizePropertiesCCPositionBottomCenter = @"bottom-center";
 static NSString* MASTMRAIDResizePropertiesCCPositionBottomRight = @"bottom-right";
 
 
@@ -45,6 +47,10 @@ static NSString* MASTMRAIDResizePropertiesCCPositionBottomRight = @"bottom-right
     {
         properties.customClosePosition = MASTMRAIDResizeCustomClosePositionTopLeft;
     }
+    else if ([ccp isEqualToString:MASTMRAIDResizePropertiesCCPositionTopCenter])
+    {
+        properties.customClosePosition = MASTMRAIDResizeCustomClosePositionTopCenter;
+    }
     else if ([ccp isEqualToString:MASTMRAIDResizePropertiesCCPositionTopRight])
     {
         properties.customClosePosition = MASTMRAIDResizeCustomClosePositionTopRight;
@@ -56,6 +62,10 @@ static NSString* MASTMRAIDResizePropertiesCCPositionBottomRight = @"bottom-right
     else if ([ccp isEqualToString:MASTMRAIDResizePropertiesCCPositionBottomLeft])
     {
         properties.customClosePosition = MASTMRAIDResizeCustomClosePositionBottomLeft;
+    }
+    else if ([ccp isEqualToString:MASTMRAIDResizePropertiesCCPositionBottomCenter])
+    {
+        properties.customClosePosition = MASTMRAIDResizeCustomClosePositionBottomCenter;
     }
     else if ([ccp isEqualToString:MASTMRAIDResizePropertiesCCPositionBottomRight])
     {
@@ -84,6 +94,9 @@ static NSString* MASTMRAIDResizePropertiesCCPositionBottomRight = @"bottom-right
         case MASTMRAIDResizeCustomClosePositionTopLeft:
             ccp = MASTMRAIDResizePropertiesCCPositionTopLeft;
             break;
+        case MASTMRAIDResizeCustomClosePositionTopCenter:
+            ccp = MASTMRAIDResizePropertiesCCPositionTopCenter;
+            break;
         case MASTMRAIDResizeCustomClosePositionTopRight:
             ccp = MASTMRAIDResizePropertiesCCPositionTopRight;
             break;
@@ -92,6 +105,9 @@ static NSString* MASTMRAIDResizePropertiesCCPositionBottomRight = @"bottom-right
             break;
         case MASTMRAIDResizeCustomClosePositionBottomLeft:
             ccp = MASTMRAIDResizePropertiesCCPositionBottomLeft;
+            break;
+        case MASTMRAIDResizeCustomClosePositionBottomCenter:
+            ccp = MASTMRAIDResizePropertiesCCPositionBottomCenter;
             break;
         case MASTMRAIDResizeCustomClosePositionBottomRight:
             ccp = MASTMRAIDResizePropertiesCCPositionBottomRight;

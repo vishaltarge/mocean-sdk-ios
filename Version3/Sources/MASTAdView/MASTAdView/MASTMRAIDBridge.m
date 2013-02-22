@@ -23,7 +23,7 @@ static NSString* MRAIDBridgeSResized = @"resized";
 static NSString* MRAIDBridgeSHidden = @"resized";
 
 static NSString* MRAIDBridgeFeatureSMS = @"sms";
-static NSString* MRAIDBridgeFeaturePhone = @"phone";
+static NSString* MRAIDBridgeFeatureTel = @"tel";
 static NSString* MRAIDBridgeFeatureCalendar = @"calendar";
 static NSString* MRAIDBridgeFeatureStorePicture = @"storePicture";
 static NSString* MRAIDBridgeFeatureInlineVideo = @"inlineVideo";
@@ -72,8 +72,8 @@ static NSString* MRAIDBridgeCommandStorePicture = @"storePicture";
         case MASTMRAIDBridgeSupportsSMS:
             feature = MRAIDBridgeFeatureSMS;
             break;
-        case MASTMRAIDBridgeSupportsPhone:
-            feature = MRAIDBridgeFeaturePhone;
+        case MASTMRAIDBridgeSupportsTel:
+            feature = MRAIDBridgeFeatureTel;
             break;
         case MASTMRAIDBridgeSupportsCalendar:
             feature = MRAIDBridgeFeatureCalendar;
