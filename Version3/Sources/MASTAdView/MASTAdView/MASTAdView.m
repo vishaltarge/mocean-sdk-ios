@@ -2487,9 +2487,38 @@ static NSString* AdViewUserAgent = nil;
         return YES;
     }
     
-    if ((navigationType == UIWebViewNavigationTypeLinkClicked) ||
-        (navigationType == UIWebViewNavigationTypeOther))
-    {   
+    //
+    // TODO: For now allowing UIWebViewNavigationTypeOther since theres no way to know
+    // how the navigation occured from the UIWebView.  This will allow iframes to be used
+    // by an ad but may also allow an ad to randomly navigate the web view to some normal
+    // web page (say http://www.mocean.com) which is NOT supported by the SDK.
+    //
+    //if ((navigationType == UIWebViewNavigationTypeLinkClicked) ||
+    //    (navigationType == UIWebViewNavigationTypeOther))
+    //
+    // Need to revisit and attempt to trap usages in JS and attempt to determine their
+    // source and then allow access to UIWebViewNavigationTypeOther when used by iframes.
+    //
+    
+    // Normally canOpenInternall would be processed inside the navigation type selection.
+    // However, it's being done outside becuase of the above handling of UIWebViewNavigationTypeOther.
+    BOOL canOpenInternal = YES;
+    if ([[request.URL.scheme lowercaseString] hasPrefix:@"http"])
+    {
+        canOpenInternal = NO;
+    }
+    
+    NSString* host = [request.URL.host lowercaseString];
+    if ([host hasSuffix:@"itunes.apple.com"] || [host hasSuffix:@"phobos.apple.com"])
+    {
+        // TODO: May need to follow all redirects to determine if it's an itunes link.
+        // http://developer.apple.com/library/ios/#qa/qa1629/_index.html
+        
+        canOpenInternal = NO;
+    }
+    
+    if (navigationType == UIWebViewNavigationTypeLinkClicked)
+    {
         __block BOOL shouldOpen = YES;
         if ([self.delegate respondsToSelector:@selector(MASTAdView:shouldOpenURL:)])
         {
@@ -2502,26 +2531,9 @@ static NSString* AdViewUserAgent = nil;
         if (shouldOpen == NO)
             return NO;
         
-        BOOL canOpenInternal = YES;
-        
-        if ([[request.URL.scheme lowercaseString] hasPrefix:@"http"])
-        {
-            canOpenInternal = NO;
-        }
-        
-        NSString* host = [request.URL.host lowercaseString];
-        if ([host hasSuffix:@"itunes.apple.com"] || [host hasSuffix:@"phobos.apple.com"])
-        {
-            // TODO: May need to follow all redirects to determine if it's an itunes link.
-            // http://developer.apple.com/library/ios/#qa/qa1629/_index.html
-            
-            canOpenInternal = NO;
-        }
-        
         if (canOpenInternal && self.useInternalBrowser)
         {
             [self openAdBrowserWithURL:request.URL];
-            
             return NO;
         }
         
@@ -2532,6 +2544,17 @@ static NSString* AdViewUserAgent = nil;
         [[UIApplication sharedApplication] openURL:request.URL];
         
         // Never let the ad's window render the destination link.
+        return NO;
+    }
+
+    if ((navigationType == UIWebViewNavigationTypeOther) && (canOpenInternal == NO))
+    {
+        [self invokeDelegateSelector:@selector(MASTAdViewWillLeaveApplication:)];
+        
+        self.skipNextUpdateTick = YES;
+        
+        [[UIApplication sharedApplication] openURL:request.URL];
+        
         return NO;
     }
     

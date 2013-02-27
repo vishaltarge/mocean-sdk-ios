@@ -39,7 +39,7 @@ static NSTimeInterval MAST_DEFAULT_NETWORK_TIMEOUT __attribute__((unused)) = 5;
 //  The second parameter represens the ad content.
 //  DO NOT change the order or inclusion of these parameters.
 //
-static NSString* MAST_RICHMEDIA_FORMAT __attribute__((unused)) = @"<html><head><meta name=\"viewport\" content=\"user-scalable=0;\"/><script>%@</script><style>*:not(input){-webkit-touch-callout:none;-webkit-user-select:none;-webkit-text-size-adjust:none;}body{margin:0;padding:0;}</style></head><body>%@</body></html>";
+static NSString* MAST_RICHMEDIA_FORMAT __attribute__((unused)) = @"<html><head><meta name=\"viewport\" content=\"user-scalable=no;\"/><script>%@</script><style>*:not(input){-webkit-touch-callout:none;-webkit-user-select:none;-webkit-text-size-adjust:none;}body{margin:0;padding:0;}</style></head><body>%@</body></html>";
 
 
 #endif
