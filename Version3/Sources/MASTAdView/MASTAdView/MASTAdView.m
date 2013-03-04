@@ -51,7 +51,6 @@ static NSString* AdViewUserAgent = nil;
 @property (nonatomic, strong) NSTimer* closeButtonTimer;
 @property (nonatomic, strong) UIButton* closeButton;
 
-
 // Gesture for non-mraid/web ads
 @property (nonatomic, strong) UITapGestureRecognizer* tapGesture;
 
@@ -88,6 +87,9 @@ static NSString* AdViewUserAgent = nil;
 
 // For location services
 @property (nonatomic, strong) CLLocationManager* locationManager;
+
+// Using the rootViewController, determines the view that the resizeView uses as a superview.
+- (UIView*)resizeViewSuperview;
 
 // Inspects ad descriptor and configures views and loads the ad.
 - (void)loadContent:(NSData*)content;
@@ -631,6 +633,8 @@ static NSString* AdViewUserAgent = nil;
     [self invokeDelegateSelector:@selector(MASTAdViewWillLeaveApplication:)];
     
     self.skipNextUpdateTick = YES;
+    
+    [self closeAdBrowser];
 }
 
 #pragma mark - Gestures
@@ -883,7 +887,7 @@ static NSString* AdViewUserAgent = nil;
 {
     if (resizeView == nil)
     {
-        resizeView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        resizeView = [[UIView alloc] initWithFrame:CGRectZero];
         resizeView.backgroundColor = [UIColor clearColor];
         resizeView.opaque = NO;
         resizeView.autoresizesSubviews = YES;
@@ -891,6 +895,20 @@ static NSString* AdViewUserAgent = nil;
     }
     
     return resizeView;
+}
+
+#pragma mark - Resize View Container
+
+- (UIView*)resizeViewSuperview
+{
+    UIViewController* rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
+    
+    if ([self.delegate respondsToSelector:@selector(MASTAdViewPresentationController:)])
+    {
+        rootViewController = [self.delegate MASTAdViewPresentationController:self];
+    }
+    
+    return [rootViewController view];
 }
 
 #pragma mark - Close Button
@@ -1400,9 +1418,27 @@ static NSString* AdViewUserAgent = nil;
 - (void)mraidUpdateLayoutForNewState:(MASTMRAIDBridgeState)state
 {
     CGSize screenSize = [self screenSizeIncludingStatusBar:NO];
-    CGSize maxSize = [self.superview bounds].size;
     CGRect defaultFrame = [self absoluteFrameForView:self];
     CGRect currentFrame = [self absoluteFrameForView:self.webView];
+    
+    CGSize maxSize = CGSizeZero;
+    if ([self resizeViewSuperview] != nil)
+    {
+        maxSize = [self resizeViewSuperview].bounds.size;
+
+        CGRect statusBarFrame = [[UIApplication sharedApplication] statusBarFrame];
+        if (CGRectEqualToRect(statusBarFrame, CGRectZero) == NO)
+        {
+            if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation]))
+            {
+                maxSize.height -= statusBarFrame.size.height;
+            }
+            else
+            {
+                maxSize.height -= statusBarFrame.size.width;
+            }
+        }
+    }
     
     BOOL viewable = NO;
     
@@ -1412,9 +1448,6 @@ static NSString* AdViewUserAgent = nil;
         {
             // This doesn't take any consideration to the app being suspended (and obviously terminated).
             viewable = YES;
-            
-            // While expanded the status bar is hidden so the max size is now the screen size.
-            maxSize = self.expandView.bounds.size;
         }
         else
         {
@@ -1675,6 +1708,16 @@ static NSString* AdViewUserAgent = nil;
 
 - (void)mraidBridgeResize:(MASTMRAIDBridge*)bridge
 {
+    UIView* resizeViewSuperview = [self resizeViewSuperview];
+    
+    if (resizeViewSuperview == nil)
+    {
+        [bridge sendErrorMessage:@"Unable to determine superview for resize container view."
+                       forAction:@"expand"
+                      forWebView:self.webView];
+        return;
+    }
+    
     if (self.placementType == MASTAdViewPlacementTypeInterstitial)
     {
         [bridge sendErrorMessage:@"Can not resize with placementType interstitial."
@@ -1719,8 +1762,34 @@ static NSString* AdViewUserAgent = nil;
                       forWebView:self.webView];
         return;
     }
+    
+    CGRect maxFrame = resizeViewSuperview.bounds;
+    
+    CGRect statusBarFrame = [[UIApplication sharedApplication] statusBarFrame];
+    if (CGRectEqualToRect(statusBarFrame, CGRectZero) == NO)
+    {
+        if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation]))
+        {
+            maxFrame.origin.y += statusBarFrame.size.height;
+            maxFrame.size.height -= statusBarFrame.size.height;
+        }
+        else
+        {
+            maxFrame.origin.y += statusBarFrame.size.width;
+            maxFrame.size.height -= statusBarFrame.size.width;
+        }
+    }
+    
+    // The actual max size for a resize must be less than the max size reported to the bridge.
+    if ((requestedSize.width >= maxFrame.size.width) && (requestedSize.height >= maxFrame.size.height))
+    {
+        [bridge sendErrorMessage:@"Size must be smaller than the max size."
+                       forAction:@"resize"
+                      forWebView:self.webView];
+        return;
+    }
 
-    CGRect currentFrame = self.frame;
+    CGRect currentFrame = [resizeViewSuperview convertRect:self.bounds fromView:self];
     CGRect convertRect = currentFrame;
     
     convertRect.origin.x += requestedOffset.x;
@@ -1731,9 +1800,6 @@ static NSString* AdViewUserAgent = nil;
     
     if (bridge.resizeProperties.allowOffscreen == NO)
     {
-        CGSize maxSize = [self.superview bounds].size;
-        CGRect maxFrame = CGRectMake(0, 0, maxSize.width, maxSize.height);
-        
         if (CGRectContainsRect(maxFrame, convertRect) == NO)
         {
             // Adjust height and width to fit.
@@ -1770,6 +1836,69 @@ static NSString* AdViewUserAgent = nil;
         }
     }
     
+    const CGFloat closeControlSize = 50;
+    
+    // Setup the "guaranteed" close area (invisible).
+    // Note, this logic only uses the width and height from  convertRect and 0,0
+    // as the top left since convertRect represents the resize view frame, not bounds.
+    CGRect closeControlFrame = CGRectMake(convertRect.size.width - closeControlSize, 0,
+                                          closeControlSize, closeControlSize);
+    
+    // Unlike expand the ad can specify the general location of the control area
+    switch (bridge.resizeProperties.customClosePosition)
+    {
+        case MASTMRAIDResizeCustomClosePositionTopRight:
+            // Already configured above.
+            break;
+            
+        case MASTMRAIDResizeCustomClosePositionTopCenter:
+            closeControlFrame = CGRectMake(convertRect.size.width/2 - closeControlSize/2, 0,
+                                           closeControlSize, closeControlSize);
+            break;
+            
+        case MASTMRAIDResizeCustomClosePositionTopLeft:
+            closeControlFrame = CGRectMake(0, 0,
+                                           closeControlSize, closeControlSize);
+            break;
+            
+        case MASTMRAIDResizeCustomClosePositionBottomLeft:
+            closeControlFrame = CGRectMake(0, convertRect.size.height - closeControlSize,
+                                           closeControlSize, closeControlSize);
+            break;
+            
+        case MASTMRAIDResizeCustomClosePositionBottomRight:
+            closeControlFrame = CGRectMake(convertRect.size.width - closeControlSize,
+                                           convertRect.size.height - closeControlSize,
+                                           closeControlSize, closeControlSize);
+            break;
+            
+        case MASTMRAIDResizeCustomClosePositionBottomCenter:
+            closeControlFrame = CGRectMake(convertRect.size.width/2 - closeControlSize/2,
+                                           convertRect.size.height - closeControlSize,
+                                           closeControlSize, closeControlSize);
+            break;
+            
+        case MASTMRAIDResizeCustomClosePositionCenter:
+            closeControlFrame = CGRectMake(convertRect.size.width/2 - closeControlSize/2,
+                                           convertRect.size.height/2 - closeControlSize/2,
+                                           closeControlSize, closeControlSize);
+            break;
+    }
+    
+    // Create a frame relative to the maxFrame from the closeControl frame.
+    CGRect maxCloseControlFrame = closeControlFrame;
+    maxCloseControlFrame.origin.x += convertRect.origin.x;
+    maxCloseControlFrame.origin.y += convertRect.origin.y;
+    
+    // Determine if any of the close control will end up off screen.
+    if (CGRectContainsRect(maxFrame, maxCloseControlFrame) == NO)
+    {
+        [bridge sendErrorMessage:@"Resize close control must remain on screen."
+                       forAction:@"resize"
+                      forWebView:self.webView];
+        return;
+    }
+
     if ([self.delegate respondsToSelector:@selector(MASTAdView:willResizeToFrame:)])
     {
         [self invokeDelegateBlock:^
@@ -1781,70 +1910,7 @@ static NSString* AdViewUserAgent = nil;
     self.resizeView.frame = convertRect;
     [self.resizeView addSubview:self.webView];
     [self.webView setFrame:self.resizeView.bounds];
-
-    [self.superview addSubview:self.resizeView];
-    
-    // Adjust for status bar (resize doesn't hide the status bar).
-    CGRect statusBarFrame = [[UIApplication sharedApplication] statusBarFrame];
-    if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation]))
-    {
-        convertRect.origin.y -= statusBarFrame.size.height;
-    }
-    else
-    {
-        convertRect.origin.y -= statusBarFrame.size.width;
-    }
-    
-    const CGFloat closeControlSize = 50;
-    
-    // Setup the "guaranteed" close area (invisible).
-    CGRect closeControlFrame = CGRectMake(CGRectGetMaxX(self.resizeView.bounds) - closeControlSize,
-                                          CGRectGetMinY(self.resizeView.bounds), 
-                                          closeControlSize, closeControlSize);
-    
-    // Unlike expand the ad can specify the general location of the control area
-    switch (bridge.resizeProperties.customClosePosition)
-    {
-        case MASTMRAIDResizeCustomClosePositionTopRight:
-            // Already configured above.
-            break;
-            
-        case MASTMRAIDResizeCustomClosePositionTopCenter:
-            closeControlFrame = CGRectMake(self.resizeView.center.x - closeControlSize/2,
-                                           CGRectGetMinY(self.resizeView.bounds),
-                                           closeControlSize, closeControlSize);
-            break;
-            
-        case MASTMRAIDResizeCustomClosePositionTopLeft:
-            closeControlFrame = CGRectMake(CGRectGetMinX(self.resizeView.bounds),
-                                           CGRectGetMinY(self.resizeView.bounds), 
-                                           closeControlSize, closeControlSize);
-            break;
-            
-        case MASTMRAIDResizeCustomClosePositionBottomLeft:
-            closeControlFrame = CGRectMake(CGRectGetMinX(self.resizeView.bounds),
-                                           CGRectGetMaxY(self.resizeView.bounds) - closeControlSize, 
-                                           closeControlSize, closeControlSize);
-            break;
-            
-        case MASTMRAIDResizeCustomClosePositionBottomRight:
-            closeControlFrame = CGRectMake(CGRectGetMaxX(self.resizeView.bounds) - closeControlSize,
-                                           CGRectGetMaxY(self.resizeView.bounds) - closeControlSize, 
-                                           closeControlSize, closeControlSize);
-            break;
-            
-        case MASTMRAIDResizeCustomClosePositionBottomCenter:
-            closeControlFrame = CGRectMake(self.resizeView.center.x - closeControlSize/2,
-                                           CGRectGetMaxY(self.resizeView.bounds) - closeControlSize,
-                                           closeControlSize, closeControlSize);
-            break;
-            
-        case MASTMRAIDResizeCustomClosePositionCenter:
-            closeControlFrame = CGRectMake(self.resizeView.center.x - closeControlSize/2,
-                                           self.resizeView.center.y - closeControlSize/2,
-                                           closeControlSize, closeControlSize);
-            break;
-    }
+    [resizeViewSuperview addSubview:self.resizeView];
     
     self.resizeCloseControl.frame = closeControlFrame;
     [self.resizeView addSubview:self.resizeCloseControl];
@@ -1915,9 +1981,7 @@ static NSString* AdViewUserAgent = nil;
     }
 }
 
-// Updates MRAID on size changes.  Note that this also makes an assumption that if this instance
-// changes that the resize view may also change if in a resized state.  This is becuase both views
-// share the same autoresizingmask and superview.
+// Updates MRAID on size changes.
 - (void)setFrame:(CGRect)frame
 {
     [super setFrame:frame];

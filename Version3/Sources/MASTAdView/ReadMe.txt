@@ -42,4 +42,8 @@ Release Notes:
 - Added invoke of didFailToReceiveAdWithError when an ad descriptor has no content and content is expected.
 - Minor log entry formatting updates for entries that have extra detail.
 - Corrected internal browser view layout so tool bar does not cover the web view.
+- If the internal web browser detects it will leave the application it will automatically close.
+- The resize container is now the rootViewController view.  The rootViewController is determined from the UIApplication UIWindow or from the MASTAdViewDelegate.
+- The maxSize is now based on size of the rootViewController view and is affected by the status bar.
+- Updated MRAID resize to account for a minium size that of the close control view, a maximum size that is less than the maxSize and that the close control area is on screen.  If these constraints are not met then the resize request will fail.
 
