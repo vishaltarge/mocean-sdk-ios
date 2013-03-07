@@ -27,7 +27,8 @@
         self.modalPresentationStyle = UIModalPresentationFullScreen;
         self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         
-        self.forcedOrientation = UIInterfaceOrientationPortrait;
+        self.allowRotation = YES;
+        self.forcedOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     }
     return self;
 }
@@ -72,6 +73,9 @@
 
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
 {
+    if (self.allowRotation)
+        return [[UIApplication sharedApplication] statusBarOrientation];
+    
     return self.forcedOrientation;
 }
 

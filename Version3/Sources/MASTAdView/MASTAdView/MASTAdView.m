@@ -253,8 +253,15 @@ static NSString* AdViewUserAgent = nil;
     }
     
     CGSize size = self.bounds.size;
+    
     if (self.placementType == MASTAdViewPlacementTypeInterstitial)
-        size = self.expandView.bounds.size;
+    {
+        size = [UIScreen mainScreen].bounds.size;
+        if (UIInterfaceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]))
+        {
+            size = CGSizeMake(size.height, size.width);
+        }
+    }
     
     CGFloat scale = [[UIScreen mainScreen] scale];
     CGFloat size_x = size.width * scale;
@@ -347,6 +354,8 @@ static NSString* AdViewUserAgent = nil;
 
 - (void)updateWithTimeInterval:(NSTimeInterval)interval
 {
+    [self reset];
+    
     if (interval == 0)
     {
         [self update];
@@ -355,8 +364,6 @@ static NSString* AdViewUserAgent = nil;
     
     // If iOS 6 determine if the calendar can be used and ask user for authorization if necessary.
     [self checkCalendarAuthorizationStatus];
-    
-    [self reset];
 
     self.updateTimer = [[NSTimer alloc] initWithFireDate:nil
                                                 interval:interval
@@ -540,8 +547,8 @@ static NSString* AdViewUserAgent = nil;
     }
     
     // Create the interstitial timer that will close the interstial when it triggers.
-    self.interstitialTimer = [[NSTimer alloc] initWithFireDate:nil
-                                                      interval:delay
+    self.interstitialTimer = [[NSTimer alloc] initWithFireDate:[[NSDate date] dateByAddingTimeInterval:delay]
+                                                      interval:0
                                                         target:self
                                                       selector:@selector(closeInterstitial)
                                                       userInfo:nil
@@ -1992,6 +1999,38 @@ static NSString* AdViewUserAgent = nil;
     }
 }
 
+- (void)removeFromSuperview
+{
+    // To avoid NSTimer retaining instances of the MASTAdView all timers MUST be cancled when the view
+    // is no longer attached to a superview.
+    
+    // Stop/reset the timer.
+    if (self.updateTimer != nil)
+    {
+        [self.updateTimer performSelectorOnMainThread:@selector(invalidate) withObject:nil waitUntilDone:YES];
+        self.updateTimer = nil;
+        
+        [self logEvent:@"CAUTION: removeFromSuperview invoked with live timers.  Be sure to call [MASTAdView reset] if the superview is being deallocated/destoryed and no longer referenced."
+                ofType:MASTAdViewLogEventTypeError
+                  func:__func__
+                  line:__LINE__];
+    }
+    
+    // Stop the interstitial timer
+    if (self.interstitialTimer != nil)
+    {
+        [self.interstitialTimer performSelectorOnMainThread:@selector(invalidate) withObject:nil waitUntilDone:YES];
+        self.interstitialTimer = nil;
+        
+        [self logEvent:@"CAUTION: removeFromSuperview invoked with live timers.  Be sure to call [MASTAdView reset] if the superview is being deallocated/destoryed and no longer referenced."
+                ofType:MASTAdViewLogEventTypeError
+                  func:__func__
+                  line:__LINE__];
+    }
+    
+    [super removeFromSuperview];
+}
+
 #pragma mark - Calendar Interactions
 
 // Any thread
@@ -2613,6 +2652,18 @@ static NSString* AdViewUserAgent = nil;
 
     if ((navigationType == UIWebViewNavigationTypeOther) && (canOpenInternal == NO))
     {
+        __block BOOL shouldOpen = YES;
+        if ([self.delegate respondsToSelector:@selector(MASTAdView:shouldOpenURL:)])
+        {
+            [self invokeDelegateBlock:^
+             {
+                 shouldOpen = [self.delegate MASTAdView:self shouldOpenURL:request.URL];
+             }];
+        }
+        
+        if (shouldOpen == NO)
+            return NO;
+        
         [self invokeDelegateSelector:@selector(MASTAdViewWillLeaveApplication:)];
         
         self.skipNextUpdateTick = YES;

@@ -23,7 +23,8 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
-    self.adView.delegate = nil;
+    [self.adView reset];
+    [self.adView setDelegate:nil];
     self.adView = nil;
     
     [super dealloc];

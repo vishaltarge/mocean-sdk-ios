@@ -46,4 +46,10 @@ Release Notes:
 - The resize container is now the rootViewController view.  The rootViewController is determined from the UIApplication UIWindow or from the MASTAdViewDelegate.
 - The maxSize is now based on size of the rootViewController view and is affected by the status bar.
 - Updated MRAID resize to account for a minium size that of the close control view, a maximum size that is less than the maxSize and that the close control area is on screen.  If these constraints are not met then the resize request will fail.
+- Updated documentation for updateWithTimeInterval: and showCloseButton:afterDelay indicating reset must be called if the MASTAdView instance is being destroyed/deallocated.
+- Added removeFromSuperview implementation to detect and invalidate update and close button timers and log (as errors) caution output that reset must be called if the MASTAdView instance is being destroyed/deallocated.
+- Corrected default handling of interstitial to properly allow landscape interstitial presentation.
+- Corrected showInterstitialWithDuration: timer creation.
+- Reworked orientation properties parsing to default to allowing rotation vs. locking rotation if there is a parse issue with the properties.
+
 

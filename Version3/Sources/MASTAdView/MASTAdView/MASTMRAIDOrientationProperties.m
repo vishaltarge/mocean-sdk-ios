@@ -28,7 +28,7 @@ static NSString* MASTMRAIDOrientationPropertiesFOrientationNone = @"none";
     // Some of them need to default to true if unset so the logic should be updated to check the unset
     // condition or default everything to it's defaults and only set them if set to something.
     
-    properties.allowOrientationChange = [[args valueForKey:MASTMRAIDOrientationPropertiesAllowOrientationChange] isEqualToString:@"true"];
+    properties.allowOrientationChange = ![[args valueForKey:MASTMRAIDOrientationPropertiesAllowOrientationChange] isEqualToString:@"false"];
     
     properties.forceOrientation = MASTMRAIDOrientationPropertiesForceOrientationNone;
     NSString* fo = [args valueForKey:MASTMRAIDOrientationPropertiesFOrientation];

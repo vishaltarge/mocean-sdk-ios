@@ -486,6 +486,12 @@ typedef enum
  this request occurs can do so prior to calling update.  Refer to iOS EKEventStore
  documentation for more information.
  
+ @warning Ensure [MASTAdView reset] is invoked when the instance will no longer be used or
+ is being removed from the view stack.  This will prevent the main NSRunLoop from retaining
+ the MASTAdView instance after its intended release.
+ 
+ @see reset
+ 
  @param interval The delay between requesting updates after the initial update.
  */
 - (void)updateWithTimeInterval:(NSTimeInterval)interval;
@@ -505,6 +511,9 @@ typedef enum
  responding to other activities update or updateWithTimeInterval: can be sent again
  to resume ad updates.
  
+ @warning If the project is using ARC (automatic reference counting) this MUST be called
+ to cancel internal timers.  If not the main NSRunLoop will retain a reference to the 
+ MASTAdView instance and continue invoking its timers.
  @warning Does not reset the delegate.
  */
 - (void)reset;
@@ -561,6 +570,12 @@ typedef enum
  
  The setting applies for all subsequent updates.  The button can be customized using the 
  MASTAdViewCustomCloseButton: delegate method.
+ 
+ @warning Ensure [MASTAdView reset] is invoked when the instance will no longer be used or
+ is being removed from the view stack.  This will prevent the main NSRunLoop from retaining 
+ the MASTAdView instance after its intended release.
+ 
+ @see reset
  
  @param showCloseButton Set to `YES` to display the close button after rendering ads.
  @param delay The time to delay showing the close button after rendering the ad.  A
