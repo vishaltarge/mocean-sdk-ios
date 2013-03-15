@@ -816,9 +816,7 @@ static NSString* AdViewUserAgent = nil;
     if (labelView == nil)
     {
         labelView = [[UILabel alloc] initWithFrame:self.bounds];
-        labelView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight |
-            UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin |
-            UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+        labelView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         labelView.numberOfLines = 4;
         labelView.textAlignment = UITextAlignmentCenter;
         labelView.minimumFontSize = 10;
@@ -838,9 +836,7 @@ static NSString* AdViewUserAgent = nil;
     if (imageView == nil)
     {
         imageView = [[UIImageView alloc] initWithFrame:self.bounds];
-        imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight |
-            UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin |
-            UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+        imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         imageView.contentMode = UIViewContentModeScaleAspectFit;
         imageView.backgroundColor = self.backgroundColor;
         imageView.opaque = YES;
@@ -859,10 +855,8 @@ static NSString* AdViewUserAgent = nil;
         webView.delegate = self;
         webView.opaque = NO;
         webView.backgroundColor = [UIColor clearColor];
-        webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight |
-            UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin |
-            UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
-            webView.autoresizesSubviews = YES;
+        webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        webView.autoresizesSubviews = YES;
         webView.mediaPlaybackRequiresUserAction = NO;
         webView.allowsInlineMediaPlayback = YES;
         
