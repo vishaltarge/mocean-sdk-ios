@@ -52,4 +52,7 @@ Release Notes:
 - Corrected showInterstitialWithDuration: timer creation.
 - Reworked orientation properties parsing to default to allowing rotation vs. locking rotation if there is a parse issue with the properties.
 
-
+3.0.3
+- Updated default injection wrapper to use 0 vs. "no" for disabling user-scaling in the default viewport.
+- Updated container autoresizeMask flags to better usages with the desired effect.
+- Blocking/ignoring tap gesture for web view based ads as the UIWebView should consume them directly.
