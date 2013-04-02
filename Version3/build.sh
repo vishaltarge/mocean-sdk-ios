@@ -22,5 +22,5 @@ rm -rf `find . -name xcuserdata -type d`
 rm -rf `find . -name buildtmp -type d`
 rm -rf `find . -name .DS_Store` 
 
-zip -rX build.zip Documentation Samples Sources ThirdParty
+zip -rX --symlinks build.zip Documentation Samples Sources ThirdParty
 
