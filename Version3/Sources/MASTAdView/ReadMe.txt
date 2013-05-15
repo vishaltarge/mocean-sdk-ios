@@ -56,3 +56,7 @@ Release Notes:
 - Updated default injection wrapper to use 0 vs. "no" for disabling user-scaling in the default viewport.
 - Updated container autoresizeMask flags to better usages with the desired effect.
 - Blocking/ignoring tap gesture for web view based ads as the UIWebView should consume them directly.
+
+3.0.4
+- Corrected tap handling for interstitial image and text ads.
+

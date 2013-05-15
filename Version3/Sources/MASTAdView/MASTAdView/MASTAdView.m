@@ -648,8 +648,9 @@ static NSString* AdViewUserAgent = nil;
 
 - (void)tapGesture:(id)sender
 {
-    // Any web based ad MUST implement it's own navigation.
-    if ((self.imageView.superview != self) &&  (self.labelView.superview != self))
+    // Taps are only handled directly for imageView and labelView based ads.
+    // Any web based ad MUST implement it's own navigation
+    if ((self.imageView.superview == nil) && (self.labelView.superview == nil))
         return;
     
     if ([[self.adDescriptor url] length] == 0)
