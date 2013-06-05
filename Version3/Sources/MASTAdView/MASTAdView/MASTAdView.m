@@ -1531,14 +1531,14 @@ static NSString* AdViewUserAgent = nil;
             [self addSubview:self.webView];
             
             [self.webView scrollToTop];
-
-            [self mraidUpdateLayoutForNewState:MASTMRAIDBridgeStateDefault];
-            [self.mraidBridge setState:MASTMRAIDBridgeStateDefault forWebView:self.webView];
             
             [self prepareCloseButton];
             [self restartUpdateTimer];
             
             [self dismissModalView:self.expandView animated:YES];
+            
+            [self mraidUpdateLayoutForNewState:MASTMRAIDBridgeStateDefault];
+            [self.mraidBridge setState:MASTMRAIDBridgeStateDefault forWebView:self.webView];
 
             [self invokeDelegateSelector:@selector(MASTAdViewDidCollapse:)];
 
@@ -1556,11 +1556,11 @@ static NSString* AdViewUserAgent = nil;
             
             [self.webView scrollToTop];
             
-            [self mraidUpdateLayoutForNewState:MASTMRAIDBridgeStateDefault];
-            [self.mraidBridge setState:MASTMRAIDBridgeStateDefault forWebView:self.webView];
-            
             [self prepareCloseButton];
             [self restartUpdateTimer];
+            
+            [self mraidUpdateLayoutForNewState:MASTMRAIDBridgeStateDefault];
+            [self.mraidBridge setState:MASTMRAIDBridgeStateDefault forWebView:self.webView];
             
             [self invokeDelegateSelector:@selector(MASTAdViewDidCollapse:)];
             break;
@@ -2605,7 +2605,7 @@ static NSString* AdViewUserAgent = nil;
     // Normally canOpenInternall would be processed inside the navigation type selection.
     // However, it's being done outside becuase of the above handling of UIWebViewNavigationTypeOther.
     BOOL canOpenInternal = YES;
-    if ([[request.URL.scheme lowercaseString] hasPrefix:@"http"])
+    if ([[request.URL.scheme lowercaseString] hasPrefix:@"http"] == NO)
     {
         canOpenInternal = NO;
     }

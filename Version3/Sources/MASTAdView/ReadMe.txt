@@ -59,4 +59,6 @@ Release Notes:
 
 3.0.4
 - Corrected tap handling for interstitial image and text ads.
+- Reordered layout/sizing logic for MRAID to occur after SDK completes the close handling logic.
+- Corrected HTTP/S check when determining what to allow the banner UIWebView to handle directly.
 
