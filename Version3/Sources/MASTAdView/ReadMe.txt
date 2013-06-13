@@ -64,4 +64,7 @@ Release Notes:
 - Added MASTAdViewResizeSuperview: delegate method to allow developers to specify the base view in the view stack for MRAID resize operations.
 - Reworked MRAID resize logic to account for proper max size between a full screen resize superview and a partial one.
 - Added internal browser status property and delegate messages to allow notification when the internal browser is opened and closed.
+- Removed now not-required site property.  The zone is all that is needed for obtaining ad content.  If used for other reason can be set with other optional parameters through adRequestParameters.
+
+
 

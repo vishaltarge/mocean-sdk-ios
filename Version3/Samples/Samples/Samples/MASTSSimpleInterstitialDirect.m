@@ -28,7 +28,6 @@
 - (void)refresh:(id)sender
 {
     MASTSAdConfigPrompt* prompt = [[[MASTSAdConfigPrompt alloc] initWithDelegate:self
-                                                                            site:self.interstitialAdView.site
                                                                             zone:self.interstitialAdView.zone] autorelease];
     [prompt show];
 }
@@ -63,7 +62,6 @@
     {
         self.interstitialAdView = [[[MASTAdView alloc] initInterstitial] autorelease];
         
-        self.interstitialAdView.site = 19829;
         self.interstitialAdView.zone = 88269;
         
         self.interstitialAdView.logLevel = MASTAdViewLogEventTypeDebug;
@@ -81,9 +79,8 @@
 
 #pragma mark -
 
-- (void)configPrompt:(MASTSAdConfigPrompt *)prompt refreshWithSite:(NSInteger)site zone:(NSInteger)zone
+- (void)configPrompt:(MASTSAdConfigPrompt *)prompt refreshWithZone:(NSInteger)zone
 {
-    self.interstitialAdView.site = site;
     self.interstitialAdView.zone = zone;
     
     // Since the UIAlertView seems to nil out the keyWindow used by the SDK, must "wait" for the

@@ -18,16 +18,10 @@
 {
     [super viewDidLoad];
     
-    NSInteger site = 19829;
     NSInteger zone = 88269;
     
-    self.adView.test = NO;
-    
-    self.adView.site = site;
     self.adView.zone = zone;
-    
-    // Uncomment to test internal browser delegates.
-    //self.adView.useInternalBrowser = YES;
+    self.adView.logLevel = MASTADViewLogEventTypeNone;
 }
 
 @end

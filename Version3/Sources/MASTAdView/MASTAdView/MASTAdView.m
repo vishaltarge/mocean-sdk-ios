@@ -112,7 +112,7 @@ static NSString* AdViewUserAgent = nil;
 @implementation MASTAdView
 
 @synthesize labelView, imageView, expandView, resizeView;
-@synthesize site, zone, useInternalBrowser, placementType;
+@synthesize zone, useInternalBrowser, placementType;
 @synthesize adServerURL, adRequestParameters;
 @synthesize test, logLevel;
 @synthesize delegate;
@@ -231,16 +231,16 @@ static NSString* AdViewUserAgent = nil;
             return;
     }
     
-    if ((self.site == 0) || (self.zone == 0))
+    if (self.zone == 0)
     {
-        [self logEvent:@"Can not update without a proper site and zone."
+        [self logEvent:@"Can not update without a proper zone."
                 ofType:MASTAdViewLogEventTypeError
                   func:__func__
                   line:__LINE__];
         
         if ([self.delegate respondsToSelector:@selector(MASTAdView:didFailToReceiveAdWithError:)])
         {
-            NSError* error = [NSError errorWithDomain:@"Missing site or zone."
+            NSError* error = [NSError errorWithDomain:@"Missing zone."
                                                  code:0
                                              userInfo:nil];
             
@@ -299,7 +299,6 @@ static NSString* AdViewUserAgent = nil;
     [args setValue:[MASTAdView version] forKey:@"version"];
     [args setValue:@"1" forKey:@"count"];
     [args setValue:@"3" forKey:@"key"];
-    [args setValue:[NSString stringWithFormat:@"%d", self.site] forKey:@"site"];
     [args setValue:[NSString stringWithFormat:@"%d", self.zone] forKey:@"zone"];
     
     if (self.test)

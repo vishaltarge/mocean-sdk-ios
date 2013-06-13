@@ -464,10 +464,6 @@ typedef enum
 /// @name Required configuration
 ///---------------------------------------------------------------------------------------
 
-/** Specifies the site for the ad network.
- */
-@property (nonatomic, assign) NSInteger site;
-
 /** Specifies the zone for the ad network.
  */
 @property (nonatomic, assign) NSInteger zone;
@@ -761,7 +757,7 @@ typedef enum
 ///---------------------------------------------------------------------------------------
 
 
-/** Instructs the ad server to return test ads for the configured site/zone.
+/** Instructs the ad server to return test ads for the configured zone.
  
  @warning This should never be set to `YES` for application releases.
  */

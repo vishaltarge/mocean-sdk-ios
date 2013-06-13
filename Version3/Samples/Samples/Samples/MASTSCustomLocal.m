@@ -18,15 +18,13 @@
 {
     [super viewDidLoad];
     
-    NSInteger site = 0;
     NSInteger zone = 0;
     
-    super.adView.site = site;
     super.adView.zone = zone;
     
     // A bit goofy but keeps setFirstAppear hidden in the parent class and
-    // overrides it to not do an update since the site and zone are invalid
-    // given the goal of this sample is to show locally derived ad content.
+    // overrides it to not do an update since the zone is invalid given
+    // the goal of this sample is to show locally derived ad content.
     BOOL value = NO;
     SEL sel = @selector(setFirstAppear:);
     NSMethodSignature* sig = [super methodSignatureForSelector:sel];
