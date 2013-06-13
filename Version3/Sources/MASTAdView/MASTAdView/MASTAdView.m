@@ -154,6 +154,7 @@ static NSString* AdViewUserAgent = nil;
 
     [self.webView setDelegate:nil];
     [self.webView stopLoading];
+    self.webView = nil;
     
     [self setLocationDetectionEnabled:NO];
 }
@@ -907,14 +908,50 @@ static NSString* AdViewUserAgent = nil;
 
 - (UIView*)resizeViewSuperview
 {
-    UIViewController* rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
+    UIView* resizeViewSuperview = [[[self window] rootViewController] view];
     
-    if ([self.delegate respondsToSelector:@selector(MASTAdViewPresentationController:)])
+    if (resizeViewSuperview == nil)
     {
-        rootViewController = [self.delegate MASTAdViewPresentationController:self];
+        resizeViewSuperview = [[[[UIApplication sharedApplication] keyWindow] rootViewController] view];
+    }
+
+    if ([self.delegate respondsToSelector:@selector(MASTAdViewRichMediaResizeSuperview:)])
+    {
+        resizeViewSuperview = [self.delegate MASTAdViewResizeSuperview:self];
     }
     
-    return [rootViewController view];
+    return resizeViewSuperview;
+}
+
+- (CGRect)resizeViewMaxRect
+{
+    CGSize screenSize = [self screenSizeIncludingStatusBar:NO];
+    CGRect maxRect = [self resizeViewSuperview].bounds;
+    
+    // Only account for the status bar size if the maxSize is the screen size.
+    // This would be the case where the resize superview is the rootViewController's
+    // view or the like.  It also works around the case where the resize superview may
+    // be this view's superview which may already account for the status bar.
+    
+    if (CGSizeEqualToSize(maxRect.size, screenSize))
+    {
+        CGRect statusBarFrame = [[UIApplication sharedApplication] statusBarFrame];
+        if (CGRectEqualToRect(statusBarFrame, CGRectZero) == NO)
+        {
+            if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation]))
+            {
+                maxRect.origin.y += statusBarFrame.size.height;
+                maxRect.size.height -= statusBarFrame.size.height;
+            }
+            else
+            {
+                maxRect.origin.y += statusBarFrame.size.width;
+                maxRect.size.height -= statusBarFrame.size.width;
+            }
+        }
+    }
+    
+    return maxRect;
 }
 
 #pragma mark - Close Button
@@ -1427,24 +1464,7 @@ static NSString* AdViewUserAgent = nil;
     CGRect defaultFrame = [self absoluteFrameForView:self];
     CGRect currentFrame = [self absoluteFrameForView:self.webView];
     
-    CGSize maxSize = CGSizeZero;
-    if ([self resizeViewSuperview] != nil)
-    {
-        maxSize = [self resizeViewSuperview].bounds.size;
-
-        CGRect statusBarFrame = [[UIApplication sharedApplication] statusBarFrame];
-        if (CGRectEqualToRect(statusBarFrame, CGRectZero) == NO)
-        {
-            if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation]))
-            {
-                maxSize.height -= statusBarFrame.size.height;
-            }
-            else
-            {
-                maxSize.height -= statusBarFrame.size.width;
-            }
-        }
-    }
+    CGSize maxSize = [self resizeViewMaxRect].size;
     
     BOOL viewable = NO;
     
@@ -1769,22 +1789,7 @@ static NSString* AdViewUserAgent = nil;
         return;
     }
     
-    CGRect maxFrame = resizeViewSuperview.bounds;
-    
-    CGRect statusBarFrame = [[UIApplication sharedApplication] statusBarFrame];
-    if (CGRectEqualToRect(statusBarFrame, CGRectZero) == NO)
-    {
-        if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation]))
-        {
-            maxFrame.origin.y += statusBarFrame.size.height;
-            maxFrame.size.height -= statusBarFrame.size.height;
-        }
-        else
-        {
-            maxFrame.origin.y += statusBarFrame.size.width;
-            maxFrame.size.height -= statusBarFrame.size.width;
-        }
-    }
+    CGRect maxFrame = [self resizeViewMaxRect];
     
     // The actual max size for a resize must be less than the max size reported to the bridge.
     if ((requestedSize.width >= maxFrame.size.width) && (requestedSize.height >= maxFrame.size.height))

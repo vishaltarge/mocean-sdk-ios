@@ -61,4 +61,7 @@ Release Notes:
 - Corrected tap handling for interstitial image and text ads.
 - Reordered layout/sizing logic for MRAID to occur after SDK completes the close handling logic.
 - Corrected HTTP/S check when determining what to allow the banner UIWebView to handle directly.
+- Added MASTAdViewResizeSuperview: delegate method to allow developers to specify the base view in the view stack for MRAID resize operations.
+- Reworked MRAID resize logic to account for proper max size between a full screen resize superview and a partial one.
+-
 

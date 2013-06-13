@@ -356,6 +356,26 @@ typedef enum
  */
 - (UIViewController*)MASTAdViewPresentationController:(MASTAdView*)adView;
 
+
+/** Sent to allow the application to override the superview used for ad resizing and visibility.
+ 
+ The supplied view MUST be a superview in the hierarchy to the MASTAdView instance.
+ 
+ The SDK by default will attempt to find a suitable default using the MASTAdView instance's window's
+ rootViewController view, the application's keyWindow rootViewController's view and finally the
+ MASTAdView's superview.
+ 
+ Note: Application's SHOULD have a rootViewController set for the application window but the iOS SDK
+ will allow an application to run without one.  If the application can not set up the rootViewController
+ as expected then this method MUST be implemented to return a view controller that can be used for 
+ resizing.  Without one set the resize feature may not work correctly.
+ 
+ @param adView The MASTAdView instance sending the message.
+ @return UIView to use as the superview when placing the resize view container.
+ */
+- (UIView*)MASTAdViewResizeSuperview:(MASTAdView*)adView;
+
+
 @end
 
 
