@@ -63,5 +63,5 @@ Release Notes:
 - Corrected HTTP/S check when determining what to allow the banner UIWebView to handle directly.
 - Added MASTAdViewResizeSuperview: delegate method to allow developers to specify the base view in the view stack for MRAID resize operations.
 - Reworked MRAID resize logic to account for proper max size between a full screen resize superview and a partial one.
--
+- Added internal browser status property and delegate messages to allow notification when the internal browser is opened and closed.
 

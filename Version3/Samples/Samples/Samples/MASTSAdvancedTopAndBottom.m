@@ -79,6 +79,7 @@
     self.bottomAdView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | 
         UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
     self.bottomAdView.backgroundColor = self.adView.backgroundColor;
+    self.bottomAdView.logLevel = MASTAdViewLogEventTypeDebug;
     [self.view addSubview:self.bottomAdView];
 }
 

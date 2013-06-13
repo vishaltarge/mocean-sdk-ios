@@ -584,6 +584,11 @@ static NSString* AdViewUserAgent = nil;
 
 #pragma mark - Internal Browser
 
+- (BOOL)isInternalBrowserOpen
+{
+    return [self adBrowserOpen];
+}
+
 - (MASTAdBrowser*)adBrowser
 {
     if (adBrowser == nil)
@@ -612,15 +617,23 @@ static NSString* AdViewUserAgent = nil;
     
     self.adBrowser.URL = url;
     
+    [self invokeDelegateSelector:@selector(MASTAdViewInternalBrowserWillOpen:)];
+    
     [self presentModalView:self.adBrowser.view];
+    
+    [self invokeDelegateSelector:@selector(MASTAdViewInternalBrowserDidOpen:)];
 }
 
 - (void)closeAdBrowser
 {
+    [self invokeDelegateSelector:@selector(MASTAdViewInternalBrowserWillClose:)];
+    
     [self dismissModalView:self.adBrowser.view animated:YES];
     self.adBrowser = nil;
 
     [self restartUpdateTimer];
+    
+    [self invokeDelegateSelector:@selector(MASTAdViewInternalBrowserDidClose:)];
 }
 
 - (void)MASTAdBrowser:(MASTAdBrowser *)browser didFailLoadWithError:(NSError *)error

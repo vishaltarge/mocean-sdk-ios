@@ -127,8 +127,7 @@ static NSInteger AdViewTag = 123;
             MASTAdView* adView = [[[MASTAdView alloc] initWithFrame:frame] autorelease];
             adView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
             adView.backgroundColor = [UIColor darkGrayColor];
-            //adView.showPreviousAdOnError = YES;
-            //adView.autoCollapse = NO;
+            adView.logLevel = MASTAdViewLogEventTypeDebug;
             adView.tag = AdViewTag;
             [cell.contentView addSubview:adView];
         }

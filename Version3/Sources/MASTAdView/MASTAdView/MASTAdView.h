@@ -182,6 +182,34 @@ typedef enum
 - (void)MASTAdViewDidCollapse:(MASTAdView*)adView;
 
 
+/** Sent before the internal browser is opened.
+ 
+ @param adView The MASTAdView instance sending the message.
+ */
+- (void)MASTAdViewInternalBrowserWillOpen:(MASTAdView*)adView;
+
+
+/** Sent after the internal browser is opened.
+ 
+ @param adView The MASTAdView instance sending the message.
+ */
+- (void)MASTAdViewInternalBrowserDidOpen:(MASTAdView*)adView;
+
+
+/** Sent before the internal browser is closed.
+ 
+ @param adView The MASTAdView instance sending the message.
+ */
+- (void)MASTAdViewInternalBrowserWillClose:(MASTAdView*)adView;
+
+
+/** Sent after the internal browser is closed.
+ 
+ @param adView The MASTAdView instance sending the message.
+ */
+- (void)MASTAdViewInternalBrowserDidClose:(MASTAdView*)adView;
+
+
 /** Sent before the ad opens a URL that invokes another application (ex: Safari or App Store).
  
  @param adView The MASTAdView instance sending the message.
@@ -469,8 +497,21 @@ typedef enum
 
 
 /** Set to enable the use of the internal browser for opening ad content.  Defaults to `NO`.
+ 
+ @see isInternalBrowserOpen
+ @see [MASTAdViewDelegate MASTAdViewInternalBrowserWillOpen:]
+ @see [MASTAdViewDelegate MASTAdViewInternalBrowserDidOpen:]
+ @see [MASTAdViewDelegate MASTAdViewInternalBrowserWillClose:]
+ @see [MASTAdViewDelegate MASTAdViewInternalBrowserDidClose:]
  */
 @property (nonatomic, assign) BOOL useInternalBrowser;
+
+
+/** Returns the status of the internal browser.
+ 
+ @see useInternalBrowser
+ */
+@property (nonatomic, readonly) BOOL isInternalBrowserOpen;
 
 
 /** Sets the MASTAdViewDelegate delegate receiever for the ad view.

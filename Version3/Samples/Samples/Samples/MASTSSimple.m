@@ -68,6 +68,7 @@
     self.adView = [[[MASTAdView alloc] initWithFrame:frame] autorelease];
     self.adView.backgroundColor = [UIColor lightGrayColor];
     self.adView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
+    self.adView.logLevel = MASTAdViewLogEventTypeDebug;
     [self.view addSubview:self.adView];
 }
 

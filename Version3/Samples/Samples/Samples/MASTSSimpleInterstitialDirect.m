@@ -66,6 +66,7 @@
         self.interstitialAdView.site = 19829;
         self.interstitialAdView.zone = 88269;
         
+        self.interstitialAdView.logLevel = MASTAdViewLogEventTypeDebug;
         self.interstitialAdView.delegate = self;
         [self.interstitialAdView showCloseButton:YES afterDelay:3];
         
