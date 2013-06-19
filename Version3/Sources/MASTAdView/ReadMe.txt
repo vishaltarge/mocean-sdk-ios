@@ -67,6 +67,7 @@ Release Notes:
 - Removed now not-required site property.  The zone is all that is needed for obtaining ad content.  If used for other reason can be set with other optional parameters through adRequestParameters.
 - The update message will now defer updates if the user is currently interacting with an ad via the internal browser or MRAID expand/resize.  An overloaded update: has been added to allow developers to force an update even if the user is interacting with the ad.
 - The update message no longer stops the interstitial duration timer set with showInterstitialForDuration:.
+- Fixed Generated Source build phase to support SDK compiling when placed in a path with spaces.
 
 
 

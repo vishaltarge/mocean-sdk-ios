@@ -326,7 +326,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd $SRCROOT/$TARGET_NAME\nxxd -i MASTMRAIDController.js MASTMRAIDControllerJS.h\nxxd -i MASTCloseButton.png MASTCloseButtonPNG.h\nxxd -i MASTBrowserBack.png MASTBrowserBackPNG.h\nxxd -i MASTBrowserForward.png MASTBrowserForwardPNG.h\n";
+			shellScript = "cd \"$SRCROOT/$TARGET_NAME\"\nxxd -i MASTMRAIDController.js MASTMRAIDControllerJS.h\nxxd -i MASTCloseButton.png MASTCloseButtonPNG.h\nxxd -i MASTBrowserBack.png MASTBrowserBackPNG.h\nxxd -i MASTBrowserForward.png MASTBrowserForwardPNG.h\n";
 			showEnvVarsInLog = 0;
 		};
 		C5ACCBA21611F4FA0018E0AD /* ShellScript */ = {
