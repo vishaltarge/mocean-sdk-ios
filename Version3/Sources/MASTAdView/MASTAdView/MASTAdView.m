@@ -43,6 +43,9 @@ static NSString* AdViewUserAgent = nil;
 // Set to skip the next timer update
 @property (nonatomic, assign) BOOL skipNextUpdateTick;
 
+// Set to indicate an update should occur after user interaction is done.
+@property (nonatomic, assign) BOOL deferredUpdate;
+
 // Interstitial delay timer
 @property (nonatomic, strong) NSTimer* interstitialTimer;
 
@@ -117,7 +120,7 @@ static NSString* AdViewUserAgent = nil;
 @synthesize test, logLevel;
 @synthesize delegate;
 @synthesize connection, dataBuffer, webView;
-@synthesize updateTimer, skipNextUpdateTick, interstitialTimer;
+@synthesize updateTimer, skipNextUpdateTick, deferredUpdate, interstitialTimer;
 @synthesize closeButtonTimeInterval, closeButtonTimer, closeButton;
 @synthesize tapGesture;
 @synthesize expandCloseControl, resizeCloseControl;
@@ -212,9 +215,12 @@ static NSString* AdViewUserAgent = nil;
 
 - (void)internalUpdate
 {
+    self.deferredUpdate = NO;
+    
     // Don't update if the internal browser is up.
     if ([self adBrowserOpen])
     {
+        self.deferredUpdate = YES;
         return;
     }
     
@@ -228,6 +234,7 @@ static NSString* AdViewUserAgent = nil;
             
         case MASTMRAIDBridgeStateExpanded:
         case MASTMRAIDBridgeStateResized:
+            self.deferredUpdate = YES;
             return;
     }
     
@@ -344,18 +351,60 @@ static NSString* AdViewUserAgent = nil;
 
 - (void)update
 {
-    [self reset];
-    
+    [self update:NO];
+}
+
+- (void)update:(BOOL)force
+{
     // If iOS 6 determine if the calendar can be used and ask user for authorization if necessary.
     [self checkCalendarAuthorizationStatus];
+
+    // Stop/reset the timer.
+    if (self.updateTimer != nil)
+    {
+        [self.updateTimer performSelectorOnMainThread:@selector(invalidate) withObject:nil waitUntilDone:YES];
+        self.updateTimer = nil;
+    }
+    
+    if (force)
+    {
+        // Close the ad browser if open.
+        if ([self adBrowserOpen])
+        {
+            [self closeAdBrowser];
+        }
+        
+        // Close interstitial if interstitial.
+        [self closeInterstitial];
+        
+        // Do non-interstitial cleanup after this.
+        if (self.placementType == MASTAdViewPlacementTypeInline)
+        {
+            // Close any expanded or resized MRAID ad.
+            switch ([self.mraidBridge state])
+            {
+                case MASTMRAIDBridgeStateLoading:
+                case MASTMRAIDBridgeStateDefault:
+                case MASTMRAIDBridgeStateHidden:
+                    break;
+                    
+                case MASTMRAIDBridgeStateExpanded:
+                case MASTMRAIDBridgeStateResized:
+                    [self mraidBridgeClose:self.mraidBridge];
+                    break;
+            }
+        }
+    }
+    
+    // Cancel any current request
+    [self.connection cancel];
+    self.connection = nil;
     
     [self internalUpdate];
 }
 
 - (void)updateWithTimeInterval:(NSTimeInterval)interval
 {
-    [self reset];
-    
     if (interval == 0)
     {
         [self update];
@@ -364,6 +413,13 @@ static NSString* AdViewUserAgent = nil;
     
     // If iOS 6 determine if the calendar can be used and ask user for authorization if necessary.
     [self checkCalendarAuthorizationStatus];
+
+    // Stop/reset the timer.
+    if (self.updateTimer != nil)
+    {
+        [self.updateTimer performSelectorOnMainThread:@selector(invalidate) withObject:nil waitUntilDone:YES];
+        self.updateTimer = nil;
+    }
 
     self.updateTimer = [[NSTimer alloc] initWithFireDate:nil
                                                 interval:interval
@@ -377,6 +433,8 @@ static NSString* AdViewUserAgent = nil;
 
 - (void)reset
 {
+    self.deferredUpdate = NO;
+    
     // Close the ad browser if open.
     if ([self adBrowserOpen])
     {
@@ -432,14 +490,9 @@ static NSString* AdViewUserAgent = nil;
 
 - (void)removeContent
 {
-    [self closeInterstitial];
+    self.deferredUpdate = NO;
     
-    // Stop the interstitial timer
-    if (self.interstitialTimer != nil)
-    {
-        [self.interstitialTimer performSelectorOnMainThread:@selector(invalidate) withObject:nil waitUntilDone:YES];
-        self.interstitialTimer = nil;
-    }
+    [self closeInterstitial];
     
     // Do non-interstitial cleanup after this.
     if (self.placementType != MASTAdViewPlacementTypeInline)
@@ -464,8 +517,13 @@ static NSString* AdViewUserAgent = nil;
     [self resetWebAd];
 }
 
-- (void)restartUpdateTimer
+- (void)resumeUpdates
 {
+    if (self.deferredUpdate)
+    {
+        [self update];
+    }
+    
     if (self.updateTimer != nil)
     {
         [self.updateTimer performSelectorOnMainThread:@selector(invalidate) 
@@ -630,7 +688,7 @@ static NSString* AdViewUserAgent = nil;
     [self dismissModalView:self.adBrowser.view animated:YES];
     self.adBrowser = nil;
 
-    [self restartUpdateTimer];
+    [self resumeUpdates];
     
     [self invokeDelegateSelector:@selector(MASTAdViewInternalBrowserDidClose:)];
 }
@@ -1565,7 +1623,6 @@ static NSString* AdViewUserAgent = nil;
             [self.webView scrollToTop];
             
             [self prepareCloseButton];
-            [self restartUpdateTimer];
             
             [self dismissModalView:self.expandView animated:YES];
             
@@ -1573,6 +1630,8 @@ static NSString* AdViewUserAgent = nil;
             [self.mraidBridge setState:MASTMRAIDBridgeStateDefault forWebView:self.webView];
 
             [self invokeDelegateSelector:@selector(MASTAdViewDidCollapse:)];
+            
+            [self resumeUpdates];
 
             break;
         }
@@ -1589,12 +1648,13 @@ static NSString* AdViewUserAgent = nil;
             [self.webView scrollToTop];
             
             [self prepareCloseButton];
-            [self restartUpdateTimer];
             
             [self mraidUpdateLayoutForNewState:MASTMRAIDBridgeStateDefault];
             [self.mraidBridge setState:MASTMRAIDBridgeStateDefault forWebView:self.webView];
             
             [self invokeDelegateSelector:@selector(MASTAdViewDidCollapse:)];
+            
+            [self resumeUpdates];
             break;
         }
     }

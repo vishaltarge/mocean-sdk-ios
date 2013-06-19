@@ -61,10 +61,12 @@ Release Notes:
 - Corrected tap handling for interstitial image and text ads.
 - Reordered layout/sizing logic for MRAID to occur after SDK completes the close handling logic.
 - Corrected HTTP/S check when determining what to allow the banner UIWebView to handle directly.
-- Added MASTAdViewResizeSuperview: delegate method to allow developers to specify the base view in the view stack for MRAID resize operations.
+- Added MASTAdViewResizeSuperview: delegate message to allow developers to specify the base view in the view stack for MRAID resize operations.
 - Reworked MRAID resize logic to account for proper max size between a full screen resize superview and a partial one.
 - Added internal browser status property and delegate messages to allow notification when the internal browser is opened and closed.
 - Removed now not-required site property.  The zone is all that is needed for obtaining ad content.  If used for other reason can be set with other optional parameters through adRequestParameters.
+- The update message will now defer updates if the user is currently interacting with an ad via the internal browser or MRAID expand/resize.  An overloaded update: has been added to allow developers to force an update even if the user is interacting with the ad.
+- The update message no longer stops the interstitial duration timer set with showInterstitialForDuration:.
 
 
 

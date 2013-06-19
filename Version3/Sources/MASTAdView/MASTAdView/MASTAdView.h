@@ -522,20 +522,35 @@ typedef enum
 /// @name Updating and resetting ad content
 ///---------------------------------------------------------------------------------------
 
-/** Issues an immediate ad update and cancles any existing ad update.
+/** Issues an update request.  The request is deferred until user action is completed.
  
- If [MASTAdViewDelegate MASTAdViewSupportsCalendar:] is implemented by the delegate then 
- this message will determine if a request to the user for access to the calendar is needed.
- If so, the instance will request access from the user.  Developers desiring to control when
- this request occurs can do so prior to calling update.  Refer to iOS EKEventStore
- documentation for more information.
- 
+ @see update:
  */
 - (void)update;
 
 
-/** Issues an immediate ad update and cancels any pending ad update.
- Will automatically update every interval seconds.
+/** Issues an update.
+ 
+ Resets any interval update from updateWithTimeInterval:.
+ 
+ The update will be deferred if the user is interacting with the ad instance.  This can 
+ include the internal browser being open or a rich media ad in an expanded or resized state.
+ If deferred the update will resume when the interaction is completed.  Specifying YES to
+ the force property will close any user interaction and perform the update immediately.
+ 
+ If [MASTAdViewDelegate MASTAdViewSupportsCalendar:] is implemented by the delegate then
+ this message will determine if a request to the user for access to the calendar is needed.
+ If so, the instance will request access from the user.  Developers desiring to control when
+ this request occurs can do so prior to calling update.  Refer to iOS EKEventStore
+ documentation for more information.
+
+ @param force Set to `YES` to force an update regardless of current ad status/interaction.
+ */
+- (void)update:(BOOL)force;
+
+
+/** Issues an update request that will be deferred if the ad is currently being interacted with.
+ Will automatically update every interval seconds (can vary depending on user interaction).
  
  If [MASTAdViewDelegate MASTAdViewSupportsCalendar:] is implemented by the delegate then
  this message will determine if a request to the user for access to the calendar is needed.
@@ -581,7 +596,11 @@ typedef enum
  -Collapses any expanded or resized richmedia ads.
  -Closes interstitial.
  
+ Cancels any deferred update.
+ 
  Unlike reset, it does not reset the instance to it's default state.
+ 
+ @see update:
  */
 - (void)removeContent;
 
