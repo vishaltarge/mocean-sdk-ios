@@ -422,6 +422,17 @@ typedef enum
 + (NSString*)version;
 
 
+/** Unregisters the protocol class used to intercept the MRAID bridge request
+ from rich media ads.
+ 
+ Note: The registered NSURLProtocol class used by the SDK only intercepts requests
+ for "mraid.js" from a UIWebView.
+ 
+ @see [NSURLProtocol](https://developer.apple.com/library/mac/#documentation/Cocoa/Reference/Foundation/Classes/NSURLProtocol_Class/Reference/Reference.html) for any possible impact to the application.
+ */
++ (void)unregisterProtocolClass;
+
+
 ///---------------------------------------------------------------------------------------
 /// @name Initialization
 ///---------------------------------------------------------------------------------------

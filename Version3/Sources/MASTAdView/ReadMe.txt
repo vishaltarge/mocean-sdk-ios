@@ -68,6 +68,6 @@ Release Notes:
 - The update message will now defer updates if the user is currently interacting with an ad via the internal browser or MRAID expand/resize.  An overloaded update: has been added to allow developers to force an update even if the user is interacting with the ad.
 - The update message no longer stops the interstitial duration timer set with showInterstitialForDuration:.
 - Fixed Generated Source build phase to support SDK compiling when placed in a path with spaces.
-
+- Updated how the MRAID JavaScript bridge is injected into the UIWebView.  The new method allows the UIWebView to load it directly using a custom NSURLProtocol class.  This class is registered automatically and if needed can be unregistered with unregisterProtocolClass.
 
 

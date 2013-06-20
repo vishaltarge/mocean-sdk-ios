@@ -8,6 +8,7 @@
 #import "MASTDefaults.h"
 #import "MASTConstants.h"
 #import "MASTAdView.h"
+#import "MASTURLProtocol.h"
 #import "UIWebView+MASTAdView.h"
 #import "NSDictionary+MASTAdView.h"
 #import "NSDate+MASTAdView.h"
@@ -20,7 +21,6 @@
 #import "MASTAdBrowser.h"
 #import "MASTModalViewController.h"
 
-#import "MASTMRAIDControllerJS.h"
 #import "MASTCloseButtonPNG.h"
 
 #import <objc/runtime.h>
@@ -28,7 +28,7 @@
 
 
 static NSString* AdViewUserAgent = nil;
-
+static BOOL registerProtocolClass = YES;
 
 @interface MASTAdView () <UIGestureRecognizerDelegate, UIWebViewDelegate, MASTMRAIDBridgeDelegate,
     MASTAdBrowserDelegate, MASTModalViewControllerDelegate, CLLocationManagerDelegate, EKEventEditViewDelegate>
@@ -140,6 +140,13 @@ static NSString* AdViewUserAgent = nil;
 + (NSString*)version
 {
     return MAST_DEFAULT_VERSION;
+}
+
++ (void)unregisterProtocolClass
+{
+    registerProtocolClass = YES;
+
+    [NSURLProtocol unregisterClass:[MASTURLProtocol class]];
 }
 
 #pragma mark -
@@ -552,14 +559,12 @@ static NSString* AdViewUserAgent = nil;
     self.connection = nil;
     
     NSURLRequest* request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:url]
-                                                  cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                  cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
                                               timeoutInterval:MAST_DEFAULT_NETWORK_TIMEOUT];
     
-    self.dataBuffer = nil;
-    
-    self.connection = [[NSURLConnection alloc] initWithRequest:request 
-                                                      delegate:self 
-                                              startImmediately:YES];
+    [self performSelectorOnMainThread:@selector(renderMRAIDAd:)
+                           withObject:request
+                        waitUntilDone:NO];
 }
 
 #pragma mark - Interstitial
@@ -1320,7 +1325,7 @@ static NSString* AdViewUserAgent = nil;
         NSError* error = nil;
         
         NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:ad.img]
-                                                                    cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+                                                                    cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
                                                                 timeoutInterval:MAST_DEFAULT_NETWORK_TIMEOUT];
         
         [request setValue:AdViewUserAgent forHTTPHeaderField:MASTUserAgentHeader];
@@ -1427,20 +1432,17 @@ static NSString* AdViewUserAgent = nil;
 #pragma mark - MRAID Ad Handling
 
 // Main thread
-- (void)renderMRAIDAd:(NSString*)mraidHtml
+- (void)renderMRAIDAd:(id)mraidFragmentOrTwoPartRequest
 {
     self.invokeTracking = NO;
     
     [self.webView stopLoading];
     
-    // TODO: Load into an in memory cache.
-    NSData* jsData = [NSData dataWithBytesNoCopy:MASTMRAIDController_js
-                                          length:MASTMRAIDController_js_len
-                                    freeWhenDone:NO];
-    
-    NSString* mraidScript = [[NSString alloc] initWithData:jsData encoding:NSUTF8StringEncoding];
-    
-    NSString* htmlContent = [NSString stringWithFormat:MAST_RICHMEDIA_FORMAT, mraidScript, mraidHtml];
+    if (registerProtocolClass)
+    {
+        registerProtocolClass = NO;
+        [NSURLProtocol registerClass:[MASTURLProtocol class]];
+    }
 
     self.mraidBridge = [MASTMRAIDBridge new];
     self.mraidBridge.delegate = self;
@@ -1457,7 +1459,15 @@ static NSString* AdViewUserAgent = nil;
             break;
     }
     
-    [self.webView loadHTMLString:htmlContent baseURL:nil];
+    if (self.isExpandedURL == NO)
+    {
+        NSString* htmlContent = [NSString stringWithFormat:MAST_RICHMEDIA_FORMAT, (NSString*)mraidFragmentOrTwoPartRequest];
+        [self.webView loadHTMLString:htmlContent baseURL:nil];
+    }
+    else
+    {
+        [self.webView loadRequest:(NSURLRequest*)mraidFragmentOrTwoPartRequest];
+    }
     
     [self resetImageAd];
     [self resetTextAd];
@@ -2394,17 +2404,6 @@ static NSString* AdViewUserAgent = nil;
     // DEV: Use to output content of the buffered response.
     //NSString* debugString = [[NSString alloc] initWithData:content encoding:NSUTF8StringEncoding];
     //NSLog(@"loadContent: %@", debugString);
-    
-    if (self.isExpandedURL)
-    {
-        // This is the result of the parent ad calling expand with a URL.
-        NSString* contentString = [[NSString alloc] initWithData:content encoding:NSUTF8StringEncoding];
-        
-        [self performSelectorOnMainThread:@selector(renderMRAIDAd:) 
-                               withObject:contentString
-                            waitUntilDone:NO];
-        return;
-    }
     
     MASTMoceanAdResponse* response = [[MASTMoceanAdResponse alloc] initWithXML:content];
     [response parse];
