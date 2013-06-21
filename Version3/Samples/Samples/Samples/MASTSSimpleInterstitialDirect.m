@@ -91,7 +91,12 @@
     // Applications should generally not have to deal with this since most interstitials will be
     // sourced by view transitions.  This is here simply becuase Samples uses a UIAlertView to
     // manually refresh ads for sample purposes.
-    [self.interstitialAdView performSelector:@selector(update) withObject:nil afterDelay:1];
+    //
+    //[self.interstitialAdView performSelector:@selector(update) withObject:nil afterDelay:1];
+    
+    // The above would be necessary prior to MAST SDK 3.1.  It may still be possible on some
+    // applications to get into the same situation so it's preserved in comments for reference.
+    [self.interstitialAdView update];
 }
 
 #pragma mark -

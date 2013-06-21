@@ -792,12 +792,7 @@ static BOOL registerProtocolClass = YES;
     {
         self.statusBarHidden = [[UIApplication sharedApplication] isStatusBarHidden];
         
-        UIViewController* rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
-        
-        if ([self.delegate respondsToSelector:@selector(MASTAdViewPresentationController:)])
-        {
-            rootViewController = [self.delegate MASTAdViewPresentationController:self];
-        }
+        UIViewController* rootViewController = [self modalRootViewController];
         
         if (rootViewController == nil)
         {
@@ -849,6 +844,28 @@ static BOOL registerProtocolClass = YES;
     {
         [self.modalViewController dismissModalViewControllerAnimated:animated];
     }
+}
+
+- (UIViewController*)modalRootViewController
+{
+    UIViewController* rootViewController = [self.window rootViewController];
+    
+    if (rootViewController == nil)
+    {
+        rootViewController = [[[[UIApplication sharedApplication] windows] objectAtIndex:0] rootViewController];
+    }
+    
+    if (rootViewController == nil)
+    {
+        rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(MASTAdViewPresentationController:)])
+    {
+        rootViewController = [self.delegate MASTAdViewPresentationController:self];
+    }
+    
+    return rootViewController;
 }
 
 #pragma mark - MASTModalViewControllerDelegate
@@ -985,6 +1002,11 @@ static BOOL registerProtocolClass = YES;
 {
     UIView* resizeViewSuperview = [[[self window] rootViewController] view];
     
+    if (resizeViewSuperview == nil)
+    {
+        resizeViewSuperview = [[[[[UIApplication sharedApplication] windows] objectAtIndex:0] rootViewController] view];
+    }
+
     if (resizeViewSuperview == nil)
     {
         resizeViewSuperview = [[[[UIApplication sharedApplication] keyWindow] rootViewController] view];
@@ -2229,13 +2251,8 @@ static BOOL registerProtocolClass = YES;
                                  shouldSaveCalendarEvent:event
                                             inEventStore:store];
              
-             UIViewController* rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
-             
-             if ([self.delegate respondsToSelector:@selector(MASTAdViewPresentationController:)])
-             {
-                 rootViewController = [self.delegate MASTAdViewPresentationController:self];
-             }
-             
+             UIViewController* rootViewController = [self modalRootViewController];
+
              // Included in this block since this block occurs on the main thread and the
              // following must be on the main thread since it's interacting with the UI.
              if (shouldSave && (rootViewController != nil))
