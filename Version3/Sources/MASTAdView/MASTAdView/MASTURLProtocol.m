@@ -16,8 +16,9 @@ static NSData* mraidScriptData = nil;
 + (BOOL)canInitWithRequest:(NSURLRequest *)request
 {
     NSURL* url = [request URL];
+    NSString* scheme = [url scheme];
     
-    if ([[url scheme] isEqualToString:@"applewebdata"])
+    if ([scheme isEqualToString:@"applewebdata"] || [scheme hasPrefix:@"http"])
     {
         if ([[url absoluteString] hasSuffix:@"mraid.js"])
         {
