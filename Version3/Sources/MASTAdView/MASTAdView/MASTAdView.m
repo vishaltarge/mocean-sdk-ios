@@ -73,6 +73,9 @@ static BOOL registerProtocolClass = YES;
 // Used to render interstitial, expand and internal browser.
 @property (nonatomic, strong) MASTModalViewController* modalViewController;
 
+// If for some reason the modal needs to be dismissed before the presentation is complete, this flag is set.
+@property (nonatomic, assign) BOOL modalDismissAfterPresent;
+
 // Used to re-expand the ad if a calendar event is  created.
 @property (nonatomic, assign) BOOL calendarReExpand;
 
@@ -127,7 +130,7 @@ static BOOL registerProtocolClass = YES;
 @synthesize adDescriptor;
 @synthesize mraidBridge;
 @synthesize adBrowser;
-@synthesize modalViewController, calendarReExpand, statusBarHidden;
+@synthesize modalViewController, modalDismissAfterPresent, calendarReExpand, statusBarHidden;
 @synthesize isExpandedURL;
 @synthesize expandedAdView;
 @synthesize invokeTracking;
@@ -811,7 +814,15 @@ static BOOL registerProtocolClass = YES;
         
         if ([rootViewController respondsToSelector:@selector(presentViewController:animated:completion:)])
         {
-            [rootViewController presentViewController:self.modalViewController animated:YES completion:nil];
+            self.modalDismissAfterPresent = NO;
+            
+            [rootViewController presentViewController:self.modalViewController animated:YES completion:^()
+            {
+                if (self.modalDismissAfterPresent)
+                {
+                    [self dismissModalView:view animated:YES];
+                }
+            }];
         }
         else
         {
@@ -824,6 +835,15 @@ static BOOL registerProtocolClass = YES;
 {
     if (self.modalViewController.view.superview == nil)
         return;
+    
+    if ([self.modalViewController respondsToSelector:@selector(isBeingPresented)])
+    {
+        if ([self.modalViewController isBeingPresented])
+        {
+            self.modalDismissAfterPresent = YES;
+            return;
+        }
+    }
     
     if ([view superview] == self.modalViewController.view)
         [view removeFromSuperview];
