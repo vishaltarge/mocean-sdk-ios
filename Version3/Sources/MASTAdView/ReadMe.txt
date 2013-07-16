@@ -71,6 +71,8 @@ Release Notes:
 - Updated how the MRAID JavaScript bridge is injected into the UIWebView.  The new method allows the UIWebView to load it directly using a custom NSURLProtocol class.  This class is registered automatically and if needed can be unregistered with unregisterProtocolClass.
 - Updated the logic to determine the controller to use for presenting modal controllers.  The first will be the instance's window's rootViewController followed by the application's first window's rootViewController, then they keyWindow's rootViewController.  The protocol MASTAdViewPresentationController: message can still override this behavior if necessary.
 - Added a check and logic to handle cases where the internal browser may need to immediately close if the supplied URL redirects to a URL that isn't handled by the internal browser.
+- Updated the internal browser to only redirect iTunes URLs to UIApplication's openURL: message.
+
 
 
 
