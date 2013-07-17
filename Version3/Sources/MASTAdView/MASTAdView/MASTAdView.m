@@ -711,7 +711,9 @@ static BOOL registerProtocolClass = YES;
 
 - (void)MASTAdBrowserClose:(MASTAdBrowser *)browser
 {
-    [self closeAdBrowser];
+    // Delay to workaround issues with iOS5 not implementing isBeingPresented
+    // as expected (and as-is in iOS6).
+    [self performSelector:@selector(closeAdBrowser) withObject:nil afterDelay:0.5];
 }
 
 - (void)MASTAdBrowserWillLeaveApplication:(MASTAdBrowser*)browser
@@ -720,7 +722,9 @@ static BOOL registerProtocolClass = YES;
     
     self.skipNextUpdateTick = YES;
     
-    [self closeAdBrowser];
+    // Delay to workaround issues with iOS5 not implementing isBeingPresented
+    // as expected (and as-is in iOS6).
+    [self performSelector:@selector(closeAdBrowser) withObject:nil afterDelay:0.5];
 }
 
 #pragma mark - Gestures
