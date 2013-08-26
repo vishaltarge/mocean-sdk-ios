@@ -30,6 +30,7 @@ static NSString* MRAIDBridgeFeatureInlineVideo = @"inlineVideo";
 
 static NSString* MRAIDBridgeEReady = @"ready";
 
+static NSString* MRAIDBridgeCommandInit = @"init";
 static NSString* MRAIDBridgeCommandClose = @"close";
 static NSString* MRAIDBridgeCommandOpen = @"open";
 static NSString* MRAIDBridgeCommandUpdateCurrentPosition = @"updateCurrentPosition";
@@ -246,7 +247,14 @@ static NSString* MRAIDBridgeCommandStorePicture = @"storePicture";
     }
     
     
-    if ([command isEqualToString:MRAIDBridgeCommandClose])
+    if ([command isEqualToString:MRAIDBridgeCommandInit])
+    {
+        if  (self.delegate)
+        {
+            [self.delegate mraidBridgeInit:self];
+        }
+    }
+    else if ([command isEqualToString:MRAIDBridgeCommandClose])
     {
         if  (self.delegate)
         {

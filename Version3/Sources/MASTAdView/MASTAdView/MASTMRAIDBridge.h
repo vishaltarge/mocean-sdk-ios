@@ -41,6 +41,8 @@ typedef enum
 @protocol MASTMRAIDBridgeDelegate <NSObject>
 @required
 
+- (void)mraidBridgeInit:(MASTMRAIDBridge*)bridge;
+
 - (void)mraidBridgeClose:(MASTMRAIDBridge*)bridge;
 
 - (void)mraidBridge:(MASTMRAIDBridge*)bridge openURL:(NSString*)url;

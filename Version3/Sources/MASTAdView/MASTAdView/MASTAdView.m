@@ -1643,6 +1643,43 @@ static BOOL registerProtocolClass = YES;
 
 #pragma mark - MASTMRAIDBridgeDelegate
 
+- (void)mraidBridgeInit:(MASTMRAIDBridge *)bridge
+{
+    [self mraidSupports:self.webView];
+    
+    MASTMRAIDBridgePlacementType mraidPlacementType = MASTMRAIDBridgePlacementTypeInline;
+    if (self.placementType == MASTAdViewPlacementTypeInterstitial)
+    {
+        mraidPlacementType = MASTMRAIDBridgePlacementTypeInterstitial;
+    }
+    [bridge setPlacementType:mraidPlacementType forWebView:self.webView];
+    
+    [self mraidUpdateLayoutForNewState:MASTMRAIDBridgeStateDefault];
+    
+    CGSize screenSize = [self screenSizeIncludingStatusBar:NO];
+    MASTMRAIDExpandProperties* expandProperties = [[MASTMRAIDExpandProperties alloc] initWithSize:screenSize];
+    [bridge setExpandProperties:expandProperties forWebView:self.webView];
+    
+    MASTMRAIDResizeProperties* resizeProperties = [MASTMRAIDResizeProperties new];
+    [bridge setResizeProperties:resizeProperties forWebView:self.webView];
+    
+    MASTMRAIDOrientationProperties* orientationProperties = [MASTMRAIDOrientationProperties new];
+    [bridge setOrientationProperties:orientationProperties forWebView:self.webView];
+    
+    if (self.isExpandedURL == NO)
+    {
+        [self.mraidBridge setState:MASTMRAIDBridgeStateDefault forWebView:self.webView];
+    }
+    else
+    {
+        [self mraidBridge:self.mraidBridge expandWithURL:nil];
+    }
+    
+    [bridge sendReadyForWebView:self.webView];
+    
+    [self prepareCloseButton];
+}
+
 - (void)mraidBridgeClose:(MASTMRAIDBridge*)bridge
 {
     if (self.placementType == MASTAdViewPlacementTypeInterstitial)
@@ -2799,48 +2836,9 @@ static BOOL registerProtocolClass = YES;
 
 - (void)webViewDidFinishLoad:(UIWebView *)wv
 {
-    // Should making all the JS calls a bit more memory efficient with all the
-    // strings being autorelease.
     @autoreleasepool
     {
         [wv disableSelection];
-        
-        if (self.mraidBridge != nil)
-        {
-            [self mraidSupports:wv];
-            
-            MASTMRAIDBridgePlacementType mraidPlacementType = MASTMRAIDBridgePlacementTypeInline;
-            if (self.placementType == MASTAdViewPlacementTypeInterstitial)
-            {
-                mraidPlacementType = MASTMRAIDBridgePlacementTypeInterstitial;
-            }
-            [self.mraidBridge setPlacementType:mraidPlacementType forWebView:wv];
-
-            [self mraidUpdateLayoutForNewState:MASTMRAIDBridgeStateDefault];
-
-            CGSize screenSize = [self screenSizeIncludingStatusBar:NO];
-            MASTMRAIDExpandProperties* expandProperties = [[MASTMRAIDExpandProperties alloc] initWithSize:screenSize];
-            [self.mraidBridge setExpandProperties:expandProperties forWebView:wv];
-            
-            MASTMRAIDResizeProperties* resizeProperties = [MASTMRAIDResizeProperties new];
-            [self.mraidBridge setResizeProperties:resizeProperties forWebView:wv];
-            
-            MASTMRAIDOrientationProperties* orientationProperties = [MASTMRAIDOrientationProperties new];
-            [self.mraidBridge setOrientationProperties:orientationProperties forWebView:wv];
-            
-            if (self.isExpandedURL == NO)
-            {
-                [self.mraidBridge setState:MASTMRAIDBridgeStateDefault forWebView:wv];
-            }
-            else
-            {
-                [self mraidBridge:self.mraidBridge expandWithURL:nil];
-            }
-            
-            [self.mraidBridge sendReadyForWebView:wv];
-            
-            [self prepareCloseButton];
-        }
     }
 }
 
