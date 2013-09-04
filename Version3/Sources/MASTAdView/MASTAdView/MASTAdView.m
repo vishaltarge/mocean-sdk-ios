@@ -1099,6 +1099,16 @@ static BOOL registerProtocolClass = YES;
     {
         switch (self.mraidBridge.state)
         {
+            case MASTMRAIDBridgeStateDefault:
+                if (self.placementType == MASTMRAIDBridgePlacementTypeInterstitial)
+                {
+                    if (self.mraidBridge.expandProperties.useCustomClose == NO)
+                    {
+                        [self showCloseButton];
+                    }
+                }
+                break;
+                
             case MASTMRAIDBridgeStateExpanded:
                 // When expanded use the built in button or the custom one, else nothing else.
                 if (self.mraidBridge.expandProperties.useCustomClose == NO)
@@ -1584,6 +1594,54 @@ static BOOL registerProtocolClass = YES;
     [self.mraidBridge setSupported:YES forFeature:MASTMRAIDBridgeSupportsInlineVideo forWebView:wv];
 }
 
+- (void)mraidInitializeBridge:(MASTMRAIDBridge*)bridge forWebView:(UIWebView*)wv
+{
+    @synchronized (bridge)
+    {
+        if (bridge.needsInit == NO)
+            return;
+        
+        if (wv.isLoading)
+            return;
+        
+        bridge.needsInit = NO;
+    }
+    
+    [self mraidSupports:self.webView];
+    
+    MASTMRAIDBridgePlacementType mraidPlacementType = MASTMRAIDBridgePlacementTypeInline;
+    if (self.placementType == MASTAdViewPlacementTypeInterstitial)
+    {
+        mraidPlacementType = MASTMRAIDBridgePlacementTypeInterstitial;
+    }
+    [bridge setPlacementType:mraidPlacementType forWebView:self.webView];
+    
+    [self mraidUpdateLayoutForNewState:MASTMRAIDBridgeStateDefault];
+    
+    CGSize screenSize = [self screenSizeIncludingStatusBar:NO];
+    MASTMRAIDExpandProperties* expandProperties = [[MASTMRAIDExpandProperties alloc] initWithSize:screenSize];
+    [bridge setExpandProperties:expandProperties forWebView:self.webView];
+    
+    MASTMRAIDResizeProperties* resizeProperties = [MASTMRAIDResizeProperties new];
+    [bridge setResizeProperties:resizeProperties forWebView:self.webView];
+    
+    MASTMRAIDOrientationProperties* orientationProperties = [MASTMRAIDOrientationProperties new];
+    [bridge setOrientationProperties:orientationProperties forWebView:self.webView];
+    
+    if (self.isExpandedURL == NO)
+    {
+        [self.mraidBridge setState:MASTMRAIDBridgeStateDefault forWebView:self.webView];
+    }
+    else
+    {
+        [self mraidBridge:self.mraidBridge expandWithURL:nil];
+    }
+    
+    [bridge sendReadyForWebView:self.webView];
+    
+    [self prepareCloseButton];
+}
+
 - (void)mraidUpdateLayoutForNewState:(MASTMRAIDBridgeState)state
 {
     CGSize screenSize = [self screenSizeIncludingStatusBar:NO];
@@ -1645,39 +1703,9 @@ static BOOL registerProtocolClass = YES;
 
 - (void)mraidBridgeInit:(MASTMRAIDBridge *)bridge
 {
-    [self mraidSupports:self.webView];
+    bridge.needsInit = YES;
     
-    MASTMRAIDBridgePlacementType mraidPlacementType = MASTMRAIDBridgePlacementTypeInline;
-    if (self.placementType == MASTAdViewPlacementTypeInterstitial)
-    {
-        mraidPlacementType = MASTMRAIDBridgePlacementTypeInterstitial;
-    }
-    [bridge setPlacementType:mraidPlacementType forWebView:self.webView];
-    
-    [self mraidUpdateLayoutForNewState:MASTMRAIDBridgeStateDefault];
-    
-    CGSize screenSize = [self screenSizeIncludingStatusBar:NO];
-    MASTMRAIDExpandProperties* expandProperties = [[MASTMRAIDExpandProperties alloc] initWithSize:screenSize];
-    [bridge setExpandProperties:expandProperties forWebView:self.webView];
-    
-    MASTMRAIDResizeProperties* resizeProperties = [MASTMRAIDResizeProperties new];
-    [bridge setResizeProperties:resizeProperties forWebView:self.webView];
-    
-    MASTMRAIDOrientationProperties* orientationProperties = [MASTMRAIDOrientationProperties new];
-    [bridge setOrientationProperties:orientationProperties forWebView:self.webView];
-    
-    if (self.isExpandedURL == NO)
-    {
-        [self.mraidBridge setState:MASTMRAIDBridgeStateDefault forWebView:self.webView];
-    }
-    else
-    {
-        [self mraidBridge:self.mraidBridge expandWithURL:nil];
-    }
-    
-    [bridge sendReadyForWebView:self.webView];
-    
-    [self prepareCloseButton];
+    [self mraidInitializeBridge:bridge forWebView:self.webView];
 }
 
 - (void)mraidBridgeClose:(MASTMRAIDBridge*)bridge
@@ -1788,12 +1816,11 @@ static BOOL registerProtocolClass = YES;
 
 - (void)mraidBridgeUpdatedExpandProperties:(MASTMRAIDBridge*)bridge
 {
-    // Only need to react if the mraid ad is expanded.
-    if (bridge.state != MASTMRAIDBridgeStateExpanded)
-        return;
-    
-    // Nothing really needs to happen now unless the close
-    // button is allowed to be toggled on or off.
+    if ((bridge.state == MASTMRAIDBridgeStateExpanded) ||
+        ((self.placementType == MASTAdViewPlacementTypeInterstitial) && (bridge.state == MASTMRAIDBridgeStateDefault)))
+    {
+        [self prepareCloseButton];
+    }
 }
 
 - (void)mraidBridge:(MASTMRAIDBridge*)bridge expandWithURL:(NSString*)url
@@ -1874,21 +1901,22 @@ static BOOL registerProtocolClass = YES;
 {
     self.modalViewController.allowRotation = bridge.orientationProperties.allowOrientationChange;
     
-    if (bridge.state != MASTMRAIDBridgeStateExpanded)
-        return;
-    
-    switch (bridge.orientationProperties.forceOrientation)
+    if ((bridge.state == MASTMRAIDBridgeStateExpanded) ||
+        ((self.placementType == MASTAdViewPlacementTypeInterstitial) && (bridge.state == MASTMRAIDBridgeStateDefault)))
     {
-        case MASTMRAIDOrientationPropertiesForceOrientationPortrait:
-            [self.modalViewController forceRotateToInterfaceOrientation:UIInterfaceOrientationPortrait];
-            break;
-            
-        case MASTMRAIDOrientationPropertiesForceOrientationLandscape:
-            [self.modalViewController forceRotateToInterfaceOrientation:UIInterfaceOrientationLandscapeLeft];
-            break;
-            
-        case MASTMRAIDOrientationPropertiesForceOrientationNone:
-            break;
+        switch (bridge.orientationProperties.forceOrientation)
+        {
+            case MASTMRAIDOrientationPropertiesForceOrientationPortrait:
+                [self.modalViewController forceRotateToInterfaceOrientation:UIInterfaceOrientationPortrait];
+                break;
+                
+            case MASTMRAIDOrientationPropertiesForceOrientationLandscape:
+                [self.modalViewController forceRotateToInterfaceOrientation:UIInterfaceOrientationLandscapeLeft];
+                break;
+                
+            case MASTMRAIDOrientationPropertiesForceOrientationNone:
+                break;
+        }
     }
 }
 
@@ -2839,6 +2867,8 @@ static BOOL registerProtocolClass = YES;
     @autoreleasepool
     {
         [wv disableSelection];
+        
+        [self mraidInitializeBridge:self.mraidBridge forWebView:wv];
     }
 }
 

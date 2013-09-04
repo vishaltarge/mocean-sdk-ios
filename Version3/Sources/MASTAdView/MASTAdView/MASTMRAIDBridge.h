@@ -72,6 +72,8 @@ typedef enum
 
 @property (nonatomic, assign) id<MASTMRAIDBridgeDelegate> delegate;
 
+@property (nonatomic, assign) BOOL needsInit;
+
 @property (nonatomic, readonly) MASTMRAIDBridgeState state;
 @property (nonatomic, readonly) MASTMRAIDExpandProperties* expandProperties;
 @property (nonatomic, readonly) MASTMRAIDResizeProperties* resizeProperties;

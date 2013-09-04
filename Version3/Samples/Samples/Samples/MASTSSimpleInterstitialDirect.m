@@ -62,11 +62,11 @@
     {
         self.interstitialAdView = [[[MASTAdView alloc] initInterstitial] autorelease];
         
-        self.interstitialAdView.zone = 88269;
+        self.interstitialAdView.zone = 199766; //88269;
         
         self.interstitialAdView.logLevel = MASTAdViewLogEventTypeDebug;
         self.interstitialAdView.delegate = self;
-        [self.interstitialAdView showCloseButton:YES afterDelay:3];
+        //[self.interstitialAdView showCloseButton:YES afterDelay:3];
         
         [self.interstitialAdView update];
     }

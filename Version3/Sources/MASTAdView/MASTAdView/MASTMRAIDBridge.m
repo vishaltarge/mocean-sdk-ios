@@ -47,6 +47,7 @@ static NSString* MRAIDBridgeCommandStorePicture = @"storePicture";
 @implementation MASTMRAIDBridge
 
 @synthesize delegate;
+@synthesize needsInit;
 @synthesize state, expandProperties, resizeProperties, orientationProperties;
 
 - (void)dealloc
@@ -280,6 +281,11 @@ static NSString* MRAIDBridgeCommandStorePicture = @"storePicture";
     {
         MASTMRAIDExpandProperties* properties = [MASTMRAIDExpandProperties propertiesFromArgs:args];
         expandProperties = properties;
+        
+        if (self.delegate)
+        {
+            [self.delegate mraidBridgeUpdatedExpandProperties:self];
+        }
     }
     else if ([command isEqualToString:MRAIDBridgeCommandExpand])
     {
@@ -293,6 +299,11 @@ static NSString* MRAIDBridgeCommandStorePicture = @"storePicture";
     {
         MASTMRAIDResizeProperties* properties = [MASTMRAIDResizeProperties propertiesFromArgs:args];
         resizeProperties = properties;
+        
+        if (self.delegate)
+        {
+            [self.delegate mraidBridgeUpdatedResizeProperties:self];
+        }
     }
     else if ([command isEqualToString:MRAIDBridgeCommandResize])
     {

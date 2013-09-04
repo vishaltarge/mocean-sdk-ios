@@ -74,4 +74,9 @@ Release Notes:
 - Updated the internal browser to only redirect iTunes URLs to UIApplication's openURL: message.
 - Added workaround for iOS5 to assist a previous change dealing with the internal browser immediately closing.
 
+3.1.0
+- Adding MRAID bridge init event for the SDK so that the bridge is initialized at the correct time.
+- Adding logic to init the bridge after init is invoked and the web view is loaded.  This prevents init from occurring while the web view is still loading.
+- Updated close button logic for rich media interstitials.
+
 
