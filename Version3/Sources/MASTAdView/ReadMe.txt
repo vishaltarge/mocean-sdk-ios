@@ -79,4 +79,8 @@ Release Notes:
 - Adding logic to init the bridge after init is invoked and the web view is loaded.  This prevents init from occurring while the web view is still loading.
 - Updated close button logic for rich media interstitials.
 
+3.1.1
+- Updates for Xcode 5 and iOS 7.
+- Fixes to two part expand when expanded URL is NOT MRAID based.
+
 
