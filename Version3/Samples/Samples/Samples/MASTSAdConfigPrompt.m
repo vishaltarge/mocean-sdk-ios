@@ -27,34 +27,49 @@
 
 - (id)initWithDelegate:(id<MASTSAdConfigPromptDelegate>)d zone:(NSInteger)zone;
 {
+    NSString* message = nil;
+    if ([super respondsToSelector:@selector(setAlertViewStyle:)] == NO)
+    {
+        message = @"\n\n";
+    }
+
     self = [super initWithTitle:@"Zone"
-                        message:@"\n\n"
+                        message:message
                        delegate:nil
               cancelButtonTitle:@"Cancel"
               otherButtonTitles:@"Refresh", nil];
+    
     if (self)
     {
         self.delegate = d;
         
-        self.zoneField = [[[UITextField alloc] initWithFrame:CGRectMake(12, 45, 260, 31)] autorelease];
-        [self.zoneField setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
-		[self.zoneField setBorderStyle:UITextBorderStyleRoundedRect];
-		[self.zoneField setBackgroundColor:[UIColor clearColor]];
-        [self.zoneField setKeyboardType:UIKeyboardTypeNumberPad];
-        [self.zoneField setClearButtonMode:UITextFieldViewModeWhileEditing];
-        [self.zoneField setPlaceholder:@"Zone"];
-        [self addSubview:self.zoneField];
-        
-        NSString* sysVersion = [[[UIDevice currentDevice] systemVersion] substringToIndex:1];
-        if ([sysVersion integerValue] >= 5)
+        if ([super respondsToSelector:@selector(setAlertViewStyle:)])
         {
-            [self.zoneField setBackgroundColor:[UIColor whiteColor]];
+            [super setAlertViewStyle:UIAlertViewStylePlainTextInput];
         }
-        
+        else
+        {
+            self.zoneField = [[[UITextField alloc] initWithFrame:CGRectMake(12, 45, 260, 31)] autorelease];
+            [self.zoneField setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
+            [self.zoneField setBorderStyle:UITextBorderStyleRoundedRect];
+            [self.zoneField setBackgroundColor:[UIColor clearColor]];
+            [self.zoneField setKeyboardType:UIKeyboardTypeNumberPad];
+            [self.zoneField setClearButtonMode:UITextFieldViewModeWhileEditing];
+            [self.zoneField setPlaceholder:@"Zone"];
+            [self addSubview:self.zoneField];
+        }
+
         [super setDelegate:self];
 
         if (zone != 0)
-            self.zoneField.text = [NSString stringWithFormat:@"%d", zone];
+        {
+            UITextField* textField = self.zoneField;
+            if ([super respondsToSelector:@selector(textFieldAtIndex:)])
+            {
+                textField = [super textFieldAtIndex:0];
+            }
+            textField.text = [NSString stringWithFormat:@"%d", zone];
+        }
     }
     return self;
 }
@@ -71,8 +86,14 @@
         [self.delegate configPromptCancel:self];
         return;
     }
+    
+    UITextField* textField = self.zoneField;
+    if ([super respondsToSelector:@selector(textFieldAtIndex:)])
+    {
+        textField = [super textFieldAtIndex:0];
+    }
 
-    [self.delegate configPrompt:self refreshWithZone:[self.zoneField.text integerValue]];
+    [self.delegate configPrompt:self refreshWithZone:[textField.text integerValue]];
 }
 
 @end

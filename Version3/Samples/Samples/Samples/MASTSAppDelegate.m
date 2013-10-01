@@ -45,6 +45,7 @@
     MASTSMenuController* mastsMenuController = [[MASTSMenuController new] autorelease];
     mastsMenuController.delegate = self;
     self.menuNavController = [[[UINavigationController alloc] initWithRootViewController:mastsMenuController] autorelease];
+    self.menuNavController.navigationBar.translucent = NO;
 
     
     self.rootController = self.menuNavController;

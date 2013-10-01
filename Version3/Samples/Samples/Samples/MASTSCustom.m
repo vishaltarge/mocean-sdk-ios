@@ -51,7 +51,7 @@
             break;
             
         case 1: // refresh (this is a hack since we know refresh exits)
-            [self performSelector:@selector(refresh:) withObject:seg];
+            [self performSelector:sel_registerName("refresh:") withObject:seg];
             break;
     }
 }

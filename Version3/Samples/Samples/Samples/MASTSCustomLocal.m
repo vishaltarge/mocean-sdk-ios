@@ -26,7 +26,7 @@
     // overrides it to not do an update since the zone is invalid given
     // the goal of this sample is to show locally derived ad content.
     BOOL value = NO;
-    SEL sel = @selector(setFirstAppear:);
+    SEL sel = sel_registerName("setFirstAppear:");
     NSMethodSignature* sig = [super methodSignatureForSelector:sel];
     NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:sig];
     [invocation setTarget:self];
