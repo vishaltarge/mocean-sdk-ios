@@ -42,32 +42,31 @@
     if (self)
     {
         self.delegate = d;
+        [super setDelegate:self];
         
+        UITextField* textField = nil;
+
         if ([super respondsToSelector:@selector(setAlertViewStyle:)])
         {
             [super setAlertViewStyle:UIAlertViewStylePlainTextInput];
+            textField = [super textFieldAtIndex:0];
         }
         else
         {
             self.zoneField = [[[UITextField alloc] initWithFrame:CGRectMake(12, 45, 260, 31)] autorelease];
-            [self.zoneField setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
             [self.zoneField setBorderStyle:UITextBorderStyleRoundedRect];
-            [self.zoneField setBackgroundColor:[UIColor clearColor]];
-            [self.zoneField setKeyboardType:UIKeyboardTypeNumberPad];
-            [self.zoneField setClearButtonMode:UITextFieldViewModeWhileEditing];
-            [self.zoneField setPlaceholder:@"Zone"];
             [self addSubview:self.zoneField];
+            textField = self.zoneField;
         }
 
-        [super setDelegate:self];
+        [textField setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
+        [textField setBackgroundColor:[UIColor clearColor]];
+        [textField setKeyboardType:UIKeyboardTypeNumberPad];
+        [textField setClearButtonMode:UITextFieldViewModeWhileEditing];
+        [textField setPlaceholder:@"Zone"];
 
         if (zone != 0)
         {
-            UITextField* textField = self.zoneField;
-            if ([super respondsToSelector:@selector(textFieldAtIndex:)])
-            {
-                textField = [super textFieldAtIndex:0];
-            }
             textField.text = [NSString stringWithFormat:@"%d", zone];
         }
     }
