@@ -1523,6 +1523,8 @@ static BOOL registerProtocolClass = YES;
     else
     {
         [self.webView loadRequest:(NSURLRequest*)mraidFragmentOrTwoPartRequest];
+        
+        [self mraidBridge:self.mraidBridge expandWithURL:nil];
     }
     
     [self resetImageAd];
@@ -1616,8 +1618,6 @@ static BOOL registerProtocolClass = YES;
     }
     [bridge setPlacementType:mraidPlacementType forWebView:self.webView];
     
-    [self mraidUpdateLayoutForNewState:MASTMRAIDBridgeStateDefault];
-    
     CGSize screenSize = [self screenSizeIncludingStatusBar:NO];
     MASTMRAIDExpandProperties* expandProperties = [[MASTMRAIDExpandProperties alloc] initWithSize:screenSize];
     [bridge setExpandProperties:expandProperties forWebView:self.webView];
@@ -1630,11 +1630,22 @@ static BOOL registerProtocolClass = YES;
     
     if (self.isExpandedURL == NO)
     {
+        switch (self.placementType)
+        {
+            case MASTAdViewPlacementTypeInline:
+                [self mraidUpdateLayoutForNewState:MASTMRAIDBridgeStateDefault];
+                break;
+                
+            case MASTAdViewPlacementTypeInterstitial:
+                [self mraidUpdateLayoutForNewState:MASTMRAIDBridgeStateExpanded];
+                break;
+        }
         [self.mraidBridge setState:MASTMRAIDBridgeStateDefault forWebView:self.webView];
     }
     else
     {
-        [self mraidBridge:self.mraidBridge expandWithURL:nil];
+        [self mraidUpdateLayoutForNewState:MASTMRAIDBridgeStateExpanded];
+        [self.mraidBridge setState:MASTMRAIDBridgeStateExpanded forWebView:self.webView];
     }
     
     [bridge sendReadyForWebView:self.webView];
@@ -1706,6 +1717,8 @@ static BOOL registerProtocolClass = YES;
     bridge.needsInit = YES;
     
     [self mraidInitializeBridge:bridge forWebView:self.webView];
+    
+    //NSString* debugContent = [self.webView stringByEvaluatingJavaScriptFromString:@"document.body.innerHTML"];
 }
 
 - (void)mraidBridgeClose:(MASTMRAIDBridge*)bridge
@@ -2867,6 +2880,8 @@ static BOOL registerProtocolClass = YES;
     @autoreleasepool
     {
         [wv disableSelection];
+        
+        //NSString* debugContent = [wv stringByEvaluatingJavaScriptFromString:@"document.body.innerHTML"];
         
         [self mraidInitializeBridge:self.mraidBridge forWebView:wv];
     }
