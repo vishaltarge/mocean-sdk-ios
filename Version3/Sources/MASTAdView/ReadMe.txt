@@ -82,5 +82,7 @@ Release Notes:
 3.1.1
 - Updates for Xcode 5 and iOS 7.
 - Fixes to two part expand when expanded URL is NOT MRAID based.
+- Added copy call to prevent non-ARC compiles from having issues with static user-agent string.
+
 
 
