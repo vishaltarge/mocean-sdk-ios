@@ -197,7 +197,7 @@ static BOOL registerProtocolClass = YES;
     if (AdViewUserAgent == nil)
     {
         UIWebView* wv = [[UIWebView alloc] initWithFrame:CGRectZero];
-        AdViewUserAgent = [wv stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
+        AdViewUserAgent = [[wv stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"] copy];
     }
     
     self = [super initWithFrame:frame];
