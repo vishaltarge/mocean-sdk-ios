@@ -85,6 +85,9 @@ static BOOL registerProtocolClass = YES;
 // Determines if this ad is an expand URL ad.
 @property (nonatomic, assign) BOOL isExpandedURL;
 
+// Two-part expand properties for initialization.
+@property (nonatomic, strong) MASTMRAIDExpandProperties* twoPartExapandProperties;
+
 // Used to display MRAID expand URL.
 @property (nonatomic, strong) MASTAdView* expandedAdView;
 
@@ -131,7 +134,7 @@ static BOOL registerProtocolClass = YES;
 @synthesize mraidBridge;
 @synthesize adBrowser;
 @synthesize modalViewController, modalDismissAfterPresent, calendarReExpand, statusBarHidden;
-@synthesize isExpandedURL;
+@synthesize isExpandedURL, twoPartExapandProperties;
 @synthesize expandedAdView;
 @synthesize invokeTracking;
 @synthesize locationManager;
@@ -316,7 +319,7 @@ static BOOL registerProtocolClass = YES;
     [args setValue:[MASTAdView version] forKey:@"version"];
     [args setValue:@"1" forKey:@"count"];
     [args setValue:@"3" forKey:@"key"];
-    [args setValue:[NSString stringWithFormat:@"%d", self.zone] forKey:@"zone"];
+    [args setValue:[NSString stringWithFormat:@"%d", (int)self.zone] forKey:@"zone"];
     
     if (self.test)
         [args setValue:@"1" forKey:@"test"];
@@ -553,9 +556,10 @@ static BOOL registerProtocolClass = YES;
 
 #pragma mark - Two Creative Expand
 
-- (void)showExpanded:(NSString*)url
+- (void)showExpanded:(NSString*)url withExpandProperties:(MASTMRAIDExpandProperties*)ep
 {
     self.isExpandedURL = YES;
+    self.twoPartExapandProperties = ep;
     
     // Cancel any current request
     [self.connection cancel];
@@ -923,7 +927,8 @@ static BOOL registerProtocolClass = YES;
     // Workaround for pre-iOS 5 UIWebView not telling JS about the change.
     if ([[[UIDevice currentDevice] systemVersion] integerValue] < 5)
     {
-        NSString* script = [NSString stringWithFormat:@"window.__defineGetter__('orientation',function(){return %i;});", degrees];
+        NSString* script = [NSString stringWithFormat:@"window.__defineGetter__('orientation',function(){return %d;});",
+                            (int)degrees];
         
         script = [script stringByAppendingString:@"(function(){var event = document.createEvent('Events'); event.initEvent('orientationchange',true, false); window.dispatchEvent(event);})();"];
         
@@ -1619,8 +1624,16 @@ static BOOL registerProtocolClass = YES;
     [bridge setPlacementType:mraidPlacementType forWebView:self.webView];
     
     CGSize screenSize = [self screenSizeIncludingStatusBar:NO];
-    MASTMRAIDExpandProperties* expandProperties = [[MASTMRAIDExpandProperties alloc] initWithSize:screenSize];
-    [bridge setExpandProperties:expandProperties forWebView:self.webView];
+    
+    if (self.twoPartExapandProperties == nil)
+    {
+        MASTMRAIDExpandProperties* expandProperties = [[MASTMRAIDExpandProperties alloc] initWithSize:screenSize];
+        [bridge setExpandProperties:expandProperties forWebView:self.webView];
+    }
+    else
+    {
+        [bridge setExpandProperties:self.twoPartExapandProperties forWebView:self.webView];
+    }
     
     MASTMRAIDResizeProperties* resizeProperties = [MASTMRAIDResizeProperties new];
     [bridge setResizeProperties:resizeProperties forWebView:self.webView];
@@ -1874,7 +1887,7 @@ static BOOL registerProtocolClass = YES;
     if (hasURL)
     {
         self.expandedAdView = [MASTAdView new];
-        [self.expandedAdView showExpanded:url];
+        [self.expandedAdView showExpanded:url withExpandProperties:self.mraidBridge.expandProperties];
         
         [self mraidUpdateLayoutForNewState:MASTMRAIDBridgeStateExpanded];
         

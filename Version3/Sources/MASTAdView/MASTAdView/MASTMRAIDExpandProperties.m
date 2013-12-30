@@ -60,7 +60,8 @@ static NSString* MASTMRAIDExpandPropertiesUseCustomClose = @"useCustomClose";
     if (self.useCustomClose)
         ucc = @"true";
     
-    NSString* desc = [NSString stringWithFormat:@"{width:%d,height:%d,useCustomClose:%@}", self.width, self.height, ucc];
+    NSString* desc = [NSString stringWithFormat:@"{width:%d,height:%d,useCustomClose:%@}",
+                      (int)self.width, (int)self.height, ucc];
     
     return desc;
 }

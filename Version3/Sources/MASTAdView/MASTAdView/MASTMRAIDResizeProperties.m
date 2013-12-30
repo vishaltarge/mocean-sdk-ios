@@ -118,7 +118,7 @@ static NSString* MASTMRAIDResizePropertiesCCPositionBottomRight = @"bottom-right
     if (self.allowOffscreen)
         ao = @"true";
     
-    NSString* desc = [NSString stringWithFormat:@"{width:%d,height:%d,customClosePosition:'%@',offsetX:%d,offsetY:%d,allowOffscreen:%@}", self.width, self.height, ccp, self.offsetX, self.offsetY, ao];
+    NSString* desc = [NSString stringWithFormat:@"{width:%d,height:%d,customClosePosition:'%@',offsetX:%d,offsetY:%d,allowOffscreen:%@}", (int)self.width, (int)self.height, ccp, (int)self.offsetX, (int)self.offsetY, ao];
     
     return desc;
 }

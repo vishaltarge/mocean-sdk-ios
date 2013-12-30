@@ -83,6 +83,9 @@ Release Notes:
 - Updates for Xcode 5 and iOS 7.
 - Fixes to two part expand when expanded URL is NOT MRAID based.
 - Added copy call to prevent non-ARC compiles from having issues with static user-agent string.
+- Updates to settings to allow for arm64 builds.  This was possible prior but now configured so by default.
+- Added casts to integer to string conversions.
+- Changed two-part initializations to use first-part expand properties.
 
 
 
