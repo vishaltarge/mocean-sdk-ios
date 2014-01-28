@@ -87,5 +87,8 @@ Release Notes:
 - Added casts to integer to string conversions.
 - Changed two-part initializations to use first-part expand properties.
 
+3.1.2
+- Updated URL handling to be more consistent across invocations and inline with other SDK platforms.
+
 
 

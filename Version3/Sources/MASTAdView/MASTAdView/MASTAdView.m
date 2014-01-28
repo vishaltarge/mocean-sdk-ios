@@ -651,6 +651,72 @@ static BOOL registerProtocolClass = YES;
     }
 }
 
+#pragma mark - URL handling (ad clicks, browser links, etc..)
+
+// url can be either a NSURLRequest or NSString
+// returns YES if opened (external or internal), NO if not
+- (BOOL)openURL:(id)url
+{
+    if ([url isKindOfClass:[NSURL class]] == NO)
+    {
+        url = [NSURL URLWithString:url];
+    }
+    NSURL* nsurl = url;
+    
+    BOOL canOpenInternal = [self canOpenInternal:nsurl];
+    
+    __block BOOL shouldOpen = YES;
+    if ([self.delegate respondsToSelector:@selector(MASTAdView:shouldOpenURL:)])
+    {
+        [self invokeDelegateBlock:^
+         {
+             shouldOpen = [self.delegate MASTAdView:self shouldOpenURL:nsurl];
+         }];
+    }
+    
+    if (shouldOpen == NO)
+        return NO;
+    
+    if (canOpenInternal && self.useInternalBrowser)
+    {
+        [self openAdBrowserWithURL:nsurl];
+        return NO;
+    }
+    
+    [self invokeDelegateSelector:@selector(MASTAdViewWillLeaveApplication:)];
+    
+    self.skipNextUpdateTick = YES;
+    
+    [[UIApplication sharedApplication] openURL:nsurl];
+    
+    return YES;
+}
+
+- (BOOL)canOpenInternal:(id)url
+{
+    if ([url isKindOfClass:[NSURL class]] == NO)
+    {
+        url = [NSURL URLWithString:url];
+    }
+    NSURL* nsurl = url;
+
+    if ([[nsurl.scheme lowercaseString] hasPrefix:@"http"] == NO)
+    {
+        return NO;
+    }
+    
+    NSString* host = [nsurl.host lowercaseString];
+    if ([host hasSuffix:@"itunes.apple.com"] || [host hasSuffix:@"phobos.apple.com"])
+    {
+        // TODO: May need to follow all redirects to determine if it's an itunes link.
+        // http://developer.apple.com/library/ios/#qa/qa1629/_index.html
+        
+        return NO;
+    }
+    
+    return YES;
+}
+
 #pragma mark - Internal Browser
 
 - (BOOL)isInternalBrowserOpen
@@ -743,27 +809,7 @@ static BOOL registerProtocolClass = YES;
     if ([[self.adDescriptor url] length] == 0)
         return;
     
-    NSURL* url = [NSURL URLWithString:self.adDescriptor.url];
-    
-    __block BOOL shouldOpen = YES;
-    if ([self.delegate respondsToSelector:@selector(MASTAdView:shouldOpenURL:)])
-    {
-        [self invokeDelegateBlock:^
-        {
-            shouldOpen = [self.delegate MASTAdView:self shouldOpenURL:url];
-        }];
-    }
-    
-    if (shouldOpen == NO)
-        return;
-    
-    if (self.useInternalBrowser)
-    {
-        [self openAdBrowserWithURL:url];
-        return;
-    }
-    
-    [[UIApplication sharedApplication] openURL:url];
+    [self openURL:self.adDescriptor.url];
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
@@ -1809,30 +1855,7 @@ static BOOL registerProtocolClass = YES;
 
 - (void)mraidBridge:(MASTMRAIDBridge *)bridge openURL:(NSString*)url
 {
-    __block BOOL shouldOpen = YES;
-    if ([self.delegate respondsToSelector:@selector(MASTAdView:shouldOpenURL:)])
-    {
-        [self invokeDelegateBlock:^
-        {
-            shouldOpen = [self.delegate MASTAdView:self shouldOpenURL:[NSURL URLWithString:url]];
-        }];
-    }
-    
-    if (shouldOpen == NO)
-        return;
-    
-    if (self.useInternalBrowser)
-    {
-        [self openAdBrowserWithURL:[NSURL URLWithString:url]];
-        
-        return;
-    }
-    
-    [self invokeDelegateSelector:@selector(MASTAdViewWillLeaveApplication:)];
-    
-    self.skipNextUpdateTick = YES;
-
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+    [self openURL:url];
 }
 
 - (void)mraidBridgeUpdateCurrentPosition:(MASTMRAIDBridge*)bridge
@@ -2812,46 +2835,11 @@ static BOOL registerProtocolClass = YES;
     
     // Normally canOpenInternall would be processed inside the navigation type selection.
     // However, it's being done outside becuase of the above handling of UIWebViewNavigationTypeOther.
-    BOOL canOpenInternal = YES;
-    if ([[request.URL.scheme lowercaseString] hasPrefix:@"http"] == NO)
-    {
-        canOpenInternal = NO;
-    }
-    
-    NSString* host = [request.URL.host lowercaseString];
-    if ([host hasSuffix:@"itunes.apple.com"] || [host hasSuffix:@"phobos.apple.com"])
-    {
-        // TODO: May need to follow all redirects to determine if it's an itunes link.
-        // http://developer.apple.com/library/ios/#qa/qa1629/_index.html
-        
-        canOpenInternal = NO;
-    }
-    
+    BOOL canOpenInternal = [self canOpenInternal:request.URL];
+
     if (navigationType == UIWebViewNavigationTypeLinkClicked)
     {
-        __block BOOL shouldOpen = YES;
-        if ([self.delegate respondsToSelector:@selector(MASTAdView:shouldOpenURL:)])
-        {
-            [self invokeDelegateBlock:^
-            {
-                 shouldOpen = [self.delegate MASTAdView:self shouldOpenURL:request.URL];
-            }];
-        }
-        
-        if (shouldOpen == NO)
-            return NO;
-        
-        if (canOpenInternal && self.useInternalBrowser)
-        {
-            [self openAdBrowserWithURL:request.URL];
-            return NO;
-        }
-        
-        [self invokeDelegateSelector:@selector(MASTAdViewWillLeaveApplication:)];
-        
-        self.skipNextUpdateTick = YES;
-        
-        [[UIApplication sharedApplication] openURL:request.URL];
+        [self openURL:request.URL];
         
         // Never let the ad's window render the destination link.
         return NO;
@@ -2859,23 +2847,7 @@ static BOOL registerProtocolClass = YES;
 
     if ((navigationType == UIWebViewNavigationTypeOther) && (canOpenInternal == NO))
     {
-        __block BOOL shouldOpen = YES;
-        if ([self.delegate respondsToSelector:@selector(MASTAdView:shouldOpenURL:)])
-        {
-            [self invokeDelegateBlock:^
-             {
-                 shouldOpen = [self.delegate MASTAdView:self shouldOpenURL:request.URL];
-             }];
-        }
-        
-        if (shouldOpen == NO)
-            return NO;
-        
-        [self invokeDelegateSelector:@selector(MASTAdViewWillLeaveApplication:)];
-        
-        self.skipNextUpdateTick = YES;
-        
-        [[UIApplication sharedApplication] openURL:request.URL];
+        [self openURL:request.URL];
         
         return NO;
     }
