@@ -2640,21 +2640,31 @@ static BOOL registerProtocolClass = YES;
     // is available else just render as richmedia/html.
     if ([ad.type hasPrefix:@"thirdparty"])
     {
-        if ([self.adDescriptor.url length] > 0)
+        if ([ad.url length] > 0)
         {
-            if ([self.adDescriptor.img length] > 0)
+            if ([ad.img length] > 0)
             {
-                [self performSelectorInBackground:@selector(loadImageAd:) 
-                                       withObject:ad];
-                return;
+                if ([self verifyThirdPartyRendering:ad.content
+                                                url:ad.url
+                                          imgOrText:ad.img])
+                {
+                    [self performSelectorInBackground:@selector(loadImageAd:)
+                                           withObject:ad];
+                    return;
+                }
             }
             
-            if ([self.adDescriptor.text length] > 0)
+            if ([ad.text length] > 0)
             {
-                [self performSelectorOnMainThread:@selector(renderTextAd:) 
-                                       withObject:adDescriptor.text 
-                                    waitUntilDone:NO];
-                return;
+                if ([self verifyThirdPartyRendering:ad.content
+                                                url:ad.url
+                                          imgOrText:ad.text])
+                {
+                    [self performSelectorOnMainThread:@selector(renderTextAd:)
+                                           withObject:ad.text
+                                        waitUntilDone:NO];
+                    return;
+                }
             }
         }
         else
@@ -2706,6 +2716,37 @@ static BOOL registerProtocolClass = YES;
 
     // All other ad types flow to the MRAID/HTML handler.
     [self performSelectorOnMainThread:@selector(renderMRAIDAd:) withObject:contentString waitUntilDone:NO];
+}
+
+- (BOOL)verifyThirdPartyRendering:(NSString*)content url:(NSString*)url imgOrText:(NSString*)imgOrText
+{
+    // This is fine since there's no content to render with a web view.
+    if ((content == nil) || ([content length] == 0))
+    {
+        return YES;
+    }
+    
+    // Any script tag in the content requires web view rendering.
+    if ([content rangeOfString:@"<script"].location != NSNotFound)
+    {
+        return NO;
+    }
+    
+    // Finally the content must include by the click url and the img url or content text.  Removing those
+    // should leave minimal html structure.
+    if (([content rangeOfString:url].location != NSNotFound) && ([content rangeOfString:imgOrText].location != NSNotFound))
+    {
+        NSInteger length = [content length];
+        length -= [url length];
+        length -= [imgOrText length];
+        
+        if (length < MAST_DESCRIPTOR_THIRD_PARTY_VALIDATOR_LENGTH)
+        {
+            return YES;
+        }
+    }
+    
+    return NO;
 }
 
 #pragma mark - Tracking

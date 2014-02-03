@@ -31,6 +31,14 @@ static NSTimeInterval MAST_DEFAULT_NETWORK_TIMEOUT __attribute__((unused)) = 5;
 
 
 //
+// How much content is allowed after parsing out click url and image
+// or text content before falling through and rendering as html vs.
+// native rendering.
+//
+static NSTimeInterval MAST_DESCRIPTOR_THIRD_PARTY_VALIDATOR_LENGTH __attribute__((unused)) = 20;
+
+
+//
 // Default injection HTML for rich media ads.
 //
 // IMPORTANT:

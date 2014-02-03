@@ -89,6 +89,7 @@ Release Notes:
 
 3.1.2
 - Updated URL handling to be more consistent across invocations and inline with other SDK platforms.
+- Adding validation to third party ad descriptors that attempts to ensure image and text ads are rendered natively only if it appears the server's parsing was proper.
 
 
 
