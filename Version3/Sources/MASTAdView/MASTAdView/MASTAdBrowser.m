@@ -182,7 +182,8 @@
     NSURLRequest* request = [[NSURLRequest alloc] initWithURL:self.URL
                                                   cachePolicy:NSURLRequestReloadIgnoringCacheData
                                               timeoutInterval:10];
-    
+    self.webView.scalesPageToFit=YES;
+
     [self.webView loadRequest:request];
 }
 
