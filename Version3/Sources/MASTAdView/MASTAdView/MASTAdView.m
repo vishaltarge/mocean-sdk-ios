@@ -339,7 +339,23 @@ static BOOL registerProtocolClass = YES;
         [args setValue:@"1" forKey:@"test"];
     
     
+    if(locationDetectionEnabled && !self.adRequestParameters[@"lat"])
+    {
+        // Delay to workaround issues which not insert lat-long parameter quickly in ad request
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(),
+                       ^{
+                           [self constructAdRequest:args];
+                       });
+    }
+    else
+        [self constructAdRequest:args];
+}
+
+-(void)constructAdRequest:(NSMutableDictionary*)args
+{
     NSMutableString* url = [NSMutableString stringWithFormat:@"%@?", self.adServerURL];
+    
+    [args addEntriesFromDictionary:self.adRequestParameters];
     
     for (NSString* argKey in args.allKeys)
     {
@@ -353,16 +369,17 @@ static BOOL registerProtocolClass = YES;
             ofType:MASTAdViewLogEventTypeDebug
               func:__func__
               line:__LINE__];
-
+    
     NSURLRequest* request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:requestUrl]
                                                   cachePolicy:NSURLRequestUseProtocolCachePolicy
                                               timeoutInterval:MAST_DEFAULT_NETWORK_TIMEOUT];
     
     self.dataBuffer = nil;
     
-    self.connection = [[NSURLConnection alloc] initWithRequest:request 
-                                                      delegate:self 
+    self.connection = [[NSURLConnection alloc] initWithRequest:request
+                                                      delegate:self
                                               startImmediately:YES];
+    
 }
 
 - (void)internalUpdateTimerTick
