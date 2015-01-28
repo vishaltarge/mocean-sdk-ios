@@ -1,0 +1,500 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		9BA3D74919CC0AB700046981 /* Framework */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 9BA3D74A19CC0AB700046981 /* Build configuration list for PBXAggregateTarget "Framework" */;
+			buildPhases = (
+				9BA3D74D19CC0AEC00046981 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = Framework;
+			productName = Framework;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		9B8EFE561A5A8644004B62EA /* MASTMoPubAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B8EFE4C1A5A8644004B62EA /* MASTMoPubAdapter.m */; };
+		9B8EFE5B1A5A86A0004B62EA /* MASTMoPubAdapterTests-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B8EFE5A1A5A86A0004B62EA /* MASTMoPubAdapterTests-Info.plist */; };
+		9B8EFE5E1A5A86C2004B62EA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9B8EFE5C1A5A86C2004B62EA /* InfoPlist.strings */; };
+		9B8EFE601A5A871E004B62EA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B8EFE5F1A5A871E004B62EA /* UIKit.framework */; };
+		9BA3D6C719CAB74300046981 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BA3D6C619CAB74300046981 /* Foundation.framework */; };
+		9BA3D6D619CAB74300046981 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BA3D6C619CAB74300046981 /* Foundation.framework */; };
+		9BA3D6DB19CAB74300046981 /* libMASTMoPubAdapter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BA3D6C319CAB74300046981 /* libMASTMoPubAdapter.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9BA3D6D919CAB74300046981 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9BA3D6BB19CAB74200046981 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9BA3D6C219CAB74300046981;
+			remoteInfo = MASTTwitterAdapter;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9BA3D6C119CAB74300046981 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		9B8EFE4A1A5A8644004B62EA /* MASTBaseAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MASTBaseAdapter.h; path = MASTMoPubAdapter/MASTBaseAdapter.h; sourceTree = SOURCE_ROOT; };
+		9B8EFE4B1A5A8644004B62EA /* MASTMoPubAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MASTMoPubAdapter.h; path = MASTMoPubAdapter/MASTMoPubAdapter.h; sourceTree = SOURCE_ROOT; };
+		9B8EFE4C1A5A8644004B62EA /* MASTMoPubAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MASTMoPubAdapter.m; path = MASTMoPubAdapter/MASTMoPubAdapter.m; sourceTree = SOURCE_ROOT; };
+		9B8EFE4D1A5A8644004B62EA /* MASTNativeAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MASTNativeAd.h; path = MASTMoPubAdapter/MASTNativeAd.h; sourceTree = SOURCE_ROOT; };
+		9B8EFE4E1A5A8644004B62EA /* MASTNativeAdapterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MASTNativeAdapterDelegate.h; path = MASTMoPubAdapter/MASTNativeAdapterDelegate.h; sourceTree = SOURCE_ROOT; };
+		9B8EFE4F1A5A8644004B62EA /* MASTNativeAdAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MASTNativeAdAttributes.h; path = MASTMoPubAdapter/MASTNativeAdAttributes.h; sourceTree = SOURCE_ROOT; };
+		9B8EFE501A5A8644004B62EA /* MASTNativeAdDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MASTNativeAdDelegate.h; path = MASTMoPubAdapter/MASTNativeAdDelegate.h; sourceTree = SOURCE_ROOT; };
+		9B8EFE511A5A8644004B62EA /* MPNativeAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPNativeAd.h; path = MASTMoPubAdapter/MPNativeAd.h; sourceTree = SOURCE_ROOT; };
+		9B8EFE521A5A8644004B62EA /* MPNativeAdAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPNativeAdAdapter.h; path = MASTMoPubAdapter/MPNativeAdAdapter.h; sourceTree = SOURCE_ROOT; };
+		9B8EFE531A5A8644004B62EA /* MPNativeAdConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPNativeAdConstants.h; path = MASTMoPubAdapter/MPNativeAdConstants.h; sourceTree = SOURCE_ROOT; };
+		9B8EFE541A5A8644004B62EA /* MPNativeAdRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPNativeAdRequest.h; path = MASTMoPubAdapter/MPNativeAdRequest.h; sourceTree = SOURCE_ROOT; };
+		9B8EFE551A5A8644004B62EA /* MPNativeAdRequestTargeting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPNativeAdRequestTargeting.h; path = MASTMoPubAdapter/MPNativeAdRequestTargeting.h; sourceTree = SOURCE_ROOT; };
+		9B8EFE571A5A865A004B62EA /* MASTMoPubAdapter-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MASTMoPubAdapter-Prefix.pch"; path = "MASTMoPubAdapter/MASTMoPubAdapter-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		9B8EFE5A1A5A86A0004B62EA /* MASTMoPubAdapterTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "MASTMoPubAdapterTests-Info.plist"; path = "MASTMoPubAdapterTests/MASTMoPubAdapterTests-Info.plist"; sourceTree = SOURCE_ROOT; };
+		9B8EFE5D1A5A86C2004B62EA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = MASTMoPubAdapterTests/en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
+		9B8EFE5F1A5A871E004B62EA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		9BA3D6C319CAB74300046981 /* libMASTMoPubAdapter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMASTMoPubAdapter.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BA3D6C619CAB74300046981 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		9BA3D6D319CAB74300046981 /* MASTMoPubAdapterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MASTMoPubAdapterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9BA3D6C019CAB74300046981 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9BA3D6C719CAB74300046981 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9BA3D6D019CAB74300046981 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B8EFE601A5A871E004B62EA /* UIKit.framework in Frameworks */,
+				9BA3D6DB19CAB74300046981 /* libMASTMoPubAdapter.a in Frameworks */,
+				9BA3D6D619CAB74300046981 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9BA3D6BA19CAB74200046981 = {
+			isa = PBXGroup;
+			children = (
+				9BA3D6C819CAB74300046981 /* MASTMoPubAdapter */,
+				9BA3D6DC19CAB74300046981 /* MASTMoPubAdapterTests */,
+				9BA3D6C519CAB74300046981 /* Frameworks */,
+				9BA3D6C419CAB74300046981 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9BA3D6C419CAB74300046981 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9BA3D6C319CAB74300046981 /* libMASTMoPubAdapter.a */,
+				9BA3D6D319CAB74300046981 /* MASTMoPubAdapterTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9BA3D6C519CAB74300046981 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9B8EFE5F1A5A871E004B62EA /* UIKit.framework */,
+				9BA3D6C619CAB74300046981 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9BA3D6C819CAB74300046981 /* MASTMoPubAdapter */ = {
+			isa = PBXGroup;
+			children = (
+				9B8EFE4A1A5A8644004B62EA /* MASTBaseAdapter.h */,
+				9B8EFE4B1A5A8644004B62EA /* MASTMoPubAdapter.h */,
+				9B8EFE4C1A5A8644004B62EA /* MASTMoPubAdapter.m */,
+				9B8EFE4D1A5A8644004B62EA /* MASTNativeAd.h */,
+				9B8EFE4E1A5A8644004B62EA /* MASTNativeAdapterDelegate.h */,
+				9B8EFE4F1A5A8644004B62EA /* MASTNativeAdAttributes.h */,
+				9B8EFE501A5A8644004B62EA /* MASTNativeAdDelegate.h */,
+				9B8EFE511A5A8644004B62EA /* MPNativeAd.h */,
+				9B8EFE521A5A8644004B62EA /* MPNativeAdAdapter.h */,
+				9B8EFE531A5A8644004B62EA /* MPNativeAdConstants.h */,
+				9B8EFE541A5A8644004B62EA /* MPNativeAdRequest.h */,
+				9B8EFE551A5A8644004B62EA /* MPNativeAdRequestTargeting.h */,
+				9BA3D6C919CAB74300046981 /* Supporting Files */,
+			);
+			name = MASTMoPubAdapter;
+			path = MASTTwitterAdapter;
+			sourceTree = "<group>";
+		};
+		9BA3D6C919CAB74300046981 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9B8EFE571A5A865A004B62EA /* MASTMoPubAdapter-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9BA3D6DC19CAB74300046981 /* MASTMoPubAdapterTests */ = {
+			isa = PBXGroup;
+			children = (
+				9BA3D6DD19CAB74300046981 /* Supporting Files */,
+			);
+			name = MASTMoPubAdapterTests;
+			path = MASTTwitterAdapterTests;
+			sourceTree = "<group>";
+		};
+		9BA3D6DD19CAB74300046981 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9B8EFE5C1A5A86C2004B62EA /* InfoPlist.strings */,
+				9B8EFE5A1A5A86A0004B62EA /* MASTMoPubAdapterTests-Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9BA3D6C219CAB74300046981 /* MASTMoPubAdapter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9BA3D6E619CAB74300046981 /* Build configuration list for PBXNativeTarget "MASTMoPubAdapter" */;
+			buildPhases = (
+				9BA3D6BF19CAB74300046981 /* Sources */,
+				9BA3D6C019CAB74300046981 /* Frameworks */,
+				9BA3D6C119CAB74300046981 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MASTMoPubAdapter;
+			productName = MASTTwitterAdapter;
+			productReference = 9BA3D6C319CAB74300046981 /* libMASTMoPubAdapter.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		9BA3D6D219CAB74300046981 /* MASTMoPubAdapterTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9BA3D6E919CAB74300046981 /* Build configuration list for PBXNativeTarget "MASTMoPubAdapterTests" */;
+			buildPhases = (
+				9BA3D6CF19CAB74300046981 /* Sources */,
+				9BA3D6D019CAB74300046981 /* Frameworks */,
+				9BA3D6D119CAB74300046981 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9BA3D6DA19CAB74300046981 /* PBXTargetDependency */,
+			);
+			name = MASTMoPubAdapterTests;
+			productName = MASTTwitterAdapterTests;
+			productReference = 9BA3D6D319CAB74300046981 /* MASTMoPubAdapterTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9BA3D6BB19CAB74200046981 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = PubMatic;
+			};
+			buildConfigurationList = 9BA3D6BE19CAB74200046981 /* Build configuration list for PBXProject "MASTMoPubAdapter" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 9BA3D6BA19CAB74200046981;
+			productRefGroup = 9BA3D6C419CAB74300046981 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9BA3D6C219CAB74300046981 /* MASTMoPubAdapter */,
+				9BA3D6D219CAB74300046981 /* MASTMoPubAdapterTests */,
+				9BA3D74919CC0AB700046981 /* Framework */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9BA3D6D119CAB74300046981 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B8EFE5B1A5A86A0004B62EA /* MASTMoPubAdapterTests-Info.plist in Resources */,
+				9B8EFE5E1A5A86C2004B62EA /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9BA3D74D19CC0AEC00046981 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#\n# Script Attribution:\n# http://db-in.com/blog/2011/07/universal-framework-iphone-ios-2-0/\n#\n# Modifications Copyright (c) 2012 Mocean Mobile.  All rights reserved.\n#\n\n# Sets the target folders and the final framework product.\nLIB_NAME=lib${PROJECT_NAME}.a\nFMK_NAME=${PROJECT_NAME}\nFMK_VERSION=A\n\n# Install dir will be the final output to the framework.\n# The following line create it in the root folder of the current project.\nINSTALL_DIR=${SRCROOT}/Products/${FMK_NAME}.framework\n\n# Working dir will be deleted after the framework creation.\nWRK_DIR=build\nDEVICE_DIR=${WRK_DIR}/Release-iphoneos/\nSIMULATOR_DIR=${WRK_DIR}/Release-iphonesimulator/\n\n# Cleaning the oldest.\nrm -rf \"${INSTALL_DIR}\"\n\n# Building both architectures.\nxcodebuild -configuration \"Release\" -target \"${FMK_NAME}\" -sdk iphoneos\nxcodebuild -configuration \"Release\" -target \"${FMK_NAME}\" -sdk iphonesimulator\n\n# Creates and renews the final product folder.\nmkdir -p \"${INSTALL_DIR}\"\nmkdir -p \"${INSTALL_DIR}/Versions\"\nmkdir -p \"${INSTALL_DIR}/Versions/${FMK_VERSION}\"\nmkdir -p \"${INSTALL_DIR}/Versions/${FMK_VERSION}/Headers\"\n\n# Creates the internal links.\n# It MUST uses relative path, otherwise will not work when the folder is copied/moved.\nln -s \"${FMK_VERSION}\" \"${INSTALL_DIR}/Versions/Current\"\nln -s \"Versions/Current/Headers\" \"${INSTALL_DIR}/Headers\"\nln -s \"Versions/Current/${FMK_NAME}\" \"${INSTALL_DIR}/${FMK_NAME}\"\n\n# Copies the headers files to the final product folder.\ncp -R \"${DEVICE_DIR}/include/\" \"${INSTALL_DIR}/Versions/${FMK_VERSION}/Headers/\"\n\n# Uses the Lipo Tool to merge both binary files (i386 + armv6/armv7) into one Universal final product.\nlipo -create \"${DEVICE_DIR}/${LIB_NAME}\" \"${SIMULATOR_DIR}/${LIB_NAME}\" -output \"${INSTALL_DIR}/Versions/${FMK_VERSION}/${FMK_NAME}\"\n\nrm -r \"${WRK_DIR}\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9BA3D6BF19CAB74300046981 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B8EFE561A5A8644004B62EA /* MASTMoPubAdapter.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9BA3D6CF19CAB74300046981 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9BA3D6DA19CAB74300046981 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9BA3D6C219CAB74300046981 /* MASTMoPubAdapter */;
+			targetProxy = 9BA3D6D919CAB74300046981 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		9B8EFE5C1A5A86C2004B62EA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9B8EFE5D1A5A86C2004B62EA /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9BA3D6E419CAB74300046981 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		9BA3D6E519CAB74300046981 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9BA3D6E719CAB74300046981 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/MASTMoPubAdapter.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MASTMoPubAdapter/MASTMoPubAdapter-Prefix.pch";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = MASTMoPubAdapter;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		9BA3D6E819CAB74300046981 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/MASTMoPubAdapter.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MASTMoPubAdapter/MASTMoPubAdapter-Prefix.pch";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = MASTMoPubAdapter;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		9BA3D6EA19CAB74300046981 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MASTMoPubAdapter/MASTMoPubAdapter-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "MASTMoPubAdapterTests/MASTMoPubAdapterTests-Info.plist";
+				PRODUCT_NAME = MASTMoPubAdapterTests;
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		9BA3D6EB19CAB74300046981 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MASTMoPubAdapter/MASTMoPubAdapter-Prefix.pch";
+				INFOPLIST_FILE = "MASTMoPubAdapterTests/MASTMoPubAdapterTests-Info.plist";
+				PRODUCT_NAME = MASTMoPubAdapterTests;
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+		9BA3D74B19CC0AB700046981 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				New_Setting = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		9BA3D74C19CC0AB700046981 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				New_Setting = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9BA3D6BE19CAB74200046981 /* Build configuration list for PBXProject "MASTMoPubAdapter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9BA3D6E419CAB74300046981 /* Debug */,
+				9BA3D6E519CAB74300046981 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9BA3D6E619CAB74300046981 /* Build configuration list for PBXNativeTarget "MASTMoPubAdapter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9BA3D6E719CAB74300046981 /* Debug */,
+				9BA3D6E819CAB74300046981 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9BA3D6E919CAB74300046981 /* Build configuration list for PBXNativeTarget "MASTMoPubAdapterTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9BA3D6EA19CAB74300046981 /* Debug */,
+				9BA3D6EB19CAB74300046981 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9BA3D74A19CC0AB700046981 /* Build configuration list for PBXAggregateTarget "Framework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9BA3D74B19CC0AB700046981 /* Debug */,
+				9BA3D74C19CC0AB700046981 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9BA3D6BB19CAB74200046981 /* Project object */;
+}

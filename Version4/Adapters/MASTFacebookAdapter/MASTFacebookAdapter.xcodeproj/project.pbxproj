@@ -1,0 +1,544 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		E6AF6D3519D196C6003F2934 /* FBAdapterFramework */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = E6AF6D3819D196C6003F2934 /* Build configuration list for PBXAggregateTarget "FBAdapterFramework" */;
+			buildPhases = (
+				E6AF6D3919D196CB003F2934 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = FBAdapterFramework;
+			productName = FBAdapterFramework;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		9B8E838E1A66864E004E0E67 /* FBAudienceNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B8E838D1A66864E004E0E67 /* FBAudienceNetwork.framework */; };
+		9BA3D68919CA9ECF00046981 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BA3D68819CA9ECF00046981 /* Foundation.framework */; };
+		9BA3D68E19CA9ECF00046981 /* MASTFacebookAdapter.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9BA3D68D19CA9ECF00046981 /* MASTFacebookAdapter.h */; };
+		9BA3D69019CA9ECF00046981 /* MASTFacebookAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA3D68F19CA9ECF00046981 /* MASTFacebookAdapter.m */; };
+		9BA3D69719CA9ED000046981 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BA3D69619CA9ED000046981 /* XCTest.framework */; };
+		9BA3D69819CA9ED000046981 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BA3D68819CA9ECF00046981 /* Foundation.framework */; };
+		9BA3D69A19CA9ED000046981 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BA3D69919CA9ED000046981 /* UIKit.framework */; };
+		9BA3D69D19CA9ED000046981 /* libMASTFacebookAdapter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BA3D68519CA9ECF00046981 /* libMASTFacebookAdapter.a */; };
+		9BA3D6A319CA9ED000046981 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9BA3D6A119CA9ED000046981 /* InfoPlist.strings */; };
+		9BA3D6A519CA9ED000046981 /* MASTFacebookAdapterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA3D6A419CA9ED000046981 /* MASTFacebookAdapterTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9BA3D69B19CA9ED000046981 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9BA3D67D19CA9ECF00046981 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9BA3D68419CA9ECF00046981;
+			remoteInfo = MASTFacebookAdapter;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9BA3D68319CA9ECF00046981 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				9BA3D68E19CA9ECF00046981 /* MASTFacebookAdapter.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		9B8E838D1A66864E004E0E67 /* FBAudienceNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBAudienceNetwork.framework; path = ../../MediationNetworkLibrary/FacebookAudienceNetwork/FBAudienceNetwork.framework; sourceTree = "<group>"; };
+		9B8EFBC91A53F88A004B62EA /* MASTBaseAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTBaseAdapter.h; sourceTree = "<group>"; };
+		9B8EFBCA1A53F88A004B62EA /* MASTNativeAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTNativeAd.h; sourceTree = "<group>"; };
+		9B8EFBCB1A53F88A004B62EA /* MASTNativeAdapterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTNativeAdapterDelegate.h; sourceTree = "<group>"; };
+		9B8EFBCC1A53F88A004B62EA /* MASTNativeAdAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTNativeAdAttributes.h; sourceTree = "<group>"; };
+		9B8EFBCD1A53F88A004B62EA /* MASTNativeAdDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASTNativeAdDelegate.h; sourceTree = "<group>"; };
+		9BA3D68519CA9ECF00046981 /* libMASTFacebookAdapter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMASTFacebookAdapter.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BA3D68819CA9ECF00046981 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		9BA3D68C19CA9ECF00046981 /* MASTFacebookAdapter-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MASTFacebookAdapter-Prefix.pch"; sourceTree = "<group>"; };
+		9BA3D68D19CA9ECF00046981 /* MASTFacebookAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MASTFacebookAdapter.h; sourceTree = "<group>"; };
+		9BA3D68F19CA9ECF00046981 /* MASTFacebookAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MASTFacebookAdapter.m; sourceTree = "<group>"; };
+		9BA3D69519CA9ED000046981 /* MASTFacebookAdapterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MASTFacebookAdapterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BA3D69619CA9ED000046981 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		9BA3D69919CA9ED000046981 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		9BA3D6A019CA9ED000046981 /* MASTFacebookAdapterTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MASTFacebookAdapterTests-Info.plist"; sourceTree = "<group>"; };
+		9BA3D6A219CA9ED000046981 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9BA3D6A419CA9ED000046981 /* MASTFacebookAdapterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MASTFacebookAdapterTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9BA3D68219CA9ECF00046981 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9BA3D68919CA9ECF00046981 /* Foundation.framework in Frameworks */,
+				9B8E838E1A66864E004E0E67 /* FBAudienceNetwork.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9BA3D69219CA9ED000046981 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9BA3D69719CA9ED000046981 /* XCTest.framework in Frameworks */,
+				9BA3D69A19CA9ED000046981 /* UIKit.framework in Frameworks */,
+				9BA3D69D19CA9ED000046981 /* libMASTFacebookAdapter.a in Frameworks */,
+				9BA3D69819CA9ED000046981 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9BA3D67C19CA9ECF00046981 = {
+			isa = PBXGroup;
+			children = (
+				9BA3D68A19CA9ECF00046981 /* MASTFacebookAdapter */,
+				9BA3D69E19CA9ED000046981 /* MASTFacebookAdapterTests */,
+				9BA3D68719CA9ECF00046981 /* Frameworks */,
+				9BA3D68619CA9ECF00046981 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9BA3D68619CA9ECF00046981 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9BA3D68519CA9ECF00046981 /* libMASTFacebookAdapter.a */,
+				9BA3D69519CA9ED000046981 /* MASTFacebookAdapterTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9BA3D68719CA9ECF00046981 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9B8E838D1A66864E004E0E67 /* FBAudienceNetwork.framework */,
+				9BA3D68819CA9ECF00046981 /* Foundation.framework */,
+				9BA3D69619CA9ED000046981 /* XCTest.framework */,
+				9BA3D69919CA9ED000046981 /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9BA3D68A19CA9ECF00046981 /* MASTFacebookAdapter */ = {
+			isa = PBXGroup;
+			children = (
+				9B8EFBC91A53F88A004B62EA /* MASTBaseAdapter.h */,
+				9B8EFBCA1A53F88A004B62EA /* MASTNativeAd.h */,
+				9B8EFBCB1A53F88A004B62EA /* MASTNativeAdapterDelegate.h */,
+				9B8EFBCC1A53F88A004B62EA /* MASTNativeAdAttributes.h */,
+				9B8EFBCD1A53F88A004B62EA /* MASTNativeAdDelegate.h */,
+				9BA3D68D19CA9ECF00046981 /* MASTFacebookAdapter.h */,
+				9BA3D68F19CA9ECF00046981 /* MASTFacebookAdapter.m */,
+				9BA3D68B19CA9ECF00046981 /* Supporting Files */,
+			);
+			path = MASTFacebookAdapter;
+			sourceTree = "<group>";
+		};
+		9BA3D68B19CA9ECF00046981 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9BA3D68C19CA9ECF00046981 /* MASTFacebookAdapter-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9BA3D69E19CA9ED000046981 /* MASTFacebookAdapterTests */ = {
+			isa = PBXGroup;
+			children = (
+				9BA3D6A419CA9ED000046981 /* MASTFacebookAdapterTests.m */,
+				9BA3D69F19CA9ED000046981 /* Supporting Files */,
+			);
+			path = MASTFacebookAdapterTests;
+			sourceTree = "<group>";
+		};
+		9BA3D69F19CA9ED000046981 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9BA3D6A019CA9ED000046981 /* MASTFacebookAdapterTests-Info.plist */,
+				9BA3D6A119CA9ED000046981 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9BA3D68419CA9ECF00046981 /* MASTFacebookAdapter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9BA3D6A819CA9ED000046981 /* Build configuration list for PBXNativeTarget "MASTFacebookAdapter" */;
+			buildPhases = (
+				9BA3D68119CA9ECF00046981 /* Sources */,
+				9BA3D68219CA9ECF00046981 /* Frameworks */,
+				9BA3D68319CA9ECF00046981 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MASTFacebookAdapter;
+			productName = MASTFacebookAdapter;
+			productReference = 9BA3D68519CA9ECF00046981 /* libMASTFacebookAdapter.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		9BA3D69419CA9ED000046981 /* MASTFacebookAdapterTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9BA3D6AB19CA9ED000046981 /* Build configuration list for PBXNativeTarget "MASTFacebookAdapterTests" */;
+			buildPhases = (
+				9BA3D69119CA9ED000046981 /* Sources */,
+				9BA3D69219CA9ED000046981 /* Frameworks */,
+				9BA3D69319CA9ED000046981 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9BA3D69C19CA9ED000046981 /* PBXTargetDependency */,
+			);
+			name = MASTFacebookAdapterTests;
+			productName = MASTFacebookAdapterTests;
+			productReference = 9BA3D69519CA9ED000046981 /* MASTFacebookAdapterTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9BA3D67D19CA9ECF00046981 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = PubMatic;
+			};
+			buildConfigurationList = 9BA3D68019CA9ECF00046981 /* Build configuration list for PBXProject "MASTFacebookAdapter" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 9BA3D67C19CA9ECF00046981;
+			productRefGroup = 9BA3D68619CA9ECF00046981 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9BA3D68419CA9ECF00046981 /* MASTFacebookAdapter */,
+				9BA3D69419CA9ED000046981 /* MASTFacebookAdapterTests */,
+				E6AF6D3519D196C6003F2934 /* FBAdapterFramework */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9BA3D69319CA9ED000046981 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9BA3D6A319CA9ED000046981 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E6AF6D3919D196CB003F2934 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#\n# Script Attribution:\n# http://db-in.com/blog/2011/07/universal-framework-iphone-ios-2-0/\n#\n# Modifications Copyright (c) 2012 Mocean Mobile.  All rights reserved.\n#\n\n# Sets the target folders and the final framework product.\nLIB_NAME=lib${PROJECT_NAME}.a\nFMK_NAME=${PROJECT_NAME}\nFMK_VERSION=A\n\n# Install dir will be the final output to the framework.\n# The following line create it in the root folder of the current project.\nINSTALL_DIR=${SRCROOT}/Products/${FMK_NAME}.framework\n\n# Working dir will be deleted after the framework creation.\nWRK_DIR=build\nDEVICE_DIR=${WRK_DIR}/Release-iphoneos/\nSIMULATOR_DIR=${WRK_DIR}/Release-iphonesimulator/\n\n# Cleaning the oldest.\nrm -rf \"${INSTALL_DIR}\"\n\n# Building both architectures.\nxcodebuild -configuration \"Release\" -target \"${FMK_NAME}\" -sdk iphoneos\nxcodebuild -configuration \"Release\" -target \"${FMK_NAME}\" -sdk iphonesimulator\n\n# Creates and renews the final product folder.\nmkdir -p \"${INSTALL_DIR}\"\nmkdir -p \"${INSTALL_DIR}/Versions\"\nmkdir -p \"${INSTALL_DIR}/Versions/${FMK_VERSION}\"\nmkdir -p \"${INSTALL_DIR}/Versions/${FMK_VERSION}/Headers\"\n\n# Creates the internal links.\n# It MUST uses relative path, otherwise will not work when the folder is copied/moved.\nln -s \"${FMK_VERSION}\" \"${INSTALL_DIR}/Versions/Current\"\nln -s \"Versions/Current/Headers\" \"${INSTALL_DIR}/Headers\"\nln -s \"Versions/Current/${FMK_NAME}\" \"${INSTALL_DIR}/${FMK_NAME}\"\n\n# Copies the headers files to the final product folder.\ncp -R \"${DEVICE_DIR}/include/\" \"${INSTALL_DIR}/Versions/${FMK_VERSION}/Headers/\"\n\n# Uses the Lipo Tool to merge both binary files (i386 + armv6/armv7) into one Universal final product.\nlipo -create \"${DEVICE_DIR}/${LIB_NAME}\" \"${SIMULATOR_DIR}/${LIB_NAME}\" -output \"${INSTALL_DIR}/Versions/${FMK_VERSION}/${FMK_NAME}\"\n\nrm -r \"${WRK_DIR}\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9BA3D68119CA9ECF00046981 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9BA3D69019CA9ECF00046981 /* MASTFacebookAdapter.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9BA3D69119CA9ED000046981 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9BA3D6A519CA9ED000046981 /* MASTFacebookAdapterTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9BA3D69C19CA9ED000046981 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9BA3D68419CA9ECF00046981 /* MASTFacebookAdapter */;
+			targetProxy = 9BA3D69B19CA9ED000046981 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		9BA3D6A119CA9ED000046981 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9BA3D6A219CA9ED000046981 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9BA3D6A619CA9ED000046981 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		9BA3D6A719CA9ED000046981 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9BA3D6A919CA9ED000046981 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/MASTFacebookAdapter.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/shrinivasprabhu/Documents/FacebookSDK/FBAudienceNetwork,
+					/Users/pramodjadhav/Documents/Repos/Version3,
+					/Users/shrinivasprabhu/Documents/SVN_CodeBase/Mocean,
+					Sample/Version3/Mediation,
+					Network,
+					Library/Facebook,
+					Audience,
+					Network,
+					/Users/shrinivasprabhu/Documents/Scrap/scrap/Version4/Mediation,
+					Network,
+					Library/Facebook,
+					Audience,
+					Network,
+					/Users/shrinivasprabhu/Documents/Scrap/scrap/Version4/Mediation,
+					Network,
+					Library/Facebook,
+					Audience,
+					Network,
+					/Users/shrinivasprabhu/Documents/Scrap/scrap/Version4/Mediation,
+					Network,
+					Library/Facebook,
+					Audience,
+					Network,
+					/Users/shrinivasprabhu/Documents/Scrap/scrap/Version4/MediationNetworkLibrary/FacebookAudienceNetwork,
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MASTFacebookAdapter/MASTFacebookAdapter-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		9BA3D6AA19CA9ED000046981 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/MASTFacebookAdapter.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/shrinivasprabhu/Documents/FacebookSDK/FBAudienceNetwork,
+					/Users/pramodjadhav/Documents/Repos/Version3,
+					/Users/shrinivasprabhu/Documents/SVN_CodeBase/Mocean,
+					Sample/Version3/Mediation,
+					Network,
+					Library/Facebook,
+					Audience,
+					Network,
+					/Users/shrinivasprabhu/Documents/Scrap/scrap/Version4/Mediation,
+					Network,
+					Library/Facebook,
+					Audience,
+					Network,
+					/Users/shrinivasprabhu/Documents/Scrap/scrap/Version4/Mediation,
+					Network,
+					Library/Facebook,
+					Audience,
+					Network,
+					/Users/shrinivasprabhu/Documents/Scrap/scrap/Version4/Mediation,
+					Network,
+					Library/Facebook,
+					Audience,
+					Network,
+					/Users/shrinivasprabhu/Documents/Scrap/scrap/Version4/MediationNetworkLibrary/FacebookAudienceNetwork,
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MASTFacebookAdapter/MASTFacebookAdapter-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		9BA3D6AC19CA9ED000046981 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MASTFacebookAdapter/MASTFacebookAdapter-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "MASTFacebookAdapterTests/MASTFacebookAdapterTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		9BA3D6AD19CA9ED000046981 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MASTFacebookAdapter/MASTFacebookAdapter-Prefix.pch";
+				INFOPLIST_FILE = "MASTFacebookAdapterTests/MASTFacebookAdapterTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+		E6AF6D3619D196C6003F2934 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		E6AF6D3719D196C6003F2934 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9BA3D68019CA9ECF00046981 /* Build configuration list for PBXProject "MASTFacebookAdapter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9BA3D6A619CA9ED000046981 /* Debug */,
+				9BA3D6A719CA9ED000046981 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9BA3D6A819CA9ED000046981 /* Build configuration list for PBXNativeTarget "MASTFacebookAdapter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9BA3D6A919CA9ED000046981 /* Debug */,
+				9BA3D6AA19CA9ED000046981 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9BA3D6AB19CA9ED000046981 /* Build configuration list for PBXNativeTarget "MASTFacebookAdapterTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9BA3D6AC19CA9ED000046981 /* Debug */,
+				9BA3D6AD19CA9ED000046981 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E6AF6D3819D196C6003F2934 /* Build configuration list for PBXAggregateTarget "FBAdapterFramework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E6AF6D3619D196C6003F2934 /* Debug */,
+				E6AF6D3719D196C6003F2934 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9BA3D67D19CA9ECF00046981 /* Project object */;
+}
